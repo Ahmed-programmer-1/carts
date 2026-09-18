@@ -1,0 +1,2226 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#2f5d50">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+
+:root{
+  --bg:#efece2;
+  --surface:#fbfaf5;
+  --soft:#f2efe4;
+  --text:#201f1b;
+  --muted:#6f6a5a;
+  --line:#ddd6c5;
+  --primary:#2f5d50;
+  --primary-ink:#f3f7f4;
+  --accent:#c98a2c;
+  --danger:#b3261e;
+  --shadow:0 1px 2px rgba(32,31,27,.05),0 14px 32px rgba(32,31,27,.08);
+  --radius-s:6px;--radius-m:10px;--radius-l:16px;
+  --font-display:'Noto Naskh Arabic','Amiri',serif;
+  --font-body:'IBM Plex Sans Arabic',Tahoma,Arial,sans-serif;
+}
+body.dark{
+  --bg:#14181a;
+  --surface:#1b2124;
+  --soft:#20272a;
+  --text:#ece7d9;
+  --muted:#9b9686;
+  --line:#2b3336;
+  --primary:#63a48d;
+  --primary-ink:#0d1917;
+  --accent:#e0ab55;
+  --danger:#e0827a;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 34px rgba(0,0,0,.5);
+}
+
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.7;transition:background .2s,color .2s}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.hidden{display:none!important}
+
+/* Topbar */
+.topbar{height:76px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(20px,calc((100% - 1180px)/2));position:sticky;top:0;z-index:20}
+.brand{display:flex;align-items:center;gap:13px}
+.brand-icon{width:34px;height:34px;color:var(--primary);flex:none}
+.brand-icon svg{width:100%;height:100%}
+.brand h1{font-size:20px;margin:0}
+.brand p{font-size:12.5px;color:var(--muted);margin:3px 0 0;font-family:var(--font-body)}
+.top-actions{display:flex;gap:8px}
+.icon-btn,.close-btn,.viewer-actions button,.viewer-back{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:var(--radius-s);width:40px;height:40px}
+.icon-btn:hover,.close-btn:hover,.viewer-actions button:hover,.viewer-back:hover{border-color:var(--primary)}
+.icon-btn.active{border-color:var(--primary);color:var(--primary)}
+
+/* Hero */
+.hero{background:var(--soft);border-bottom:1px solid var(--line)}
+.hero-inner{max-width:1180px;margin:auto;padding:52px 20px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.hero-text{max-width:520px}
+.hero h2{font-size:34px;line-height:1.45;margin:0 0 14px}
+.hero p{margin:0;color:var(--muted);line-height:1.8;max-width:60ch}
+.hero-stats{display:flex;gap:0;margin:0;flex:none}
+.hero-stats .stat{padding:0 22px;border-inline-start:1px solid var(--line);text-align:center}
+.hero-stats .stat:first-child{border-inline-start:0;padding-inline-start:0}
+.hero-stats dt{font-size:12.5px;color:var(--muted);margin:0 0 6px}
+.hero-stats dd{margin:0;font-family:var(--font-display);font-size:32px;font-weight:600;color:var(--primary)}
+
+/* Layout */
+.container{max-width:1180px;margin:auto;padding:30px 20px}
+.search-box{height:54px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);display:flex;align-items:center;gap:10px;padding:0 16px}
+.search-box input{border:0;outline:0;background:transparent;color:var(--text);width:100%;font-size:15.5px}
+.clear-search{border:0;background:none;color:var(--muted);width:26px;height:26px;border-radius:50%;font-size:13px}
+.clear-search:hover{background:var(--soft);color:var(--text)}
+
+/* Category chips — tab style, not filled pills */
+.chips{display:flex;gap:4px;flex-wrap:wrap;margin:22px 0 0;border-bottom:1px solid var(--line)}
+.chip{border:0;background:none;color:var(--muted);padding:10px 4px;margin-inline-end:22px;border-bottom:2px solid transparent;font-size:14.5px;font-weight:500}
+.chip:hover{color:var(--text)}
+.chip.active{color:var(--text);border-bottom-color:var(--primary);font-weight:600}
+
+.section{margin-top:38px}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;gap:10px}
+.section-head h2{font-size:21px;margin:0}
+.section-head span{color:var(--muted);font-size:13px}
+.text-btn{border:0;background:none;color:var(--primary);cursor:pointer;font-size:13.5px;font-weight:500}
+.sort-wrap{display:flex;align-items:center;gap:10px}
+.sort-wrap select{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:7px 10px;border-radius:8px;font-size:13px}
+
+/* Cards — index-card treatment */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden;cursor:pointer;transition:border-color .15s,box-shadow .15s;position:relative}
+.card:hover{border-color:var(--primary);box-shadow:var(--shadow)}
+.cover{height:140px;background:var(--soft);position:relative;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line)}
+.cover img{width:100%;height:100%;object-fit:cover}
+.cover-icon{font-size:44px;opacity:.55}
+.fav{position:absolute;top:9px;left:9px;width:32px;height:32px;border:1px solid var(--line);border-radius:50%;background:var(--surface);cursor:pointer;font-size:16px;color:var(--text);line-height:1}
+.fav:hover{border-color:var(--accent)}
+
+/* Featured stamp — the one deliberate flourish */
+.stamp{position:absolute;top:10px;right:10px;width:52px;height:52px;border-radius:50%;border:1.5px dashed var(--accent);display:flex;align-items:center;justify-content:center;transform:rotate(-10deg);background:rgba(251,250,245,.82);backdrop-filter:blur(2px)}
+body.dark .stamp{background:rgba(27,33,36,.82)}
+.stamp span{font-family:var(--font-display);font-size:11.5px;font-weight:600;color:var(--accent);text-align:center;line-height:1.25}
+
+.card-body{padding:16px}
+.card-title h3{font-size:17.5px;margin:0 0 8px;line-height:1.5}
+.card-desc{font-size:13.5px;color:var(--muted);line-height:1.7;margin:0 0 12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{display:flex;flex-wrap:wrap;gap:6px;color:var(--muted);font-size:12px}
+.tag{border:1px solid var(--line);padding:4px 9px;border-radius:999px;background:transparent}
+.eyebrow-tag{display:inline-block;color:var(--muted);font-size:12.5px;margin-bottom:6px}
+
+.mini-list{display:flex;gap:12px;overflow:auto;padding-bottom:6px}
+.mini{min-width:230px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);padding:14px;cursor:pointer}
+.mini:hover{border-color:var(--primary)}
+.mini strong{display:block;margin-bottom:7px;font-weight:600}
+.mini small{color:var(--muted)}
+.empty{text-align:center;border:1px dashed var(--line);border-radius:var(--radius-m);padding:44px 20px;color:var(--muted);background:var(--surface)}
+
+/* Modals */
+.modal{position:fixed;inset:0;z-index:250;display:flex;align-items:center;justify-content:center;padding:18px}
+.modal-backdrop{position:absolute;inset:0;background:rgba(20,18,14,.55)}
+.modal-card{position:relative;width:min(760px,100%);max-height:90vh;overflow:auto;background:var(--surface);border-radius:var(--radius-l);padding:26px;box-shadow:0 30px 90px rgba(0,0,0,.35)}
+.modal-card.small{width:min(560px,100%)}
+.modal-head{display:flex;justify-content:space-between;gap:15px}
+.modal-head h2{margin:2px 0 8px;font-size:24px}
+.modal-head p{color:var(--muted);line-height:1.75;margin:0}
+.parts-list{margin-top:22px;display:flex;flex-direction:column;gap:8px}
+.part{display:flex;align-items:center;gap:14px;border:1px solid var(--line);padding:13px;border-radius:var(--radius-s);cursor:pointer}
+.part:hover{border-color:var(--primary)}
+.part-number{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--primary);color:var(--primary);display:grid;place-items:center;font-family:var(--font-display);font-weight:600;flex:none}
+.part-title{flex:1}
+.part small{color:var(--muted)}
+
+/* Viewer */
+.viewer{position:fixed;inset:0;background:var(--surface);z-index:200;display:flex;flex-direction:column}
+.tab-strip-wrap{display:flex;align-items:flex-end;background:var(--soft);border-bottom:1px solid var(--line);flex:none}
+.tab-strip{display:flex;gap:4px;overflow-x:auto;padding:7px 8px 0;flex:1;scrollbar-width:thin}
+.tab-add{flex:none;width:32px;height:32px;margin:6px 8px 6px 2px;border:1px solid var(--line);background:var(--surface);border-radius:8px;color:var(--muted);font-size:18px;line-height:1}
+.tab-add:hover{color:var(--primary);border-color:var(--primary)}
+.tab-item{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px 8px 0 0;background:var(--bg);border:1px solid var(--line);border-bottom:none;cursor:pointer;white-space:nowrap;flex:none;color:var(--muted);font-size:13.5px}
+.tab-item.active{background:var(--surface);color:var(--text);font-weight:600}
+.tab-item:hover{color:var(--text)}
+.tab-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px}
+.tab-close{border:0;background:none;color:inherit;opacity:.6;width:18px;height:18px;border-radius:50%;font-size:11px;line-height:1;flex:none}
+.tab-close:hover{background:var(--line);opacity:1}
+.viewer-bar{height:58px;flex:none;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:var(--surface)}
+.viewer-title{display:flex;align-items:center;gap:8px}
+.viewer-title strong{max-width:55vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--font-body);font-weight:600}
+.viewer-title span{color:var(--muted);font-size:13px}
+.viewer-actions{display:flex;gap:6px}
+.viewer-actions button{width:36px;height:36px}
+.viewer-actions button:disabled{opacity:.35;cursor:not-allowed}
+.lesson-layout{display:flex;flex:1;min-height:0;position:relative}
+.lesson-sidebar{width:245px;border-left:1px solid var(--line);overflow:auto;padding:12px;background:var(--surface);transition:transform .2s}
+.side-part{padding:11px;border-radius:var(--radius-s);cursor:pointer;margin-bottom:4px;font-size:14px}
+.side-part:hover{background:var(--soft)}
+.side-part.active{background:var(--soft);color:var(--primary);font-weight:600}
+.tab-frames{flex:1;position:relative;background:#fff}
+.tab-frames>[data-tab]{position:absolute;inset:0;width:100%;height:100%;border:0;display:none}
+.tab-frames>[data-tab].active{display:block}
+.tab-frames>[data-tab].pdf-inverted{filter:invert(88%) hue-rotate(180deg)}
+.tab-picker{overflow:auto;background:var(--bg);padding:30px 20px}
+.tab-picker-inner{max-width:900px;margin:auto}
+.tab-picker-inner h2{margin:0 0 16px;font-size:22px}
+.tab-picker-grid{margin-top:16px}
+.parts-toggle{display:none}
+.sidebar-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:15}
+
+/* Quick menu (☰) */
+.quick-menu{position:fixed;inset:0;z-index:260;display:flex;justify-content:flex-end}
+.quick-menu-backdrop{position:absolute;inset:0;background:rgba(20,18,14,.55)}
+.quick-menu-panel{position:relative;width:min(320px,86vw);height:100%;background:var(--surface);box-shadow:-10px 0 30px rgba(0,0,0,.25);display:flex;flex-direction:column;padding:20px;overflow:auto}
+.quick-menu-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.quick-menu-head h2{margin:0;font-size:19px}
+#quickMenuSearch{border:1px solid var(--line);border-radius:var(--radius-s);padding:10px 12px;background:var(--bg);color:var(--text);margin-bottom:10px;outline:0}
+.quick-menu-list{display:flex;flex-direction:column;gap:8px}
+.quick-item{display:flex;align-items:center;gap:13px;padding:14px 13px;border:1px solid var(--line);border-radius:var(--radius-m);background:var(--soft);cursor:pointer;font-size:14.5px;font-weight:600;color:var(--text);text-align:right}
+.quick-item:hover{border-color:var(--primary)}
+.quick-item .qi-icon{font-size:19px;width:26px;text-align:center;flex:none}
+.quick-menu-empty{color:var(--muted);font-size:13.5px;text-align:center;padding:20px 0}
+
+.history-row{padding:14px;border-bottom:1px solid var(--line);cursor:pointer}
+.history-row:last-child{border-bottom:0}
+.history-row:hover{background:var(--soft)}
+.history-row strong{display:block;margin-bottom:4px;font-weight:600}
+.history-row small{color:var(--muted)}
+
+footer{text-align:center;color:var(--muted);border-top:1px solid var(--line);padding:30px 15px;font-size:13px;margin-top:20px}
+
+@media(max-width:700px){
+  .hero h2{font-size:26px}
+  .hero-inner{padding:36px 20px}
+  .hero-stats dd{font-size:26px}
+  .lesson-sidebar{width:190px}
+  .cards{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+}
+@media(max-width:640px){
+  .hero-inner{flex-direction:column;align-items:stretch}
+  .hero-stats{justify-content:space-between}
+  .hero-stats .stat{padding:0 10px;flex:1}
+}
+@media(max-width:520px){
+  .parts-toggle{display:inline-flex;align-items:center;justify-content:center}
+  .lesson-sidebar{position:fixed;top:58px;bottom:0;right:0;width:78vw;max-width:300px;z-index:16;transform:translateX(100%);box-shadow:-10px 0 30px rgba(0,0,0,.2)}
+  .lesson-sidebar.open{transform:translateX(0)}
+  .container{padding:22px 14px}
+  .topbar{padding:0 14px}
+  .cards{grid-template-columns:1fr}
+  .viewer-title strong{max-width:32vw}
+  .hero-stats dt{font-size:11px}
+  .hero-stats dd{font-size:22px}
+}
+
+/* ============================================================
+   نظام الحسابات (Auth)
+   ============================================================ */
+.auth-buttons{display:flex;align-items:center;gap:10px}
+.btn-primary-sm{background:var(--primary);color:var(--primary-ink);border:0;border-radius:var(--radius-s);padding:8px 16px;font-size:13.5px;font-weight:600}
+.btn-primary-sm:hover{filter:brightness(1.08)}
+.auth-name{font-size:13.5px;font-weight:600;color:var(--text)}
+
+.auth-card{width:min(380px,100%)}
+.auth-tabs{display:flex;gap:18px}
+.auth-switch{border:0;background:none;color:var(--muted);font-size:15px;font-weight:600;padding:0 0 8px;border-bottom:2px solid transparent}
+.auth-switch.active{color:var(--text);border-bottom-color:var(--primary)}
+.auth-pane{display:flex;flex-direction:column;gap:14px;margin-top:20px}
+.auth-pane label{display:flex;flex-direction:column;gap:6px;font-size:13.5px;color:var(--muted);font-weight:600}
+.auth-pane input{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:var(--radius-s);padding:11px 13px;font-size:14.5px;outline:0}
+.auth-pane input:focus{border-color:var(--primary)}
+.auth-pane .btn-primary{background:var(--primary);color:var(--primary-ink);border:0;border-radius:var(--radius-s);padding:12px;font-size:15px;font-weight:700;margin-top:4px}
+.auth-pane .btn-primary:hover{filter:brightness(1.08)}
+.auth-error{color:var(--danger);font-size:13px;min-height:1px}
+
+@media(max-width:520px){
+  .auth-name{display:none}
+}
+
+/* ============================================================
+   ملفاتي (Cards + رفع الملفات + المشاركة)
+   ============================================================ */
+.mylib{position:fixed;inset:0;background:var(--bg);z-index:220;display:flex;flex-direction:column}
+.mylib-bar{height:58px;flex:none;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:var(--surface)}
+.mylib-title{display:flex;align-items:center;gap:10px}
+.mylib-title strong{font-weight:600}
+.mylib-bar-actions{display:flex;gap:6px}
+.mylib-body{flex:1;overflow:auto;padding:24px 20px;max-width:1180px;margin:0 auto;width:100%}
+
+.card-desc-full{color:var(--muted);line-height:1.8;margin:0 0 18px;font-size:14px}
+
+.share-box{display:flex;align-items:center;gap:10px;background:var(--soft);border:1px solid var(--line);border-radius:var(--radius-s);padding:10px 14px;margin-bottom:18px;flex-wrap:wrap}
+.share-box input{flex:1;min-width:180px;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:6px;padding:8px 10px;font-size:12.5px;direction:ltr;text-align:left}
+
+.upload-drop{border:1.5px dashed var(--line);border-radius:var(--radius-m);padding:26px 20px;text-align:center;color:var(--muted);margin-bottom:22px;transition:border-color .15s,background .15s}
+.upload-drop.dragover{border-color:var(--primary);background:var(--soft)}
+.upload-drop p{margin:0 0 12px;font-size:13.5px}
+.upload-pick{display:inline-block;cursor:pointer}
+.upload-progress{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.upload-progress-row{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)}
+.upload-progress-row .bar{flex:1;height:6px;background:var(--soft);border-radius:99px;overflow:hidden}
+.upload-progress-row .bar span{display:block;height:100%;background:var(--primary);width:0%;transition:width .2s}
+
+.files-list{display:flex;flex-direction:column;gap:8px}
+.file-row{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-s);padding:12px 14px}
+.file-row .file-icon{font-size:20px;flex:none}
+.file-row .file-info{flex:1;min-width:0}
+.file-row .file-info strong{display:block;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-row .file-info small{color:var(--muted);font-size:12px}
+.file-row .file-actions{display:flex;gap:6px}
+.file-row .file-actions button{width:34px;height:34px;border:1px solid var(--line);background:var(--surface);border-radius:8px;color:var(--text)}
+.file-row .file-actions button:hover{border-color:var(--primary)}
+
+.auth-pane textarea{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:var(--radius-s);padding:11px 13px;font-size:14.5px;font-family:inherit;resize:vertical}
+.auth-pane select{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:var(--radius-s);padding:11px 13px;font-size:14px}
+.checkbox-label{flex-direction:row!important;align-items:center;gap:8px!important}
+.checkbox-label input{width:auto}
+
+@media(max-width:640px){
+  .mylib-body{padding:18px 14px}
+}
+
+/* ============================================================
+   تواصل معنا
+   ============================================================ */
+.note-text{color:var(--muted);font-size:13px}
+
+/* ============================================================
+   شات الأدمن
+   ============================================================ */
+.chat-msg{max-width:75%;padding:9px 13px;border-radius:12px;font-size:13.5px;line-height:1.6}
+.chat-msg.from-user{align-self:flex-end;background:var(--primary);color:var(--primary-ink);border-bottom-left-radius:3px}
+.chat-msg.from-admin{align-self:flex-start;background:var(--soft);color:var(--text);border-bottom-right-radius:3px}
+@media print{
+  body *{visibility:hidden}
+  #qrPrintArea,#qrPrintArea *{visibility:visible}
+  #qrPrintArea{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+}
+</style>
+<title>مكتبتي</title>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5.5C10.3 4.4 7.8 4 5 4v13c2.8 0 5.3.4 7 1.5M12 5.5C13.7 4.4 16.2 4 19 4v13c-2.8 0-5.3.4-7 1.5M12 5.5v13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div><h1 id="brandName">مكتبتي</h1><p id="brandSubtitle">دروسك ومشاريعك، مرتّبة في مكان واحد</p></div>
+  </div>
+  <div class="top-actions">
+    <div id="authButtonsLoggedOut" class="auth-buttons">
+      <button class="text-btn" id="openRegisterBtn">تسجيل</button>
+      <button class="btn-primary-sm" id="openLoginBtn">تسجيل دخول</button>
+    </div>
+    <div id="authButtonsLoggedIn" class="auth-buttons hidden">
+      <button class="text-btn" id="quickUploadBtn">⬆️ رفع ملف</button>
+      <input type="file" id="quickUploadInput" multiple hidden>
+      <button class="text-btn" id="openMyLibraryBtn">ملفاتي</button>
+      <span id="authDisplayName" class="auth-name"></span>
+      <button class="icon-btn" id="logoutBtnTop" title="تسجيل خروج">⏻</button>
+    </div>
+    <button class="text-btn" id="openCommunityFilesBtn">ملفات المجتمع</button>
+    <button class="icon-btn" id="menuBtn" title="المزيد">☰</button>
+    <button class="icon-btn" id="themeBtn" title="الوضع الليلي">🌙</button>
+    <button class="icon-btn" id="installBtn" title="تثبيت التطبيق" hidden>⬇️</button>
+  </div>
+</header>
+
+<div id="quickMenu" class="quick-menu hidden">
+  <div class="quick-menu-backdrop"></div>
+  <div class="quick-menu-panel">
+    <div class="quick-menu-head"><h2>المزيد</h2><button id="closeQuickMenu" class="close-btn">✕</button></div>
+    <input id="quickMenuSearch" class="hidden" placeholder="ابحث في القائمة...">
+    <div id="quickMenuList" class="quick-menu-list"></div>
+    <div class="quick-menu-list" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">
+      <button type="button" class="quick-item" id="menuSiteQrBtn"><span class="qi-icon">📱</span><span>QR لمكتبتي (طباعة/مشاركة)</span></button>
+      <button type="button" class="quick-item" id="menuContactBtn"><span class="qi-icon">✉️</span><span>تواصل معنا</span></button>
+      <button type="button" class="quick-item" id="menuChatBtn"><span class="qi-icon">💬</span><span>تواصل مع الأدمن</span></button>
+      <button type="button" class="quick-item" id="menuPurchaseBtn"><span class="qi-icon">🛒</span><span>شراء المشروع</span></button>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h2 id="heroTitle">مكتبتك الصغيرة<br>للدروس والمشاريع</h2>
+      <p id="heroText">افتح أي درس أو مشروع مباشرة من هنا، وتابع من حيث توقفت، دون أن تفقد أثر أي جزء.</p>
+    </div>
+    <dl class="hero-stats">
+      <div class="stat"><dt>دروس ومشاريع</dt><dd id="statCourses">0</dd></div>
+      <div class="stat"><dt>تصنيفات</dt><dd id="statCategories">0</dd></div>
+      <div class="stat"><dt>في المفضلة</dt><dd id="statFavorites">0</dd></div>
+    </dl>
+  </div>
+</section>
+
+<main class="container">
+  <div class="search-box">
+    <span aria-hidden="true">🔎</span><input id="search" placeholder="ابحث عن درس، مشروع، وسم أو تصنيف...">
+    <button id="clearSearch" class="clear-search hidden" title="مسح البحث">✕</button>
+  </div>
+
+  <div id="categories" class="chips"></div>
+
+  <section id="continueSection" class="section hidden">
+    <div class="section-head"><h2>آخر ما شاهدته</h2><button id="historyBtn" class="text-btn">السجل الكامل</button></div>
+    <div id="continueList" class="mini-list"></div>
+  </section>
+
+  <section id="featuredSection" class="section hidden">
+    <div class="section-head"><h2>المميز</h2></div>
+    <div id="featuredGrid" class="cards"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2 id="sectionTitle">كل المحتوى</h2><div class="sort-wrap"><select id="sortSelect"><option value="default">الترتيب الافتراضي</option><option value="newest">الأحدث</option><option value="popular">الأكثر متابعة</option><option value="az">أبجديًا (أ-ي)</option></select><span id="countLabel"></span></div></div>
+    <div id="cards" class="cards"></div>
+    <div id="empty" class="empty hidden">لا نتائج لهذا البحث. جرّب كلمة أخرى أو اختر تصنيفًا مختلفًا.</div>
+  </section>
+
+  <section id="exploreSection" class="section hidden">
+    <div class="section-head"><h2>الأكثر متابعة</h2></div>
+    <div id="trendingGrid" class="cards"></div>
+  </section>
+</main>
+
+<div id="courseModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+    <div class="modal-head"><div><span id="modalBadge" class="eyebrow-tag"></span><h2 id="modalTitle"></h2><p id="modalDesc"></p></div><button id="closeModal" class="close-btn">✕</button></div>
+    <div id="modalMeta" class="meta"></div>
+    <div id="partsList" class="parts-list"></div>
+    <div id="relatedSection" class="hidden" style="margin-top:22px">
+      <div class="section-head"><h2 style="font-size:16px">قد يعجبك أيضًا</h2></div>
+      <div id="relatedGrid" class="cards"></div>
+    </div>
+  </div>
+</div>
+
+<div id="viewer" class="viewer hidden">
+  <div class="tab-strip-wrap">
+    <div id="tabStrip" class="tab-strip"></div>
+    <button id="addTab" class="tab-add" title="تبويب جديد">+</button>
+  </div>
+  <div class="viewer-bar">
+    <div class="viewer-title"><button id="backCourse" class="viewer-back hidden">←</button><button id="partsToggle" class="viewer-back parts-toggle hidden" title="الأجزاء">☰</button><strong id="viewerTitle">الدرس</strong><span id="partCounter"></span></div>
+    <div class="viewer-actions">
+      <button id="prevPart" title="الجزء السابق">›</button>
+      <button id="nextPart" title="الجزء التالي">‹</button>
+      <button id="favViewer" title="المفضلة">♡</button>
+      <button id="openNew" title="فتح في تبويب جديد">↗</button>
+      <button id="downloadPdf" title="تنزيل PDF" class="hidden">⬇️</button>
+      <button id="invertPdf" title="وضع القراءة الليلي للـPDF" class="hidden">🌓</button>
+      <button id="fullscreen" title="ملء الشاشة">⛶</button>
+      <button id="closeViewer" title="إغلاق الكل">✕</button>
+    </div>
+  </div>
+  <div class="lesson-layout">
+    <aside id="lessonSidebar" class="lesson-sidebar"></aside>
+    <div id="sidebarBackdrop" class="sidebar-backdrop hidden"></div>
+    <div id="tabFrames" class="tab-frames"></div>
+  </div>
+</div>
+
+<div id="authModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card small auth-card">
+    <div class="modal-head">
+      <div class="auth-tabs">
+        <button class="auth-switch active" data-to="login" id="tabLogin">تسجيل دخول</button>
+        <button class="auth-switch" data-to="register" id="tabRegister">حساب جديد</button>
+      </div>
+      <button id="closeAuthModal" class="close-btn">✕</button>
+    </div>
+
+    <form id="loginForm" class="auth-pane" autocomplete="on">
+      <label>اسم المستخدم<input type="text" id="loginUsername" name="username" autocomplete="username" required></label>
+      <label>كلمة المرور<input type="password" id="loginPassword" name="password" autocomplete="current-password" required></label>
+      <div class="auth-error" id="authError"></div>
+      <button type="submit" class="btn-primary">دخول</button>
+    </form>
+
+    <form id="registerForm" class="auth-pane hidden" autocomplete="on">
+      <label>الاسم اللي يظهر للآخرين<input type="text" id="regDisplayName" name="displayname" required></label>
+      <label>اسم المستخدم (لتسجيل الدخول)<input type="text" id="regUsername" name="username" autocomplete="username" required></label>
+      <label>كلمة المرور<input type="password" id="regPassword" name="new-password" autocomplete="new-password" required></label>
+      <label>النوع (اختياري)
+        <select id="regGender">
+          <option value="">تفضّل عدم التحديد</option>
+          <option value="male">ذكر</option>
+          <option value="female">أنثى</option>
+        </select>
+      </label>
+      <div class="auth-error" id="registerError"></div>
+      <button type="submit" class="btn-primary">إنشاء الحساب</button>
+    </form>
+  </div>
+</div>
+
+<div id="myLibraryView" class="mylib hidden">
+  <div class="mylib-bar">
+    <div class="mylib-title"><button id="closeMyLibrary" class="viewer-back">→</button><strong>ملفاتي</strong></div>
+    <button class="btn-primary-sm" id="newCardBtn">+ بطاقة جديدة</button>
+  </div>
+  <div class="mylib-body">
+    <div id="myCardsGrid" class="cards"></div>
+    <div id="myCardsEmpty" class="empty hidden">لسه معملتش أي بطاقة. اضغط "+ بطاقة جديدة" وابدأ.</div>
+  </div>
+</div>
+
+<div id="cardDetailView" class="mylib hidden">
+  <div class="mylib-bar">
+    <div class="mylib-title"><button id="closeCardDetail" class="viewer-back">→</button><strong id="cardDetailName"></strong></div>
+    <div class="mylib-bar-actions">
+      <span id="cardViewCount" class="note-text" style="margin-inline-end:8px"></span>
+      <button class="text-btn" id="duplicateCardBtn" title="نسخ البطاقة">نسخ</button>
+      <button class="icon-btn" id="editCardBtn" title="تعديل البطاقة">✎</button>
+      <button class="icon-btn" id="deleteCardBtn" title="حذف البطاقة">🗑</button>
+    </div>
+  </div>
+  <div class="mylib-body">
+    <p id="cardDetailDesc" class="card-desc-full"></p>
+    <div id="cardShareBox" class="share-box hidden">
+      <span>رابط المشاركة:</span>
+      <input type="text" id="cardShareLink" readonly>
+      <button class="text-btn" id="copyShareLink">نسخ</button>
+      <button class="text-btn" id="cardShareQrBtn">QR</button>
+    </div>
+    <p id="cardApprovalNote" class="note-text hidden" style="color:var(--accent, #c98a2c)">⏳ بانتظار موافقة الأدمن — الرابط لسه مش هيشتغل لحد ما توافَق البطاقة</p>
+
+    <div id="uploadDrop" class="upload-drop">
+      <p>اسحب الملفات هنا أو</p>
+      <label class="btn-primary-sm upload-pick">اختر الملفات<input type="file" id="fileInput" multiple hidden></label>
+      <div id="uploadProgress" class="upload-progress"></div>
+    </div>
+
+    <div id="cardFilesList" class="files-list"></div>
+    <div id="cardFilesEmpty" class="empty hidden">مفيش ملفات في البطاقة دي لسه.</div>
+
+    <div class="section-head" style="margin-top:28px"><h2>التعليقات</h2></div>
+    <div id="cardCommentsList" class="files-list"></div>
+    <p id="cardCommentsEmpty" class="note-text hidden">لسه مفيش تعليقات.</p>
+    <form id="cardCommentForm" class="auth-pane" style="margin-top:12px">
+      <input type="text" id="cardCommentInput" placeholder="اكتب تعليق...">
+      <button type="submit" class="btn-primary-sm" style="align-self:flex-start">إرسال</button>
+    </form>
+
+    <div id="communityPublishBox" class="hidden" style="margin-top:28px;padding-top:20px;border-top:1px solid var(--line)">
+      <div class="section-head"><h2>النشر في "ملفات المجتمع"</h2></div>
+      <p class="note-text">ده هيرفع ملفات البطاقة فعليًا على GitHub في مجلد "ملفات المجتمع" وتظهر فورًا للعامة. الأدمن بعدين بيراجعها ويقدر يشيلها لو فيها مشكلة.</p>
+      <p id="communityPublishedNote" class="note-text hidden" style="color:var(--primary)">✓ منشورة في ملفات المجتمع بالفعل</p>
+      <label style="display:block;margin:10px 0 4px">الأقسام (افصل بينهم بفاصلة)</label>
+      <input type="text" id="communityCategoriesInput" placeholder="مثال: برمجة, لغة عربية">
+      <p class="note-text">ملفات PDF بتتحط أوتوماتيك في "ملفات PDF" مهما كتبت هنا. "المميزة" و"الأكثر تحميلاً" مش بتتحدد يدوي — دول بيتحددوا من الأدمن أو أوتوماتيك.</p>
+      <button class="btn-primary-sm" id="publishCommunityBtn">تأكيد النشر النهائي في ملفات المجتمع</button>
+      <p id="communityPublishStatus" class="note-text"></p>
+    </div>
+  </div>
+</div>
+
+<div id="cardFormModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card small">
+    <div class="modal-head"><h2 id="cardFormTitle">بطاقة جديدة</h2><button id="closeCardForm" class="close-btn">✕</button></div>
+    <form id="cardForm" class="auth-pane">
+      <label>اسم البطاقة<input type="text" id="cf_name" required></label>
+      <label>الوصف<textarea id="cf_desc" rows="2"></textarea></label>
+      <label>الخصوصية
+        <select id="cf_visibility">
+          <option value="private">خاصة — أنا بس اللي أشوفها</option>
+          <option value="unlisted">برابط — أي حد معاه الرابط يشوفها</option>
+          <option value="public">عامة — تظهر للجميع</option>
+        </select>
+      </label>
+      <label class="checkbox-label"><input type="checkbox" id="cf_download" checked> السماح بتحميل الملفات</label>
+      <div class="auth-error" id="cardFormError"></div>
+      <button type="submit" class="btn-primary">حفظ</button>
+    </form>
+  </div>
+</div>
+
+<div id="sharedCardView" class="mylib hidden">
+  <div class="mylib-bar">
+    <div class="mylib-title"><button id="closeSharedCard" class="viewer-back">→</button><strong id="sharedCardName"></strong></div>
+    <button class="text-btn" id="reportCardBtn">🚩 إبلاغ</button>
+  </div>
+  <div class="mylib-body">
+    <p id="sharedCardDesc" class="card-desc-full"></p>
+    <div id="sharedFilesList" class="files-list"></div>
+
+    <div class="section-head" style="margin-top:28px"><h2>التعليقات</h2></div>
+    <div id="sharedCommentsList" class="files-list"></div>
+    <p id="sharedCommentsEmpty" class="note-text hidden">لسه مفيش تعليقات.</p>
+    <form id="sharedCommentForm" class="auth-pane hidden" style="margin-top:12px">
+      <input type="text" id="sharedCommentInput" placeholder="اكتب تعليق...">
+      <button type="submit" class="btn-primary-sm" style="align-self:flex-start">إرسال</button>
+    </form>
+    <p id="sharedCommentLoginNote" class="note-text hidden">سجّل دخول عشان تقدر تعلّق.</p>
+  </div>
+</div>
+
+<div id="communityFilesView" class="mylib hidden">
+  <div class="mylib-bar">
+    <div class="mylib-title"><button id="closeCommunityFiles" class="viewer-back">→</button><strong>ملفات المجتمع</strong></div>
+    <button class="text-btn" id="communityQrBtn">مشاركة بـQR</button>
+  </div>
+  <div class="mylib-body">
+    <div class="search-box" style="margin-bottom:16px">
+      <span aria-hidden="true">🔎</span>
+      <input type="text" id="communitySearchInput" placeholder="ابحث باسم الملف أو البطاقة أو صاحبها...">
+    </div>
+    <div id="communityCategoryChips" class="category-chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px"></div>
+    <button type="button" id="communityFollowCategoryBox" class="chip hidden" style="margin-bottom:16px"></button>
+    <div id="communityFilesList" class="files-list"></div>
+    <button type="button" id="communityLoadMoreBtn" class="btn-primary-sm hidden" style="margin-top:14px">تحميل المزيد</button>
+    <div id="communityFilesEmpty" class="empty hidden">مفيش ملفات منشورة في ملفات المجتمع لسه.</div>
+  </div>
+</div>
+
+<div id="contactModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card small">
+    <div class="modal-head"><h2>تواصل معنا</h2><button id="closeContactModal" class="close-btn">✕</button></div>
+    <form id="contactForm" class="auth-pane">
+      <label>النوع
+        <select id="contactType">
+          <option value="inquiry">استفسار</option>
+          <option value="suggestion">مقترح</option>
+          <option value="complaint">شكوى</option>
+        </select>
+      </label>
+      <label id="contactNameLabel">اسمك (اختياري)<input type="text" id="contactName"></label>
+      <label>رسالتك<textarea id="contactMessageInput" rows="4" required></textarea></label>
+      <div class="auth-error" id="contactError"></div>
+      <button type="submit" class="btn-primary">إرسال</button>
+    </form>
+    <p id="contactSuccess" class="note-text hidden">تم الإرسال، شكرًا لتواصلك معنا 🙏</p>
+  </div>
+</div>
+
+<div id="chatModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card small">
+    <div class="modal-head"><h2>تحدث مع الأدمن</h2><button id="closeChatModal" class="close-btn">✕</button></div>
+    <p id="chatLoginNote" class="note-text hidden">سجّل دخول الأول عشان تقدر تتكلم مع الأدمن.</p>
+    <div id="chatBody" class="hidden">
+      <div id="chatMessages" style="max-height:320px;overflow:auto;display:flex;flex-direction:column;gap:8px;margin-bottom:14px"></div>
+      <form id="chatForm" style="display:flex;gap:8px">
+        <input type="text" id="chatInput" placeholder="اكتب رسالتك..." style="flex:1;border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:8px;padding:10px 12px;font-size:14px">
+        <button type="submit" class="btn-primary-sm">إرسال</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="purchaseModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card small">
+    <div class="modal-head"><h2>شراء المشروع</h2><button id="closePurchaseModal" class="close-btn">✕</button></div>
+    <form id="purchaseForm" class="auth-pane">
+      <label>نوع المشتري
+        <select id="pu_buyerType">
+          <option value="individual">فرد</option>
+          <option value="company">شركة</option>
+        </select>
+      </label>
+      <label>الإيميل للتواصل<input type="email" id="pu_email" required></label>
+      <label>رقم الهاتف (اختياري)<input type="tel" id="pu_phone"></label>
+      <label>وصف طلبك (اكتب أي تفاصيل تحب تقولها والسعر المقترح)<textarea id="pu_message" rows="5" required></textarea></label>
+      <div class="auth-error" id="purchaseError"></div>
+      <button type="submit" class="btn-primary">إرسال الطلب</button>
+    </form>
+    <p id="purchaseSuccess" class="note-text hidden">استلمنا طلبك، هنتواصل معاك على الإيميل اللي كتبته 🙏</p>
+  </div>
+</div>
+
+<div id="quickUploadModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card small">
+    <div class="modal-head"><h2>جارِ الرفع...</h2></div>
+    <p class="note-text">هيتعمل تلقائيًا بطاقة جديدة بالملف/الملفات دي، وهنوديك لـ"ملفاتي" أول ما يخلص الرفع.</p>
+    <div id="quickUploadProgress" class="upload-progress"></div>
+  </div>
+</div>
+
+<div id="historyModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card small"><div class="modal-head"><h2>سجل المشاهدة</h2><button id="closeHistory" class="close-btn">✕</button></div><div id="historyList"></div></div>
+</div>
+
+<div id="qrModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card small">
+    <div class="modal-head"><h2 id="qrModalTitle">مشاركة برمز QR</h2><button id="closeQrModal" class="close-btn">✕</button></div>
+    <div id="qrPrintArea" style="text-align:center;padding:10px">
+      <div id="qrCanvasBox" style="display:flex;justify-content:center;margin-bottom:14px"></div>
+      <p id="qrLabelText" style="font-weight:700;margin-bottom:6px"></p>
+      <p id="qrUrlText" class="note-text" style="word-break:break-all"></p>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:14px">
+      <button class="btn-primary-sm" id="qrCopyBtn">نسخ الرابط</button>
+      <button class="btn-primary-sm" id="qrShareBtn">مشاركة</button>
+      <button class="btn-primary-sm" id="qrPrintBtn">طباعة</button>
+    </div>
+  </div>
+</div>
+
+<footer id="footerText">مكتبتي — أرشيفك التعليمي الخاص
+  <button id="openContactBtn" class="text-btn" style="margin-inline-start:10px">تواصل معنا</button>
+  <button id="openChatBtn" class="text-btn" style="margin-inline-start:10px">💬 تحدث مع الأدمن</button>
+  <button id="openPurchaseBtn" class="text-btn" style="margin-inline-start:10px">🛒 شراء المشروع</button>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ===== auth.js ===== */
+/* ============================================================
+   auth.js — نظام الحسابات (اسم مستخدم + كلمة مرور، بدون إيميل)
+   ============================================================
+   ⚠️ غيّر القيمتين دول بعد ما تعمل مشروع Supabase وتشغّل schema.sql:
+   ============================================================ */
+const SUPABASE_URL = "https://yoaogeogmbzbsqgnutbf.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvYW9nZW9nbWJ6YnNxZ251dGJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwNzI5MjYsImV4cCI6MjEwNDY0ODkyNn0.l41xrb3BnfA_r1VeOei1BsHQ_AsK9cb9g4YO8lTXvEk";
+/* ============================================================ */
+
+// Supabase Auth محتاج شكل إيميل داخليًا، فبنولّد واحد وهمي من اسم
+// المستخدم على دومين مش موجود فعليًا — المستخدم مايشوفه ولا يكتبه أبدًا.
+const EMAIL_DOMAIN = "mektabty.com";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+function usernameToEmail(u) { return u.trim().toLowerCase() + "@" + EMAIL_DOMAIN; }
+
+const authState = { user: null, profile: null };
+
+async function checkUsernameTaken(username) {
+  const { data } = await sb.from("profiles").select("id").ilike("username", username.trim()).maybeSingle();
+  return !!data;
+}
+
+async function registerAccount(username, displayName, password, gender) {
+  username = (username || "").trim();
+  displayName = (displayName || "").trim();
+  if (!/^[A-Za-z0-9_\u0600-\u06FF]{3,20}$/.test(username)) throw new Error("اسم المستخدم لازم يكون بين 3 و20 حرف/رقم (بدون مسافات)");
+  if (!displayName) throw new Error("اكتب الاسم اللي هيظهر للآخرين");
+  if ((password || "").length < 6) throw new Error("كلمة المرور لازم تكون 6 أحرف على الأقل");
+  if (await checkUsernameTaken(username)) throw new Error("اسم المستخدم ده مستخدم بالفعل");
+
+  const { data, error } = await sb.auth.signUp({
+    email: usernameToEmail(username),
+    password,
+    options: { data: { username, display_name: displayName, gender: gender || null } }
+  });
+  if (error) throw new Error(/registered/i.test(error.message) ? "اسم المستخدم ده مستخدم بالفعل" : error.message);
+
+  await rememberCredential(username, password, displayName);
+  await sb.from("login_events").insert({ user_id: data.user.id });
+  await loadSession();
+  return data;
+}
+
+async function loginAccount(username, password) {
+  const { data, error } = await sb.auth.signInWithPassword({ email: usernameToEmail(username), password });
+  if (error) throw new Error("اسم المستخدم أو كلمة المرور غير صحيحة");
+  await rememberCredential(username, password);
+  await sb.from("login_events").insert({ user_id: data.user.id });
+  await loadSession();
+  return data;
+}
+
+async function logoutAccount() {
+  await sb.auth.signOut();
+  if (heartbeatTimer) { clearInterval(heartbeatTimer); heartbeatTimer = null; }
+  authState.user = null;
+  authState.profile = null;
+  renderAuthUI();
+}
+
+async function loadSession() {
+  const { data: { session } } = await sb.auth.getSession();
+  authState.user = session?.user || null;
+  if (authState.user) {
+    const { data: pp } = await sb.from("profile_private").select("disabled").eq("id", authState.user.id).maybeSingle();
+    if (pp?.disabled) {
+      await sb.auth.signOut();
+      authState.user = null;
+      authState.profile = null;
+      renderAuthUI();
+      alert("تم إيقاف حسابك مؤقتًا من قِبل إدارة الموقع.");
+      return;
+    }
+    const { data } = await sb.from("profiles").select("username, display_name").eq("id", authState.user.id).single();
+    authState.profile = data || null;
+    startPresenceHeartbeat();
+  } else {
+    authState.profile = null;
+  }
+  renderAuthUI();
+  checkNotifications();
+}
+
+let heartbeatTimer = null;
+function startPresenceHeartbeat() {
+  if (heartbeatTimer) return;
+  sb.rpc("touch_last_seen");
+  heartbeatTimer = setInterval(() => sb.rpc("touch_last_seen"), 60000);
+}
+
+/* ----------------------------------------------------------
+   تذكّر بيانات الدخول تلقائيًا (Credential Management API)
+   ملحوظة: مدعومة في Chrome/Edge/Opera، مش مدعومة في Firefox/Safari —
+   في المتصفحات اللي مش داعمة، هيشتغل حفظ/تعبئة كلمات المرور
+   العادي بتاع المتصفح نفسه بدل كده (بفضل autocomplete في الفورم).
+   ---------------------------------------------------------- */
+async function rememberCredential(username, password, displayName) {
+  if (!("credentials" in navigator) || !window.PasswordCredential) return;
+  try {
+    const cred = new PasswordCredential({ id: username, password, name: displayName || username });
+    await navigator.credentials.store(cred);
+  } catch (e) { /* تجاهل — مش أساسي */ }
+}
+async function tryAutoFillCredential() {
+  if (!("credentials" in navigator)) return;
+  try {
+    const cred = await navigator.credentials.get({ password: true, mediation: "optional" });
+    if (cred && cred.type === "password") {
+      const u = document.getElementById("loginUsername");
+      const p = document.getElementById("loginPassword");
+      if (u && p) { u.value = cred.id; p.value = cred.password; }
+    }
+  } catch (e) { /* تجاهل */ }
+}
+
+/* ---------------- واجهة الأزرار العلوية ---------------- */
+function renderAuthUI() {
+  const loggedOut = document.getElementById("authButtonsLoggedOut");
+  const loggedIn = document.getElementById("authButtonsLoggedIn");
+  const nameEl = document.getElementById("authDisplayName");
+  if (!loggedOut || !loggedIn) return;
+  if (authState.user) {
+    loggedOut.classList.add("hidden");
+    loggedIn.classList.remove("hidden");
+    if (nameEl) nameEl.textContent = authState.profile?.display_name || "حسابي";
+  } else {
+    loggedOut.classList.remove("hidden");
+    loggedIn.classList.add("hidden");
+  }
+}
+
+function openAuthModal(tab) { document.getElementById("authModal").classList.remove("hidden"); switchAuthTab(tab || "login"); }
+function closeAuthModal() { document.getElementById("authModal").classList.add("hidden"); }
+function switchAuthTab(tab) {
+  document.getElementById("loginForm").classList.toggle("hidden", tab !== "login");
+  document.getElementById("registerForm").classList.toggle("hidden", tab !== "register");
+  document.getElementById("tabLogin").classList.toggle("active", tab === "login");
+  document.getElementById("tabRegister").classList.toggle("active", tab === "register");
+}
+
+function initAuthUI() {
+  document.getElementById("openLoginBtn")?.addEventListener("click", () => { openAuthModal("login"); tryAutoFillCredential(); });
+  document.getElementById("openRegisterBtn")?.addEventListener("click", () => openAuthModal("register"));
+  document.getElementById("closeAuthModal")?.addEventListener("click", closeAuthModal);
+  document.getElementById("logoutBtnTop")?.addEventListener("click", () => logoutAccount());
+  document.querySelectorAll(".auth-switch").forEach(btn => btn.addEventListener("click", () => switchAuthTab(btn.dataset.to)));
+
+  document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const err = document.getElementById("authError");
+    err.textContent = "";
+    try {
+      await loginAccount(document.getElementById("loginUsername").value, document.getElementById("loginPassword").value);
+      closeAuthModal();
+    } catch (ex) { err.textContent = ex.message; }
+  });
+
+  document.getElementById("registerForm")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const err = document.getElementById("registerError");
+    err.textContent = "";
+    try {
+      await registerAccount(
+        document.getElementById("regUsername").value,
+        document.getElementById("regDisplayName").value,
+        document.getElementById("regPassword").value,
+        document.getElementById("regGender")?.value
+      );
+      closeAuthModal();
+    } catch (ex) { err.textContent = ex.message; }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const underMaintenance = await checkMaintenanceMode();
+  if (underMaintenance) return;
+  initAuthUI();
+  initContactUI();
+  initChatUI();
+  initPurchaseUI();
+  loadSession();
+});
+
+async function checkMaintenanceMode() {
+  try {
+    const { data } = await sb.from("site_settings").select("maintenance_mode, maintenance_message").eq("id", true).maybeSingle();
+    if (data?.maintenance_mode) {
+      document.body.innerHTML = `
+        <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;font-family:inherit">
+          <div>
+            <div style="font-size:44px;margin-bottom:14px">🛠️</div>
+            <h1 style="margin:0 0 10px;font-size:22px">الموقع تحت الصيانة</h1>
+            <p style="color:var(--muted,#666);max-width:420px;margin:0 auto">${String(data.maintenance_message || "").replace(/[<>&]/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c]))}</p>
+          </div>
+        </div>`;
+      return true;
+    }
+  } catch (e) { /* لو فشل الفحص لأي سبب، سيبي الموقع يفتح عادي */ }
+  return false;
+}
+
+/* ----------------------------------------------------------
+   إشعارات الأدمن المجدولة — بتتحسب هنا في المتصفح (مفيش جدولة
+   سيرفر حقيقية)، فبنشيك كل مرة يفتح فيها حد الموقع: هل فيه إشعار
+   نشط دلوقتي حسب تاريخه ومدته ووقته اليومي والنوع المستهدف؟
+   ---------------------------------------------------------- */
+async function checkNotifications() {
+  const { data, error } = await sb.from("notifications").select("*").eq("active", true);
+  if (error || !data || !data.length) return;
+
+  let myGender = null;
+  if (authState.user) {
+    const { data: pp } = await sb.from("profile_private").select("gender").eq("id", authState.user.id).maybeSingle();
+    myGender = pp?.gender || null;
+  }
+
+  const now = new Date();
+  const active = data.filter(n => {
+    if (n.target_gender !== "all" && n.target_gender !== myGender) return false;
+    const start = new Date(n.start_date + "T00:00:00");
+    const end = new Date(start.getTime()); end.setDate(end.getDate() + n.days_duration - 1);
+    const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    if (todayMidnight < start || todayMidnight > end) return false;
+    if (todayMidnight.getTime() === start.getTime()) {
+      const sendTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), n.send_hour, n.send_minute, 0);
+      if (now < sendTime) return false;
+    }
+    return true;
+  });
+  if (!active.length) return;
+
+  const dismissed = JSON.parse(sessionStorage.getItem("dismissedNotifs") || "[]");
+  const toShow = active.find(n => !dismissed.includes(n.id));
+  if (toShow) renderNotifBanner(toShow);
+}
+
+function renderNotifBanner(n) {
+  let bar = document.getElementById("notifBanner");
+  if (!bar) {
+    bar = document.createElement("div");
+    bar.id = "notifBanner";
+    bar.style.cssText = "position:sticky;top:0;z-index:30;background:var(--primary);color:var(--primary-ink);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13.5px;line-height:1.6";
+    document.body.prepend(bar);
+  }
+  const safeMsg = String(n.message).replace(/[<>&]/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c]));
+  const viewBtn = n.link_course_id ? `<button id="notifViewCourseBtn" style="background:rgba(255,255,255,.2);border:0;color:inherit;border-radius:6px;padding:5px 12px;font-size:12.5px;cursor:pointer;flex:none">عرض</button>` : "";
+  bar.innerHTML = `<span>${safeMsg}</span><span style="display:flex;gap:8px;align-items:center;flex:none">${viewBtn}<button id="dismissNotifBtn" style="background:none;border:0;color:inherit;cursor:pointer;font-size:16px;flex:none">✕</button></span>`;
+
+  sb.rpc("track_notification_view", { p_id: n.id });
+
+  document.getElementById("notifViewCourseBtn")?.addEventListener("click", () => {
+    const course = (typeof state !== "undefined" ? state.sites : []).find(s => s.id === n.link_course_id);
+    if (course && typeof openCourse === "function") openCourse(course);
+  });
+  document.getElementById("dismissNotifBtn").onclick = () => {
+    const dismissed = JSON.parse(sessionStorage.getItem("dismissedNotifs") || "[]");
+    dismissed.push(n.id);
+    sessionStorage.setItem("dismissedNotifs", JSON.stringify(dismissed));
+    sb.rpc("track_notification_dismiss", { p_id: n.id });
+    bar.remove();
+  };
+}
+
+/* ============================================================
+   تواصل معنا (استفسار / مقترح / شكوى)
+   ============================================================ */
+function initContactUI() {
+  document.getElementById("menuContactBtn")?.addEventListener("click", () => { closeQuickMenu(); document.getElementById("openContactBtn")?.click(); });
+  document.getElementById("openContactBtn")?.addEventListener("click", () => {
+    document.getElementById("contactModal").classList.remove("hidden");
+    document.getElementById("contactNameLabel").classList.toggle("hidden", !!authState.user);
+    document.getElementById("contactSuccess").classList.add("hidden");
+    document.getElementById("contactForm").classList.remove("hidden");
+    document.getElementById("contactForm").reset();
+  });
+  document.getElementById("closeContactModal")?.addEventListener("click", () => {
+    document.getElementById("contactModal").classList.add("hidden");
+  });
+  document.getElementById("contactForm")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const err = document.getElementById("contactError");
+    err.textContent = "";
+    const message = document.getElementById("contactMessageInput").value.trim();
+    if (!message) { err.textContent = "اكتب رسالتك الأول"; return; }
+    const { error } = await sb.from("contact_messages").insert({
+      type: document.getElementById("contactType").value,
+      message,
+      contact_name: document.getElementById("contactName").value.trim() || null
+    });
+    if (error) { err.textContent = "حصل خطأ، حاول تاني"; return; }
+    document.getElementById("contactForm").classList.add("hidden");
+    document.getElementById("contactSuccess").classList.remove("hidden");
+  });
+}
+
+/* ============================================================
+   شات مباشر مع الأدمن
+   ============================================================ */
+let chatChannel = null;
+
+function initChatUI() {
+  document.getElementById("menuChatBtn")?.addEventListener("click", () => { closeQuickMenu(); document.getElementById("openChatBtn")?.click(); });
+  document.getElementById("openChatBtn")?.addEventListener("click", () => {
+    document.getElementById("chatModal").classList.remove("hidden");
+    if (authState.user) {
+      document.getElementById("chatLoginNote").classList.add("hidden");
+      document.getElementById("chatBody").classList.remove("hidden");
+      loadChatMessages();
+      subscribeChatRealtime();
+    } else {
+      document.getElementById("chatLoginNote").classList.remove("hidden");
+      document.getElementById("chatBody").classList.add("hidden");
+    }
+  });
+  document.getElementById("closeChatModal")?.addEventListener("click", () => {
+    document.getElementById("chatModal").classList.add("hidden");
+    if (chatChannel) { sb.removeChannel(chatChannel); chatChannel = null; }
+  });
+  document.getElementById("chatForm")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const input = document.getElementById("chatInput");
+    const message = input.value.trim();
+    if (!message) return;
+    input.value = "";
+    await sb.from("admin_chat_messages").insert({ thread_user_id: authState.user.id, message });
+    loadChatMessages();
+  });
+}
+
+async function loadChatMessages() {
+  if (!authState.user) return;
+  const { data } = await sb.from("admin_chat_messages").select("*").eq("thread_user_id", authState.user.id).order("created_at", { ascending: true });
+  renderChatMessages(data || []);
+  // نعلّم رسائل الأدمن كمقروءة أول ما المستخدم يفتح الشات
+  await sb.from("admin_chat_messages").update({ read: true }).eq("thread_user_id", authState.user.id).eq("sender", "admin").eq("read", false);
+}
+
+function renderChatMessages(messages) {
+  const box = document.getElementById("chatMessages");
+  box.innerHTML = messages.map(m => {
+    const safe = String(m.message).replace(/[<>&]/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c]));
+    return `<div class="chat-msg ${m.sender === "user" ? "from-user" : "from-admin"}">${safe}</div>`;
+  }).join("");
+  box.scrollTop = box.scrollHeight;
+}
+
+function subscribeChatRealtime() {
+  if (chatChannel) sb.removeChannel(chatChannel);
+  chatChannel = sb
+    .channel("chat-" + authState.user.id)
+    .on("postgres_changes", { event: "*", schema: "public", table: "admin_chat_messages", filter: `thread_user_id=eq.${authState.user.id}` }, () => loadChatMessages())
+    .subscribe();
+}
+
+/* ============================================================
+   طلب شراء المشروع
+   ============================================================ */
+function initPurchaseUI() {
+  document.getElementById("menuPurchaseBtn")?.addEventListener("click", () => { closeQuickMenu(); document.getElementById("openPurchaseBtn")?.click(); });
+  document.getElementById("openPurchaseBtn")?.addEventListener("click", () => {
+    document.getElementById("purchaseModal").classList.remove("hidden");
+    document.getElementById("purchaseForm").classList.remove("hidden");
+    document.getElementById("purchaseSuccess").classList.add("hidden");
+    document.getElementById("purchaseForm").reset();
+  });
+  document.getElementById("closePurchaseModal")?.addEventListener("click", () => {
+    document.getElementById("purchaseModal").classList.add("hidden");
+  });
+  document.getElementById("purchaseForm")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const err = document.getElementById("purchaseError");
+    err.textContent = "";
+    const email = document.getElementById("pu_email").value.trim();
+    const message = document.getElementById("pu_message").value.trim();
+    if (!email || !message) { err.textContent = "لازم تملأ الإيميل ووصف طلبك"; return; }
+    const { error } = await sb.from("purchase_inquiries").insert({
+      buyer_type: document.getElementById("pu_buyerType").value,
+      email,
+      phone: document.getElementById("pu_phone").value.trim() || null,
+      message
+    });
+    if (error) { err.textContent = "حصل خطأ، حاول تاني"; return; }
+    document.getElementById("purchaseForm").classList.add("hidden");
+    document.getElementById("purchaseSuccess").classList.remove("hidden");
+  });
+}
+
+</script>
+<script>
+/* ===== cards.js ===== */
+/* ============================================================
+   cards.js — البطاقات، رفع الملفات، الصلاحيات، والمشاركة
+   محتاج auth.js يتحمّل قبله (بيستخدم sb و authState منه)
+   ============================================================ */
+
+const STORAGE_BUCKET = "study-files";
+
+/* رفع حقيقي بنسبة تقدم فعلية (مش أرقام ثابتة زي 30%/75%) — بيتابع
+   بايتات الرفع الفعلية عن طريق XMLHttpRequest، لأن sb.storage.upload()
+   العادي مبيديش أي إشارة تقدم أثناء الرفع نفسه */
+function uploadFileWithProgress(path, file, onProgress) {
+  return new Promise((resolve, reject) => {
+    sb.auth.getSession().then(({ data: { session } }) => {
+      if (!session) { reject(new Error("لازم تسجّل دخول")); return; }
+      const xhr = new XMLHttpRequest();
+      const url = `${SUPABASE_URL}/storage/v1/object/${STORAGE_BUCKET}/${path.split("/").map(encodeURIComponent).join("/")}`;
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Authorization", "Bearer " + session.access_token);
+      xhr.setRequestHeader("apikey", SUPABASE_ANON_KEY);
+      xhr.setRequestHeader("Content-Type", file.type || "application/octet-stream");
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable && onProgress) onProgress(Math.round((e.loaded / e.total) * 100));
+      };
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) { onProgress?.(100); resolve(); }
+        else {
+          let msg = "فشل الرفع (كود " + xhr.status + ")";
+          try { const j = JSON.parse(xhr.responseText); if (j.message) msg = j.message; } catch (_) {}
+          reject(new Error(msg));
+        }
+      };
+      xhr.onerror = () => reject(new Error("فشل الاتصال أثناء الرفع"));
+      xhr.send(file);
+    }).catch(reject);
+  });
+}
+const MAX_FILE_MB = 50; // لو محتاج حجم أكبر، لازم كمان ترفع الليمت من Supabase Dashboard > Storage > Settings
+
+const libState = { cards: [], currentCard: null, currentFiles: [] };
+
+function fmtSize(bytes) {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+  return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+}
+// اسم الملف الأصلي (عربي/فيه مسافات) بيتحفظ عادي في عمود original_filename
+// للعرض، لكن Supabase Storage بيرفض أي حروف غير-لاتينية أو مسافات في
+// الـ"key" (المسار) نفسه بتاع الملف على السيرفر — فبنستخدم الامتداد بس
+// وUUID عشوائي كمسار تخزين آمن، بدل تضمين الاسم الأصلي فيه
+function safeFileExt(name) {
+  const m = /\.([a-zA-Z0-9]{1,10})$/.exec(name || "");
+  return m ? "." + m[1].toLowerCase() : "";
+}
+function visibilityLabel(v) { return v === "public" ? "عامة" : v === "unlisted" ? "برابط" : "خاصة"; }
+function shareUrlFor(token) { return location.origin + location.pathname + "?share=" + token; }
+function coverIconFor(mimeOrName) {
+  const s = (mimeOrName || "").toLowerCase();
+  if (/pdf/.test(s)) return "📕";
+  if (/image|png|jpe?g|gif|webp|svg/.test(s)) return "🖼️";
+  if (/video|mp4|mov|webm|mkv/.test(s)) return "🎥";
+  if (/audio|mp3|wav|m4a/.test(s)) return "🎵";
+  if (/zip|rar|7z/.test(s)) return "🗜️";
+  return "📁";
+}
+
+/* ---------------- تحميل بطاقاتي ---------------- */
+async function loadMyCards() {
+  if (!authState.user) return;
+  const { data, error } = await sb.from("cards").select("*, files(mime_type)").eq("owner_id", authState.user.id).order("created_at", { ascending: false });
+  if (error) { console.error(error); return; }
+  libState.cards = data || [];
+  renderMyCardsGrid();
+}
+
+function renderMyCardsGrid() {
+  const grid = document.getElementById("myCardsGrid");
+  const empty = document.getElementById("myCardsEmpty");
+  if (!libState.cards.length) { grid.innerHTML = ""; empty.classList.remove("hidden"); return; }
+  empty.classList.add("hidden");
+  grid.innerHTML = libState.cards.map(c => `
+    <div class="card mycard" data-id="${c.id}">
+      <div class="cover"><span class="cover-icon">${coverIconFor(c.files?.[0]?.mime_type)}</span></div>
+      <div class="card-body">
+        <div class="card-title"><h3>${esc(c.name)}</h3></div>
+        <p class="card-desc">${esc(c.description || "بدون وصف")}</p>
+        <div class="meta"><span class="tag">${(c.files || []).length} ملف</span><span class="tag">${visibilityLabel(c.visibility)}</span></div>
+      </div>
+    </div>`).join("");
+  grid.querySelectorAll(".mycard").forEach(el => el.addEventListener("click", () => {
+    const card = libState.cards.find(c => c.id === el.dataset.id);
+    if (card) openCardDetail(card);
+  }));
+}
+
+/* ---------------- فتح/قفل شاشة ملفاتي ---------------- */
+function openMyLibrary() {
+  document.getElementById("myLibraryView").classList.remove("hidden");
+  loadMyCards();
+}
+function closeMyLibrary() { document.getElementById("myLibraryView").classList.add("hidden"); }
+
+/* ---------------- فورم إنشاء/تعديل بطاقة ---------------- */
+function openCardForm(card) {
+  document.getElementById("cardFormTitle").textContent = card ? "تعديل البطاقة" : "بطاقة جديدة";
+  document.getElementById("cf_name").value = card?.name || "";
+  document.getElementById("cf_desc").value = card?.description || "";
+  document.getElementById("cf_visibility").value = card?.visibility || "public";
+  document.getElementById("cf_download").checked = card ? card.allow_download : true;
+  document.getElementById("cardForm").dataset.editId = card?.id || "";
+  document.getElementById("cardFormError").textContent = "";
+  document.getElementById("cardFormModal").classList.remove("hidden");
+}
+function closeCardForm() { document.getElementById("cardFormModal").classList.add("hidden"); }
+
+async function submitCardForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
+  // بدون هذا الحارس، ضغطة مزدوجة على "حفظ" (أو Enter ثم كليك) كانت تبعت
+  // insert مرتين قبل ما أول واحدة تخلص، فتتكرر البطاقة بنفس الاسم بالظبط —
+  // وهو بالظبط اللي ظاهر في لقطة الشاشة (بطاقتين "الفصل الاول - الدرس الاول")
+  if (btn.disabled) return;
+  const err = document.getElementById("cardFormError");
+  err.textContent = "";
+  const name = document.getElementById("cf_name").value.trim();
+  if (!name) { err.textContent = "اكتب اسم للبطاقة"; return; }
+  const payload = {
+    name,
+    description: document.getElementById("cf_desc").value.trim(),
+    visibility: document.getElementById("cf_visibility").value,
+    allow_download: document.getElementById("cf_download").checked
+  };
+  const editId = document.getElementById("cardForm").dataset.editId;
+  const originalLabel = btn.textContent;
+  btn.disabled = true; btn.textContent = "جارِ الحفظ...";
+  try {
+    if (editId) {
+      const { error } = await sb.from("cards").update(payload).eq("id", editId);
+      if (error) throw error;
+    } else {
+      // لو فيه فولدر (بطاقة) بنفس الاسم ده موجود بالفعل عندك، منعملش
+      // واحد جديد يتكرر جنبه — بندخلك في نفس الفولدر الموجود عشان تضيف
+      // ملفك فيه، بدل ما يبقى عندك فولدرين بنفس الاسم متبعثرين
+      const existing = libState.cards.find(c => c.name.trim().toLowerCase() === name.toLowerCase());
+      if (existing) {
+        closeCardForm();
+        await loadMyCards();
+        const fresh = libState.cards.find(c => c.id === existing.id) || existing;
+        openCardDetail(fresh);
+        return;
+      }
+      const { error } = await sb.from("cards").insert({ ...payload, owner_id: authState.user.id });
+      if (error) throw error;
+    }
+    closeCardForm();
+    await loadMyCards();
+    if (editId && libState.currentCard?.id === editId) {
+      const fresh = libState.cards.find(c => c.id === editId);
+      if (fresh) openCardDetail(fresh);
+    }
+  } catch (ex) { err.textContent = ex.message; }
+  finally { btn.disabled = false; btn.textContent = originalLabel; }
+}
+
+async function deleteCurrentCard() {
+  if (!libState.currentCard) return;
+  if (!confirm(`حذف بطاقة "${libState.currentCard.name}"؟ هتتحط في سلة المهملات ويقدر الأدمن يسترجعها لو احتجت.`)) return;
+  await sb.from("cards").update({ deleted_at: new Date().toISOString() }).eq("id", libState.currentCard.id);
+  closeCardDetail();
+  await loadMyCards();
+}
+
+/* ---------------- تفاصيل البطاقة + الملفات ---------------- */
+async function openCardDetail(card) {
+  libState.currentCard = card;
+  document.getElementById("cardDetailView").classList.remove("hidden");
+  document.getElementById("cardDetailName").textContent = card.name;
+  document.getElementById("cardDetailDesc").textContent = card.description || "";
+
+  const shareBox = document.getElementById("cardShareBox");
+  if (card.visibility === "unlisted" || card.visibility === "public") {
+    shareBox.classList.remove("hidden");
+    document.getElementById("cardShareLink").value = shareUrlFor(card.share_token);
+    document.getElementById("cardApprovalNote").classList.toggle("hidden", !!card.approved);
+  } else {
+    shareBox.classList.add("hidden");
+    document.getElementById("cardApprovalNote").classList.add("hidden");
+  }
+
+  await loadCardFiles(card.id);
+  await loadViewCount(card.id);
+  await loadComments(card.id, "cardCommentsList", "cardCommentsEmpty");
+  await refreshCommunityPublishBox(card);
+}
+
+/* ---------------- النشر في "ملفات المجتمع" (على GitHub، عن طريق Edge Function) ---------------- */
+async function refreshCommunityPublishBox(card) {
+  const box = document.getElementById("communityPublishBox");
+  // النشر متاح بس للبطاقات العامة والموافَق عليها — نفس شرط ظهورها للعامة أصلًا
+  const eligible = card.visibility === "public" && !card.deleted_at;
+  box.classList.toggle("hidden", !eligible);
+  if (!eligible) return;
+  const { data: existingFiles, count } = await sb.from("community_files").select("categories", { count: "exact" }).eq("card_id", card.id);
+  document.getElementById("communityPublishedNote").classList.toggle("hidden", !count);
+  document.getElementById("publishCommunityBtn").textContent = count ? "تحديث النشر في ملفات المجتمع" : "تأكيد النشر النهائي في ملفات المجتمع";
+  const existingCats = [...new Set((existingFiles || []).flatMap(f => f.categories || []))];
+  document.getElementById("communityCategoriesInput").value = existingCats.join(", ");
+  document.getElementById("communityPublishStatus").textContent = "";
+}
+function closeCardDetail() {
+  document.getElementById("cardDetailView").classList.add("hidden");
+  libState.currentCard = null;
+  libState.currentFiles = [];
+}
+
+async function loadCardFiles(cardId) {
+  const { data, error } = await sb.from("files").select("*").eq("card_id", cardId).order("created_at", { ascending: false });
+  if (error) { console.error(error); return; }
+  libState.currentFiles = data || [];
+  renderCardFiles();
+}
+
+function renderCardFiles() {
+  const list = document.getElementById("cardFilesList");
+  const empty = document.getElementById("cardFilesEmpty");
+  if (!libState.currentFiles.length) { list.innerHTML = ""; empty.classList.remove("hidden"); return; }
+  empty.classList.add("hidden");
+  list.innerHTML = libState.currentFiles.map(f => `
+    <div class="file-row" data-id="${f.id}">
+      <span class="file-icon">${coverIconFor(f.mime_type)}</span>
+      <div class="file-info"><strong>${esc(f.name)}</strong><small>${fmtSize(f.size_bytes)}</small></div>
+      <div class="file-actions">
+        <button class="view-file" title="فتح">👁</button>
+        <button class="download-file" title="تنزيل">⬇️</button>
+        <button class="delete-file" title="حذف">🗑</button>
+      </div>
+    </div>`).join("");
+  list.querySelectorAll(".view-file").forEach(b => b.addEventListener("click", (e) => viewFile(rowFile(e))));
+  list.querySelectorAll(".download-file").forEach(b => b.addEventListener("click", (e) => downloadFile(rowFile(e))));
+  list.querySelectorAll(".delete-file").forEach(b => b.addEventListener("click", (e) => deleteFile(rowFile(e))));
+}
+function rowFile(e) { const id = e.target.closest(".file-row").dataset.id; return libState.currentFiles.find(f => f.id === id); }
+
+async function viewFile(file) {
+  const { data, error } = await sb.storage.from(STORAGE_BUCKET).createSignedUrl(file.storage_path, 60);
+  if (error) { alert("تعذّر فتح الملف: " + error.message); return; }
+  window.open(data.signedUrl, "_blank");
+}
+async function downloadFile(file) {
+  const { data, error } = await sb.storage.from(STORAGE_BUCKET).download(file.storage_path);
+  if (error) { alert("تعذّر تنزيل الملف: " + error.message); return; }
+  const url = URL.createObjectURL(data);
+  const a = document.createElement("a");
+  a.href = url; a.download = file.original_filename; a.click();
+  URL.revokeObjectURL(url);
+}
+async function deleteFile(file) {
+  if (!confirm(`حذف "${file.name}"؟`)) return;
+  await sb.storage.from(STORAGE_BUCKET).remove([file.storage_path]);
+  await sb.from("files").delete().eq("id", file.id);
+  await loadCardFiles(libState.currentCard.id);
+  await loadMyCards();
+}
+
+/* ---------------- الرفع ---------------- */
+async function uploadFiles(fileList) {
+  const progressBox = document.getElementById("uploadProgress");
+  for (const file of Array.from(fileList)) {
+    if (file.size > MAX_FILE_MB * 1024 * 1024) { alert(`"${file.name}" أكبر من ${MAX_FILE_MB}MB`); continue; }
+
+    const dup = libState.currentFiles.find(f => f.name === file.name);
+    if (dup) {
+      const replace = confirm(`فيه ملف اسمه "${file.name}" في البطاقة دي بالفعل.\n\nOK = استبداله بالنسخة الجديدة\nCancel = إضافته كملف منفصل جنبه`);
+      if (replace) {
+        await sb.storage.from(STORAGE_BUCKET).remove([dup.storage_path]);
+        await sb.from("files").delete().eq("id", dup.id);
+        libState.currentFiles = libState.currentFiles.filter(f => f.id !== dup.id);
+      }
+    }
+
+    const row = document.createElement("div");
+    row.className = "upload-progress-row";
+    row.innerHTML = `<span>${esc(file.name)}</span><div class="bar"><span></span></div>`;
+    progressBox.appendChild(row);
+    const bar = row.querySelector(".bar span");
+    bar.style.width = "0%";
+
+    const path = `${authState.user.id}/${libState.currentCard.id}/${crypto.randomUUID()}${safeFileExt(file.name)}`;
+    try {
+      await uploadFileWithProgress(path, file, pct => { bar.style.width = pct + "%"; });
+    } catch (upErr) { row.querySelector("span").textContent += " — فشل: " + upErr.message; continue; }
+
+    const { error: dbErr } = await sb.from("files").insert({
+      card_id: libState.currentCard.id,
+      owner_id: authState.user.id,
+      name: file.name,
+      original_filename: file.name,
+      size_bytes: file.size,
+      mime_type: file.type,
+      storage_path: path
+    });
+    if (dbErr) { row.querySelector("span").textContent += " — فشل: " + dbErr.message; continue; }
+    bar.style.width = "100%";
+    setTimeout(() => row.remove(), 1200);
+  }
+  await loadCardFiles(libState.currentCard.id);
+  await loadMyCards();
+}
+
+/* ---------------- عدد المشاهدات ---------------- */
+async function loadViewCount(cardId) {
+  const { count } = await sb.from("card_share_views").select("*", { count: "exact", head: true }).eq("card_id", cardId);
+  document.getElementById("cardViewCount").textContent = `👁 ${count || 0} مشاهدة`;
+}
+
+/* ---------------- التعليقات (تُستخدم لعرض البطاقة عند المالك والزائر) ---------------- */
+async function loadComments(cardId, listElId, emptyElId) {
+  const { data, error } = await sb.from("card_comments").select("*, profiles(display_name)").eq("card_id", cardId).order("created_at", { ascending: true });
+  const list = document.getElementById(listElId);
+  const empty = document.getElementById(emptyElId);
+  if (error || !data || !data.length) { list.innerHTML = ""; empty.classList.remove("hidden"); return; }
+  empty.classList.add("hidden");
+  list.innerHTML = data.map(c => `
+    <div class="file-row" data-id="${c.id}">
+      <div class="file-info"><strong>${esc(c.profiles?.display_name || "مستخدم")}</strong><small>${esc(c.message)}</small></div>
+      ${(authState.user && (authState.user.id === c.user_id)) ? `<div class="file-actions"><button class="delete-comment" title="حذف">🗑</button></div>` : ""}
+    </div>`).join("");
+  list.querySelectorAll(".delete-comment").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".file-row").dataset.id;
+    await sb.from("card_comments").delete().eq("id", id);
+    loadComments(cardId, listElId, emptyElId);
+  }));
+}
+
+/* ---------------- نسخ البطاقة ---------------- */
+async function duplicateCurrentCard() {
+  if (!libState.currentCard) return;
+  if (!confirm(`عمل نسخة من "${libState.currentCard.name}"؟`)) return;
+  const original = libState.currentCard;
+  const { data: newCard, error } = await sb.from("cards").insert({
+    owner_id: authState.user.id,
+    name: original.name + " (نسخة)",
+    description: original.description,
+    visibility: "private",
+    allow_download: original.allow_download
+  }).select().single();
+  if (error) { alert("تعذّر النسخ: " + error.message); return; }
+
+  for (const f of libState.currentFiles) {
+    const newPath = `${authState.user.id}/${newCard.id}/${crypto.randomUUID()}${safeFileExt(f.original_filename)}`;
+    const { error: copyErr } = await sb.storage.from(STORAGE_BUCKET).copy(f.storage_path, newPath);
+    if (copyErr) continue;
+    await sb.from("files").insert({
+      card_id: newCard.id, owner_id: authState.user.id, name: f.name,
+      original_filename: f.original_filename, size_bytes: f.size_bytes,
+      mime_type: f.mime_type, storage_path: newPath
+    });
+  }
+  await loadMyCards();
+  alert("تم عمل نسخة خاصة من البطاقة ✓");
+}
+
+/* ---------------- لصق/سحب مباشر جوه صفحة "ملفاتي" (برّه أي بطاقة مفتوحة) ---------------- */
+function initGlobalDropPaste() {
+  const zone = document.getElementById("myLibraryView");
+  if (!zone) return;
+
+  ["dragover", "dragenter"].forEach(ev => zone.addEventListener(ev, (e) => { e.preventDefault(); zone.style.outline = "2px dashed var(--primary)"; }));
+  ["dragleave", "drop"].forEach(ev => zone.addEventListener(ev, (e) => { e.preventDefault(); zone.style.outline = "none"; }));
+  zone.addEventListener("drop", (e) => {
+    if (e.dataTransfer.files.length) quickUpload(e.dataTransfer.files);
+  });
+
+  document.addEventListener("paste", (e) => {
+    if (zone.classList.contains("hidden")) return; // بس لو صفحة "ملفاتي" فاتحة فعلاً
+    const files = Array.from(e.clipboardData?.files || []);
+    if (files.length) quickUpload(files);
+  });
+}
+
+/* ---------------- رفع سريع: بطاقة تلقائية + تحويل مباشر لـ"ملفاتي" ---------------- */
+async function quickUpload(fileList) {
+  if (!fileList.length || !authState.user) return;
+  const modal = document.getElementById("quickUploadModal");
+  const box = document.getElementById("quickUploadProgress");
+  modal.classList.remove("hidden");
+  box.innerHTML = "";
+
+  const baseName = fileList[0].name.replace(/\.[^.]+$/, "") || "ملف جديد";
+
+  // نفس منطق "بطاقة جديدة" — لو فيه فولدر بنفس الاسم موجود بالفعل،
+  // نستخدمه بدل ما نعمل واحد جديد يتكرر جنبه
+  await loadMyCards();
+  let newCard = libState.cards.find(c => c.name.trim().toLowerCase() === baseName.trim().toLowerCase());
+  if (!newCard) {
+    const { data, error } = await sb.from("cards").insert({
+      owner_id: authState.user.id,
+      name: baseName,
+      description: "",
+      visibility: "public",
+      allow_download: true
+    }).select().single();
+    if (error) { alert("تعذّر إنشاء البطاقة: " + error.message); modal.classList.add("hidden"); return; }
+    newCard = data;
+  }
+
+  for (const file of Array.from(fileList)) {
+    const row = document.createElement("div");
+    row.className = "upload-progress-row";
+    row.innerHTML = `<span>${esc(file.name)}</span><div class="bar"><span></span></div>`;
+    box.appendChild(row);
+    const bar = row.querySelector(".bar span");
+    bar.style.width = "0%";
+
+    const path = `${authState.user.id}/${newCard.id}/${crypto.randomUUID()}${safeFileExt(file.name)}`;
+    try {
+      await uploadFileWithProgress(path, file, pct => { bar.style.width = pct + "%"; });
+    } catch (upErr) { row.querySelector("span").textContent += " — فشل: " + upErr.message; continue; }
+
+    await sb.from("files").insert({
+      card_id: newCard.id, owner_id: authState.user.id, name: file.name,
+      original_filename: file.name, size_bytes: file.size, mime_type: file.type, storage_path: path
+    });
+  }
+
+  setTimeout(() => {
+    modal.classList.add("hidden");
+    openMyLibrary();
+  }, 700);
+}
+
+/* ---------------- الإبلاغ عن بطاقة مشتركة ---------------- */
+async function reportSharedCard(cardId) {
+  const reason = prompt("ليه بتبلّغ عن البطاقة دي؟ (اختياري)") || null;
+  const { error } = await sb.from("card_reports").insert({ card_id: cardId, reason });
+  if (error) { alert("تعذّر الإبلاغ: " + error.message); return; }
+  alert("تم إرسال بلاغك، شكرًا لك 🙏");
+}
+async function loadSharedCard(token) {
+  const { data, error } = await sb.rpc("get_shared_card", { p_token: token });
+  if (error || !data) { alert("الرابط غير صالح أو الكارت لم يعد متاحًا"); return; }
+  sb.from("card_share_views").insert({ card_id: data.card.id }).then(() => {});
+  document.getElementById("sharedCardView").classList.remove("hidden");
+  document.getElementById("sharedCardName").textContent = data.card.name;
+  document.getElementById("sharedCardDesc").textContent = data.card.description || "";
+  const list = document.getElementById("sharedFilesList");
+  list.innerHTML = (data.files || []).map(f => `
+    <div class="file-row" data-path="${esc(f.storage_path)}" data-name="${esc(f.name)}">
+      <span class="file-icon">${coverIconFor(f.mime_type)}</span>
+      <div class="file-info"><strong>${esc(f.name)}</strong><small>${fmtSize(f.size_bytes)}</small></div>
+      <div class="file-actions">
+        <button class="view-shared" title="فتح">👁</button>
+        ${data.card.allow_download ? '<button class="download-shared" title="تنزيل">⬇️</button>' : ""}
+      </div>
+    </div>`).join("");
+  list.querySelectorAll(".view-shared").forEach(b => b.addEventListener("click", async (e) => {
+    const row = e.target.closest(".file-row");
+    const { data: d } = await sb.storage.from(STORAGE_BUCKET).createSignedUrl(row.dataset.path, 60);
+    if (d) window.open(d.signedUrl, "_blank");
+  }));
+  list.querySelectorAll(".download-shared").forEach(b => b.addEventListener("click", async (e) => {
+    const row = e.target.closest(".file-row");
+    const { data: blob } = await sb.storage.from(STORAGE_BUCKET).download(row.dataset.path);
+    if (!blob) return;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a"); a.href = url; a.download = row.dataset.name; a.click();
+    URL.revokeObjectURL(url);
+  }));
+
+  document.getElementById("reportCardBtn").onclick = () => reportSharedCard(data.card.id);
+  await loadComments(data.card.id, "sharedCommentsList", "sharedCommentsEmpty");
+  const commentForm = document.getElementById("sharedCommentForm");
+  const loginNote = document.getElementById("sharedCommentLoginNote");
+  if (authState.user) {
+    commentForm.classList.remove("hidden");
+    loginNote.classList.add("hidden");
+    commentForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const btn = commentForm.querySelector('button[type="submit"]');
+      if (btn.disabled) return; // منع إرسال نفس التعليق مرتين بضغطة مزدوجة
+      const input = document.getElementById("sharedCommentInput");
+      const message = input.value.trim();
+      if (!message) return;
+      btn.disabled = true;
+      try {
+        const { error } = await sb.from("card_comments").insert({ card_id: data.card.id, message });
+        if (error) { alert(error.message); return; }
+        input.value = "";
+        await loadComments(data.card.id, "sharedCommentsList", "sharedCommentsEmpty");
+      } finally { btn.disabled = false; }
+    };
+  } else {
+    commentForm.classList.add("hidden");
+    loginNote.classList.remove("hidden");
+  }
+}
+
+/* ---------------- الربط بالواجهة ---------------- */
+function initCardsUI() {
+  document.getElementById("quickUploadBtn")?.addEventListener("click", () => document.getElementById("quickUploadInput").click());
+  document.getElementById("quickUploadInput")?.addEventListener("change", (e) => {
+    if (e.target.files.length) quickUpload(e.target.files);
+    e.target.value = "";
+  });
+  initGlobalDropPaste();
+  document.getElementById("openMyLibraryBtn")?.addEventListener("click", openMyLibrary);
+  document.getElementById("closeMyLibrary")?.addEventListener("click", closeMyLibrary);
+  document.getElementById("newCardBtn")?.addEventListener("click", () => openCardForm(null));
+  document.getElementById("closeCardForm")?.addEventListener("click", closeCardForm);
+  document.getElementById("cardForm")?.addEventListener("submit", submitCardForm);
+  document.getElementById("closeCardDetail")?.addEventListener("click", closeCardDetail);
+  document.getElementById("editCardBtn")?.addEventListener("click", () => openCardForm(libState.currentCard));
+  document.getElementById("deleteCardBtn")?.addEventListener("click", deleteCurrentCard);
+  document.getElementById("duplicateCardBtn")?.addEventListener("click", duplicateCurrentCard);
+  document.getElementById("cardCommentForm")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn.disabled) return; // منع إرسال نفس التعليق مرتين بضغطة مزدوجة
+    const input = document.getElementById("cardCommentInput");
+    const message = input.value.trim();
+    if (!message || !libState.currentCard) return;
+    btn.disabled = true;
+    try {
+      const { error } = await sb.from("card_comments").insert({ card_id: libState.currentCard.id, message });
+      if (error) { alert(error.message); return; }
+      input.value = "";
+      await loadComments(libState.currentCard.id, "cardCommentsList", "cardCommentsEmpty");
+    } finally { btn.disabled = false; }
+  });
+  document.getElementById("closeSharedCard")?.addEventListener("click", () => document.getElementById("sharedCardView").classList.add("hidden"));
+
+  const RESERVED_CATEGORIES_CLIENT = ["مميز", "مميزة", "المميزة", "الأكثر تحميلاً", "الأكثر تحميلا", "الأكثر متابعة"];
+  document.getElementById("publishCommunityBtn")?.addEventListener("click", async () => {
+    const btn = document.getElementById("publishCommunityBtn");
+    if (btn.disabled || !libState.currentCard) return;
+    const status = document.getElementById("communityPublishStatus");
+    if (!libState.currentFiles.length) { status.textContent = "لازم ترفع ملف واحد على الأقل الأول."; return; }
+    const categories = document.getElementById("communityCategoriesInput").value.split(",").map(c => c.trim()).filter(Boolean);
+    const blocked = categories.find(c => RESERVED_CATEGORIES_CLIENT.includes(c));
+    if (blocked) { status.textContent = `"${blocked}" قسم محجوز — بيتحدد من الأدمن أو أوتوماتيك، ماينفعش تختاره بنفسك.`; return; }
+    btn.disabled = true;
+    status.textContent = "جارِ النشر على GitHub...";
+    try {
+      const { data, error } = await sb.functions.invoke("publish-to-community", { body: { card_id: libState.currentCard.id, categories } });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      status.textContent = "تم النشر ✓";
+      await refreshCommunityPublishBox(libState.currentCard);
+    } catch (ex) {
+      status.textContent = "فشل: " + (ex.message || "خطأ غير معروف");
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  document.getElementById("copyShareLink")?.addEventListener("click", () => {
+    const input = document.getElementById("cardShareLink");
+    input.select(); document.execCommand("copy");
+  });
+  document.getElementById("cardShareQrBtn")?.addEventListener("click", () => {
+    const url = document.getElementById("cardShareLink").value;
+    if (url) showQrModal(url, libState.currentCard?.name || "بطاقة");
+  });
+
+  const fileInput = document.getElementById("fileInput");
+  fileInput?.addEventListener("change", () => { if (fileInput.files.length) uploadFiles(fileInput.files); fileInput.value = ""; });
+
+  const dropZone = document.getElementById("uploadDrop");
+  if (dropZone) {
+    ["dragover", "dragenter"].forEach(ev => dropZone.addEventListener(ev, (e) => { e.preventDefault(); dropZone.classList.add("dragover"); }));
+    ["dragleave", "drop"].forEach(ev => dropZone.addEventListener(ev, (e) => { e.preventDefault(); dropZone.classList.remove("dragover"); }));
+    dropZone.addEventListener("drop", (e) => { if (e.dataTransfer.files.length) uploadFiles(e.dataTransfer.files); });
+  }
+
+  // فتح رابط مشاركة مباشر: ?share=TOKEN
+  const params = new URLSearchParams(location.search);
+  const token = params.get("share");
+  if (token) loadSharedCard(token);
+
+  // فتح "ملفات المجتمع" مباشرة من رابط QR: ?community=1&cat=القسم
+  if (params.get("community") === "1") {
+    openCommunityFiles();
+    const cat = params.get("cat");
+    if (cat) { communityActiveChip = cat; fetchCommunityPage(true); }
+  }
+
+  document.getElementById("communityQrBtn")?.addEventListener("click", () => {
+    const url = communityShareUrl(communityActiveChip);
+    showQrModal(url, communityActiveChip === "الكل" ? "ملفات المجتمع" : "ملفات المجتمع — " + communityActiveChip);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", initCardsUI);
+
+</script>
+<script>
+/* ===== app.js ===== */
+const state={sites:[],sections:[],category:"الكل",sort:"default",tabs:[],activeTab:null,config:{texts:{},menu:[]}};
+function isPdf(file){return /\.pdf($|\?)/i.test(file||"")}
+function isPdfCourse(s){const parts=s.parts?.length?s.parts:[{file:s.file}];return parts.length>0&&parts.every(p=>isPdf(p.file))}
+const LS={fav:"myLibraryFavorites",history:"myLibraryHistory",theme:"myLibraryTheme",opens:"myLibraryOpens",lastPart:"myLibraryLastPart"};
+
+function getBase(){return new URL(".",location.href)}
+function resolve(p){return new URL(p,getBase()).href}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function getFav(){try{return JSON.parse(localStorage.getItem(LS.fav)||"[]")}catch{return[]}}
+function saveFav(a){localStorage.setItem(LS.fav,JSON.stringify(a))}
+function getHistory(){try{return JSON.parse(localStorage.getItem(LS.history)||"[]")}catch{return[]}}
+function saveHistory(a){localStorage.setItem(LS.history,JSON.stringify(a.slice(0,30)))}
+function isFav(id){return getFav().includes(id)}
+function getOpens(){try{return JSON.parse(localStorage.getItem(LS.opens)||"{}")}catch{return{}}}
+function bumpOpens(id){const o=getOpens();o[id]=(o[id]||0)+1;localStorage.setItem(LS.opens,JSON.stringify(o))}
+function getLastPart(){try{return JSON.parse(localStorage.getItem(LS.lastPart)||"{}")}catch{return{}}}
+function setLastPart(id,index){const o=getLastPart();o[id]=index;localStorage.setItem(LS.lastPart,JSON.stringify(o))}
+function toggleFav(id,e){e?.stopPropagation();let a=getFav();a=a.includes(id)?a.filter(x=>x!==id):[...a,id];saveFav(a);renderAll();const tab=state.tabs.find(t=>t.id===state.activeTab);if(tab?.siteId===id)document.getElementById("favViewer").textContent=isFav(id)?"♥":"♡"}
+function findTab(siteId){return state.tabs.find(t=>t.siteId===siteId)}
+function getTabSite(tab){return tab.siteId?state.sites.find(s=>s.id===tab.siteId):null}
+
+async function init(){
+  const theme=localStorage.getItem(LS.theme);if(theme==="dark")document.body.classList.add("dark");
+  updateThemeIcon();
+  document.getElementById("themeBtn").onclick=()=>{document.body.classList.toggle("dark");localStorage.setItem(LS.theme,document.body.classList.contains("dark")?"dark":"light");updateThemeIcon()}
+  document.getElementById("search").addEventListener("input",()=>{document.getElementById("clearSearch").classList.toggle("hidden",!document.getElementById("search").value);renderAll()});
+  document.getElementById("clearSearch").onclick=()=>{const s=document.getElementById("search");s.value="";s.focus();document.getElementById("clearSearch").classList.add("hidden");renderAll()};
+  document.getElementById("closeModal").onclick=closeCourse;
+  document.querySelector("#courseModal .modal-backdrop").onclick=closeCourse;
+  document.getElementById("closeHistory").onclick=()=>document.getElementById("historyModal").classList.add("hidden");
+  document.querySelector("#historyModal .modal-backdrop").onclick=()=>document.getElementById("historyModal").classList.add("hidden");
+  document.getElementById("historyBtn").onclick=showHistory;
+  document.getElementById("closeViewer").onclick=closeViewer;
+  document.getElementById("backCourse").onclick=()=>{const tab=state.tabs.find(t=>t.id===state.activeTab);const s=tab&&getTabSite(tab);if(s)openCourse(s)};
+  document.getElementById("openNew").onclick=()=>{const f=document.querySelector(".tab-frames iframe.active");if(f)window.open(f.src,"_blank")};
+  document.getElementById("downloadPdf").onclick=()=>{const f=document.querySelector(".tab-frames iframe.active");if(!f)return;const a=document.createElement("a");a.href=f.src;a.download="";document.body.appendChild(a);a.click();a.remove()};
+  document.getElementById("invertPdf").onclick=()=>{document.querySelector(".tab-frames iframe.active")?.classList.toggle("pdf-inverted")};
+  document.getElementById("sortSelect").onchange=()=>{state.sort=document.getElementById("sortSelect").value;renderAll()};
+  document.getElementById("fullscreen").onclick=()=>{document.querySelector(".tab-frames iframe.active")?.requestFullscreen?.()};
+  document.getElementById("favViewer").onclick=()=>{const tab=state.tabs.find(t=>t.id===state.activeTab);if(tab?.siteId)toggleFav(tab.siteId)};
+  document.getElementById("addTab").onclick=addEmptyTab;
+  document.getElementById("prevPart").onclick=()=>stepPart(-1);
+  document.getElementById("nextPart").onclick=()=>stepPart(1);
+  document.getElementById("partsToggle").onclick=()=>{document.getElementById("lessonSidebar").classList.add("open");document.getElementById("sidebarBackdrop").classList.remove("hidden")};
+  document.getElementById("sidebarBackdrop").onclick=()=>{document.getElementById("lessonSidebar").classList.remove("open");document.getElementById("sidebarBackdrop").classList.add("hidden")};
+  document.getElementById("menuBtn").onclick=openQuickMenu;
+  document.getElementById("menuSiteQrBtn")?.addEventListener("click",()=>{closeQuickMenu();showQrModal(location.origin+location.pathname,document.title||"مكتبتي")});
+  document.getElementById("closeQuickMenu").onclick=closeQuickMenu;
+  document.querySelector("#quickMenu .quick-menu-backdrop").onclick=closeQuickMenu;
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCourse();closeViewer();closeQuickMenu()}});
+  try{
+    const r=await fetch("sites.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)throw Error();
+    const data=await r.json();
+    if(Array.isArray(data)){state.sites=data.filter(isPublished);state.sections=[];state.config={texts:{},menu:[]}}
+    else{state.sites=(data.courses||data.sites||[]).filter(isPublished);state.sections=data.sections||[];state.config=data.config||{texts:{},menu:[]}}
+    applyConfig();renderCategories();renderAll();renderHistory();renderQuickMenu();
+    setupOfflineCache();
+  }catch(e){document.getElementById("cards").innerHTML='<div class="empty">تعذر تحميل المحتوى. تأكد من وجود sites.json.</div>'}
+}
+function applyConfig(){
+  const t=state.config.texts||{};
+  const set=(id,val)=>{if(val)document.getElementById(id).textContent=val};
+  set("brandName",t.brandName);set("brandSubtitle",t.brandSubtitle);
+  set("heroTitle",t.heroTitle);set("heroText",t.heroText);set("footerText",t.footerText);
+  if(t.searchPlaceholder)document.getElementById("search").placeholder=t.searchPlaceholder;
+  if(t.emptyText)document.getElementById("empty").textContent=t.emptyText;
+}
+function quickMenuAction(item){
+  closeQuickMenu();
+  const target=item.target||"";
+  if(target.startsWith("http")){window.open(target,"_blank");return}
+  document.getElementById("search").value="";document.getElementById("clearSearch").classList.add("hidden");
+  if(target.startsWith("category:")){
+    const cat=target.slice(9);state.category=allCategories().includes(cat)?cat:"الكل";
+    renderCategories();renderAll();
+    document.getElementById("sectionTitle")?.scrollIntoView({behavior:"smooth",block:"start"});
+  }else if(target==="featured"){
+    state.category="الكل";renderCategories();renderAll();
+    document.getElementById("featuredSection")?.scrollIntoView({behavior:"smooth",block:"start"});
+  }else if(target==="trending"){
+    state.category="الكل";renderCategories();renderAll();
+    document.getElementById("exploreSection")?.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+}
+function renderQuickMenu(){
+  const items=state.config.menu||[];
+  const searchBox=document.getElementById("quickMenuSearch");
+  searchBox.classList.toggle("hidden",items.length<=6);
+  searchBox.oninput=()=>renderQuickMenuList(items,searchBox.value.trim());
+  renderQuickMenuList(items,"");
+}
+function renderQuickMenuList(items,q){
+  const box=document.getElementById("quickMenuList");
+  const list=q?items.filter(m=>(m.label||"").toLowerCase().includes(q.toLowerCase())):items;
+  box.innerHTML=list.length?list.map(m=>`<button type="button" class="quick-item" data-id="${esc(m.id)}"><span class="qi-icon">${esc(m.icon||"•")}</span><span>${esc(m.label||"")}</span></button>`).join(""):(items.length?'<div class="quick-menu-empty">لا نتائج مطابقة.</div>':'<div class="quick-menu-empty">لا توجد عناصر بعد. أضفها من لوحة الأدمن.</div>');
+  box.querySelectorAll(".quick-item").forEach(b=>b.onclick=()=>{const item=items.find(x=>x.id===b.dataset.id);if(item)quickMenuAction(item)});
+}
+function openQuickMenu(){document.getElementById("quickMenu").classList.remove("hidden");const sb=document.getElementById("quickMenuSearch");sb.value="";renderQuickMenuList(state.config.menu||[],"")}
+function closeQuickMenu(){document.getElementById("quickMenu").classList.add("hidden")}
+function collectAssetUrls(){
+  const urls=new Set();
+  state.sites.forEach(s=>{(s.parts||[]).forEach(p=>{if(p.file)urls.add(resolve(p.file))});if(s.image)urls.add(resolve(s.image))});
+  return [...urls];
+}
+async function setupOfflineCache(){
+  if(!("serviceWorker"in navigator))return;
+  try{
+    await navigator.serviceWorker.register("sw.js");
+    await navigator.serviceWorker.ready;
+    const send=()=>{if(navigator.serviceWorker.controller)navigator.serviceWorker.controller.postMessage({type:"PRECACHE_URLS",urls:collectAssetUrls()})};
+    send();
+    navigator.serviceWorker.addEventListener("controllerchange",send);
+  }catch(e){}
+}
+function courseCategories(s){if(s.categories&&s.categories.length)return s.categories;return s.category?[s.category]:[]}
+function isPublished(s){if(s.archived)return false;if(s.publish_at&&new Date(s.publish_at)>new Date())return false;return true}
+function allCategories(){if(state.sections.length)return state.sections.map(s=>s.name).filter(Boolean);return [...new Set(state.sites.flatMap(courseCategories))].filter(Boolean)}
+function renderCategories(){
+  const box=document.getElementById("categories");box.innerHTML="";
+  ["الكل",...allCategories()].forEach(c=>{const b=document.createElement("button");b.className="chip "+(state.category===c?"active":"");b.textContent=c;b.onclick=()=>{state.category=c;renderCategories();renderAll()};box.appendChild(b)})
+}
+function matches(s,q){
+  if(!q)return true;const text=[s.name,s.description,...courseCategories(s),...(s.tags||[]),...(s.parts||[]).map(p=>p.title)].join(" ").toLowerCase();return text.includes(q.toLowerCase())
+}
+function filtered(){
+  const q=document.getElementById("search").value.trim();
+  let list=state.sites.filter(s=>(state.category==="الكل"||courseCategories(s).includes(state.category))&&matches(s,q));
+  const sort=state.sort||"default";
+  if(sort==="az")list=[...list].sort((a,b)=>(a.name||"").localeCompare(b.name||"","ar"));
+  else if(sort==="popular"){const opens=getOpens();list=[...list].sort((a,b)=>(opens[b.id]||0)-(opens[a.id]||0))}
+  else if(sort==="newest")list=[...list].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  return list;
+}
+function cardHtml(s){
+  const parts=s.parts||[];const multi=parts.length>1;const pdf=isPdfCourse(s);
+  return `<article class="card" data-id="${esc(s.id)}">
+    <div class="cover">${s.image?`<img src="${esc(resolve(s.image))}" alt="">`:`<div class="cover-icon">${pdf?"📕":multi?"📂":"📄"}</div>`}
+      ${s.featured?`<div class="stamp"><span>محتوى<br>مميز</span></div>`:""}
+      <button class="fav" data-fav="${esc(s.id)}">${isFav(s.id)?"♥":"♡"}</button>
+    </div>
+    <div class="card-body"><div class="card-title"><h3>${esc(s.name)}</h3></div>
+      <p class="card-desc">${esc(s.description||"")}</p>
+      <div class="meta">${pdf?`<span class="tag">PDF</span>`:""}${s.level?`<span class="tag">${esc(s.level)}</span>`:""}${s.duration?`<span class="tag">${esc(s.duration)}</span>`:""}${multi?`<span class="tag">${parts.length} أجزاء</span>`:""}${courseCategories(s).map(c=>`<span class="tag">${esc(c)}</span>`).join("")}</div>
+      ${s.tags?.length?`<div class="meta" style="margin-top:8px">${s.tags.slice(0,3).map(t=>`<span class="tag">#${esc(t)}</span>`).join("")}</div>`:""}
+    </div></article>`
+}
+function bindCards(container){
+  container.querySelectorAll(".card").forEach(c=>c.onclick=()=>{const s=state.sites.find(x=>x.id===c.dataset.id);openCourse(s)});
+  container.querySelectorAll("[data-fav]").forEach(b=>b.onclick=e=>toggleFav(b.dataset.fav,e))
+}
+function renderAll(){
+  const list=filtered();document.getElementById("countLabel").textContent=`${list.length} عنصر`;
+  const cards=document.getElementById("cards");cards.innerHTML=list.map(cardHtml).join("");bindCards(cards);
+  document.getElementById("empty").classList.toggle("hidden",!!list.length);
+  const featured=state.sites.filter(s=>s.featured);const fg=document.getElementById("featuredGrid");fg.innerHTML=featured.map(cardHtml).join("");document.getElementById("featuredSection").classList.toggle("hidden",!featured.length);bindCards(fg);
+  const opens=getOpens();const trending=[...state.sites].filter(s=>opens[s.id]>0).sort((a,b)=>(opens[b.id]||0)-(opens[a.id]||0)).slice(0,6);
+  const tSec=document.getElementById("exploreSection"),tg=document.getElementById("trendingGrid");
+  if(tSec)tSec.classList.toggle("hidden",!trending.length);
+  tg.innerHTML=trending.map(cardHtml).join("");bindCards(tg);
+  renderStats();
+  renderHistory();
+}
+function renderStats(){
+  const el1=document.getElementById("statCourses"),el2=document.getElementById("statCategories"),el3=document.getElementById("statFavorites");
+  if(!el1)return;el1.textContent=state.sites.length;el2.textContent=allCategories().length;el3.textContent=getFav().length;
+}
+function openCourse(s){
+  if(typeof sb!=="undefined")sb.from("course_views").insert({course_id:s.id}).then(()=>{});
+  if(!s)return;document.getElementById("modalBadge").textContent=s.featured?"محتوى مميز":courseCategories(s).join("، ");
+  document.getElementById("modalTitle").textContent=s.name||"";document.getElementById("modalDesc").textContent=s.description||"";
+  document.getElementById("modalMeta").innerHTML=[s.level&&`<span class="tag">${esc(s.level)}</span>`,s.duration&&`<span class="tag">${esc(s.duration)}</span>`,...(s.tags||[]).map(t=>`<span class="tag">#${esc(t)}</span>`)].filter(Boolean).join("");
+  const parts=s.parts?.length?s.parts:[{title:s.name,file:s.file}];const box=document.getElementById("partsList");
+  const lastIdx=getLastPart()[s.id];
+  box.innerHTML=parts.map((p,i)=>`<div class="part" data-part="${i}"><span class="part-number">${i+1}</span><span class="part-title"><strong>${esc(p.title||`الدرس ${i+1}`)}</strong><br><small>${i===lastIdx?"▶️ آخر ما فتحته":(i===0?"الجزء الأول":`الجزء ${i+1}`)}</small></span><span>▶</span></div>`).join("");
+  box.querySelectorAll(".part").forEach(x=>x.onclick=()=>openPart(s,+x.dataset.part));
+
+  const relatedSec=document.getElementById("relatedSection"),relatedGrid=document.getElementById("relatedGrid");
+  const related=(s.related||[]).map(id=>state.sites.find(x=>x.id===id)).filter(Boolean);
+  relatedSec.classList.toggle("hidden",!related.length);
+  relatedGrid.innerHTML=related.map(cardHtml).join("");bindCards(relatedGrid);
+
+  document.getElementById("courseModal").classList.remove("hidden");
+}
+function closeCourse(){document.getElementById("courseModal").classList.add("hidden")}
+
+/* ---- Tabs ---- */
+function openPart(s,index){
+  if(!s)return;closeCourse();
+  const parts=s.parts?.length?s.parts:[{title:s.name,file:s.file}];
+  index=Math.max(0,Math.min(index,parts.length-1));
+  let tab=findTab(s.id);
+  if(!tab){
+    tab={id:"t"+Date.now()+Math.random().toString(36).slice(2,6),siteId:s.id,partIndex:index};
+    state.tabs.push(tab);
+    const iframe=document.createElement("iframe");
+    iframe.dataset.tab=tab.id;iframe.title="محتوى الدرس";iframe.allowFullscreen=true;
+    document.getElementById("tabFrames").appendChild(iframe);
+  }else{
+    tab.partIndex=index;
+  }
+  state.activeTab=tab.id;
+  const iframe=document.querySelector(`#tabFrames iframe[data-tab="${tab.id}"]`);
+  const target=resolve(parts[index].file);if(iframe.src!==target)iframe.src=target;
+  document.querySelectorAll("#tabFrames > [data-tab]").forEach(el=>el.classList.toggle("active",el===iframe));
+  renderTabStrip();renderViewerChrome();
+  document.getElementById("lessonSidebar").classList.remove("open");document.getElementById("sidebarBackdrop").classList.add("hidden");
+  document.getElementById("viewer").classList.remove("hidden");document.body.style.overflow="hidden";
+  bumpOpens(s.id);setLastPart(s.id,index);
+  const h=getHistory();h.unshift({siteId:s.id,part:index,title:parts[index].title||s.name,at:Date.now()});saveHistory(uniqueHistory(h));renderHistory();
+}
+function addEmptyTab(){
+  const tab={id:"t"+Date.now()+Math.random().toString(36).slice(2,6),siteId:null,partIndex:0};
+  state.tabs.push(tab);
+  const div=document.createElement("div");div.className="tab-picker";div.dataset.tab=tab.id;
+  document.getElementById("tabFrames").appendChild(div);
+  state.activeTab=tab.id;
+  document.querySelectorAll("#tabFrames > [data-tab]").forEach(el=>el.classList.toggle("active",el===div));
+  renderTabPicker(tab.id);
+  renderTabStrip();renderViewerChrome();
+  document.getElementById("lessonSidebar").classList.remove("open");document.getElementById("sidebarBackdrop").classList.add("hidden");
+  document.getElementById("viewer").classList.remove("hidden");document.body.style.overflow="hidden";
+}
+function renderTabPicker(tabId){
+  const div=document.querySelector(`#tabFrames [data-tab="${tabId}"]`);if(!div)return;
+  div.innerHTML=`<div class="tab-picker-inner"><h2>تبويب جديد — اختر درسًا لفتحه</h2><div class="search-box"><span aria-hidden="true">🔎</span><input class="tab-search" placeholder="ابحث عن درس، مشروع، وسم أو تصنيف..."></div><div class="tab-picker-grid cards"></div></div>`;
+  const grid=div.querySelector(".tab-picker-grid"),inp=div.querySelector(".tab-search");
+  function update(){
+    const q=inp.value.trim();const list=state.sites.filter(s=>matches(s,q));
+    grid.innerHTML=list.map(cardHtml).join("")||'<div class="empty">لا نتائج مطابقة.</div>';
+    grid.querySelectorAll(".card").forEach(c=>c.onclick=()=>{const s=state.sites.find(x=>x.id===c.dataset.id);selectCourseForTab(tabId,s)});
+    grid.querySelectorAll("[data-fav]").forEach(b=>b.onclick=e=>toggleFav(b.dataset.fav,e));
+  }
+  inp.addEventListener("input",update);update();inp.focus();
+}
+function selectCourseForTab(tabId,s){
+  if(!s)return;const tab=state.tabs.find(t=>t.id===tabId);if(!tab)return;
+  document.querySelector(`#tabFrames [data-tab="${tabId}"]`)?.remove();
+  const iframe=document.createElement("iframe");iframe.dataset.tab=tabId;iframe.title="محتوى الدرس";iframe.allowFullscreen=true;
+  document.getElementById("tabFrames").appendChild(iframe);
+  const parts=s.parts?.length?s.parts:[{title:s.name,file:s.file}];
+  const lastIdx=getLastPart()[s.id];const index=(lastIdx!=null&&lastIdx<parts.length)?lastIdx:0;
+  tab.siteId=s.id;tab.partIndex=index;
+  iframe.src=resolve(parts[index].file);
+  document.querySelectorAll("#tabFrames > [data-tab]").forEach(el=>el.classList.toggle("active",el===iframe));
+  renderTabStrip();renderViewerChrome();
+  bumpOpens(s.id);setLastPart(s.id,index);
+  const h=getHistory();h.unshift({siteId:s.id,part:index,title:parts[index].title||s.name,at:Date.now()});saveHistory(uniqueHistory(h));renderHistory();
+}
+function renderViewerChrome(){
+  const tab=state.tabs.find(t=>t.id===state.activeTab);if(!tab)return;
+  if(!tab.siteId){
+    document.getElementById("viewerTitle").textContent="تبويب جديد";document.getElementById("partCounter").textContent="";
+    document.getElementById("backCourse").classList.add("hidden");document.getElementById("partsToggle").classList.add("hidden");
+    document.getElementById("prevPart").disabled=true;document.getElementById("nextPart").disabled=true;
+    document.getElementById("favViewer").textContent="♡";document.getElementById("lessonSidebar").innerHTML="";
+    document.getElementById("downloadPdf").classList.add("hidden");document.getElementById("invertPdf").classList.add("hidden");
+    return;
+  }
+  const s=getTabSite(tab);if(!s)return;
+  const parts=s.parts?.length?s.parts:[{title:s.name,file:s.file}];const index=tab.partIndex,p=parts[index];
+  document.getElementById("viewerTitle").textContent=p.title||s.name;document.getElementById("partCounter").textContent=`${index+1} / ${parts.length}`;
+  document.getElementById("backCourse").classList.toggle("hidden",parts.length<=1);
+  document.getElementById("partsToggle").classList.toggle("hidden",parts.length<=1);
+  document.getElementById("prevPart").disabled=index<=0;document.getElementById("nextPart").disabled=index>=parts.length-1;
+  document.getElementById("favViewer").textContent=isFav(s.id)?"♥":"♡";
+  const pdf=isPdf(p.file);
+  document.getElementById("downloadPdf").classList.toggle("hidden",!pdf);
+  document.getElementById("invertPdf").classList.toggle("hidden",!pdf);
+  renderSidebar(parts,index);
+}
+function renderTabStrip(){
+  const box=document.getElementById("tabStrip");
+  box.innerHTML=state.tabs.map(t=>{
+    let label;if(!t.siteId){label="تبويب جديد"}else{const s=getTabSite(t);if(!s)return"";label=s.name}
+    return `<div class="tab-item ${t.id===state.activeTab?"active":""}" data-tab="${t.id}"><span class="tab-title">${esc(label)}</span><button class="tab-close" data-tab="${t.id}" title="إغلاق التبويب">✕</button></div>`;
+  }).join("");
+  box.querySelectorAll(".tab-item").forEach(el=>el.addEventListener("click",e=>{if(e.target.closest(".tab-close"))return;switchTab(el.dataset.tab)}));
+  box.querySelectorAll(".tab-close").forEach(b=>b.addEventListener("click",e=>closeTab(b.dataset.tab,e)));
+  box.querySelector(".tab-item.active")?.scrollIntoView({inline:"nearest",block:"nearest"});
+}
+function switchTab(tabId){
+  const tab=state.tabs.find(t=>t.id===tabId);if(!tab)return;
+  state.activeTab=tabId;
+  document.querySelectorAll("#tabFrames > [data-tab]").forEach(el=>el.classList.toggle("active",el.dataset.tab===tabId));
+  renderTabStrip();renderViewerChrome();
+  document.getElementById("lessonSidebar").classList.remove("open");document.getElementById("sidebarBackdrop").classList.add("hidden");
+}
+function closeTab(tabId,evt){
+  evt?.stopPropagation();
+  const idx=state.tabs.findIndex(t=>t.id===tabId);if(idx<0)return;
+  document.querySelector(`#tabFrames [data-tab="${tabId}"]`)?.remove();
+  state.tabs.splice(idx,1);
+  if(!state.tabs.length){closeViewer();return}
+  if(state.activeTab===tabId){const next=state.tabs[idx]||state.tabs[idx-1];switchTab(next.id)}
+  else renderTabStrip();
+}
+function stepPart(delta){
+  const tab=state.tabs.find(t=>t.id===state.activeTab);if(!tab||!tab.siteId)return;
+  const s=getTabSite(tab);if(!s)return;
+  const parts=s.parts?.length?s.parts:[{title:s.name,file:s.file}];
+  const next=tab.partIndex+delta;if(next<0||next>=parts.length)return;openPart(s,next);
+}
+function uniqueHistory(a){const seen=new Set();return a.filter(x=>{const k=x.siteId+"|"+x.part;if(seen.has(k))return false;seen.add(k);return true})}
+function renderSidebar(parts,active){document.getElementById("lessonSidebar").innerHTML=parts.map((p,i)=>`<div class="side-part ${i===active?"active":""}" data-i="${i}"><b>${i+1}. ${esc(p.title||"الدرس")}</b></div>`).join("");document.querySelectorAll(".side-part").forEach(x=>x.onclick=()=>{const tab=state.tabs.find(t=>t.id===state.activeTab);const s=tab&&getTabSite(tab);if(s)openPart(s,+x.dataset.i)})}
+function closeViewer(){document.getElementById("viewer").classList.add("hidden");document.getElementById("tabFrames").innerHTML="";state.tabs=[];state.activeTab=null;document.body.style.overflow=""}
+function updateThemeIcon(){document.getElementById("themeBtn").textContent=document.body.classList.contains("dark")?"☀️":"🌙"}
+function renderHistory(){
+  const h=getHistory();const sec=document.getElementById("continueSection"),box=document.getElementById("continueList");if(!h.length){sec.classList.add("hidden");return}sec.classList.remove("hidden");
+  box.innerHTML=h.slice(0,5).map(x=>{const s=state.sites.find(z=>z.id===x.siteId);return s?`<div class="mini" data-h="${esc(x.siteId)}" data-p="${x.part}"><strong>${esc(x.title)}</strong><small>${esc(s.name)} · ${new Date(x.at).toLocaleDateString("ar-EG")}</small></div>`:""}).join("");box.querySelectorAll(".mini").forEach(x=>x.onclick=()=>{const s=state.sites.find(z=>z.id===x.dataset.h);openPart(s,+x.dataset.p)})
+}
+function showHistory(){const h=getHistory(),box=document.getElementById("historyList");box.innerHTML=h.length?h.map(x=>{const s=state.sites.find(z=>z.id===x.siteId);return s?`<div class="history-row" data-id="${esc(x.siteId)}" data-p="${x.part}"><strong>${esc(s.name)} — ${esc(x.title)}</strong><small>${new Date(x.at).toLocaleString("ar-EG")}</small></div>`:""}).join(""):'<p class="empty">السجل فارغ.</p>';box.querySelectorAll(".history-row").forEach(x=>x.onclick=()=>{document.getElementById("historyModal").classList.add("hidden");openPart(state.sites.find(s=>s.id===x.dataset.id),+x.dataset.p)});document.getElementById("historyModal").classList.remove("hidden")}
+let deferredInstall;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e;document.getElementById("installBtn").hidden=false});document.getElementById("installBtn").onclick=async()=>{if(deferredInstall){deferredInstall.prompt();deferredInstall=null}};
+/* ---------------- تصفح "ملفات المجتمع" (عامة لأي حد، بتعرض من جدول community_files) ---------------- */
+const COMMUNITY_PAGE_SIZE = 30;
+let communityFilesCache = [];
+let communityAllCategories = [];
+let communityActiveChip = "الكل";
+let communitySavedFavorites = new Set();
+let communitySavedLater = new Set();
+let communityFollows = new Set(); // "category:اسم" أو "owner:id"
+let communityPage = 0;
+let communityHasMore = true;
+function openCommunityFiles() {
+  document.getElementById("communityFilesView").classList.remove("hidden");
+  loadCommunitySavedAndFollows().then(() => fetchCommunityPage(true));
+  loadCommunityCategoryList();
+}
+function closeCommunityFiles() { document.getElementById("communityFilesView").classList.add("hidden"); }
+function communityShareUrl(chip) {
+  const base = location.origin + location.pathname + "?community=1";
+  return chip && chip !== "الكل" ? base + "&cat=" + encodeURIComponent(chip) : base;
+}
+async function loadCommunitySavedAndFollows() {
+  communitySavedFavorites = new Set(); communitySavedLater = new Set(); communityFollows = new Set();
+  if (!authState.user) return;
+  const [{ data: saved }, { data: follows }] = await Promise.all([
+    sb.from("community_saved").select("file_id, save_type").eq("user_id", authState.user.id),
+    sb.from("community_follows").select("follow_type, follow_value").eq("user_id", authState.user.id)
+  ]);
+  (saved || []).forEach(s => (s.save_type === "favorite" ? communitySavedFavorites : communitySavedLater).add(s.file_id));
+  (follows || []).forEach(f => communityFollows.add(f.follow_type + ":" + f.follow_value));
+}
+// قائمة الأقسام الموجودة فعليًا — بنجيبها منفصلة وخفيفة (عمود واحد بس)
+// عشان تبقى شاملة كل الأقسام حتى لو الصفحة الحالية المحمّلة مش فيها كلهم
+async function loadCommunityCategoryList() {
+  const { data } = await sb.from("community_files").select("categories");
+  communityAllCategories = [...new Set((data || []).flatMap(f => f.categories || []))].sort();
+  renderCommunityChips();
+}
+function renderCommunityChips() {
+  const chips = ["الكل", "المميزة", "الأكثر تحميلاً", "⭐ مفضلتي", "🕒 أشاهدها لاحقًا", ...communityAllCategories];
+  const box = document.getElementById("communityCategoryChips");
+  box.innerHTML = chips.map(c => `<button type="button" class="chip community-chip${c === communityActiveChip ? " active" : ""}" data-chip="${esc(c)}">${esc(c)}</button>`).join("");
+
+  const followBox = document.getElementById("communityFollowCategoryBox");
+  const isRealCategory = !["الكل", "المميزة", "الأكثر تحميلاً", "⭐ مفضلتي", "🕒 أشاهدها لاحقًا"].includes(communityActiveChip);
+  followBox.classList.toggle("hidden", !isRealCategory);
+  if (isRealCategory) {
+    const following = communityFollows.has("category:" + communityActiveChip);
+    followBox.textContent = following ? "🔕 إلغاء متابعة هذا القسم" : "🔔 تابع هذا القسم";
+    followBox.dataset.chip = communityActiveChip;
+    followBox.classList.toggle("active", following);
+  }
+}
+// بيبني الاستعلام المناسب حسب الفلتر الحالي (قسم/مميزة/أكثر تحميلاً/
+// مفضلتي/بحث) ويجيب صفحة واحدة بس — عشان القائمة متتقلش كلها مرة واحدة
+// مع زيادة عدد الملفات مع الوقت
+async function fetchCommunityPage(reset) {
+  if (reset) { communityPage = 0; communityHasMore = true; communityFilesCache = []; }
+  if (!communityHasMore) { renderCommunityFiles(); return; }
+
+  const term = document.getElementById("communitySearchInput").value.trim();
+  const from = communityPage * COMMUNITY_PAGE_SIZE;
+  const to = from + COMMUNITY_PAGE_SIZE - 1;
+
+  if (communityActiveChip === "⭐ مفضلتي" || communityActiveChip === "🕒 أشاهدها لاحقًا") {
+    const set = communityActiveChip === "⭐ مفضلتي" ? communitySavedFavorites : communitySavedLater;
+    if (!authState.user || !set.size) { communityFilesCache = []; communityHasMore = false; renderCommunityFiles(); return; }
+    let q = sb.from("community_files").select("*").in("id", [...set]).order("published_at", { ascending: false }).range(from, to);
+    if (term) q = q.or(`file_name.ilike.%${term}%,card_name.ilike.%${term}%,owner_display_name.ilike.%${term}%`);
+    const { data, error } = await q;
+    const rows = error ? [] : (data || []);
+    communityFilesCache = reset ? rows : [...communityFilesCache, ...rows];
+    communityHasMore = rows.length === COMMUNITY_PAGE_SIZE;
+    communityPage++;
+    renderCommunityFiles();
+    return;
+  }
+
+  let query = sb.from("community_files").select("*");
+  if (communityActiveChip === "المميزة") query = query.eq("featured", true);
+  else if (communityActiveChip !== "الكل" && communityActiveChip !== "الأكثر تحميلاً") query = query.contains("categories", [communityActiveChip]);
+  if (term) query = query.or(`file_name.ilike.%${term}%,card_name.ilike.%${term}%,owner_display_name.ilike.%${term}%`);
+  query = communityActiveChip === "الأكثر تحميلاً" ? query.order("download_count", { ascending: false }) : query.order("published_at", { ascending: false });
+  query = query.range(from, to);
+
+  const { data, error } = await query;
+  const rows = error ? [] : (data || []);
+  communityFilesCache = reset ? rows : [...communityFilesCache, ...rows];
+  communityHasMore = rows.length === COMMUNITY_PAGE_SIZE;
+  communityPage++;
+  renderCommunityFiles();
+}
+function renderCommunityFiles() {
+  const box = document.getElementById("communityFilesList");
+  const empty = document.getElementById("communityFilesEmpty");
+  const moreBtn = document.getElementById("communityLoadMoreBtn");
+  if (!communityFilesCache.length) { box.innerHTML = ""; empty.classList.remove("hidden"); moreBtn.classList.add("hidden"); return; }
+  empty.classList.add("hidden");
+  moreBtn.classList.toggle("hidden", !communityHasMore);
+  box.innerHTML = communityFilesCache.map(f => `
+    <div class="file-row">
+      <span class="file-icon">${coverIconFor(f.mime_type)}${f.featured ? " ⭐" : ""}</span>
+      <div class="file-info">
+        <strong>${esc(f.file_name)}</strong>
+        <small>${esc(f.card_name)} · ${esc(f.owner_display_name || "مستخدم")} · ${fmtSize(f.size_bytes)} · تحميل ${f.download_count || 0}${f.status === "pending" ? " · <span style=\"color:var(--accent,#c98a2c)\">قيد المراجعة</span>" : ""}</small>
+      </div>
+      <div class="file-actions">
+        <button class="icon-btn community-follow-owner-btn${communityFollows.has("owner:" + f.owner_id) ? " active" : ""}" data-owner="${esc(f.owner_id)}" title="${communityFollows.has("owner:" + f.owner_id) ? "إلغاء متابعة الناشر" : "تابع الناشر"}">👤</button>
+        <button class="icon-btn community-fav-btn${communitySavedFavorites.has(f.id) ? " active" : ""}" data-id="${esc(f.id)}" title="${communitySavedFavorites.has(f.id) ? "إلغاء المفضلة" : "إضافة للمفضلة"}">${communitySavedFavorites.has(f.id) ? "⭐" : "☆"}</button>
+        <button class="icon-btn community-later-btn${communitySavedLater.has(f.id) ? " active" : ""}" data-id="${esc(f.id)}" title="${communitySavedLater.has(f.id) ? "إلغاء ‘أشاهدها لاحقًا’" : "أشاهدها لاحقًا"}">🕒</button>
+        <button class="icon-btn community-preview-btn" data-id="${esc(f.id)}" data-url="${esc(f.download_url)}" data-mime="${esc(f.mime_type || "")}" data-name="${esc(f.file_name)}" title="معاينة">👁</button>
+        <button class="icon-btn community-download-btn" data-id="${esc(f.id)}" data-url="${esc(f.download_url)}" data-mime="${esc(f.mime_type || "")}" data-name="${esc(f.file_name)}" title="تحميل">⬇️</button>
+      </div>
+    </div>`).join("");
+}
+
+// GitHub raw.githubusercontent.com مش دايمًا بيبعت Content-Type صح (زي
+// application/pdf) — فبعض المتصفحات بتنزّل الملف بدل ما تعرضه. الحل:
+// نجيب البايتات فعليًا عن طريق fetch، ونبني منها Blob بالـmime type
+// الصحيح المحفوظ عندنا في قاعدة البيانات، وده بيضمن المعاينة الصحيحة
+// مهما كان الهيدر اللي راجع من GitHub.
+// الحل ده مكلف (بيحمّل الملف كامل في الذاكرة) فبنطبّقه بس وقت المعاينة
+// لصور وPDF (المشكلة الأصلية كانت فيهم بالظبط) — أي نوع تاني (فيديو،
+// صوت، zip...) بيفتح رابط GitHub المباشر عادي من غير ما نحمّله في الذاكرة
+function needsBlobPreview(mime) {
+  const m = (mime || "").toLowerCase();
+  return m.includes("pdf") || m.startsWith("image/");
+}
+async function openCommunityFile(url, mime, filename, mode) {
+  if (mode === "preview" && !needsBlobPreview(mime)) { window.open(url, "_blank"); return; }
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("تعذّر تحميل الملف (" + res.status + ")");
+    const buf = await res.arrayBuffer();
+    const blob = new Blob([buf], { type: mime || "application/octet-stream" });
+    const objectUrl = URL.createObjectURL(blob);
+    if (mode === "download") {
+      const a = document.createElement("a");
+      a.href = objectUrl; a.download = filename || "ملف";
+      document.body.appendChild(a); a.click(); a.remove();
+    } else {
+      window.open(objectUrl, "_blank");
+    }
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 60000);
+  } catch (ex) {
+    alert("تعذّر فتح الملف: " + ex.message);
+  }
+}
+document.getElementById("communityFilesList")?.addEventListener("click", (e) => {
+  const followOwnerBtn = e.target.closest(".community-follow-owner-btn");
+  if (followOwnerBtn) {
+    if (!authState.user) { openAuthModal("login"); return; }
+    toggleCommunityFollow("owner", followOwnerBtn.dataset.owner);
+    return;
+  }
+  const savedBtn = e.target.closest(".community-fav-btn, .community-later-btn");
+  if (savedBtn) {
+    if (!authState.user) { openAuthModal("login"); return; }
+    toggleCommunitySaved(savedBtn.dataset.id, savedBtn.classList.contains("community-fav-btn") ? "favorite" : "later");
+    return;
+  }
+  const btn = e.target.closest(".community-preview-btn, .community-download-btn");
+  if (!btn || btn.disabled) return;
+  const isDownload = btn.classList.contains("community-download-btn");
+  btn.disabled = true;
+  openCommunityFile(btn.dataset.url, btn.dataset.mime, btn.dataset.name, isDownload ? "download" : "preview").finally(() => { btn.disabled = false; });
+  if (isDownload) {
+    // عداد "الأكثر تحميلاً" — بيتزوّد فعليًا لما حد يحمّل، مش لما يعاين بس
+    sb.rpc("increment_community_download", { p_id: btn.dataset.id }).then(() => {
+      const f = communityFilesCache.find(x => x.id === btn.dataset.id);
+      if (f) { f.download_count = (f.download_count || 0) + 1; renderCommunityFiles(); }
+    });
+  }
+});
+async function toggleCommunitySaved(fileId, type) {
+  const set = type === "favorite" ? communitySavedFavorites : communitySavedLater;
+  const isSaved = set.has(fileId);
+  if (isSaved) {
+    await sb.from("community_saved").delete().eq("user_id", authState.user.id).eq("file_id", fileId).eq("save_type", type);
+    set.delete(fileId);
+  } else {
+    await sb.from("community_saved").insert({ user_id: authState.user.id, file_id: fileId, save_type: type });
+    set.add(fileId);
+  }
+  renderCommunityFiles();
+}
+async function toggleCommunityFollow(type, value) {
+  const key = type + ":" + value;
+  const isFollowing = communityFollows.has(key);
+  if (isFollowing) {
+    await sb.from("community_follows").delete().eq("user_id", authState.user.id).eq("follow_type", type).eq("follow_value", value);
+    communityFollows.delete(key);
+  } else {
+    await sb.from("community_follows").insert({ user_id: authState.user.id, follow_type: type, follow_value: value });
+    communityFollows.add(key);
+  }
+  renderCommunityChips();
+  renderCommunityFiles();
+}
+document.getElementById("communityFollowCategoryBox")?.addEventListener("click", (e) => {
+  if (!authState.user) { openAuthModal("login"); return; }
+  toggleCommunityFollow("category", e.target.dataset.chip);
+});
+document.getElementById("communityCategoryChips")?.addEventListener("click", (e) => {
+  const chip = e.target.closest(".community-chip");
+  if (!chip) return;
+  communityActiveChip = chip.dataset.chip;
+  renderCommunityChips();
+  fetchCommunityPage(true);
+});
+document.getElementById("communityLoadMoreBtn")?.addEventListener("click", () => fetchCommunityPage(false));
+document.getElementById("openCommunityFilesBtn")?.addEventListener("click", openCommunityFiles);
+document.getElementById("closeCommunityFiles")?.addEventListener("click", closeCommunityFiles);
+let communitySearchDebounce;
+document.getElementById("communitySearchInput")?.addEventListener("input", () => {
+  clearTimeout(communitySearchDebounce);
+  communitySearchDebounce = setTimeout(() => fetchCommunityPage(true), 300);
+});
+
+/* ---------------- مودال QR عام — قابل لإعادة الاستخدام لأي رابط
+   (بطاقة، قسم في ملفات المجتمع، كورس، أو الموقع نفسه) ---------------- */
+function showQrModal(url, label) {
+  document.getElementById("qrModal").classList.remove("hidden");
+  document.getElementById("qrModalTitle").textContent = "مشاركة: " + label;
+  document.getElementById("qrLabelText").textContent = label;
+  document.getElementById("qrUrlText").textContent = url;
+  const box = document.getElementById("qrCanvasBox");
+  // بنستخدم خدمة توليد صورة QR جاهزة (بدون أي مكتبة JS خارجية بتتحمّل من
+  // CDN) — أضمن وأبسط، وبتشتغل حتى لو حصل أي مشكلة تحميل سكريبت
+  const imgUrl = "https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=" + encodeURIComponent(url);
+  box.innerHTML = `<img src="${imgUrl}" width="240" height="240" alt="QR" style="background:#fff;border-radius:8px">`;
+  document.getElementById("qrCopyBtn").onclick = () => { navigator.clipboard.writeText(url); };
+  document.getElementById("qrShareBtn").onclick = () => {
+    if (navigator.share) navigator.share({ title: label, url }).catch(() => {});
+    else navigator.clipboard.writeText(url);
+  };
+  document.getElementById("qrPrintBtn").onclick = () => window.print();
+}
+document.getElementById("closeQrModal")?.addEventListener("click", () => document.getElementById("qrModal").classList.add("hidden"));
+
+init();
+
+</script>
+</body>
+</html>
+
