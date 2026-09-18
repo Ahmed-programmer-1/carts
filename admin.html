@@ -1,0 +1,1945 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>لوحة التحكم — مكتبتي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#0c0c0d; --surface:#161616; --surface2:#1c1c1e; --line:#2a2a2c;
+  --text:#f2f2f2; --muted:#9b9b9f; --accent:#e5202c; --accent-ink:#fff;
+  --ok:#2fbf71; --warn:#e0ab55;
+  --font-display:'Tajawal',sans-serif; --font-body:'IBM Plex Sans Arabic',Tahoma,sans-serif;
+}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.7}
+h1,h2,h3{font-family:var(--font-display);margin:0}
+button,input,select{font:inherit;color:inherit}
+.hidden{display:none!important}
+
+/* ---------------- شاشة الدخول ---------------- */
+#loginGate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.gate-card{width:min(360px,100%);background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px}
+.gate-card h1{font-size:22px;font-weight:900;margin-bottom:22px;text-align:center}
+.gate-card label{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted);font-weight:600;margin-bottom:14px}
+.gate-card input{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:8px;padding:11px 13px;font-size:14.5px;outline:0}
+.gate-card input:focus{border-color:var(--accent)}
+.gate-btn{width:100%;background:var(--accent);color:var(--accent-ink);border:0;border-radius:8px;padding:13px;font-size:15px;font-weight:800;cursor:pointer;margin-top:6px}
+.gate-btn:hover{filter:brightness(1.1)}
+.gate-error{color:var(--accent);font-size:13px;min-height:16px;margin-bottom:8px}
+
+/* ---------------- لوحة التحكم ---------------- */
+#adminApp{min-height:100vh}
+.topbar{height:64px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:10}
+.topbar h1{font-size:18px;font-weight:900}
+.topbar .who{color:var(--muted);font-size:13px;display:flex;align-items:center;gap:12px}
+.logout-btn{background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:13px}
+.logout-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+.tabs{display:flex;gap:4px;overflow-x:auto;padding:10px 22px 0;background:var(--surface);border-bottom:1px solid var(--line)}
+.tab-btn{background:none;border:0;color:var(--muted);padding:10px 16px;font-size:14px;font-weight:700;border-bottom:2px solid transparent;white-space:nowrap;cursor:pointer}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--text);border-bottom-color:var(--accent)}
+
+.panel{max-width:1100px;margin:0 auto;padding:26px 20px}
+.panel.hidden{display:none}
+.panel h2{font-size:20px;margin-bottom:18px}
+
+.soon{border:1.5px dashed var(--line);border-radius:14px;padding:50px 20px;text-align:center;color:var(--muted)}
+.soon strong{display:block;color:var(--text);font-size:16px;margin-bottom:8px}
+
+/* stat cards */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:24px}
+.stat-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.stat-card .num{font-family:var(--font-display);font-size:28px;font-weight:900;color:var(--accent)}
+.stat-card .lbl{color:var(--muted);font-size:12.5px;margin-top:4px}
+
+.section-title{font-size:15px;font-weight:800;margin:26px 0 12px}
+.day-picker{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.day-picker input{background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:9px 12px;font-size:13.5px}
+
+.online-list{display:flex;flex-wrap:wrap;gap:8px}
+.online-chip{display:flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px}
+.online-chip .dot{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+.empty-note{color:var(--muted);font-size:13px}
+
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{padding:11px 14px;text-align:right;font-size:13.5px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:700;background:var(--surface2)}
+tr:last-child td{border-bottom:0}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11.5px;font-weight:700}
+.badge.new{background:rgba(47,191,113,.15);color:var(--ok)}
+.badge.returning{background:rgba(224,171,85,.15);color:var(--warn)}
+.badge.male{background:rgba(90,140,255,.15);color:#7ea6ff}
+.badge.female{background:rgba(229,32,124,.15);color:#e5207c}
+
+.search-input{width:100%;max-width:320px;background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:10px 13px;font-size:13.5px;margin-bottom:16px}
+
+.notif-form{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.notif-form input[type=text]{flex:1;min-width:220px;background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:10px 13px;font-size:13.5px}
+.btn-accent{background:var(--accent);color:var(--accent-ink);border:0;border-radius:8px;padding:10px 18px;font-size:13.5px;font-weight:800;cursor:pointer}
+.btn-accent:hover{filter:brightness(1.1)}
+.notif-row{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
+.notif-row.inactive{opacity:.5}
+.notif-actions{display:flex;gap:6px}
+.icon-sm{width:30px;height:30px;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:7px;cursor:pointer}
+.icon-sm:hover{border-color:var(--accent)}
+
+@media(max-width:640px){
+  .topbar{padding:0 14px}
+  .topbar .who span:first-child{display:none}
+  .tabs{padding:10px 14px 0}
+  .panel{padding:20px 14px}
+}
+
+/* ---------------- الكورسات (GitHub) ---------------- */
+.gh-config{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.gh-config-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:12px}
+.gh-config label,.overlay-body label{display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:12px}
+.gh-config input,.overlay-body input,.overlay-body textarea{background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:10px 12px;font-size:13.5px;font-family:inherit}
+.overlay-body textarea{resize:vertical}
+
+.courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.course-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .15s;position:relative}
+.course-card:hover{border-color:var(--accent)}
+.course-card .cc-cover{height:110px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:32px;overflow:hidden}
+.course-card .cc-cover img{width:100%;height:100%;object-fit:cover}
+.course-card .cc-body{padding:13px}
+.course-card h3{font-size:14.5px;margin-bottom:6px;line-height:1.4}
+.course-card p{color:var(--muted);font-size:12px;margin:0 0 8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.course-card .cc-meta{display:flex;gap:6px;flex-wrap:wrap}
+.course-card .cc-tag{font-size:10.5px;border:1px solid var(--line);border-radius:999px;padding:2px 8px;color:var(--muted)}
+
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;display:flex;align-items:center;justify-content:center;padding:16px}
+.overlay-card{width:min(560px,100%);max-height:88vh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px}
+.overlay-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.checkbox-row{flex-direction:row!important;align-items:center;gap:8px!important}
+.checkbox-row input{width:auto}
+
+.part-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.part-row input[type=text]{flex:1;background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:6px;padding:7px 9px;font-size:12.5px}
+.part-row input[type=file]{flex:1;font-size:11.5px;color:var(--muted)}
+.part-row .remove-part{width:26px;height:26px;border:1px solid var(--line);background:var(--bg);color:var(--accent);border-radius:6px;cursor:pointer;flex:none}
+.search-result-item{padding:9px 10px;border-radius:8px;cursor:pointer;font-size:13px}
+.search-result-item:hover{background:var(--surface2)}
+
+.cat-checks{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.cat-chip{display:flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12px;cursor:pointer;color:var(--muted)}
+.cat-chip.checked{border-color:var(--accent);color:var(--text)}
+.cat-chip input{width:auto;margin:0}
+.cat-add-row{display:flex;gap:8px}
+.cat-add-row input{flex:1}
+.course-card.archived{opacity:.5}
+.course-card .cc-archived-badge{position:absolute;top:8px;right:8px;background:var(--accent);color:#fff;font-size:10px;padding:2px 8px;border-radius:999px;font-weight:700}
+
+/* ---------------- الإعدادات ---------------- */
+.settings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 16px}
+.settings-grid label,#panel-settings>#settingsArea>label{display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:12px}
+.settings-grid input,#panel-settings textarea{background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:10px 12px;font-size:13.5px;font-family:inherit}
+.preview-box{background:var(--surface2);border:1px dashed var(--line);border-radius:12px;padding:16px;margin-bottom:8px}
+.menu-item-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;flex-wrap:wrap}
+.menu-item-row input,.menu-item-row select{background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:6px;padding:7px 9px;font-size:12.5px}
+.menu-item-row .mi-icon{width:52px;text-align:center}
+.menu-item-row .mi-label{flex:1;min-width:110px}
+.menu-item-row .mi-value{flex:1;min-width:110px}
+.menu-item-row .mi-actions{display:flex;gap:4px}
+.menu-item-row .mi-actions button{width:26px;height:26px;border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:6px;cursor:pointer}
+.menu-item-row .mi-actions button:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div id="loginGate">
+  <div class="gate-card">
+    <h1>لوحة التحكم</h1>
+    <label>اسم المستخدم<input type="text" id="gateUsername" autocomplete="username"></label>
+    <label>كلمة المرور<input type="password" id="gatePassword" autocomplete="current-password"></label>
+    <div class="gate-error" id="gateError"></div>
+    <button class="gate-btn" id="gateLoginBtn">دخول</button>
+  </div>
+</div>
+
+<div id="adminApp" class="hidden">
+  <div class="topbar">
+    <h1>لوحة التحكم — مكتبتي</h1>
+    <div style="position:relative;flex:1;max-width:320px;margin:0 20px">
+      <input type="text" id="globalSearchInput" placeholder="🔍 بحث شامل (مستخدم، كورس، بطاقة)..." style="width:100%;background:var(--surface2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:9px 12px;font-size:13px">
+      <div id="globalSearchResults" class="hidden" style="position:absolute;top:110%;right:0;left:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px;z-index:50;max-height:320px;overflow:auto"></div>
+    </div>
+    <div class="who"><span id="adminWhoName"></span><button class="logout-btn" id="adminLogoutBtn">تسجيل خروج</button></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="home">🏠 الرئيسية</button>
+    <button class="tab-btn" data-tab="stats">📊 الإحصائيات المتقدمة</button>
+    <button class="tab-btn" data-tab="users">👥 المستخدمون</button>
+    <button class="tab-btn" data-tab="notifications">🔔 الإشعارات</button>
+    <button class="tab-btn" data-tab="review">✅ المراجعة</button>
+    <button class="tab-btn" data-tab="messages">📩 الرسائل</button>
+    <button class="tab-btn" data-tab="chats">💬 المحادثات</button>
+    <button class="tab-btn" data-tab="purchases">🛒 طلبات الشراء</button>
+    <button class="tab-btn" data-tab="community">🌐 ملفات المجتمع</button>
+    <button class="tab-btn" data-tab="trash">🗑️ سلة المهملات</button>
+    <button class="tab-btn" data-tab="audit">📜 السجل</button>
+    <button class="tab-btn" data-tab="courses">🎓 الكورسات</button>
+    <button class="tab-btn" data-tab="settings">⚙️ الإعدادات</button>
+  </div>
+
+  <!-- ---------------- الرئيسية ---------------- -->
+  <div class="panel" id="panel-home">
+    <h2>نظرة سريعة</h2>
+    <div class="stat-row" id="homeStatCards"></div>
+    <div class="section-title" style="margin-top:0">آخر 5 تسجيلات دخول اليوم</div>
+    <div id="homeRecentLogins"></div>
+  </div>
+
+  <!-- ---------------- الإحصائيات المتقدمة ---------------- -->
+  <div class="panel hidden" id="panel-stats">
+    <h2>الإحصائيات المتقدمة</h2>
+
+    <div class="section-title">استهلاك مساحة التخزين (أعلى المستخدمين)</div>
+    <div id="storageUsageList" style="background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:22px"></div>
+
+    <div class="section-title">داخلون الآن</div>
+    <div id="onlineList" class="online-list"><span class="empty-note">جارِ التحميل...</span></div>
+
+    <div class="section-title">اتجاه الدخول
+      <select id="trendDays" style="margin-inline-start:10px;background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:6px;padding:6px 10px;font-size:12.5px">
+        <option value="7">آخر 7 أيام</option>
+        <option value="30">آخر 30 يوم</option>
+      </select>
+    </div>
+    <div id="trendChartBox" style="background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px"></div>
+
+    <div class="section-title">إحصائيات يوم معيّن</div>
+    <div class="day-picker">
+      <input type="date" id="statsDay">
+    </div>
+    <div class="stat-row" id="dayStatCards"></div>
+
+    <div class="section-title">تفاصيل الدخول في هذا اليوم</div>
+    <table>
+      <thead><tr><th>الاسم</th><th>اسم المستخدم</th><th>النوع</th><th>الوقت</th><th>الحالة</th></tr></thead>
+      <tbody id="dayLoginsBody"></tbody>
+    </table>
+
+    <div class="section-title">أكتر البطاقات مشاهدة</div>
+    <div id="topCardsList"></div>
+
+    <div class="section-title">أكتر الكورسات فتحًا</div>
+    <div id="topCoursesList"></div>
+  </div>
+
+  <!-- ---------------- المستخدمون ---------------- -->
+  <div class="panel hidden" id="panel-users">
+    <h2>المستخدمون</h2>
+    <div style="display:flex;gap:10px;margin-bottom:0">
+      <input type="text" id="userSearch" class="search-input" style="flex:1" placeholder="ابحث بالاسم أو اسم المستخدم...">
+      <button class="icon-sm" id="exportUsersBtn" style="width:auto;padding:0 14px;height:44px">⬇️ CSV</button>
+    </div>
+    <table>
+      <thead><tr><th>الاسم</th><th>اسم المستخدم</th><th>النوع</th><th>الانضمام</th><th>آخر ظهور</th><th>الحالة</th><th>إجراءات</th></tr></thead>
+      <tbody id="usersBody"></tbody>
+    </table>
+  </div>
+
+  <!-- ---------------- الإشعارات ---------------- -->
+  <div class="panel hidden" id="panel-notifications">
+    <h2>الإشعارات</h2>
+    <div class="notif-form" style="flex-direction:column;align-items:stretch;gap:10px">
+      <input type="text" id="notifMessage" placeholder="نص الإشعار...">
+      <div class="gh-config-grid" style="margin-bottom:0">
+        <label style="margin-bottom:0">لمين؟
+          <select id="notifTarget">
+            <option value="all">الكل</option>
+            <option value="male">الذكور بس</option>
+            <option value="female">الإناث بس</option>
+          </select>
+        </label>
+        <label style="margin-bottom:0">تاريخ البداية<input type="date" id="notifStartDate"></label>
+        <label style="margin-bottom:0">مدة الإرسال (أيام)<input type="number" id="notifDuration" min="1" value="1"></label>
+        <label style="margin-bottom:0">وقت الإرسال يوميًا<input type="time" id="notifTime" value="09:00"></label>
+      </div>
+      <label style="margin-bottom:0">اربطها بكورس (اختياري — يظهر زرار "عرض" في الإشعار)
+        <input type="text" id="notifLinkCourse" list="notifCourseList" placeholder="اكتب اسم الكورس...">
+        <datalist id="notifCourseList"></datalist>
+      </label>
+      <div style="display:flex;gap:10px">
+        <button type="button" class="icon-sm" id="previewNotifBtn" style="width:auto;padding:0 14px">👁 معاينة</button>
+        <button class="btn-accent" id="addNotifBtn" style="align-self:flex-start">إضافة</button>
+      </div>
+      <div id="notifPreviewBox" class="hidden" style="background:var(--primary, #2f5d50);color:#fff;padding:12px 16px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13.5px">
+        <span id="notifPreviewText"></span>
+        <span style="display:flex;gap:8px;align-items:center">
+          <button type="button" style="background:rgba(255,255,255,.2);border:0;color:#fff;border-radius:6px;padding:4px 10px;font-size:12px">عرض</button>
+          <button type="button" style="background:none;border:0;color:#fff;font-size:16px">✕</button>
+        </span>
+      </div>
+    </div>
+    <div id="notifList" style="margin-top:18px"></div>
+  </div>
+
+  <!-- ---------------- الكورسات ---------------- -->
+  <div class="panel hidden" id="panel-courses">
+    <h2>الكورسات</h2>
+
+    <div id="ghConfigBox" class="gh-config">
+      <div class="section-title" style="margin-top:0">ربط GitHub (مرة واحدة لكل جلسة دخول)</div>
+      <div class="gh-config-grid">
+        <label>Owner<input type="text" id="ghOwner" placeholder="اسم حساب GitHub"></label>
+        <label>Repo<input type="text" id="ghRepo" placeholder="اسم المستودع"></label>
+        <label>Branch<input type="text" id="ghBranch" placeholder="main" value="main"></label>
+        <label>Token<input type="password" id="ghToken" placeholder="Fine-grained PAT"></label>
+      </div>
+      <button class="btn-accent" id="ghSaveBtn">حفظ الاتصال</button>
+      <span id="ghStatus" class="empty-note"></span>
+    </div>
+
+    <div id="coursesArea" class="hidden">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:22px 0 14px;gap:12px;flex-wrap:wrap">
+        <input type="text" id="courseSearch" class="search-input" style="margin:0" placeholder="ابحث عن كورس...">
+        <label class="checkbox-row" style="margin:0"><input type="checkbox" id="showArchivedToggle"> عرض المؤرشف كمان</label>
+        <button class="icon-sm" id="toggleOrderModeBtn" style="width:auto;padding:0 14px">🔀 إعادة الترتيب</button>
+        <button class="btn-accent" id="newCourseBtn">+ كورس جديد</button>
+      </div>
+      <div id="orderModeBox" class="hidden">
+        <p class="empty-note">رتّب الكورسات جوه نفس التصنيف بالسحب مش متاح — استخدم ▲▼. الترتيب ده هو نفسه ترتيب ظهورهم في الموقع (وضع "الافتراضي" بالفرز).</p>
+        <div id="orderList"></div>
+        <button class="btn-accent" id="saveOrderBtn" style="margin-top:12px">حفظ الترتيب على GitHub</button>
+        <span id="saveOrderStatus" class="empty-note"></span>
+      </div>
+      <div id="coursesGrid" class="courses-grid"></div>
+    </div>
+  </div>
+
+  <!-- ---------------- فورم كورس ---------------- -->
+  <div id="courseFormOverlay" class="overlay hidden">
+    <div class="overlay-card">
+      <div class="overlay-head"><h2 id="courseFormTitle">كورس جديد</h2><button class="icon-sm" id="closeCourseForm">✕</button></div>
+      <div class="overlay-body">
+        <label>الاسم<input type="text" id="cf2_name"></label>
+        <p id="cf2_idPreview" class="empty-note" style="margin:-10px 0 12px"></p>
+        <label>الوصف<textarea id="cf2_desc" rows="2"></textarea></label>
+        <label>التصنيفات (يقدر يكون أكتر من واحد)
+          <div id="cf2_categoriesBox" class="cat-checks"></div>
+          <div class="cat-add-row">
+            <input type="text" id="cf2_newCategory" placeholder="تصنيف جديد...">
+            <button type="button" class="icon-sm" id="cf2_addCategoryBtn" style="width:auto;padding:0 12px">+ إضافة</button>
+          </div>
+        </label>
+        <div class="gh-config-grid">
+          <label>المستوى<input type="text" id="cf2_level" placeholder="مبتدئ / متوسط..."></label>
+          <label>المدة<input type="text" id="cf2_duration" placeholder="مثلاً: 3 ساعات"></label>
+        </div>
+        <label>الوسوم (افصل بفاصلة)<input type="text" id="cf2_tags" placeholder="انجليزي, قواعد"></label>
+        <label class="checkbox-row"><input type="checkbox" id="cf2_featured"> مميز (يظهر في قسم "المميز")</label>
+        <label class="checkbox-row"><input type="checkbox" id="cf2_archived"> مؤرشف (جاهز بس مش ظاهر للطلاب حاليًا)</label>
+        <label>تاريخ ووقت النشر (اختياري — سيبها فاضية للنشر الفوري)
+          <input type="datetime-local" id="cf2_publishAt">
+        </label>
+        <label>كورسات مرتبطة (تظهر كـ"قد يعجبك أيضًا")
+          <div id="cf2_relatedBox" class="cat-checks"></div>
+        </label>
+        <label>صورة الغلاف <span id="cf2_coverStatus" class="empty-note"></span><input type="file" id="cf2_cover" accept="image/*"></label>
+
+        <div class="section-title">الأجزاء</div>
+        <div id="partsEditor"></div>
+        <button class="icon-sm" id="addPartBtn" style="width:auto;padding:0 14px">+ جزء جديد</button>
+
+        <div class="gate-error" id="courseFormError"></div>
+        <button class="gate-btn" id="saveCourseBtn" style="margin-top:20px">حفظ على GitHub</button>
+        <div id="saveCourseStatus" class="empty-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- المراجعة ---------------- -->
+  <div class="panel hidden" id="panel-review">
+    <h2>المراجعة</h2>
+    <div class="gh-config" style="margin-bottom:22px">
+      <label class="checkbox-row" style="margin-bottom:14px">
+        <input type="checkbox" id="autoApproveToggle">
+        الموافقة التلقائية على مشاركة بطاقات المستخدمين (لو مقفولة، أي بطاقة "عامة" هتستنى موافقتك هنا قبل ما تظهر)
+      </label>
+      <label style="margin-bottom:0">الحد الأقصى لعدد البطاقات لكل مستخدم (0 = بدون حد)
+        <input type="number" id="maxCardsInput" min="0" style="width:120px;margin-top:6px">
+      </label>
+    </div>
+
+    <div class="gh-config" style="margin-bottom:22px">
+      <label class="checkbox-row" style="margin-bottom:14px">
+        <input type="checkbox" id="maintenanceToggle">
+        وضع الصيانة (يقفل الموقع العام تمامًا عن كل الزوار)
+      </label>
+      <label style="margin-bottom:0">رسالة الصيانة
+        <textarea id="maintenanceMessage" rows="2" style="width:100%;margin-top:6px;background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:10px;font-family:inherit"></textarea>
+      </label>
+      <button class="btn-accent" id="saveMaintenanceBtn" style="margin-top:12px">حفظ</button>
+    </div>
+    <div class="section-title" style="margin-top:0">بطاقات بانتظار المراجعة</div>
+    <div id="pendingCardsList"></div>
+
+    <div class="section-title">بلاغات المستخدمين 🚩</div>
+    <div id="reportedCardsList"></div>
+  </div>
+
+  <!-- ---------------- الرسائل ---------------- -->
+  <div class="panel hidden" id="panel-messages">
+    <h2>الرسائل</h2>
+    <div style="display:flex;gap:10px;margin-bottom:16px;align-items:center">
+      <select id="msgFilterType" style="background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:9px 12px;font-size:13.5px">
+        <option value="all">الكل</option>
+        <option value="inquiry">استفسارات</option>
+        <option value="suggestion">مقترحات</option>
+        <option value="complaint">شكاوى</option>
+      </select>
+      <button class="icon-sm" id="exportMessagesBtn" style="width:auto;padding:0 14px">⬇️ CSV</button>
+    </div>
+    <div id="messagesList"></div>
+  </div>
+
+  <!-- ---------------- المحادثات ---------------- -->
+  <div class="panel hidden" id="panel-chats">
+    <h2>المحادثات</h2>
+    <div id="chatLayout" style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+      <div id="chatThreadsList" style="flex:1;min-width:220px;display:flex;flex-direction:column;gap:6px"></div>
+      <div id="chatThreadView" style="flex:2;min-width:280px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong id="chatThreadName"></strong>
+          <button type="button" id="clearThreadBtn" class="icon-sm" style="width:auto;padding:0 10px;font-size:12px">🗑️ مسح المحادثة كاملة</button>
+        </div>
+        <div id="adminChatMessages" style="max-height:340px;overflow:auto;display:flex;flex-direction:column;gap:8px;margin:14px 0"></div>
+        <form id="adminChatForm" style="display:flex;gap:8px">
+          <input type="text" id="adminChatInput" placeholder="اكتب ردك..." style="flex:1;background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:9px 12px;font-size:13.5px">
+          <button type="submit" class="btn-accent">إرسال</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- طلبات الشراء ---------------- -->
+  <div class="panel hidden" id="panel-purchases">
+    <h2>طلبات الشراء</h2>
+    <button class="icon-sm" id="exportPurchasesBtn" style="width:auto;padding:0 14px;margin-bottom:16px">⬇️ CSV</button>
+    <div id="purchasesList"></div>
+  </div>
+
+  <!-- ---------------- ملفات المجتمع ---------------- -->
+  <div class="panel hidden" id="panel-community">
+    <h2>ملفات المجتمع</h2>
+    <p class="note-text">الملفات بتتنشر فورًا وتظهر للعامة أول ما المستخدم يأكد النشر — مراجعتك هنا بعدية: وافق، ارفض (يختفي من العرض العام فورًا)، أو سيبه وراجعه بعدين.</p>
+    <div style="display:flex;gap:8px;margin:14px 0">
+      <button type="button" class="tab-btn community-status-tab active" data-status="pending">قيد المراجعة</button>
+      <button type="button" class="tab-btn community-status-tab" data-status="approved">موافَق عليها</button>
+      <button type="button" class="tab-btn community-status-tab" data-status="rejected">المرفوضة</button>
+    </div>
+    <div id="communityAdminList"></div>
+  </div>
+
+  <!-- ---------------- سلة المهملات ---------------- -->
+  <div class="panel hidden" id="panel-trash">
+    <h2>سلة المهملات</h2>
+    <div class="section-title" style="margin-top:0">بطاقات محذوفة</div>
+    <div id="trashedCardsList"></div>
+    <div class="section-title">كورسات محذوفة</div>
+    <div id="trashedCoursesList"></div>
+  </div>
+
+  <!-- ---------------- السجل ---------------- -->
+  <div class="panel hidden" id="panel-audit">
+    <h2>سجل نشاط الأدمن</h2>
+    <table>
+      <thead><tr><th>الإجراء</th><th>على</th><th>تفاصيل</th><th>الوقت</th></tr></thead>
+      <tbody id="auditLogBody"></tbody>
+    </table>
+  </div>
+
+  <!-- ---------------- الإعدادات ---------------- -->
+  <div class="panel hidden" id="panel-settings">
+    <h2>الإعدادات</h2>
+    <div id="settingsGate" class="empty-note">اتصل بـ GitHub الأول من تبويب "الكورسات"، وبعدين ارجع هنا.</div>
+    <div id="settingsArea" class="hidden">
+      <div class="section-title" style="margin-top:0">نصوص الموقع</div>
+      <div class="settings-grid">
+        <label>اسم الموقع<input type="text" id="st_brandName"></label>
+        <label>الوصف تحت الاسم<input type="text" id="st_brandSubtitle"></label>
+        <label>عنوان الترحيب<input type="text" id="st_heroTitle"></label>
+        <label>نص خانة البحث<input type="text" id="st_searchPlaceholder"></label>
+        <label>نص عدم وجود نتائج<input type="text" id="st_emptyText"></label>
+        <label>نص الفوتر<input type="text" id="st_footerText"></label>
+      </div>
+      <label>نص الترحيب<textarea id="st_heroText" rows="2"></textarea></label>
+
+      <div class="section-title">معاينة سريعة</div>
+      <div class="preview-box">
+        <strong id="pv_brandName"></strong>
+        <p id="pv_brandSubtitle" class="empty-note" style="margin:2px 0 0"></p>
+        <h3 id="pv_heroTitle" style="margin-top:12px;font-size:17px"></h3>
+        <p id="pv_heroText" class="empty-note" style="margin:4px 0 0"></p>
+      </div>
+
+      <div class="section-title">قائمة "☰ المزيد"</div>
+      <div id="menuEditor"></div>
+      <button class="icon-sm" id="addMenuItemBtn" style="width:auto;padding:0 14px">+ عنصر جديد</button>
+
+      <div class="gate-error" id="settingsError"></div>
+      <button class="gate-btn" id="saveSettingsBtn" style="margin-top:20px;max-width:260px">حفظ على GitHub</button>
+      <div id="saveSettingsStatus" class="empty-note"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ⚠️ نفس القيم بالظبط اللي حطيتها في index.html */
+const SUPABASE_URL = "https://yoaogeogmbzbsqgnutbf.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvYW9nZW9nbWJ6YnNxZ251dGJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwNzI5MjYsImV4cCI6MjEwNDY0ODkyNn0.l41xrb3BnfA_r1VeOei1BsHQ_AsK9cb9g4YO8lTXvEk";
+const EMAIL_DOMAIN = "mektabty.com";
+const STORAGE_BUCKET = "study-files";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+function usernameToEmail(u) { return u.trim().toLowerCase() + "@" + EMAIL_DOMAIN; }
+function esc(v) { return String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+function fmtTime(iso) { return new Date(iso).toLocaleString("ar-EG", { hour: "2-digit", minute: "2-digit", day: "2-digit", month: "2-digit" }); }
+function genderLabel(g) { return g === "male" ? "ذكر" : g === "female" ? "أنثى" : "—"; }
+async function logAudit(action, targetType, targetId, details) {
+  await sb.from("audit_log").insert({ action, target_type: targetType, target_id: String(targetId || ""), details: details || null });
+}
+
+/* ---------------- الدخول والتحقق من صلاحية الأدمن ---------------- */
+document.getElementById("gateLoginBtn").addEventListener("click", async () => {
+  const err = document.getElementById("gateError");
+  err.textContent = "";
+  const username = document.getElementById("gateUsername").value;
+  const password = document.getElementById("gatePassword").value;
+  const { error } = await sb.auth.signInWithPassword({ email: usernameToEmail(username), password });
+  if (error) { err.textContent = "بيانات الدخول غير صحيحة"; return; }
+  const { data: isAdmin, error: adminErr } = await sb.rpc("is_admin");
+  if (adminErr || !isAdmin) {
+    err.textContent = "الحساب ده مالوش صلاحية أدمن";
+    await sb.auth.signOut();
+    return;
+  }
+  document.getElementById("loginGate").classList.add("hidden");
+  document.getElementById("adminApp").classList.remove("hidden");
+  document.getElementById("adminWhoName").textContent = username;
+  initAdminApp();
+});
+
+document.getElementById("adminLogoutBtn").addEventListener("click", async () => {
+  await sb.auth.signOut();
+  location.reload();
+});
+
+/* ---------------- تبويبات ---------------- */
+document.querySelectorAll(".tab-btn").forEach(btn => btn.addEventListener("click", () => {
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  document.querySelectorAll(".panel").forEach(p => p.classList.add("hidden"));
+  document.getElementById("panel-" + btn.dataset.tab).classList.remove("hidden");
+}));
+
+function initAdminApp() {
+  initHomeTab();
+  initStatsTab();
+  initUsersTab();
+  initNotificationsTab();
+  initCoursesTab();
+  initReviewTab();
+  initMessagesTab();
+  initChatsTab();
+  initPurchasesTab();
+  initGlobalSearch();
+  initTrashTab();
+  initAuditTab();
+}
+
+/* ============================================================
+   الإحصائيات المتقدمة
+   ============================================================ */
+function initStatsTab() {
+  const dayInput = document.getElementById("statsDay");
+  dayInput.value = new Date().toISOString().slice(0, 10);
+  dayInput.addEventListener("change", () => loadDayStats(dayInput.value));
+  document.getElementById("trendDays").addEventListener("change", loadTrend);
+  loadOnlineNow();
+  loadDayStats(dayInput.value);
+  loadTrend();
+  loadTopCards();
+  loadTopCourses();
+  loadStorageUsage();
+  setInterval(loadOnlineNow, 30000);
+}
+
+function fmtBytes(n) {
+  if (!n) return "0 KB";
+  const u = ["B", "KB", "MB", "GB"];
+  let i = 0; let v = n;
+  while (v >= 1024 && i < u.length - 1) { v /= 1024; i++; }
+  return v.toFixed(1) + " " + u[i];
+}
+async function loadStorageUsage() {
+  const box = document.getElementById("storageUsageList");
+  const { data, error } = await sb.rpc("admin_storage_usage");
+  if (error) { box.innerHTML = `<span class="empty-note">تعذّر التحميل</span>`; return; }
+  if (!data || !data.length) { box.innerHTML = `<span class="empty-note">مفيش ملفات مرفوعة لسه</span>`; return; }
+  const total = data.reduce((s, u) => s + Number(u.total_bytes || 0), 0);
+  box.innerHTML = `<div class="empty-note" style="margin-bottom:10px">الإجمالي: ${fmtBytes(total)} عبر ${data.length} مستخدم</div>` +
+    data.map(u => `
+      <div class="notif-row" style="align-items:center">
+        <span>${esc(u.display_name || u.username || "مستخدم")}</span>
+        <span class="empty-note">${u.file_count} ملف • ${fmtBytes(u.total_bytes)}</span>
+      </div>`).join("");
+}
+
+async function loadTrend() {
+  const days = +document.getElementById("trendDays").value;
+  const { data, error } = await sb.rpc("admin_get_login_trend", { p_days: days });
+  const box = document.getElementById("trendChartBox");
+  if (error || !data || !data.length) { box.innerHTML = `<span class="empty-note">تعذّر التحميل</span>`; return; }
+  const max = Math.max(1, ...data.map(d => d.count));
+  const w = 700, h = 160, pad = 24;
+  const stepX = (w - pad * 2) / (data.length - 1 || 1);
+  const points = data.map((d, i) => {
+    const x = pad + i * stepX;
+    const y = h - pad - (d.count / max) * (h - pad * 2);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+  const dots = data.map((d, i) => {
+    const x = pad + i * stepX;
+    const y = h - pad - (d.count / max) * (h - pad * 2);
+    const label = new Date(d.day).toLocaleDateString("ar-EG", { day: "2-digit", month: "2-digit" });
+    return `<circle cx="${x}" cy="${y}" r="3" fill="var(--accent)"><title>${label}: ${d.count}</title></circle>`;
+  }).join("");
+  box.innerHTML = `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:160px" preserveAspectRatio="none">
+    <polyline points="${points}" fill="none" stroke="var(--accent)" stroke-width="2"/>
+    ${dots}
+  </svg>
+  <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:6px">
+    <span>${new Date(data[0].day).toLocaleDateString("ar-EG")}</span>
+    <span>${new Date(data[data.length - 1].day).toLocaleDateString("ar-EG")}</span>
+  </div>`;
+}
+
+async function loadTopCards() {
+  const { data, error } = await sb.rpc("admin_get_top_cards", { p_limit: 5 });
+  const box = document.getElementById("topCardsList");
+  if (error || !data || !data.length) { box.innerHTML = `<span class="empty-note">مفيش بيانات كفاية لسه</span>`; return; }
+  box.innerHTML = data.map((c, i) => `
+    <div class="notif-row"><span>#${i + 1} ${esc(c.card_name)} <span class="empty-note">(${esc(c.owner_username)})</span></span><strong>${c.views} 👁</strong></div>
+  `).join("");
+}
+
+async function loadTopCourses() {
+  const { data, error } = await sb.rpc("admin_get_top_courses", { p_limit: 5 });
+  const box = document.getElementById("topCoursesList");
+  if (error || !data || !data.length) { box.innerHTML = `<span class="empty-note">مفيش بيانات كفاية لسه</span>`; return; }
+  box.innerHTML = data.map((c, i) => {
+    const name = (sitesData?.courses || []).find(x => x.id === c.course_id)?.name || c.course_id;
+    return `<div class="notif-row"><span>#${i + 1} ${esc(name)}</span><strong>${c.views} 👁</strong></div>`;
+  }).join("");
+}
+
+async function loadOnlineNow() {
+  const { data, error } = await sb.rpc("admin_get_online_now");
+  const box = document.getElementById("onlineList");
+  if (error) { box.innerHTML = `<span class="empty-note">تعذّر التحميل</span>`; return; }
+  if (!data.length) { box.innerHTML = `<span class="empty-note">محدش داخل دلوقتي</span>`; return; }
+  box.innerHTML = data.map(u => `<span class="online-chip"><span class="dot"></span>${esc(u.display_name)}</span>`).join("");
+}
+
+async function loadDayStats(day) {
+  const [{ data: summary }, { data: logins }] = await Promise.all([
+    sb.rpc("admin_get_day_summary", { p_day: day }),
+    sb.rpc("admin_get_day_logins", { p_day: day })
+  ]);
+
+  document.getElementById("dayStatCards").innerHTML = `
+    <div class="stat-card"><div class="num">${summary?.logins_total ?? 0}</div><div class="lbl">إجمالي الدخول</div></div>
+    <div class="stat-card"><div class="num">${summary?.unique_users ?? 0}</div><div class="lbl">مستخدمون مختلفون</div></div>
+    <div class="stat-card"><div class="num">${summary?.male ?? 0}</div><div class="lbl">ذكور</div></div>
+    <div class="stat-card"><div class="num">${summary?.female ?? 0}</div><div class="lbl">إناث</div></div>
+    <div class="stat-card"><div class="num">${summary?.share_views ?? 0}</div><div class="lbl">مشاهدات روابط مشاركة</div></div>`;
+
+  const body = document.getElementById("dayLoginsBody");
+  if (!logins?.length) { body.innerHTML = `<tr><td colspan="5" class="empty-note">مفيش تسجيلات دخول في اليوم ده</td></tr>`; return; }
+  body.innerHTML = logins.map(l => `
+    <tr>
+      <td>${esc(l.display_name)}</td>
+      <td>${esc(l.username)}</td>
+      <td>${l.gender ? `<span class="badge ${l.gender}">${genderLabel(l.gender)}</span>` : "—"}</td>
+      <td>${fmtTime(l.login_at)}</td>
+      <td>${l.is_returning ? '<span class="badge returning">عائد</span>' : '<span class="badge new">جديد</span>'}</td>
+    </tr>`).join("");
+}
+
+/* ============================================================
+   المستخدمون
+   ============================================================ */
+let allUsersCache = [];
+let userNotesCache = {};
+async function initUsersTab() {
+  const { data, error } = await sb.from("profiles")
+    .select("id, username, display_name, created_at, profile_private(gender, last_seen_at, disabled)")
+    .order("created_at", { ascending: false });
+  if (error) { console.error(error); return; }
+  allUsersCache = data || [];
+
+  const { data: notes } = await sb.from("admin_user_notes").select("user_id, note");
+  userNotesCache = {};
+  (notes || []).forEach(n => { userNotesCache[n.user_id] = n.note; });
+
+  renderUsersTable(allUsersCache);
+  document.getElementById("userSearch").addEventListener("input", (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    renderUsersTable(allUsersCache.filter(u => u.username.toLowerCase().includes(q) || u.display_name.toLowerCase().includes(q)));
+  });
+  document.getElementById("exportUsersBtn").addEventListener("click", () => {
+    exportToCSV("users.csv", allUsersCache.map(u => ({
+      display_name: u.display_name, username: u.username,
+      gender: u.profile_private?.gender || "", created_at: u.created_at,
+      last_seen_at: u.profile_private?.last_seen_at || "", disabled: u.profile_private?.disabled ? "نعم" : "لا"
+    })), [
+      { key: "display_name", label: "الاسم" }, { key: "username", label: "اسم المستخدم" },
+      { key: "gender", label: "النوع" }, { key: "created_at", label: "الانضمام" },
+      { key: "last_seen_at", label: "آخر ظهور" }, { key: "disabled", label: "معطّل" }
+    ]);
+  });
+}
+
+function renderUsersTable(users) {
+  const body = document.getElementById("usersBody");
+  if (!users.length) { body.innerHTML = `<tr><td colspan="7" class="empty-note">مفيش نتائج</td></tr>`; return; }
+  body.innerHTML = users.map(u => {
+    const pp = u.profile_private || {};
+    const online = pp.last_seen_at && (Date.now() - new Date(pp.last_seen_at).getTime()) < 5 * 60 * 1000;
+    const hasNote = !!userNotesCache[u.id];
+    return `<tr data-id="${u.id}">
+      <td>${esc(u.display_name)}</td>
+      <td>${esc(u.username)}</td>
+      <td>${pp.gender ? `<span class="badge ${pp.gender}">${genderLabel(pp.gender)}</span>` : "—"}</td>
+      <td>${fmtTime(u.created_at)}</td>
+      <td>${pp.last_seen_at ? fmtTime(pp.last_seen_at) : "—"}</td>
+      <td>${pp.disabled ? '<span class="badge female">معطّل</span>' : (online ? '<span class="badge new">متصل الآن</span>' : "—")}</td>
+      <td style="display:flex;gap:6px">
+        <button class="icon-sm note-user-btn" title="ملاحظة الأدمن">${hasNote ? "📝" : "🗒️"}</button>
+        <button class="icon-sm toggle-disable-btn" title="${pp.disabled ? "تفعيل الحساب" : "تعطيل مؤقت"}">${pp.disabled ? "✅" : "⛔"}</button>
+      </td>
+    </tr>`;
+  }).join("");
+
+  body.querySelectorAll(".note-user-btn").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest("tr").dataset.id;
+    const current = userNotesCache[id] || "";
+    const note = prompt("ملاحظة خاصة بيك عن المستخدم ده (مش هيشوفها هو):", current);
+    if (note === null) return;
+    await sb.from("admin_user_notes").upsert({ user_id: id, note, updated_at: new Date().toISOString() });
+    userNotesCache[id] = note;
+    renderUsersTable(users);
+  }));
+  body.querySelectorAll(".toggle-disable-btn").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest("tr").dataset.id;
+    const user = users.find(u => u.id === id);
+    const newVal = !(user.profile_private?.disabled);
+    if (!confirm(newVal ? "تعطيل الحساب ده مؤقتًا؟ هيتم تسجيل خروجه تلقائيًا." : "إعادة تفعيل الحساب ده؟")) return;
+    const { error } = await sb.from("profile_private").update({ disabled: newVal }).eq("id", id);
+    if (error) { alert(error.message); return; }
+    logAudit(newVal ? "disable_user" : "enable_user", "user", id, { username: user.username });
+    if (!user.profile_private) user.profile_private = {};
+    user.profile_private.disabled = newVal;
+    renderUsersTable(users);
+  }));
+}
+
+/* ============================================================
+   الإشعارات
+   ============================================================ */
+async function initNotificationsTab() {
+  const dateInput = document.getElementById("notifStartDate");
+  if (!dateInput.value) dateInput.value = new Date().toISOString().slice(0, 10);
+
+  document.getElementById("previewNotifBtn").addEventListener("click", () => {
+    const box = document.getElementById("notifPreviewBox");
+    const text = document.getElementById("notifMessage").value.trim();
+    if (!text) { alert("اكتب نص الإشعار الأول"); return; }
+    document.getElementById("notifPreviewText").textContent = text;
+    box.classList.remove("hidden");
+  });
+
+  document.getElementById("addNotifBtn").addEventListener("click", async () => {
+    const btn = document.getElementById("addNotifBtn");
+    if (btn.disabled) return;
+    const input = document.getElementById("notifMessage");
+    const message = input.value.trim();
+    if (!message) return;
+    const [hh, mm] = document.getElementById("notifTime").value.split(":").map(Number);
+    const linkName = document.getElementById("notifLinkCourse").value.trim();
+    const linkCourse = linkName ? (sitesData?.courses || []).find(c => c.name === linkName) : null;
+    btn.disabled = true;
+    try {
+      const { error } = await sb.from("notifications").insert({
+        message,
+        target_gender: document.getElementById("notifTarget").value,
+        start_date: document.getElementById("notifStartDate").value,
+        days_duration: +document.getElementById("notifDuration").value || 1,
+        send_hour: hh || 0,
+        send_minute: mm || 0,
+        link_course_id: linkCourse ? linkCourse.id : null
+      });
+      if (error) { alert(error.message); return; }
+      input.value = "";
+      document.getElementById("notifLinkCourse").value = "";
+      document.getElementById("notifPreviewBox").classList.add("hidden");
+      loadNotifications();
+    } finally {
+      btn.disabled = false;
+    }
+  });
+  loadNotifications();
+}
+
+function populateNotifCourseList() {
+  const dl = document.getElementById("notifCourseList");
+  if (!dl) return;
+  dl.innerHTML = (sitesData?.courses || []).map(c => `<option value="${esc(c.name)}"></option>`).join("");
+}
+
+async function loadNotifications() {
+  const { data, error } = await sb.from("notifications").select("*").order("created_at", { ascending: false });
+  const box = document.getElementById("notifList");
+  if (error) { box.innerHTML = `<span class="empty-note">تعذّر التحميل</span>`; return; }
+  if (!data.length) { box.innerHTML = `<span class="empty-note">مفيش إشعارات لسه</span>`; return; }
+  const targetLabel = t => t === "male" ? "الذكور" : t === "female" ? "الإناث" : "الكل";
+  box.innerHTML = data.map(n => `
+    <div class="notif-row ${n.active ? "" : "inactive"}" data-id="${n.id}" style="align-items:flex-start;flex-direction:column;gap:6px">
+      <div style="display:flex;justify-content:space-between;width:100%;align-items:center">
+        <span>${esc(n.message)}</span>
+        <div class="notif-actions">
+          <button class="icon-sm toggle-notif" title="${n.active ? "إخفاء" : "تفعيل"}">${n.active ? "🙈" : "👁"}</button>
+          <button class="icon-sm delete-notif" title="حذف">🗑</button>
+        </div>
+      </div>
+      <span class="empty-note">لـ${targetLabel(n.target_gender)} • من ${n.start_date} لمدة ${n.days_duration} يوم • الساعة ${String(n.send_hour).padStart(2, "0")}:${String(n.send_minute).padStart(2, "0")}${n.link_course_id ? ` • مرتبط بكورس` : ""} • 👁 ${n.seen_count || 0} • ✕ ${n.dismissed_count || 0}</span>
+    </div>`).join("");
+  box.querySelectorAll(".toggle-notif").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.id;
+    const n = data.find(x => x.id === id);
+    await sb.from("notifications").update({ active: !n.active }).eq("id", id);
+    loadNotifications();
+  }));
+  box.querySelectorAll(".delete-notif").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.id;
+    if (!confirm("حذف الإشعار؟")) return;
+    await sb.from("notifications").delete().eq("id", id);
+    loadNotifications();
+  }));
+}
+
+/* ============================================================
+   الكورسات — عبر GitHub Contents API (نفس آلية sites.json الحالية)
+   ============================================================ */
+const GH_API = "https://api.github.com";
+let ghConfig = null;
+let sitesData = null;
+let sitesSha = null;
+let currentEditId = null;
+let partsBuffer = []; // [{title, file:File|null, existingPath:string|null}]
+let categoriesBuffer = []; // selected category names for the course being edited
+let relatedBuffer = []; // selected related-course ids for the course being edited
+
+function loadGhConfigFromSession() {
+  const raw = sessionStorage.getItem("ghConfig");
+  if (raw) { try { return JSON.parse(raw); } catch (e) { return null; } }
+  return null;
+}
+
+function initCoursesTab() {
+  ghConfig = loadGhConfigFromSession();
+  if (ghConfig) {
+    document.getElementById("ghOwner").value = ghConfig.owner;
+    document.getElementById("ghRepo").value = ghConfig.repo;
+    document.getElementById("ghBranch").value = ghConfig.branch;
+    connectGithubAndLoad();
+  }
+
+  document.getElementById("ghSaveBtn").addEventListener("click", () => {
+    ghConfig = {
+      owner: document.getElementById("ghOwner").value.trim(),
+      repo: document.getElementById("ghRepo").value.trim(),
+      branch: document.getElementById("ghBranch").value.trim() || "main",
+      token: document.getElementById("ghToken").value.trim()
+    };
+    if (!ghConfig.owner || !ghConfig.repo || !ghConfig.token) { alert("لازم تملأ Owner وRepo وToken"); return; }
+    sessionStorage.setItem("ghConfig", JSON.stringify(ghConfig));
+    connectGithubAndLoad();
+  });
+
+  document.getElementById("newCourseBtn").addEventListener("click", () => openCourseForm(null));
+  document.getElementById("cf2_name").addEventListener("input", updateIdPreview);
+  document.getElementById("closeCourseForm").addEventListener("click", closeCourseForm);
+  document.getElementById("addPartBtn").addEventListener("click", () => { partsBuffer.push({ title: "", file: null, existingPath: null }); renderPartsEditor(); });
+  document.getElementById("saveCourseBtn").addEventListener("click", saveCourse);
+  document.getElementById("courseSearch").addEventListener("input", (e) => renderCoursesGrid(e.target.value.trim()));
+  document.getElementById("showArchivedToggle").addEventListener("change", () => renderCoursesGrid(document.getElementById("courseSearch").value.trim()));
+  document.getElementById("toggleOrderModeBtn").addEventListener("click", () => {
+    const box = document.getElementById("orderModeBox");
+    box.classList.toggle("hidden");
+    document.getElementById("coursesGrid").classList.toggle("hidden", !box.classList.contains("hidden"));
+    if (!box.classList.contains("hidden")) renderOrderList();
+  });
+  document.getElementById("saveOrderBtn").addEventListener("click", saveOrder);
+  document.getElementById("cf2_addCategoryBtn").addEventListener("click", () => {
+    const input = document.getElementById("cf2_newCategory");
+    const name = input.value.trim();
+    if (!name) return;
+    if (!categoriesBuffer.includes(name)) categoriesBuffer.push(name);
+    input.value = "";
+    renderCategoryChecks();
+  });
+}
+
+async function connectGithubAndLoad() {
+  const status = document.getElementById("ghStatus");
+  status.textContent = "جارِ الاتصال...";
+  try {
+    const file = await ghGetFile("sites.json");
+    sitesData = JSON.parse(file.content);
+    sitesSha = file.sha;
+    status.textContent = "متصل ✓";
+    document.getElementById("coursesArea").classList.remove("hidden");
+    renderCoursesGrid("");
+    populateCategoryList();
+    populateNotifCourseList();
+  } catch (ex) {
+    status.textContent = "فشل الاتصال: " + ex.message;
+    document.getElementById("coursesArea").classList.add("hidden");
+  }
+}
+
+function populateCategoryList() {
+  knownCategories = [...new Set((sitesData.sections || []).map(s => s.name).concat((sitesData.courses || []).flatMap(c => c.categories || (c.category ? [c.category] : []))))].filter(Boolean);
+}
+let knownCategories = [];
+
+function renderCategoryChecks() {
+  const box = document.getElementById("cf2_categoriesBox");
+  const all = [...new Set([...knownCategories, ...categoriesBuffer])];
+  if (!all.length) { box.innerHTML = `<span class="empty-note">مفيش تصنيفات لسه — أضف واحد تحت</span>`; return; }
+  box.innerHTML = all.map(c => `
+    <label class="cat-chip ${categoriesBuffer.includes(c) ? "checked" : ""}" data-cat="${esc(c)}">
+      <input type="checkbox" ${categoriesBuffer.includes(c) ? "checked" : ""}> ${esc(c)}
+    </label>`).join("");
+  box.querySelectorAll(".cat-chip").forEach(chip => chip.addEventListener("click", (e) => {
+    e.preventDefault();
+    const cat = chip.dataset.cat;
+    if (categoriesBuffer.includes(cat)) categoriesBuffer = categoriesBuffer.filter(c => c !== cat);
+    else categoriesBuffer.push(cat);
+    renderCategoryChecks();
+  }));
+}
+
+function renderRelatedChecks() {
+  const box = document.getElementById("cf2_relatedBox");
+  const others = (sitesData.courses || []).filter(c => c.id !== currentEditId);
+  if (!others.length) { box.innerHTML = `<span class="empty-note">مفيش كورسات تانية لسه</span>`; return; }
+  box.innerHTML = others.map(c => `
+    <label class="cat-chip ${relatedBuffer.includes(c.id) ? "checked" : ""}" data-id="${esc(c.id)}">
+      <input type="checkbox" ${relatedBuffer.includes(c.id) ? "checked" : ""}> ${esc(c.name)}
+    </label>`).join("");
+  box.querySelectorAll(".cat-chip").forEach(chip => chip.addEventListener("click", (e) => {
+    e.preventDefault();
+    const id = chip.dataset.id;
+    if (relatedBuffer.includes(id)) relatedBuffer = relatedBuffer.filter(x => x !== id);
+    else relatedBuffer.push(id);
+    renderRelatedChecks();
+  }));
+}
+
+/* ---------------- GitHub Contents API helpers ---------------- */
+function ghHeaders() {
+  return { Authorization: "Bearer " + ghConfig.token, Accept: "application/vnd.github+json" };
+}
+async function ghGetFile(path) {
+  const url = `${GH_API}/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${encodeURI(path)}?ref=${ghConfig.branch}`;
+  const res = await fetch(url, { headers: ghHeaders() });
+  if (!res.ok) throw new Error(`تعذّر قراءة ${path} (${res.status})`);
+  const json = await res.json();
+  return { content: decodeURIComponent(escape(atob(json.content.replace(/\n/g, "")))), sha: json.sha };
+}
+async function ghGetFileRaw(path) {
+  const url = `${GH_API}/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${encodeURI(path)}?ref=${ghConfig.branch}`;
+  const res = await fetch(url, { headers: ghHeaders() });
+  if (!res.ok) return null;
+  const json = await res.json();
+  return json.sha;
+}
+async function ghPutFile(path, contentBase64, message, sha) {
+  const url = `${GH_API}/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${encodeURI(path)}`;
+  const body = { message, content: contentBase64, branch: ghConfig.branch };
+  if (sha) body.sha = sha;
+  const res = await fetch(url, { method: "PUT", headers: { ...ghHeaders(), "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  if (!res.ok) throw new Error(`فشل حفظ ${path} (${res.status})`);
+  return res.json();
+}
+async function ghDeleteFile(path, message) {
+  const sha = await ghGetFileRaw(path);
+  if (!sha) return;
+  const url = `${GH_API}/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${encodeURI(path)}`;
+  await fetch(url, { method: "DELETE", headers: { ...ghHeaders(), "Content-Type": "application/json" }, body: JSON.stringify({ message, sha, branch: ghConfig.branch }) });
+}
+function textToBase64(text) { return btoa(unescape(encodeURIComponent(text))); }
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result.split(",")[1]);
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+function compressImage(file, maxDim = 900, quality = 0.82) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > maxDim || height > maxDim) {
+          if (width > height) { height = Math.round(height * maxDim / width); width = maxDim; }
+          else { width = Math.round(width * maxDim / height); height = maxDim; }
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width; canvas.height = height;
+        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+        canvas.toBlob((blob) => resolve(blob || file), "image/jpeg", quality);
+      };
+      img.onerror = () => resolve(file);
+      img.src = reader.result;
+    };
+    reader.onerror = () => resolve(file);
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ---------------- عرض قائمة الكورسات ---------------- */
+function renderCoursesGrid(filter) {
+  const grid = document.getElementById("coursesGrid");
+  const q = (filter || "").toLowerCase();
+  const showArchived = document.getElementById("showArchivedToggle").checked;
+  const list = (sitesData.courses || []).filter(c => (!q || c.name.toLowerCase().includes(q)) && (showArchived || !c.archived));
+  if (!list.length) { grid.innerHTML = `<span class="empty-note">مفيش كورسات</span>`; return; }
+  grid.innerHTML = list.map(c => `
+    <div class="course-card ${c.archived ? "archived" : ""}" data-id="${esc(c.id)}">
+      ${c.archived ? '<span class="cc-archived-badge">مؤرشف</span>' : (c.publish_at && new Date(c.publish_at) > new Date() ? `<span class="cc-archived-badge" style="background:var(--warn)">مجدول ${new Date(c.publish_at).toLocaleDateString("ar-EG")}</span>` : "")}
+      <div class="cc-cover">${c.image ? `<img src="https://raw.githubusercontent.com/${ghConfig.owner}/${ghConfig.repo}/${ghConfig.branch}/${c.image}">` : "🎓"}</div>
+      <div class="cc-body">
+        <h3>${esc(c.name)}</h3>
+        <p>${esc(c.description || "")}</p>
+        <div class="cc-meta">
+          ${(c.categories && c.categories.length ? c.categories : (c.category ? [c.category] : [])).map(cat => `<span class="cc-tag">${esc(cat)}</span>`).join("") || '<span class="cc-tag">بدون تصنيف</span>'}
+          ${c.featured ? '<span class="cc-tag">⭐ مميز</span>' : ""}
+          <span class="cc-tag">${(c.parts || []).length} جزء</span>
+        </div>
+      </div>
+    </div>`).join("");
+  grid.querySelectorAll(".course-card").forEach(el => el.addEventListener("click", () => {
+    const course = sitesData.courses.find(c => c.id === el.dataset.id);
+    if (course) openCourseForm(course);
+  }));
+}
+
+function renderOrderList() {
+  const box = document.getElementById("orderList");
+  box.innerHTML = sitesData.courses.map((c, i) => `
+    <div class="part-row" data-i="${i}">
+      <span style="flex:1">${esc(c.name)}</span>
+      <div class="mi-actions">
+        <button class="mi-up" title="لأعلى">▲</button>
+        <button class="mi-down" title="لأسفل">▼</button>
+      </div>
+    </div>`).join("");
+  box.querySelectorAll(".part-row").forEach(row => {
+    const i = +row.dataset.i;
+    row.querySelector(".mi-up").addEventListener("click", () => { if (i > 0) { [sitesData.courses[i - 1], sitesData.courses[i]] = [sitesData.courses[i], sitesData.courses[i - 1]]; renderOrderList(); } });
+    row.querySelector(".mi-down").addEventListener("click", () => { if (i < sitesData.courses.length - 1) { [sitesData.courses[i + 1], sitesData.courses[i]] = [sitesData.courses[i], sitesData.courses[i + 1]]; renderOrderList(); } });
+  });
+}
+async function saveOrder() {
+  const btn = document.getElementById("saveOrderBtn");
+  if (btn.disabled) return;
+  const status = document.getElementById("saveOrderStatus");
+  status.textContent = "جارِ الحفظ...";
+  btn.disabled = true;
+  try {
+    const result = await ghPutFile("sites.json", textToBase64(JSON.stringify(sitesData, null, 2)), "إعادة ترتيب الكورسات", sitesSha);
+    sitesSha = result.content.sha;
+    status.textContent = "تم الحفظ ✓";
+    renderCoursesGrid(document.getElementById("courseSearch").value.trim());
+  } catch (ex) {
+    status.textContent = "فشل: " + ex.message;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* ---------------- فورم إنشاء/تعديل كورس ---------------- */
+function openCourseForm(course) {
+  currentEditId = course?.id || null;
+  document.getElementById("courseFormTitle").textContent = course ? "تعديل الكورس" : "كورس جديد";
+  document.getElementById("cf2_name").value = course?.name || "";
+  document.getElementById("cf2_desc").value = course?.description || "";
+  updateIdPreview();
+  categoriesBuffer = course ? (course.categories && course.categories.length ? [...course.categories] : (course.category ? [course.category] : [])) : [];
+  renderCategoryChecks();
+  document.getElementById("cf2_level").value = course?.level || "";
+  document.getElementById("cf2_duration").value = course?.duration || "";
+  document.getElementById("cf2_tags").value = (course?.tags || []).join(", ");
+  document.getElementById("cf2_featured").checked = !!course?.featured;
+  document.getElementById("cf2_archived").checked = !!course?.archived;
+  document.getElementById("cf2_publishAt").value = course?.publish_at ? course.publish_at.slice(0, 16) : "";
+  relatedBuffer = course?.related ? [...course.related] : [];
+  renderRelatedChecks();
+  document.getElementById("cf2_cover").value = "";
+  document.getElementById("cf2_coverStatus").textContent = course?.image ? "فيه صورة غلاف بالفعل — اختر ملف بس لو عايز تغيّرها" : "";
+  document.getElementById("courseFormError").textContent = "";
+  document.getElementById("saveCourseStatus").textContent = "";
+
+  partsBuffer = (course?.parts || []).map(p => ({ title: p.title, file: null, existingPath: p.file }));
+  if (!partsBuffer.length) partsBuffer.push({ title: "", file: null, existingPath: null });
+  renderPartsEditor();
+
+  document.getElementById("courseFormOverlay").classList.remove("hidden");
+
+  // زرار حذف لو بنعدّل كورس موجود
+  let delBtn = document.getElementById("deleteCourseBtn");
+  if (course) {
+    if (!delBtn) {
+      delBtn = document.createElement("button");
+      delBtn.id = "deleteCourseBtn";
+      delBtn.className = "icon-sm";
+      delBtn.style.cssText = "width:auto;padding:0 14px;color:var(--accent);margin-inline-start:8px";
+      delBtn.textContent = "حذف الكورس";
+      document.querySelector(".overlay-head").appendChild(delBtn);
+    }
+    delBtn.classList.remove("hidden");
+    delBtn.onclick = () => deleteCourse(course);
+  } else if (delBtn) {
+    delBtn.classList.add("hidden");
+  }
+}
+function closeCourseForm() { document.getElementById("courseFormOverlay").classList.add("hidden"); }
+
+function renderPartsEditor() {
+  const box = document.getElementById("partsEditor");
+  box.innerHTML = partsBuffer.map((p, i) => `
+    <div class="part-row" data-i="${i}">
+      <input type="text" class="part-title" placeholder="عنوان الجزء" value="${esc(p.title)}">
+      <input type="file" class="part-file" accept=".html,.htm,.pdf">
+      <button class="remove-part" title="حذف الجزء">✕</button>
+    </div>`).join("");
+  box.querySelectorAll(".part-row").forEach(row => {
+    const i = +row.dataset.i;
+    row.querySelector(".part-title").addEventListener("input", (e) => partsBuffer[i].title = e.target.value);
+    row.querySelector(".part-file").addEventListener("change", (e) => {
+      partsBuffer[i].file = e.target.files[0] || null;
+      if (partsBuffer[i].file && /\.pdf$/i.test(partsBuffer[i].file.name)) {
+        if (!categoriesBuffer.includes("ملفات PDF")) { categoriesBuffer.push("ملفات PDF"); renderCategoryChecks(); }
+      }
+    });
+    row.querySelector(".remove-part").addEventListener("click", () => { partsBuffer.splice(i, 1); renderPartsEditor(); });
+  });
+}
+
+function slugify(s) { return s.trim().replace(/\s+/g, "-"); }
+function randSuffix() { return Math.random().toString(36).slice(2, 7); }
+function updateIdPreview() {
+  const el = document.getElementById("cf2_idPreview");
+  if (currentEditId) { el.textContent = "المعرّف: " + currentEditId; return; }
+  const name = document.getElementById("cf2_name").value.trim();
+  el.textContent = name ? `هيتولد كـ: ${slugify(name)}-xxxxx` : "";
+}
+
+async function saveCourse() {
+  const saveBtn = document.getElementById("saveCourseBtn");
+  // نفس السبب اللي كرّر البطاقة في الموقع العام: من غير الحارس ده، ضغطة
+  // مزدوجة على "حفظ" هنا كانت أخطر لأنها بتبعت أكتر من commit لـGitHub
+  // (الغلاف + كل جزء + sites.json) مرتين، وممكن الاتنين يتعاركوا على نفس sha
+  if (saveBtn.disabled) return;
+  const err = document.getElementById("courseFormError");
+  const status = document.getElementById("saveCourseStatus");
+  err.textContent = ""; status.textContent = "";
+
+  const name = document.getElementById("cf2_name").value.trim();
+  if (!name) { err.textContent = "اكتب اسم الكورس"; return; }
+  if (!partsBuffer.some(p => p.file || p.existingPath)) { err.textContent = "لازم جزء واحد على الأقل بملف"; return; }
+
+  const hasPdfPart = partsBuffer.some(p => /\.pdf$/i.test(p.file?.name || p.existingPath || ""));
+  if (hasPdfPart && !categoriesBuffer.includes("ملفات PDF")) categoriesBuffer.push("ملفات PDF");
+
+  const id = currentEditId || `${slugify(name)}-${randSuffix()}`;
+  const courseObj = {
+    id,
+    name,
+    description: document.getElementById("cf2_desc").value.trim(),
+    categories: [...categoriesBuffer],
+    level: document.getElementById("cf2_level").value.trim(),
+    duration: document.getElementById("cf2_duration").value.trim(),
+    tags: document.getElementById("cf2_tags").value.split(",").map(t => t.trim()).filter(Boolean),
+    featured: document.getElementById("cf2_featured").checked,
+    archived: document.getElementById("cf2_archived").checked,
+    publish_at: document.getElementById("cf2_publishAt").value ? new Date(document.getElementById("cf2_publishAt").value).toISOString() : null,
+    related: [...relatedBuffer],
+    image: null,
+    parts: []
+  };
+
+  saveBtn.disabled = true;
+  try {
+    status.textContent = "جارِ رفع الملفات...";
+
+    // الغلاف — بيتضغط تلقائيًا (تصغير مقاس + جودة JPEG) قبل الرفع لـGitHub
+    const coverFile = document.getElementById("cf2_cover").files[0];
+    const existing = sitesData.courses.find(c => c.id === id);
+    if (coverFile) {
+      status.textContent = "جارِ ضغط صورة الغلاف...";
+      const compressed = await compressImage(coverFile);
+      const b64 = await fileToBase64(compressed);
+      const path = `courses/${id}/cover.jpg`;
+      const sha = await ghGetFileRaw(path);
+      status.textContent = "جارِ رفع الغلاف...";
+      await ghPutFile(path, b64, `تحديث غلاف: ${name}`, sha);
+      courseObj.image = path;
+    } else {
+      courseObj.image = existing?.image || null;
+    }
+
+    // الأجزاء
+    let partIndex = 1;
+    for (const p of partsBuffer) {
+      if (!p.file && !p.existingPath) continue;
+      if (p.file) {
+        const ext = p.file.name.toLowerCase().endsWith(".pdf") ? "pdf" : "html";
+        const path = `courses/${id}/part-${String(partIndex).padStart(2, "0")}.${ext}`;
+        const b64 = await fileToBase64(p.file);
+        const sha = await ghGetFileRaw(path);
+        status.textContent = `جارِ رفع الجزء ${partIndex}...`;
+        await ghPutFile(path, b64, `تحديث جزء ${partIndex}: ${name}`, sha);
+        courseObj.parts.push({ title: p.title || `جزء ${partIndex}`, file: path });
+      } else {
+        courseObj.parts.push({ title: p.title || `جزء ${partIndex}`, file: p.existingPath });
+      }
+      partIndex++;
+    }
+
+    // تحديث sites.json (commit واحد ذرّي بعد رفع الملفات)
+    status.textContent = "جارِ تحديث sites.json...";
+    const idx = sitesData.courses.findIndex(c => c.id === id);
+    if (idx >= 0) sitesData.courses[idx] = courseObj; else sitesData.courses.push(courseObj);
+
+    const result = await ghPutFile("sites.json", textToBase64(JSON.stringify(sitesData, null, 2)), `${currentEditId ? "تحديث" : "إضافة"} كورس: ${name}`, sitesSha);
+    sitesSha = result.content.sha;
+
+    status.textContent = "تم الحفظ ✓";
+    populateCategoryList();
+    renderCoursesGrid(document.getElementById("courseSearch").value.trim());
+    setTimeout(closeCourseForm, 700);
+  } catch (ex) {
+    err.textContent = ex.message;
+    status.textContent = "";
+  } finally {
+    saveBtn.disabled = false;
+  }
+}
+
+let deletingCourse = false;
+async function deleteCourse(course) {
+  if (deletingCourse) return;
+  if (!confirm(`حذف كورس "${course.name}"؟ هتتحط في سلة المهملات وتقدر تسترجعها من هناك.`)) return;
+  deletingCourse = true;
+  try {
+    sitesData.courses = sitesData.courses.filter(c => c.id !== course.id);
+    if (!sitesData.trashedCourses) sitesData.trashedCourses = [];
+    sitesData.trashedCourses.push(course);
+    const result = await ghPutFile("sites.json", textToBase64(JSON.stringify(sitesData, null, 2)), `نقل كورس لسلة المهملات: ${course.name}`, sitesSha);
+    sitesSha = result.content.sha;
+    logAudit("delete_course", "course", course.id, { name: course.name });
+
+    closeCourseForm();
+    renderCoursesGrid(document.getElementById("courseSearch").value.trim());
+  } catch (ex) {
+    alert("تعذّر الحذف: " + ex.message);
+  } finally {
+    deletingCourse = false;
+  }
+}
+
+/* ============================================================
+   الإعدادات — نصوص الموقع + قائمة "☰ المزيد" (نفس sites.json.config)
+   ============================================================ */
+let menuBuffer = [];
+const TEXT_FIELDS = ["brandName", "brandSubtitle", "heroTitle", "heroText", "searchPlaceholder", "emptyText", "footerText"];
+
+document.querySelector('.tab-btn[data-tab="settings"]').addEventListener("click", renderSettingsPanel);
+document.getElementById("addMenuItemBtn").addEventListener("click", () => {
+  menuBuffer.push({ id: "mi" + Date.now().toString(36), icon: "🔗", label: "", targetType: "category", targetValue: "" });
+  renderMenuEditor();
+});
+document.getElementById("saveSettingsBtn").addEventListener("click", saveSettings);
+TEXT_FIELDS.forEach(f => document.getElementById("st_" + f)?.addEventListener("input", updateSettingsPreview));
+
+function renderSettingsPanel() {
+  const gate = document.getElementById("settingsGate");
+  const area = document.getElementById("settingsArea");
+  if (!sitesData) { gate.classList.remove("hidden"); area.classList.add("hidden"); return; }
+  gate.classList.add("hidden");
+  area.classList.remove("hidden");
+
+  const texts = sitesData.config?.texts || {};
+  TEXT_FIELDS.forEach(f => { document.getElementById("st_" + f).value = texts[f] || ""; });
+  updateSettingsPreview();
+
+  menuBuffer = (sitesData.config?.menu || []).map(m => {
+    let targetType = "external", targetValue = m.target || "";
+    if (m.target === "featured") { targetType = "featured"; targetValue = ""; }
+    else if (m.target === "trending") { targetType = "trending"; targetValue = ""; }
+    else if ((m.target || "").startsWith("category:")) { targetType = "category"; targetValue = m.target.slice(9); }
+    return { id: m.id, icon: m.icon, label: m.label, targetType, targetValue };
+  });
+  renderMenuEditor();
+}
+
+function updateSettingsPreview() {
+  document.getElementById("pv_brandName").textContent = document.getElementById("st_brandName").value || "اسم الموقع";
+  document.getElementById("pv_brandSubtitle").textContent = document.getElementById("st_brandSubtitle").value || "الوصف تحت الاسم";
+  document.getElementById("pv_heroTitle").textContent = document.getElementById("st_heroTitle").value || "عنوان الترحيب";
+  document.getElementById("pv_heroText").textContent = document.getElementById("st_heroText").value || "نص الترحيب";
+}
+
+function renderMenuEditor() {
+  const box = document.getElementById("menuEditor");
+  if (!menuBuffer.length) { box.innerHTML = `<span class="empty-note">مفيش عناصر — اضغط "+ عنصر جديد"</span>`; return; }
+  box.innerHTML = menuBuffer.map((m, i) => `
+    <div class="menu-item-row" data-i="${i}">
+      <input type="text" class="mi-icon" value="${esc(m.icon)}" placeholder="🔗">
+      <input type="text" class="mi-label" value="${esc(m.label)}" placeholder="اسم العنصر">
+      <select class="mi-type">
+        <option value="category" ${m.targetType === "category" ? "selected" : ""}>تصنيف</option>
+        <option value="featured" ${m.targetType === "featured" ? "selected" : ""}>المميز</option>
+        <option value="trending" ${m.targetType === "trending" ? "selected" : ""}>الأكثر متابعة</option>
+        <option value="external" ${m.targetType === "external" ? "selected" : ""}>رابط خارجي</option>
+      </select>
+      <input type="text" class="mi-value" list="categoryList" value="${esc(m.targetValue)}" placeholder="اسم التصنيف أو رابط" ${m.targetType === "featured" || m.targetType === "trending" ? "disabled" : ""}>
+      <div class="mi-actions">
+        <button class="mi-up" title="لأعلى">▲</button>
+        <button class="mi-down" title="لأسفل">▼</button>
+        <button class="mi-del" title="حذف">✕</button>
+      </div>
+    </div>`).join("");
+
+  box.querySelectorAll(".menu-item-row").forEach(row => {
+    const i = +row.dataset.i;
+    row.querySelector(".mi-icon").addEventListener("input", e => menuBuffer[i].icon = e.target.value);
+    row.querySelector(".mi-label").addEventListener("input", e => menuBuffer[i].label = e.target.value);
+    row.querySelector(".mi-value").addEventListener("input", e => menuBuffer[i].targetValue = e.target.value);
+    row.querySelector(".mi-type").addEventListener("change", e => { menuBuffer[i].targetType = e.target.value; renderMenuEditor(); });
+    row.querySelector(".mi-del").addEventListener("click", () => { menuBuffer.splice(i, 1); renderMenuEditor(); });
+    row.querySelector(".mi-up").addEventListener("click", () => { if (i > 0) { [menuBuffer[i - 1], menuBuffer[i]] = [menuBuffer[i], menuBuffer[i - 1]]; renderMenuEditor(); } });
+    row.querySelector(".mi-down").addEventListener("click", () => { if (i < menuBuffer.length - 1) { [menuBuffer[i + 1], menuBuffer[i]] = [menuBuffer[i], menuBuffer[i + 1]]; renderMenuEditor(); } });
+  });
+}
+
+function buildMenuTarget(type, value) {
+  if (type === "featured") return "featured";
+  if (type === "trending") return "trending";
+  if (type === "category") return "category:" + value;
+  return value;
+}
+
+async function saveSettings() {
+  const btn = document.getElementById("saveSettingsBtn");
+  if (btn.disabled) return;
+  const err = document.getElementById("settingsError");
+  const status = document.getElementById("saveSettingsStatus");
+  err.textContent = ""; status.textContent = "جارِ الحفظ...";
+
+  if (!sitesData.config) sitesData.config = {};
+  sitesData.config.texts = {};
+  TEXT_FIELDS.forEach(f => sitesData.config.texts[f] = document.getElementById("st_" + f).value.trim());
+  sitesData.config.menu = menuBuffer.map(m => ({
+    id: m.id, icon: m.icon.trim(), label: m.label.trim(),
+    target: buildMenuTarget(m.targetType, m.targetValue.trim())
+  }));
+
+  btn.disabled = true;
+  try {
+    const result = await ghPutFile("sites.json", textToBase64(JSON.stringify(sitesData, null, 2)), "تحديث إعدادات الموقع", sitesSha);
+    sitesSha = result.content.sha;
+    status.textContent = "تم الحفظ ✓";
+  } catch (ex) {
+    err.textContent = ex.message;
+    status.textContent = "";
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* ============================================================
+   المراجعة — الموافقة التلقائية + طابور البطاقات المعلّقة
+   ============================================================ */
+async function initReviewTab() {
+  const toggle = document.getElementById("autoApproveToggle");
+  const maxInput = document.getElementById("maxCardsInput");
+  const { data } = await sb.from("site_settings").select("auto_approve_shares, max_cards_per_user, maintenance_mode, maintenance_message").eq("id", true).single();
+  toggle.checked = data ? !!data.auto_approve_shares : true;
+  maxInput.value = data ? data.max_cards_per_user : 0;
+  document.getElementById("maintenanceToggle").checked = data ? !!data.maintenance_mode : false;
+  document.getElementById("maintenanceMessage").value = data?.maintenance_message || "";
+
+  toggle.addEventListener("change", async () => {
+    const { error } = await sb.from("site_settings").update({ auto_approve_shares: toggle.checked }).eq("id", true);
+    if (error) { alert(error.message); toggle.checked = !toggle.checked; return; }
+    logAudit("toggle_auto_approve", "site_settings", "auto_approve_shares", { value: toggle.checked });
+  });
+  maxInput.addEventListener("change", async () => {
+    const { error } = await sb.from("site_settings").update({ max_cards_per_user: +maxInput.value || 0 }).eq("id", true);
+    if (error) { alert(error.message); return; }
+    logAudit("set_max_cards", "site_settings", "max_cards_per_user", { value: +maxInput.value || 0 });
+  });
+  document.getElementById("saveMaintenanceBtn").addEventListener("click", async () => {
+    const enabled = document.getElementById("maintenanceToggle").checked;
+    const message = document.getElementById("maintenanceMessage").value.trim();
+    const { error } = await sb.from("site_settings").update({ maintenance_mode: enabled, maintenance_message: message }).eq("id", true);
+    if (error) { alert(error.message); return; }
+    logAudit("toggle_maintenance", "site_settings", "maintenance_mode", { value: enabled });
+    alert("تم الحفظ ✓");
+  });
+
+  document.querySelector('.tab-btn[data-tab="review"]').addEventListener("click", () => { loadPendingCards(); loadReportedCards(); });
+  loadPendingCards();
+  loadReportedCards();
+}
+
+async function loadReportedCards() {
+  const box = document.getElementById("reportedCardsList");
+  const { data, error } = await sb.rpc("admin_get_reported_cards");
+  if (error) { box.innerHTML = `<span class="empty-note">تعذّر التحميل</span>`; return; }
+  if (!data.length) { box.innerHTML = `<span class="empty-note">مفيش بلاغات 🎉</span>`; return; }
+  box.innerHTML = data.map(r => `
+    <div class="notif-row" data-report-id="${r.report_id}" data-card-id="${r.card_id}" style="align-items:flex-start;flex-direction:column;gap:6px">
+      <div style="display:flex;justify-content:space-between;width:100%;align-items:center">
+        <div>
+          <strong>${esc(r.card_name)}</strong>
+          <div class="empty-note">بطاقة ${esc(r.owner_username)} • ${fmtTime(r.reported_at)}</div>
+        </div>
+        <div class="notif-actions">
+          <button class="icon-sm dismiss-report" title="تجاهل البلاغ">↩️</button>
+          <button class="icon-sm delete-reported-card" title="حذف البطاقة">🗑</button>
+        </div>
+      </div>
+      ${r.reason ? `<span class="empty-note">السبب: ${esc(r.reason)}</span>` : ""}
+    </div>`).join("");
+
+  box.querySelectorAll(".dismiss-report").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.reportId;
+    await sb.rpc("admin_dismiss_report", { p_report_id: id });
+    loadReportedCards();
+  }));
+  box.querySelectorAll(".delete-reported-card").forEach(b => b.addEventListener("click", async (e) => {
+    const row = e.target.closest(".notif-row");
+    const cardId = row.dataset.cardId;
+    const card = data.find(r => r.card_id === cardId);
+    if (!confirm("حذف البطاقة دي (هتتحط في سلة المهملات)؟")) return;
+    const reason = prompt("سبب الحذف (هيتبعت للمستخدم في الشات، سيبه فاضي عشان متبعتش رسالة):", "المحتوى مخالف لسياسة الموقع");
+    await sb.from("cards").update({ deleted_at: new Date().toISOString() }).eq("id", cardId);
+    if (reason && card?.owner_id) await sb.from("admin_chat_messages").insert({ thread_user_id: card.owner_id, message: `تم حذف بطاقتك "${card.card_name}": ${reason}` });
+    logAudit("delete_card", "card", cardId, { reason, source: "report" });
+    loadReportedCards();
+    loadPendingCards();
+  }));
+}
+
+async function loadPendingCards() {
+  const box = document.getElementById("pendingCardsList");
+  const { data, error } = await sb.rpc("admin_get_pending_cards");
+  if (error) { box.innerHTML = `<span class="empty-note">تعذّر التحميل</span>`; return; }
+  if (!data.length) { box.innerHTML = `<span class="empty-note">مفيش بطاقات بانتظار المراجعة 🎉</span>`; return; }
+  box.innerHTML = `
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+      <button class="btn-accent" id="bulkApproveBtn">✅ موافقة على المحدد</button>
+    </div>` + data.map(c => `
+    <div class="notif-row" data-id="${c.id}" style="align-items:flex-start;flex-direction:column;gap:6px">
+      <div style="display:flex;justify-content:space-between;width:100%;align-items:center">
+        <div style="display:flex;align-items:center;gap:10px">
+          <input type="checkbox" class="pending-check" data-id="${c.id}">
+          <div>
+            <strong>${esc(c.name)}</strong>
+            <div class="empty-note">بواسطة ${esc(c.owner_display_name)} (${esc(c.owner_username)}) • ${visibilityLabelAr(c.visibility)}</div>
+          </div>
+        </div>
+        <div class="notif-actions">
+          <button class="icon-sm approve-card" title="موافقة">✅</button>
+          <button class="icon-sm delete-pending-card" title="حذف">🗑</button>
+        </div>
+      </div>
+      ${c.description ? `<span class="empty-note">${esc(c.description)}</span>` : ""}
+    </div>`).join("");
+
+  document.getElementById("bulkApproveBtn").addEventListener("click", async () => {
+    const ids = [...box.querySelectorAll(".pending-check:checked")].map(cb => cb.dataset.id);
+    if (!ids.length) { alert("حدّد بطاقة واحدة على الأقل"); return; }
+    for (const id of ids) {
+      await sb.rpc("admin_approve_card", { p_card_id: id });
+      logAudit("approve_card", "card", id, { bulk: true });
+    }
+    loadPendingCards();
+  });
+
+  box.querySelectorAll(".approve-card").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.id;
+    const { error } = await sb.rpc("admin_approve_card", { p_card_id: id });
+    if (error) { alert(error.message); return; }
+    logAudit("approve_card", "card", id, null);
+    loadPendingCards();
+  }));
+  box.querySelectorAll(".delete-pending-card").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.id;
+    const card = data.find(c => c.id === id);
+    if (!confirm("رفض البطاقة دي (هتتحط في سلة المهملات)؟")) return;
+    const reason = prompt("سبب الرفض (هيتبعت للمستخدم في الشات، سيبه فاضي عشان متبعتش رسالة):", "المحتوى مخالف لسياسة الموقع");
+    await sb.from("cards").update({ deleted_at: new Date().toISOString() }).eq("id", id);
+    if (reason && card?.owner_id) await sb.from("admin_chat_messages").insert({ thread_user_id: card.owner_id, message: `تم رفض بطاقتك "${card.name}": ${reason}` });
+    logAudit("reject_card", "card", id, { reason });
+    loadPendingCards();
+  }));
+}
+function visibilityLabelAr(v) { return v === "public" ? "عامة" : v === "unlisted" ? "برابط" : "خاصة"; }
+
+/* ============================================================
+   الرسائل — استفسار / مقترح / شكوى
+   ============================================================ */
+async function initMessagesTab() {
+  document.getElementById("msgFilterType").addEventListener("change", loadMessages);
+  document.querySelector('.tab-btn[data-tab="messages"]').addEventListener("click", loadMessages);
+  document.getElementById("exportMessagesBtn").addEventListener("click", () => {
+    exportToCSV("messages.csv", messagesCache, [
+      { key: "type", label: "النوع" }, { key: "message", label: "الرسالة" },
+      { key: "contact_name", label: "الاسم" }, { key: "status", label: "الحالة" }, { key: "created_at", label: "التاريخ" }
+    ]);
+  });
+  loadMessages();
+}
+function msgTypeLabel(t) { return t === "inquiry" ? "استفسار" : t === "suggestion" ? "مقترح" : "شكوى"; }
+
+let messagesCache = [];
+async function loadMessages() {
+  const filter = document.getElementById("msgFilterType").value;
+  let q = sb.from("contact_messages").select("*").order("created_at", { ascending: false });
+  if (filter !== "all") q = q.eq("type", filter);
+  const { data, error } = await q;
+  messagesCache = data || [];
+  const box = document.getElementById("messagesList");
+  if (error) { box.innerHTML = `<span class="empty-note">تعذّر التحميل</span>`; return; }
+  if (!data.length) { box.innerHTML = `<span class="empty-note">مفيش رسائل</span>`; return; }
+  box.innerHTML = data.map(m => `
+    <div class="notif-row ${m.status === "resolved" ? "inactive" : ""}" data-id="${m.id}" style="align-items:flex-start;flex-direction:column;gap:6px">
+      <div style="display:flex;justify-content:space-between;width:100%;align-items:center">
+        <span class="badge ${m.type === "complaint" ? "female" : m.type === "suggestion" ? "male" : "new"}">${msgTypeLabel(m.type)}</span>
+        <div class="notif-actions">
+          <button class="icon-sm mark-resolved" title="${m.status === "resolved" ? "إعادة فتح" : "وضع كمحلولة"}">${m.status === "resolved" ? "↩️" : "✅"}</button>
+          <button class="icon-sm delete-msg" title="حذف">🗑</button>
+        </div>
+      </div>
+      <span>${esc(m.message)}</span>
+      <span class="empty-note">${esc(m.contact_name || "بدون اسم")} • ${fmtTime(m.created_at)}</span>
+    </div>`).join("");
+
+  box.querySelectorAll(".mark-resolved").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.id;
+    const m = data.find(x => x.id === id);
+    await sb.from("contact_messages").update({ status: m.status === "resolved" ? "new" : "resolved" }).eq("id", id);
+    loadMessages();
+  }));
+  box.querySelectorAll(".delete-msg").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.id;
+    if (!confirm("حذف الرسالة؟")) return;
+    await sb.from("contact_messages").delete().eq("id", id);
+    logAudit("delete_message", "contact_message", id, null);
+    loadMessages();
+  }));
+}
+
+/* ============================================================
+   المحادثات — شات مباشر مع المستخدمين
+   ============================================================ */
+let currentChatUserId = null;
+let adminChatChannel = null;
+
+function initChatsTab() {
+  document.querySelector('.tab-btn[data-tab="chats"]').addEventListener("click", loadChatThreads);
+  document.getElementById("adminChatForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const input = document.getElementById("adminChatInput");
+    const message = input.value.trim();
+    if (!message || !currentChatUserId) return;
+    input.value = "";
+    await sb.from("admin_chat_messages").insert({ thread_user_id: currentChatUserId, message });
+    loadThreadMessages(currentChatUserId);
+    loadChatThreads();
+  });
+  loadChatThreads();
+}
+
+async function loadChatThreads() {
+  const box = document.getElementById("chatThreadsList");
+  const { data, error } = await sb.rpc("admin_get_chat_threads");
+  if (error) { box.innerHTML = `<span class="empty-note">تعذّر التحميل</span>`; return; }
+  if (!data.length) { box.innerHTML = `<span class="empty-note">مفيش محادثات لسه</span>`; return; }
+  box.innerHTML = data.map(t => `
+    <div class="notif-row" data-id="${t.user_id}" style="cursor:pointer;flex-direction:column;align-items:flex-start;gap:4px">
+      <div style="display:flex;justify-content:space-between;width:100%">
+        <strong>${esc(t.display_name)}</strong>
+        ${t.unread > 0 ? `<span class="badge new">${t.unread}</span>` : ""}
+      </div>
+      <span class="empty-note" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">${esc(t.last_message || "")}</span>
+    </div>`).join("");
+  box.querySelectorAll(".notif-row").forEach(row => row.addEventListener("click", () => openChatThread(row.dataset.id, data.find(t => t.user_id === row.dataset.id)?.display_name)));
+}
+
+async function openChatThread(userId, name) {
+  currentChatUserId = userId;
+  document.getElementById("chatThreadView").style.display = "block";
+  document.getElementById("chatThreadName").textContent = name || "";
+  await loadThreadMessages(userId);
+  await sb.from("admin_chat_messages").update({ read: true }).eq("thread_user_id", userId).eq("sender", "user").eq("read", false);
+
+  if (adminChatChannel) sb.removeChannel(adminChatChannel);
+  adminChatChannel = sb
+    .channel("admin-chat-" + userId)
+    .on("postgres_changes", { event: "*", schema: "public", table: "admin_chat_messages", filter: `thread_user_id=eq.${userId}` }, () => loadThreadMessages(userId))
+    .subscribe();
+}
+
+async function loadThreadMessages(userId) {
+  const { data } = await sb.from("admin_chat_messages").select("*").eq("thread_user_id", userId).order("created_at", { ascending: true });
+  const box = document.getElementById("adminChatMessages");
+  box.innerHTML = (data || []).map(m => {
+    const safe = esc(m.message);
+    const mine = m.sender === "admin";
+    return `<div style="display:flex;align-items:center;gap:6px;align-self:${mine ? "flex-end" : "flex-start"}">
+      ${mine ? "" : `<button class="delete-chat-msg" data-id="${m.id}" title="امسح الرسالة دي" style="background:none;border:0;cursor:pointer;font-size:12px;opacity:.6">🗑️</button>`}
+      <div style="max-width:100%;background:${mine ? "var(--accent)" : "var(--surface2)"};color:${mine ? "#fff" : "var(--text)"};padding:8px 12px;border-radius:10px;font-size:13px">${safe}</div>
+      ${mine ? `<button class="delete-chat-msg" data-id="${m.id}" title="امسح الرسالة دي" style="background:none;border:0;cursor:pointer;font-size:12px;opacity:.6">🗑️</button>` : ""}
+    </div>`;
+  }).join("");
+  box.style.display = "flex"; box.style.flexDirection = "column";
+  box.scrollTop = box.scrollHeight;
+  box.querySelectorAll(".delete-chat-msg").forEach(b => b.addEventListener("click", async () => {
+    await sb.from("admin_chat_messages").delete().eq("id", b.dataset.id);
+    loadThreadMessages(userId);
+  }));
+}
+document.getElementById("clearThreadBtn")?.addEventListener("click", async () => {
+  if (!currentChatUserId) return;
+  if (!confirm("هتتمسح كل رسايل المحادثة دي نهائيًا، من غير رجعة. متأكد؟")) return;
+  await sb.from("admin_chat_messages").delete().eq("thread_user_id", currentChatUserId);
+  loadThreadMessages(currentChatUserId);
+  loadChatThreads();
+});
+
+/* ============================================================
+   طلبات شراء المشروع
+   ============================================================ */
+function initPurchasesTab() {
+  document.querySelector('.tab-btn[data-tab="purchases"]').addEventListener("click", loadPurchases);
+  document.getElementById("exportPurchasesBtn").addEventListener("click", () => {
+    exportToCSV("purchase_inquiries.csv", purchasesCache, [
+      { key: "buyer_type", label: "النوع" }, { key: "email", label: "الإيميل" }, { key: "phone", label: "الهاتف" },
+      { key: "message", label: "الرسالة" }, { key: "status", label: "الحالة" }, { key: "created_at", label: "التاريخ" }
+    ]);
+  });
+  loadPurchases();
+}
+
+let purchasesCache = [];
+let communityAdminStatus = "pending";
+async function loadCommunityAdmin() {
+  const box = document.getElementById("communityAdminList");
+  const { data, error } = await sb.from("community_files").select("*").eq("status", communityAdminStatus).order("published_at", { ascending: false });
+  if (error) { box.innerHTML = `<span class="empty-note">تعذّر التحميل</span>`; return; }
+  if (!data.length) { box.innerHTML = `<span class="empty-note">مفيش ملفات هنا حاليًا</span>`; return; }
+  box.innerHTML = data.map(f => `
+    <div class="notif-row" data-id="${f.id}" data-owner="${esc(f.owner_id)}" data-owner-name="${esc(f.owner_display_name || "")}" style="align-items:flex-start;flex-direction:column;gap:6px">
+      <div style="display:flex;justify-content:space-between;width:100%;align-items:center;flex-wrap:wrap;gap:8px">
+        <strong>${esc(f.file_name)}</strong>
+        <div class="notif-actions" style="display:flex;gap:6px">
+          <a href="${esc(f.download_url)}" target="_blank" rel="noopener" class="icon-sm" style="width:auto;padding:0 10px;text-decoration:none">👁 معاينة</a>
+          <button class="icon-sm chat-with-uploader" style="width:auto;padding:0 10px">💬 تواصل مع الرافع</button>
+          <button class="icon-sm toggle-featured" title="${f.featured ? "إلغاء التمييز" : "تمييز"}">${f.featured ? "⭐" : "☆"}</button>
+          ${communityAdminStatus !== "approved" ? `<button class="icon-sm set-status" data-status="approved" style="width:auto;padding:0 10px">✅ موافقة</button>` : ""}
+          ${communityAdminStatus !== "rejected" ? `<button class="icon-sm set-status" data-status="rejected" style="width:auto;padding:0 10px">⛔ رفض</button>` : ""}
+        </div>
+      </div>
+      <span class="empty-note">${esc(f.card_name)} • ${esc(f.owner_display_name || "مستخدم")} • تحميل ${f.download_count || 0} • ${(f.categories || []).join("، ") || "بدون قسم"} • ${fmtTime(f.published_at)}</span>
+    </div>`).join("");
+
+  box.querySelectorAll(".toggle-featured").forEach(b => b.addEventListener("click", async (e) => {
+    const row = e.target.closest(".notif-row"); const id = row.dataset.id;
+    const f = data.find(x => x.id === id);
+    const { error: updErr } = await sb.from("community_files").update({ featured: !f.featured }).eq("id", id);
+    if (updErr) { alert(updErr.message); return; }
+    loadCommunityAdmin();
+  }));
+  box.querySelectorAll(".set-status").forEach(b => b.addEventListener("click", async (e) => {
+    const row = e.target.closest(".notif-row"); const id = row.dataset.id;
+    const { error: updErr } = await sb.from("community_files").update({ status: e.target.dataset.status }).eq("id", id);
+    if (updErr) { alert(updErr.message); return; }
+    loadCommunityAdmin();
+  }));
+  box.querySelectorAll(".chat-with-uploader").forEach(b => b.addEventListener("click", (e) => {
+    const row = e.target.closest(".notif-row");
+    document.querySelector('.tab-btn[data-tab="chats"]').click();
+    openChatThread(row.dataset.owner, row.dataset.ownerName);
+  }));
+}
+document.querySelectorAll(".community-status-tab").forEach(tab => tab.addEventListener("click", () => {
+  document.querySelectorAll(".community-status-tab").forEach(t => t.classList.remove("active"));
+  tab.classList.add("active");
+  communityAdminStatus = tab.dataset.status;
+  loadCommunityAdmin();
+}));
+document.querySelector('.tab-btn[data-tab="community"]').addEventListener("click", loadCommunityAdmin);
+
+async function loadPurchases() {
+  const box = document.getElementById("purchasesList");
+  const { data, error } = await sb.from("purchase_inquiries").select("*").order("created_at", { ascending: false });
+  purchasesCache = data || [];
+  if (error) { box.innerHTML = `<span class="empty-note">تعذّر التحميل</span>`; return; }
+  if (!data.length) { box.innerHTML = `<span class="empty-note">مفيش طلبات لسه</span>`; return; }
+  box.innerHTML = data.map(p => `
+    <div class="notif-row ${p.status === "resolved" ? "inactive" : ""}" data-id="${p.id}" style="align-items:flex-start;flex-direction:column;gap:6px">
+      <div style="display:flex;justify-content:space-between;width:100%;align-items:center">
+        <span class="badge ${p.buyer_type === "company" ? "male" : "new"}">${p.buyer_type === "company" ? "شركة" : "فرد"}</span>
+        <div class="notif-actions">
+          <button class="icon-sm mark-purchase-resolved" title="${p.status === "resolved" ? "إعادة فتح" : "وضع كمحلولة"}">${p.status === "resolved" ? "↩️" : "✅"}</button>
+          <button class="icon-sm delete-purchase" title="حذف">🗑</button>
+        </div>
+      </div>
+      <span>${esc(p.message)}</span>
+      <span class="empty-note">📧 ${esc(p.email)}${p.phone ? " • 📱 " + esc(p.phone) : ""} • ${fmtTime(p.created_at)}</span>
+    </div>`).join("");
+
+  box.querySelectorAll(".mark-purchase-resolved").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.id;
+    const p = data.find(x => x.id === id);
+    await sb.from("purchase_inquiries").update({ status: p.status === "resolved" ? "new" : "resolved" }).eq("id", id);
+    loadPurchases();
+  }));
+  box.querySelectorAll(".delete-purchase").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.id;
+    if (!confirm("حذف الطلب؟")) return;
+    await sb.from("purchase_inquiries").delete().eq("id", id);
+    logAudit("delete_purchase_inquiry", "purchase_inquiry", id, null);
+    loadPurchases();
+  }));
+}
+
+/* ============================================================
+   الرئيسية — نظرة سريعة
+   ============================================================ */
+async function initHomeTab() {
+  document.querySelector('.tab-btn[data-tab="home"]').addEventListener("click", loadHomeTab);
+  loadHomeTab();
+}
+
+async function loadHomeTab() {
+  const today = new Date().toISOString().slice(0, 10);
+  const [pending, newMsgs, newPurchases, todayLogins] = await Promise.all([
+    sb.rpc("admin_get_pending_cards"),
+    sb.from("contact_messages").select("*", { count: "exact", head: true }).eq("status", "new"),
+    sb.from("purchase_inquiries").select("*", { count: "exact", head: true }).eq("status", "new"),
+    sb.rpc("admin_get_day_logins", { p_day: today })
+  ]);
+
+  document.getElementById("homeStatCards").innerHTML = `
+    <div class="stat-card"><div class="num">${pending.data?.length ?? 0}</div><div class="lbl">بطاقات بانتظار المراجعة</div></div>
+    <div class="stat-card"><div class="num">${newMsgs.count ?? 0}</div><div class="lbl">رسائل جديدة</div></div>
+    <div class="stat-card"><div class="num">${newPurchases.count ?? 0}</div><div class="lbl">طلبات شراء جديدة</div></div>
+    <div class="stat-card"><div class="num">${todayLogins.data?.length ?? 0}</div><div class="lbl">تسجيلات دخول اليوم</div></div>`;
+
+  const recent = (todayLogins.data || []).slice(-5).reverse();
+  const box = document.getElementById("homeRecentLogins");
+  box.innerHTML = recent.length
+    ? recent.map(l => `<div class="notif-row"><span>${esc(l.display_name)} (${esc(l.username)})</span><span class="empty-note">${fmtTime(l.login_at)}</span></div>`).join("")
+    : `<span class="empty-note">مفيش تسجيلات دخول اليوم لسه</span>`;
+}
+
+/* ============================================================
+   بحث شامل
+   ============================================================ */
+function initGlobalSearch() {
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "/") return;
+    const tag = (document.activeElement?.tagName || "").toLowerCase();
+    if (tag === "input" || tag === "textarea" || document.activeElement?.isContentEditable) return;
+    e.preventDefault();
+    document.getElementById("globalSearchInput").focus();
+  });
+  const input = document.getElementById("globalSearchInput");
+  const results = document.getElementById("globalSearchResults");
+  let debounceTimer;
+  input.addEventListener("input", () => {
+    clearTimeout(debounceTimer);
+    const q = input.value.trim();
+    if (!q) { results.classList.add("hidden"); return; }
+    debounceTimer = setTimeout(() => runGlobalSearch(q), 250);
+  });
+  document.addEventListener("click", (e) => { if (!e.target.closest("#globalSearchInput") && !e.target.closest("#globalSearchResults")) results.classList.add("hidden"); });
+}
+
+async function runGlobalSearch(q) {
+  const results = document.getElementById("globalSearchResults");
+  const ql = q.toLowerCase();
+  const userMatches = (allUsersCache || []).filter(u => u.username.toLowerCase().includes(ql) || u.display_name.toLowerCase().includes(ql)).slice(0, 5);
+  const courseMatches = (sitesData?.courses || []).filter(c => c.name.toLowerCase().includes(ql)).slice(0, 5);
+  const { data: cardMatches } = await sb.from("cards").select("id, name, owner_id").ilike("name", `%${q}%`).limit(5);
+
+  const rows = [];
+  userMatches.forEach(u => rows.push(`<div class="search-result-item" data-type="user" data-val="${esc(u.username)}">👤 ${esc(u.display_name)} <span class="empty-note">(${esc(u.username)})</span></div>`));
+  courseMatches.forEach(c => rows.push(`<div class="search-result-item" data-type="course" data-val="${esc(c.name)}">🎓 ${esc(c.name)}</div>`));
+  (cardMatches || []).forEach(c => rows.push(`<div class="search-result-item" data-type="card" data-val="${esc(c.name)}">📁 ${esc(c.name)}</div>`));
+
+  if (!rows.length) { results.innerHTML = `<div class="empty-note" style="padding:10px">مفيش نتائج</div>`; results.classList.remove("hidden"); return; }
+  results.innerHTML = rows.join("");
+  results.classList.remove("hidden");
+
+  results.querySelectorAll(".search-result-item").forEach(el => el.addEventListener("click", () => {
+    const type = el.dataset.type, val = el.dataset.val;
+    results.classList.add("hidden");
+    document.getElementById("globalSearchInput").value = "";
+    if (type === "user") {
+      document.querySelector('.tab-btn[data-tab="users"]').click();
+      document.getElementById("userSearch").value = val;
+      document.getElementById("userSearch").dispatchEvent(new Event("input"));
+    } else if (type === "course") {
+      document.querySelector('.tab-btn[data-tab="courses"]').click();
+      document.getElementById("courseSearch").value = val;
+      document.getElementById("courseSearch").dispatchEvent(new Event("input"));
+    } else {
+      alert(`البطاقة: ${val}\n(معاينة تفصيلية للبطاقات لسه مش متاحة من هنا — دور عليها في تبويب المراجعة لو كانت بانتظار موافقة)`);
+    }
+  }));
+}
+
+/* ============================================================
+   تصدير CSV
+   ============================================================ */
+function exportToCSV(filename, rows, columns) {
+  const header = columns.map(c => c.label).join(",");
+  const body = rows.map(r => columns.map(c => `"${String(r[c.key] ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
+  const blob = new Blob(["\uFEFF" + header + "\n" + body], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* ============================================================
+   سلة المهملات — بطاقات (Supabase) + كورسات (sites.json)
+   ============================================================ */
+function initTrashTab() {
+  document.querySelector('.tab-btn[data-tab="trash"]').addEventListener("click", () => { loadTrashedCards(); renderTrashedCourses(); });
+  loadTrashedCards();
+}
+
+async function loadTrashedCards() {
+  const box = document.getElementById("trashedCardsList");
+  const { data, error } = await sb.rpc("admin_get_trashed_cards");
+  if (error) { box.innerHTML = `<span class="empty-note">تعذّر التحميل</span>`; return; }
+  if (!data.length) { box.innerHTML = `<span class="empty-note">فاضية 🎉</span>`; return; }
+  box.innerHTML = data.map(c => `
+    <div class="notif-row" data-id="${c.id}">
+      <span>${esc(c.name)} <span class="empty-note">(${esc(c.owner_username)})</span></span>
+      <div class="notif-actions">
+        <button class="icon-sm restore-card" title="استرجاع">♻️</button>
+        <button class="icon-sm purge-card" title="حذف نهائي">🗑</button>
+      </div>
+    </div>`).join("");
+  box.querySelectorAll(".restore-card").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.id;
+    await sb.rpc("admin_restore_card", { p_card_id: id });
+    logAudit("restore_card", "card", id, null);
+    loadTrashedCards();
+  }));
+  box.querySelectorAll(".purge-card").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.id;
+    if (!confirm("حذف نهائي مش هترجع تقدر تسترجعها بعد كده. متأكد؟")) return;
+    const { data: files } = await sb.from("files").select("storage_path").eq("card_id", id);
+    for (const f of files || []) await sb.storage.from(STORAGE_BUCKET).remove([f.storage_path]);
+    await sb.from("cards").delete().eq("id", id);
+    logAudit("purge_card", "card", id, null);
+    loadTrashedCards();
+  }));
+}
+
+function renderTrashedCourses() {
+  const box = document.getElementById("trashedCoursesList");
+  if (!sitesData) { box.innerHTML = `<span class="empty-note">اتصل بـGitHub الأول من تبويب الكورسات</span>`; return; }
+  const trashed = sitesData.trashedCourses || [];
+  if (!trashed.length) { box.innerHTML = `<span class="empty-note">فاضية 🎉</span>`; return; }
+  box.innerHTML = trashed.map(c => `
+    <div class="notif-row" data-id="${c.id}">
+      <span>${esc(c.name)}</span>
+      <div class="notif-actions">
+        <button class="icon-sm restore-course" title="استرجاع">♻️</button>
+        <button class="icon-sm purge-course" title="حذف نهائي (بيمسح الملفات من GitHub)">🗑</button>
+      </div>
+    </div>`).join("");
+  box.querySelectorAll(".restore-course").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.id;
+    const idx = sitesData.trashedCourses.findIndex(c => c.id === id);
+    const course = sitesData.trashedCourses.splice(idx, 1)[0];
+    sitesData.courses.push(course);
+    const result = await ghPutFile("sites.json", textToBase64(JSON.stringify(sitesData, null, 2)), `استرجاع كورس: ${course.name}`, sitesSha);
+    sitesSha = result.content.sha;
+    logAudit("restore_course", "course", id, null);
+    renderTrashedCourses();
+    renderCoursesGrid("");
+  }));
+  box.querySelectorAll(".purge-course").forEach(b => b.addEventListener("click", async (e) => {
+    const id = e.target.closest(".notif-row").dataset.id;
+    const course = sitesData.trashedCourses.find(c => c.id === id);
+    if (!confirm(`حذف "${course.name}" نهائيًا مع كل ملفاته من GitHub؟`)) return;
+    if (course.image) await ghDeleteFile(course.image, `حذف نهائي: ${course.name}`);
+    for (const p of course.parts || []) await ghDeleteFile(p.file, `حذف نهائي: ${course.name}`);
+    sitesData.trashedCourses = sitesData.trashedCourses.filter(c => c.id !== id);
+    const result = await ghPutFile("sites.json", textToBase64(JSON.stringify(sitesData, null, 2)), `حذف نهائي لكورس: ${course.name}`, sitesSha);
+    sitesSha = result.content.sha;
+    logAudit("purge_course", "course", id, null);
+    renderTrashedCourses();
+  }));
+}
+
+/* ============================================================
+   سجل النشاط
+   ============================================================ */
+function initAuditTab() {
+  document.querySelector('.tab-btn[data-tab="audit"]').addEventListener("click", loadAuditLog);
+}
+async function loadAuditLog() {
+  const body = document.getElementById("auditLogBody");
+  const { data, error } = await sb.from("audit_log").select("*").order("created_at", { ascending: false }).limit(200);
+  if (error) { body.innerHTML = `<tr><td colspan="4" class="empty-note">تعذّر التحميل</td></tr>`; return; }
+  if (!data.length) { body.innerHTML = `<tr><td colspan="4" class="empty-note">مفيش نشاط مسجّل لسه</td></tr>`; return; }
+  body.innerHTML = data.map(a => `
+    <tr>
+      <td>${esc(a.action)}</td>
+      <td>${esc(a.target_type || "")} ${a.target_id ? "#" + esc(String(a.target_id).slice(0, 8)) : ""}</td>
+      <td style="max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.details ? esc(JSON.stringify(a.details)) : "—"}</td>
+      <td>${fmtTime(a.created_at)}</td>
+    </tr>`).join("");
+}
+
+</script>
+</body>
+</html>
