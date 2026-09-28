@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>الدولة المصرية القديمة ومقاومة الاحتلال | الدرس الثاني - تاريخ البكالوريا المصرية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-void: #0d0c0a;
+    --bg-panel: #16140f;
+    --bg-panel-raised: #1e1b14;
+    --stone: #3a3327;
+    --sand: #c9a227;
+    --sand-bright: #e8c96b;
+    --nile: #2e6f77;
+    --nile-bright: #4fa3ac;
+    --papyrus: #ece2c8;
+    --papyrus-dim: #a89f88;
+    --red-seal: #8c3b2e;
+    --line: rgba(201,162,39,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    background:var(--bg-void);
+    color:var(--papyrus);
+    font-family:'Tajawal', sans-serif;
+    line-height:1.9;
+    overflow-x:hidden;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  ::selection{background:var(--sand); color:#0d0c0a;}
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(201,162,39,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 100% 10%, rgba(140,59,46,0.10), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  h1,h2,h3,h4{font-family:'Amiri', serif; font-weight:700; color:var(--sand-bright);}
+  a{color:inherit; text-decoration:none;}
+
+  .topbar{
+    position:sticky; top:0; z-index:100;
+    background:rgba(13,12,10,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:calc(14px + env(safe-area-inset-top,0px)) 26px 14px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Amiri',serif; font-size:1.15rem; color:var(--sand-bright); white-space:nowrap;}
+  .brand .glyph{
+    width:34px; height:34px; border:2px solid var(--sand);
+    display:flex; align-items:center; justify-content:center;
+    border-radius:3px; font-size:1rem; color:var(--sand); flex-shrink:0;
+    background:linear-gradient(135deg, rgba(201,162,39,0.15), transparent);
+  }
+  .navlinks{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none;}
+  .navlinks::-webkit-scrollbar{display:none;}
+  .navlinks a{
+    font-size:0.8rem; padding:8px 12px; white-space:nowrap; border-radius:6px;
+    color:var(--papyrus-dim); transition:.2s;
+    border:1px solid transparent;
+  }
+  .navlinks a:hover{color:var(--sand-bright); border-color:var(--line); background:rgba(201,162,39,0.06);}
+
+  .hero{
+    position:relative; min-height:78vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:80px 20px 60px;
+    z-index:1;
+  }
+  .hero .kicker{
+    font-family:'Cairo',sans-serif; letter-spacing:5px; font-size:0.72rem;
+    color:var(--nile-bright); text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .hero .kicker::before, .hero .kicker::after{content:""; width:40px; height:1px; background:var(--nile-bright); opacity:.5;}
+  .hero h1{
+    font-size:clamp(2.1rem, 6.5vw, 4.4rem); line-height:1.3; max-width:920px;
+    text-shadow: 0 0 40px rgba(232,201,107,0.15);
+  }
+  .hero .subtitle{
+    margin-top:22px; font-size:1.1rem; color:var(--papyrus-dim); max-width:660px;
+    font-family:'Cairo',sans-serif; font-weight:300;
+  }
+  .hero .pillars-mini{ display:flex; gap:0; margin-top:56px; align-items:flex-end; }
+  .pillars-mini .col{
+    width:70px; height:100px; margin:0 6px;
+    background:linear-gradient(180deg, var(--bg-panel-raised), var(--bg-panel));
+    border:1px solid var(--line); border-top:3px solid var(--red-seal);
+    border-radius:4px 4px 0 0;
+    display:flex; align-items:flex-start; justify-content:center; padding-top:14px;
+    font-family:'Amiri',serif; font-size:0.78rem; color:var(--sand-bright);
+    position:relative;
+  }
+  .pillars-mini .col span{writing-mode:vertical-rl; text-orientation:mixed;}
+  .pillars-mini .col:nth-child(2){height:120px;}
+  .pillars-mini .col:nth-child(3){height:88px;}
+  .pillars-mini .col:nth-child(4){height:108px;}
+
+  .hero-anchor{margin-top:50px; font-size:.85rem; color:var(--papyrus-dim); display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .hero-anchor .arrow{animation:bob 2s infinite ease-in-out;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+  @media (prefers-reduced-motion: reduce){ .hero-anchor .arrow{animation:none;} }
+
+  section{
+    position:relative; z-index:1;
+    max-width:980px; margin:0 auto; padding:70px 24px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'Cairo',sans-serif; font-size:0.78rem; letter-spacing:3px;
+    color:var(--nile-bright); text-transform:uppercase; margin-bottom:10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .num{
+    background:var(--stone); color:var(--sand-bright); font-family:'Amiri',serif;
+    width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem;
+  }
+  section > h2{font-size:clamp(1.5rem,4vw,2.2rem); margin-bottom:26px;}
+  section h3{font-size:1.2rem; color:var(--nile-bright); margin:28px 0 12px; font-family:'Cairo',sans-serif; font-weight:700;}
+  p{font-size:1.02rem; color:#dcd3ba;}
+  .lead{font-size:1.1rem; color:var(--papyrus); font-family:'Cairo',sans-serif; font-weight:300;}
+
+  .box{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:10px;
+    padding:22px 24px; margin:18px 0;
+  }
+  .box.gold{border-right:4px solid var(--sand);}
+  .box.nile{border-right:4px solid var(--nile);}
+  .box.red{border-right:4px solid var(--red-seal);}
+  .box-title{font-family:'Cairo',sans-serif; font-weight:700; color:var(--sand-bright); margin-bottom:10px; font-size:0.95rem; display:flex; align-items:center; gap:8px;}
+
+  ul.clean{list-style:none; padding:0;}
+  ul.clean li{ position:relative; padding-right:22px; margin:10px 0; color:#dcd3ba; font-size:0.98rem; }
+  ul.clean li::before{content:"◆"; position:absolute; right:0; top:2px; color:var(--sand); font-size:0.6rem;}
+
+  .quote{
+    font-family:'Amiri',serif; font-style:italic; font-size:1.12rem; color:var(--sand-bright);
+    border-right:3px solid var(--sand); padding:6px 22px; margin:20px 0; line-height:2;
+  }
+  .quote cite{display:block; font-family:'Cairo',sans-serif; font-style:normal; font-size:0.8rem; color:var(--papyrus-dim); margin-top:10px;}
+
+  .pillars-wrap{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:36px 0;}
+  .pillar-card{
+    background:linear-gradient(180deg, var(--bg-panel-raised), var(--bg-panel));
+    border:1px solid var(--line); border-top:4px solid var(--sand);
+    border-radius:8px; padding:20px 14px; text-align:center;
+    transition:.25s;
+  }
+  .pillar-card:hover{transform:translateY(-6px); border-top-color:var(--sand-bright); box-shadow:0 12px 30px rgba(0,0,0,0.4);}
+  .pillar-card .ic{font-size:1.8rem; margin-bottom:10px;}
+  .pillar-card h4{font-size:1.02rem; color:var(--sand-bright); margin-bottom:8px;}
+  .pillar-card p{font-size:0.85rem; color:var(--papyrus-dim);}
+  @media(max-width:760px){.pillars-wrap{grid-template-columns:repeat(2,1fr);}}
+
+  .article-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:20px 0;}
+  .article-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:18px;
+    font-size:0.92rem;
+  }
+  .article-card .tag{color:var(--nile-bright); font-family:'Cairo',sans-serif; font-weight:700; font-size:0.8rem; margin-bottom:8px; display:block;}
+  @media(max-width:760px){.article-grid{grid-template-columns:1fr;}}
+
+  .measures{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;}
+  .measure{background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:16px 18px; display:flex; gap:12px; align-items:flex-start;}
+  .measure .ic{font-size:1.3rem; flex-shrink:0;}
+  .measure p{font-size:0.92rem; margin:0;}
+  @media(max-width:700px){.measures{grid-template-columns:1fr;}}
+
+  .timeline{position:relative; margin:40px 0 10px; padding-right:30px; border-right:2px solid var(--stone);}
+  .tl-item{position:relative; padding-bottom:36px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; right:-37px; top:4px; width:14px; height:14px;
+    background:var(--sand); border-radius:50%; box-shadow:0 0 0 4px var(--bg-void), 0 0 14px rgba(232,201,107,0.5);
+  }
+  .tl-item .tl-date{font-family:'Amiri',serif; color:var(--sand-bright); font-size:1.05rem; margin-bottom:4px;}
+  .tl-item h4{font-size:1.08rem; margin-bottom:6px;}
+  .tl-item p{font-size:0.95rem;}
+
+  .qa{
+    background:var(--bg-panel-raised); border:1px dashed var(--line); border-radius:8px;
+    padding:16px 20px; margin:16px 0; font-size:0.95rem;
+  }
+  .qa b{color:var(--nile-bright);}
+
+  .cta-row{display:flex; justify-content:center; margin:40px 0 0; flex-wrap:wrap; gap:14px;}
+  .btn{
+    background:linear-gradient(135deg, var(--sand), #a5811e);
+    color:#181206; font-family:'Cairo',sans-serif; font-weight:700; font-size:1rem;
+    padding:14px 34px; border-radius:30px; border:none; cursor:pointer;
+    transition:.2s; box-shadow:0 6px 20px rgba(201,162,39,0.25);
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(201,162,39,0.35);}
+  .btn.ghost{background:transparent; border:1px solid var(--sand); color:var(--sand-bright); box-shadow:none;}
+
+  .summary-section{background:var(--bg-panel);}
+  .summary-block{margin-bottom:30px;}
+  .summary-block h3{color:var(--sand-bright); border-bottom:1px solid var(--line); padding-bottom:8px;}
+  .summary-block ul.clean li::before{color:var(--nile-bright);}
+  .mini-table{width:100%; border-collapse:collapse; margin:14px 0; font-size:0.9rem;}
+  .mini-table th, .mini-table td{border:1px solid var(--line); padding:10px 12px; text-align:right;}
+  .mini-table th{background:var(--bg-panel-raised); color:var(--sand-bright); font-family:'Cairo',sans-serif;}
+  .mini-table{display:block; overflow-x:auto; white-space:nowrap;}
+
+  .exam-section{background:linear-gradient(180deg, var(--bg-void), #0a0908);}
+  .exam-head{text-align:center; margin-bottom:36px;}
+  .exam-progress{
+    position:sticky; top:calc(66px + env(safe-area-inset-top,0px)); z-index:50; background:var(--bg-panel);
+    border:1px solid var(--line); border-radius:20px; padding:8px 18px;
+    display:flex; align-items:center; gap:14px; font-size:0.85rem; max-width:400px; margin:0 auto 30px;
+  }
+  .bar{flex:1; height:6px; background:var(--stone); border-radius:6px; overflow:hidden;}
+  .bar-fill{height:100%; background:linear-gradient(90deg, var(--nile), var(--sand)); width:0%; transition:.3s;}
+
+  .q-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:12px;
+    padding:26px; margin-bottom:22px;
+  }
+  .q-num{color:var(--nile-bright); font-family:'Cairo',sans-serif; font-weight:700; font-size:0.85rem; margin-bottom:8px;}
+  .q-text{font-size:1.03rem; color:var(--papyrus); margin-bottom:18px; font-family:'Cairo',sans-serif; font-weight:500;}
+  .opts{display:flex; flex-direction:column; gap:10px;}
+  .opt{
+    display:flex; align-items:center; gap:12px; padding:12px 16px;
+    background:var(--bg-panel-raised); border:1px solid var(--line); border-radius:8px;
+    cursor:pointer; transition:.15s; font-size:0.94rem;
+  }
+  .opt:hover{border-color:var(--sand);}
+  .opt.selected{border-color:var(--nile-bright); background:rgba(46,111,119,0.12);}
+  .opt.correct{border-color:#5aa66b; background:rgba(90,166,107,0.15);}
+  .opt.wrong{border-color:var(--red-seal); background:rgba(140,59,46,0.18);}
+  .opt .letter{
+    width:26px; height:26px; border-radius:50%; background:var(--stone); color:var(--sand-bright);
+    display:flex; align-items:center; justify-content:center; font-size:0.8rem; flex-shrink:0; font-family:'Cairo',sans-serif;
+  }
+  .fb{margin-top:14px; font-size:0.88rem; padding:10px 14px; border-radius:6px; display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:rgba(90,166,107,0.12); color:#8fd39f; border:1px solid rgba(90,166,107,0.3);}
+  .fb.no{background:rgba(140,59,46,0.12); color:#e6a297; border:1px solid rgba(140,59,46,0.3);}
+
+  .result-panel{
+    display:none; text-align:center; background:var(--bg-panel-raised); border:1px solid var(--sand);
+    border-radius:14px; padding:40px 26px; margin-top:20px;
+  }
+  .result-panel.show{display:block;}
+  .result-score{font-family:'Amiri',serif; font-size:3rem; color:var(--sand-bright);}
+  .result-msg{font-size:1.03rem; margin-top:10px; color:var(--papyrus);}
+
+  footer{text-align:center; padding:40px 20px calc(60px + env(safe-area-inset-bottom,0px)); color:var(--papyrus-dim); font-size:0.82rem; position:relative; z-index:1;}
+
+  :focus-visible{outline:2px solid var(--nile-bright); outline-offset:2px;}
+
+  @media(prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg-void:#0d0c0a; --bg-panel:#16140f; --bg-panel-raised:#1e1b14; --papyrus:#ece2c8;
+    }
+  }
+
+  @media(max-width:640px){
+    .navlinks{display:none;}
+    .article-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="glyph">𓋹</span> الدولة المصرية القديمة</div>
+  <nav class="navlinks">
+    <a href="#intro">مدخل الدرس</a>
+    <a href="#dawafi">دوافع الاحتلال</a>
+    <a href="#hyksos">الهكسوس</a>
+    <a href="#persian">الفرس</a>
+    <a href="#alexander">الإسكندر</a>
+    <a href="#rome">البطالمة والرومان</a>
+    <a href="#tadribat">تدريبات الكتاب</a>
+    <a href="#molakhas">الملخص الشامل</a>
+    <a href="#exam">الامتحان</a>
+    <a href="#mindmaps">الصور الذهنية</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="kicker">تاريخ · البكالوريا المصرية · الوحدة الأولى · الدرس الثاني</div>
+  <h1>الدولة المصرية القديمة ومقاومة الاحتلال</h1>
+  <p class="subtitle">الموقع الجغرافي المتميز لمصر ومواردها الاقتصادية الضخمة جعلاها مركزًا مهمًا في العالم القديم، لكن فترات ضعف الدولة جعلتها هدفًا للأطماع الخارجية — فكيف قاوم المصريون هذه الأطماع عبر العصور؟</p>
+  <div class="pillars-mini" aria-hidden="true">
+    <div class="col"><span>الهكسوس</span></div>
+    <div class="col"><span>الفرس</span></div>
+    <div class="col"><span>الإسكندر</span></div>
+    <div class="col"><span>الرومان</span></div>
+  </div>
+  <div class="hero-anchor"><span>ابدأ الرحلة</span><span class="arrow">↓</span></div>
+</div>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="eyebrow"><span class="num">۰</span> مدخل الدرس</div>
+  <h2>الموقع الجغرافي لمصر: سلاح ذو حدين</h2>
+  <p class="lead">شكّل الموقع الجغرافي المتميز لمصر، ومواردها الاقتصادية الضخمة، مصدر قوتها عبر التاريخ، لكنه في الوقت نفسه جعلها هدفًا دائمًا لأطماع القوى الخارجية كلما ضعفت سلطتها المركزية.</p>
+
+  <div class="box gold">
+    <div class="box-title">🎯 أهداف الدرس</div>
+    <ul class="clean">
+      <li>يُحدِّد العلاقة بين الموقع الجغرافي لمصر والتنافس الدولي عليها عبر العصور.</li>
+      <li>يُفسِّر كيفية تحوّل الموارد الاقتصادية من مصدر قوة إلى سبب للصراع.</li>
+      <li>يستنتج العلاقة بين القوة الداخلية للدولة والأطماع الخارجية.</li>
+      <li>يستنتج أهمية التماسك المجتمعي للدولة المصرية قديمًا.</li>
+    </ul>
+  </div>
+
+  <div class="quote">إن الموقع الجغرافي المتميز لمصر ومواردها الاقتصادية الضخمة جعلاها مركزًا مهمًا في العالم القديم، لكن فترات ضعف الدولة جعلتها هدفًا للأطماع الخارجية.
+    <cite>— الفكرة الرئيسة للدرس</cite>
+  </div>
+
+  <div class="qa">💭 <b>سؤال يدفعنا للتعلم:</b> كيف كان الموقع الجغرافي لمصر سلاحًا ذا حدين؟</div>
+</section>
+
+<!-- دوافع الاحتلال -->
+<section id="dawafi">
+  <div class="eyebrow"><span class="num">١</span> أولًا</div>
+  <h2>دوافع احتلال مصر عبر التاريخ</h2>
+  <p>شكّلت مصر عبر تاريخها الطويل محورًا إستراتيجيًا في السياسة الإقليمية والدولية، أدركت معها دول الاحتلال أن السيطرة على مصر تمنحها تفوقًا سياسيًا واقتصاديًا.</p>
+
+  <h3>أقرأ وأجيب: صنّف دوافع احتلال مصر</h3>
+  <div class="pillars-wrap" style="grid-template-columns:repeat(3,1fr);">
+    <div class="pillar-card"><div class="ic">⚔️</div><h4>دوافع عسكرية</h4><p>التوسع والتنافس الدولي، والرغبة في السيطرة على موازين القوى بالمنطقة.</p></div>
+    <div class="pillar-card"><div class="ic">🌾</div><h4>دوافع اقتصادية</h4><p>خصوبة الأرض ووفرة المحاصيل، ومَخزن الحبوب للدول الكبرى (مثل روما).</p></div>
+    <div class="pillar-card"><div class="ic">🧭</div><h4>دوافع إستراتيجية</h4><p>الموقع على مفترق طرق ثلاث قارات، والإشراف على طرق التجارة العالمية.</p></div>
+  </div>
+
+  <p>كانت مصر هدفًا دائمًا لقوى الاحتلال التي سعت إلى توسيع نفوذها؛ لذلك تعددت محاولات إخضاعها منذ القدم من قوى متعددة، مثل: الهكسوس والفرس واليونان والرومان؛ الأمر الذي هدَّد أمنها القومي بشكل مباشر.</p>
+
+  <div class="article-grid">
+    <div class="article-card"><span class="tag">📖 الاحتلال</span>سيطرة دولة قوية على أراضي دولة وفرض نفوذها السياسي والإداري عليها من دون موافقة شعبها؛ مما يؤدي إلى تقييد سيادة الدولة المحتلة.</div>
+    <div class="article-card"><span class="tag">📖 التنافس الدولي</span>صراع بين القوى الكبرى للسيطرة على مناطق النفوذ والمصالح؛ سعيًا لتوسيع هيمنتها وتحقيق مكاسب سياسية واقتصادية على حساب الآخرين.</div>
+  </div>
+
+  <div class="box nile">
+    <div class="box-title">📖 مفهوم أتعلمه: الأمن القومي</div>
+    <p>قدرة الدولة على حماية أراضيها وسيادتها وشعبها ومواردها ومصالحها من التهديدات الداخلية والخارجية، بما يضمن الاستقرار وتحقيق التنمية المستدامة.</p>
+  </div>
+
+  <div class="qa">
+    <p><b>💡 تطبيقات حياتية:</b> أي إنسان يمتلك مجموعة من المميزات وبعض العيوب، فلا تسمح لأحد أن يستغل مميزاتك ويوجه طاقاتك لتحقيق مصالحه الشخصية، وأصلح من عيوبك ولا تُظهرها فتكون نقطة ضعف ضدك تؤدي إلى هلاكك.</p>
+  </div>
+</section>
+
+<!-- غزو الهكسوس -->
+<section id="hyksos">
+  <div class="eyebrow"><span class="num">٢</span> ثانيًا</div>
+  <h2>غزو الهكسوس لمصر</h2>
+
+  <h3>عوامل نجاح الهكسوس في السيطرة على مصر</h3>
+  <p>مع نهاية عصر الدولة الوسطى في مصر قديمًا ضعفت السلطة المركزية للدولة، وأصبحت غير قادرة على حماية حدودها الشمالية الشرقية التي كانت تمثل بوابة مصر نحو آسيا، وفي ظل هذه الاضطرابات تمكَّن الهكسوس من التسلل منها تدريجيًا إلى دلتا النيل.</p>
+  <p>لم يكن نجاح الهكسوس في السيطرة على مصر بسبب ضعف الدولة المصرية فقط، بل لامتلاكهم أسلحة منحتهم التفوق العسكري والقدرة على الحركة والمناورة في ميدان القتال لم تكن متوافرة لدى المصريين. واختار الهكسوس دلتا النيل موضعًا لتمركزهم؛ لأنها تمثل النبض الاقتصادي لمصر وأقرب مناطقها اتصالًا بطرق التجارة القادمة من آسيا، واتخذوا من مدينة أواريس عاصمةً سياسيةً وعسكريةً لبسط نفوذهم في شمال البلاد.</p>
+
+  <div class="box gold">
+    <div class="box-title">💡 قيمة أتعلمها</div>
+    <p>الانتماء يعني التضحية من أجل تراب هذا الوطن.</p>
+  </div>
+
+  <p>بدأت مقاومة الهكسوس على يد أمراء طيبة في الأسرة السابعة عشرة عندما أعلنوا استقلالهم السياسي وسيطروا على المناطق الجنوبية من مصر، وقد مثَّلت مدينة طيبة منطقة تمركزهم السياسي والعسكري.</p>
+
+  <h3>مراحل طرد الهكسوس من مصر</h3>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">المرحلة الأولى — من التحدي إلى المواجهة</div>
+      <h4>الملك سقنن رع</h4>
+      <p>تولى سقنن رع قيادة طيبة، وبدأ في توسيع نفوذه حتى أبيدوس (سوهاج حاليًا)، ودفع نفوذ الهكسوس شمالًا، فأدرك الهكسوس الخطر الفعلي لصحوة الجيش المصري. انتهت المرحلة بمقتل سقنن رع، لكن شرارة المقاومة المسلحة لم تنطفئ معه.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">المرحلة الثانية — من المقاومة إلى التخطيط</div>
+      <h4>الملك كامس</h4>
+      <p>تولى كامس الحكم بعد وفاة والده، ولم يكتفِ بالمواجهة الدفاعية، بل أعاد تنظيم الجيش بروح هجومية، فحارب الهكسوس في مصر الوسطى وانتصر عليهم، ثم اتجه شمالًا لمنعهم من إعادة التمركز، ولتضييق الخناق عليهم، ولنقل المعركة إلى مناطق نفوذ العدو. كما اعتمد سياسة قطع طرق الإمدادات القادمة من مملكة كوش لعزل الهكسوس واستنزاف قدراتهم. توفي قبل المعركة الفاصلة، لكن خطته مهَّدت الطريق لأحمس.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">المرحلة الثالثة — الحسم والنصر</div>
+      <h4>الملك أحمس الأول والملكة إياح حتب</h4>
+      <p>استكمل أحمس مسيرة أخيه كامس ووالده سقنن رع، وحاصر الهكسوس في منف وأواريس، وطاردهم خارج حدود مصر وقضى عليهم نهائيًا، ثم أخضع حكام الأقاليم مع السماح لهم بالاحتفاظ بألقابهم لضمان الاستقرار وولائهم. ومثَّلت الملكة إياح حتب نموذجًا للقيادة الوطنية؛ إذ حافظت على وحدة الدولة واستقرارها، ودعمت الجيش خلال حرب التحرير ضد الهكسوس.</p>
+    </div>
+  </div>
+
+  <div class="quote">إن مصر مقسمة معي، فهناك حاكم آسيوي في أواريس، وآخر في كوش، وكل رجل يشاركني قطعة من مصر.
+    <cite>— من لوحة تُنسب إلى عهد الملك كامس</cite>
+  </div>
+
+  <div class="qa">
+    <p>١- حلِّل أبعاد الأزمة التي مرَّت بها مصر كما يعكسها محتوى اللوحة.</p>
+    <p>٢- هل يمكن اعتبار الملك كامس مهندس النصر رغم أنه لم يشهد المعركة الفاصلة؟ برِّر إجابتك.</p>
+  </div>
+
+  <div class="box nile">
+    <div class="box-title">🧠 مهارة أتعلمها</div>
+    <p>التخطيط لأمورك اليومية يجعلك أكثر فعالية. تعلَّم التخطيط من أمراء طيبة.</p>
+  </div>
+
+  <p>هكذا تتحول الأزمات الكبرى إلى نقطة انطلاق لمرحلة جديدة، أدرك المصريون بعدها ضرورة تطوير الجيش وتأمين حدودهم، وهو ما أسهم في بناء أول إمبراطورية في التاريخ المصري القديم. وأظهر المصريون قدرًا كبيرًا من الابتكار في تطوير العجلات الحربية بعد التعرف إليها؛ فجعلوها أخف وزنًا وأكثر سرعة وكفاءة، وهو ما يعكس قدرتهم على توظيف المعارف الوافدة وتطويرها بما يخدم احتياجاتهم.</p>
+</section>
+
+<!-- الغزو الفارسي -->
+<section id="persian">
+  <div class="eyebrow"><span class="num">٣</span> ثالثًا</div>
+  <h2>الغزو الفارسي لمصر</h2>
+  <div class="qa">💭 هل كان سقوط مصر نتيجة قوة الفرس فقط أم بسبب ظروف داخلية أضعفت الدولة المصرية؟</div>
+
+  <p>في العصر المتأخر كانت مصر تمر بحالة من الاضطراب السياسي والصراع الداخلي، وأصبحت هدفًا للأطماع الخارجية، خاصة من الإمبراطورية الفارسية. وفي عام <b>٥٢٥ ق.م</b> التقى الجيشان المصري والفارسي في شرق الدلتا، وانتهت المواجهة بدخول الفرس لمصر بقيادة الملك قمبيز الثاني، وأخضعوها لسلطتهم، وأسسوا الأسرة السابعة والعشرين.</p>
+
+  <div class="qa">
+    <p>١- «كانت إمبراطورية الفرس عابرة للقارات». ناقش العبارة، مع الاستدلال بمناطق نفوذها.</p>
+    <p>٢- في رأيك، ما أهمية ضم مصر لدولة الفرس؟</p>
+  </div>
+
+  <p>لم يتقبَّل الشعب المصري الاحتلال الفارسي، وظهرت حركات المقاومة والثورات لاستعادة الاستقلال الوطني، وهو ما عكس تمسُّك المصريين بهويتهم ورفضهم للسيطرة الأجنبية.</p>
+
+  <div class="qa">💭 <b>أفكر وأحلل:</b> ما القيمة التي يمكن تأكيدها من مقاومة المصريين للفرس؟</div>
+
+  <div class="box gold">
+    <div class="box-title">✍️ أستنتج</div>
+    <p>من خلال غزو الهكسوس والغزو الفارسي، حدِّد أهم الصفات المميزة للشعب المصري (التماسك، التمسك بالهوية، رفض الخضوع للأجنبي، القدرة على تجديد المقاومة...).</p>
+  </div>
+</section>
+
+<!-- غزو الإسكندر -->
+<section id="alexander">
+  <div class="eyebrow"><span class="num">٤</span> رابعًا</div>
+  <h2>غزو الإسكندر الأكبر لمصر</h2>
+
+  <p>عند وصول الإسكندر الأكبر إلى مصر عام <b>٣٣٢ ق.م</b>، كانت البلاد تعاني وطأة الحكم الفارسي والضرائب المثقلة على المصريين، وقد هيَّأت هذه الأوضاع المناخ لتقبُّل قوة خارجية قادرة على القضاء على الفرس. وبعد انتصاره عليهم في عدة معارك حاسمة اتجه نحو مصر ودخلها من دون مقاومة تُذكر من جانب المصريين؛ لأنهم وجدوا فيه فرصة للتخلص من الحكم الفارسي.</p>
+
+  <div class="qa">💭 توقَّع كيف كان يمكن أن تتغير شخصية الإسكندر وسياسته لو لم يتلقَّ تعليمه على يد أرسطو.</div>
+
+  <div class="quote">أنا مدين لأبي لأنه منحني الحياة، ولأرسطو لأنه علَّمني كيف أعيش الحياة بشكل صحيح.
+    <cite>— الإسكندر الأكبر</cite>
+  </div>
+
+  <p>حرص الإسكندر على تثبيت نفوذه في مصر بأقل قدر من الصراع حينما حصل على اعتراف ديني بسلطته بادعائه أنه ابن الإله آمون، كما احترم عادات المصريين وتقاليدهم، وأسَّس مدينة الإسكندرية لتصبح مركزًا تجاريًا وثقافيًا وعسكريًا؛ لتبدأ بذلك مرحلة جديدة في العلاقات بين مصر والإغريق.</p>
+
+  <h3>أقرأ وأحلِّل: رأيان حول استقبال المصريين للإسكندر</h3>
+  <div class="pillars-wrap" style="grid-template-columns:repeat(2,1fr);">
+    <div class="pillar-card"><div class="ic">🗨️</div><h4>الرأي الأول</h4><p>دخل مصر بعد أن أنهك الفرس، ولم يجد مقاومة؛ إذ اعتبره المصريون محررًا، مع حفاظه على جاهزيته العسكرية لمواجهة أي تهديد خارجي.</p></div>
+    <div class="pillar-card"><div class="ic">🗨️</div><h4>الرأي الثاني</h4><p>استقبل المصريون الإسكندر بحذر، وشكَّك الكهنة ورجال الحكم في نيته، ونجح في كسب ثقتهم عبر التوازن بين القوة العسكرية والسياسة.</p></div>
+  </div>
+  <div class="qa">قارن بين طريقة استقبال المصريين للإسكندر في كلٍّ من الرأيين، موضحًا أسباب الاختلاف.</div>
+
+  <div class="box red">
+    <div class="box-title">💡 قيمة أتعلمها</div>
+    <p>قد يظهر لك عدوك الود والمحبة، لكنه سيبقى عدوك الذي يريد القضاء على هويتك.</p>
+  </div>
+  <div class="box nile">
+    <div class="box-title">🧠 مهارة أتعلمها</div>
+    <p>قراءة الخريطة التاريخية تكون من خلال التدقيق في كل عناصرها، وتحليل خط السير فيها، ومقارنة الموقع الجغرافي للقوى المتنازعة.</p>
+  </div>
+</section>
+
+<!-- البطالمة والرومان -->
+<section id="rome">
+  <div class="eyebrow"><span class="num">٥-٦</span> خامسًا وسادسًا</div>
+  <h2>دولة البطالمة ومصر تحت حكم الرومان</h2>
+
+  <h3>دولة البطالمة</h3>
+  <p>بعد وفاة الإسكندر الأكبر عام <b>٣٢٣ ق.م</b> واجهت إمبراطوريته أزمة كبيرة؛ إذ دخل قادة جيشه في صراع للسيطرة على أراضي الإمبراطورية، وهنا برزت شخصية القائد بطلميوس بن لاجوس الذي فرض سيطرته على مصر وجعلها قاعدة لحكمه، لتبدأ مرحلة جديدة في تاريخ مصر: دولة البطالمة.</p>
+
+  <h3>مصر تحت حكم الرومان</h3>
+  <p>في الوقت الذي شهدت فيه روما تحولات سياسية وعسكرية كبرى، كانت دولة البطالمة تعاني اضطرابات داخلية وصراعات على السلطة أضعفت قدرتها على حماية استقلالها. ومثَّلت مصر بالنسبة للرومان مركزًا اقتصاديًا وإستراتيجيًا مهمًا؛ فهي أحد أهم مصادر الحبوب في العالم القديم، وموقعها يمنحها القدرة على التحكم في طرق التجارة بين الشرق والغرب. وتم ذلك بعد هزيمة كليوباترا السابعة في معركة أكتيوم البحرية وسيطرة أكتافيوس على مصر، لتصبح إحدى أهم الولايات الرومانية.</p>
+
+  <div class="quote">كانت مصر تُدار بواسطة حاكم روماني يعيِّنه الإمبراطور مباشرة، ويخضع له وحده، ولا يجوز لأي عضو من مجلس الشيوخ الروماني دخولها إلا بإذن خاص من الإمبراطور؛ لما لمصر من أهمية إستراتيجية واقتصادية كبرى للإمبراطورية.</div>
+
+  <h3>المقاومة المصرية للحكم الروماني</h3>
+  <p>زاد اضطهاد الرومان للمصريين بعد اعتناقهم المسيحية؛ حيث تعرضوا للتعذيب والسجن والقتل، وهُدمت كنائسهم وأُحرقت الكتب الدينية، وبلغ الاضطهاد ذروته في عهد الإمبراطور دقلديانوس، حتى عُرف هذا العصر في مصر باسم «عصر الشهداء»، وانتهى الاضطهاد بعد اعتراف الإمبراطور قسطنطين بالمسيحية وإعلانه سياسة التسامح الديني.</p>
+
+  <div class="box red">
+    <div class="box-title">📜 مصر أولًا</div>
+    <p>لا يستطيع أحد العبث بمقدرات مصر مهما كان؛ فتاريخ مصر يثبت أن مصر هي التي تقود العالم.</p>
+  </div>
+
+  <p>أوجد انتشار المسيحية في مصر تحولات دينية واجتماعية وثقافية وعمرانية؛ حيث ترسَّخت قيم المحبة والتسامح، وظهرت الرهبنة، وازدهرت اللغة والفنون القبطية. ومع ذلك لم يتقبَّل المصريون الحكم الروماني، وشهدت البلاد ثورات بسبب الضرائب المفروضة، وتعامل الرومان بشدة مع هذه الاضطرابات؛ لأن فقدان السيطرة على مصر كان يهدد استقرار دولتهم. وتكشف هذه المقاومة عن حقيقة تاريخية: أن المصريين، رغم خضوعهم للحكم الروماني، ظلُّوا متمسكين بهويتهم الوطنية ورافضين للسيطرة الأجنبية.</p>
+
+  <div class="qa">
+    <p>١- هل يمكن اعتبار المقاومة التي شهدتها مصر في مواجهة الرومان امتدادًا لتقاليد المصريين في الدفاع عن استقلال بلادهم؟</p>
+    <p>٢- كيف استطاعت الحضارة المصرية أن تحافظ على استمرارها رغم خضوع البلاد للحكم الروماني؟</p>
+  </div>
+
+  <div class="box gold">
+    <div class="box-title">📌 مشروع بحثي</div>
+    <p>صمِّم مع زملائك «لوحة رمزية» تمثِّل مشهدًا تاريخيًا لمقاومة الشعب المصري للغزو عبر التاريخ القديم.</p>
+  </div>
+
+  <div class="qa"><b>سؤال التفسير المدعوم بالأدلة:</b> حلِّل قرارات القيادة المصرية (كامس - سقنن رع - أحمس) في مواجهة الهكسوس، مع التدليل تاريخيًا على صحة أو خطأ كل قرار.</div>
+</section>
+
+<!-- تدريبات الكتاب -->
+<section id="tadribat">
+  <div class="eyebrow"><span class="num">✎</span> تدريبات الدرس</div>
+  <h2>تدريبات الكتاب (صفحة ٢٩-٣٠)</h2>
+  <p>يتضمن الكتاب المدرسي مجموعة تدريبات تكميلية تستحق المراجعة قبل الامتحان، من أبرزها:</p>
+  <ul class="clean">
+    <li>مقارنة بين أسباب نجاح الهكسوس والفرس في دخول مصر، واستنتاج العامل المشترك بينهما.</li>
+    <li>تحليل عبارة: «احتلال مصر في العصور القديمة كان نتيجة ضعف داخلي أكثر منه قوة خارجية».</li>
+    <li>تفسير كيف تتحول الموارد الاقتصادية من مصدر قوة إلى سبب للصراع.</li>
+    <li>تحديد أهم أركان قيام الدولة التي افتقدتها مصر بعد تعرضها للغزو في العصور القديمة.</li>
+    <li>قراءة نص لوحة الكرنك عن إنجازات الملكة إياح حتب، واستخلاص دلالة تسجيل أحمس لهذا النص.</li>
+  </ul>
+  <div class="qa">💭 <b>ماذا لو...؟</b> لم يقاوم المصريون الهكسوس، أو لم يكن لمصر موقع إستراتيجي؟ ناقش الاحتمالين.</div>
+</section>
+
+<!-- الملخص الشامل -->
+<section id="molakhas" class="summary-section">
+  <div class="eyebrow"><span class="num">Σ</span> مراجعة نهائية</div>
+  <h2>الملخص الشامل للدرس</h2>
+
+  <div class="summary-block">
+    <h3>١. المفاهيم التي لا بد أن تحفظها</h3>
+    <table class="mini-table">
+      <tr><th>المفهوم</th><th>التعريف</th></tr>
+      <tr><td>الاحتلال</td><td>سيطرة دولة قوية على أراضي دولة وفرض نفوذها السياسي والإداري عليها من دون موافقة شعبها؛ مما يقيّد سيادتها.</td></tr>
+      <tr><td>التنافس الدولي</td><td>صراع بين القوى الكبرى للسيطرة على مناطق النفوذ والمصالح؛ سعيًا لتوسيع هيمنتها وتحقيق مكاسب سياسية واقتصادية.</td></tr>
+      <tr><td>الأمن القومي</td><td>قدرة الدولة على حماية أراضيها وسيادتها وشعبها ومواردها من التهديدات الداخلية والخارجية، بما يضمن الاستقرار والتنمية.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٢. دوافع احتلال مصر عبر التاريخ</h3>
+    <table class="mini-table">
+      <tr><th>النوع</th><th>الدوافع</th></tr>
+      <tr><td>عسكرية</td><td>التوسع والتنافس الدولي، السيطرة على موازين القوى بالمنطقة.</td></tr>
+      <tr><td>اقتصادية</td><td>خصوبة الأرض ووفرة المحاصيل، مخزن الحبوب للدول الكبرى (روما).</td></tr>
+      <tr><td>إستراتيجية</td><td>الموقع على مفترق ثلاث قارات، الإشراف على طرق التجارة العالمية.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٣. القوى التي احتلت مصر قديمًا</h3>
+    <table class="mini-table">
+      <tr><th>القوة</th><th>التاريخ</th><th>أبرز الأحداث</th></tr>
+      <tr><td>الهكسوس</td><td>~١٦٥٠ ق.م</td><td>تسلَّلوا مع ضعف الدولة الوسطى، اتخذوا أواريس عاصمة، طُردوا على يد سقنن رع وكامس وأحمس الأول.</td></tr>
+      <tr><td>الفرس</td><td>٥٢٥ ق.م</td><td>دخلوا بقيادة قمبيز الثاني، وأسَّسوا الأسرة ٢٧، وواجهوا مقاومة وثورات مصرية مستمرة.</td></tr>
+      <tr><td>الإسكندر واليونان</td><td>٣٣٢ ق.م</td><td>دخل الإسكندر مصر دون مقاومة، ثبَّت نفوذه دينيًا وبنى الإسكندرية، تلاه حكم البطالمة عام ٣٢٣ ق.م.</td></tr>
+      <tr><td>الرومان</td><td>٣٠ ق.م</td><td>سيطر أكتافيوس على مصر بعد أكتيوم، واضطهدوا الأقباط حتى «عصر الشهداء» في عهد دقلديانوس.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٤. مراحل طرد الهكسوس بالتفصيل</h3>
+    <table class="mini-table">
+      <tr><th>المرحلة</th><th>القائد</th><th>ما تحقق</th></tr>
+      <tr><td>الأولى: من التحدي إلى المواجهة</td><td>سقنن رع</td><td>بدأ المواجهة ووسَّع نفوذه حتى أبيدوس، واستُشهد قبل الحسم.</td></tr>
+      <tr><td>الثانية: من المقاومة إلى التخطيط</td><td>كامس</td><td>انتصر في مصر الوسطى، وقطع إمدادات الهكسوس من كوش، وتوفي قبل المعركة الفاصلة.</td></tr>
+      <tr><td>الثالثة: الحسم والنصر</td><td>أحمس الأول</td><td>حاصر أواريس ومنف، وطرد الهكسوس نهائيًا خارج حدود مصر.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٥. الشخصيات التاريخية الرئيسة</h3>
+    <table class="mini-table">
+      <tr><th>الشخصية</th><th>دورها</th></tr>
+      <tr><td>سقنن رع</td><td>بدأ حرب تحرير مصر من الهكسوس، واستُشهد في المواجهة الأولى.</td></tr>
+      <tr><td>كامس</td><td>خطَّط عسكريًا واستراتيجيًا لعزل الهكسوس قبل وفاته.</td></tr>
+      <tr><td>أحمس الأول</td><td>حقق النصر النهائي وطرد الهكسوس من مصر.</td></tr>
+      <tr><td>الملكة إياح حتب</td><td>حافظت على وحدة الدولة ودعمت الجيش خلال حرب التحرير.</td></tr>
+      <tr><td>قمبيز الثاني</td><td>قاد الغزو الفارسي لمصر ٥٢٥ ق.م وأسَّس الأسرة ٢٧.</td></tr>
+      <tr><td>الإسكندر الأكبر</td><td>دخل مصر ٣٣٢ ق.م دون مقاومة، وأسَّس الإسكندرية.</td></tr>
+      <tr><td>بطلميوس بن لاجوس</td><td>أسَّس دولة البطالمة في مصر بعد وفاة الإسكندر ٣٢٣ ق.م.</td></tr>
+      <tr><td>كليوباترا السابعة</td><td>آخر حكام البطالمة، هُزمت في معركة أكتيوم أمام أكتافيوس.</td></tr>
+      <tr><td>أكتافيوس</td><td>القائد الروماني الذي سيطر على مصر وجعلها ولاية رومانية.</td></tr>
+      <tr><td>دقلديانوس</td><td>الإمبراطور الروماني الذي بلغ في عهده اضطهاد الأقباط ذروته («عصر الشهداء»).</td></tr>
+      <tr><td>قسطنطين</td><td>أنهى الاضطهاد الديني بإعلانه سياسة التسامح مع المسيحية.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٦. المقاومة عبر العصور — نمط متكرر</h3>
+    <p>على اختلاف الغزاة (الهكسوس، الفرس، الرومان)، تكرَّر نفس النمط: ضعف داخلي يفتح الباب أمام الغزو، يليه رفض شعبي وحركات مقاومة، وينتهي غالبًا باستعادة الهوية أو السيادة ولو جزئيًا. أما الإسكندر فمثَّل استثناءً؛ إذ دخل دون مقاومة لأن المصريين رأوا فيه محررًا من الفرس، لا محتلًا جديدًا في نظرهم آنذاك.</p>
+  </div>
+
+  <div class="summary-block">
+    <h3>٧. القيم والدروس المستفادة (قيم أتعلمها)</h3>
+    <ul class="clean">
+      <li>الانتماء يعني التضحية من أجل تراب هذا الوطن.</li>
+      <li>التخطيط لأمورك اليومية يجعلك أكثر فعالية — تعلَّم التخطيط من أمراء طيبة.</li>
+      <li>قد يظهر لك عدوك الود والمحبة، لكنه سيبقى عدوك الذي يريد القضاء على هويتك.</li>
+      <li>قراءة الخريطة التاريخية تكون بالتدقيق في عناصرها، وتحليل خط السير، ومقارنة المواقع الجغرافية للقوى المتنازعة.</li>
+      <li>لا يستطيع أحد العبث بمقدرات مصر مهما كان؛ فتاريخها يثبت أنها هي التي تقود العالم.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h3>٨. تواريخ يجب حفظها</h3>
+    <ul class="clean">
+      <li>~١٦٥٠ ق.م: بداية تسلل الهكسوس إلى دلتا النيل.</li>
+      <li>٥٢٥ ق.م: الغزو الفارسي لمصر بقيادة قمبيز الثاني.</li>
+      <li>٣٣٢ ق.م: دخول الإسكندر الأكبر مصر.</li>
+      <li>٣٢٣ ق.م: وفاة الإسكندر وبداية حكم بطلميوس بن لاجوس لمصر.</li>
+      <li>٣٠ ق.م: سيطرة أكتافيوس على مصر بعد معركة أكتيوم.</li>
+      <li>٦٤١ م: الفتح الإسلامي لمصر (نهاية الحقبة القديمة).</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h3>٩. الخلاصة الكبرى</h3>
+    <p>رغم تعرُّض مصر لغزوات متعددة عبر العصور القديمة (الهكسوس، الفرس، اليونان والبطالمة، الرومان)، حافظ المصريون في كل مرة على تماسكهم وهويتهم الوطنية، وأثبتوا عبر المقاومة المتكررة — من سقنن رع إلى ثورات الأقباط ضد الرومان — أن التماسك الداخلي هو أهم عناصر قوة الدولة، وأن الموقع الجغرافي والموارد الاقتصادية سلاح ذو حدين: يمنح القوة حين تكون الدولة متماسكة، ويجلب الأطماع حين تضعف.</p>
+  </div>
+
+  <div class="cta-row">
+    <a href="#exam" class="btn">ابدأ الامتحان الشامل →</a>
+  </div>
+</section>
+
+<!-- EXAM -->
+<section id="exam" class="exam-section">
+  <div class="exam-head">
+    <div class="eyebrow" style="justify-content:center;"><span class="num">✎</span> التقييم الختامي</div>
+    <h2>الامتحان الشامل</h2>
+    <p class="lead">١٥ سؤالًا تغطي كل عناصر الدرس. اختر إجابتك وستظهر لك النتيجة فورًا في نهاية الاختبار.</p>
+  </div>
+
+  <div class="exam-progress">
+    <span id="prog-text">٠ / ١٥</span>
+    <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <div class="cta-row">
+    <button class="btn" id="submit-btn">تصحيح الامتحان</button>
+    <button class="btn ghost" id="reset-btn">إعادة المحاولة</button>
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <div class="result-score" id="result-score">0/15</div>
+    <div class="result-msg" id="result-msg"></div>
+  </div>
+</section>
+
+<!-- الصور الذهنية والترابط -->
+<section id="mindmaps" style="border-bottom:none; text-align:center;">
+  <div class="eyebrow" style="justify-content:center;"><span class="num">🕸️</span> الصورة الكبرى</div>
+  <h2>الصور الذهنية وترابط الأحداث</h2>
+  <p class="lead">مش هتحتاج تحفظ الدرس كخط مستقيم — دي خرائط ذهنية (زي شبكات سيسكو 😂) توضح إزاي كل حدث وشخصية وسبب مرتبطين ببعض.</p>
+  <div class="cta-row">
+    <button class="btn" id="toggle-mindmaps">🧠 اعرض الصور الذهنية</button>
+  </div>
+
+  <div id="mindmaps-panel" style="display:none; margin-top:34px; text-align:right;">
+
+    <div class="box gold">
+      <div class="box-title">🗺️ خريطة (١): تسلسل القوى الغازية عبر الزمن</div>
+      <svg viewBox="0 0 620 820" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <defs>
+          <marker id="arrow1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#c9a227"/>
+          </marker>
+        </defs>
+        <line x1="310" y1="90" x2="310" y2="126" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="190" x2="310" y2="226" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="290" x2="310" y2="326" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="390" x2="310" y2="426" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="490" x2="310" y2="526" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="590" x2="310" y2="626" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="690" x2="310" y2="726" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+
+        <rect x="70" y="30" width="480" height="60" rx="12" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="310" y="55" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">ضعف الدولة داخليًا</text>
+        <text x="310" y="76" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">السبب المشترك وراء كل غزوة</text>
+
+        <rect x="70" y="130" width="480" height="60" rx="12" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="310" y="155" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">الهكسوس (~١٦٥٠ ق.م)</text>
+        <text x="310" y="176" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">يحتلون الدلتا ويتخذون أواريس عاصمة</text>
+
+        <rect x="70" y="230" width="480" height="60" rx="12" fill="#1e1b14" stroke="#4fa3ac" stroke-width="2"/>
+        <text x="310" y="255" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">المقاومة المصرية</text>
+        <text x="310" y="276" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">سقنن رع ← كامس ← أحمس الأول</text>
+
+        <rect x="70" y="330" width="480" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="310" y="355" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">التحرير والانطلاق</text>
+        <text x="310" y="376" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">بناء إمبراطورية، ودعم الملكة إياح حتب</text>
+
+        <rect x="70" y="430" width="480" height="60" rx="12" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="310" y="455" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">الفرس (٥٢٥ ق.م)</text>
+        <text x="310" y="476" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">قمبيز الثاني يؤسس الأسرة ٢٧</text>
+
+        <rect x="70" y="530" width="480" height="60" rx="12" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="310" y="555" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">الإسكندر ثم البطالمة</text>
+        <text x="310" y="576" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">٣٣٢ ق.م دخول سلمي، ٣٢٣ ق.م حكم بطلميوس</text>
+
+        <rect x="70" y="630" width="480" height="60" rx="12" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="310" y="655" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">الرومان (٣٠ ق.م)</text>
+        <text x="310" y="676" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">بعد أكتيوم، ثم اضطهاد ديني</text>
+
+        <rect x="70" y="730" width="480" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="3"/>
+        <text x="310" y="755" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">المقاومة المستمرة</text>
+        <text x="310" y="776" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">الحفاظ على الهوية حتى الفتح الإسلامي ٦٤١م</text>
+      </svg>
+    </div>
+
+    <div class="box nile">
+      <div class="box-title">🕸️ خريطة (٢): شبكة الشخصيات والقوى (على طريقة توبولوجي الشبكات)</div>
+      <svg viewBox="0 0 640 460" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <line x1="320" y1="230" x2="520" y2="80" stroke="#4fa3ac" stroke-width="2"/>
+        <line x1="320" y1="230" x2="120" y2="80" stroke="#4fa3ac" stroke-width="2"/>
+        <line x1="320" y1="230" x2="120" y2="380" stroke="#4fa3ac" stroke-width="2"/>
+        <line x1="320" y1="230" x2="520" y2="380" stroke="#4fa3ac" stroke-width="2"/>
+
+        <circle cx="320" cy="230" r="70" fill="#16140f" stroke="#e8c96b" stroke-width="3"/>
+        <text x="320" y="224" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="16" font-weight="700">مصر</text>
+        <text x="320" y="245" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="14">القديمة</text>
+
+        <rect x="430" y="40" width="180" height="80" rx="10" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="520" y="72" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">الهكسوس</text>
+        <text x="520" y="94" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">سقنن رع • كامس • أحمس</text>
+
+        <rect x="30" y="40" width="180" height="80" rx="10" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="120" y="72" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">الفرس</text>
+        <text x="120" y="94" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">قمبيز الثاني</text>
+
+        <rect x="30" y="340" width="180" height="80" rx="10" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="120" y="368" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="13" font-weight="700">اليونان والبطالمة</text>
+        <text x="120" y="390" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">الإسكندر • أرسطو • بطلميوس</text>
+
+        <rect x="430" y="340" width="180" height="80" rx="10" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="520" y="365" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="13" font-weight="700">الرومان</text>
+        <text x="520" y="384" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">كليوباترا • أكتافيوس</text>
+        <text x="520" y="400" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">دقلديانوس • قسطنطين</text>
+      </svg>
+    </div>
+
+    <div class="box red">
+      <div class="box-title">🔗 خريطة (٣): من الدافع إلى النتيجة</div>
+      <svg viewBox="0 0 620 630" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <defs>
+          <marker id="arrow3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#8c3b2e"/>
+          </marker>
+        </defs>
+        <line x1="125" y1="90" x2="290" y2="146" stroke="#8c3b2e" stroke-width="2"/>
+        <line x1="310" y1="90" x2="310" y2="146" stroke="#8c3b2e" stroke-width="2"/>
+        <line x1="495" y1="90" x2="330" y2="146" stroke="#8c3b2e" stroke-width="2"/>
+        <line x1="310" y1="210" x2="310" y2="246" stroke="#8c3b2e" stroke-width="2" marker-end="url(#arrow3)"/>
+        <line x1="310" y1="310" x2="310" y2="346" stroke="#8c3b2e" stroke-width="2" marker-end="url(#arrow3)"/>
+        <line x1="310" y1="410" x2="310" y2="446" stroke="#8c3b2e" stroke-width="2" marker-end="url(#arrow3)"/>
+        <line x1="310" y1="510" x2="310" y2="546" stroke="#8c3b2e" stroke-width="2" marker-end="url(#arrow3)"/>
+
+        <rect x="40" y="20" width="170" height="70" rx="10" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="125" y="52" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="12.5" font-weight="700">دوافع عسكرية</text>
+        <text x="125" y="70" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">التوسع والتنافس</text>
+
+        <rect x="225" y="20" width="170" height="70" rx="10" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="310" y="52" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="12.5" font-weight="700">دوافع اقتصادية</text>
+        <text x="310" y="70" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">خصوبة الأرض والحبوب</text>
+
+        <rect x="410" y="20" width="170" height="70" rx="10" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="495" y="52" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="12.5" font-weight="700">دوافع إستراتيجية</text>
+        <text x="495" y="70" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">الموقع وطرق التجارة</text>
+
+        <rect x="110" y="150" width="400" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="310" y="185" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">مصر: موقع فريد + موارد ضخمة</text>
+
+        <rect x="110" y="250" width="400" height="60" rx="12" fill="#1e1b14" stroke="#4fa3ac" stroke-width="2"/>
+        <text x="310" y="285" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">ضعف داخلي + تفوق عسكري للغزاة</text>
+
+        <rect x="110" y="350" width="400" height="60" rx="12" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="310" y="385" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">احتلال مصر</text>
+
+        <rect x="110" y="450" width="400" height="60" rx="12" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="310" y="485" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">مقاومة شعبية متكررة</text>
+
+        <rect x="110" y="550" width="400" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="3"/>
+        <text x="310" y="585" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">الحفاظ على الهوية الوطنية</text>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  موقع مراجعة تفاعلي — الدرس الثاني: الدولة المصرية القديمة ومقاومة الاحتلال — تاريخ البكالوريا المصرية، الوحدة الأولى: مصر بين الماضي والحاضر
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "المقصود بمفهوم «الاحتلال» هو:",
+    opts: [
+      "تعاون طوعي بين دولتين لتبادل المصالح",
+      "سيطرة دولة قوية على أراضي دولة أخرى وفرض نفوذها من دون موافقة شعبها",
+      "اتفاقية تجارية بين دولتين متجاورتين",
+      "انضمام دولة إلى منظمة دولية بمحض إرادتها"
+    ],
+    correct: 1,
+    fb: "الاحتلال: سيطرة دولة قوية على أراضي دولة وفرض نفوذها السياسي والإداري عليها من دون موافقة شعبها، مما يقيّد سيادتها."
+  },
+  {
+    q: "أيٌّ مما يلي يُعَد دافعًا اقتصاديًا لاحتلال مصر عبر التاريخ؟",
+    opts: ["الموقع على مفترق طرق ثلاث قارات", "الرغبة في السيطرة على موازين القوى", "خصوبة الأرض ووفرة المحاصيل", "التوسع والتنافس الدولي"],
+    correct: 2,
+    fb: "الدوافع الاقتصادية شملت خصوبة الأرض ووفرة المحاصيل، إلى جانب كون مصر مخزن الحبوب للدول الكبرى مثل روما."
+  },
+  {
+    q: "استغل الهكسوس ضعف أي جزء من حدود مصر للتسلل إليها في نهاية عصر الدولة الوسطى؟",
+    opts: ["الحدود الجنوبية مع النوبة", "الحدود الشمالية الشرقية (بوابة آسيا)", "ساحل البحر الأحمر", "الحدود الغربية مع ليبيا"],
+    correct: 1,
+    fb: "ضعفت السلطة المركزية عن حماية الحدود الشمالية الشرقية، التي كانت بوابة مصر نحو آسيا، فتسلَّل الهكسوس منها إلى الدلتا."
+  },
+  {
+    q: "اتخذ الهكسوس من مدينة ...... عاصمة سياسية وعسكرية لهم في مصر.",
+    opts: ["طيبة", "منف", "أواريس", "الإسكندرية"],
+    correct: 2,
+    fb: "اتخذ الهكسوس من مدينة أواريس عاصمة سياسية وعسكرية لبسط نفوذهم في شمال البلاد."
+  },
+  {
+    q: "بدأت مقاومة الهكسوس على يد أمراء مدينة:",
+    opts: ["منف", "طيبة", "أواريس", "أبيدوس"],
+    correct: 1,
+    fb: "بدأت المقاومة على يد أمراء طيبة في الأسرة السابعة عشرة، حين أعلنوا استقلالهم وسيطروا على جنوب مصر."
+  },
+  {
+    q: "انتهت المرحلة الأولى من حرب تحرير مصر من الهكسوس (بقيادة سقنن رع) بـ:",
+    opts: ["طرد الهكسوس نهائيًا من مصر", "توقيع هدنة مع الهكسوس", "مقتل سقنن رع مع استمرار شرارة المقاومة", "انتصار حاسم على الهكسوس في أواريس"],
+    correct: 2,
+    fb: "انتهت المرحلة الأولى بمقتل سقنن رع، لكن شرارة المقاومة المسلحة لم تنطفئ معه."
+  },
+  {
+    q: "اعتمد الملك كامس سياسة عسكرية قوامها:",
+    opts: ["التحالف مع مملكة كوش ضد الهكسوس", "قطع طرق إمدادات الهكسوس القادمة من كوش", "الدفاع فقط دون أي هجوم", "الانسحاب إلى الجنوب لتجنب المواجهة"],
+    correct: 1,
+    fb: "اعتمد كامس سياسة قطع طرق الإمدادات القادمة من مملكة كوش؛ بهدف عزل الهكسوس واستنزاف قدراتهم الاقتصادية."
+  },
+  {
+    q: "أكمل حرب التحرير ضد الهكسوس وقضى عليهم نهائيًا الملك:",
+    opts: ["سقنن رع", "كامس", "أحمس الأول", "تحتمس الثالث"],
+    correct: 2,
+    fb: "استكمل أحمس الأول مسيرة أخيه كامس ووالده سقنن رع، وحاصر الهكسوس في منف وأواريس وطردهم نهائيًا."
+  },
+  {
+    q: "مثَّلت الملكة إياح حتب نموذجًا للقيادة الوطنية من خلال:",
+    opts: ["قيادتها للجيش في المعركة الفاصلة ضد الهكسوس بنفسها", "حفاظها على وحدة الدولة ودعمها للجيش خلال حرب التحرير", "عقدها معاهدة سلام مع الهكسوس", "تأسيسها مدينة الإسكندرية"],
+    correct: 1,
+    fb: "حافظت الملكة إياح حتب على وحدة الدولة واستقرارها، ودعمت الجيش المصري خلال حرب التحرير ضد الهكسوس."
+  },
+  {
+    q: "دخل الفرس مصر بقيادة الملك قمبيز الثاني في عام:",
+    opts: ["٣٣٢ ق.م", "٥٢٥ ق.م", "٣٢٣ ق.م", "٣٠ ق.م"],
+    correct: 1,
+    fb: "في عام ٥٢٥ ق.م التقى الجيشان المصري والفارسي في شرق الدلتا، ودخل الفرس مصر بقيادة قمبيز الثاني، وأسَّسوا الأسرة ٢٧."
+  },
+  {
+    q: "موقف الشعب المصري من الاحتلال الفارسي كان:",
+    opts: ["قبولًا تامًا دون أي مقاومة", "ظهور حركات مقاومة وثورات لاستعادة الاستقلال", "الاندماج الكامل في الثقافة الفارسية", "الهجرة الجماعية خارج مصر"],
+    correct: 1,
+    fb: "لم يتقبل المصريون الاحتلال الفارسي، وظهرت حركات المقاومة والثورات، مما عكس تمسكهم بهويتهم ورفضهم للسيطرة الأجنبية."
+  },
+  {
+    q: "دخل الإسكندر الأكبر مصر عام ٣٣٢ ق.م من دون مقاومة تُذكر؛ لأن المصريين:",
+    opts: ["كانوا موالين للفرس", "رأوا فيه فرصة للتخلص من الحكم الفارسي", "لم يكن لديهم جيش أصلًا", "وقَّعوا معاهدة مسبقة معه"],
+    correct: 1,
+    fb: "كانت مصر تعاني وطأة الحكم الفارسي والضرائب المثقلة، فوجد المصريون في الإسكندر فرصة للتخلص من الفرس."
+  },
+  {
+    q: "ثبَّت الإسكندر الأكبر نفوذه في مصر بأقل قدر من الصراع من خلال:",
+    opts: ["فرض حاميات عسكرية ضخمة في كل مدينة", "ادعائه أنه ابن الإله آمون واحترام تقاليد المصريين", "إجبار المصريين على تبني الديانة اليونانية", "إلغاء جميع المناصب الدينية المصرية"],
+    correct: 1,
+    fb: "حصل الإسكندر على اعتراف ديني بسلطته بادعائه أنه ابن آمون، واحترم عادات المصريين وتقاليدهم، وأسَّس مدينة الإسكندرية."
+  },
+  {
+    q: "بدأت دولة البطالمة في مصر على يد القائد:",
+    opts: ["أكتافيوس", "بطلميوس بن لاجوس", "قمبيز الثاني", "دقلديانوس"],
+    correct: 1,
+    fb: "بعد وفاة الإسكندر عام ٣٢٣ ق.م، فرض القائد بطلميوس بن لاجوس سيطرته على مصر وجعلها قاعدة لحكمه، فبدأت دولة البطالمة."
+  },
+  {
+    q: "سيطر الرومان على مصر نهائيًا بعد هزيمة كليوباترا السابعة في معركة:",
+    opts: ["أكتيوم البحرية", "الكرنك", "أبيدوس", "منف"],
+    correct: 0,
+    fb: "هُزمت كليوباترا السابعة في معركة أكتيوم البحرية، وسيطر أكتافيوس على مصر لتصبح من أهم الولايات الرومانية."
+  },
+  {
+    q: "بلغ اضطهاد الرومان للمسيحيين في مصر ذروته في عهد الإمبراطور:",
+    opts: ["قسطنطين", "دقلديانوس", "أكتافيوس", "قمبيز الثاني"],
+    correct: 1,
+    fb: "بلغ الاضطهاد ذروته في عهد دقلديانوس، حتى عُرف هذا العصر باسم «عصر الشهداء»، وانتهى بعد إعلان قسطنطين التسامح الديني."
+  }
+];
+
+const container = document.getElementById('quiz-container');
+let answers = new Array(QUESTIONS.length).fill(null);
+let submitted = false;
+
+function render(){
+  container.innerHTML = '';
+  QUESTIONS.forEach((item, qi) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.innerHTML = `
+      <div class="q-num">السؤال ${qi+1} من ${QUESTIONS.length}</div>
+      <div class="q-text">${item.q}</div>
+      <div class="opts" data-qi="${qi}"></div>
+      <div class="fb" id="fb-${qi}"></div>
+    `;
+    const optsWrap = card.querySelector('.opts');
+    const letters = ['أ','ب','ج','د'];
+    item.opts.forEach((opt, oi) => {
+      const el = document.createElement('div');
+      el.className = 'opt';
+      el.setAttribute('role','button');
+      el.setAttribute('tabindex','0');
+      el.innerHTML = `<span class="letter">${letters[oi]}</span><span>${opt}</span>`;
+      el.addEventListener('click', () => selectOpt(qi, oi));
+      el.addEventListener('keydown', (e) => { if(e.key==='Enter' || e.key===' '){ e.preventDefault(); selectOpt(qi, oi); } });
+      optsWrap.appendChild(el);
+    });
+    container.appendChild(card);
+  });
+  updateProgress();
+}
+
+function selectOpt(qi, oi){
+  if(submitted) return;
+  answers[qi] = oi;
+  const optsWrap = document.querySelector(`.opts[data-qi="${qi}"]`);
+  [...optsWrap.children].forEach((el, idx) => {
+    el.classList.toggle('selected', idx === oi);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const answered = answers.filter(a => a !== null).length;
+  document.getElementById('prog-text').textContent = `${toArabicDigits(answered)} / ${toArabicDigits(QUESTIONS.length)}`;
+  document.getElementById('bar-fill').style.width = (answered / QUESTIONS.length * 100) + '%';
+}
+
+function toArabicDigits(n){
+  const map = {'0':'٠','1':'١','2':'٢','3':'٣','4':'٤','5':'٥','6':'٦','7':'٧','8':'٨','9':'٩'};
+  return String(n).split('').map(c => map[c] !== undefined ? map[c] : c).join('');
+}
+
+document.getElementById('submit-btn').addEventListener('click', () => {
+  submitted = true;
+  let score = 0;
+  QUESTIONS.forEach((item, qi) => {
+    const optsWrap = document.querySelector(`.opts[data-qi="${qi}"]`);
+    const chosen = answers[qi];
+    [...optsWrap.children].forEach((el, idx) => {
+      el.style.pointerEvents = 'none';
+      if(idx === item.correct) el.classList.add('correct');
+      else if(idx === chosen && chosen !== item.correct) el.classList.add('wrong');
+    });
+    if(chosen === item.correct) score++;
+    const fb = document.getElementById(`fb-${qi}`);
+    fb.textContent = (chosen === item.correct ? '✓ إجابة صحيحة — ' : (chosen === null ? '— لم تتم الإجابة — ' : '✗ إجابة غير دقيقة — ')) + item.fb;
+    fb.classList.add('show', chosen === item.correct ? 'ok' : 'no');
+  });
+
+  const panel = document.getElementById('result-panel');
+  panel.classList.add('show');
+  document.getElementById('result-score').textContent = `${toArabicDigits(score)} / ${toArabicDigits(QUESTIONS.length)}`;
+  let msg = '';
+  const pct = score / QUESTIONS.length;
+  if(pct === 1) msg = 'ممتاز! إتقان كامل لدرس الدولة المصرية القديمة ومقاومة الاحتلال 🏛️';
+  else if(pct >= 0.8) msg = 'مستوى رائع جدًا — راجع الأسئلة التي أخطأت فيها لتثبيت المعلومة.';
+  else if(pct >= 0.6) msg = 'مستوى جيد — يُنصح بمراجعة الملخص الشامل مرة أخرى.';
+  else msg = 'يحتاج الأمر مزيدًا من المراجعة — عد إلى قسم الملخص الشامل قبل إعادة المحاولة.';
+  document.getElementById('result-msg').textContent = msg;
+  panel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  submitted = false;
+  answers = new Array(QUESTIONS.length).fill(null);
+  document.getElementById('result-panel').classList.remove('show');
+  render();
+  document.getElementById('exam').scrollIntoView({behavior:'smooth'});
+});
+
+render();
+
+const mmBtn = document.getElementById('toggle-mindmaps');
+const mmPanel = document.getElementById('mindmaps-panel');
+mmBtn.addEventListener('click', () => {
+  const showing = mmPanel.style.display !== 'none';
+  mmPanel.style.display = showing ? 'none' : 'block';
+  mmBtn.textContent = showing ? '🧠 اعرض الصور الذهنية' : '🙈 إخفاء الصور الذهنية';
+  if(!showing){ mmPanel.scrollIntoView({behavior:'smooth', block:'start'}); }
+});
+</script>
+
+</body>
+</html>
