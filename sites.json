@@ -417,6 +417,77 @@
           "file": "courses/اكواد-طلاب-تانيه-بكالوريا-w49xy/part-01.html"
         }
       ]
+    },
+    {
+      "id": "تاريخ-بكالوريا-الترم-الاول-ay8mt",
+      "name": "تاريخ بكالوريا الترم الاول",
+      "description": "تاريخ تانية بكالوريا كل المسارات الترم الاول",
+      "categories": [
+        "التاريخ الوطني"
+      ],
+      "level": "",
+      "duration": "",
+      "tags": [
+        "تاريخ"
+      ],
+      "featured": true,
+      "archived": false,
+      "publish_at": null,
+      "related": [
+        "اداة-حفظ-الكلمات-pcdq1",
+        "اكواد-طلاب-تانيه-بكالوريا-w49xy"
+      ],
+      "image": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/cover.jpg",
+      "parts": [
+        {
+          "title": "البداية - الدرس الاول ",
+          "file": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/part-01.html"
+        },
+        {
+          "title": "الدرس الثاني",
+          "file": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/part-02.html"
+        },
+        {
+          "title": "الدرس الثالث",
+          "file": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/part-03.html"
+        },
+        {
+          "title": "الدرس الرابع",
+          "file": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/part-04.html"
+        },
+        {
+          "title": "الدرس الخامس",
+          "file": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/part-05.html"
+        },
+        {
+          "title": "الدرس السادس",
+          "file": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/part-06.html"
+        },
+        {
+          "title": "الدرس السابع",
+          "file": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/part-07.html"
+        },
+        {
+          "title": "الدرس الثامن",
+          "file": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/part-08.html"
+        },
+        {
+          "title": "الدرس التاسع",
+          "file": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/part-09.html"
+        },
+        {
+          "title": "الدرس العاشر",
+          "file": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/part-10.html"
+        },
+        {
+          "title": "الدرس الحادي عشر",
+          "file": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/part-11.html"
+        },
+        {
+          "title": "الدرس الثاني عشر - الاخير",
+          "file": "courses/تاريخ-بكالوريا-الترم-الاول-ay8mt/part-12.html"
+        }
+      ]
     }
   ],
   "config": {
