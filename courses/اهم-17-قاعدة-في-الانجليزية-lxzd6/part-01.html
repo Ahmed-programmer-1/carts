@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أهم 17 قاعدة بالإنجليزي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #FF6B2B;
+  --teal: #1DB8A0;
+  --dark: #0F1923;
+  --darker: #080E15;
+  --card: #162030;
+  --card2: #1C2A3A;
+  --text: #E8F0F7;
+  --muted: #7A9BB5;
+  --yellow: #FFD166;
+  --pink: #FF4F8B;
+  --sw: 270px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Cairo',sans-serif; background:var(--darker); color:var(--text); overflow-x:hidden; }
+
+/* SIDEBAR */
+#sidebar {
+  position:fixed; top:0; right:0;
+  width:var(--sw); height:100vh;
+  background:var(--dark);
+  border-left:2px solid rgba(29,184,160,0.25);
+  z-index:100; display:flex; flex-direction:column;
+  transform:translateX(0);
+  transition:transform .35s ease;
+}
+#sidebar.closed { transform:translateX(100%); }
+
+.sb-head {
+  padding:20px 16px 14px;
+  background:linear-gradient(135deg,#1a8f7e,#0d5f54);
+  text-align:center; flex-shrink:0;
+}
+.sb-head h2 { font-size:17px; font-weight:900; color:#fff; }
+.sb-head small { font-size:11px; color:rgba(255,255,255,.65); display:block; margin-top:3px; }
+
+.sb-list { overflow-y:auto; flex:1; padding:8px 0; }
+.sb-list::-webkit-scrollbar { width:3px; }
+.sb-list::-webkit-scrollbar-thumb { background:var(--teal); border-radius:2px; }
+
+.sb-item {
+  padding:11px 16px; cursor:pointer;
+  display:flex; align-items:center; gap:11px;
+  border-right:3px solid transparent;
+  transition:background .15s, border-color .15s;
+}
+.sb-item:hover { background:rgba(29,184,160,.09); border-right-color:var(--teal); }
+.sb-item.active { background:rgba(29,184,160,.14); border-right-color:var(--orange); }
+
+.sb-num {
+  width:26px; height:26px; border-radius:50%;
+  background:rgba(29,184,160,.15);
+  border:1.5px solid rgba(29,184,160,.5);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; color:var(--teal); flex-shrink:0;
+}
+.sb-item.active .sb-num { background:var(--orange); border-color:var(--orange); color:#fff; }
+.sb-name { font-size:13px; font-weight:600; line-height:1.35; }
+.sb-en { font-size:11px; color:var(--muted); display:block; margin-top:1px; }
+
+/* TOGGLE BUTTON */
+#tog {
+  position:fixed; top:16px; right:16px; z-index:200;
+  width:44px; height:44px; border-radius:50%;
+  background:var(--teal); border:none; cursor:pointer;
+  font-size:20px; color:#fff;
+  box-shadow:0 3px 14px rgba(29,184,160,.45);
+  transition:background .2s, right .35s ease, transform .2s;
+  display:flex; align-items:center; justify-content:center;
+}
+#tog:hover { background:var(--orange); transform:scale(1.08); }
+#tog.shifted { right:calc(var(--sw) + 12px); }
+
+/* MAIN */
+#main {
+  margin-right:var(--sw);
+  min-height:100vh; padding-bottom:60px;
+  transition:margin-right .35s ease;
+}
+#main.full { margin-right:0; }
+
+/* HERO */
+.hero {
+  padding:56px 44px 36px;
+  background:linear-gradient(135deg,var(--dark) 0%,#0a1520 100%);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  position:relative; overflow:hidden;
+}
+.hero::before {
+  content:'';
+  position:absolute; top:-80px; left:-60px;
+  width:400px; height:400px; border-radius:50%;
+  background:radial-gradient(circle,rgba(29,184,160,.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-badge {
+  display:inline-block;
+  background:rgba(29,184,160,.12);
+  border:1px solid rgba(29,184,160,.35);
+  color:var(--teal); font-size:11px; font-weight:700;
+  padding:4px 13px; border-radius:100px;
+  margin-bottom:14px; letter-spacing:1px;
+}
+.hero h1 { font-size:38px; font-weight:900; line-height:1.2; margin-bottom:10px; }
+.hero h1 span { color:var(--orange); }
+.hero p { color:var(--muted); font-size:15px; line-height:1.7; max-width:460px; }
+
+/* CONTENT */
+#content { padding:36px 44px; max-width:880px; }
+
+/* WELCOME */
+.welcome { text-align:center; padding:70px 20px; }
+.welcome .ico { font-size:72px; display:block; margin-bottom:20px; animation:bob 3s ease-in-out infinite; }
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.welcome h2 { font-size:26px; font-weight:900; margin-bottom:10px; }
+.welcome p { color:var(--muted); font-size:15px; line-height:1.7; }
+.welcome .hint {
+  margin-top:28px; color:var(--teal); font-size:14px; font-weight:600;
+  animation:blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+/* LESSON ANIMATION */
+.lesson { animation:slideIn .4s ease forwards; }
+@keyframes slideIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+/* LESSON HEADER */
+.l-head { display:flex; align-items:center; gap:14px; margin-bottom:28px; }
+.l-num {
+  width:50px; height:50px; border-radius:13px; flex-shrink:0;
+  background:linear-gradient(135deg,var(--orange),#ff9055);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; font-weight:900; color:#fff;
+  box-shadow:0 4px 14px rgba(255,107,43,.35);
+}
+.l-head h2 { font-size:26px; font-weight:900; }
+.l-head .en { font-size:13px; color:var(--teal); font-weight:600; display:block; margin-top:2px; }
+
+/* BLOCK */
+.blk {
+  background:var(--card); border-radius:14px;
+  padding:22px 26px; margin-bottom:18px;
+  border:1px solid rgba(255,255,255,.055);
+  position:relative; overflow:hidden;
+}
+.blk::before {
+  content:''; position:absolute;
+  top:0; right:0; width:4px; height:100%;
+  background:var(--teal); border-radius:0 4px 4px 0;
+}
+.blk.or::before { background:var(--orange); }
+.blk.yl::before { background:var(--yellow); }
+.blk.pk::before { background:var(--pink); }
+
+.blk-lbl {
+  font-size:10px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; margin-bottom:8px;
+  display:flex; align-items:center; gap:7px;
+}
+.blk-lbl.tl { color:var(--teal); }
+.blk-lbl.or { color:var(--orange); }
+.blk-lbl.yl { color:var(--yellow); }
+.blk-lbl.pk { color:var(--pink); }
+
+.blk h3 { font-size:18px; font-weight:800; margin-bottom:8px; }
+.blk p { font-size:14px; line-height:1.8; color:#c0d5e8; }
+
+/* INFO BOX */
+.info {
+  background:rgba(29,184,160,.07);
+  border:1px solid rgba(29,184,160,.22);
+  border-radius:10px; padding:13px 16px;
+  margin:12px 0; display:flex; gap:10px;
+}
+.info .ic { font-size:18px; flex-shrink:0; margin-top:1px; }
+.info p { font-size:13px; color:#9dd4c8; line-height:1.7; margin:0; }
+
+/* FORMULA */
+.formula {
+  background:var(--card2); border-radius:10px;
+  padding:13px 16px; margin:12px 0;
+  display:flex; align-items:center; flex-wrap:wrap; gap:8px;
+  border:1px dashed rgba(255,209,102,.3);
+}
+.fpart {
+  background:rgba(255,209,102,.1);
+  border:1px solid rgba(255,209,102,.35);
+  padding:4px 11px; border-radius:7px;
+  font-size:13px; font-weight:700; color:var(--yellow);
+}
+.fop { color:var(--muted); font-size:15px; }
+
+/* EXAMPLES GRID */
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; margin-top:12px; }
+
+.ecard {
+  background:var(--card2); border-radius:11px;
+  padding:13px 15px; border:1px solid rgba(255,255,255,.055);
+  cursor:pointer; transition:all .2s; position:relative;
+}
+.ecard:hover {
+  background:rgba(29,184,160,.11);
+  border-color:rgba(29,184,160,.38);
+  transform:translateY(-2px);
+  box-shadow:0 5px 18px rgba(29,184,160,.12);
+}
+.ecard:active { transform:scale(.97); }
+.ecard .en {
+  font-size:14px; font-weight:700; color:var(--teal);
+  margin-bottom:5px; direction:ltr; text-align:left; line-height:1.5;
+}
+.ecard .en .h { color:var(--orange); background:rgba(255,107,43,.1); padding:0 3px; border-radius:3px; }
+.ecard .ar { font-size:12px; color:var(--muted); }
+.ecard .snd { font-size:11px; color:rgba(29,184,160,.45); margin-top:5px; }
+
+/* TABLE */
+.gtbl {
+  width:100%; border-collapse:separate; border-spacing:0;
+  margin:12px 0; border-radius:11px; overflow:hidden;
+  border:1px solid rgba(255,255,255,.065);
+}
+.gtbl th {
+  background:linear-gradient(135deg,var(--teal),#0e8a76);
+  color:#fff; font-size:12px; font-weight:700;
+  padding:11px 14px; text-align:right;
+}
+.gtbl td {
+  padding:10px 14px; font-size:13px;
+  border-bottom:1px solid rgba(255,255,255,.045);
+  background:var(--card2); direction:ltr; text-align:left;
+}
+.gtbl tr:last-child td { border-bottom:none; }
+.gtbl tr:hover td { background:rgba(29,184,160,.07); }
+.gtbl .ar { direction:rtl; text-align:right; color:var(--muted); }
+.gtbl .tl { color:var(--teal); font-weight:700; }
+
+/* RULE BOX */
+.rbox {
+  background:var(--card2); border-radius:10px;
+  padding:14px 17px; margin:10px 0;
+  border:1px solid rgba(255,255,255,.06);
+}
+.rbox .rt {
+  font-size:11px; font-weight:700; letter-spacing:1px;
+  text-transform:uppercase; margin-bottom:7px;
+  display:flex; align-items:center; gap:6px;
+}
+.rbox .rt.neg { color:var(--pink); }
+.rbox .rt.pos { color:var(--teal); }
+.rbox .rt.que { color:var(--yellow); }
+.rbox code {
+  display:block; font-family:monospace; font-size:13px;
+  color:var(--text); padding:7px 11px;
+  background:rgba(0,0,0,.35); border-radius:7px;
+  margin:5px 0; direction:ltr; text-align:left;
+}
+
+/* TAGS */
+.tags { display:flex; flex-wrap:wrap; gap:7px; margin:10px 0; }
+.tag {
+  padding:4px 12px; border-radius:100px;
+  font-size:12px; font-weight:700; border:1.5px solid;
+}
+.tag.tl { color:var(--teal); border-color:rgba(29,184,160,.38); background:rgba(29,184,160,.07); }
+.tag.or { color:var(--orange); border-color:rgba(255,107,43,.38); background:rgba(255,107,43,.07); }
+.tag.yl { color:var(--yellow); border-color:rgba(255,209,102,.38); background:rgba(255,209,102,.07); }
+
+/* TOAST */
+#toast {
+  position:fixed; bottom:28px; left:50%;
+  transform:translateX(-50%) translateY(70px);
+  background:var(--teal); color:#fff;
+  padding:9px 20px; border-radius:100px;
+  font-size:13px; font-weight:700; z-index:9999;
+  transition:transform .35s cubic-bezier(.23,1,.32,1);
+  pointer-events:none; white-space:nowrap;
+}
+#toast.show { transform:translateX(-50%) translateY(0); }
+
+/* SPEAKING */
+.speaking { animation:spk .4s ease; }
+@keyframes spk { 0%{transform:scale(1)} 50%{transform:scale(1.04);box-shadow:0 0 18px rgba(29,184,160,.4)} 100%{transform:scale(1)} }
+
+@media(max-width:700px){
+  :root{--sw:255px;}
+  .hero{padding:70px 18px 28px;}
+  .hero h1{font-size:26px;}
+  #content{padding:20px 16px;}
+  .grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<button id="tog">☰</button>
+
+<div id="sidebar">
+  <div class="sb-head">
+    <h2>📚 دليلك للإنجليزي</h2>
+    <small>أهم 17 قاعدة</small>
+  </div>
+  <div class="sb-list" id="sblist"></div>
+</div>
+
+<div id="main">
+  <div class="hero">
+    <div class="hero-badge">✦ دليلك للإنجليزي</div>
+    <h1>أهم <span>17</span> قاعدة<br>بالإنجليزي</h1>
+    <p>اختار الدرس من القائمة وتعلم بأسلوب واضح مع أمثلة تقدر تسمعها 🎧</p>
+  </div>
+  <div id="content">
+    <div class="welcome" id="wel">
+      <span class="ico">🎯</span>
+      <h2>ابدأ رحلتك مع الإنجليزي</h2>
+      <p>اضغط على زر القائمة في أعلى اليمين<br>واختار الدرس اللي تبيه</p>
+      <div class="hint">☝️ اضغط الزر في أعلى اليمين للبدء</div>
+    </div>
+    <div id="lc" style="display:none"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+var LESSONS = [
+  {id:1, ar:'أجزاء الكلام', en:'Parts of Speech'},
+  {id:2, ar:'ضمائر الفاعل', en:'Subject Pronouns'},
+  {id:3, ar:'حروف الجر', en:'Prepositions'},
+  {id:4, ar:'المفرد والجمع', en:'Singular & Plural'},
+  {id:5, ar:'أدوات التنكير والتعريف', en:'Articles: a / an / the'},
+  {id:6, ar:'الصفات', en:'Adjectives'},
+  {id:7, ar:'الأحوال', en:'Adverbs'},
+  {id:8, ar:'قاعدة تكوين الجملة', en:'Sentence Structure'},
+  {id:9, ar:'المضارع البسيط', en:'Simple Present'},
+  {id:10, ar:'الماضي البسيط', en:'Simple Past'},
+  {id:11, ar:'المستقبل البسيط', en:'Simple Future (will)'},
+  {id:12, ar:'المضارع المستمر', en:'Present Continuous'},
+  {id:13, ar:'الماضي المستمر', en:'Past Continuous'},
+  {id:14, ar:'المستقبل المستمر', en:'Future Continuous'},
+  {id:15, ar:'الأفعال المساعدة — to be', en:'Verb to be'},
+  {id:16, ar:'to do و to have', en:'Verb to do & have'},
+  {id:17, ar:'صياغة الأسئلة', en:'Question Formation'}
+];
+
+// Build sidebar
+var sblist = document.getElementById('sblist');
+LESSONS.forEach(function(l){
+  var d = document.createElement('div');
+  d.className = 'sb-item';
+  d.setAttribute('data-id', l.id);
+  d.innerHTML = '<div class="sb-num">'+l.id+'</div><div class="sb-name">'+l.ar+'<span class="sb-en">'+l.en+'</span></div>';
+  d.addEventListener('click', function(){ loadLesson(l.id); });
+  sblist.appendChild(d);
+});
+
+// Toggle sidebar
+var tog = document.getElementById('tog');
+var sidebar = document.getElementById('sidebar');
+var mainEl = document.getElementById('main');
+var open = true;
+
+tog.addEventListener('click', function(){
+  open = !open;
+  if(open){
+    sidebar.classList.remove('closed');
+    mainEl.classList.remove('full');
+    tog.classList.add('shifted');
+    tog.textContent = '✕';
+  } else {
+    sidebar.classList.add('closed');
+    mainEl.classList.add('full');
+    tog.classList.remove('shifted');
+    tog.textContent = '☰';
+  }
+});
+
+// Initial state
+sidebar.classList.remove('closed');
+mainEl.classList.remove('full');
+tog.classList.add('shifted');
+tog.textContent = '✕';
+
+// Load lesson
+function loadLesson(id){
+  document.querySelectorAll('.sb-item').forEach(function(el){
+    el.classList.toggle('active', parseInt(el.getAttribute('data-id')) === id);
+  });
+  document.getElementById('wel').style.display = 'none';
+  var lc = document.getElementById('lc');
+  lc.style.display = 'block';
+  var fn = CONTENT[id];
+  lc.innerHTML = fn ? fn() : '<div class="blk"><p>قريباً...</p></div>';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Speak
+function speak(txt, el){
+  if(!window.speechSynthesis){ showToast('المتصفح لا يدعم النطق'); return; }
+  window.speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(txt);
+  u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1;
+  window.speechSynthesis.speak(u);
+  if(el){ el.classList.add('speaking'); setTimeout(function(){ el.classList.remove('speaking'); }, 600); }
+  showToast('🔊 ' + txt.substring(0,35) + (txt.length>35?'...':''));
+}
+
+// Toast
+var toastTimer;
+function showToast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+}
+
+// Example card helper
+function ec(enHtml, ar){
+  var plain = enHtml.replace(/<[^>]+>/g,'');
+  var safe = plain.replace(/'/g,"\\'");
+  return '<div class="ecard" onclick="speak(\''+safe+'\',this)"><div class="en">'+enHtml+'</div><div class="ar">'+ar+'</div><div class="snd">🔊 اضغط للاستماع</div></div>';
+}
+
+// ============ LESSON CONTENT ============
+var CONTENT = {};
+
+CONTENT[1] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">1</div><div><h2>أجزاء الكلام</h2><span class="en">Parts of Speech</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 ما هي؟</div><h3>كل كلمة إنجليزية لها وظيفة محددة!</h3><p>قبل ما تبني جملة، لازم تعرف أدوار الكلمات — اسم؟ فعل؟ صفة؟</p>'+
+  '<div class="info"><span class="ic">🔑</span><p>تخيل الكلمات كلاعبين في فريق — لما تعرف دور كل لاعب تقدر تلعب أي تشكيلة!</p></div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📌 الاسم — Noun</div><h3>اسم شخص أو شيء أو مكان أو حيوان</h3>'+
+  '<div class="tags"><span class="tag or">Ahmed</span><span class="tag or">School</span><span class="tag or">Dog</span><span class="tag or">Flower</span></div>'+
+  '<div class="grid">'+ec('The <span class="h">dog</span> is big.','الكلب كبير')+ec('<span class="h">Ahmed</span> is my friend.','أحمد صديقي')+ec('I love <span class="h">flowers</span>.','أحب الزهور')+ec('The <span class="h">school</span> is near.','المدرسة قريبة')+'</div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">⚡ الفعل — Verb</div><h3>يدل على حدث أو اكشن</h3>'+
+  '<div class="tags"><span class="tag tl">Play</span><span class="tag tl">Study</span><span class="tag tl">Run</span><span class="tag tl">Eat</span></div>'+
+  '<div class="grid">'+ec('She <span class="h">runs</span> every day.','هي تجري كل يوم')+ec('They <span class="h">play</span> football.','هم يلعبون كرة')+ec('I <span class="h">study</span> English.','أنا أدرس الإنجليزي')+'</div></div>'+
+
+  '<div class="blk yl"><div class="blk-lbl yl">🎭 الضمير — Pronoun</div><h3>يحل محل الاسم في الجملة</h3>'+
+  '<div class="tags"><span class="tag yl">I</span><span class="tag yl">He</span><span class="tag yl">She</span><span class="tag yl">They</span><span class="tag yl">We</span></div>'+
+  '<div class="grid">'+ec('<span class="h">She</span> is smart.','هي ذكية')+ec('<span class="h">They</span> are happy.','هم سعداء')+ec('<span class="h">We</span> study together.','نحن ندرس سوياً')+'</div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">🌈 الصفة — Adjective</div><h3>تصف الاسم — تأتي قبله</h3>'+
+  '<div class="info"><span class="ic">⚠️</span><p>الصفات ما تتجمع! ❌ smarts boys &nbsp;✅ smart boys</p></div>'+
+  '<div class="grid">'+ec('He is a <span class="h">clever</span> boy.','هو ولد ذكي')+ec('It is a <span class="h">big</span> house.','بيت كبير')+'</div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">🏃 الحال — Adverb</div><h3>يظهر حالة الفعل — يأتي بعده</h3>'+
+  '<div class="grid">'+ec('She runs <span class="h">fast</span>.','هي تجري بسرعة')+ec('He speaks <span class="h">quietly</span>.','يتكلم بهدوء')+'</div></div>'+
+
+  '<div class="blk yl"><div class="blk-lbl yl">🔗 حرف الجر — Preposition</div><h3>في — إلى — من — على — بجانب...</h3>'+
+  '<div class="grid">'+ec('<span class="h">In</span> England','في إنجلترا')+ec('<span class="h">At</span> 8 am','الساعة 8')+ec('<span class="h">To</span> Dubai','إلى دبي')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[2] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">2</div><div><h2>ضمائر الفاعل</h2><span class="en">Subject Pronouns</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 ما هي؟</div><h3>تحل محل اسم الفاعل بدل تكراره</h3>'+
+  '<div class="info"><span class="ic">🌟</span><p>بدل: "Ahmed drinks milk. Ahmed is tall." نقول: "Ahmed drinks milk. <b>He</b> is tall."</p></div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📋 جدول الضمائر</div>'+
+  '<table class="gtbl"><tr><th>الضمير</th><th>المعنى</th><th>مثال</th></tr>'+
+  '<tr><td class="tl">I</td><td class="ar">أنا</td><td>I drink milk</td></tr>'+
+  '<tr><td class="tl">He</td><td class="ar">هو</td><td>He drinks milk</td></tr>'+
+  '<tr><td class="tl">She</td><td class="ar">هي</td><td>She drinks milk</td></tr>'+
+  '<tr><td class="tl">It</td><td class="ar">هو/هي (غير عاقل)</td><td>It drinks milk</td></tr>'+
+  '<tr><td class="tl">We</td><td class="ar">نحن</td><td>We drink milk</td></tr>'+
+  '<tr><td class="tl">You</td><td class="ar">أنت/أنتِ/أنتم</td><td>You drink milk</td></tr>'+
+  '<tr><td class="tl">They</td><td class="ar">هم/هما</td><td>They drink milk</td></tr>'+
+  '</table></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">⚡ مهم — "It"</div><h3>It = للحيوانات والأشياء والطقس</h3>'+
+  '<div class="grid">'+ec('<span class="h">It</span> is raining.','الجو ممطر')+ec('<span class="h">It</span> is cold today.','الجو بارد اليوم')+ec('<span class="h">It</span> is 5 pm.','الساعة 5 مساءً')+ec('<span class="h">It</span> is a cat.','هذه قطة')+'</div></div>'+
+
+  '<div class="blk yl"><div class="blk-lbl yl">🎯 تطبيق</div>'+
+  '<div class="grid">'+ec('<span class="h">I</span> am a student.','أنا طالب')+ec('<span class="h">She</span> is eating.','هي تأكل')+ec('<span class="h">We</span> are friends.','نحن أصدقاء')+ec('<span class="h">They</span> are brothers.','هم إخوة')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[3] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">3</div><div><h2>حروف الجر</h2><span class="en">Prepositions</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 ما هي؟</div><h3>تربط الكلمات وتوضح علاقة الوقت والمكان</h3>'+
+  '<div class="info"><span class="ic">🌟</span><p>3 أنواع: حروف جر الوقت (at/on/in) — حروف جر المكان — وحروف جر عامة</p></div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">⏰ حروف جر الوقت: AT — ON — IN</div><h3>كلما صغر الوقت استخدم AT ثم ON ثم IN</h3>'+
+  '<table class="gtbl"><tr><th>الحرف</th><th>يستخدم مع</th><th>مثال</th></tr>'+
+  '<tr><td class="tl">AT</td><td class="ar">الساعات — وقت محدد</td><td>at 8 am, at noon</td></tr>'+
+  '<tr><td class="tl">ON</td><td class="ar">أيام الأسبوع والتواريخ</td><td>on Monday, on July 4th</td></tr>'+
+  '<tr><td class="tl">IN</td><td class="ar">الأشهر والسنوات والفصول</td><td>in winter, in 2020</td></tr>'+
+  '</table>'+
+  '<div class="grid">'+ec('The class starts <span class="h">at</span> 8 am.','الفصل يبدأ الساعة 8')+ec('She will be here <span class="h">on</span> Monday.','ستكون هنا يوم الاثنين')+ec('We went skiing <span class="h">in</span> winter.','ذهبنا للتزلج في الشتاء')+ec('I was born <span class="h">in</span> 1995.','ولدت عام 1995')+'</div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">📍 حروف جر المكان</div>'+
+  '<table class="gtbl"><tr><th>الحرف</th><th>المعنى</th><th>مثال</th></tr>'+
+  '<tr><td class="tl">In</td><td class="ar">في (داخل)</td><td>in the box</td></tr>'+
+  '<tr><td class="tl">On</td><td class="ar">على</td><td>on the table</td></tr>'+
+  '<tr><td class="tl">Under</td><td class="ar">تحت</td><td>under the chair</td></tr>'+
+  '<tr><td class="tl">Next to</td><td class="ar">بجانب</td><td>next to the door</td></tr>'+
+  '<tr><td class="tl">Between</td><td class="ar">بين</td><td>between A and B</td></tr>'+
+  '<tr><td class="tl">In front of</td><td class="ar">أمام</td><td>in front of the school</td></tr>'+
+  '</table>'+
+  '<div class="grid">'+ec('The cat is sleeping <span class="h">under</span> the chair.','القطة نائمة تحت الكرسي')+ec('The cookies are <span class="h">in</span> the jar.','الكعك في الجرة')+ec('He lives <span class="h">on</span> the second floor.','يسكن في الطابق الثاني')+'</div></div>'+
+
+  '<div class="blk yl"><div class="blk-lbl yl">🔗 حروف الجر العامة</div>'+
+  '<table class="gtbl"><tr><th>الحرف</th><th>المعنى</th><th>مثال</th></tr>'+
+  '<tr><td class="tl">By</td><td class="ar">بواسطة</td><td>travel by car</td></tr>'+
+  '<tr><td class="tl">With</td><td class="ar">مع</td><td>play with friends</td></tr>'+
+  '<tr><td class="tl">Without</td><td class="ar">بدون</td><td>without water</td></tr>'+
+  '<tr><td class="tl">For</td><td class="ar">لأجل / لمدة</td><td>for two hours</td></tr>'+
+  '<tr><td class="tl">After</td><td class="ar">بعد</td><td>after dinner</td></tr>'+
+  '<tr><td class="tl">Before</td><td class="ar">قبل</td><td>before school</td></tr>'+
+  '</table>'+
+  '<div class="grid">'+ec('They travel <span class="h">by</span> car.','يسافرون بالسيارة')+ec('I will finish <span class="h">by</span> the evening.','سأنهي قبيل المساء')+ec('The kids are scared <span class="h">of</span> the dark.','خايفين من الظلام')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[4] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">4</div><div><h2>المفرد والجمع</h2><span class="en">Singular & Plural</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 القاعدة الأساسية</div><h3>في الغالب نضيف S لجمع الاسم</h3>'+
+  '<div class="formula"><span class="fpart">Noun</span><span class="fop">+</span><span class="fpart">S</span><span class="fop">→</span><span class="fpart">Plural</span></div>'+
+  '<div class="grid">'+ec('<span class="h">Pen</span> → <span class="h">Pens</span>','قلم → أقلام')+ec('<span class="h">Girl</span> → <span class="h">Girls</span>','بنت → بنات')+ec('<span class="h">Book</span> → <span class="h">Books</span>','كتاب → كتب')+'</div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📌 إذا انتهى بـ S/Sh/Ch/X/Z → أضف ES</div>'+
+  '<div class="grid">'+ec('<span class="h">Box</span> → <span class="h">Boxes</span>','صندوق → صناديق')+ec('<span class="h">Bus</span> → <span class="h">Buses</span>','حافلة → حافلات')+ec('<span class="h">Match</span> → <span class="h">Matches</span>','مباراة → مباريات')+'</div></div>'+
+
+  '<div class="blk yl"><div class="blk-lbl yl">🔄 إذا انتهى بـ Y قبلها ساكن → احذف Y وأضف IES</div>'+
+  '<div class="grid">'+ec('<span class="h">Story</span> → <span class="h">Stories</span>','قصة → قصص')+ec('<span class="h">Lady</span> → <span class="h">Ladies</span>','سيدة → سيدات')+ec('<span class="h">Sky</span> → <span class="h">Skies</span>','سماء → سماوات')+'</div>'+
+  '<div class="info"><span class="ic">⚠️</span><p>إذا قبل Y حرف علة (a,e,i,o,u) نضيف S فقط: Toy→Toys | Day→Days</p></div></div>'+
+
+  '<div class="blk pk"><div class="blk-lbl pk">⚡ جموع شاذة</div>'+
+  '<table class="gtbl"><tr><th>المفرد</th><th>الجمع</th></tr>'+
+  '<tr><td>Man</td><td class="tl">Men</td></tr>'+
+  '<tr><td>Woman</td><td class="tl">Women</td></tr>'+
+  '<tr><td>Child</td><td class="tl">Children</td></tr>'+
+  '<tr><td>Tooth</td><td class="tl">Teeth</td></tr>'+
+  '<tr><td>Foot</td><td class="tl">Feet</td></tr>'+
+  '</table>'+
+  '<div class="grid">'+ec('The <span class="h">children</span> are playing.','الأطفال يلعبون')+ec('I brush my <span class="h">teeth</span> daily.','أنظف أسناني يومياً')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[5] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">5</div><div><h2>أدوات التنكير والتعريف</h2><span class="en">Articles: a / an / the</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 ليش نستخدمها؟</div><h3>لتحديد هل الشيء معروف أم لا</h3>'+
+  '<div class="info"><span class="ic">🌟</span><p>A/AN = تنكير (شيء غير محدد) &nbsp;|&nbsp; THE = تعريف (شيء محدد معروف)</p></div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📌 A مقابل AN</div>'+
+  '<table class="gtbl"><tr><th>الأداة</th><th>متى نستخدمها</th><th>مثال</th></tr>'+
+  '<tr><td class="tl">A</td><td class="ar">قبل كلمة تبدأ بحرف ساكن</td><td>a book, a cat, a man</td></tr>'+
+  '<tr><td class="tl">AN</td><td class="ar">قبل كلمة تبدأ بحرف علة أو صوت علة</td><td>an apple, an egg, an hour</td></tr>'+
+  '</table>'+
+  '<div class="info"><span class="ic">⚠️</span><p>"Hour" تبدأ بـ H لكن تُنطق بصوت علة ← نستخدم AN: "an hour" ✅</p></div>'+
+  '<div class="grid">'+ec('I saw <span class="h">a</span> cat outside.','رأيت قطة بالخارج')+ec('She has <span class="h">an</span> umbrella.','عندها مظلة')+ec('He is <span class="h">an</span> honest man.','رجل شريف')+ec('I want <span class="h">a</span> toy.','أريد لعبة')+'</div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">🎯 THE — أداة التعريف</div><h3>لشيء محدد أو مذكور من قبل</h3>'+
+  '<div class="grid">'+ec('<span class="h">The</span> apple I ate was sweet.','التفاحة اللي أكلتها كانت حلوة')+ec('<span class="h">The</span> moon is bright tonight.','القمر مضيء الليلة')+ec('He is <span class="h">the</span> fastest runner.','هو أسرع عداء')+ec('I visited <span class="h">the</span> USA.','زرت الولايات المتحدة')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[6] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">6</div><div><h2>الصفات</h2><span class="en">Adjectives</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 ما هي الصفة؟</div><h3>كلمات تصف الاسم أو الضمير</h3><p>تجاوب على "كيف هو؟" وتأتي قبل الاسم أو بعد فعل الكون.</p>'+
+  '<div class="info"><span class="ic">⚠️</span><p><b>مهم:</b> الصفات ما تتجمع! ❌ "smarts boys" &nbsp;✅ "smart boys"</p></div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📋 أمثلة على الصفات</div>'+
+  '<div class="tags"><span class="tag or">Tall طويل</span><span class="tag or">Short قصير</span><span class="tag or">Happy سعيد</span><span class="tag or">Sad حزين</span><span class="tag or">Smart ذكي</span><span class="tag or">Beautiful جميل</span></div>'+
+  '<div class="grid">'+ec('He is a <span class="h">clever</span> boy.','هو ولد ذكي')+ec('Mona is a <span class="h">beautiful</span> woman.','منى امرأة جميلة')+ec('The water was <span class="h">cold</span>.','الماء كان بارداً')+ec('The soup tasted <span class="h">delicious</span>.','الحساء كانت لذيذة')+'</div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">🔑 موضع الصفة في الجملة</div>'+
+  '<div class="rbox"><div class="rt pos">✅ قبل الاسم</div><code>a smart student — the big house — an old car</code></div>'+
+  '<div class="rbox"><div class="rt pos">✅ بعد فعل الكون (is/are/was)</div><code>He is smart. — The house is big. — The car was old.</code></div>'+
+  '<div class="grid">'+ec('It was a <span class="h">hot</span> day in summer.','كان يوماً حاراً')+ec('She has a <span class="h">melodious</span> voice.','لديها صوت جميل')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[7] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">7</div><div><h2>الأحوال</h2><span class="en">Adverbs</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 ما هو الحال؟</div><h3>يظهر كيف صار الفعل — يأتي بعده</h3></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📌 طريقة التكوين</div>'+
+  '<table class="gtbl"><tr><th>النوع</th><th>الصفة</th><th>الحال</th></tr>'+
+  '<tr><td class="ar">أضف LY</td><td>Quick</td><td class="tl">Quickly</td></tr>'+
+  '<tr><td class="ar">أضف LY</td><td>Quiet</td><td class="tl">Quietly</td></tr>'+
+  '<tr><td class="ar">أضف LY</td><td>Slow</td><td class="tl">Slowly</td></tr>'+
+  '<tr><td class="ar">لا يتغير</td><td>Fast</td><td class="tl">Fast</td></tr>'+
+  '<tr><td class="ar">لا يتغير</td><td>Hard</td><td class="tl">Hard</td></tr>'+
+  '<tr><td class="ar">يختلف كلياً</td><td>Good</td><td class="tl">Well</td></tr>'+
+  '</table>'+
+  '<div class="info"><span class="ic">⚠️</span><p>Good → Well (مش Goodly!) — لازم تحفظها</p></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">🎯 أمثلة</div>'+
+  '<div class="grid">'+ec('He ran <span class="h">quickly</span>.','جرى بسرعة')+ec('She sings <span class="h">beautifully</span>.','تغني بجمال')+ec('The turtle moves <span class="h">slowly</span>.','السلحفاة تتحرك ببطء')+ec('He works <span class="h">hard</span>.','يعمل بجد')+ec('The rain fell <span class="h">heavily</span>.','المطر نزل بغزارة')+ec('She answered <span class="h">correctly</span>.','أجابت بشكل صحيح')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[8] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">8</div><div><h2>قاعدة تكوين الجملة</h2><span class="en">Sentence Structure</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 أهم قاعدة في الإنجليزي</div><h3>كل جملة = فاعل + فعل + تكملة</h3>'+
+  '<div class="formula"><span class="fpart">فاعل Subject</span><span class="fop">+</span><span class="fpart">فعل Verb</span><span class="fop">+</span><span class="fpart">تكملة</span></div>'+
+  '<div class="info"><span class="ic">🌟</span><p>هذا الترتيب ثابت في الإنجليزي — الفاعل دايماً أول!</p></div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📌 أمثلة على الهيكل</div>'+
+  '<table class="gtbl"><tr><th>الفاعل</th><th>الفعل</th><th>التكملة</th></tr>'+
+  '<tr><td class="tl">Ahmed</td><td style="color:var(--orange)">is</td><td>a doctor.</td></tr>'+
+  '<tr><td class="tl">They</td><td style="color:var(--orange)">work</td><td>hard.</td></tr>'+
+  '<tr><td class="tl">Salma</td><td style="color:var(--orange)">runs</td><td>fast.</td></tr>'+
+  '<tr><td class="tl">I</td><td style="color:var(--orange)">ate</td><td>at 7 p.m.</td></tr>'+
+  '</table>'+
+  '<div class="grid">'+ec('<span class="h">Ahmed</span> is a doctor.','أحمد طبيب')+ec('<span class="h">Salma</span> runs fast.','سلمى تجري بسرعة')+ec('<span class="h">I</span> ate at 7 pm.','أكلت الساعة 7')+ec('<span class="h">They</span> play every day.','يلعبون كل يوم')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[9] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">9</div><div><h2>المضارع البسيط</h2><span class="en">Simple Present Tense</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 متى نستخدمه؟</div><h3>للعادات والروتين اليومي والحقائق الثابتة</h3>'+
+  '<div class="info"><span class="ic">🌟</span><p>كلماته: always, usually, often, sometimes, every day, never</p></div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📐 التكوين</div>'+
+  '<div class="rbox"><div class="rt pos">✅ مع I / You / We / They</div><code>Subject + فعل مصدر</code></div>'+
+  '<div class="rbox"><div class="rt pos">✅ مع He / She / It</div><code>Subject + فعل + s/es/ies</code></div>'+
+  '<div class="grid">'+ec('She <span class="h">wakes</span> up early.','تستيقظ مبكراً')+ec('They <span class="h">go</span> to work every day.','يذهبون للعمل كل يوم')+ec('Ali <span class="h">comes</span> late.','علي يرجع متأخر')+ec('The sun <span class="h">rises</span> in the east.','الشمس تشرق من الشرق')+'</div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">🚫 النفي</div>'+
+  '<div class="rbox"><div class="rt neg">❌ مع I/You/We/They</div><code>Subject + don\'t + verb</code></div>'+
+  '<div class="rbox"><div class="rt neg">❌ مع He/She/It</div><code>Subject + doesn\'t + verb</code></div>'+
+  '<div class="grid">'+ec('I <span class="h">don\'t</span> like coffee.','لا أحب القهوة')+ec('She <span class="h">doesn\'t</span> speak French.','لا تتكلم الفرنسية')+'</div></div>'+
+
+  '<div class="blk yl"><div class="blk-lbl yl">❓ السؤال</div>'+
+  '<div class="rbox"><div class="rt que">❓ مع I/You/We/They</div><code>Do + Subject + verb + ?</code></div>'+
+  '<div class="rbox"><div class="rt que">❓ مع He/She/It</div><code>Does + Subject + verb + ?</code></div>'+
+  '<div class="grid">'+ec('<span class="h">Does</span> he like coffee?','هل يحب القهوة؟')+ec('<span class="h">Do</span> they live in London?','هل يسكنون في لندن؟')+ec('<span class="h">Does</span> it rain in April?','هل يمطر في أبريل؟')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[10] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">10</div><div><h2>الماضي البسيط</h2><span class="en">Simple Past Tense</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 متى نستخدمه؟</div><h3>لشيء حصل وانتهى في الماضي</h3>'+
+  '<div class="info"><span class="ic">🌟</span><p>كلماته: yesterday, last week, ago, in 2020, last night</p></div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📐 التكوين</div>'+
+  '<div class="rbox"><div class="rt pos">✅ الأفعال المنتظمة</div><code>Verb + ed/d/ied → helped, played, walked, studied</code></div>'+
+  '<div class="rbox"><div class="rt neg">⚡ الأفعال الشاذة — لازم تحفظها</div><code>go→went | eat→ate | speak→spoke | sleep→slept | meet→met</code></div>'+
+  '<div class="grid">'+ec('She <span class="h">came</span> late yesterday.','جاءت متأخرة أمس')+ec('He <span class="h">went</span> shopping last week.','ذهب للتسوق الأسبوع الماضي')+ec('I <span class="h">ate</span> pizza last night.','أكلت بيتزا أمس بالليل')+ec('Ali <span class="h">played</span> football last Monday.','لعب كرة يوم الاثنين')+'</div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">🚫 النفي</div>'+
+  '<div class="rbox"><div class="rt neg">❌ النفي في الماضي</div><code>Subject + didn\'t + verb (مصدر)</code></div>'+
+  '<div class="grid">'+ec('I <span class="h">didn\'t</span> go to school.','ما رحت المدرسة')+ec('She <span class="h">didn\'t</span> eat breakfast.','ما أكلت الفطور')+'</div></div>'+
+
+  '<div class="blk yl"><div class="blk-lbl yl">❓ السؤال</div>'+
+  '<div class="rbox"><div class="rt que">❓ السؤال في الماضي</div><code>Did + Subject + verb (مصدر) + ?</code></div>'+
+  '<div class="grid">'+ec('<span class="h">Did</span> you visit the museum?','هل زرت المتحف؟')+ec('<span class="h">Did</span> they enjoy the party?','هل استمتعوا؟')+ec('Where <span class="h">did</span> she go?','أين ذهبت؟')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[11] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">11</div><div><h2>المستقبل البسيط</h2><span class="en">Simple Future (will)</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 متى نستخدمه؟</div><h3>للقرارات السريعة والتنبؤ وشيء سيحدث مستقبلاً</h3></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📐 التكوين</div>'+
+  '<div class="formula"><span class="fpart">Subject</span><span class="fop">+</span><span class="fpart">will</span><span class="fop">+</span><span class="fpart">Verb (مصدر)</span></div>'+
+  '<div class="grid">'+ec('It <span class="h">will</span> rain.','سيمطر')+ec('Ali <span class="h">will</span> visit us.','علي سيزورنا')+ec('She <span class="h">will</span> get married.','ستتزوج')+ec('I <span class="h">will</span> open the door.','سأفتح الباب')+'</div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">🚫 النفي: will not = won\'t</div>'+
+  '<div class="rbox"><div class="rt neg">❌ النفي</div><code>Subject + won\'t + verb</code></div>'+
+  '<div class="grid">'+ec('I <span class="h">won\'t</span> be late.','لن أتأخر')+ec('She <span class="h">won\'t</span> come today.','لن تأتي اليوم')+'</div></div>'+
+
+  '<div class="blk yl"><div class="blk-lbl yl">❓ السؤال</div>'+
+  '<div class="rbox"><div class="rt que">❓ السؤال</div><code>Will + Subject + verb + ?</code></div>'+
+  '<div class="grid">'+ec('<span class="h">Will</span> it rain tomorrow?','هل سيمطر غداً؟')+ec('<span class="h">Will</span> she study medicine?','هل ستدرس الطب؟')+ec('Where <span class="h">will</span> they travel?','أين سيسافرون؟')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[12] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">12</div><div><h2>المضارع المستمر</h2><span class="en">Present Continuous</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 متى نستخدمه؟</div><h3>لشيء يحدث الآن في هذه اللحظة</h3>'+
+  '<div class="info"><span class="ic">🌟</span><p>كلماته: now, right now, at this moment, currently</p></div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📐 التكوين</div>'+
+  '<table class="gtbl"><tr><th>الفاعل</th><th>التكوين</th><th>مثال</th></tr>'+
+  '<tr><td class="tl">I</td><td>am + V+ing</td><td>I am eating now</td></tr>'+
+  '<tr><td class="tl">He / She / It</td><td>is + V+ing</td><td>He is sleeping</td></tr>'+
+  '<tr><td class="tl">We / You / They</td><td>are + V+ing</td><td>They are playing</td></tr>'+
+  '</table>'+
+  '<div class="grid">'+ec('I <span class="h">am eating</span> now.','أنا آكل الآن')+ec('He <span class="h">is sleeping</span> right now.','هو نائم الآن')+ec('They <span class="h">are playing</span> at this moment.','يلعبون الآن')+ec('She <span class="h">is reading</span> a book.','تقرأ كتاباً')+'</div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">🚫 النفي والسؤال</div>'+
+  '<div class="rbox"><div class="rt neg">❌ النفي</div><code>Subject + am/is/are + not + V+ing</code></div>'+
+  '<div class="rbox"><div class="rt que">❓ السؤال</div><code>Am/Is/Are + Subject + V+ing + ?</code></div>'+
+  '<div class="grid">'+ec('She <span class="h">is not watching</span> TV.','لا تشاهد التلفاز')+ec('<span class="h">Are</span> they playing football?','هل يلعبون كرة؟')+ec('<span class="h">Is</span> he studying?','هل يدرس؟')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[13] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">13</div><div><h2>الماضي المستمر</h2><span class="en">Past Continuous</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 متى نستخدمه؟</div><h3>لشيء كان مستمراً حين قطعه حدث آخر</h3>'+
+  '<div class="info"><span class="ic">🌟</span><p>مثال: كنت أشاهد التلفاز لما بدأ الحريق = When the fire started, I was watching TV</p></div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📐 التكوين</div>'+
+  '<table class="gtbl"><tr><th>الفاعل</th><th>التكوين</th><th>مثال</th></tr>'+
+  '<tr><td class="tl">I / He / She / It</td><td>was + V+ing</td><td>I was eating</td></tr>'+
+  '<tr><td class="tl">We / You / They</td><td>were + V+ing</td><td>They were playing</td></tr>'+
+  '</table>'+
+  '<div class="grid">'+ec('I <span class="h">was watching</span> TV when the fire started.','كنت أشاهد التلفاز حين بدأ الحريق')+ec('She <span class="h">was reading</span> at 3 pm.','كانت تقرأ الساعة 3')+ec('They <span class="h">were playing</span> when it rained.','كانوا يلعبون حين أمطرت')+ec('He <span class="h">was wearing</span> a blue shirt.','كان يرتدي قميصاً أزرق')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[14] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">14</div><div><h2>المستقبل المستمر</h2><span class="en">Future Continuous</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 متى نستخدمه؟</div><h3>لفعل سيكون مستمراً في وقت محدد مستقبلاً</h3></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📐 التكوين</div>'+
+  '<div class="formula"><span class="fpart">Subject</span><span class="fop">+</span><span class="fpart">will be</span><span class="fop">+</span><span class="fpart">V+ing</span></div>'+
+  '<div class="grid">'+ec('At this time tomorrow, I <span class="h">will be sitting</span> in class.','في هذا الوقت غداً سأكون في الفصل')+ec('They <span class="h">will be watching</span> the match at 9 pm.','سيشاهدون المباراة الساعة 9')+ec('She <span class="h">will be traveling</span> next week.','ستكون مسافرة الأسبوع القادم')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[15] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">15</div><div><h2>الأفعال المساعدة — to be</h2><span class="en">am / is / are / was / were</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">⭐ أهم فعل في الإنجليزي!</div><h3>فعل "to be" = يكون</h3><p>بدونه ما تقدر تكون جملة كاملة في معظم الأحيان. يأتي بعده صفة أو اسم أو رقم.</p>'+
+  '<div class="info"><span class="ic">🔑</span><p>أمثلة على ما يأتي بعده: I am <b>happy</b> (صفة) | She is <b>a doctor</b> (اسم) | He is <b>20</b> (رقم) | They are <b>at home</b> (مكان)</p></div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">📋 المضارع: am / is / are</div>'+
+  '<table class="gtbl"><tr><th>الفاعل</th><th>الفعل</th><th>مثال</th></tr>'+
+  '<tr><td class="tl">I</td><td style="color:var(--orange)">am</td><td>I am happy.</td></tr>'+
+  '<tr><td class="tl">He / She / It</td><td style="color:var(--orange)">is</td><td>He is nice.</td></tr>'+
+  '<tr><td class="tl">We / You / They</td><td style="color:var(--orange)">are</td><td>They are at the office.</td></tr>'+
+  '</table>'+
+  '<div class="grid">'+ec('I <span class="h">am</span> happy.','أنا سعيد')+ec('He <span class="h">is</span> nice.','هو طيب')+ec('She <span class="h">is</span> a doctor.','هي طبيبة')+ec('They <span class="h">are</span> at the office.','هم في المكتب')+'</div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">🚫 النفي في المضارع</div>'+
+  '<div class="rbox"><div class="rt neg">❌ am not / isn\'t / aren\'t</div><code>I am not tired. | He isn\'t here. | They aren\'t ready.</code></div>'+
+  '<div class="grid">'+ec('I <span class="h">am not</span> tired.','لست متعباً')+ec('She <span class="h">isn\'t</span> a teacher.','ليست معلمة')+ec('They <span class="h">aren\'t</span> ready.','ليسوا مستعدين')+'</div></div>'+
+
+  '<div class="blk yl"><div class="blk-lbl yl">❓ السؤال في المضارع</div>'+
+  '<div class="rbox"><div class="rt que">❓ نقدم الفعل على الفاعل</div><code>Am/Is/Are + Subject + ?</code></div>'+
+  '<div class="grid">'+ec('<span class="h">Are</span> you busy?','هل أنت مشغول؟')+ec('<span class="h">Is</span> he a doctor?','هل هو طبيب؟')+ec('<span class="h">Are</span> they ready?','هل هم مستعدون؟')+'</div></div>'+
+
+  '<div class="blk pk"><div class="blk-lbl pk">⏮️ الماضي: was / were</div>'+
+  '<table class="gtbl"><tr><th>الفاعل</th><th>الفعل</th><th>مثال</th></tr>'+
+  '<tr><td class="tl">I / He / She / It</td><td style="color:var(--pink)">was</td><td>I was tired.</td></tr>'+
+  '<tr><td class="tl">We / You / They</td><td style="color:var(--pink)">were</td><td>They were happy.</td></tr>'+
+  '</table>'+
+  '<div class="rbox"><div class="rt neg">❌ النفي: wasn\'t / weren\'t</div><code>She wasn\'t at home. | They weren\'t ready.</code></div>'+
+  '<div class="rbox"><div class="rt que">❓ السؤال: Was/Were + Subject + ?</div><code>Was he tired? | Were they happy?</code></div>'+
+  '<div class="grid">'+ec('I <span class="h">was</span> happy yesterday.','كنت سعيداً أمس')+ec('They <span class="h">were</span> tired.','كانوا متعبين')+ec('She <span class="h">wasn\'t</span> at home.','لم تكن في البيت')+ec('<span class="h">Were</span> you at school?','هل كنت في المدرسة؟')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[16] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">16</div><div><h2>الأفعال المساعدة</h2><span class="en">Verb to do & Verb to have</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">⚡ Verb to do — يعمل / يفعل</div><h3>do / does / did</h3><p>كفعل أساسي بمعنى "يعمل"، وكفعل مساعد لتكوين الأسئلة والنفي.</p>'+
+  '<table class="gtbl"><tr><th>الفعل</th><th>الاستخدام</th><th>مثال</th></tr>'+
+  '<tr><td class="tl">do</td><td class="ar">مضارع مع جمع/I/You</td><td>I do my duty everyday.</td></tr>'+
+  '<tr><td class="tl">does</td><td class="ar">مضارع مع مفرد</td><td>She does her homework.</td></tr>'+
+  '<tr><td class="tl">did</td><td class="ar">ماضي</td><td>They did the work.</td></tr>'+
+  '</table>'+
+  '<div class="grid">'+ec('I <span class="h">do</span> my duty everyday.','أؤدي واجبي كل يوم')+ec('She <span class="h">does</span> her homework.','تعمل واجبها')+ec('They <span class="h">did</span> the project.','أنهوا المشروع')+'</div></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">💎 Verb to have — يملك / يمتلك</div><h3>have / has / had</h3><p>كفعل أساسي بمعنى "يمتلك".</p>'+
+  '<table class="gtbl"><tr><th>الفعل</th><th>الاستخدام</th><th>مثال</th></tr>'+
+  '<tr><td class="tl">have</td><td class="ar">مضارع مع جمع/I/You</td><td>I have a car.</td></tr>'+
+  '<tr><td class="tl">has</td><td class="ar">مضارع مع مفرد</td><td>She has a book.</td></tr>'+
+  '<tr><td class="tl">had</td><td class="ar">ماضي</td><td>He had a dog.</td></tr>'+
+  '</table>'+
+  '<div class="grid">'+ec('I <span class="h">have</span> a car.','عندي سيارة')+ec('She <span class="h">has</span> a beautiful voice.','لديها صوت جميل')+ec('He <span class="h">had</span> a dog last year.','كان عنده كلب السنة الماضية')+ec('They <span class="h">have</span> two children.','لديهم طفلان')+'</div></div>'+
+
+  '</div>';
+};
+
+CONTENT[17] = function(){
+  return '<div class="lesson">'+
+  '<div class="l-head"><div class="l-num">17</div><div><h2>صياغة الأسئلة</h2><span class="en">Question Formation</span></div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">💡 نوعان من الأسئلة</div><h3>أسئلة Yes/No — وأسئلة WH</h3></div>'+
+
+  '<div class="blk or"><div class="blk-lbl or">✅ أسئلة Yes/No</div><h3>الإجابة تكون نعم أو لا فقط</h3>'+
+  '<div class="formula"><span class="fpart">الفعل المساعد</span><span class="fop">+</span><span class="fpart">الفاعل</span><span class="fop">+</span><span class="fpart">الفعل</span><span class="fop">+</span><span class="fpart">؟</span></div>'+
+  '<div class="grid">'+ec('<span class="h">Are</span> you busy? → Yes, I am.','هل أنت مشغول؟')+ec('<span class="h">Does</span> he like coffee? → Yes, he does.','هل يحب القهوة؟')+ec('<span class="h">Did</span> you eat? → No, I didn\'t.','هل أكلت؟')+ec('<span class="h">Will</span> it rain? → Yes, it will.','هل سيمطر؟')+'</div></div>'+
+
+  '<div class="blk"><div class="blk-lbl tl">🔍 أدوات الاستفهام WH</div>'+
+  '<table class="gtbl"><tr><th>الأداة</th><th>المعنى</th><th>مثال</th></tr>'+
+  '<tr><td class="tl">What</td><td class="ar">إيش؟</td><td>What\'s your name?</td></tr>'+
+  '<tr><td class="tl">When</td><td class="ar">متى؟</td><td>When is Eid?</td></tr>'+
+  '<tr><td class="tl">Where</td><td class="ar">فين؟</td><td>Where are you?</td></tr>'+
+  '<tr><td class="tl">Why</td><td class="ar">ليش؟</td><td>Why are you late?</td></tr>'+
+  '<tr><td class="tl">Who</td><td class="ar">من؟</td><td>Who attended the party?</td></tr>'+
+  '<tr><td class="tl">How</td><td class="ar">كيف؟</td><td>How are you?</td></tr>'+
+  '<tr><td class="tl">Which</td><td class="ar">أي؟</td><td>Which do you prefer?</td></tr>'+
+  '</table></div>'+
+
+  '<div class="blk yl"><div class="blk-lbl yl">📐 تكوين سؤال WH</div>'+
+  '<div class="formula"><span class="fpart">WH</span><span class="fop">+</span><span class="fpart">فعل مساعد</span><span class="fop">+</span><span class="fpart">فاعل</span><span class="fop">+</span><span class="fpart">فعل + ؟</span></div>'+
+  '<div class="grid">'+ec('<span class="h">When</span> did you sleep yesterday?','متى نمت أمس؟')+ec('<span class="h">Where</span> do they go on weekends?','فين يروحون في الويكند؟')+ec('<span class="h">Why</span> does she cry so often?','ليش تبكي كثيراً؟')+ec('<span class="h">How</span> did you travel to London?','كيف سافرت للندن؟')+ec('<span class="h">Who</span> will join us for dinner?','من سيشاركنا العشاء؟')+ec('<span class="h">What</span> will she wear?','إيش ستلبس؟')+'</div></div>'+
+
+  '</div>';
+};
+
+// Auto-load first lesson
+loadLesson(1);
+</script>
+</body>
+</html>

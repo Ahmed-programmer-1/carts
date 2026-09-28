@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>قاموس الحلقات | كلمات كورس القواعد (695 كلمة)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@400;600;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12203A;
+    --ink-2:#1B2C4D;
+    --paper:#F6EFDD;
+    --paper-2:#EDE2C6;
+    --gold:#C9972C;
+    --gold-2:#E4B84B;
+    --forest:#3E6E55;
+    --rose:#BE4B3C;
+    --slate:#5C6A82;
+    --text-dark:#1C2333;
+    --text-soft:#5E6B85;
+    --bg:var(--paper);
+    --bg-2:var(--paper-2);
+    --surface:#FFFDF6;
+    --ink-text:var(--text-dark);
+    --sub-text:var(--text-soft);
+    --shadow:0 10px 30px rgba(20,25,45,.12);
+    --radius:18px;
+  }
+  [data-theme="night"]{
+    --bg:#0C1220;
+    --bg-2:#111A2E;
+    --surface:#182238;
+    --ink-text:#F1EAD8;
+    --sub-text:#9AA6C2;
+    --shadow:0 10px 30px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink-text);
+    font-family:'Tajawal',sans-serif;
+    min-height:100vh;
+    transition:background .35s ease,color .35s ease;
+    overscroll-behavior-y:none;
+  }
+  .en{font-family:'Space Grotesk',sans-serif;}
+  #app{max-width:520px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;position:relative;padding-bottom:78px;}
+
+  /* ===== Top bar ===== */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 18px 10px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{
+    width:36px;height:36px;border-radius:10px;
+    background:linear-gradient(145deg,var(--gold-2),var(--gold));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk';font-weight:700;color:#2a1d05;font-size:16px;
+    box-shadow:0 4px 12px rgba(201,151,44,.4);
+  }
+  .brand h1{font-family:'Cairo';font-weight:800;font-size:19px;margin:0;letter-spacing:.2px;}
+  .brand span{display:block;font-size:11px;color:var(--sub-text);font-weight:500;margin-top:1px;}
+  .icon-btn{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--surface);border:1px solid rgba(120,120,120,.15);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    box-shadow:var(--shadow);font-size:17px;color:var(--ink-text);
+  }
+
+  /* ===== screens ===== */
+  .screen{display:none;padding:6px 18px 20px;animation:fadeIn .35s ease;}
+  .screen.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  /* ===== stats strip ===== */
+  .stats-strip{display:flex;gap:10px;margin:6px 0 18px;}
+  .stat-card{
+    flex:1;background:var(--surface);border-radius:14px;padding:12px 10px;
+    box-shadow:var(--shadow);text-align:center;
+  }
+  .stat-card b{display:block;font-family:'Space Grotesk';font-size:20px;color:var(--gold);}
+  .stat-card small{font-size:11px;color:var(--sub-text);}
+
+  /* ===== category list (rolodex tabs) ===== */
+  .section-label{font-family:'Cairo';font-weight:800;font-size:14px;color:var(--sub-text);margin:18px 2px 10px;display:flex;align-items:center;gap:8px;}
+  .section-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(120,120,120,.3),transparent);}
+  .cat-list{display:flex;flex-direction:column;gap:10px;}
+  .cat-tab{
+    position:relative;background:var(--surface);border-radius:14px;
+    padding:14px 16px 14px 14px;display:flex;align-items:center;gap:12px;
+    box-shadow:var(--shadow);cursor:pointer;border-inline-start:5px solid var(--gold);
+    transition:transform .15s ease;
+  }
+  .cat-tab:active{transform:scale(.98);}
+  .cat-num{
+    font-family:'Space Grotesk';font-weight:700;font-size:13px;color:var(--gold);
+    background:rgba(201,151,44,.12);border-radius:8px;padding:4px 8px;min-width:30px;text-align:center;
+  }
+  .cat-info{flex:1;min-width:0;}
+  .cat-info h3{margin:0 0 2px;font-family:'Cairo';font-size:15px;font-weight:700;}
+  .cat-info p{margin:0;font-size:11.5px;color:var(--sub-text);font-family:'Space Grotesk';}
+  .cat-progress-wrap{width:44px;height:44px;position:relative;flex-shrink:0;}
+  .cat-progress-wrap svg{transform:rotate(-90deg);width:44px;height:44px;}
+  .cat-progress-wrap circle{fill:none;stroke-width:4;}
+  .cat-progress-wrap .bg{stroke:rgba(120,120,120,.18);}
+  .cat-progress-wrap .fg{stroke:var(--forest);stroke-linecap:round;transition:stroke-dashoffset .4s ease;}
+  .cat-progress-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Space Grotesk';}
+
+  /* ===== deck / flashcard screen ===== */
+  .deck-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+  .deck-header h2{font-family:'Cairo';font-size:16px;margin:0;font-weight:800;}
+  .deck-count{font-size:12px;color:var(--sub-text);font-family:'Space Grotesk';}
+  .progress-bar{height:5px;border-radius:5px;background:rgba(120,120,120,.18);margin:10px 0 22px;overflow:hidden;}
+  .progress-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-2));border-radius:5px;transition:width .3s ease;}
+
+  .card-stage{perspective:1400px;height:340px;margin:0 auto 18px;position:relative;}
+  .flashcard{
+    width:100%;height:100%;position:relative;transform-style:preserve-3d;
+    transition:transform .55s cubic-bezier(.4,.2,.2,1);cursor:pointer;
+  }
+  .flashcard.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;
+    background:var(--surface);box-shadow:0 18px 40px rgba(20,25,45,.18);
+    padding:22px;display:flex;flex-direction:column;
+    border:1px solid rgba(120,120,120,.12);
+  }
+  .face::before{
+    content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);
+    width:52px;height:9px;border-radius:6px;background:repeating-linear-gradient(90deg,rgba(120,120,120,.35) 0 4px,transparent 4px 8px);
+  }
+  .face.back{transform:rotateY(180deg);}
+  .face-top{display:flex;justify-content:space-between;align-items:flex-start;margin-top:14px;}
+  .fav-btn{font-size:20px;background:none;border:none;cursor:pointer;color:var(--sub-text);padding:0;line-height:1;}
+  .fav-btn.active{color:var(--gold);}
+  .speak-btn{
+    width:38px;height:38px;border-radius:50%;background:var(--bg-2);border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ink-text);
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+  }
+  .card-word{font-family:'Space Grotesk';font-weight:700;font-size:34px;text-align:center;margin:0 0 6px;}
+  .card-phon{text-align:center;color:var(--gold);font-size:13px;font-family:'Space Grotesk';margin-bottom:8px;}
+  .card-mean{text-align:center;font-family:'Cairo';font-weight:700;font-size:20px;color:var(--ink-text);}
+  .card-tag{position:absolute;bottom:16px;inset-inline-start:16px;font-size:10.5px;color:var(--sub-text);background:var(--bg-2);padding:4px 10px;border-radius:20px;font-family:'Space Grotesk';}
+  .card-hint{position:absolute;bottom:16px;inset-inline-end:16px;font-size:10.5px;color:var(--sub-text);}
+  .sentence-wrap{margin:auto 0;text-align:center;}
+  .sentence-en{font-family:'Space Grotesk';font-size:19px;line-height:1.5;margin-bottom:10px;}
+  .sentence-ar{font-family:'Cairo';font-size:14.5px;color:var(--sub-text);line-height:1.6;}
+  .back .card-word{font-size:20px;margin-bottom:4px;}
+  .back .card-mean{font-size:14px;color:var(--sub-text);font-weight:500;}
+
+  .deck-controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px;}
+  .ctrl-btn{
+    width:50px;height:50px;border-radius:50%;background:var(--surface);border:none;
+    box-shadow:var(--shadow);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink-text);
+  }
+  .ctrl-btn.primary{
+    width:auto;height:50px;padding:0 22px;border-radius:25px;background:var(--forest);color:#fff;
+    font-family:'Cairo';font-weight:700;font-size:14px;gap:8px;display:flex;align-items:center;
+  }
+  .ctrl-btn.primary.done{background:var(--sub-text);}
+  .ctrl-btn:active{transform:scale(.94);}
+
+  /* ===== bottom nav ===== */
+  .bottom-nav{
+    position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;
+    background:var(--surface);border-top:1px solid rgba(120,120,120,.15);
+    display:flex;padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+    box-shadow:0 -6px 20px rgba(0,0,0,.06);z-index:50;
+  }
+  .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:var(--sub-text);font-family:'Cairo';font-size:10.5px;font-weight:700;cursor:pointer;padding:4px 0;}
+  .nav-item .ic{font-size:19px;}
+  .nav-item.active{color:var(--gold);}
+
+  /* ===== exam screen ===== */
+  .exam-card{background:var(--surface);border-radius:18px;padding:18px;box-shadow:var(--shadow);margin-bottom:14px;}
+  .exam-card h3{font-family:'Cairo';font-size:15px;margin:0 0 4px;display:flex;align-items:center;gap:8px;}
+  .exam-card p{margin:0 0 12px;font-size:12.5px;color:var(--sub-text);line-height:1.6;}
+  .exam-btn{
+    width:100%;background:linear-gradient(135deg,var(--gold-2),var(--gold));border:none;color:#241804;
+    font-family:'Cairo';font-weight:800;font-size:14px;padding:13px;border-radius:12px;cursor:pointer;
+  }
+  .exam-btn:disabled{background:var(--bg-2);color:var(--sub-text);}
+  .exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .exam-tile{
+    background:var(--surface);border-radius:14px;padding:14px;box-shadow:var(--shadow);cursor:pointer;text-align:center;
+    border:2px solid transparent;
+  }
+  .exam-tile b{display:block;font-family:'Space Grotesk';font-size:22px;color:var(--gold);}
+  .exam-tile span{font-size:11px;color:var(--sub-text);font-family:'Cairo';font-weight:700;}
+  .exam-tile small{display:block;font-size:10px;color:var(--sub-text);margin-top:3px;}
+  .exam-tile:active{transform:scale(.97);}
+
+  /* quiz runner */
+  .quiz-progress{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .quiz-progress b{font-family:'Space Grotesk';color:var(--gold);}
+  .quiz-q{background:var(--surface);border-radius:18px;padding:24px 18px;text-align:center;box-shadow:var(--shadow);margin-bottom:18px;}
+  .quiz-q .qword{font-family:'Space Grotesk';font-size:30px;font-weight:700;margin:10px 0 4px;}
+  .quiz-q .qphon{color:var(--gold);font-size:12.5px;margin-bottom:6px;}
+  .opt-list{display:flex;flex-direction:column;gap:10px;}
+  .opt-btn{
+    background:var(--surface);border:2px solid rgba(120,120,120,.18);border-radius:12px;
+    padding:14px;font-family:'Cairo';font-weight:600;font-size:14.5px;cursor:pointer;text-align:right;color:var(--ink-text);
+  }
+  .opt-btn.correct{border-color:var(--forest);background:rgba(62,110,85,.12);color:var(--forest);}
+  .opt-btn.wrong{border-color:var(--rose);background:rgba(190,75,60,.12);color:var(--rose);}
+  .opt-btn:disabled{opacity:.7;}
+
+  .result-wrap{text-align:center;padding:20px 10px;}
+  .result-ring{width:150px;height:150px;margin:10px auto 18px;position:relative;}
+  .result-ring svg{transform:rotate(-90deg);width:150px;height:150px;}
+  .result-ring circle{fill:none;stroke-width:10;}
+  .result-ring .bg{stroke:rgba(120,120,120,.15);}
+  .result-ring .fg{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset 1s ease;}
+  .result-ring-txt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .result-ring-txt b{font-family:'Space Grotesk';font-size:28px;}
+  .result-ring-txt span{font-size:11px;color:var(--sub-text);}
+  .result-msg{font-family:'Cairo';font-weight:800;font-size:17px;margin-bottom:4px;}
+  .result-sub{font-size:12.5px;color:var(--sub-text);margin-bottom:20px;}
+  .review-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-radius:12px;padding:12px 14px;margin-bottom:8px;text-align:right;box-shadow:var(--shadow);}
+  .review-item .rw{font-family:'Space Grotesk';font-weight:700;}
+  .review-item .rm{font-size:12px;color:var(--sub-text);}
+
+  /* settings */
+  .settings-row{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-radius:14px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow);}
+  .settings-row div h4{margin:0 0 2px;font-family:'Cairo';font-size:14px;}
+  .settings-row div p{margin:0;font-size:11.5px;color:var(--sub-text);}
+  .toggle{width:50px;height:28px;border-radius:20px;background:var(--bg-2);position:relative;cursor:pointer;border:none;flex-shrink:0;}
+  .toggle i{position:absolute;top:3px;inset-inline-start:3px;width:22px;height:22px;border-radius:50%;background:var(--gold);transition:inset-inline-start .25s ease;}
+  .toggle.on i{inset-inline-start:25px;}
+  .voice-select{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(120,120,120,.25);background:var(--surface);color:var(--ink-text);font-family:'Cairo';font-size:13px;}
+
+  /* ===== spaced repetition ===== */
+  .review-banner{
+    background:linear-gradient(135deg,var(--ink) 0%,var(--ink-2) 100%);
+    border-radius:18px;padding:18px;margin:6px 0 18px;color:#F6EFDD;
+    box-shadow:var(--shadow);display:flex;align-items:center;gap:14px;cursor:pointer;
+    position:relative;overflow:hidden;
+  }
+  .review-banner::after{content:"🔁";position:absolute;font-size:70px;opacity:.12;left:-6px;bottom:-16px;}
+  .review-banner .rb-num{font-family:'Space Grotesk';font-weight:700;font-size:32px;color:var(--gold-2);}
+  .review-banner .rb-text h4{margin:0 0 2px;font-family:'Cairo';font-size:14.5px;font-weight:800;}
+  .review-banner .rb-text p{margin:0;font-size:11.5px;color:#C7BFA8;}
+  .review-banner.zero{background:linear-gradient(135deg,var(--forest),#2e5540);}
+
+  .recall-row{display:flex;gap:10px;margin-top:10px;}
+  .recall-btn{
+    flex:1;border:none;border-radius:14px;padding:14px 8px;font-family:'Cairo';font-weight:800;font-size:13.5px;
+    cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;
+  }
+  .recall-btn .rc-ic{font-size:19px;}
+  .recall-btn.forgot{background:rgba(190,75,60,.14);color:var(--rose);border:2px solid rgba(190,75,60,.35);}
+  .recall-btn.remembered{background:rgba(62,110,85,.14);color:var(--forest);border:2px solid rgba(62,110,85,.4);}
+  .recall-btn:active{transform:scale(.96);}
+  .flip-nav-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px;}
+
+  .srs-badge{
+    position:absolute;top:14px;left:50%;transform:translateX(-50%);
+    font-size:10px;font-family:'Space Grotesk';font-weight:600;color:var(--sub-text);
+    background:var(--bg-2);padding:3px 10px;border-radius:20px;opacity:.9;top:auto;bottom:44px;left:50%;
+  }
+
+  .box-list{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+  .box-row{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:12px;padding:10px 14px;box-shadow:var(--shadow);}
+  .box-row .bx-label{width:76px;font-family:'Cairo';font-weight:700;font-size:12px;flex-shrink:0;}
+  .box-row .bx-bar-wrap{flex:1;height:8px;border-radius:6px;background:rgba(120,120,120,.15);overflow:hidden;}
+  .box-row .bx-bar{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold),var(--gold-2));}
+  .box-row .bx-count{width:34px;text-align:left;font-family:'Space Grotesk';font-weight:700;font-size:12.5px;color:var(--sub-text);}
+
+  .review-start-btn{
+    width:100%;background:linear-gradient(135deg,var(--gold-2),var(--gold));border:none;color:#241804;
+    font-family:'Cairo';font-weight:800;font-size:15px;padding:15px;border-radius:14px;cursor:pointer;margin-bottom:18px;
+  }
+  .review-start-btn:disabled{background:var(--bg-2);color:var(--sub-text);}
+
+  .empty-state{text-align:center;padding:50px 20px;color:var(--sub-text);}
+  .empty-state .em{font-size:40px;margin-bottom:10px;}
+  .empty-state p{font-size:13px;line-height:1.7;}
+
+  .back-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .back-row h2{font-family:'Cairo';font-weight:800;font-size:17px;margin:0;}
+
+  ::selection{background:rgba(201,151,44,.35);}
+  #toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#F6EFDD;padding:10px 20px;border-radius:30px;font-family:'Cairo';font-size:13px;font-weight:700;opacity:0;transition:all .3s ease;z-index:100;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.3);}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  /* ===== v2 additions: search / levels / rules / mastery / emoji / chips ===== */
+  .search-wrap{margin:6px 0 14px;}
+  .search-input{width:100%;padding:13px 16px;border-radius:14px;border:1px solid rgba(120,120,120,.2);background:var(--surface);color:var(--ink-text);font-family:'Cairo';font-size:14px;box-shadow:var(--shadow);outline:none;}
+  .search-result-item{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:12px;padding:10px 14px;margin-bottom:8px;box-shadow:var(--shadow);cursor:pointer;}
+  .search-result-item:active{transform:scale(.98);}
+  .sr-emoji{font-size:22px;flex-shrink:0;}
+  .sr-text{flex:1;min-width:0;}
+  .sr-cat{font-size:10px;color:var(--sub-text);font-family:'Cairo';max-width:90px;text-align:left;flex-shrink:0;}
+  .level-header{font-family:'Cairo';font-weight:800;font-size:13px;color:var(--gold);margin:22px 2px 8px;padding-bottom:6px;border-bottom:2px solid rgba(201,151,44,.25);}
+  .deck-tools{display:flex;gap:8px;margin-bottom:10px;}
+  .tool-btn{flex:1;background:var(--surface);border:1px solid rgba(120,120,120,.15);border-radius:10px;padding:9px 4px;font-family:'Cairo';font-weight:700;font-size:11.5px;cursor:pointer;color:var(--ink-text);box-shadow:var(--shadow);}
+  .tool-btn:active{transform:scale(.96);}
+  .rule-box{background:rgba(201,151,44,.1);border:1px solid rgba(201,151,44,.3);border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.8;margin-bottom:14px;}
+  .mastery-bar{margin-bottom:14px;}
+  .mastery-track{display:flex;height:8px;border-radius:6px;overflow:hidden;background:rgba(120,120,120,.15);}
+  .mastery-track span{display:block;height:100%;}
+  .mastery-legend{font-size:10.5px;color:var(--sub-text);margin-top:5px;text-align:center;font-family:'Cairo';}
+  .card-center{margin:auto 0;width:100%;}
+  .card-emoji{text-align:center;font-size:46px;line-height:1;margin-bottom:4px;}
+  .related-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:10px;}
+  .chip{background:var(--bg-2);border:none;border-radius:20px;padding:5px 12px;font-size:11px;font-family:'Cairo';font-weight:700;color:var(--ink-text);cursor:pointer;}
+  .chip:active{transform:scale(.95);}
+  .qemoji{font-size:34px;margin-bottom:4px;}
+</style>
+</head>
+<body data-theme="day">
+<div id="app">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark en">م</div>
+      <div>
+        <h1>قاموس الحلقات</h1>
+        <span id="headerSub">كلمات 23 حلقة من كورس القواعد + تكرار متباعد</span>
+      </div>
+    </div>
+    <button class="icon-btn" id="themeBtn" title="الوضع الليلي/النهاري">🌙</button>
+  </div>
+
+  <!-- HOME -->
+  <div class="screen active" id="screen-home">
+    <div class="review-banner" id="homeReviewBanner" onclick="switchTab('review')">
+      <div class="rb-num" id="homeDueNum">0</div>
+      <div class="rb-text">
+        <h4 id="homeDueTitle">كلمة مستحقة للمراجعة اليوم</h4>
+        <p id="homeDueSub">نظام التكرار المتباعد بيفكّرك بالكلمة في وقتها المثالي</p>
+      </div>
+    </div>
+    <div class="stats-strip">
+      <div class="stat-card"><b id="statTotal">0</b><small>إجمالي الكلمات</small></div>
+      <div class="stat-card"><b id="statMemo">0</b><small>محفوظة</small></div>
+      <div class="stat-card"><b id="statFav">0</b><small>مفضّلة</small></div>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 دوّر على كلمة (عربي أو إنجليزي)..." oninput="onSearchInput(this.value)">
+    </div>
+    <div id="searchResults" style="display:none;"></div>
+    <div id="catListSection">
+      <div class="section-label">مجموعات الدروس</div>
+      <div class="cat-list" id="catList"></div>
+    </div>
+  </div>
+
+  <!-- DECK -->
+  <div class="screen" id="screen-deck">
+    <div class="back-row"><button class="icon-btn" onclick="goHome()">→</button><h2 id="deckTitle"></h2></div>
+    <div class="deck-tools">
+      <button class="tool-btn" onclick="toggleRuleBox()">📘 القاعدة</button>
+      <button class="tool-btn" onclick="exportLesson()">⬇️ تصدير</button>
+      <button class="tool-btn" onclick="copyLessonLink()">🔗 مشاركة</button>
+    </div>
+    <div class="rule-box" id="ruleBox" style="display:none;"></div>
+    <div class="mastery-bar" id="masteryBar"></div>
+    <div class="deck-header"><div class="deck-count" id="deckCount"></div><div class="deck-count" id="deckMemoCount"></div></div>
+    <div class="progress-bar"><i id="deckProgressBar" style="width:0%"></i></div>
+
+    <div class="card-stage">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="face front">
+          <div class="face-top">
+            <button class="fav-btn" id="favBtnFront" onclick="event.stopPropagation();toggleFav()">☆</button>
+            <button class="speak-btn" onclick="event.stopPropagation();speak('en')">🔊</button>
+          </div>
+          <div class="card-center">
+            <div class="card-emoji" id="cardEmoji"></div>
+            <div class="card-word en" id="cardWord"></div>
+            <div class="card-phon" id="cardPhon"></div>
+            <div class="card-mean" id="cardMean"></div>
+            <div class="related-chips" id="relatedChips" style="display:none;"></div>
+          </div>
+          <div class="card-tag" id="cardTagFront"></div>
+          <div class="srs-badge" id="srsBadgeFront"></div>
+          <div class="card-hint">اضغط لقلب البطاقة ↺</div>
+        </div>
+        <div class="face back">
+          <div class="face-top">
+            <button class="fav-btn" id="favBtnBack" onclick="event.stopPropagation();toggleFav()">☆</button>
+            <button class="speak-btn" onclick="event.stopPropagation();speak('sen')">🔊</button>
+          </div>
+          <div class="sentence-wrap">
+            <div class="sentence-en en" id="sentEn"></div>
+            <div class="sentence-ar" id="sentAr"></div>
+          </div>
+          <div class="card-word en" id="cardWordBack" style="font-size:16px;margin-top:0;"></div>
+          <div class="card-mean" id="cardMeanBack" style="font-size:13px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recall-row" id="recallRow" style="display:none;">
+      <button class="recall-btn forgot" onclick="assessCard(false)"><span class="rc-ic">🔁</span>لسه محتاج مراجعة</button>
+      <button class="recall-btn remembered" onclick="assessCard(true)"><span class="rc-ic">✅</span>اتذكرتها</button>
+    </div>
+    <div class="flip-nav-row">
+      <button class="ctrl-btn" onclick="prevCard()">›</button>
+      <span class="deck-count" id="srsStatus" style="min-width:120px;text-align:center;"></span>
+      <button class="ctrl-btn" onclick="nextCard()">‹</button>
+    </div>
+  </div>
+
+  <!-- REVIEW (Spaced Repetition) -->
+  <div class="screen" id="screen-review">
+    <div class="back-row"><h2>🔁 المراجعة المتباعدة</h2></div>
+    <p style="font-size:12.5px;color:var(--sub-text);margin:-6px 0 16px;line-height:1.7;">
+      كل كلمة بترجعلك في وقتها الصح: يوم، ٣ أيام، أسبوع، أسبوعين، شهر، ٣ شهور. كل ما تفتكر الكلمة صح، بتبعد المراجعة القادمة أكتر.
+    </p>
+    <button class="review-start-btn" id="reviewStartBtn" onclick="startReviewSession()">ابدأ مراجعة اليوم (<span id="reviewStartCount">0</span> كلمة)</button>
+    <div class="section-label">توزيع الكلمات على مراحل الحفظ</div>
+    <div class="box-list" id="boxList"></div>
+    <div class="section-label">جدول المراجعات القادمة</div>
+    <div id="upcomingList"></div>
+  </div>
+
+  <!-- FAVORITES -->
+  <div class="screen" id="screen-fav">
+    <div class="back-row"><h2>⭐ الكلمات المفضّلة</h2></div>
+    <div id="favList"></div>
+  </div>
+
+  <!-- EXAMS -->
+  <div class="screen" id="screen-exam">
+    <div class="back-row"><h2>📝 الاختبارات</h2></div>
+
+    <div class="exam-card">
+      <h3>📅 الاختبار اليومي</h3>
+      <p id="dailyDesc">اختبار سريع وشامل على الكلمات التي حفظتها في آخر فترة مذاكرة فقط.</p>
+      <button class="exam-btn" id="dailyBtn" onclick="startDailyExam()">ابدأ الاختبار اليومي</button>
+    </div>
+
+    <div class="section-label">اختبارات شاملة (على كل الكلمات المحفوظة)</div>
+    <div class="exam-grid" id="examGrid"></div>
+
+    <div class="section-label">آخر النتائج</div>
+    <div id="examHistory"></div>
+  </div>
+
+  <!-- QUIZ RUNNER -->
+  <div class="screen" id="screen-quiz">
+    <div class="quiz-progress">
+      <button class="icon-btn" onclick="quitQuiz()">✕</button>
+      <span>سؤال <b id="qIndex">1</b> / <span id="qTotal">10</span></span>
+    </div>
+    <div class="quiz-q">
+      <button class="speak-btn" style="margin:0 auto 8px;" onclick="speakQuizWord()">🔊</button>
+      <div class="qemoji" id="qEmoji"></div>
+      <div class="qword en" id="qWord"></div>
+      <div class="qphon" id="qPhon"></div>
+    </div>
+    <div class="opt-list" id="optList"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div class="result-wrap">
+      <div class="result-ring">
+        <svg viewBox="0 0 150 150">
+          <circle class="bg" cx="75" cy="75" r="62"></circle>
+          <circle class="fg" id="resultRing" cx="75" cy="75" r="62"></circle>
+        </svg>
+        <div class="result-ring-txt"><b id="resultPct">0%</b><span id="resultFrac">0/0</span></div>
+      </div>
+      <div class="result-msg" id="resultMsg"></div>
+      <div class="result-sub" id="resultSub"></div>
+      <div id="reviewList"></div>
+      <button class="exam-btn" style="margin-top:10px;" onclick="goExam()">رجوع للاختبارات</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="screen" id="screen-settings">
+    <div class="back-row"><h2>⚙️ الإعدادات</h2></div>
+    <div class="settings-row">
+      <div><h4>الوضع الليلي</h4><p>مريح للعين أثناء المذاكرة ليلاً</p></div>
+      <button class="toggle" id="nightToggle" onclick="toggleTheme()"><i></i></button>
+    </div>
+    <div class="settings-row">
+      <div style="width:100%;"><h4>صوت النطق</h4><p style="margin-bottom:8px;">اختر الصوت الإنجليزي المتاح على جهازك</p>
+        <select class="voice-select" id="voiceSelect"></select>
+      </div>
+    </div>
+    <div class="settings-row" style="cursor:pointer;" onclick="resetProgress()">
+      <div><h4 style="color:var(--rose);">إعادة ضبط التقدم</h4><p>حذف كل الكلمات المحفوظة والمفضلة (لا يمكن التراجع)</p></div>
+      <span style="font-size:18px;">🗑️</span>
+    </div>
+    <div class="section-label">عن التطبيق</div>
+    <div class="exam-card">
+      <p style="margin:0;">قاموس الحلقات — كل كلمات كورس القواعد (23 حلقة، 695 كلمة) من قناة ذا اميركان انجلش، مستخرجة كاملة من نص كل درس (شاملة تصريفات الأفعال وأدوات الربط)، مقسّمة على 3 مستويات صعوبة، مع إيموجي، قاعدة نحوية لكل درس، بحث فوري، تصدير وروابط مشاركة، ونظام تكرار متباعد (Spaced Repetition) يرجّعلك كل كلمة في وقتها المثالي.</p>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="nav-item active" data-tab="home" onclick="switchTab('home')"><span class="ic">🏠</span>الرئيسية</button>
+    <button class="nav-item" data-tab="review" onclick="switchTab('review')"><span class="ic">🔁</span>المراجعة</button>
+    <button class="nav-item" data-tab="fav" onclick="switchTab('fav')"><span class="ic">⭐</span>المفضلة</button>
+    <button class="nav-item" data-tab="exam" onclick="switchTab('exam')"><span class="ic">📝</span>الاختبارات</button>
+    <button class="nav-item" data-tab="settings" onclick="switchTab('settings')"><span class="ic">⚙️</span>الإعدادات</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const CATEGORIES = [{"id": "c1", "title": "حلقة 1: A / An", "sub": "A - An", "words": [{"en": "elephant", "ar": "فيل", "phon": "إليفانت", "sen": "This is an elephant.", "senm": "هذا فيل.", "id": "c1_w0", "related": [], "emoji": "🐘"}, {"en": "ball", "ar": "كرة", "phon": "بول", "sen": "This is a ball.", "senm": "هذه كرة.", "id": "c1_w1", "related": [], "emoji": "⚽"}, {"en": "star", "ar": "نجم", "phon": "ستار", "sen": "This is a star.", "senm": "هذا نجم.", "id": "c1_w2", "related": [], "emoji": "⭐"}, {"en": "egg", "ar": "بيضة", "phon": "إيج", "sen": "This is an egg.", "senm": "هذه بيضة.", "id": "c1_w3", "related": [], "emoji": "🥚"}, {"en": "X-ray", "ar": "أشعة سينية", "phon": "إكس-راي", "sen": "This is an x-ray.", "senm": "هذه أشعة سينية.", "id": "c1_w4", "related": [], "emoji": "🩻"}, {"en": "hour", "ar": "ساعة (مدة)", "phon": "أور", "sen": "I waited an hour.", "senm": "انتظرت ساعة.", "id": "c1_w5", "related": [], "emoji": "⏰"}, {"en": "umbrella", "ar": "مظلة", "phon": "أمبريلا", "sen": "This is an umbrella.", "senm": "هذه مظلة.", "id": "c1_w6", "related": [], "emoji": "☂️"}, {"en": "chair", "ar": "كرسي", "phon": "تشير", "sen": "This is a chair.", "senm": "هذا كرسي.", "id": "c1_w7", "related": [], "emoji": "🪑"}, {"en": "minute", "ar": "دقيقة", "phon": "مينت", "sen": "Wait a minute.", "senm": "انتظر دقيقة.", "id": "c1_w8", "related": [], "emoji": "⏱️"}, {"en": "uniform", "ar": "زي موحد", "phon": "يونيفورم", "sen": "She wears a uniform.", "senm": "هي ترتدي زيًا موحدًا.", "id": "c1_w9", "related": [], "emoji": "🎽"}, {"en": "donut", "ar": "دونات", "phon": "دونَت", "sen": "I ate a donut.", "senm": "أكلت دونات.", "id": "c1_w10", "related": [], "emoji": "🍩"}, {"en": "girl", "ar": "بنت", "phon": "جيرل", "sen": "I'm a girl.", "senm": "أنا بنت.", "id": "c1_w11", "related": [], "emoji": "👧"}, {"en": "doctor", "ar": "طبيب", "phon": "دوكتور", "sen": "Are you a doctor?", "senm": "هل أنت طبيب؟", "id": "c1_w12", "related": [], "emoji": "🩺"}, {"en": "dog", "ar": "كلب", "phon": "دوج", "sen": "A dog eats an apple.", "senm": "كلب يأكل تفاحة.", "id": "c1_w13", "related": [], "emoji": "🐶"}, {"en": "eats", "ar": "يأكل (هو/هي)", "phon": "إيتس", "sen": "A dog eats an apple.", "senm": "كلب يأكل تفاحة.", "id": "c1_w14", "related": ["c1_w15"], "emoji": "🍽️"}, {"en": "eat", "ar": "يأكل", "phon": "إيت", "sen": "I eat an apple every day.", "senm": "آكل تفاحة كل يوم.", "id": "c1_w15", "related": ["c1_w14"], "emoji": "🍽️"}, {"en": "apple", "ar": "تفاحة", "phon": "أَبِل", "sen": "A dog eats an apple.", "senm": "كلب يأكل تفاحة.", "id": "c1_w16", "related": [], "emoji": "🍎"}, {"en": "movie", "ar": "فيلم", "phon": "موڤي", "sen": "You are a movie star.", "senm": "أنت نجم سينمائي.", "id": "c1_w17", "related": [], "emoji": "🎬"}, {"en": "owl", "ar": "بومة", "phon": "أول", "sen": "An owl lives in a tree.", "senm": "بومة تعيش في شجرة.", "id": "c1_w18", "related": [], "emoji": "🦉"}, {"en": "lives", "ar": "يعيش (هو/هي)", "phon": "ليڤز", "sen": "An owl lives in a tree.", "senm": "بومة تعيش في شجرة.", "id": "c1_w19", "related": ["c1_w20"], "emoji": "🏠"}, {"en": "live", "ar": "يعيش", "phon": "ليڤ", "sen": "Owls live in trees.", "senm": "البوم يعيش في الأشجار.", "id": "c1_w20", "related": ["c1_w19"], "emoji": "🏠"}, {"en": "in", "ar": "في", "phon": "إن", "sen": "An owl lives in a tree.", "senm": "بومة تعيش في شجرة.", "id": "c1_w21", "related": [], "emoji": "📥"}, {"en": "tree", "ar": "شجرة", "phon": "تري", "sen": "An owl lives in a tree.", "senm": "بومة تعيش في شجرة.", "id": "c1_w22", "related": [], "emoji": "🌳"}, {"en": "old", "ar": "قديم", "phon": "أولد", "sen": "An old legend.", "senm": "أسطورة قديمة.", "id": "c1_w23", "related": [], "emoji": "👴"}, {"en": "legend", "ar": "أسطورة", "phon": "ليجند", "sen": "An old legend.", "senm": "أسطورة قديمة.", "id": "c1_w24", "related": [], "emoji": "📜"}, {"en": "see", "ar": "يرى", "phon": "سي", "sen": "A girl sees an elephant.", "senm": "بنت ترى فيل.", "id": "c1_w25", "related": ["c1_w26"], "emoji": "👀"}, {"en": "sees", "ar": "يرى (هو/هي)", "phon": "سيز", "sen": "A girl sees an elephant.", "senm": "بنت ترى فيل.", "id": "c1_w26", "related": ["c1_w25"], "emoji": "👀"}, {"en": "police officer", "ar": "ضابط شرطة", "phon": "بوليس أوفيسر", "sen": "A police officer rides a bike.", "senm": "ضابط شرطة يركب دراجة.", "id": "c1_w27", "related": [], "emoji": "👮"}, {"en": "rides", "ar": "يركب (هو/هي)", "phon": "رايدز", "sen": "A police officer rides a bike.", "senm": "ضابط شرطة يركب دراجة.", "id": "c1_w28", "related": [], "emoji": "🚴"}, {"en": "bike", "ar": "دراجة", "phon": "بايك", "sen": "A police officer rides a bike.", "senm": "ضابط شرطة يركب دراجة.", "id": "c1_w29", "related": [], "emoji": "🚲"}, {"en": "university", "ar": "جامعة", "phon": "يونيڤرسيتي", "sen": "A university family.", "senm": "عائلة الجامعة.", "id": "c1_w30", "related": [], "emoji": "🏛️"}, {"en": "family", "ar": "عائلة", "phon": "فاميلي", "sen": "A university family.", "senm": "عائلة الجامعة.", "id": "c1_w31", "related": [], "emoji": "👪"}, {"en": "used", "ar": "اعتاد", "phon": "يوزد", "sen": "I used to have an office like this.", "senm": "كان لدي مكتب مثل هذا.", "id": "c1_w32", "related": [], "emoji": "♻️"}, {"en": "have", "ar": "يملك/لديه", "phon": "هاڤ", "sen": "I used to have an office like this.", "senm": "كان لدي مكتب مثل هذا.", "id": "c1_w33", "related": [], "emoji": "🤲"}, {"en": "office", "ar": "مكتب", "phon": "أوفيس", "sen": "I used to have an office like this.", "senm": "كان لدي مكتب مثل هذا.", "id": "c1_w34", "related": [], "emoji": "🏢"}, {"en": "like", "ar": "مثل", "phon": "لايك", "sen": "I used to have an office like this.", "senm": "كان لدي مكتب مثل هذا.", "id": "c1_w35", "related": [], "emoji": "👍"}, {"en": "this", "ar": "هذا", "phon": "ذيس", "sen": "I used to have an office like this.", "senm": "كان لدي مكتب مثل هذا.", "id": "c1_w36", "related": [], "emoji": "👆"}, {"en": "test", "ar": "اختبار", "phon": "تست", "sen": "Test or not. It's a problem.", "senm": "اختبار أو لا. إنها مشكلة.", "id": "c1_w37", "related": [], "emoji": "📝"}, {"en": "or", "ar": "أو", "phon": "أور", "sen": "Test or not. It's a problem.", "senm": "اختبار أو لا. إنها مشكلة.", "id": "c1_w38", "related": [], "emoji": "↔️"}, {"en": "not", "ar": "لا/ليس", "phon": "نوت", "sen": "Test or not. It's a problem.", "senm": "اختبار أو لا. إنها مشكلة.", "id": "c1_w39", "related": [], "emoji": "🚫"}, {"en": "it's", "ar": "إنه/إنها", "phon": "إتس", "sen": "It's a problem.", "senm": "إنها مشكلة.", "id": "c1_w40", "related": [], "emoji": "ℹ️"}, {"en": "problem", "ar": "مشكلة", "phon": "پروبلم", "sen": "It's a problem.", "senm": "إنها مشكلة.", "id": "c1_w41", "related": [], "emoji": "❗"}, {"en": "evil", "ar": "شرير", "phon": "إيڤل", "sen": "I have an evil twin.", "senm": "لدي توأم شرير.", "id": "c1_w42", "related": [], "emoji": "😈"}, {"en": "twin", "ar": "توأم", "phon": "توين", "sen": "I have an evil twin.", "senm": "لدي توأم شرير.", "id": "c1_w43", "related": [], "emoji": "👯"}, {"en": "think", "ar": "يعتقد/يظن", "phon": "ثينك", "sen": "You think I'm an evil man.", "senm": "أنت تعتقد أنني رجل شرير.", "id": "c1_w44", "related": [], "emoji": "🤔"}, {"en": "man", "ar": "رجل", "phon": "مان", "sen": "You think I'm an evil man.", "senm": "أنت تعتقد أنني رجل شرير.", "id": "c1_w45", "related": [], "emoji": "👨"}, {"en": "fell", "ar": "سقط", "phon": "فِل", "sen": "I fell down an elevator shaft.", "senm": "وقعت في بئر المصعد.", "id": "c1_w46", "related": [], "emoji": "🤕"}, {"en": "down", "ar": "إلى الأسفل", "phon": "داون", "sen": "I fell down an elevator shaft.", "senm": "وقعت في بئر المصعد.", "id": "c1_w47", "related": [], "emoji": "⬇️"}, {"en": "elevator", "ar": "مصعد", "phon": "إليڤيتور", "sen": "I fell down an elevator shaft.", "senm": "وقعت في بئر المصعد.", "id": "c1_w48", "related": [], "emoji": "🛗"}, {"en": "shaft", "ar": "بئر/عمود", "phon": "شافت", "sen": "I fell down an elevator shaft.", "senm": "وقعت في بئر المصعد.", "id": "c1_w49", "related": [], "emoji": "🕳️"}, {"en": "enter", "ar": "يدخل", "phon": "إنتر", "sen": "Don't enter without an invention, man.", "senm": "لا تدخل بدون دعوة يا رجل.", "id": "c1_w50", "related": [], "emoji": "🚪"}, {"en": "without", "ar": "بدون", "phon": "ويذاوت", "sen": "Don't enter without an invention, man.", "senm": "لا تدخل بدون دعوة يا رجل.", "id": "c1_w51", "related": [], "emoji": "🚫"}, {"en": "invention", "ar": "اختراع", "phon": "إنڤنشن", "sen": "Don't enter without an invention, man.", "senm": "لا تدخل بدون دعوة يا رجل.", "id": "c1_w52", "related": [], "emoji": "💡"}, {"en": "I'll", "ar": "سوف (أنا)", "phon": "آيل", "sen": "I'll call a friend when you call a friend.", "senm": "سأتصل بصديق حين تتصل أنت بصديق.", "id": "c1_w53", "related": [], "emoji": "🔜"}, {"en": "call", "ar": "يتصل", "phon": "كول", "sen": "I'll call a friend when you call a friend.", "senm": "سأتصل بصديق حين تتصل أنت بصديق.", "id": "c1_w54", "related": [], "emoji": "📞"}, {"en": "friend", "ar": "صديق", "phon": "فرند", "sen": "I'll call a friend when you call a friend.", "senm": "سأتصل بصديق حين تتصل أنت بصديق.", "id": "c1_w55", "related": [], "emoji": "🧑‍🤝‍🧑"}, {"en": "when", "ar": "عندما", "phon": "وين", "sen": "I'll call a friend when you call a friend.", "senm": "سأتصل بصديق حين تتصل أنت بصديق.", "id": "c1_w56", "related": [], "emoji": "⏰"}, {"en": "everybody", "ar": "الجميع", "phon": "إيفريبودي", "sen": "Please everybody have a seat.", "senm": "تفضلوا بالجلوس.", "id": "c1_w57", "related": [], "emoji": "👥"}, {"en": "seat", "ar": "مقعد", "phon": "سيت", "sen": "Please everybody have a seat.", "senm": "تفضلوا بالجلوس.", "id": "c1_w58", "related": [], "emoji": "💺"}, {"en": "honor", "ar": "شرف", "phon": "أونر", "sen": "What an honor to be with you today.", "senm": "يا له من شرف أن أكون معكم اليوم.", "id": "c1_w59", "related": [], "emoji": "🎖️"}], "rule": "نستخدم <b>an</b> قبل الكلمة التي تبدأ بصوت متحرك (a, e, i, o, u)، ونستخدم <b>a</b> قبل باقي الكلمات — العبرة بالصوت مش بالحرف المكتوب.", "level": 1}, {"id": "c2", "title": "حلقة 2: This / That", "sub": "This - That", "words": [{"en": "ring", "ar": "خاتم", "phon": "رينج", "sen": "This is a ring.", "senm": "هذا خاتم.", "id": "c2_w0", "related": [], "emoji": "💍"}, {"en": "umbrella", "ar": "مظلة", "phon": "أمبريلا", "sen": "That is an umbrella.", "senm": "تلك مظلة.", "id": "c2_w1", "related": [], "emoji": "☂️"}, {"en": "tea", "ar": "شاي", "phon": "تي", "sen": "This tea is delicious.", "senm": "هذا الشاي لذيذ.", "id": "c2_w2", "related": [], "emoji": "🍵"}, {"en": "delicious", "ar": "لذيذ", "phon": "ديليشس", "sen": "This tea is delicious.", "senm": "هذا الشاي لذيذ.", "id": "c2_w3", "related": [], "emoji": "😋"}, {"en": "car", "ar": "سيارة", "phon": "كار", "sen": "That car is there for your protection.", "senm": "تلك السيارة هناك من أجل حمايتك.", "id": "c2_w4", "related": [], "emoji": "🚗"}, {"en": "there", "ar": "هناك", "phon": "ذير", "sen": "That car is there for your protection.", "senm": "تلك السيارة هناك من أجل حمايتك.", "id": "c2_w5", "related": [], "emoji": "📍"}, {"en": "for", "ar": "من أجل", "phon": "فور", "sen": "That car is there for your protection.", "senm": "تلك السيارة هناك من أجل حمايتك.", "id": "c2_w6", "related": [], "emoji": "➡️"}, {"en": "your", "ar": "الخاص بك", "phon": "يور", "sen": "That car is there for your protection.", "senm": "تلك السيارة هناك من أجل حمايتك.", "id": "c2_w7", "related": [], "emoji": "🫵"}, {"en": "protection", "ar": "حماية", "phon": "بروتكشن", "sen": "That car is there for your protection.", "senm": "تلك السيارة هناك من أجل حمايتك.", "id": "c2_w8", "related": [], "emoji": "🛡️"}, {"en": "flower", "ar": "وردة", "phon": "فلاور", "sen": "This is a flower.", "senm": "هذه وردة.", "id": "c2_w9", "related": [], "emoji": "🌸"}, {"en": "mean", "ar": "يقصد", "phon": "مين", "sen": "You mean this?", "senm": "تقصد هذا؟", "id": "c2_w10", "related": [], "emoji": "💭"}, {"en": "borrow", "ar": "يستعير", "phon": "بورو", "sen": "Can I borrow this?", "senm": "هل يمكنني اقتراض هذا؟", "id": "c2_w11", "related": [], "emoji": "🤝"}, {"en": "boy", "ar": "ولد", "phon": "بوي", "sen": "That boy will die.", "senm": "ذلك الولد سوف يموت.", "id": "c2_w12", "related": [], "emoji": "👦"}, {"en": "die", "ar": "يموت", "phon": "داي", "sen": "That boy will die.", "senm": "ذلك الولد سوف يموت.", "id": "c2_w13", "related": [], "emoji": "💀"}, {"en": "like", "ar": "يعجبه", "phon": "لايك", "sen": "I like that kid.", "senm": "يعجبني ذلك الولد.", "id": "c2_w14", "related": [], "emoji": "👍"}, {"en": "kid", "ar": "ولد", "phon": "كيد", "sen": "I like that kid.", "senm": "يعجبني ذلك الولد.", "id": "c2_w15", "related": [], "emoji": "🧒"}, {"en": "me", "ar": "أنا (مفعول به)", "phon": "مي", "sen": "This is, this is me.", "senm": "هذا، هذا أنا.", "id": "c2_w16", "related": [], "emoji": "🙋"}, {"en": "pure", "ar": "نقي", "phon": "پيور", "sen": "This is pure glass.", "senm": "هذا زجاج نقي.", "id": "c2_w17", "related": [], "emoji": "💎"}, {"en": "glass", "ar": "زجاج", "phon": "جلاس", "sen": "This is pure glass.", "senm": "هذا زجاج نقي.", "id": "c2_w18", "related": [], "emoji": "🥛"}, {"en": "see", "ar": "يرى", "phon": "سي", "sen": "You see that picture?", "senm": "هل ترى تلك الصورة؟", "id": "c2_w19", "related": [], "emoji": "👀"}, {"en": "picture", "ar": "صورة", "phon": "پيكتشر", "sen": "You see that picture?", "senm": "هل ترى تلك الصورة؟", "id": "c2_w20", "related": [], "emoji": "🖼️"}, {"en": "leave", "ar": "يترك", "phon": "ليڤ", "sen": "Leave that dog here.", "senm": "اترك ذلك الكلب هنا.", "id": "c2_w21", "related": [], "emoji": "🚪"}, {"en": "dog", "ar": "كلب", "phon": "دوج", "sen": "Leave that dog here.", "senm": "اترك ذلك الكلب هنا.", "id": "c2_w22", "related": [], "emoji": "🐶"}, {"en": "here", "ar": "هنا", "phon": "هير", "sen": "Leave that dog here.", "senm": "اترك ذلك الكلب هنا.", "id": "c2_w23", "related": [], "emoji": "📍"}, {"en": "let", "ar": "دع", "phon": "لِت", "sen": "Let me kill this witch.", "senm": "دعني أقتل هذه الساحرة.", "id": "c2_w24", "related": [], "emoji": "➡️"}, {"en": "kill", "ar": "يقتل", "phon": "كيل", "sen": "Let me kill this witch.", "senm": "دعني أقتل هذه الساحرة.", "id": "c2_w25", "related": [], "emoji": "🔪"}, {"en": "witch", "ar": "ساحرة", "phon": "ويتش", "sen": "Let me kill this witch.", "senm": "دعني أقتل هذه الساحرة.", "id": "c2_w26", "related": [], "emoji": "🧙‍♀️"}, {"en": "need", "ar": "يحتاج", "phon": "نيد", "sen": "I need this man now.", "senm": "أحتاج هذا الرجل الآن.", "id": "c2_w27", "related": [], "emoji": "🙏"}, {"en": "man", "ar": "رجل", "phon": "مان", "sen": "I need this man now.", "senm": "أحتاج هذا الرجل الآن.", "id": "c2_w28", "related": [], "emoji": "👨"}, {"en": "now", "ar": "الآن", "phon": "ناو", "sen": "I need this man now.", "senm": "أحتاج هذا الرجل الآن.", "id": "c2_w29", "related": [], "emoji": "⏰"}, {"en": "business", "ar": "عمل", "phon": "بزنس", "sen": "This is a business.", "senm": "هذا عمل.", "id": "c2_w30", "related": [], "emoji": "💼"}, {"en": "box", "ar": "صندوق", "phon": "بوكس", "sen": "This is a box.", "senm": "هذا صندوق.", "id": "c2_w31", "related": [], "emoji": "📦"}, {"en": "book", "ar": "كتاب", "phon": "بوك", "sen": "I like this book.", "senm": "يعجبني هذا الكتاب.", "id": "c2_w32", "related": [], "emoji": "📕"}, {"en": "look", "ar": "ينظر", "phon": "لوك", "sen": "Look at that cat.", "senm": "انظر إلى تلك القطة.", "id": "c2_w33", "related": [], "emoji": "👀"}, {"en": "at", "ar": "إلى/عند", "phon": "آت", "sen": "Look at that cat.", "senm": "انظر إلى تلك القطة.", "id": "c2_w34", "related": [], "emoji": "📍"}, {"en": "cat", "ar": "قطة", "phon": "كات", "sen": "Look at that cat.", "senm": "انظر إلى تلك القطة.", "id": "c2_w35", "related": [], "emoji": "🐱"}, {"en": "English", "ar": "إنجليزي", "phon": "إنجلش", "sen": "This is an English book.", "senm": "هذا كتاب إنجليزي.", "id": "c2_w36", "related": [], "emoji": "🇬🇧"}, {"en": "don't", "ar": "لا (فعل مساعد)", "phon": "دونت", "sen": "I don't know this girl.", "senm": "أنا لا أعرف هذه البنت.", "id": "c2_w37", "related": [], "emoji": "🚫"}, {"en": "know", "ar": "يعرف", "phon": "نو", "sen": "I don't know this girl.", "senm": "أنا لا أعرف هذه البنت.", "id": "c2_w38", "related": [], "emoji": "🧠"}, {"en": "girl", "ar": "بنت", "phon": "جيرل", "sen": "I don't know this girl.", "senm": "أنا لا أعرف هذه البنت.", "id": "c2_w39", "related": [], "emoji": "👧"}, {"en": "bus", "ar": "حافلة", "phon": "باص", "sen": "Look at that bus.", "senm": "انظر إلى ذلك الأوتوبيس.", "id": "c2_w40", "related": [], "emoji": "🚌"}, {"en": "laptop", "ar": "حاسوب محمول", "phon": "لابتوب", "sen": "I like this laptop.", "senm": "يعجبني هذا اللاب توب.", "id": "c2_w41", "related": [], "emoji": "💻"}, {"en": "tree", "ar": "شجرة", "phon": "تري", "sen": "This is a beautiful tree.", "senm": "هذه شجرة جميلة.", "id": "c2_w42", "related": [], "emoji": "🌳"}, {"en": "beautiful", "ar": "جميلة", "phon": "بيوتيفل", "sen": "This is a beautiful tree.", "senm": "هذه شجرة جميلة.", "id": "c2_w43", "related": [], "emoji": "😍"}, {"en": "house", "ar": "منزل", "phon": "هاوس", "sen": "That is a big house.", "senm": "ذلك منزل كبير.", "id": "c2_w44", "related": [], "emoji": "🏠"}, {"en": "big", "ar": "كبير", "phon": "بيج", "sen": "That is a big house.", "senm": "ذلك منزل كبير.", "id": "c2_w45", "related": [], "emoji": "📏"}], "rule": "نستخدم <b>this / that</b> مع الاسم المفرد: this للقريب، that للبعيد.", "level": 1}, {"id": "c3", "title": "حلقة 3: These / Those", "sub": "These - Those", "words": [{"en": "cow", "ar": "بقرة", "phon": "كاو", "sen": "These are cows.", "senm": "هؤلاء أبقار.", "id": "c3_w0", "related": [], "emoji": "🐄"}, {"en": "my", "ar": "الخاص بي", "phon": "ماي", "sen": "These are my cars.", "senm": "هؤلاء سياراتي.", "id": "c3_w1", "related": [], "emoji": "🙋"}, {"en": "car", "ar": "سيارة", "phon": "كار", "sen": "These are my cars.", "senm": "هؤلاء سياراتي.", "id": "c3_w2", "related": [], "emoji": "🚗"}, {"en": "friend", "ar": "صديق", "phon": "فرند", "sen": "Those are my friends.", "senm": "أولئك أصدقائي.", "id": "c3_w3", "related": [], "emoji": "🧑‍🤝‍🧑"}, {"en": "flower", "ar": "وردة", "phon": "فلاور", "sen": "These are flower.", "senm": "هؤلاء يكونوا ورود.", "id": "c3_w4", "related": [], "emoji": "🌸"}, {"en": "tree", "ar": "شجرة", "phon": "تري", "sen": "Those are trees.", "senm": "أولئك يكونوا أشجار.", "id": "c3_w5", "related": [], "emoji": "🌳"}, {"en": "guy", "ar": "شخص", "phon": "جاي", "sen": "You see these guys?", "senm": "هل ترى هؤلاء الأشخاص؟", "id": "c3_w6", "related": [], "emoji": "🧑"}, {"en": "not", "ar": "لا", "phon": "نوت", "sen": "I'm not taking these pills.", "senm": "أنا لا آخذ هؤلاء الحبوب.", "id": "c3_w7", "related": [], "emoji": "🚫"}, {"en": "taking", "ar": "يأخذ (مستمر)", "phon": "تيكينج", "sen": "I'm not taking these pills.", "senm": "أنا لا آخذ هؤلاء الحبوب.", "id": "c3_w8", "related": [], "emoji": "🤲"}, {"en": "pill", "ar": "حبة دواء", "phon": "پيل", "sen": "I'm not taking these pills.", "senm": "أنا لا آخذ هؤلاء الحبوب.", "id": "c3_w9", "related": [], "emoji": "💊"}, {"en": "cross", "ar": "يعبر", "phon": "كروس", "sen": "Cross those rocks.", "senm": "اعبر أولئك الصخور.", "id": "c3_w10", "related": [], "emoji": "🚸"}, {"en": "rock", "ar": "صخرة", "phon": "روك", "sen": "Cross those rocks.", "senm": "اعبر أولئك الصخور.", "id": "c3_w11", "related": [], "emoji": "🪨"}, {"en": "close", "ar": "يغلق", "phon": "كلوز", "sen": "Close those blinds.", "senm": "أغلق أولئك الستائر.", "id": "c3_w12", "related": [], "emoji": "✖️"}, {"en": "blind", "ar": "ستارة", "phon": "بلايند", "sen": "Close those blinds.", "senm": "أغلق أولئك الستائر.", "id": "c3_w13", "related": [], "emoji": "🪟"}, {"en": "phone", "ar": "هاتف", "phon": "فون", "sen": "These are phones.", "senm": "هؤلاء هواتف.", "id": "c3_w14", "related": [], "emoji": "📱"}, {"en": "computer", "ar": "حاسوب", "phon": "كمبيوتر", "sen": "Those are computers.", "senm": "أولئك حواسيب آلية.", "id": "c3_w15", "related": [], "emoji": "🖥️"}, {"en": "new", "ar": "جديد", "phon": "نيو", "sen": "Those are new.", "senm": "أولئك جدد.", "id": "c3_w16", "related": [], "emoji": "✨"}, {"en": "word", "ar": "كلمة", "phon": "وورد", "sen": "My word those are snug.", "senm": "أولئك مريحين.", "id": "c3_w17", "related": [], "emoji": "🔤"}, {"en": "snug", "ar": "مريح", "phon": "سناج", "sen": "My word those are snug.", "senm": "أولئك مريحين.", "id": "c3_w18", "related": [], "emoji": "🛋️"}, {"en": "cave people", "ar": "أناس كهف", "phon": "كيڤ پيپل", "sen": "These are cave people.", "senm": "هؤلاء أناس كهف.", "id": "c3_w19", "related": [], "emoji": "🕳️"}, {"en": "you", "ar": "أنت", "phon": "يو", "sen": "These are for you.", "senm": "هؤلاء لك.", "id": "c3_w20", "related": [], "emoji": "🫵"}, {"en": "draw", "ar": "يرسم", "phon": "درو", "sen": "Draw these bats.", "senm": "ارسم هؤلاء الوطاويط.", "id": "c3_w21", "related": [], "emoji": "✏️"}, {"en": "bat", "ar": "خفاش", "phon": "بات", "sen": "Draw these bats.", "senm": "ارسم هؤلاء الوطاويط.", "id": "c3_w22", "related": [], "emoji": "🦇"}, {"en": "clothes", "ar": "ملابس", "phon": "كلوذز", "sen": "Those are my clothes.", "senm": "أولئك يكونوا ملابسي.", "id": "c3_w23", "related": [], "emoji": "👕"}, {"en": "colorful", "ar": "ملون", "phon": "كالرفل", "sen": "I like those colorful birds.", "senm": "يعجبني أولئك الطيور الملونة.", "id": "c3_w24", "related": [], "emoji": "🌈"}, {"en": "bird", "ar": "طائر", "phon": "بيرد", "sen": "I like those birds.", "senm": "يعجبني أولئك الطيور.", "id": "c3_w25", "related": [], "emoji": "🐦"}, {"en": "give", "ar": "يعطي", "phon": "جيڤ", "sen": "Give me those drums.", "senm": "اعطني أولئك الطبول.", "id": "c3_w26", "related": [], "emoji": "🎁"}, {"en": "drum", "ar": "طبل", "phon": "درَم", "sen": "Give me those drums.", "senm": "اعطني أولئك الطبول.", "id": "c3_w27", "related": [], "emoji": "🥁"}, {"en": "rabbit", "ar": "أرنب", "phon": "رابيت", "sen": "These are rabbits.", "senm": "هؤلاء أرانب.", "id": "c3_w28", "related": [], "emoji": "🐰"}, {"en": "doctor", "ar": "طبيب", "phon": "دوكتور", "sen": "Those are doctors.", "senm": "أولئك أطباء.", "id": "c3_w29", "related": [], "emoji": "🩺"}, {"en": "clown", "ar": "مهرج", "phon": "كلاون", "sen": "Those are clowns.", "senm": "أولئك مهرجون.", "id": "c3_w30", "related": [], "emoji": "🤡"}, {"en": "scientist", "ar": "عالم", "phon": "ساينتيست", "sen": "These are scientists.", "senm": "هؤلاء علماء.", "id": "c3_w31", "related": [], "emoji": "🧑‍🔬"}, {"en": "banana", "ar": "موزة", "phon": "بنانا", "sen": "These are bananas.", "senm": "هؤلاء موز.", "id": "c3_w32", "related": [], "emoji": "🍌"}], "rule": "نستخدم <b>these / those</b> مع الاسم الجمع: these للقريب، those للبعيد.", "level": 1}, {"id": "c4", "title": "حلقة 4: Verb To Be", "sub": "Am - Is - Are", "words": [{"en": "from", "ar": "من", "phon": "فروم", "sen": "They are from Sudan.", "senm": "هم من السودان.", "id": "c4_w0", "related": [], "emoji": "⬅️"}, {"en": "Sudan", "ar": "السودان", "phon": "سودان", "sen": "They are from Sudan.", "senm": "هم من السودان.", "id": "c4_w1", "related": [], "emoji": "🇸🇩"}, {"en": "king", "ar": "ملك", "phon": "كينج", "sen": "I am your king.", "senm": "أنا ملكك.", "id": "c4_w2", "related": [], "emoji": "👑"}, {"en": "rich", "ar": "غني", "phon": "ريتش", "sen": "I am rich.", "senm": "أنا غني.", "id": "c4_w3", "related": [], "emoji": "💰"}, {"en": "teacher", "ar": "معلمة", "phon": "تيتشر", "sen": "I am a teacher.", "senm": "أنا مدرسة.", "id": "c4_w4", "related": ["c4_w6"], "emoji": "👩‍🏫"}, {"en": "student", "ar": "طالب", "phon": "ستيودنت", "sen": "You are a student.", "senm": "أنت طالبة.", "id": "c4_w5", "related": [], "emoji": "🎓"}, {"en": "teachers", "ar": "معلمون", "phon": "تيتشرز", "sen": "They are teachers.", "senm": "هم مدرسين.", "id": "c4_w6", "related": ["c4_w4"], "emoji": "👩‍🏫"}, {"en": "happy", "ar": "سعيد", "phon": "هابي", "sen": "You are happy.", "senm": "أنت سعيد.", "id": "c4_w7", "related": [], "emoji": "😊"}, {"en": "friends", "ar": "أصدقاء", "phon": "فرندز", "sen": "We are friends.", "senm": "نحن أصدقاء.", "id": "c4_w8", "related": [], "emoji": "🧑‍🤝‍🧑"}, {"en": "farmer", "ar": "مزارع", "phon": "فارمر", "sen": "I am a farmer.", "senm": "أنا مزارع.", "id": "c4_w9", "related": [], "emoji": "👨‍🌾"}, {"en": "artist", "ar": "فنان", "phon": "آرتيست", "sen": "He is an artist.", "senm": "هو فنان.", "id": "c4_w10", "related": [], "emoji": "🎨"}, {"en": "trees", "ar": "أشجار", "phon": "تريز", "sen": "They are trees.", "senm": "هم أشجار.", "id": "c4_w11", "related": [], "emoji": "🌳"}, {"en": "police officer", "ar": "ضابط شرطة", "phon": "بوليس أوفيسر", "sen": "Jack is a police officer.", "senm": "جاك ضابط شرطة.", "id": "c4_w12", "related": [], "emoji": "👮"}, {"en": "nurse", "ar": "ممرضة", "phon": "نيرس", "sen": "She isn't a nurse.", "senm": "هي ليست ممرضة.", "id": "c4_w13", "related": [], "emoji": "👩‍⚕️"}, {"en": "isn't", "ar": "ليس", "phon": "إيزنت", "sen": "She isn't a nurse.", "senm": "هي ليست ممرضة.", "id": "c4_w14", "related": [], "emoji": "🚫"}, {"en": "stupid", "ar": "غبي", "phon": "ستيوپد", "sen": "You aren't stupid.", "senm": "أنت لست غبيًا.", "id": "c4_w15", "related": [], "emoji": "🙃"}, {"en": "aren't", "ar": "لستم", "phon": "آرنت", "sen": "You aren't stupid.", "senm": "أنت لست غبيًا.", "id": "c4_w16", "related": [], "emoji": "🚫"}, {"en": "soccer", "ar": "كرة قدم", "phon": "سوكر", "sen": "He plays soccer.", "senm": "هو يلعب كرة القدم.", "id": "c4_w17", "related": [], "emoji": "⚽"}, {"en": "play", "ar": "يلعب", "phon": "پلاي", "sen": "He plays soccer.", "senm": "هو يلعب كرة القدم.", "id": "c4_w18", "related": [], "emoji": "🎮"}], "rule": "الفعل المساعد <b>Verb To Be</b>: am مع I، is مع he/she/it، are مع you/we/they.", "level": 1}, {"id": "c5", "title": "حلقة 5: أسئلة نعم/لا", "sub": "Yes/No Questions", "words": [{"en": "beautiful", "ar": "جميلة", "phon": "بيوتيفل", "sen": "Is she beautiful?", "senm": "هل هي جميلة؟", "id": "c5_w0", "related": [], "emoji": "😍"}, {"en": "hungry", "ar": "جائع", "phon": "هَنجري", "sen": "Am I hungry?", "senm": "هل أنا جائع؟", "id": "c5_w1", "related": [], "emoji": "🤤"}, {"en": "ok", "ar": "بخير", "phon": "أوكيه", "sen": "Is he ok?", "senm": "هل هو بخير؟", "id": "c5_w2", "related": [], "emoji": "👌"}, {"en": "dead", "ar": "ميت", "phon": "ديد", "sen": "Is it dead?", "senm": "هل هو ميت؟", "id": "c5_w3", "related": [], "emoji": "💀"}, {"en": "on", "ar": "على", "phon": "أون", "sen": "Are we on a spaceship?", "senm": "هل نحن على متن مركبة فضائية؟", "id": "c5_w4", "related": [], "emoji": "🔛"}, {"en": "spaceship", "ar": "مركبة فضائية", "phon": "سپيسشيپ", "sen": "Are we on a spaceship?", "senm": "هل نحن على متن مركبة فضائية؟", "id": "c5_w5", "related": [], "emoji": "🚀"}, {"en": "apple", "ar": "تفاحة", "phon": "أَبِل", "sen": "They are apples.", "senm": "إنها تفاح.", "id": "c5_w6", "related": [], "emoji": "🍎"}, {"en": "basketball", "ar": "كرة سلة", "phon": "باسكيتبول", "sen": "Are they basketball players?", "senm": "هل هم لاعبو كرة سلة؟", "id": "c5_w7", "related": [], "emoji": "🏀"}, {"en": "player", "ar": "لاعب", "phon": "پلاير", "sen": "Are they basketball players?", "senm": "هل هم لاعبو كرة سلة؟", "id": "c5_w8", "related": [], "emoji": "🎮"}, {"en": "soccer", "ar": "كرة قدم", "phon": "سوكر", "sen": "They are soccer players.", "senm": "هم لاعبو كرة قدم.", "id": "c5_w9", "related": [], "emoji": "⚽"}, {"en": "box", "ar": "صندوق", "phon": "بوكس", "sen": "They are boxes.", "senm": "هم صناديق.", "id": "c5_w10", "related": [], "emoji": "📦"}, {"en": "hospital", "ar": "مستشفى", "phon": "هوسپيتال", "sen": "Is it a hospital?", "senm": "هل هو مستشفى؟", "id": "c5_w11", "related": [], "emoji": "🏥"}, {"en": "gorilla", "ar": "غوريلا", "phon": "جوريلا", "sen": "Are they gorillas?", "senm": "هل هم غوريلات؟", "id": "c5_w12", "related": [], "emoji": "🦍"}], "rule": "لتكوين سؤال بـ Verb To Be نقدّم <b>Am/Is/Are</b> في أول الجملة بمعنى «هل».", "level": 1}, {"id": "c6", "title": "حلقة 6: أدوات الاستفهام", "sub": "WH Questions", "words": [{"en": "opinion", "ar": "رأي", "phon": "أوپينيون", "sen": "What is your opinion?", "senm": "ما هو رأيك؟", "id": "c6_w0", "related": [], "emoji": "💭"}, {"en": "your", "ar": "الخاص بك", "phon": "يور", "sen": "What is your opinion?", "senm": "ما هو رأيك؟", "id": "c6_w1", "related": [], "emoji": "🫵"}, {"en": "dragon", "ar": "تنين", "phon": "دراجون", "sen": "Where are my dragons?", "senm": "أين التنانين الخاصين بي؟", "id": "c6_w2", "related": [], "emoji": "🐉"}, {"en": "these", "ar": "هؤلاء", "phon": "ذيز", "sen": "Who are these men?", "senm": "من هؤلاء الرجال؟", "id": "c6_w3", "related": [], "emoji": "👉"}, {"en": "men", "ar": "رجال", "phon": "مِن", "sen": "Who are these men?", "senm": "من هؤلاء الرجال؟", "id": "c6_w4", "related": [], "emoji": "👨‍👨‍👦"}, {"en": "birthday", "ar": "عيد ميلاد", "phon": "بيرثداي", "sen": "When is your birthday?", "senm": "متى يوم ميلادك؟", "id": "c6_w5", "related": [], "emoji": "🎂"}, {"en": "eye", "ar": "عين", "phon": "آي", "sen": "Why are your eyes so wide?", "senm": "لماذا عيونك واسعة جدًا؟", "id": "c6_w6", "related": [], "emoji": "👁️"}, {"en": "so", "ar": "جدًا/إذًا", "phon": "سو", "sen": "Why are your eyes so wide?", "senm": "لماذا عيونك واسعة جدًا؟", "id": "c6_w7", "related": [], "emoji": "➡️"}, {"en": "wide", "ar": "واسع", "phon": "وايد", "sen": "Why are your eyes so wide?", "senm": "لماذا عيونك واسعة جدًا؟", "id": "c6_w8", "related": [], "emoji": "↔️"}, {"en": "here", "ar": "هنا", "phon": "هير", "sen": "Why is she here?", "senm": "لماذا هي هنا؟", "id": "c6_w9", "related": [], "emoji": "📍"}, {"en": "no one", "ar": "لا أحد", "phon": "نو وان", "sen": "Why is no one eating?", "senm": "لماذا لا يأكل أحد؟", "id": "c6_w10", "related": [], "emoji": "🙅"}, {"en": "eating", "ar": "يأكل (مستمر)", "phon": "إيتينج", "sen": "Why is no one eating?", "senm": "لماذا لا يأكل أحد؟", "id": "c6_w11", "related": [], "emoji": "🍽️"}, {"en": "everyone", "ar": "الجميع", "phon": "إيفريوان", "sen": "Where is everyone?", "senm": "أين الجميع؟", "id": "c6_w12", "related": [], "emoji": "👥"}, {"en": "things", "ar": "أمور/أشياء", "phon": "ثينجز", "sen": "How are things at home?", "senm": "ما الأخبار في البيت؟", "id": "c6_w13", "related": [], "emoji": "📦"}, {"en": "home", "ar": "المنزل", "phon": "هوم", "sen": "How are things at home?", "senm": "ما الأخبار في البيت؟", "id": "c6_w14", "related": [], "emoji": "🏠"}, {"en": "Egypt", "ar": "مصر", "phon": "إيجيبت", "sen": "How are things in Egypt?", "senm": "إيه الأخبار في مصر؟", "id": "c6_w15", "related": [], "emoji": "🇪🇬"}, {"en": "pencil", "ar": "قلم رصاص", "phon": "پنسل", "sen": "What is it? It is a pencil.", "senm": "ما هذا؟ إنه قلم رصاص.", "id": "c6_w16", "related": [], "emoji": "✏️"}, {"en": "teacher", "ar": "معلمة", "phon": "تيتشر", "sen": "She is my teacher.", "senm": "هي معلمتي.", "id": "c6_w17", "related": [], "emoji": "👩‍🏫"}, {"en": "new", "ar": "جديدة", "phon": "نيو", "sen": "Is she a new teacher?", "senm": "هل هي معلمة جديدة؟", "id": "c6_w18", "related": [], "emoji": "✨"}, {"en": "strong", "ar": "أقوياء", "phon": "سترونج", "sen": "Are they strong?", "senm": "هل هم أقوياء؟", "id": "c6_w19", "related": [], "emoji": "💪"}, {"en": "chef", "ar": "طاهي", "phon": "شيف", "sen": "This man is a chef.", "senm": "هذا الرجل طاهٍ.", "id": "c6_w20", "related": [], "emoji": "👨‍🍳"}, {"en": "good", "ar": "جيد", "phon": "جود", "sen": "Is it a good one?", "senm": "هل هو جيد؟", "id": "c6_w21", "related": [], "emoji": "👍"}, {"en": "one", "ar": "واحد", "phon": "وان", "sen": "Is it a good one?", "senm": "هل هو جيد؟", "id": "c6_w22", "related": [], "emoji": "1️⃣"}, {"en": "bus", "ar": "حافلة", "phon": "باص", "sen": "Are you on the bus?", "senm": "هل أنت على الحافلة؟", "id": "c6_w23", "related": [], "emoji": "🚌"}, {"en": "driver", "ar": "سائق", "phon": "درايڤر", "sen": "He is a bus driver.", "senm": "هو سائق حافلة.", "id": "c6_w24", "related": [], "emoji": "🚌"}, {"en": "sure", "ar": "متأكد", "phon": "شور", "sen": "Are you sure?", "senm": "هل أنت متأكد؟", "id": "c6_w25", "related": [], "emoji": "👍"}, {"en": "party", "ar": "حفلة", "phon": "پارتي", "sen": "When is the party?", "senm": "متى الحفلة؟", "id": "c6_w26", "related": [], "emoji": "🎉"}, {"en": "tomorrow", "ar": "غدًا", "phon": "تومورو", "sen": "The party is tomorrow at six.", "senm": "الحفلة غدًا الساعة السادسة.", "id": "c6_w27", "related": [], "emoji": "📅"}, {"en": "six", "ar": "ستة", "phon": "سيكس", "sen": "The party is tomorrow at six.", "senm": "الحفلة غدًا الساعة السادسة.", "id": "c6_w28", "related": [], "emoji": "6️⃣"}, {"en": "excited", "ar": "متحمس", "phon": "إكسايتد", "sen": "Are you excited about it?", "senm": "هل أنت متحمس بشأن ذلك؟", "id": "c6_w29", "related": [], "emoji": "🤩"}, {"en": "about", "ar": "بشأن", "phon": "أباوت", "sen": "Are you excited about it?", "senm": "هل أنت متحمس بشأن ذلك؟", "id": "c6_w30", "related": [], "emoji": "💬"}, {"en": "park", "ar": "حديقة عامة", "phon": "پارك", "sen": "Mike and Zac are at the park.", "senm": "مايك وزاك في الحديقة.", "id": "c6_w31", "related": [], "emoji": "🏞️"}], "rule": "أدوات الاستفهام (What, Where, Who, When, Why, How) توضع في أول الجملة، ويليها مباشرة <b>am/is/are</b>.", "level": 1}, {"id": "c7", "title": "حلقة 7: الصفات", "sub": "Adjectives", "words": [{"en": "girl", "ar": "بنت", "phon": "جيرل", "sen": "She is a beautiful girl.", "senm": "هي فتاة جميلة.", "id": "c7_w0", "related": ["c7_w1"], "emoji": "👧"}, {"en": "girls", "ar": "بنات", "phon": "جيرلز", "sen": "They are beautiful girls.", "senm": "إنهم فتيات جميلات.", "id": "c7_w1", "related": ["c7_w0"], "emoji": "👧"}, {"en": "very", "ar": "جدًا", "phon": "ڤيري", "sen": "He is very angry.", "senm": "هو غاضب جدًا.", "id": "c7_w2", "related": [], "emoji": "❗"}, {"en": "angry", "ar": "غاضب", "phon": "أنجري", "sen": "He is very angry.", "senm": "هو غاضب جدًا.", "id": "c7_w3", "related": [], "emoji": "😠"}, {"en": "men", "ar": "رجال", "phon": "مِن", "sen": "They are rich men.", "senm": "إنهم رجال أغنياء.", "id": "c7_w4", "related": [], "emoji": "👨‍👨‍👦"}, {"en": "interesting", "ar": "مشوق", "phon": "إنترستنج", "sen": "This book is interesting.", "senm": "هذا الكتاب مشوق.", "id": "c7_w5", "related": [], "emoji": "🧐"}, {"en": "bullet", "ar": "رصاصة", "phon": "بوليت", "sen": "Like an angry bullet.", "senm": "مثل رصاصة غاضبة.", "id": "c7_w6", "related": [], "emoji": "🔫"}, {"en": "tall", "ar": "طويل", "phon": "تول", "sen": "A tall child.", "senm": "طفل طويل.", "id": "c7_w7", "related": [], "emoji": "📏"}, {"en": "child", "ar": "طفل", "phon": "تشايلد", "sen": "A tall child.", "senm": "طفل طويل.", "id": "c7_w8", "related": [], "emoji": "🧒"}, {"en": "wow", "ar": "واو", "phon": "واو", "sen": "Wow, you are ugly.", "senm": "واو، أنت قبيح.", "id": "c7_w9", "related": [], "emoji": "😮"}, {"en": "ugly", "ar": "قبيح", "phon": "أَجلي", "sen": "Wow, you are ugly.", "senm": "واو، أنت قبيح.", "id": "c7_w10", "related": [], "emoji": "🙈"}, {"en": "start", "ar": "يبدأ", "phon": "ستارت", "sen": "Start a new life, a good life.", "senm": "ابدأ حياة جديدة، حياة جيدة.", "id": "c7_w11", "related": [], "emoji": "▶️"}, {"en": "life", "ar": "حياة", "phon": "لايف", "sen": "Start a new life, a good life.", "senm": "ابدأ حياة جديدة، حياة جيدة.", "id": "c7_w12", "related": [], "emoji": "✨"}, {"en": "strong", "ar": "أقوياء", "phon": "سترونج", "sen": "Strong men also cry.", "senm": "الرجال الأقوياء أيضًا يبكون.", "id": "c7_w13", "related": [], "emoji": "💪"}, {"en": "also", "ar": "أيضًا", "phon": "أولسو", "sen": "Strong men also cry.", "senm": "الرجال الأقوياء أيضًا يبكون.", "id": "c7_w14", "related": [], "emoji": "➕"}, {"en": "cry", "ar": "يبكي", "phon": "كراي", "sen": "Strong men also cry.", "senm": "الرجال الأقوياء أيضًا يبكون.", "id": "c7_w15", "related": [], "emoji": "😢"}, {"en": "spot", "ar": "بقعة", "phon": "سپوت", "sen": "This is an ugly spot.", "senm": "هذه بقعة قبيحة.", "id": "c7_w16", "related": [], "emoji": "📍"}, {"en": "made", "ar": "صنع", "phon": "ميد", "sen": "I made a new friend.", "senm": "أنا كسبت صديق جديد.", "id": "c7_w17", "related": [], "emoji": "🛠️"}, {"en": "universe", "ar": "كون", "phon": "يونيڤرس", "sen": "It is a big universe.", "senm": "أنه كون كبير.", "id": "c7_w18", "related": [], "emoji": "🌌"}, {"en": "can", "ar": "يستطيع", "phon": "كان", "sen": "We can learn a lot from hardworking people.", "senm": "نتعلم كثيرًا من الناس المجتهدين.", "id": "c7_w19", "related": [], "emoji": "💪"}, {"en": "learn", "ar": "يتعلم", "phon": "ليرن", "sen": "We can learn a lot from hardworking people.", "senm": "نتعلم كثيرًا من الناس المجتهدين.", "id": "c7_w20", "related": [], "emoji": "📖"}, {"en": "a lot", "ar": "الكثير", "phon": "أ لوت", "sen": "We can learn a lot from hardworking people.", "senm": "نتعلم كثيرًا من الناس المجتهدين.", "id": "c7_w21", "related": [], "emoji": "📈"}, {"en": "from", "ar": "من", "phon": "فروم", "sen": "We can learn a lot from hardworking people.", "senm": "نتعلم كثيرًا من الناس المجتهدين.", "id": "c7_w22", "related": [], "emoji": "⬅️"}, {"en": "hardworking", "ar": "مجتهد", "phon": "هارد ووركنج", "sen": "We can learn a lot from hardworking people.", "senm": "نتعلم كثيرًا من الناس المجتهدين.", "id": "c7_w23", "related": [], "emoji": "💪"}, {"en": "people", "ar": "ناس", "phon": "پيپل", "sen": "We can learn a lot from hardworking people.", "senm": "نتعلم كثيرًا من الناس المجتهدين.", "id": "c7_w24", "related": [], "emoji": "👥"}, {"en": "has", "ar": "لديه/لديها", "phon": "هاز", "sen": "My friend has beautiful handwriting.", "senm": "لدى صديقي خط جميل.", "id": "c7_w25", "related": [], "emoji": "🤲"}, {"en": "handwriting", "ar": "خط اليد", "phon": "هاند رايتنج", "sen": "My friend has beautiful handwriting.", "senm": "لدى صديقي خط جميل.", "id": "c7_w26", "related": [], "emoji": "✍️"}, {"en": "children", "ar": "أطفال", "phon": "تشيلدرن", "sen": "The children have clean uniforms.", "senm": "الأطفال لديهم زي نظيف.", "id": "c7_w27", "related": [], "emoji": "🧒"}, {"en": "have", "ar": "لديهم", "phon": "هاڤ", "sen": "The children have clean uniforms.", "senm": "الأطفال لديهم زي نظيف.", "id": "c7_w28", "related": [], "emoji": "🤲"}, {"en": "uniform", "ar": "زي موحد", "phon": "يونيفورم", "sen": "The children have clean uniforms.", "senm": "الأطفال لديهم زي نظيف.", "id": "c7_w29", "related": [], "emoji": "🎽"}, {"en": "clean", "ar": "نظيف", "phon": "كلين", "sen": "The children have clean uniforms.", "senm": "الأطفال لديهم زي نظيف.", "id": "c7_w30", "related": [], "emoji": "🧼"}], "rule": "الصفة في الإنجليزية لا تتغير مع الجمع، وتُوضع <b>قبل</b> الاسم الموصوف مباشرة (a beautiful girl).", "level": 1}, {"id": "c8", "title": "حلقة 8: الأسماء المعدودة والغير معدودة", "sub": "Countable & Uncountable Nouns", "words": [{"en": "cat", "ar": "قطة", "phon": "كات", "sen": "This is a cat.", "senm": "هذه قطة.", "id": "c8_w0", "related": ["c8_w1"], "emoji": "🐱"}, {"en": "cats", "ar": "قطط", "phon": "كاتس", "sen": "These are cats.", "senm": "هذه قطط.", "id": "c8_w1", "related": ["c8_w0"], "emoji": "🐱"}, {"en": "cheese", "ar": "جبنة", "phon": "تشيز", "sen": "Is that goat cheese?", "senm": "هل تلك جبنة ماعز؟", "id": "c8_w2", "related": [], "emoji": "🧀"}, {"en": "goat", "ar": "ماعز", "phon": "جوت", "sen": "Is that goat cheese?", "senm": "هل تلك جبنة ماعز؟", "id": "c8_w3", "related": [], "emoji": "🐐"}, {"en": "butter", "ar": "زبدة", "phon": "باتر", "sen": "You know I can't eat butter.", "senm": "أنت تعرف أنني لا أستطيع أن أكل الزبد.", "id": "c8_w4", "related": [], "emoji": "🧈"}, {"en": "know", "ar": "يعرف", "phon": "نو", "sen": "You know I can't eat butter.", "senm": "أنت تعرف أنني لا أستطيع أن أكل الزبد.", "id": "c8_w5", "related": [], "emoji": "🧠"}, {"en": "can't", "ar": "لا يستطيع", "phon": "كانت", "sen": "You know I can't eat butter.", "senm": "أنت تعرف أنني لا أستطيع أن أكل الزبد.", "id": "c8_w6", "related": [], "emoji": "🚫"}, {"en": "food", "ar": "طعام", "phon": "فود", "sen": "I need food.", "senm": "أنا احتاج طعام.", "id": "c8_w7", "related": [], "emoji": "🍽️"}, {"en": "need", "ar": "يحتاج", "phon": "نيد", "sen": "I need food.", "senm": "أنا احتاج طعام.", "id": "c8_w8", "related": [], "emoji": "🙏"}, {"en": "it's", "ar": "إنه", "phon": "إتس", "sen": "It's apple juice.", "senm": "إنه عصير تفاح.", "id": "c8_w9", "related": [], "emoji": "ℹ️"}, {"en": "juice", "ar": "عصير", "phon": "جوس", "sen": "It's apple juice.", "senm": "إنه عصير تفاح.", "id": "c8_w10", "related": [], "emoji": "🧃"}, {"en": "now", "ar": "الآن", "phon": "ناو", "sen": "Now all I have is cold milk.", "senm": "الآن كل ما لدي هو لبن بارد.", "id": "c8_w11", "related": [], "emoji": "⏰"}, {"en": "all", "ar": "كل", "phon": "أول", "sen": "Now all I have is cold milk.", "senm": "الآن كل ما لدي هو لبن بارد.", "id": "c8_w12", "related": [], "emoji": "💯"}, {"en": "cold", "ar": "بارد", "phon": "كولد", "sen": "Now all I have is cold milk.", "senm": "الآن كل ما لدي هو لبن بارد.", "id": "c8_w13", "related": [], "emoji": "🥶"}, {"en": "milk", "ar": "حليب", "phon": "ميلك", "sen": "Now all I have is cold milk.", "senm": "الآن كل ما لدي هو لبن بارد.", "id": "c8_w14", "related": [], "emoji": "🥛"}, {"en": "give", "ar": "يعطي", "phon": "جيڤ", "sen": "Give me a chair please.", "senm": "اعطني كرسي من فضلك.", "id": "c8_w15", "related": [], "emoji": "🎁"}, {"en": "chair", "ar": "كرسي", "phon": "تشير", "sen": "Give me a chair please.", "senm": "اعطني كرسي من فضلك.", "id": "c8_w16", "related": [], "emoji": "🪑"}, {"en": "sugar", "ar": "سكر", "phon": "شوجر", "sen": "Give me sugar.", "senm": "اعطني سكر.", "id": "c8_w17", "related": [], "emoji": "🍬"}, {"en": "come", "ar": "يأتي", "phon": "كَم", "sen": "You come with us to Cairo.", "senm": "أنت تأتي معنا إلى القاهرة.", "id": "c8_w18", "related": [], "emoji": "🚶"}, {"en": "with", "ar": "مع", "phon": "ويذ", "sen": "You come with us to Cairo.", "senm": "أنت تأتي معنا إلى القاهرة.", "id": "c8_w19", "related": [], "emoji": "🤝"}, {"en": "us", "ar": "نا (مفعول)", "phon": "أَس", "sen": "You come with us to Cairo.", "senm": "أنت تأتي معنا إلى القاهرة.", "id": "c8_w20", "related": [], "emoji": "🙌"}, {"en": "Cairo", "ar": "القاهرة", "phon": "كايرو", "sen": "You come with us to Cairo.", "senm": "أنت تأتي معنا إلى القاهرة.", "id": "c8_w21", "related": [], "emoji": "🕌"}, {"en": "three", "ar": "ثلاثة", "phon": "ثري", "sen": "We have three cows and twelve chickens.", "senm": "لدينا 3 بقرات واثنتا عشرة دجاجة.", "id": "c8_w22", "related": [], "emoji": "3️⃣"}, {"en": "cow", "ar": "بقرة", "phon": "كاو", "sen": "We have three cows and twelve chickens.", "senm": "لدينا 3 بقرات واثنتا عشرة دجاجة.", "id": "c8_w23", "related": [], "emoji": "🐄"}, {"en": "and", "ar": "و", "phon": "آند", "sen": "We have three cows and twelve chickens.", "senm": "لدينا 3 بقرات واثنتا عشرة دجاجة.", "id": "c8_w24", "related": [], "emoji": "➕"}, {"en": "twelve", "ar": "اثنا عشر", "phon": "توِلف", "sen": "We have three cows and twelve chickens.", "senm": "لدينا 3 بقرات واثنتا عشرة دجاجة.", "id": "c8_w25", "related": [], "emoji": "🔟"}, {"en": "chicken", "ar": "دجاجة", "phon": "تشيكن", "sen": "It's a chicken.", "senm": "أنها دجاجة.", "id": "c8_w26", "related": [], "emoji": "🍗"}, {"en": "our", "ar": "الخاص بنا", "phon": "آور", "sen": "We have cows and chickens in our farm.", "senm": "لدينا أبقار ودجاج في مزرعتنا.", "id": "c8_w27", "related": [], "emoji": "🙌"}, {"en": "farm", "ar": "مزرعة", "phon": "فارم", "sen": "We have cows and chickens in our farm.", "senm": "لدينا أبقار ودجاج في مزرعتنا.", "id": "c8_w28", "related": [], "emoji": "🚜"}, {"en": "made", "ar": "أعدّ", "phon": "ميد", "sen": "I made chicken.", "senm": "لقد اعدت دجاج.", "id": "c8_w29", "related": [], "emoji": "🛠️"}, {"en": "found", "ar": "وجد", "phon": "فاوند", "sen": "I found two hairs in my food.", "senm": "لقد وجدت شعرتان في طعامي.", "id": "c8_w30", "related": [], "emoji": "🔍"}, {"en": "two", "ar": "اثنان", "phon": "تو", "sen": "I found two hairs in my food.", "senm": "لقد وجدت شعرتان في طعامي.", "id": "c8_w31", "related": [], "emoji": "2️⃣"}, {"en": "hair", "ar": "شعرة", "phon": "هير", "sen": "I found two hairs in my food.", "senm": "لقد وجدت شعرتان في طعامي.", "id": "c8_w32", "related": [], "emoji": "💇"}, {"en": "want", "ar": "يريد", "phon": "وونت", "sen": "I want a coffee.", "senm": "أريد 1 قهوة.", "id": "c8_w33", "related": [], "emoji": "🙋"}, {"en": "coffee", "ar": "قهوة", "phon": "كوفي", "sen": "I want a coffee.", "senm": "أريد 1 قهوة.", "id": "c8_w34", "related": ["c8_w38"], "emoji": "☕"}, {"en": "do", "ar": "فعل مساعد", "phon": "دو", "sen": "Do you like coffee?", "senm": "هل تحب القهوة؟", "id": "c8_w35", "related": [], "emoji": "✅"}, {"en": "like", "ar": "يحب", "phon": "لايك", "sen": "Do you like coffee?", "senm": "هل تحب القهوة؟", "id": "c8_w36", "related": [], "emoji": "👍"}, {"en": "guys", "ar": "يا رفاق", "phon": "جايز", "sen": "So you guys want coffees?", "senm": "إذا يا رفاق أتريدون قهوة؟", "id": "c8_w37", "related": [], "emoji": "🧑‍🤝‍🧑"}, {"en": "coffees", "ar": "أكواب قهوة", "phon": "كوفيز", "sen": "So you guys want coffees?", "senm": "إذا يا رفاق أتريدون قهوة؟", "id": "c8_w38", "related": ["c8_w34"], "emoji": "☕"}, {"en": "hair", "ar": "شعر", "phon": "هير", "sen": "I think I found hair in my food!", "senm": "أظن أني وجدت شعرًا في طعامي!", "id": "c8_w39", "related": [], "emoji": "💇"}, {"en": "smile", "ar": "ابتسامة", "phon": "سمايل", "sen": "The boy has a cute smile.", "senm": "الولد لديه ابتسامة لطيفة.", "id": "c8_w40", "related": [], "emoji": "😊"}, {"en": "would", "ar": "تود", "phon": "وود", "sen": "I would like to travel to Brazil.", "senm": "أود أن أسافر إلى البرازيل.", "id": "c8_w41", "related": [], "emoji": "💭"}, {"en": "travel", "ar": "يسافر", "phon": "ترافل", "sen": "I would like to travel to Brazil.", "senm": "أود أن أسافر إلى البرازيل.", "id": "c8_w42", "related": [], "emoji": "✈️"}, {"en": "Brazil", "ar": "البرازيل", "phon": "برازيل", "sen": "I would like to travel to Brazil.", "senm": "أود أن أسافر إلى البرازيل.", "id": "c8_w43", "related": [], "emoji": "🇧🇷"}, {"en": "mom", "ar": "أمي", "phon": "مُم", "sen": "Mom made soup for dinner.", "senm": "أمي أعدت حساء للعشاء.", "id": "c8_w44", "related": [], "emoji": "👩"}, {"en": "dinner", "ar": "عشاء", "phon": "دينر", "sen": "Mom made soup for dinner.", "senm": "أمي أعدت حساء للعشاء.", "id": "c8_w45", "related": [], "emoji": "🍽️"}, {"en": "soup", "ar": "حساء", "phon": "سوب", "sen": "Mom made soup for dinner.", "senm": "أمي أعدت حساء للعشاء.", "id": "c8_w46", "related": [], "emoji": "🍲"}, {"en": "alone", "ar": "وحيدًا", "phon": "ألون", "sen": "Leave me alone. I don't drink soda.", "senm": "اتركني وحدي. أنا لا أشرب صودا.", "id": "c8_w47", "related": [], "emoji": "🧍"}, {"en": "soda", "ar": "صودا", "phon": "سودا", "sen": "I don't drink soda.", "senm": "أنا لا أشرب صودا.", "id": "c8_w48", "related": [], "emoji": "🥤"}], "rule": "الاسم المعدود له مفرد وجمع (a cat / cats)، أما الاسم الغير معدود فلا يُجمع ولا تُستخدم معه a/an (milk, food).", "level": 1}, {"id": "c9", "title": "حلقة 9: جمع الأسماء", "sub": "Plural Nouns (s / es / ies)", "words": [{"en": "tree", "ar": "شجرة", "phon": "تري", "sen": "tree — trees", "senm": "شجرة — أشجار", "id": "c9_w0", "related": ["c9_w1"], "emoji": "🌳"}, {"en": "trees", "ar": "أشجار", "phon": "تريز", "sen": "tree — trees", "senm": "شجرة — أشجار", "id": "c9_w1", "related": ["c9_w0"], "emoji": "🌳"}, {"en": "game", "ar": "لعبة", "phon": "جيم", "sen": "game — games", "senm": "لعبة — ألعاب", "id": "c9_w2", "related": ["c9_w3"], "emoji": "🎮"}, {"en": "games", "ar": "ألعاب", "phon": "جيمز", "sen": "game — games", "senm": "لعبة — ألعاب", "id": "c9_w3", "related": ["c9_w2"], "emoji": "🎮"}, {"en": "bus", "ar": "حافلة", "phon": "باص", "sen": "bus — buses", "senm": "حافلة — حافلات", "id": "c9_w4", "related": ["c9_w5"], "emoji": "🚌"}, {"en": "buses", "ar": "حافلات", "phon": "باصز", "sen": "bus — buses", "senm": "حافلة — حافلات", "id": "c9_w5", "related": ["c9_w4"], "emoji": "🚌"}, {"en": "dish", "ar": "طبق", "phon": "ديش", "sen": "dish — dishes", "senm": "طبق — أطباق", "id": "c9_w6", "related": ["c9_w7"], "emoji": "🍽️"}, {"en": "dishes", "ar": "أطباق", "phon": "ديشز", "sen": "dish — dishes", "senm": "طبق — أطباق", "id": "c9_w7", "related": ["c9_w6"], "emoji": "🍽️"}, {"en": "church", "ar": "كنيسة", "phon": "تشيرتش", "sen": "church — churches", "senm": "كنيسة — كنائس", "id": "c9_w8", "related": ["c9_w9"], "emoji": "⛪"}, {"en": "churches", "ar": "كنائس", "phon": "تشيرتشز", "sen": "church — churches", "senm": "كنيسة — كنائس", "id": "c9_w9", "related": ["c9_w8"], "emoji": "⛪"}, {"en": "fox", "ar": "ثعلب", "phon": "فوكس", "sen": "fox — foxes", "senm": "ثعلب — ثعالب", "id": "c9_w10", "related": ["c9_w11"], "emoji": "🦊"}, {"en": "foxes", "ar": "ثعالب", "phon": "فوكسز", "sen": "fox — foxes", "senm": "ثعلب — ثعالب", "id": "c9_w11", "related": ["c9_w10"], "emoji": "🦊"}, {"en": "quiz", "ar": "اختبار قصير", "phon": "كويز", "sen": "quiz — quizzes", "senm": "اختبار — اختبارات", "id": "c9_w12", "related": [], "emoji": "❓"}, {"en": "quizzes", "ar": "اختبارات", "phon": "كويززز", "sen": "quiz — quizzes", "senm": "اختبار — اختبارات", "id": "c9_w13", "related": [], "emoji": "❓"}, {"en": "stomach", "ar": "معدة", "phon": "ستَمِك", "sen": "stomach — stomachs", "senm": "معدة — معدات", "id": "c9_w14", "related": ["c9_w15"], "emoji": "🫃"}, {"en": "stomachs", "ar": "معدات", "phon": "ستَمِكس", "sen": "stomach — stomachs", "senm": "معدة — معدات", "id": "c9_w15", "related": ["c9_w14"], "emoji": "🫃"}, {"en": "piano", "ar": "بيانو", "phon": "پيانو", "sen": "piano — pianos", "senm": "بيانو — بيانوهات", "id": "c9_w16", "related": ["c9_w17"], "emoji": "🎹"}, {"en": "pianos", "ar": "بيانوهات", "phon": "پيانوز", "sen": "piano — pianos", "senm": "بيانو — بيانوهات", "id": "c9_w17", "related": ["c9_w16"], "emoji": "🎹"}, {"en": "buffalo", "ar": "جاموس", "phon": "بافالو", "sen": "buffalo — buffalos / buffaloes", "senm": "جاموس — جواميس", "id": "c9_w18", "related": ["c9_w19"], "emoji": "🐃"}, {"en": "buffalos", "ar": "جواميس", "phon": "بافالوز", "sen": "buffalo — buffalos / buffaloes", "senm": "جاموس — جواميس", "id": "c9_w19", "related": ["c9_w18"], "emoji": "🐃"}, {"en": "potato", "ar": "بطاطا", "phon": "پوتيتو", "sen": "potato — potatoes", "senm": "بطاطا — بطاطا (جمع)", "id": "c9_w20", "related": ["c9_w21"], "emoji": "🥔"}, {"en": "potatoes", "ar": "بطاطا (جمع)", "phon": "پوتيتوز", "sen": "potato — potatoes", "senm": "بطاطا — بطاطا (جمع)", "id": "c9_w21", "related": ["c9_w20"], "emoji": "🥔"}, {"en": "cherry", "ar": "كرز", "phon": "تشيري", "sen": "cherry — cherries", "senm": "كرز — كرز (جمع)", "id": "c9_w22", "related": ["c9_w23"], "emoji": "🍒"}, {"en": "cherries", "ar": "كرز (جمع)", "phon": "تشيريز", "sen": "cherry — cherries", "senm": "كرز — كرز (جمع)", "id": "c9_w23", "related": ["c9_w22"], "emoji": "🍒"}, {"en": "lady", "ar": "سيدة", "phon": "ليدي", "sen": "lady — ladies", "senm": "سيدة — سيدات", "id": "c9_w24", "related": ["c9_w25"], "emoji": "👩"}, {"en": "ladies", "ar": "سيدات", "phon": "ليديز", "sen": "lady — ladies", "senm": "سيدة — سيدات", "id": "c9_w25", "related": ["c9_w24"], "emoji": "👩‍👩‍👧"}, {"en": "family", "ar": "عائلة", "phon": "فاميلي", "sen": "family — families", "senm": "عائلة — عائلات", "id": "c9_w26", "related": ["c9_w27"], "emoji": "👪"}, {"en": "families", "ar": "عائلات", "phon": "فاميليز", "sen": "family — families", "senm": "عائلة — عائلات", "id": "c9_w27", "related": ["c9_w26"], "emoji": "👪"}, {"en": "boy", "ar": "ولد", "phon": "بوي", "sen": "boy — boys", "senm": "ولد — أولاد", "id": "c9_w28", "related": ["c9_w29"], "emoji": "👦"}, {"en": "boys", "ar": "أولاد", "phon": "بويز", "sen": "boy — boys", "senm": "ولد — أولاد", "id": "c9_w29", "related": ["c9_w28"], "emoji": "👦"}, {"en": "monkey", "ar": "قرد", "phon": "مانكي", "sen": "monkey — monkeys", "senm": "قرد — قرود", "id": "c9_w30", "related": ["c9_w31"], "emoji": "🐒"}, {"en": "monkeys", "ar": "قرود", "phon": "مانكيز", "sen": "monkey — monkeys", "senm": "قرد — قرود", "id": "c9_w31", "related": ["c9_w30"], "emoji": "🐒"}, {"en": "wife", "ar": "زوجة", "phon": "وايف", "sen": "wife — wives", "senm": "زوجة — زوجات", "id": "c9_w32", "related": [], "emoji": "👰"}, {"en": "wives", "ar": "زوجات", "phon": "وايڤز", "sen": "wife — wives", "senm": "زوجة — زوجات", "id": "c9_w33", "related": [], "emoji": "👰"}, {"en": "thief", "ar": "لص", "phon": "ثيف", "sen": "thief — thieves", "senm": "لص — لصوص", "id": "c9_w34", "related": [], "emoji": "🥷"}, {"en": "thieves", "ar": "لصوص", "phon": "ثيڤز", "sen": "thief — thieves", "senm": "لص — لصوص", "id": "c9_w35", "related": [], "emoji": "🥷"}, {"en": "leaf", "ar": "ورقة شجر", "phon": "ليف", "sen": "leaf — leaves", "senm": "ورقة شجر — أوراق شجر", "id": "c9_w36", "related": [], "emoji": "🍂"}, {"en": "leaves", "ar": "أوراق شجر", "phon": "ليڤز", "sen": "leaf — leaves", "senm": "ورقة شجر — أوراق شجر", "id": "c9_w37", "related": [], "emoji": "🍂"}, {"en": "chief", "ar": "رئيس", "phon": "تشيف", "sen": "chief — chiefs", "senm": "رئيس — رؤساء", "id": "c9_w38", "related": ["c9_w39"], "emoji": "👑"}, {"en": "chiefs", "ar": "رؤساء", "phon": "تشيفس", "sen": "chief — chiefs", "senm": "رئيس — رؤساء", "id": "c9_w39", "related": ["c9_w38"], "emoji": "👑"}, {"en": "chef", "ar": "طاهي", "phon": "شيف", "sen": "chef — chefs", "senm": "طاهي — طهاة", "id": "c9_w40", "related": ["c9_w41"], "emoji": "👨‍🍳"}, {"en": "chefs", "ar": "طهاة", "phon": "شيفس", "sen": "chef — chefs", "senm": "طاهي — طهاة", "id": "c9_w41", "related": ["c9_w40"], "emoji": "👨‍🍳"}, {"en": "foot", "ar": "قدم", "phon": "فوت", "sen": "foot — feet", "senm": "قدم — أقدام", "id": "c9_w42", "related": [], "emoji": "🦶"}, {"en": "feet", "ar": "أقدام", "phon": "فيت", "sen": "foot — feet", "senm": "قدم — أقدام", "id": "c9_w43", "related": [], "emoji": "🦶"}, {"en": "man", "ar": "رجل", "phon": "مان", "sen": "man — men", "senm": "رجل — رجال", "id": "c9_w44", "related": [], "emoji": "👨"}, {"en": "men", "ar": "رجال", "phon": "مِن", "sen": "man — men", "senm": "رجل — رجال", "id": "c9_w45", "related": [], "emoji": "👨‍👨‍👦"}, {"en": "mouse", "ar": "فأر", "phon": "ماوس", "sen": "mouse — mice", "senm": "فأر — فئران", "id": "c9_w46", "related": [], "emoji": "🐭"}, {"en": "mice", "ar": "فئران", "phon": "مايس", "sen": "mouse — mice", "senm": "فأر — فئران", "id": "c9_w47", "related": [], "emoji": "🐭"}, {"en": "fish", "ar": "سمكة", "phon": "فيش", "sen": "fish — fish", "senm": "سمكة — سمك (جمع)", "id": "c9_w48", "related": [], "emoji": "🐟"}, {"en": "deer", "ar": "غزال", "phon": "ديير", "sen": "deer — deer", "senm": "غزال — غزلان (جمع)", "id": "c9_w49", "related": [], "emoji": "🦌"}, {"en": "sheep", "ar": "خروف", "phon": "شيپ", "sen": "sheep — sheep", "senm": "خروف — أغنام (جمع)", "id": "c9_w50", "related": [], "emoji": "🐑"}, {"en": "crisis", "ar": "أزمة", "phon": "كرايسِس", "sen": "crisis — crises", "senm": "أزمة — أزمات", "id": "c9_w51", "related": [], "emoji": "🔥"}, {"en": "crises", "ar": "أزمات", "phon": "كرايسيز", "sen": "crisis — crises", "senm": "أزمة — أزمات", "id": "c9_w52", "related": [], "emoji": "🔥"}, {"en": "analysis", "ar": "تحليل", "phon": "أناليسِس", "sen": "analysis — analyses", "senm": "تحليل — تحليلات", "id": "c9_w53", "related": [], "emoji": "🔬"}, {"en": "analyses", "ar": "تحليلات", "phon": "أناليسيز", "sen": "analysis — analyses", "senm": "تحليل — تحليلات", "id": "c9_w54", "related": [], "emoji": "🔬"}], "rule": "لجمع الاسم المعدود نضيف <b>s</b> عادة، و<b>es</b> بعد الأصوات s/sh/ch/x/z، و<b>y</b> تتحول لـ <b>ies</b> إذا سبقها حرف ساكن.", "level": 1}, {"id": "c10", "title": "حلقة 10: الكميات", "sub": "Many / Much / A lot of / Some / Any", "words": [{"en": "bad", "ar": "سيء", "phon": "باد", "sen": "Don't drink much coffee, it's bad for you.", "senm": "لا تشرب الكثير من القهوة، إنه سيء لك.", "id": "c10_w0", "related": [], "emoji": "👎"}, {"en": "for", "ar": "لـ", "phon": "فور", "sen": "Don't drink much coffee, it's bad for you.", "senm": "لا تشرب الكثير من القهوة، إنه سيء لك.", "id": "c10_w1", "related": [], "emoji": "➡️"}, {"en": "were", "ar": "كانوا", "phon": "وير", "sen": "There were many people in the zoo.", "senm": "كان هناك الكثير من الأشخاص في حديقة الحيوان.", "id": "c10_w2", "related": [], "emoji": "⏪"}, {"en": "zoo", "ar": "حديقة حيوان", "phon": "زو", "sen": "There were many people in the zoo.", "senm": "كان هناك الكثير من الأشخاص في حديقة الحيوان.", "id": "c10_w3", "related": [], "emoji": "🦁"}, {"en": "please", "ar": "من فضلك", "phon": "بليز", "sen": "Please add a little salt to the salad.", "senm": "من فضلك أضف قليلًا من الملح للسلطة.", "id": "c10_w4", "related": [], "emoji": "🙏"}, {"en": "add", "ar": "يضيف", "phon": "آد", "sen": "Please add a little salt to the salad.", "senm": "من فضلك أضف قليلًا من الملح للسلطة.", "id": "c10_w5", "related": [], "emoji": "➕"}, {"en": "salt", "ar": "ملح", "phon": "سولت", "sen": "Please add a little salt to the salad.", "senm": "من فضلك أضف قليلًا من الملح للسلطة.", "id": "c10_w6", "related": [], "emoji": "🧂"}, {"en": "salad", "ar": "سلطة", "phon": "سالد", "sen": "Please add a little salt to the salad.", "senm": "من فضلك أضف قليلًا من الملح للسلطة.", "id": "c10_w7", "related": [], "emoji": "🥗"}, {"en": "idea", "ar": "فكرة", "phon": "آيديا", "sen": "Do you have any idea how much this costs?", "senm": "هل لديك أي فكرة كم يكلف هذا؟", "id": "c10_w8", "related": [], "emoji": "💡"}, {"en": "costs", "ar": "يكلف", "phon": "كوستس", "sen": "Do you have any idea how much this costs?", "senm": "هل لديك أي فكرة كم يكلف هذا؟", "id": "c10_w9", "related": [], "emoji": "💲"}, {"en": "doesn't", "ar": "لا (هو/هي)", "phon": "دَزنت", "sen": "He doesn't have any money.", "senm": "هو لا يمتلك أي مال.", "id": "c10_w10", "related": [], "emoji": "🚫"}, {"en": "money", "ar": "مال", "phon": "مني", "sen": "He doesn't have any money.", "senm": "هو لا يمتلك أي مال.", "id": "c10_w11", "related": [], "emoji": "💰"}, {"en": "didn't", "ar": "لم", "phon": "ديدنت", "sen": "I didn't tell anyone.", "senm": "لم اخبر أي أحد.", "id": "c10_w12", "related": [], "emoji": "🚫"}, {"en": "tell", "ar": "يخبر", "phon": "تِل", "sen": "I didn't tell anyone.", "senm": "لم اخبر أي أحد.", "id": "c10_w13", "related": [], "emoji": "🗣️"}, {"en": "anyone", "ar": "أي أحد", "phon": "إني وان", "sen": "I didn't tell anyone.", "senm": "لم اخبر أي أحد.", "id": "c10_w14", "related": [], "emoji": "❓"}, {"en": "of", "ar": "من", "phon": "أوف", "sen": "He doesn't know some of the people in this room.", "senm": "هو لا يعرف بعض الأشخاص في هذه الغرفة.", "id": "c10_w15", "related": [], "emoji": "🔗"}, {"en": "room", "ar": "غرفة", "phon": "روم", "sen": "He doesn't know some of the people in this room.", "senm": "هو لا يعرف بعض الأشخاص في هذه الغرفة.", "id": "c10_w16", "related": [], "emoji": "🚪"}, {"en": "bit", "ar": "قليل/قطعة", "phon": "بِت", "sen": "That's a bit much, don't you think?", "senm": "هل تريدني أن أفعل هذا؟ كده كتير.", "id": "c10_w17", "related": [], "emoji": "🤏"}, {"en": "work", "ar": "يعمل", "phon": "وورك", "sen": "You want me to work 10 hours a day?", "senm": "هل تريدني أن أشتغل 10 ساعات في اليوم؟", "id": "c10_w18", "related": [], "emoji": "💼"}, {"en": "hours", "ar": "ساعات", "phon": "آورز", "sen": "You want me to work 10 hours a day?", "senm": "هل تريدني أن أشتغل 10 ساعات في اليوم؟", "id": "c10_w19", "related": [], "emoji": "⏰"}, {"en": "day", "ar": "يوم", "phon": "داي", "sen": "You want me to work 10 hours a day?", "senm": "هل تريدني أن أشتغل 10 ساعات في اليوم؟", "id": "c10_w20", "related": [], "emoji": "☀️"}, {"en": "only", "ar": "فقط", "phon": "أونلي", "sen": "I only wanted to taste it.", "senm": "أنا أردت فقط أن أتذوق.", "id": "c10_w21", "related": [], "emoji": "☝️"}, {"en": "wanted", "ar": "أراد", "phon": "وونتد", "sen": "I only wanted to taste it.", "senm": "أنا أردت فقط أن أتذوق.", "id": "c10_w22", "related": [], "emoji": "🙋"}, {"en": "taste", "ar": "يتذوق", "phon": "تيست", "sen": "I only wanted to taste it.", "senm": "أنا أردت فقط أن أتذوق.", "id": "c10_w23", "related": [], "emoji": "👅"}, {"en": "too", "ar": "أكثر من اللازم", "phon": "تو", "sen": "too much on my plate", "senm": "الكثير من المشاغل", "id": "c10_w24", "related": [], "emoji": "➕"}, {"en": "plate", "ar": "صحن/مشاغل", "phon": "پليت", "sen": "I have too much on my plate.", "senm": "لدي الكثير من المشاغل.", "id": "c10_w25", "related": [], "emoji": "🍽️"}, {"en": "sorry", "ar": "آسف", "phon": "سوري", "sen": "Sorry, I can't come with you.", "senm": "آسف، لا أستطيع أن آتي معك.", "id": "c10_w26", "related": [], "emoji": "😔"}, {"en": "cooks", "ar": "طهاة", "phon": "كوكس", "sen": "Too many cooks spoil the soup.", "senm": "الكثير من الطهاة يفسدون الحساء.", "id": "c10_w27", "related": [], "emoji": "🍳"}, {"en": "spoil", "ar": "يفسد", "phon": "سپويل", "sen": "Too many cooks spoil the soup.", "senm": "الكثير من الطهاة يفسدون الحساء.", "id": "c10_w28", "related": [], "emoji": "🤢"}], "rule": "<b>many/few</b> مع المعدود، و<b>much/little</b> مع الغير معدود، و<b>a lot of/some/any</b> تصلح للاثنين.", "level": 2}, {"id": "c11", "title": "حلقة 11: صفات وضمائر الملكية", "sub": "Possessive Adjectives & Pronouns", "words": [{"en": "laptop", "ar": "حاسوب محمول", "phon": "لابتوب", "sen": "This is my laptop.", "senm": "هذا حاسوبي المحمول.", "id": "c11_w0", "related": [], "emoji": "💻"}, {"en": "elephant", "ar": "فيل", "phon": "إليفانت", "sen": "The elephant uses its trunk to drink.", "senm": "الفيل يستخدم خرطومه للشرب.", "id": "c11_w1", "related": [], "emoji": "🐘"}, {"en": "uses", "ar": "يستخدم", "phon": "يوزز", "sen": "The elephant uses its trunk to drink.", "senm": "الفيل يستخدم خرطومه للشرب.", "id": "c11_w2", "related": [], "emoji": "⚙️"}, {"en": "trunk", "ar": "خرطوم", "phon": "ترَنك", "sen": "The elephant uses its trunk to drink.", "senm": "الفيل يستخدم خرطومه للشرب.", "id": "c11_w3", "related": [], "emoji": "🐘"}, {"en": "drink", "ar": "يشرب", "phon": "درينك", "sen": "The elephant uses its trunk to drink.", "senm": "الفيل يستخدم خرطومه للشرب.", "id": "c11_w4", "related": [], "emoji": "🥤"}, {"en": "money", "ar": "مال", "phon": "مني", "sen": "Give me your money.", "senm": "أعطيني أموالك.", "id": "c11_w5", "related": [], "emoji": "💰"}, {"en": "school", "ar": "مدرسة", "phon": "سكول", "sen": "Our school is small.", "senm": "مدرستنا صغيرة.", "id": "c11_w6", "related": [], "emoji": "🏫"}, {"en": "small", "ar": "صغيرة", "phon": "سمول", "sen": "Our school is small.", "senm": "مدرستنا صغيرة.", "id": "c11_w7", "related": [], "emoji": "📏"}, {"en": "car", "ar": "سيارة", "phon": "كار", "sen": "That is his car.", "senm": "تلك سيارته.", "id": "c11_w8", "related": ["c11_w17"], "emoji": "🚗"}, {"en": "classroom", "ar": "فصل دراسي", "phon": "كلاسروم", "sen": "This is your classroom.", "senm": "هذا فصلكم.", "id": "c11_w9", "related": [], "emoji": "🏫"}, {"en": "phone", "ar": "هاتف", "phon": "فون", "sen": "Is this her new phone?", "senm": "هل هذا هاتفها الجديد؟", "id": "c11_w10", "related": [], "emoji": "📱"}, {"en": "new", "ar": "جديد", "phon": "نيو", "sen": "Is this her new phone?", "senm": "هل هذا هاتفها الجديد؟", "id": "c11_w11", "related": [], "emoji": "✨"}, {"en": "very", "ar": "جدًا", "phon": "ڤيري", "sen": "Their car is very fast.", "senm": "سيارتهم سريعة جدًا.", "id": "c11_w12", "related": [], "emoji": "❗"}, {"en": "fast", "ar": "سريعة", "phon": "فاست", "sen": "Their car is very fast.", "senm": "سيارتهم سريعة جدًا.", "id": "c11_w13", "related": [], "emoji": "⚡"}, {"en": "has", "ar": "لديه", "phon": "هاز", "sen": "It has a tail.", "senm": "لديه ذيل.", "id": "c11_w14", "related": [], "emoji": "🤲"}, {"en": "tail", "ar": "ذيل", "phon": "تيل", "sen": "It has a tail.", "senm": "لديه ذيل.", "id": "c11_w15", "related": [], "emoji": "🦁"}, {"en": "house", "ar": "منزل", "phon": "هاوس", "sen": "That house is its.", "senm": "ذلك المنزل ملكه.", "id": "c11_w16", "related": [], "emoji": "🏠"}, {"en": "cars", "ar": "سيارات", "phon": "كارز", "sen": "These cars are ours.", "senm": "هؤلاء السيارات ملكنا.", "id": "c11_w17", "related": ["c11_w8"], "emoji": "🚗"}, {"en": "box", "ar": "صندوق", "phon": "بوكس", "sen": "The box is his.", "senm": "الصندوق ملكه.", "id": "c11_w18", "related": [], "emoji": "📦"}, {"en": "ship", "ar": "سفينة", "phon": "شيپ", "sen": "This ship is not yours.", "senm": "هذه السفينة ليست ملككم.", "id": "c11_w19", "related": [], "emoji": "🚢"}, {"en": "dress", "ar": "فستان", "phon": "دريس", "sen": "This dress is hers.", "senm": "هذا الفستان ملكها.", "id": "c11_w20", "related": [], "emoji": "👗"}], "rule": "صفة الملكية (my, your, his...) تأتي قبل الاسم، وضمير الملكية (mine, yours, his...) يحل محل الاسم بالكامل.", "level": 2}, {"id": "c12", "title": "حلقة 12: ضمائر المفعول والضمائر المنعكسة", "sub": "Objective & Reflexive Pronouns", "words": [{"en": "loves", "ar": "يحب (هو/هي)", "phon": "لَڤز", "sen": "He loves me.", "senm": "هو يحبني.", "id": "c12_w0", "related": ["c12_w1"], "emoji": "❤️"}, {"en": "love", "ar": "يحب", "phon": "لَڤ", "sen": "He loves me.", "senm": "هو يحبني.", "id": "c12_w1", "related": ["c12_w0"], "emoji": "❤️"}, {"en": "feeds", "ar": "يطعم (هو/هي)", "phon": "فيدز", "sen": "He feeds it.", "senm": "هو يطعمه.", "id": "c12_w2", "related": ["c12_w3"], "emoji": "🍼"}, {"en": "feed", "ar": "يطعم", "phon": "فيد", "sen": "He feeds it.", "senm": "هو يطعمه.", "id": "c12_w3", "related": ["c12_w2"], "emoji": "🍼"}, {"en": "sings", "ar": "تغني", "phon": "سينجز", "sen": "She sings for you.", "senm": "هي تغني من أجلك.", "id": "c12_w4", "related": ["c12_w5"], "emoji": "🎤"}, {"en": "sing", "ar": "يغني", "phon": "سينج", "sen": "She will sing for them.", "senm": "هي سوف تغني من أجلهم.", "id": "c12_w5", "related": ["c12_w4"], "emoji": "🎤"}, {"en": "teaches", "ar": "يعلّم (هو/هي)", "phon": "تيتشز", "sen": "He teaches you.", "senm": "هو يعلمكم.", "id": "c12_w6", "related": ["c12_w7"], "emoji": "👨‍🏫"}, {"en": "teach", "ar": "يعلّم", "phon": "تيتش", "sen": "He teaches you.", "senm": "هو يعلمكم.", "id": "c12_w7", "related": ["c12_w6"], "emoji": "👨‍🏫"}, {"en": "helps", "ar": "يساعد (هو/هي)", "phon": "هيلپس", "sen": "He helps her.", "senm": "هو يساعدها.", "id": "c12_w8", "related": ["c12_w9"], "emoji": "🤝"}, {"en": "help", "ar": "يساعد", "phon": "هيلپ", "sen": "He helps her.", "senm": "هو يساعدها.", "id": "c12_w9", "related": ["c12_w8"], "emoji": "🤝"}, {"en": "monster", "ar": "وحش", "phon": "مونستر", "sen": "The monster itself told her.", "senm": "الوحش بنفسه أخبرها.", "id": "c12_w10", "related": [], "emoji": "👹"}, {"en": "told", "ar": "أخبر", "phon": "تولد", "sen": "The monster itself told her.", "senm": "الوحش بنفسه أخبرها.", "id": "c12_w11", "related": [], "emoji": "🗣️"}, {"en": "cut", "ar": "يجرح/يقطع", "phon": "كَت", "sen": "You will cut yourself.", "senm": "سوف تجرح نفسك.", "id": "c12_w12", "related": [], "emoji": "✂️"}, {"en": "put", "ar": "يضع", "phon": "پوت", "sen": "Don't put yourselves at risk.", "senm": "لا تعرضوا أنفسكم للمخاطرة.", "id": "c12_w13", "related": [], "emoji": "📥"}, {"en": "risk", "ar": "خطر", "phon": "ريسك", "sen": "Don't put yourselves at risk.", "senm": "لا تعرضوا أنفسكم للمخاطرة.", "id": "c12_w14", "related": [], "emoji": "⚠️"}, {"en": "president", "ar": "رئيس", "phon": "پريزيدنت", "sen": "The president himself was here.", "senm": "الرئيس بنفسه كان هنا.", "id": "c12_w15", "related": [], "emoji": "🎩"}, {"en": "was", "ar": "كان", "phon": "وَز", "sen": "The president himself was here.", "senm": "الرئيس بنفسه كان هنا.", "id": "c12_w16", "related": [], "emoji": "⏪"}, {"en": "take care", "ar": "يعتني", "phon": "تيك كير", "sen": "We take care of ourselves.", "senm": "نحن نعتني بأنفسنا.", "id": "c12_w17", "related": [], "emoji": "🤲"}, {"en": "talks", "ar": "يتحدث (هو/هي)", "phon": "توكس", "sen": "She talks to herself.", "senm": "هي تتحدث مع نفسها.", "id": "c12_w18", "related": ["c12_w19"], "emoji": "💬"}, {"en": "talk", "ar": "يتحدث", "phon": "توك", "sen": "They talk to themselves.", "senm": "هم يتحدثون مع أنفسهم.", "id": "c12_w19", "related": ["c12_w18"], "emoji": "💬"}], "rule": "ضمير المفعول به (me, you, him...) يقع بعد الفعل، والضمير المنعكس (myself, yourself...) يُستخدم عندما يعود الفعل على نفس الفاعل.", "level": 2}, {"id": "c13", "title": "حلقة 13: Whose", "sub": "لمن؟", "words": [{"en": "chair", "ar": "كرسي", "phon": "تشير", "sen": "Whose chair is this?", "senm": "لمن هذا الكرسي؟", "id": "c13_w0", "related": [], "emoji": "🪑"}, {"en": "child", "ar": "طفل", "phon": "تشايلد", "sen": "Whose child is this?", "senm": "لمن هذا الطفل؟", "id": "c13_w1", "related": [], "emoji": "🧒"}, {"en": "car", "ar": "سيارة", "phon": "كار", "sen": "Whose car is this?", "senm": "لمن هذه السيارة؟", "id": "c13_w2", "related": [], "emoji": "🚗"}, {"en": "pen", "ar": "قلم", "phon": "پن", "sen": "Whose pen is this?", "senm": "لمن هذا القلم؟", "id": "c13_w3", "related": [], "emoji": "🖊️"}, {"en": "birds", "ar": "طيور", "phon": "بيردز", "sen": "Whose birds are these?", "senm": "لمن هؤلاء الطيور؟", "id": "c13_w4", "related": [], "emoji": "🐦"}, {"en": "hat", "ar": "قبعة", "phon": "هات", "sen": "Whose hat is that?", "senm": "لمن تلك القبعة؟", "id": "c13_w5", "related": [], "emoji": "👒"}, {"en": "houses", "ar": "بيوت", "phon": "هاوزز", "sen": "Whose houses are these?", "senm": "لمن هذه البيوت؟", "id": "c13_w6", "related": [], "emoji": "🏘️"}, {"en": "shoes", "ar": "حذاء", "phon": "شوز", "sen": "Whose shoes are these?", "senm": "لمن هذا الحذاء؟", "id": "c13_w7", "related": [], "emoji": "👟"}, {"en": "sword", "ar": "سيف", "phon": "سورد", "sen": "Whose sword is that?", "senm": "سيف من ذلك؟", "id": "c13_w8", "related": [], "emoji": "⚔️"}, {"en": "fault", "ar": "غلطة", "phon": "فولت", "sen": "Whose fault is that?", "senm": "غلطة من تلك؟", "id": "c13_w9", "related": [], "emoji": "⚠️"}, {"en": "birthday party", "ar": "حفلة عيد ميلاد", "phon": "بيرثداي پارتي", "sen": "Whose birthday party?", "senm": "حفل عيد ميلاد من؟", "id": "c13_w10", "related": [], "emoji": "🎉"}, {"en": "ball", "ar": "كرة", "phon": "بول", "sen": "Whose ball is this? It's mine.", "senm": "لمن هذه الكرة؟ إنها ملكي.", "id": "c13_w11", "related": ["c13_w17"], "emoji": "⚽"}, {"en": "bag", "ar": "حقيبة", "phon": "باج", "sen": "Whose bag is this? It's his bag.", "senm": "لمن هذه الحقيبة؟ إنها حقيبته.", "id": "c13_w12", "related": [], "emoji": "🎒"}, {"en": "doll", "ar": "دمية", "phon": "دول", "sen": "Whose doll is that? It's your doll.", "senm": "لمن تلك الدمية؟ إنها دميتك.", "id": "c13_w13", "related": [], "emoji": "🪆"}, {"en": "cookies", "ar": "بسكويت", "phon": "كوكيز", "sen": "Whose cookies are these?", "senm": "لمن هذا البسكويت؟", "id": "c13_w14", "related": [], "emoji": "🍪"}, {"en": "umbrella", "ar": "مظلة", "phon": "أمبريلا", "sen": "Whose umbrella is this?", "senm": "لمن هذه المظلة؟", "id": "c13_w15", "related": [], "emoji": "☂️"}, {"en": "book", "ar": "كتاب", "phon": "بوك", "sen": "Whose book is that?", "senm": "كتاب من ذلك؟", "id": "c13_w16", "related": ["c13_w19"], "emoji": "📕"}, {"en": "balls", "ar": "كرات", "phon": "بولز", "sen": "Whose balls are these?", "senm": "لمن هذه الكرات؟", "id": "c13_w17", "related": ["c13_w11"], "emoji": "⚽"}, {"en": "cats", "ar": "قطط", "phon": "كاتس", "sen": "Whose cats are these? They are her cats.", "senm": "لمن هذه القطط؟ إنها قططها.", "id": "c13_w18", "related": [], "emoji": "🐱"}, {"en": "books", "ar": "كتب", "phon": "بوكس", "sen": "Whose books are those? They're ours.", "senm": "لمن هذه الكتب؟ إنها كتبنا.", "id": "c13_w19", "related": ["c13_w16"], "emoji": "📚"}], "rule": "<b>Whose</b> نستخدمها للسؤال عن المالك: Whose + اسم + is/are this/that/these/those?", "level": 2}, {"id": "c14", "title": "حلقة 14: المضارع البسيط", "sub": "Simple Present Tense", "words": [{"en": "sleeps", "ar": "ينام (هو/هي)", "phon": "سليپس", "sen": "My cat sleeps a lot.", "senm": "قطتي تنام كثيرًا.", "id": "c14_w0", "related": [], "emoji": "😴"}, {"en": "a lot", "ar": "كثيرًا", "phon": "أ لوت", "sen": "My cat sleeps a lot.", "senm": "قطتي تنام كثيرًا.", "id": "c14_w1", "related": [], "emoji": "📈"}, {"en": "video games", "ar": "ألعاب فيديو", "phon": "ڤيديو جيمز", "sen": "I play video games.", "senm": "أنا ألعب ألعاب الفيديو.", "id": "c14_w2", "related": [], "emoji": "🎮"}, {"en": "make", "ar": "يصنع", "phon": "ميك", "sen": "We want to make a deal.", "senm": "نحن نريد أن نعقد صفقة.", "id": "c14_w3", "related": [], "emoji": "🛠️"}, {"en": "deal", "ar": "صفقة", "phon": "ديل", "sen": "We want to make a deal.", "senm": "نحن نريد أن نعقد صفقة.", "id": "c14_w4", "related": [], "emoji": "🤝"}, {"en": "our", "ar": "الخاص بنا", "phon": "آور", "sen": "We love our country.", "senm": "نحن نحب بلادنا.", "id": "c14_w5", "related": [], "emoji": "🙌"}, {"en": "country", "ar": "بلد", "phon": "كنتري", "sen": "We love our country.", "senm": "نحن نحب بلادنا.", "id": "c14_w6", "related": [], "emoji": "🌍"}, {"en": "guy", "ar": "شخص", "phon": "جاي", "sen": "This guy buys flowers.", "senm": "هذا الشخص يشتري زهور.", "id": "c14_w7", "related": [], "emoji": "🧑"}, {"en": "buys", "ar": "يشتري (هو/هي)", "phon": "بايز", "sen": "This guy buys flowers.", "senm": "هذا الشخص يشتري زهور.", "id": "c14_w8", "related": [], "emoji": "🛒"}, {"en": "flowers", "ar": "زهور", "phon": "فلاورز", "sen": "This guy buys flowers.", "senm": "هذا الشخص يشتري زهور.", "id": "c14_w9", "related": [], "emoji": "💐"}, {"en": "food", "ar": "طعام", "phon": "فود", "sen": "I eat a lot of food.", "senm": "أنا أكل الكثير من الطعام.", "id": "c14_w10", "related": [], "emoji": "🍽️"}, {"en": "good", "ar": "جيدون", "phon": "جود", "sen": "We are good students.", "senm": "نحن طلبه جيدون.", "id": "c14_w11", "related": [], "emoji": "👍"}, {"en": "students", "ar": "طلاب", "phon": "ستيودنتس", "sen": "We are good students.", "senm": "نحن طلبه جيدون.", "id": "c14_w12", "related": [], "emoji": "🎓"}, {"en": "dances", "ar": "يرقص (هو/هي)", "phon": "دانسِز", "sen": "He dances on a stage.", "senm": "هو يرقص على المسرح.", "id": "c14_w13", "related": [], "emoji": "💃"}, {"en": "stage", "ar": "مسرح", "phon": "ستيج", "sen": "He dances on a stage.", "senm": "هو يرقص على المسرح.", "id": "c14_w14", "related": [], "emoji": "🎭"}, {"en": "fast", "ar": "سريع", "phon": "فاست", "sen": "You are a fast reader.", "senm": "أنت قارئ سريع.", "id": "c14_w15", "related": [], "emoji": "⚡"}, {"en": "reader", "ar": "قارئ", "phon": "ريدر", "sen": "You are a fast reader.", "senm": "أنت قارئ سريع.", "id": "c14_w16", "related": [], "emoji": "📖"}, {"en": "sells", "ar": "تبيع", "phon": "سيلز", "sen": "She sells her ring.", "senm": "هي تبيع خاتمها.", "id": "c14_w17", "related": [], "emoji": "💰"}, {"en": "ring", "ar": "خاتم", "phon": "رينج", "sen": "She sells her ring.", "senm": "هي تبيع خاتمها.", "id": "c14_w18", "related": [], "emoji": "💍"}, {"en": "builds", "ar": "يبني (هو/هي)", "phon": "بيلدز", "sen": "Jack builds houses.", "senm": "جاك يبني منازل.", "id": "c14_w19", "related": [], "emoji": "🏗️"}, {"en": "houses", "ar": "منازل", "phon": "هاوزز", "sen": "Jack builds houses.", "senm": "جاك يبني منازل.", "id": "c14_w20", "related": [], "emoji": "🏘️"}, {"en": "does", "ar": "فعل مساعد", "phon": "دَز", "sen": "Does Jack build houses?", "senm": "هل جاك يبني منازل؟", "id": "c14_w21", "related": [], "emoji": "✅"}, {"en": "friends", "ar": "أصدقاء", "phon": "فرندز", "sen": "Your friends love to come late.", "senm": "أصدقائك يحبون أن يأتون متأخرين.", "id": "c14_w22", "related": [], "emoji": "🧑‍🤝‍🧑"}, {"en": "come", "ar": "يأتي", "phon": "كَم", "sen": "Your friends love to come late.", "senm": "أصدقائك يحبون أن يأتون متأخرين.", "id": "c14_w23", "related": [], "emoji": "🚶"}, {"en": "late", "ar": "متأخرًا", "phon": "ليت", "sen": "Your friends love to come late.", "senm": "أصدقائك يحبون أن يأتون متأخرين.", "id": "c14_w24", "related": [], "emoji": "⏰"}, {"en": "has", "ar": "لديها", "phon": "هاز", "sen": "Her cat has a short tail.", "senm": "قطتها لديها ذيل قصير.", "id": "c14_w25", "related": [], "emoji": "🤲"}, {"en": "short", "ar": "قصير", "phon": "شورت", "sen": "Her cat has a short tail.", "senm": "قطتها لديها ذيل قصير.", "id": "c14_w26", "related": [], "emoji": "📏"}, {"en": "tail", "ar": "ذيل", "phon": "تيل", "sen": "Her cat has a short tail.", "senm": "قطتها لديها ذيل قصير.", "id": "c14_w27", "related": [], "emoji": "🦁"}, {"en": "have", "ar": "لديه", "phon": "هاڤ", "sen": "Does her cat have a short tail?", "senm": "هل قطتها لديها ذيل قصير؟", "id": "c14_w28", "related": [], "emoji": "🤲"}, {"en": "nice", "ar": "جميلة", "phon": "نايس", "sen": "Tom has a nice car.", "senm": "توم لديه سيارة جميلة.", "id": "c14_w29", "related": [], "emoji": "👍"}], "rule": "في المضارع البسيط نضيف <b>s/es</b> للفعل مع he/she/it، ونستخدم do/does في السؤال والنفي.", "level": 2}, {"id": "c15", "title": "حلقة 15: اختبار شامل", "sub": "Comprehensive Review", "words": [{"en": "lemonade", "ar": "عصير ليمون", "phon": "ليمونيد", "sen": "I like lemonade very much.", "senm": "أنا أحب عصير الليمون كثيرًا.", "id": "c15_w0", "related": [], "emoji": "🍋"}, {"en": "very", "ar": "جدًا", "phon": "ڤيري", "sen": "I like lemonade very much.", "senm": "أنا أحب عصير الليمون كثيرًا.", "id": "c15_w1", "related": [], "emoji": "❗"}, {"en": "much", "ar": "كثيرًا", "phon": "مَتش", "sen": "I like lemonade very much.", "senm": "أنا أحب عصير الليمون كثيرًا.", "id": "c15_w2", "related": [], "emoji": "📈"}, {"en": "girls", "ar": "فتيات", "phon": "جيرلز", "sen": "These girls always listen to pop music.", "senm": "هؤلاء الفتيات دائمًا يستمعن لموسيقى البوب.", "id": "c15_w3", "related": [], "emoji": "👧"}, {"en": "always", "ar": "دائمًا", "phon": "أولويز", "sen": "These girls always listen to pop music.", "senm": "هؤلاء الفتيات دائمًا يستمعن لموسيقى البوب.", "id": "c15_w4", "related": [], "emoji": "🔁"}, {"en": "listen", "ar": "يستمع", "phon": "ليسن", "sen": "These girls always listen to pop music.", "senm": "هؤلاء الفتيات دائمًا يستمعن لموسيقى البوب.", "id": "c15_w5", "related": [], "emoji": "👂"}, {"en": "pop music", "ar": "موسيقى البوب", "phon": "پوپ ميوزك", "sen": "These girls always listen to pop music.", "senm": "هؤلاء الفتيات دائمًا يستمعن لموسيقى البوب.", "id": "c15_w6", "related": [], "emoji": "🎵"}, {"en": "never", "ar": "أبدًا", "phon": "نيڤر", "sen": "Janet never wears jeans.", "senm": "جانيت لا ترتدي الجينز أبدًا.", "id": "c15_w7", "related": [], "emoji": "🚫"}, {"en": "wears", "ar": "يرتدي (هو/هي)", "phon": "ويرز", "sen": "Janet never wears jeans.", "senm": "جانيت لا ترتدي الجينز أبدًا.", "id": "c15_w8", "related": [], "emoji": "👕"}, {"en": "jeans", "ar": "جينز", "phon": "جينز", "sen": "Janet never wears jeans.", "senm": "جانيت لا ترتدي الجينز أبدًا.", "id": "c15_w9", "related": [], "emoji": "👖"}, {"en": "Spanish", "ar": "الإسبانية", "phon": "سپانِش", "sen": "Mr. Smith teaches Spanish and French.", "senm": "مستر سميث يعلم الإسبانية والفرنسية.", "id": "c15_w10", "related": [], "emoji": "🇪🇸"}, {"en": "and", "ar": "و", "phon": "آند", "sen": "Mr. Smith teaches Spanish and French.", "senm": "مستر سميث يعلم الإسبانية والفرنسية.", "id": "c15_w11", "related": [], "emoji": "➕"}, {"en": "French", "ar": "الفرنسية", "phon": "فرنش", "sen": "Mr. Smith teaches Spanish and French.", "senm": "مستر سميث يعلم الإسبانية والفرنسية.", "id": "c15_w12", "related": [], "emoji": "🇫🇷"}, {"en": "homework", "ar": "واجب مدرسي", "phon": "هوموورك", "sen": "You do your homework after school.", "senm": "أنت تؤدي واجبك بعد المدرسة.", "id": "c15_w13", "related": [], "emoji": "📝"}, {"en": "after", "ar": "بعد", "phon": "آفتر", "sen": "You do your homework after school.", "senm": "أنت تؤدي واجبك بعد المدرسة.", "id": "c15_w14", "related": [], "emoji": "⏭️"}, {"en": "school", "ar": "مدرسة", "phon": "سكول", "sen": "You do your homework after school.", "senm": "أنت تؤدي واجبك بعد المدرسة.", "id": "c15_w15", "related": [], "emoji": "🏫"}, {"en": "brother", "ar": "أخ", "phon": "براذر", "sen": "Do you know my brother?", "senm": "هل تعرف أخي؟", "id": "c15_w16", "related": [], "emoji": "👦"}, {"en": "money", "ar": "نقود", "phon": "مني", "sen": "Does she have money?", "senm": "هل لديها نقود؟", "id": "c15_w17", "related": [], "emoji": "💰"}, {"en": "garden", "ar": "حديقة", "phon": "جاردن", "sen": "We have a nice garden.", "senm": "لدينا حديقة جميلة.", "id": "c15_w18", "related": [], "emoji": "🌷"}, {"en": "years old", "ar": "سنوات العمر", "phon": "يِرز أولد", "sen": "She is six years old.", "senm": "عمرها ست سنوات.", "id": "c15_w19", "related": [], "emoji": "🎂"}, {"en": "rabbits", "ar": "أرانب", "phon": "رابيتس", "sen": "Simon has two rabbits.", "senm": "سيمون لديه أرنبان.", "id": "c15_w20", "related": [], "emoji": "🐰"}, {"en": "Egypt", "ar": "مصر", "phon": "إيجيبت", "sen": "I am from Egypt.", "senm": "أنا من مصر.", "id": "c15_w21", "related": [], "emoji": "🇪🇬"}, {"en": "English", "ar": "الإنجليزية", "phon": "إنجلش", "sen": "Do you speak English?", "senm": "هل تتحدث الإنجليزية؟", "id": "c15_w22", "related": [], "emoji": "🇬🇧"}, {"en": "go home", "ar": "يذهب للمنزل", "phon": "جو هوم", "sen": "Do you want to go home?", "senm": "هل تريد أن تذهب للمنزل؟", "id": "c15_w23", "related": [], "emoji": "🏠"}, {"en": "tall", "ar": "طويل", "phon": "تول", "sen": "Is your friend tall?", "senm": "هل صديقك طويل؟", "id": "c15_w24", "related": [], "emoji": "📏"}, {"en": "work", "ar": "يعمل", "phon": "وورك", "sen": "Does Jack work in a supermarket?", "senm": "هل يعمل جاك في سوبر ماركت؟", "id": "c15_w25", "related": [], "emoji": "💼"}, {"en": "supermarket", "ar": "سوبر ماركت", "phon": "سوپرماركت", "sen": "Does Jack work in a supermarket?", "senm": "هل يعمل جاك في سوبر ماركت؟", "id": "c15_w26", "related": [], "emoji": "🛒"}, {"en": "father", "ar": "أب", "phon": "فاذر", "sen": "My father makes breakfast.", "senm": "أبي يعد الفطور.", "id": "c15_w27", "related": [], "emoji": "👨"}, {"en": "makes", "ar": "يعد (هو/هي)", "phon": "ميكس", "sen": "My father makes breakfast.", "senm": "أبي يعد الفطور.", "id": "c15_w28", "related": [], "emoji": "🛠️"}, {"en": "breakfast", "ar": "فطور", "phon": "بريكفاست", "sen": "My father makes breakfast.", "senm": "أبي يعد الفطور.", "id": "c15_w29", "related": [], "emoji": "🍳"}, {"en": "writes", "ar": "يكتب (هو/هي)", "phon": "رايتس", "sen": "She writes a letter.", "senm": "هي تكتب رسالة.", "id": "c15_w30", "related": [], "emoji": "✍️"}, {"en": "letter", "ar": "رسالة", "phon": "ليتر", "sen": "She writes a letter.", "senm": "هي تكتب رسالة.", "id": "c15_w31", "related": [], "emoji": "✉️"}, {"en": "speaks", "ar": "يتحدث (هو/هي)", "phon": "سپيكس", "sen": "He speaks Italian.", "senm": "هو يتحدث الإيطالية.", "id": "c15_w32", "related": [], "emoji": "🗣️"}, {"en": "Italian", "ar": "الإيطالية", "phon": "إيطاليان", "sen": "He speaks Italian.", "senm": "هو يتحدث الإيطالية.", "id": "c15_w33", "related": [], "emoji": "🇮🇹"}, {"en": "clean", "ar": "ينظف", "phon": "كلين", "sen": "The students clean the classroom.", "senm": "الطلاب ينظفون الفصل.", "id": "c15_w34", "related": [], "emoji": "🧼"}, {"en": "classroom", "ar": "فصل دراسي", "phon": "كلاسروم", "sen": "The students clean the classroom.", "senm": "الطلاب ينظفون الفصل.", "id": "c15_w35", "related": [], "emoji": "🏫"}, {"en": "sit", "ar": "يجلس", "phon": "سيت", "sen": "Meg sits on the chair.", "senm": "ميج تجلس على الكرسي.", "id": "c15_w36", "related": [], "emoji": "🪑"}, {"en": "police officers", "ar": "ضباط شرطة", "phon": "بوليس أوفيسرز", "sen": "Do police officers wear T-shirts?", "senm": "هل يرتدي ضباط الشرطة تي شيرت؟", "id": "c15_w37", "related": [], "emoji": "👮"}, {"en": "T-shirts", "ar": "تي شيرت", "phon": "تي شيرتس", "sen": "Do police officers wear T-shirts?", "senm": "هل يرتدي ضباط الشرطة تي شيرت؟", "id": "c15_w38", "related": [], "emoji": "👕"}, {"en": "Canada", "ar": "كندا", "phon": "كندا", "sen": "Is Jack from Canada?", "senm": "هل جاك من كندا؟", "id": "c15_w39", "related": [], "emoji": "🍁"}, {"en": "dogs", "ar": "كلاب", "phon": "دوجز", "sen": "My friend has three dogs.", "senm": "لصديقي ثلاثة كلاب.", "id": "c15_w40", "related": [], "emoji": "🐕"}, {"en": "everyday", "ar": "كل يوم", "phon": "إيفري داي", "sen": "Everyday after school, he goes home.", "senm": "كل يوم بعد المدرسة يذهب للمنزل.", "id": "c15_w41", "related": [], "emoji": "📆"}, {"en": "goes", "ar": "يذهب (هو/هي)", "phon": "جوز", "sen": "Everyday after school, he goes home.", "senm": "كل يوم بعد المدرسة يذهب للمنزل.", "id": "c15_w42", "related": [], "emoji": "🚶"}, {"en": "plays", "ar": "يلعب (هو/هي)", "phon": "پلايز", "sen": "He plays with his dogs.", "senm": "يلعب مع كلابه.", "id": "c15_w43", "related": [], "emoji": "🎮"}, {"en": "eats", "ar": "يأكل (هو/هي)", "phon": "إيتس", "sen": "After he eats lunch, he comes to my house.", "senm": "بعد أن يتناول الغداء، يأتي إلى بيتي.", "id": "c15_w44", "related": [], "emoji": "🍽️"}, {"en": "lunch", "ar": "غداء", "phon": "لَنش", "sen": "After he eats lunch, he comes to my house.", "senm": "بعد أن يتناول الغداء، يأتي إلى بيتي.", "id": "c15_w45", "related": [], "emoji": "🍱"}, {"en": "comes", "ar": "يأتي (هو/هي)", "phon": "كَمز", "sen": "After he eats lunch, he comes to my house.", "senm": "بعد أن يتناول الغداء، يأتي إلى بيتي.", "id": "c15_w46", "related": [], "emoji": "🚶"}, {"en": "together", "ar": "معًا", "phon": "توجذر", "sen": "We do our homework together.", "senm": "نؤدي واجبنا معًا.", "id": "c15_w47", "related": [], "emoji": "🤝"}, {"en": "park", "ar": "حديقة عامة", "phon": "پارك", "sen": "We go out to play in the park.", "senm": "نخرج لنلعب في الحديقة.", "id": "c15_w48", "related": [], "emoji": "🏞️"}, {"en": "love", "ar": "يحب", "phon": "لَڤ", "sen": "I love my friend so much.", "senm": "أحب صديقي كثيرًا.", "id": "c15_w49", "related": [], "emoji": "❤️"}], "rule": "مراجعة شاملة على المضارع البسيط: التكوين، النفي، والسؤال.", "level": 2}, {"id": "c16", "title": "حلقة 16: المضارع المستمر", "sub": "Present Continuous Tense", "words": [{"en": "brothers", "ar": "إخوة", "phon": "براذرز", "sen": "My brothers are talking with mom.", "senm": "اخوتي يتحدثون مع والدتي.", "id": "c16_w0", "related": [], "emoji": "👦"}, {"en": "talking", "ar": "يتحدث (مستمر)", "phon": "توكينج", "sen": "My brothers are talking with mom.", "senm": "اخوتي يتحدثون مع والدتي.", "id": "c16_w1", "related": [], "emoji": "💬"}, {"en": "mom", "ar": "أمي", "phon": "مُم", "sen": "My brothers are talking with mom.", "senm": "اخوتي يتحدثون مع والدتي.", "id": "c16_w2", "related": [], "emoji": "👩"}, {"en": "sleeping", "ar": "نائم (مستمر)", "phon": "سليپينج", "sen": "The cat is sleeping in the kitchen.", "senm": "القطة نائمة في المطبخ.", "id": "c16_w3", "related": [], "emoji": "😴"}, {"en": "kitchen", "ar": "مطبخ", "phon": "كيتشن", "sen": "The cat is sleeping in the kitchen.", "senm": "القطة نائمة في المطبخ.", "id": "c16_w4", "related": [], "emoji": "🍳"}, {"en": "by the way", "ar": "بالمناسبة", "phon": "باي ذي واي", "sen": "By the way, my leg is killing me.", "senm": "بالمناسبة، رجلي تقتلني.", "id": "c16_w5", "related": [], "emoji": "💬"}, {"en": "leg", "ar": "رجل (ساق)", "phon": "ليج", "sen": "My leg is killing me.", "senm": "رجلي تقتلني.", "id": "c16_w6", "related": [], "emoji": "🦵"}, {"en": "killing", "ar": "يقتل (مستمر)", "phon": "كيلينج", "sen": "My leg is killing me.", "senm": "رجلي تقتلني.", "id": "c16_w7", "related": [], "emoji": "🔪"}, {"en": "loving", "ar": "يحب (مستمر)", "phon": "لَڤينج", "sen": "Jenkins is loving this.", "senm": "جينكينز تحب هذا.", "id": "c16_w8", "related": [], "emoji": "❤️"}, {"en": "calling", "ar": "يتصل (مستمر)", "phon": "كولينج", "sen": "You're calling me at home.", "senm": "أنت تتصل بي في البيت.", "id": "c16_w9", "related": [], "emoji": "📞"}, {"en": "begging", "ar": "يتوسل (مستمر)", "phon": "بيجينج", "sen": "I am begging you.", "senm": "أنا أتوسل إليك.", "id": "c16_w10", "related": [], "emoji": "🙏"}, {"en": "boys", "ar": "أولاد", "phon": "بويز", "sen": "Look, the boys are swimming.", "senm": "أنظر، الأولاد يسبحون.", "id": "c16_w11", "related": [], "emoji": "👦"}, {"en": "swimming", "ar": "يسبح (مستمر)", "phon": "سويمينج", "sen": "Look, the boys are swimming.", "senm": "أنظر، الأولاد يسبحون.", "id": "c16_w12", "related": [], "emoji": "🏊"}, {"en": "wearing", "ar": "يرتدي (مستمر)", "phon": "ويرينج", "sen": "Ross is wearing leather pants.", "senm": "روس يرتدي بنطلون جلد.", "id": "c16_w13", "related": [], "emoji": "👕"}, {"en": "leather pants", "ar": "بنطلون جلد", "phon": "ليذر پانتس", "sen": "Ross is wearing leather pants.", "senm": "روس يرتدي بنطلون جلد.", "id": "c16_w14", "related": [], "emoji": "👖"}, {"en": "driving", "ar": "يقود (مستمر)", "phon": "درايڤينج", "sen": "Mary is driving a car.", "senm": "ماري تسوق سيارة.", "id": "c16_w15", "related": [], "emoji": "🚗"}, {"en": "coming", "ar": "قادم (مستمر)", "phon": "كَمينج", "sen": "They are coming.", "senm": "إنهم قادمون.", "id": "c16_w16", "related": [], "emoji": "🚶"}, {"en": "listening", "ar": "يستمع (مستمر)", "phon": "ليسنينج", "sen": "I am listening to you.", "senm": "أنا استمع إليك.", "id": "c16_w17", "related": [], "emoji": "👂"}, {"en": "seeing", "ar": "يرى (مستمر)", "phon": "سيينج", "sen": "You are seeing this.", "senm": "أنت ترى هذا.", "id": "c16_w18", "related": [], "emoji": "👀"}, {"en": "drinking", "ar": "يشرب (مستمر)", "phon": "درينكينج", "sen": "They are drinking coffee.", "senm": "هم يشربون القهوة.", "id": "c16_w19", "related": [], "emoji": "🥤"}, {"en": "doing", "ar": "يفعل (مستمر)", "phon": "دوينج", "sen": "I am doing my homework.", "senm": "أنا أؤدي واجبي.", "id": "c16_w20", "related": [], "emoji": "🔨"}, {"en": "homework", "ar": "واجب", "phon": "هوموورك", "sen": "I am doing my homework.", "senm": "أنا أؤدي واجبي.", "id": "c16_w21", "related": [], "emoji": "📝"}, {"en": "watching", "ar": "يشاهد (مستمر)", "phon": "واتشينج", "sen": "Jim is watching television.", "senm": "جيم يشاهد التلفاز.", "id": "c16_w22", "related": [], "emoji": "👀"}, {"en": "television", "ar": "تلفاز", "phon": "تيليڤيجن", "sen": "Jim is watching television.", "senm": "جيم يشاهد التلفاز.", "id": "c16_w23", "related": [], "emoji": "📺"}, {"en": "jump", "ar": "يقفز", "phon": "جامب", "sen": "The boy jumps high.", "senm": "الولد يقفز عاليًا.", "id": "c16_w24", "related": [], "emoji": "🦘"}, {"en": "high", "ar": "عاليًا", "phon": "هاي", "sen": "The boy jumps high.", "senm": "الولد يقفز عاليًا.", "id": "c16_w25", "related": [], "emoji": "⬆️"}, {"en": "walking", "ar": "يمشي (مستمر)", "phon": "ووكينج", "sen": "They are walking.", "senm": "هم يسيرون.", "id": "c16_w26", "related": [], "emoji": "🚶"}], "rule": "المضارع المستمر: Subject + am/is/are + Verb-ing، يُستخدم لحدث يحصل الآن.", "level": 2}, {"id": "c17", "title": "حلقة 17: Be مقابل Do", "sub": "Be vs Do", "words": [{"en": "movies", "ar": "أفلام", "phon": "موڤيز", "sen": "Do you watch movies?", "senm": "هل تشاهد الأفلام؟", "id": "c17_w0", "related": [], "emoji": "🎬"}, {"en": "watching", "ar": "يشاهد (مستمر)", "phon": "واتشينج", "sen": "Are you watching the movie now?", "senm": "هل تشاهد الفيلم الآن؟", "id": "c17_w1", "related": [], "emoji": "👀"}], "rule": "نستخدم <b>Be (am/is/are)</b> مع الصفة أو الاسم أو الفعل المستمر، ونستخدم <b>Do/Does</b> مع الفعل الذي لا يحدث الآن.", "level": 2}, {"id": "c18", "title": "حلقة 18: الماضي البسيط", "sub": "Simple Past Tense", "words": [{"en": "finished", "ar": "أنهى", "phon": "فينِشد", "sen": "I finished work, walked home, and cooked dinner.", "senm": "انهيت العمل، مشيت إلى البيت، وطبخت العشاء.", "id": "c18_w0", "related": [], "emoji": "✅"}, {"en": "walked", "ar": "مشى", "phon": "ووكد", "sen": "I finished work, walked home, and cooked dinner.", "senm": "انهيت العمل، مشيت إلى البيت، وطبخت العشاء.", "id": "c18_w1", "related": [], "emoji": "🚶"}, {"en": "cooked", "ar": "طبخ", "phon": "كوكت", "sen": "I finished work, walked home, and cooked dinner.", "senm": "انهيت العمل، مشيت إلى البيت، وطبخت العشاء.", "id": "c18_w2", "related": [], "emoji": "🍳"}, {"en": "dinner", "ar": "عشاء", "phon": "دينر", "sen": "I finished work, walked home, and cooked dinner.", "senm": "انهيت العمل، مشيت إلى البيت، وطبخت العشاء.", "id": "c18_w3", "related": [], "emoji": "🍽️"}, {"en": "saw", "ar": "رأى", "phon": "سو", "sen": "I saw a movie yesterday.", "senm": "أنا شاهدت فيلم بالأمس.", "id": "c18_w4", "related": [], "emoji": "👀"}, {"en": "yesterday", "ar": "بالأمس", "phon": "يستردي", "sen": "I saw a movie yesterday.", "senm": "أنا شاهدت فيلم بالأمس.", "id": "c18_w5", "related": [], "emoji": "📅"}, {"en": "washed", "ar": "غسل", "phon": "واشد", "sen": "I washed the car.", "senm": "أنا غسلت السيارة.", "id": "c18_w6", "related": [], "emoji": "🧼"}, {"en": "did", "ar": "فعل مساعد ماضي", "phon": "ديد", "sen": "Did you wash the car?", "senm": "هل غسلت السيارة؟", "id": "c18_w7", "related": [], "emoji": "✅"}, {"en": "weren't", "ar": "لم يكونوا", "phon": "ويرنت", "sen": "They weren't my friends.", "senm": "هم لم يكونوا أصدقائي.", "id": "c18_w8", "related": [], "emoji": "⏪"}, {"en": "wait", "ar": "ينتظر (ماضٍ: waited)", "phon": "ويت", "sen": "wait — waited", "senm": "ينتظر — انتظر", "id": "c18_w9", "related": [], "emoji": "⏳"}, {"en": "love", "ar": "يحب (ماضٍ: loved)", "phon": "لَڤ", "sen": "love — loved", "senm": "يحب — أحب", "id": "c18_w10", "related": [], "emoji": "❤️"}, {"en": "help", "ar": "يساعد (ماضٍ: helped)", "phon": "هيلپ", "sen": "He helped his mom.", "senm": "هو ساعد والدته.", "id": "c18_w11", "related": [], "emoji": "🤝"}, {"en": "visit", "ar": "يزور (ماضٍ: visited)", "phon": "ڤيزت", "sen": "They visited their grandfather.", "senm": "هم زاروا جدهم.", "id": "c18_w12", "related": [], "emoji": "🏡"}, {"en": "stay", "ar": "يمكث (ماضٍ: stayed)", "phon": "ستاي", "sen": "We stayed in a hotel.", "senm": "مكثنا في فندق.", "id": "c18_w13", "related": [], "emoji": "🏨"}, {"en": "go", "ar": "يذهب (ماضٍ: went)", "phon": "جو", "sen": "Mike went to school.", "senm": "مايك ذهب إلى المدرسة.", "id": "c18_w14", "related": [], "emoji": "🚶"}, {"en": "break", "ar": "يكسر (ماضٍ: broke)", "phon": "بريك", "sen": "break — broke", "senm": "يكسر — كسر", "id": "c18_w15", "related": [], "emoji": "💥"}, {"en": "sing", "ar": "يغني (ماضٍ: sang)", "phon": "سينج", "sen": "sing — sang", "senm": "يغني — غنى", "id": "c18_w16", "related": [], "emoji": "🎤"}, {"en": "cut", "ar": "يقطع (ماضٍ: cut)", "phon": "كَت", "sen": "cut — cut", "senm": "يقطع — قطع", "id": "c18_w17", "related": [], "emoji": "✂️"}, {"en": "water", "ar": "ماء", "phon": "ووتر", "sen": "The man drank water.", "senm": "الرجل شرب الماء.", "id": "c18_w18", "related": [], "emoji": "💧"}, {"en": "drank", "ar": "شرب", "phon": "درانك", "sen": "The man drank water.", "senm": "الرجل شرب الماء.", "id": "c18_w19", "related": [], "emoji": "🥤"}, {"en": "cake", "ar": "كعكة", "phon": "كيك", "sen": "We made a cake.", "senm": "نحن صنعنا كعكة.", "id": "c18_w20", "related": [], "emoji": "🎂"}, {"en": "ate", "ar": "أكل", "phon": "إيت", "sen": "She ate his food.", "senm": "هي أكلت طعامه.", "id": "c18_w21", "related": [], "emoji": "🍽️"}, {"en": "grandfather", "ar": "جد", "phon": "جراند فاذر", "sen": "They visited their grandfather.", "senm": "هم زاروا جدهم.", "id": "c18_w22", "related": [], "emoji": "👴"}, {"en": "last year", "ar": "العام الماضي", "phon": "لاست يير", "sen": "Last year, I travelled to Moscow.", "senm": "العام الماضي، سافرت إلى موسكو.", "id": "c18_w23", "related": [], "emoji": "📆"}, {"en": "travelled", "ar": "سافر", "phon": "ترافلد", "sen": "Last year, I travelled to Moscow.", "senm": "العام الماضي، سافرت إلى موسكو.", "id": "c18_w24", "related": [], "emoji": "✈️"}, {"en": "Moscow", "ar": "موسكو", "phon": "موسكو", "sen": "Last year, I travelled to Moscow.", "senm": "العام الماضي، سافرت إلى موسكو.", "id": "c18_w25", "related": [], "emoji": "🏙️"}, {"en": "were", "ar": "كانوا", "phon": "وير", "sen": "Mary and John were happy.", "senm": "ماري و جون كانوا سعداء.", "id": "c18_w26", "related": [], "emoji": "⏪"}, {"en": "scared", "ar": "خائفة", "phon": "سكيرد", "sen": "The cat was scared of the dog.", "senm": "القطة كانت خائفة من الكلب.", "id": "c18_w27", "related": [], "emoji": "😨"}, {"en": "told", "ar": "أخبر", "phon": "تولد", "sen": "I told you that.", "senm": "أخبرتك ذلك.", "id": "c18_w28", "related": [], "emoji": "🗣️"}, {"en": "that", "ar": "ذلك", "phon": "ذات", "sen": "I told you that.", "senm": "أخبرتك ذلك.", "id": "c18_w29", "related": [], "emoji": "👉"}, {"en": "ran", "ar": "ركض", "phon": "ران", "sen": "Sarah ran 2 kilometers yesterday.", "senm": "ركضت سارة 2 كم بالأمس.", "id": "c18_w30", "related": [], "emoji": "🏃"}, {"en": "kilometers", "ar": "كيلومترات", "phon": "كيلومترز", "sen": "Sarah ran 2 kilometers yesterday.", "senm": "ركضت سارة 2 كم بالأمس.", "id": "c18_w31", "related": [], "emoji": "📏"}, {"en": "week", "ar": "أسبوع", "phon": "ويك", "sen": "I saw my friends last week.", "senm": "رأيت أصدقائي الأسبوع الماضي.", "id": "c18_w32", "related": [], "emoji": "🗓️"}, {"en": "played", "ar": "لعب", "phon": "پليد", "sen": "They played basketball.", "senm": "هم لعبوا كرة السلة.", "id": "c18_w33", "related": [], "emoji": "🎮"}, {"en": "hotel", "ar": "فندق", "phon": "هوتيل", "sen": "We stayed in a hotel.", "senm": "مكثنا في فندق.", "id": "c18_w34", "related": [], "emoji": "🏨"}, {"en": "met", "ar": "قابل", "phon": "مِت", "sen": "She met her friends at school.", "senm": "قابلت أصدقائها في المدرسة.", "id": "c18_w35", "related": [], "emoji": "🤝"}, {"en": "won", "ar": "فاز", "phon": "وَن", "sen": "We won.", "senm": "نحن فزنا.", "id": "c18_w36", "related": [], "emoji": "🏆"}, {"en": "bought", "ar": "اشترى", "phon": "بوت", "sen": "Did you buy a new house?", "senm": "هل اشتريت منزلًا جديدًا؟", "id": "c18_w37", "related": [], "emoji": "🛍️"}], "rule": "الماضي البسيط: نضيف <b>ed/d</b> للأفعال المنتظمة، والأفعال الغير منتظمة لها شكل خاص يُحفظ (go→went).", "level": 2}, {"id": "c19", "title": "حلقة 19: الماضي المستمر", "sub": "Continuous Past Tense", "words": [{"en": "running", "ar": "يجري (مستمر)", "phon": "رَنينج", "sen": "At 6 am, I was running.", "senm": "في السادسة صباحًا، كنت أجري.", "id": "c19_w0", "related": [], "emoji": "🏃"}, {"en": "making", "ar": "يعد (مستمر)", "phon": "ميكينج", "sen": "Was I making dinner when my son arrived?", "senm": "هل كنت اعد العشاء عندما وصل ابني؟", "id": "c19_w1", "related": [], "emoji": "🛠️"}, {"en": "son", "ar": "ابن", "phon": "صَن", "sen": "Was I making dinner when my son arrived?", "senm": "هل كنت اعد العشاء عندما وصل ابني؟", "id": "c19_w2", "related": [], "emoji": "👦"}, {"en": "arrived", "ar": "وصل", "phon": "أرايڤد", "sen": "Was I making dinner when my son arrived?", "senm": "هل كنت اعد العشاء عندما وصل ابني؟", "id": "c19_w3", "related": [], "emoji": "🛬"}, {"en": "wasn't", "ar": "لم يكن", "phon": "وَزنت", "sen": "She wasn't sleeping when her dog came.", "senm": "هي لم تكن نائمة عندما جاء كلبها.", "id": "c19_w4", "related": [], "emoji": "⏪"}, {"en": "sleeping", "ar": "نائمة (مستمر)", "phon": "سليپينج", "sen": "She wasn't sleeping when her dog came.", "senm": "هي لم تكن نائمة عندما جاء كلبها.", "id": "c19_w5", "related": [], "emoji": "😴"}, {"en": "came", "ar": "جاء", "phon": "كيم", "sen": "She wasn't sleeping when her dog came.", "senm": "هي لم تكن نائمة عندما جاء كلبها.", "id": "c19_w6", "related": [], "emoji": "🚶"}, {"en": "night", "ar": "ليلة", "phon": "نايت", "sen": "Last night at 8 PM, I was eating dinner.", "senm": "الليلة الماضية الساعة 8 مساءً، كنت أتناول العشاء.", "id": "c19_w7", "related": [], "emoji": "🌙"}, {"en": "studying", "ar": "يذاكر (مستمر)", "phon": "ستَديينج", "sen": "She was studying while her mom was making dinner.", "senm": "كانت تذاكر بينما كانت أمها تعد العشاء.", "id": "c19_w8", "related": [], "emoji": "📚"}, {"en": "father", "ar": "أب", "phon": "فاذر", "sen": "My father was watching TV.", "senm": "كان أبي يشاهد التلفاز.", "id": "c19_w9", "related": [], "emoji": "👨"}, {"en": "little", "ar": "صغير", "phon": "ليتل", "sen": "My little brother was talking on the phone.", "senm": "أخي الصغير كان يتحدث في الهاتف.", "id": "c19_w10", "related": [], "emoji": "🤏"}, {"en": "brother", "ar": "أخ", "phon": "براذر", "sen": "My little brother was talking on the phone.", "senm": "أخي الصغير كان يتحدث في الهاتف.", "id": "c19_w11", "related": [], "emoji": "👦"}, {"en": "phone", "ar": "هاتف", "phon": "فون", "sen": "My little brother was talking on the phone.", "senm": "أخي الصغير كان يتحدث في الهاتف.", "id": "c19_w12", "related": [], "emoji": "📱"}, {"en": "as usual", "ar": "كالمعتاد", "phon": "آز يوجول", "sen": "My little brother was talking on the phone as usual.", "senm": "أخي الصغير كان يتحدث في الهاتف كالمعتاد.", "id": "c19_w13", "related": [], "emoji": "🔁"}, {"en": "sister", "ar": "أخت", "phon": "سيستر", "sen": "My sister was painting her room.", "senm": "كانت أختي تطلي غرفتها.", "id": "c19_w14", "related": [], "emoji": "👧"}, {"en": "painting", "ar": "يطلي (مستمر)", "phon": "پينتينج", "sen": "My sister was painting her room.", "senm": "كانت أختي تطلي غرفتها.", "id": "c19_w15", "related": [], "emoji": "🎨"}, {"en": "room", "ar": "غرفة", "phon": "روم", "sen": "My sister was painting her room.", "senm": "كانت أختي تطلي غرفتها.", "id": "c19_w16", "related": [], "emoji": "🚪"}, {"en": "always", "ar": "دائمًا", "phon": "أولويز", "sen": "He was always coming late to class.", "senm": "كان دائمًا يأتي متأخرًا للحصة.", "id": "c19_w17", "related": [], "emoji": "🔁"}, {"en": "class", "ar": "حصة", "phon": "كلاس", "sen": "He was always coming late to class.", "senm": "كان دائمًا يأتي متأخرًا للحصة.", "id": "c19_w18", "related": [], "emoji": "🏫"}, {"en": "outside", "ar": "بالخارج", "phon": "أوتسايد", "sen": "Paul was walking outside.", "senm": "بول كان يمشي بالخارج.", "id": "c19_w19", "related": [], "emoji": "🏞️"}, {"en": "sandwiches", "ar": "شطائر", "phon": "ساندويتشز", "sen": "Beth and I were making sandwiches.", "senm": "بيث وأنا كنا نصنع شطائر.", "id": "c19_w20", "related": [], "emoji": "🥪"}, {"en": "yoga", "ar": "يوجا", "phon": "يوجا", "sen": "He was doing yoga.", "senm": "هو كان يمارس اليوجا.", "id": "c19_w21", "related": [], "emoji": "🧘"}, {"en": "teach a class", "ar": "يعطي حصة", "phon": "تيتش أ كلاس", "sen": "Kate was teaching a class.", "senm": "كيت كانت تعطي حصة.", "id": "c19_w22", "related": [], "emoji": "🏫"}], "rule": "الماضي المستمر: Subject + was/were + Verb-ing، يصف حدثًا كان مستمرًا وقت وقوع حدث آخر في الماضي.", "level": 3}, {"id": "c20", "title": "حلقة 20: When / While", "sub": "أدوات الربط الزمنية", "words": [{"en": "cooking", "ar": "يطبخ (مستمر)", "phon": "كوكينج", "sen": "Mom was cooking when Messy dropped the dishes.", "senm": "أمي كانت تطبخ عندما أوقعت ميسي الأطباق.", "id": "c20_w0", "related": [], "emoji": "🍳"}, {"en": "dropped", "ar": "أوقع", "phon": "دروپت", "sen": "Mom was cooking when Messy dropped the dishes.", "senm": "أمي كانت تطبخ عندما أوقعت ميسي الأطباق.", "id": "c20_w1", "related": [], "emoji": "🫳"}, {"en": "dishes", "ar": "أطباق", "phon": "ديشِز", "sen": "Mom was cooking when Messy dropped the dishes.", "senm": "أمي كانت تطبخ عندما أوقعت ميسي الأطباق.", "id": "c20_w2", "related": [], "emoji": "🍽️"}, {"en": "taking a shower", "ar": "يستحم", "phon": "تيكينج أ شاور", "sen": "I was taking a shower when the electricity went out.", "senm": "أنا كنت استحم عندما الكهرباء انقطعت.", "id": "c20_w3", "related": [], "emoji": "🚿"}, {"en": "electricity", "ar": "كهرباء", "phon": "إليكتريسيتي", "sen": "I was taking a shower when the electricity went out.", "senm": "أنا كنت استحم عندما الكهرباء انقطعت.", "id": "c20_w4", "related": [], "emoji": "⚡"}, {"en": "went out", "ar": "انقطعت/خرج", "phon": "ونت أوت", "sen": "The electricity went out.", "senm": "الكهرباء انقطعت.", "id": "c20_w5", "related": [], "emoji": "🚪"}, {"en": "surfing the internet", "ar": "يتصفح الأنترنت", "phon": "سيرفينج ذي إنترنت", "sen": "I was surfing the internet when I found your channel.", "senm": "كنت أتصفح الأنترنت عندما عثرت على قناتك.", "id": "c20_w6", "related": [], "emoji": "🏄"}, {"en": "found", "ar": "عثر", "phon": "فاوند", "sen": "I was surfing the internet when I found your channel.", "senm": "كنت أتصفح الأنترنت عندما عثرت على قناتك.", "id": "c20_w7", "related": [], "emoji": "🔍"}, {"en": "channel", "ar": "قناة", "phon": "تشانل", "sen": "I was surfing the internet when I found your channel.", "senm": "كنت أتصفح الأنترنت عندما عثرت على قناتك.", "id": "c20_w8", "related": [], "emoji": "📡"}, {"en": "sat with", "ar": "جلس مع", "phon": "سات ويذ", "sen": "She sat with Pete while he was dying.", "senm": "جلست مع بيت في أثناء ما كان يحتضر.", "id": "c20_w9", "related": [], "emoji": "🪑"}, {"en": "dying", "ar": "يحتضر", "phon": "دايينج", "sen": "She sat with Pete while he was dying.", "senm": "جلست مع بيت في أثناء ما كان يحتضر.", "id": "c20_w10", "related": [], "emoji": "⚰️"}, {"en": "slips up", "ar": "يخطئ", "phon": "سليپس أَپ", "sen": "When he slips up, we will be ready.", "senm": "عندما يخطئ سوف نكون جاهزين.", "id": "c20_w11", "related": [], "emoji": "🛝"}, {"en": "ready", "ar": "جاهزين", "phon": "ريدي", "sen": "When he slips up, we will be ready.", "senm": "عندما يخطئ سوف نكون جاهزين.", "id": "c20_w12", "related": [], "emoji": "✅"}, {"en": "riding", "ar": "يستقل (مستمر)", "phon": "رايدينج", "sen": "When he was riding in his car...", "senm": "عندما كان يستقل سيارته...", "id": "c20_w13", "related": [], "emoji": "🚴"}, {"en": "hums", "ar": "يدندن", "phon": "هَمز", "sen": "She hums when she cooks.", "senm": "هي تدندن عندما تطهو.", "id": "c20_w14", "related": [], "emoji": "🎶"}, {"en": "cooks", "ar": "يطبخ (هو/هي)", "phon": "كوكس", "sen": "She hums when she cooks.", "senm": "هي تدندن عندما تطهو.", "id": "c20_w15", "related": [], "emoji": "🍳"}, {"en": "kite", "ar": "طائرة ورقية", "phon": "كايت", "sen": "I was flying my kite when he pushed me.", "senm": "في أثناء ما كنت أطير طائرتي، هو دفعني.", "id": "c20_w16", "related": [], "emoji": "🪁"}, {"en": "airport", "ar": "مطار", "phon": "إيربورت", "sen": "When you arrive at the airport, call me.", "senm": "عندما تصل إلى المطار، اتصل بي.", "id": "c20_w17", "related": [], "emoji": "✈️"}], "rule": "<b>When</b> يسبق الحدث المفاجئ (القصير)، و<b>While</b> يسبق الحدث المستمر (الطويل) في جملة الماضي المستمر.", "level": 3}, {"id": "c21", "title": "حلقة 21: المستقبل البسيط", "sub": "Simple Future Tense (Will / Going to)", "words": [{"en": "do", "ar": "يفعل", "phon": "دو", "sen": "You know what I am going to do?", "senm": "هل تعرف ماذا سأفعل؟", "id": "c21_w0", "related": [], "emoji": "✅"}, {"en": "until", "ar": "حتى", "phon": "أنتيل", "sen": "But until then, I'm going to do what I came here to do.", "senm": "ولكن حتى حينها، سأفعل ما أتيت هنا لأفعله.", "id": "c21_w1", "related": [], "emoji": "⏳"}, {"en": "then", "ar": "حينها", "phon": "ذين", "sen": "But until then, I'm going to do what I came here to do.", "senm": "ولكن حتى حينها، سأفعل ما أتيت هنا لأفعله.", "id": "c21_w2", "related": [], "emoji": "⏭️"}, {"en": "came", "ar": "أتيت", "phon": "كيم", "sen": "But until then, I'm going to do what I came here to do.", "senm": "ولكن حتى حينها، سأفعل ما أتيت هنا لأفعله.", "id": "c21_w3", "related": [], "emoji": "🚶"}, {"en": "rain", "ar": "يمطر", "phon": "رين", "sen": "It is going to rain.", "senm": "سوف تمطر.", "id": "c21_w4", "related": [], "emoji": "🌧️"}, {"en": "think", "ar": "يظن", "phon": "ثينك", "sen": "Molly, I think I'm going to die.", "senm": "مولي، أظن أني سوف أموت.", "id": "c21_w5", "related": [], "emoji": "🤔"}, {"en": "die", "ar": "يموت", "phon": "داي", "sen": "Molly, I think I'm going to die.", "senm": "مولي، أظن أني سوف أموت.", "id": "c21_w6", "related": [], "emoji": "💀"}, {"en": "computer games", "ar": "ألعاب كمبيوتر", "phon": "كمپيوتر جيمز", "sen": "He will play computer games.", "senm": "هو سوف يلعب ألعاب الكمبيوتر.", "id": "c21_w7", "related": [], "emoji": "🎮"}, {"en": "turn off", "ar": "يطفئ", "phon": "تيرن أوف", "sen": "Is he going to turn off the light?", "senm": "هل سوف يطفئ النور؟", "id": "c21_w8", "related": [], "emoji": "🔌"}, {"en": "light", "ar": "نور", "phon": "لايت", "sen": "Is he going to turn off the light?", "senm": "هل سوف يطفئ النور؟", "id": "c21_w9", "related": [], "emoji": "💡"}, {"en": "market", "ar": "سوق", "phon": "ماركت", "sen": "Will I go to the market?", "senm": "هل سوف أذهب إلى السوق؟", "id": "c21_w10", "related": [], "emoji": "🏪"}, {"en": "watch", "ar": "يشاهد", "phon": "واتش", "sen": "They won't watch the show.", "senm": "لن يشاهدوا العرض.", "id": "c21_w11", "related": [], "emoji": "👀"}, {"en": "show", "ar": "عرض", "phon": "شو", "sen": "They won't watch the show.", "senm": "لن يشاهدوا العرض.", "id": "c21_w12", "related": [], "emoji": "📺"}, {"en": "accept", "ar": "يقبل", "phon": "أكسپت", "sen": "I won't accept his blood money.", "senm": "لن أقبل ديته.", "id": "c21_w13", "related": [], "emoji": "✅"}, {"en": "blood money", "ar": "دية", "phon": "بلَد مَني", "sen": "I won't accept his blood money.", "senm": "لن أقبل ديته.", "id": "c21_w14", "related": [], "emoji": "💰"}, {"en": "surrender", "ar": "استسلام", "phon": "سرندر", "sen": "I will not accept surrender.", "senm": "لن أقبل الاستسلام.", "id": "c21_w15", "related": [], "emoji": "🏳️"}, {"en": "visit", "ar": "يزور", "phon": "ڤيزت", "sen": "I'm going to visit my friend.", "senm": "أنا سوف ازور صديقي.", "id": "c21_w16", "related": [], "emoji": "🏡"}], "rule": "<b>Will</b> و<b>going to</b> يعبّران عن المستقبل: will غالبًا للقرار اللحظي، وgoing to للخطة المُعدّة مسبقًا.", "level": 3}, {"id": "c22", "title": "حلقة 22: صفات المقارنة", "sub": "Comparative Adjectives", "words": [{"en": "big", "ar": "كبير", "phon": "بيج", "sen": "big — bigger than", "senm": "كبير — أكبر من", "id": "c22_w0", "related": [], "emoji": "📏"}, {"en": "bigger", "ar": "أكبر", "phon": "بيجر", "sen": "Bigger yachts, faster yachts.", "senm": "يخوت أكبر، يخوت أسرع.", "id": "c22_w1", "related": [], "emoji": "📏"}, {"en": "yachts", "ar": "يخوت", "phon": "يوتس", "sen": "Bigger yachts, faster yachts.", "senm": "يخوت أكبر، يخوت أسرع.", "id": "c22_w2", "related": [], "emoji": "🛥️"}, {"en": "small", "ar": "صغير", "phon": "سمول", "sen": "small — smaller", "senm": "صغير — أصغر", "id": "c22_w3", "related": [], "emoji": "📏"}, {"en": "smaller", "ar": "أصغر", "phon": "سمولر", "sen": "Smaller piece.", "senm": "قطعة أصغر.", "id": "c22_w4", "related": [], "emoji": "📏"}, {"en": "piece", "ar": "قطعة", "phon": "پيس", "sen": "Smaller piece.", "senm": "قطعة أصغر.", "id": "c22_w5", "related": [], "emoji": "🍕"}, {"en": "fast", "ar": "سريع", "phon": "فاست", "sen": "fast — faster", "senm": "سريع — أسرع", "id": "c22_w6", "related": [], "emoji": "⚡"}, {"en": "faster", "ar": "أسرع", "phon": "فاستر", "sen": "My friend is faster than me.", "senm": "صديقي أسرع مني.", "id": "c22_w7", "related": [], "emoji": "⚡"}, {"en": "fat", "ar": "سمين", "phon": "فات", "sen": "fat — fatter", "senm": "سمين — أسمن", "id": "c22_w8", "related": [], "emoji": "🎈"}, {"en": "happy", "ar": "سعيد", "phon": "هابي", "sen": "happy — happier", "senm": "سعيد — أسعد", "id": "c22_w9", "related": [], "emoji": "😊"}, {"en": "happier", "ar": "أسعد", "phon": "هابيير", "sen": "Happier days.", "senm": "أيام أسعد.", "id": "c22_w10", "related": [], "emoji": "😄"}, {"en": "pretty", "ar": "جميلة", "phon": "پريتي", "sen": "pretty — prettier", "senm": "جميلة — أجمل", "id": "c22_w11", "related": [], "emoji": "💄"}, {"en": "expensive", "ar": "غالٍ", "phon": "إكسپنسيڤ", "sen": "expensive — more expensive", "senm": "غالٍ — أغلى", "id": "c22_w12", "related": [], "emoji": "💸"}, {"en": "more expensive", "ar": "أغلى", "phon": "مور إكسپنسيڤ", "sen": "This car is more expensive than that car.", "senm": "هذه السيارة أغلى من تلك السيارة.", "id": "c22_w13", "related": [], "emoji": "💸"}, {"en": "colorful", "ar": "ألوانه أكثر", "phon": "كالرفل", "sen": "My t-shirt is more colorful than yours.", "senm": "تي شيرتي ألوانه أكثر من تي شيرتك.", "id": "c22_w14", "related": [], "emoji": "🌈"}, {"en": "taller", "ar": "أطول", "phon": "تولر", "sen": "I'm taller than you.", "senm": "أنا أطول منك.", "id": "c22_w15", "related": [], "emoji": "📏"}, {"en": "stronger", "ar": "أقوى", "phon": "سترونجر", "sen": "I'm stronger than you.", "senm": "أنا أقوى منك.", "id": "c22_w16", "related": [], "emoji": "💪"}, {"en": "months", "ar": "أشهر", "phon": "مَنثس", "sen": "I'm five months younger than my friend.", "senm": "أنا أصغر من صديقي بخمسة أشهر.", "id": "c22_w17", "related": [], "emoji": "🗓️"}, {"en": "younger", "ar": "أصغر (سنًا)", "phon": "يَنجر", "sen": "I'm five months younger than my friend.", "senm": "أنا أصغر من صديقي بخمسة أشهر.", "id": "c22_w18", "related": [], "emoji": "👶"}, {"en": "older", "ar": "أكبر (سنًا)", "phon": "أولدر", "sen": "He is older than me.", "senm": "هو أكبر مني.", "id": "c22_w19", "related": [], "emoji": "👴"}, {"en": "years", "ar": "سنوات", "phon": "يِرز", "sen": "He is 22 years older than me.", "senm": "يكبرني بـ22 سنة.", "id": "c22_w20", "related": [], "emoji": "📅"}, {"en": "t-shirt", "ar": "تي شيرت", "phon": "تي شيرت", "sen": "My t-shirt is more colorful than yours.", "senm": "تي شيرتي ألوانه أكثر من تي شيرتك.", "id": "c22_w21", "related": [], "emoji": "👕"}, {"en": "naughtier", "ar": "أشقى", "phon": "نوتيير", "sen": "Jack is naughtier than Tim.", "senm": "جاك أشقى من تيم.", "id": "c22_w22", "related": [], "emoji": "😜"}, {"en": "difficult", "ar": "أصعب", "phon": "ديفيكلت", "sen": "My homework is more difficult than yours.", "senm": "واجبي أصعب من واجبك.", "id": "c22_w23", "related": [], "emoji": "😓"}, {"en": "elephants", "ar": "فيلة", "phon": "إليفانتس", "sen": "Elephants are bigger than monkeys.", "senm": "الفيلة أكبر من القرود.", "id": "c22_w24", "related": [], "emoji": "🐘"}, {"en": "monkeys", "ar": "قرود", "phon": "مانكيز", "sen": "Elephants are bigger than monkeys.", "senm": "الفيلة أكبر من القرود.", "id": "c22_w25", "related": [], "emoji": "🐒"}, {"en": "playing", "ar": "لعب", "phon": "پلايينج", "sen": "Playing soccer is easier than playing basketball.", "senm": "لعب كرة القدم أسهل من كرة السلة.", "id": "c22_w26", "related": [], "emoji": "🎮"}, {"en": "easier", "ar": "أسهل", "phon": "إيزيير", "sen": "Playing soccer is easier than playing basketball.", "senm": "لعب كرة القدم أسهل من كرة السلة.", "id": "c22_w27", "related": [], "emoji": "😌"}, {"en": "more rude", "ar": "أحمق", "phon": "مور رود", "sen": "More rude than you can imagine.", "senm": "أكثر حمقًا مما تتخيل.", "id": "c22_w28", "related": [], "emoji": "😤"}, {"en": "ruder", "ar": "أحمق", "phon": "رودر", "sen": "There is nothing ruder than a sheep.", "senm": "لا يوجد شيء أحمق من الخروف.", "id": "c22_w29", "related": [], "emoji": "😤"}, {"en": "large", "ar": "كبيرة", "phon": "لارج", "sen": "Russia is larger than Canada.", "senm": "روسيا أكبر من كندا.", "id": "c22_w30", "related": [], "emoji": "🐋"}, {"en": "noisy", "ar": "صاخبون", "phon": "نويزي", "sen": "The children are noisier than the students.", "senm": "الأطفال أكثر صخبًا من الطلاب.", "id": "c22_w31", "related": [], "emoji": "🔊"}, {"en": "long", "ar": "طويل", "phon": "لونج", "sen": "A ruler is longer than a pencil.", "senm": "المسطرة أطول من القلم.", "id": "c22_w32", "related": [], "emoji": "📏"}], "rule": "صفة المقارنة: نضيف <b>er</b> للصفة القصيرة، و<b>more</b> قبل الصفة الطويلة، ثم <b>than</b> بعدها.", "level": 3}, {"id": "c23", "title": "حلقة 23: صفات المقارنة والتفضيل", "sub": "Comparative & Superlative Adjectives", "words": [{"en": "good", "ar": "جيد", "phon": "جود", "sen": "Juice is good.", "senm": "العصير جيد.", "id": "c23_w0", "related": [], "emoji": "👍"}, {"en": "better", "ar": "أفضل", "phon": "بيتر", "sen": "Coffee is better than juice.", "senm": "القهوة أفضل من العصير.", "id": "c23_w1", "related": [], "emoji": "👍"}, {"en": "best", "ar": "الأفضل", "phon": "بست", "sen": "Water is the best.", "senm": "المياه هي الأفضل.", "id": "c23_w2", "related": [], "emoji": "🏆"}, {"en": "loneliness", "ar": "وحدة", "phon": "لونلينس", "sen": "Loneliness is a bad feeling.", "senm": "الوحدة هي شعور سيء.", "id": "c23_w3", "related": [], "emoji": "😔"}, {"en": "feeling", "ar": "شعور", "phon": "فيلينج", "sen": "Loneliness is a bad feeling.", "senm": "الوحدة هي شعور سيء.", "id": "c23_w4", "related": [], "emoji": "💭"}, {"en": "worse", "ar": "أسوأ", "phon": "ورس", "sen": "What is worse than loneliness?", "senm": "ما هو الأسوأ من الوحدة؟", "id": "c23_w5", "related": [], "emoji": "👎"}, {"en": "worst", "ar": "الأسوأ", "phon": "ورست", "sen": "Nothing, it is the worst feeling.", "senm": "لا شيء، أنها الشعور الأسوأ.", "id": "c23_w6", "related": [], "emoji": "👎"}, {"en": "nothing", "ar": "لا شيء", "phon": "ناثينج", "sen": "Nothing, it is the worst feeling.", "senm": "لا شيء، أنها الشعور الأسوأ.", "id": "c23_w7", "related": [], "emoji": "0️⃣"}, {"en": "shortest", "ar": "الأقصر", "phon": "شورتست", "sen": "Jack is the shortest in the world.", "senm": "جاك هو الأقصر في العالم.", "id": "c23_w8", "related": [], "emoji": "📏"}, {"en": "world", "ar": "العالم", "phon": "وورلد", "sen": "Jack is the shortest in the world.", "senm": "جاك هو الأقصر في العالم.", "id": "c23_w9", "related": [], "emoji": "🌐"}, {"en": "happiest", "ar": "الأسعد", "phon": "هابيست", "sen": "The happiest man on earth.", "senm": "الرجل الأسعد على الأرض.", "id": "c23_w10", "related": [], "emoji": "😄"}, {"en": "earth", "ar": "الأرض", "phon": "إيرث", "sen": "The happiest man on earth.", "senm": "الرجل الأسعد على الأرض.", "id": "c23_w11", "related": [], "emoji": "🌍"}, {"en": "cheetah", "ar": "فهد صياد", "phon": "تشيتا", "sen": "The cheetah is the fastest animal in the world.", "senm": "الفهد الصياد هو أسرع حيوان في العالم.", "id": "c23_w12", "related": [], "emoji": "🐆"}, {"en": "fastest", "ar": "الأسرع", "phon": "فاستست", "sen": "The cheetah is the fastest animal in the world.", "senm": "الفهد الصياد هو أسرع حيوان في العالم.", "id": "c23_w13", "related": [], "emoji": "⚡"}, {"en": "animal", "ar": "حيوان", "phon": "أنيمال", "sen": "The cheetah is the fastest animal in the world.", "senm": "الفهد الصياد هو أسرع حيوان في العالم.", "id": "c23_w14", "related": [], "emoji": "🐾"}, {"en": "redwood", "ar": "شجرة الريدوود", "phon": "ريدوود", "sen": "The redwood is the tallest tree in the world.", "senm": "شجرة الريدوود هي أطول شجرة في العالم.", "id": "c23_w15", "related": [], "emoji": "🌲"}, {"en": "tallest", "ar": "الأطول", "phon": "تولست", "sen": "The redwood is the tallest tree in the world.", "senm": "شجرة الريدوود هي أطول شجرة في العالم.", "id": "c23_w16", "related": [], "emoji": "📏"}, {"en": "history", "ar": "تاريخ", "phon": "هيستوري", "sen": "History is an interesting subject.", "senm": "التاريخ مادة شيقة.", "id": "c23_w17", "related": [], "emoji": "📖"}, {"en": "subject", "ar": "مادة دراسية", "phon": "سَبجكت", "sen": "History is the most interesting subject in school.", "senm": "التاريخ هو أكثر مادة شيقة في المدرسة.", "id": "c23_w18", "related": [], "emoji": "📚"}, {"en": "blue whale", "ar": "حوت أزرق", "phon": "بلو ويل", "sen": "The blue whale is a large mammal.", "senm": "الحوت الأزرق ثديي كبير.", "id": "c23_w19", "related": [], "emoji": "🐋"}, {"en": "large", "ar": "كبير", "phon": "لارج", "sen": "The blue whale is a large mammal.", "senm": "الحوت الأزرق ثديي كبير.", "id": "c23_w20", "related": [], "emoji": "🐋"}, {"en": "mammal", "ar": "ثديي", "phon": "ماملّ", "sen": "The blue whale is a large mammal.", "senm": "الحوت الأزرق ثديي كبير.", "id": "c23_w21", "related": [], "emoji": "🐋"}, {"en": "largest", "ar": "الأكبر", "phon": "لارجست", "sen": "The blue whale is the largest mammal in the world.", "senm": "الحوت الأزرق هو أكبر ثديي في العالم.", "id": "c23_w22", "related": [], "emoji": "🐋"}, {"en": "heavy", "ar": "ثقيل", "phon": "هيڤي", "sen": "The elephant is a heavy land animal.", "senm": "الفيل حيوان بري ثقيل.", "id": "c23_w23", "related": [], "emoji": "⚓"}, {"en": "land animal", "ar": "حيوان بري", "phon": "لاند أنيمال", "sen": "The elephant is a heavy land animal.", "senm": "الفيل حيوان بري ثقيل.", "id": "c23_w24", "related": [], "emoji": "🐾"}, {"en": "heaviest", "ar": "الأثقل", "phon": "هيڤيست", "sen": "The elephant is the heaviest land animal in the world.", "senm": "الفيل هو أثقل حيوان بري في العالم.", "id": "c23_w25", "related": [], "emoji": "⚓"}, {"en": "smarter", "ar": "أذكى", "phon": "سمارتر", "sen": "She is smarter than her brother.", "senm": "هي أذكى من أخيها.", "id": "c23_w26", "related": [], "emoji": "🧠"}, {"en": "cheaper", "ar": "أرخص", "phon": "تشيپر", "sen": "This bag is cheaper than that one.", "senm": "هذه الحقيبة أرخص من تلك.", "id": "c23_w27", "related": [], "emoji": "💲"}, {"en": "careful", "ar": "حريص", "phon": "كيرفل", "sen": "He is more careful than his friend.", "senm": "هو أكثر حرصًا من صديقه.", "id": "c23_w28", "related": [], "emoji": "🧐"}], "rule": "صفة التفضيل: نضيف <b>est</b> للصفة القصيرة مسبوقة بـ the، و<b>most</b> قبل الصفة الطويلة مسبوقة بـ the.", "level": 3}];
+const ALL_WORDS = CATEGORIES.flatMap(c => c.words.map(w => ({...w, catId:c.id, catTitle:c.title})));
+const WORD_MAP = Object.fromEntries(ALL_WORDS.map(w => [w.id, w]));
+
+const DAY = 24*60*60*1000;
+// interval (days) to wait AFTER reaching this box, indexed 1..6. box 0 = new/never studied.
+const BOX_DAYS = [0, 1, 3, 7, 14, 30, 90];
+const BOX_LABELS = ['جديدة','يوم واحد','٣ أيام','أسبوع','أسبوعين','شهر','متقنة (٣ شهور)'];
+
+let state = {
+  srs: {},          // id -> {box, next, last, reviews, lapses}
+  favorites: [],    // [id]
+  theme: 'day',
+  examLog: []       // {date, type, label, score, total}
+};
+
+let currentCat = null;
+let currentIdx = 0;
+let currentDeckIds = [];
+let deckMode = 'category'; // 'category' | 'review'
+let reviewStats = { seen:0, remembered:0, forgot:0 };
+let quiz = { items: [], idx: 0, score: 0, wrong: [], type: '' };
+
+// ---------- SRS helpers ----------
+function srsOf(id){ return state.srs[id] || null; }
+function isDue(id, now){
+  const s = state.srs[id];
+  if(!s) return true; // never studied = due now
+  return s.next <= now;
+}
+function dueIds(){
+  const now = Date.now();
+  return ALL_WORDS.map(w=>w.id).filter(id => isDue(id, now));
+}
+function isLearned(id){ const s = state.srs[id]; return !!s && s.box >= 1; }
+function learnedIds(){ return Object.keys(state.srs).filter(id => state.srs[id].box >= 1); }
+function boxCounts(){
+  const counts = [0,0,0,0,0,0,0];
+  ALL_WORDS.forEach(w=>{
+    const s = state.srs[w.id];
+    const b = s ? s.box : 0;
+    counts[b]++;
+  });
+  return counts;
+}
+function assess(id, remembered){
+  const now = Date.now();
+  let s = state.srs[id] || { box:0, next:now, last:0, reviews:0, lapses:0 };
+  s.reviews++;
+  if(remembered){
+    s.box = Math.min(s.box+1, 6);
+    s.next = now + BOX_DAYS[s.box]*DAY;
+  } else {
+    s.lapses++;
+    s.box = 0;
+    s.next = now + 1*DAY;
+  }
+  s.last = now;
+  state.srs[id] = s;
+  saveSrs();
+  return s;
+}
+function fmtInterval(s){
+  if(!s) return 'جديدة';
+  return BOX_LABELS[s.box] || '';
+}
+function fmtRelative(ts){
+  const now = Date.now();
+  const diff = ts - now;
+  if(diff <= 0) return 'مستحقة الآن';
+  const days = Math.round(diff / DAY);
+  if(days <= 0) return 'اليوم';
+  if(days === 1) return 'غدًا';
+  return `بعد ${days} يوم`;
+}
+
+// ---------- storage ----------
+async function loadState(){
+  try{ const r = await window.storage.get('srs_v1'); if(r) state.srs = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('favorites_v1'); if(r) state.favorites = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('theme_v1'); if(r) state.theme = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('exam_log_v1'); if(r) state.examLog = JSON.parse(r.value); }catch(e){}
+  applyTheme();
+  renderHome();
+  routeFromHash();
+}
+async function saveSrs(){ try{ await window.storage.set('srs_v1', JSON.stringify(state.srs)); }catch(e){} }
+async function saveFavorites(){ try{ await window.storage.set('favorites_v1', JSON.stringify(state.favorites)); }catch(e){} }
+async function saveTheme(){ try{ await window.storage.set('theme_v1', JSON.stringify(state.theme)); }catch(e){} }
+async function saveExamLog(){ try{ await window.storage.set('exam_log_v1', JSON.stringify(state.examLog)); }catch(e){} }
+
+// ---------- theme ----------
+function applyTheme(){
+  document.body.setAttribute('data-theme', state.theme);
+  document.getElementById('themeBtn').textContent = state.theme === 'night' ? '☀️' : '🌙';
+  document.getElementById('nightToggle').classList.toggle('on', state.theme === 'night');
+}
+function toggleTheme(){
+  state.theme = state.theme === 'night' ? 'day' : 'night';
+  applyTheme(); saveTheme();
+}
+document.getElementById('themeBtn').onclick = toggleTheme;
+
+// ---------- toast ----------
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 1800);
+}
+
+// ---------- tabs ----------
+function switchTab(tab){
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+  ['home','review','fav','exam','settings'].forEach(s=>{
+    document.getElementById('screen-'+s).classList.toggle('active', s===tab);
+  });
+  document.getElementById('screen-deck').classList.remove('active');
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-result').classList.remove('active');
+  if(tab==='home') renderHome();
+  if(tab==='review') renderReviewScreen();
+  if(tab==='fav') renderFav();
+  if(tab==='exam') renderExam();
+}
+function goHome(){ switchTab('home'); }
+function goExam(){ switchTab('exam'); }
+
+// ---------- home / categories ----------
+function renderHome(){
+  const learned = learnedIds().length;
+  document.getElementById('statTotal').textContent = ALL_WORDS.length;
+  document.getElementById('statMemo').textContent = learned;
+  document.getElementById('statFav').textContent = state.favorites.length;
+
+  const due = dueIds().length;
+  const banner = document.getElementById('homeReviewBanner');
+  document.getElementById('homeDueNum').textContent = due;
+  if(due === 0){
+    banner.classList.add('zero');
+    document.getElementById('homeDueTitle').textContent = 'مفيش كلمات مستحقة دلوقتي 🎉';
+    document.getElementById('homeDueSub').textContent = 'كل كلماتك في وقتها الصح، تعال تاني بعد شوية';
+  } else {
+    banner.classList.remove('zero');
+    document.getElementById('homeDueTitle').textContent = 'كلمة مستحقة للمراجعة الآن';
+    document.getElementById('homeDueSub').textContent = 'اضغط هنا عشان تراجعهم بنظام التكرار المتباعد';
+  }
+
+  const list = document.getElementById('catList');
+  list.innerHTML = '';
+  const levelNames = {1:'📗 المستوى الأول — الأساسيات', 2:'📘 المستوى الثاني — متوسط', 3:'📙 المستوى الثالث — متقدم'};
+  let lastLevel = null;
+  CATEGORIES.forEach((c, i) => {
+    if(c.level !== lastLevel){
+      lastLevel = c.level;
+      const h = document.createElement('div');
+      h.className = 'level-header';
+      h.textContent = levelNames[c.level] || '';
+      list.appendChild(h);
+    }
+    const total = c.words.length;
+    const done = c.words.filter(w => isLearned(w.id)).length;
+    const pct = total ? Math.round(done/total*100) : 0;
+    const circ = 2*Math.PI*18;
+    const offset = circ - (pct/100)*circ;
+    const div = document.createElement('div');
+    div.className = 'cat-tab';
+    div.onclick = () => openDeck(c.id);
+    div.innerHTML = `
+      <div class="cat-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="cat-info">
+        <h3>${c.title}</h3>
+        <p>${c.sub} · ${total} كلمة</p>
+      </div>
+      <div class="cat-progress-wrap">
+        <svg viewBox="0 0 44 44">
+          <circle class="bg" cx="22" cy="22" r="18"></circle>
+          <circle class="fg" cx="22" cy="22" r="18" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"></circle>
+        </svg>
+        <div class="cat-progress-txt">${pct}%</div>
+      </div>`;
+    list.appendChild(div);
+  });
+}
+
+// ---------- review screen ----------
+function renderReviewScreen(){
+  const due = dueIds();
+  document.getElementById('reviewStartCount').textContent = due.length;
+  document.getElementById('reviewStartBtn').disabled = due.length === 0;
+
+  const counts = boxCounts();
+  const maxC = Math.max(...counts, 1);
+  const boxList = document.getElementById('boxList');
+  boxList.innerHTML = '';
+  BOX_LABELS.forEach((label, i) => {
+    const div = document.createElement('div');
+    div.className = 'box-row';
+    div.innerHTML = `<div class="bx-label">${label}</div>
+      <div class="bx-bar-wrap"><div class="bx-bar" style="width:${(counts[i]/maxC*100)}%;"></div></div>
+      <div class="bx-count">${counts[i]}</div>`;
+    boxList.appendChild(div);
+  });
+
+  const upcoming = document.getElementById('upcomingList');
+  const scheduled = Object.entries(state.srs)
+    .filter(([id,s]) => s.next > Date.now())
+    .sort((a,b) => a[1].next - b[1].next)
+    .slice(0, 8);
+  if(scheduled.length === 0){
+    upcoming.innerHTML = `<div class="empty-state" style="padding:20px;"><p>لا توجد مراجعات مجدولة بعد. ابدأ بمراجعة بعض الكلمات أولًا.</p></div>`;
+  } else {
+    upcoming.innerHTML = '';
+    scheduled.forEach(([id, s]) => {
+      const w = WORD_MAP[id];
+      if(!w) return;
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `<div><div class="rw en">${w.emoji?w.emoji+' ':''}${w.en}</div><div class="rm">${w.ar}</div></div>
+        <div class="rm">${fmtRelative(s.next)}</div>`;
+      upcoming.appendChild(div);
+    });
+  }
+}
+function startReviewSession(){
+  const ids = dueIds();
+  if(ids.length === 0) return;
+  currentDeckIds = ids.sort(()=>Math.random()-0.5);
+  currentIdx = 0;
+  currentCat = null;
+  deckMode = 'review';
+  reviewStats = { seen:0, remembered:0, forgot:0 };
+  document.getElementById('deckTitle').textContent = 'مراجعة اليوم';
+  document.getElementById('ruleBox').innerHTML = ''; document.getElementById('ruleBox').style.display = 'none';
+  document.getElementById('masteryBar').innerHTML = '';
+  location.hash = 'review';
+  ['home','review','fav','exam','settings'].forEach(s=>document.getElementById('screen-'+s).classList.remove('active'));
+  document.getElementById('screen-deck').classList.add('active');
+  renderCard();
+}
+
+// ---------- deck / flashcards ----------
+function openDeck(catId){
+  currentCat = CATEGORIES.find(c => c.id === catId);
+  currentDeckIds = currentCat.words.map(w => w.id);
+  currentIdx = 0;
+  deckMode = 'category';
+  document.getElementById('deckTitle').textContent = currentCat.title;
+  const rb = document.getElementById('ruleBox');
+  rb.innerHTML = currentCat.rule ? ('📘 <b>قاعدة الدرس:</b> ' + currentCat.rule) : 'مفيش قاعدة إضافية لهذا الدرس.';
+  rb.style.display = 'none';
+  renderMasteryBar();
+  location.hash = catId;
+  document.getElementById('screen-home').classList.remove('active');
+  document.getElementById('screen-deck').classList.add('active');
+  renderCard();
+}
+function toggleRuleBox(){
+  const box = document.getElementById('ruleBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+}
+function renderMasteryBar(){
+  const wrap = document.getElementById('masteryBar');
+  if(deckMode !== 'category' || !currentCat){ wrap.innerHTML=''; return; }
+  const counts = [0,0,0,0,0,0,0];
+  currentCat.words.forEach(w=>{
+    const s = state.srs[w.id];
+    counts[s?s.box:0]++;
+  });
+  const total = currentCat.words.length || 1;
+  const colors = ['#9AA6C2','#C9972C','#C9972C','#C9972C','#3E6E55','#3E6E55','#3E6E55'];
+  const segs = counts.map((c,i)=>{
+    if(c<=0) return '';
+    const pct = (c/total*100);
+    return '<span style="width:'+pct+'%;background:'+colors[i]+'" title="'+BOX_LABELS[i]+': '+c+'"></span>';
+  }).join('');
+  wrap.innerHTML = '<div class="mastery-track">'+segs+'</div><div class="mastery-legend">توزيع الإتقان لكلمات هذه الحلقة ('+counts[0]+' لسه جديدة)</div>';
+}
+function exportLesson(){
+  if(!currentCat) return;
+  let txt = currentCat.title + '\n' + currentCat.sub + '\n' + '='.repeat(30) + '\n\n';
+  currentCat.words.forEach((w,i)=>{
+    txt += (i+1) + '. ' + w.en + '  —  ' + w.ar + ' (' + w.phon + ')\n';
+    txt += '   ' + w.sen + '\n';
+    txt += '   ' + w.senm + '\n\n';
+  });
+  const blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const safeName = currentCat.title.replace(/[\\\/:*?"<>|]/g,'').trim();
+  a.href = url; a.download = safeName + '.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 2000);
+  toast('📄 اتحمّل ملف كلمات الحلقة');
+}
+function copyLessonLink(){
+  if(!currentCat) return;
+  const url = location.origin + location.pathname + '#' + currentCat.id;
+  const done = () => toast('🔗 اتنسخ رابط الحلقة');
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(done).catch(()=> toast('تعذّر النسخ التلقائي'));
+  } else {
+    toast('تعذّر النسخ التلقائي');
+  }
+}
+function onSearchInput(q){
+  const wrap = document.getElementById('searchResults');
+  const listSection = document.getElementById('catListSection');
+  q = q.trim();
+  if(!q){ wrap.style.display='none'; wrap.innerHTML=''; listSection.style.display=''; return; }
+  listSection.style.display='none';
+  const ql = q.toLowerCase();
+  const results = ALL_WORDS.filter(w => w.en.toLowerCase().includes(ql) || w.ar.includes(q)).slice(0, 30);
+  wrap.style.display='block';
+  if(results.length === 0){
+    wrap.innerHTML = '<div class="empty-state" style="padding:30px 10px;"><p>مفيش نتائج لـ «'+q+'»</p></div>';
+    return;
+  }
+  wrap.innerHTML = '';
+  results.forEach(w=>{
+    const div = document.createElement('div');
+    div.className = 'search-result-item';
+    div.onclick = () => openWordDirect(w.id);
+    div.innerHTML = '<span class="sr-emoji">'+(w.emoji||'🔤')+'</span>'
+      + '<div class="sr-text"><div class="rw en">'+w.en+'</div><div class="rm">'+w.ar+'</div></div>'
+      + '<div class="sr-cat">'+w.catTitle.replace(/^حلقة \d+:\s*/,'')+'</div>';
+    wrap.appendChild(div);
+  });
+}
+function openWordDirect(id){
+  const w = WORD_MAP[id];
+  if(!w) return;
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchResults').style.display = 'none';
+  document.getElementById('catListSection').style.display = '';
+  openDeck(w.catId);
+  const idx = currentDeckIds.indexOf(id);
+  if(idx > -1){ currentIdx = idx; renderCard(); }
+}
+function jumpRelated(id){
+  const idx = currentDeckIds.indexOf(id);
+  if(idx > -1){ currentIdx = idx; renderCard(); }
+  else { openWordDirect(id); }
+}
+function routeFromHash(){
+  const h = location.hash.replace('#','');
+  if(!h) return;
+  if(h === 'review'){ switchTab('review'); return; }
+  const cat = CATEGORIES.find(c => c.id === h);
+  if(cat) openDeck(h);
+}
+function renderCard(){
+  const id = currentDeckIds[currentIdx];
+  const w = WORD_MAP[id];
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('recallRow').style.display = 'none';
+  document.getElementById('cardEmoji').textContent = w.emoji || '';
+  document.getElementById('cardEmoji').style.display = w.emoji ? 'block' : 'none';
+  document.getElementById('cardWord').textContent = w.en;
+  document.getElementById('cardPhon').textContent = w.phon;
+  document.getElementById('cardMean').textContent = w.ar;
+  document.getElementById('cardTagFront').textContent = w.catTitle;
+  const chips = document.getElementById('relatedChips');
+  if(w.related && w.related.length){
+    chips.style.display = 'flex';
+    chips.innerHTML = w.related.map(rid=>{
+      const rw = WORD_MAP[rid];
+      return rw ? ('<button class="chip" onclick="event.stopPropagation();jumpRelated(\''+rid+'\')">🔗 '+rw.en+'</button>') : '';
+    }).join('');
+  } else {
+    chips.style.display = 'none';
+    chips.innerHTML = '';
+  }
+  document.getElementById('sentEn').textContent = w.sen;
+  document.getElementById('sentAr').textContent = w.senm;
+  document.getElementById('cardWordBack').textContent = w.en;
+  document.getElementById('cardMeanBack').textContent = w.ar;
+
+  const isFav = state.favorites.includes(id);
+  document.getElementById('favBtnFront').textContent = isFav ? '★' : '☆';
+  document.getElementById('favBtnFront').classList.toggle('active', isFav);
+  document.getElementById('favBtnBack').textContent = isFav ? '★' : '☆';
+  document.getElementById('favBtnBack').classList.toggle('active', isFav);
+
+  const s = srsOf(id);
+  document.getElementById('srsBadgeFront').textContent = '🔁 ' + fmtInterval(s);
+
+  if(deckMode === 'review'){
+    document.getElementById('deckCount').textContent = `مراجعة ${currentIdx+1} من ${currentDeckIds.length}`;
+    document.getElementById('deckMemoCount').textContent = `اتذكرت: ${reviewStats.remembered} · محتاج مراجعة: ${reviewStats.forgot}`;
+  } else {
+    document.getElementById('deckCount').textContent = `بطاقة ${currentIdx+1} من ${currentDeckIds.length}`;
+    const learnedInCat = currentCat.words.filter(w2 => isLearned(w2.id)).length;
+    document.getElementById('deckMemoCount').textContent = `محفوظ: ${learnedInCat}/${currentCat.words.length}`;
+  }
+  document.getElementById('deckProgressBar').style.width = `${((currentIdx+1)/currentDeckIds.length)*100}%`;
+  document.getElementById('srsStatus').textContent = s ? fmtRelative(s.next) : 'كلمة جديدة';
+}
+function flipCard(){
+  const card = document.getElementById('flashcard');
+  card.classList.toggle('flipped');
+  document.getElementById('recallRow').style.display = card.classList.contains('flipped') ? 'flex' : 'none';
+}
+function nextCard(){ currentIdx = (currentIdx+1) % currentDeckIds.length; renderCard(); }
+function prevCard(){ currentIdx = (currentIdx-1+currentDeckIds.length) % currentDeckIds.length; renderCard(); }
+function toggleFav(){
+  const id = currentDeckIds[currentIdx];
+  const i = state.favorites.indexOf(id);
+  if(i>-1){ state.favorites.splice(i,1); } else { state.favorites.push(id); }
+  saveFavorites(); renderCard();
+}
+function assessCard(remembered){
+  const id = currentDeckIds[currentIdx];
+  const s = assess(id, remembered);
+  renderMasteryBar();
+  reviewStats.seen++;
+  if(remembered){ reviewStats.remembered++; toast('👍 هترجعلك بعد ' + BOX_LABELS[s.box]); }
+  else { reviewStats.forgot++; toast('🔁 هترجعلك بكرة تاني'); }
+
+  if(deckMode === 'review'){
+    if(currentIdx >= currentDeckIds.length - 1){ finishReviewSession(); return; }
+    currentIdx++; renderCard();
+  } else {
+    if(currentIdx >= currentDeckIds.length - 1){ currentIdx = 0; } else { currentIdx++; }
+    renderCard();
+  }
+}
+function finishReviewSession(){
+  const total = reviewStats.seen;
+  const pct = total ? Math.round(reviewStats.remembered/total*100) : 0;
+  document.getElementById('screen-deck').classList.remove('active');
+  document.getElementById('screen-result').classList.add('active');
+  const circ = 2*Math.PI*62;
+  const ring = document.getElementById('resultRing');
+  ring.setAttribute('stroke-dasharray', circ);
+  ring.setAttribute('stroke-dashoffset', circ);
+  ring.style.stroke = pct>=70 ? 'var(--forest)' : (pct>=40? 'var(--gold)':'var(--rose)');
+  setTimeout(()=>{ ring.style.strokeDashoffset = circ - (pct/100)*circ; }, 100);
+  document.getElementById('resultPct').textContent = pct+'%';
+  document.getElementById('resultFrac').textContent = reviewStats.remembered+'/'+total;
+  document.getElementById('resultMsg').textContent = pct>=85?'مذاكرة ممتازة! 🎉' : pct>=60?'مراجعة كويسة 👏' : 'محتاج تركّز على اللي محتاج مراجعة تاني 💪';
+  document.getElementById('resultSub').textContent = 'خلصت مراجعة اليوم';
+  document.getElementById('reviewList').innerHTML = '';
+  renderHome();
+}
+
+// ---------- favorites screen ----------
+function renderFav(){
+  const wrap = document.getElementById('favList');
+  if(state.favorites.length === 0){
+    wrap.innerHTML = `<div class="empty-state"><div class="em">⭐</div><p>لسه معملتش تفضيل لأي كلمة.<br>اضغط على أيقونة النجمة داخل أي بطاقة لإضافتها هنا.</p></div>`;
+    return;
+  }
+  wrap.innerHTML = '';
+  state.favorites.forEach(id => {
+    const w = WORD_MAP[id];
+    if(!w) return;
+    const learned = isLearned(id);
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    div.innerHTML = `<div><div class="rw en">${w.emoji?w.emoji+' ':''}${w.en}</div><div class="rm">${w.ar} — ${w.catTitle}</div></div>
+      <div style="font-size:16px;">${learned?'✅':'🔸'}</div>`;
+    wrap.appendChild(div);
+  });
+}
+
+// ---------- exams ----------
+function memorizedIds(){ return learnedIds(); }
+function recentMemorizedIds(hours=48){
+  const cutoff = Date.now() - hours*3600*1000;
+  return Object.entries(state.srs).filter(([id,s]) => s.last >= cutoff).map(([id]) => id);
+}
+function renderExam(){
+  const total = memorizedIds().length;
+  const recent = recentMemorizedIds();
+  document.getElementById('dailyDesc').textContent = recent.length
+    ? `لديك ${recent.length} كلمة راجعتها في آخر يومين. اختبر نفسك عليها فقط.`
+    : 'لم تراجع كلمات في آخر يومين. راجع بطاقات أولًا لتفعيل الاختبار اليومي.';
+  document.getElementById('dailyBtn').disabled = recent.length === 0;
+
+  const percents = [
+    {p:7, label:'اختبار سريع', desc:'مراجعة خاطفة'},
+    {p:10, label:'اختبار خفيف', desc:'مراجعة أساسية'},
+    {p:15, label:'اختبار متوسط', desc:'مراجعة أعمق'},
+    {p:20, label:'اختبار شامل', desc:'أكبر تغطية'},
+  ];
+  const grid = document.getElementById('examGrid');
+  grid.innerHTML = '';
+  percents.forEach(pc => {
+    const count = Math.max(1, Math.ceil(total * pc.p/100));
+    const div = document.createElement('div');
+    div.className = 'exam-tile';
+    if(total===0){ div.style.opacity = .5; }
+    else { div.onclick = () => startComprehensiveExam(pc.p, count); }
+    div.innerHTML = `<b>${pc.p}%</b><span>${pc.label}</span><small>${total? count+' سؤال' : '—'}</small>`;
+    grid.appendChild(div);
+  });
+
+  const hist = document.getElementById('examHistory');
+  if(state.examLog.length === 0){
+    hist.innerHTML = `<div class="empty-state" style="padding:20px;"><p>لا توجد اختبارات سابقة بعد.</p></div>`;
+  } else {
+    hist.innerHTML = '';
+    [...state.examLog].reverse().slice(0,8).forEach(e => {
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      const pct = Math.round(e.score/e.total*100);
+      div.innerHTML = `<div><div class="rw" style="font-family:'Cairo';">${e.label}</div><div class="rm">${new Date(e.date).toLocaleDateString('ar-EG')}</div></div>
+        <div style="font-weight:800;color:${pct>=70?'var(--forest)':'var(--rose)'};">${e.score}/${e.total}</div>`;
+      hist.appendChild(div);
+    });
+  }
+}
+
+function buildQuizItems(ids, type, label){
+  const shuffled = [...ids].sort(()=>Math.random()-0.5);
+  const items = shuffled.map(id => {
+    const w = WORD_MAP[id];
+    let pool = ALL_WORDS.filter(x => x.id !== id);
+    pool = pool.sort(()=>Math.random()-0.5).slice(0,3);
+    const options = [...pool.map(p=>p.ar), w.ar].sort(()=>Math.random()-0.5);
+    return { id, word: w, options, correct: w.ar };
+  });
+  quiz = { items, idx:0, score:0, wrong:[], type, label };
+  document.getElementById('screen-exam').classList.remove('active');
+  document.getElementById('screen-quiz').classList.add('active');
+  document.getElementById('qTotal').textContent = items.length;
+  renderQuizQ();
+}
+function startDailyExam(){
+  const ids = recentMemorizedIds();
+  if(ids.length===0) return;
+  buildQuizItems(ids, 'daily', 'الاختبار اليومي (' + ids.length + ' كلمة)');
+}
+function startComprehensiveExam(pct, count){
+  const ids = memorizedIds();
+  const shuffled = [...ids].sort(()=>Math.random()-0.5).slice(0, count);
+  buildQuizItems(shuffled, 'comp'+pct, `اختبار شامل ${pct}% (${count} سؤال)`);
+}
+function renderQuizQ(){
+  const it = quiz.items[quiz.idx];
+  document.getElementById('qIndex').textContent = quiz.idx+1;
+  document.getElementById('qEmoji').textContent = it.word.emoji || '';
+  document.getElementById('qWord').textContent = it.word.en;
+  document.getElementById('qPhon').textContent = it.word.phon;
+  const optWrap = document.getElementById('optList');
+  optWrap.innerHTML = '';
+  it.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt;
+    btn.onclick = () => answerQuiz(opt, btn);
+    optWrap.appendChild(btn);
+  });
+}
+function speakQuizWord(){
+  const it = quiz.items[quiz.idx];
+  speakText(it.word.en);
+}
+function answerQuiz(opt, btn){
+  const it = quiz.items[quiz.idx];
+  const allBtns = document.querySelectorAll('.opt-btn');
+  allBtns.forEach(b => b.disabled = true);
+  const isCorrect = opt === it.correct;
+  if(isCorrect){ btn.classList.add('correct'); quiz.score++; }
+  else{
+    btn.classList.add('wrong');
+    allBtns.forEach(b => { if(b.textContent === it.correct) b.classList.add('correct'); });
+    quiz.wrong.push(it);
+  }
+  setTimeout(() => {
+    if(quiz.idx < quiz.items.length-1){ quiz.idx++; renderQuizQ(); }
+    else finishQuiz();
+  }, 900);
+}
+function quitQuiz(){
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-exam').classList.add('active');
+}
+async function finishQuiz(){
+  const total = quiz.items.length;
+  const score = quiz.score;
+  const pct = Math.round(score/total*100);
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-result').classList.add('active');
+  const circ = 2*Math.PI*62;
+  const ring = document.getElementById('resultRing');
+  ring.setAttribute('stroke-dasharray', circ);
+  ring.setAttribute('stroke-dashoffset', circ);
+  ring.style.stroke = pct>=70 ? 'var(--forest)' : (pct>=40? 'var(--gold)':'var(--rose)');
+  setTimeout(()=>{ ring.style.strokeDashoffset = circ - (pct/100)*circ; }, 100);
+  document.getElementById('resultPct').textContent = pct+'%';
+  document.getElementById('resultFrac').textContent = score+'/'+total;
+  document.getElementById('resultMsg').textContent = pct>=85?'ممتاز! 🎉' : pct>=70?'أداء جيد جدًا 👏' : pct>=50?'مستوى مقبول، استمر بالمراجعة':'محتاج مراجعة أكتر شوية 💪';
+  document.getElementById('resultSub').textContent = quiz.label;
+
+  const rev = document.getElementById('reviewList');
+  rev.innerHTML = '';
+  if(quiz.wrong.length){
+    const lbl = document.createElement('div');
+    lbl.className = 'section-label'; lbl.textContent = 'راجع الكلمات دي تاني';
+    rev.appendChild(lbl);
+    quiz.wrong.forEach(it => {
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `<div><div class="rw en">${it.word.emoji?it.word.emoji+' ':''}${it.word.en}</div><div class="rm">${it.word.sen}</div></div><div class="rm">${it.correct}</div>`;
+      rev.appendChild(div);
+    });
+  }
+
+  state.examLog.push({date:Date.now(), type:quiz.type, label:quiz.label, score, total});
+  await saveExamLog();
+}
+
+// ---------- TTS ----------
+let voices = [];
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
+  const sel = document.getElementById('voiceSelect');
+  if(!sel) return;
+  sel.innerHTML = '';
+  if(voices.length===0){
+    sel.innerHTML = '<option>الصوت الافتراضي للجهاز</option>';
+    return;
+  }
+  voices.forEach((v,i) => {
+    const o = document.createElement('option');
+    o.value = i; o.textContent = `${v.name} (${v.lang})`;
+    sel.appendChild(o);
+  });
+}
+speechSynthesis.onvoiceschanged = loadVoices;
+function speakText(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const sel = document.getElementById('voiceSelect');
+  if(voices.length && sel && sel.value !== '') u.voice = voices[sel.value];
+  u.lang = 'en-US'; u.rate = 0.92;
+  speechSynthesis.speak(u);
+}
+function speak(mode){
+  const w = WORD_MAP[currentDeckIds[currentIdx]];
+  speakText(mode==='en' ? w.en : w.sen);
+}
+
+// ---------- reset ----------
+async function resetProgress(){
+  if(!confirm('هل أنت متأكد؟ سيتم حذف كل جدول المراجعة والكلمات المفضلة نهائيًا.')) return;
+  state.srs = {}; state.favorites = []; state.examLog = [];
+  await saveSrs(); await saveFavorites(); await saveExamLog();
+  toast('تم إعادة الضبط');
+  renderHome();
+}
+
+// ---------- hash routing ----------
+window.addEventListener('hashchange', routeFromHash);
+
+// ---------- init ----------
+loadVoices();
+loadState();
+</script>
+</body>
+</html>

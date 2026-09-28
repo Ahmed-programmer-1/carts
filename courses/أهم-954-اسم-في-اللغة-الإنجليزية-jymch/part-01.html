@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أهم الأسماء الإنجليزية · نظام موسّع بـ 18 فئة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,600&family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#151922; --bg-soft:#1b202b; --card:#f4efe2; --card-ink:#22252b;
+    --ink:#ece6d8; --ink-dim:#9aa0ad; --gold:#d9a441; --gold-dim:#8a6a2e;
+    --line:#2a3140; --good:#3e8e8a; --bad:#c1543c; --radius:14px;
+    --tier-time:#d9a441; --tier-family:#c1543c; --tier-home:#3e8e8a; --tier-food:#b5651d;
+    --tier-body:#a4527a; --tier-school:#4c6fa5; --tier-city:#5b8a3a; --tier-nature:#2e8b57;
+    --tier-clothes:#7b68a6; --tier-ideas:#4a5568; --tier-tech:#2c7fb0; --tier-money:#8b5e3c;
+    --tier-general1:#6b7280; --tier-general2:#78716c; --tier-general3:#57534e;
+    --tier-sport:#c2410c; --tier-art:#9333ea; --tier-weather:#0891b2; --tier-law:#475569;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'Cairo',sans-serif;min-height:100vh;}
+  .en{font-family:'Fraunces',serif;direction:ltr;unicode-bidi:isolate;}
+  .mono{font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;}
+  .wrap{max-width:1080px;margin:0 auto;padding:26px 20px 80px;}
+  header.top{text-align:center;margin-bottom:20px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--gold);background:rgba(217,164,65,.08);border:1px solid rgba(217,164,65,.35);padding:5px 12px;border-radius:999px;margin-bottom:14px;}
+  h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(24px,4.2vw,38px);margin:0 0 8px;line-height:1.15;}
+  .sub{color:var(--ink-dim);font-size:14px;max-width:620px;margin:0 auto;line-height:1.85;}
+  .note2{max-width:640px;margin:14px auto 0;font-size:12.5px;color:#c9a441;background:rgba(217,164,65,.07);border:1px solid rgba(217,164,65,.25);border-radius:10px;padding:10px 14px;line-height:1.8;}
+  .notif-bar{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:18px;flex-wrap:wrap;}
+  .notif-btn{border:1px solid var(--line);background:var(--bg-soft);color:var(--ink);border-radius:999px;padding:9px 18px;font-size:13px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;}
+  .notif-btn:hover{border-color:var(--gold);color:var(--gold);}
+  .notif-btn.on{background:rgba(62,142,138,.15);border-color:var(--good);color:#6fc2bd;}
+  .notif-note{font-size:11px;color:var(--ink-dim);max-width:420px;text-align:center;line-height:1.7;}
+  .group-label{text-align:center;font-size:12px;color:var(--ink-dim);font-weight:700;margin:30px 0 12px;letter-spacing:.05em;}
+  #hub{margin-top:26px;}
+  .hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+  .hub-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:16px;padding:18px;position:relative;border-top:4px solid var(--cat-color,var(--gold));}
+  .hub-card .hc-top{display:flex;justify-content:space-between;align-items:flex-start;}
+  .hub-card .hc-emoji{font-size:26px;}
+  .hub-card .hc-count{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-dim);background:rgba(255,255,255,.04);padding:3px 9px;border-radius:999px;}
+  .hub-card h3{font-size:16px;margin:12px 0 4px;}
+  .hub-card .hc-due{font-size:12px;color:var(--gold);margin-bottom:10px;min-height:16px;}
+  .hc-bar{height:6px;background:#10131a;border-radius:99px;overflow:hidden;margin-bottom:12px;}
+  .hc-bar i{display:block;height:100%;background:var(--cat-color,var(--gold));}
+  .hc-actions{display:flex;gap:6px;}
+  .hc-btn{flex:1;text-align:center;padding:8px 6px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:12px;cursor:pointer;color:var(--ink);font-weight:700;}
+  .hc-btn:hover{border-color:var(--cat-color,var(--gold));color:var(--cat-color,var(--gold));}
+  #catView{display:none;margin-top:20px;}
+  .cat-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
+  .back-btn{border:1px solid var(--line);background:var(--bg-soft);color:var(--ink-dim);border-radius:999px;padding:8px 16px;font-size:13px;cursor:pointer;font-family:'Cairo',sans-serif;}
+  .back-btn:hover{color:var(--gold);border-color:var(--gold);}
+  .cat-title{display:flex;align-items:center;gap:10px;}
+  .cat-title .em{font-size:26px;}
+  .cat-title h2{margin:0;font-family:'Fraunces',serif;font-size:22px;}
+  .cat-title .cnt{font-size:12px;color:var(--ink-dim);font-family:'IBM Plex Mono',monospace;}
+  .subtabs{display:flex;gap:6px;background:var(--bg-soft);border:1px solid var(--line);border-radius:12px;padding:6px;max-width:420px;margin:0 auto 20px;}
+  .subtab{flex:1;text-align:center;padding:9px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:var(--ink-dim);}
+  .subtab.active{background:var(--cat-color,var(--gold));color:#1a1508;}
+  .subview{display:none;}
+  .subview.active{display:block;}
+  .controls{display:flex;flex-direction:column;gap:14px;margin-bottom:22px;}
+  .search{width:100%;padding:13px 16px;border-radius:10px;border:1px solid var(--line);background:var(--bg-soft);color:var(--ink);font-family:'Cairo',sans-serif;font-size:15px;}
+  .search:focus{outline:none;border-color:var(--gold);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;}
+  .card{background:var(--card);color:var(--card-ink);border-radius:var(--radius);padding:14px 14px 12px;position:relative;overflow:hidden;border-top:5px solid var(--cat-color,var(--gold));box-shadow:0 2px 0 rgba(0,0,0,.15);}
+  .card .rank{position:absolute;top:10px;left:12px;font-size:10px;color:#8b8574;font-family:'IBM Plex Mono',monospace;}
+  .card .tierbadge{position:absolute;top:10px;right:34px;font-size:9px;font-weight:800;padding:2px 7px;border-radius:999px;}
+  .tierbadge.easy{background:#d9efe6;color:#1e6b52;}
+  .tierbadge.medium{background:#fbe9c8;color:#8a5a10;}
+  .tierbadge.hard{background:#f7dcd4;color:#933;}
+  .card .word{font-family:'Fraunces',serif;font-weight:700;font-size:21px;margin-top:22px;direction:ltr;text-align:left;}
+  .card .meaning{font-size:14px;color:#4a4638;margin-top:4px;font-weight:600;}
+  .card .speak{position:absolute;bottom:10px;left:10px;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.06);border:none;cursor:pointer;font-size:13px;}
+  .card .speak:hover{background:rgba(0,0,0,.14);}
+  .empty{text-align:center;color:var(--ink-dim);padding:40px 0;}
+  .fc-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .fc-scene{width:100%;max-width:380px;height:260px;perspective:1200px;}
+  .fc-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.2,1);cursor:pointer;}
+  .fc-card.flipped{transform:rotateY(180deg);}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;border-top:6px solid var(--cat-color,var(--gold));background:var(--card);color:var(--card-ink);box-shadow:0 8px 24px rgba(0,0,0,.35);}
+  .fc-face .rank{position:absolute;top:12px;left:14px;font-size:11px;color:#8b8574;font-family:'IBM Plex Mono',monospace;}
+  .fc-face .tierbadge{position:absolute;top:12px;right:14px;font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;}
+  .fc-face .big-emoji{font-size:44px;margin-bottom:14px;}
+  .fc-face .big-word{font-family:'Fraunces',serif;font-weight:800;font-size:30px;direction:ltr;}
+  .fc-face .hint{font-size:12px;color:#8b8574;margin-top:10px;}
+  .fc-back{transform:rotateY(180deg);}
+  .fc-back .big-meaning{font-family:'Cairo',sans-serif;font-weight:800;font-size:26px;}
+  .fc-speak{margin-top:6px;border:1px solid var(--line);background:var(--bg-soft);color:var(--ink);border-radius:999px;padding:8px 16px;cursor:pointer;font-size:13px;font-family:'Cairo',sans-serif;}
+  .fc-speak:hover{border-color:var(--gold);color:var(--gold);}
+  .fc-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  .btn{border:none;border-radius:10px;padding:12px 20px;font-weight:700;font-size:14px;cursor:pointer;font-family:'Cairo',sans-serif;}
+  .btn:active{transform:scale(.97);}
+  .btn-hard{background:rgba(193,84,60,.15);color:#e08268;border:1px solid rgba(193,84,60,.4);}
+  .btn-hard:hover{background:var(--bad);color:#fff;}
+  .btn-mid{background:rgba(217,164,65,.15);color:var(--gold);border:1px solid rgba(217,164,65,.4);}
+  .btn-mid:hover{background:var(--gold);color:#1a1508;}
+  .btn-easy{background:rgba(62,142,138,.15);color:#6fc2bd;border:1px solid rgba(62,142,138,.4);}
+  .btn-easy:hover{background:var(--good);color:#fff;}
+  .btn-primary{background:var(--gold);color:#1a1508;}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+  .fc-progress{font-size:13px;color:var(--ink-dim);font-family:'IBM Plex Mono',monospace;}
+  .fc-done{text-align:center;padding:50px 10px;}
+  .fc-done .big-emoji{font-size:50px;}
+  .quiz-intro{text-align:center;padding:20px 0;}
+  .quiz-intro .qi-count{font-family:'Fraunces',serif;font-size:44px;font-weight:900;color:var(--gold);}
+  .quiz-intro .qi-desc{color:var(--ink-dim);font-size:13px;max-width:420px;margin:8px auto 20px;line-height:1.8;}
+  .type-legend{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;}
+  .type-chip{font-size:11px;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--ink-dim);}
+  .q-wrap{max-width:520px;margin:0 auto;}
+  .q-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:13px;color:var(--ink-dim);font-family:'IBM Plex Mono',monospace;}
+  .q-bar{height:6px;background:var(--bg-soft);border-radius:99px;overflow:hidden;margin-bottom:22px;}
+  .q-bar-fill{height:100%;background:var(--gold);transition:width .3s;}
+  .q-card{background:var(--card);color:var(--card-ink);border-radius:18px;padding:26px 22px;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3);}
+  .q-typebadge{display:inline-block;font-size:10px;font-weight:800;padding:4px 10px;border-radius:999px;background:#e9e2cd;color:#6b5a30;margin-bottom:10px;}
+  .q-emoji{font-size:34px;margin-bottom:6px;}
+  .q-prompt-label{font-size:12px;color:#8b8574;font-weight:700;margin-bottom:6px;}
+  .q-prompt{font-size:23px;font-weight:800;line-height:1.5;}
+  .q-prompt.en{font-family:'Fraunces',serif;direction:ltr;}
+  .q-prompt .blank{display:inline-block;min-width:60px;border-bottom:3px solid var(--gold-dim);}
+  .q-options{display:grid;gap:10px;margin-top:20px;}
+  .q-opt{background:#fff;border:2px solid #e4dcc8;border-radius:10px;padding:12px 16px;cursor:pointer;font-weight:600;font-size:15px;}
+  .q-opt:hover{border-color:var(--gold);}
+  .q-opt.correct{background:#e5f4ee;border-color:var(--good);color:#1e6b60;}
+  .q-opt.wrong{background:#f9e6e0;border-color:var(--bad);color:#933;}
+  .q-opt.en{font-family:'Fraunces',serif;direction:ltr;}
+  .q-input-row{display:flex;gap:8px;margin-top:20px;}
+  .q-input{flex:1;padding:13px 14px;border-radius:10px;border:2px solid #e4dcc8;font-family:'Fraunces',serif;font-size:18px;direction:ltr;text-align:center;}
+  .q-input:focus{outline:none;border-color:var(--gold);}
+  .q-feedback{margin-top:12px;font-size:14px;font-weight:700;min-height:20px;}
+  .q-feedback.ok{color:var(--good);}
+  .q-feedback.bad{color:var(--bad);}
+  .q-next{margin-top:16px;}
+  .result{text-align:center;padding:16px 0;}
+  .result .score{font-family:'Fraunces',serif;font-size:52px;font-weight:900;color:var(--gold);}
+  .result .out-of{color:var(--ink-dim);font-size:14px;margin-bottom:16px;}
+  .wrong-list{text-align:right;max-width:440px;margin:16px auto 0;background:var(--bg-soft);border:1px solid var(--line);border-radius:12px;padding:14px 18px;max-height:320px;overflow-y:auto;}
+  .wrong-list .wl-item{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px;}
+  .wrong-list .wl-item:last-child{border-bottom:none;}
+  .wrong-list .wl-en{font-family:'Fraunces',serif;direction:ltr;}
+  footer{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:56px;line-height:2;}
+  footer b{color:var(--gold);}
+  @media (max-width:520px){ .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));} .fc-scene{height:230px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow" id="eyebrowTxt">— نظام مستقل</div>
+    <h1>أهم <span id="titleCount">—</span> اسم في اللغة الإنجليزية</h1>
+    <p class="sub">كل فئة نظام قائم بذاته: تصفّح، بطاقات وتكرار متباعد، واختبار خاص بعدد أسئلة = عدد كلمات الفئة بالضبط.</p>
+    <div class="note2">🔹 ركّزنا هذه المرة على «الكلمات بلا مجموعة محدّدة» وقسّمناها لـ 3 مستويات مستقلة (كل مستوى نظام كامل لوحده) لأنها فئة ضخمة جدًا من حيث العدد. وأضفنا أيضًا 4 مجالات جديدة: الرياضة، الفن والموسيقى، الطقس بالتفصيل، والقانون والحكومة.</div>
+    <div class="notif-bar"><button class="notif-btn" id="notifBtn">🔔 فعّل تذكيرات المراجعة</button></div>
+    <div class="notif-note">التذكيرات تعمل أثناء فتح هذه الصفحة في المتصفح فقط — ملف HTML بدون خادم لا يمكنه إرسال إشعارات بعد إغلاق المتصفح تمامًا.</div>
+  </header>
+  <div id="hub">
+    <div class="group-label">🔹 الكلمات بلا مجموعة محدّدة — 3 مستويات مستقلة</div>
+    <div class="hub-grid" id="hubGridGeneral"></div>
+    <div class="group-label">📚 المجالات الموضوعية</div>
+    <div class="hub-grid" id="hubGridDomains"></div>
+  </div>
+  <div id="catView">
+    <div class="cat-header">
+      <button class="back-btn" id="backBtn">→ كل الفئات</button>
+      <div class="cat-title"><span class="em" id="catEmoji">🍽️</span><div><h2 id="catName">—</h2><div class="cnt mono" id="catCount">0 كلمة</div></div></div>
+    </div>
+    <nav class="subtabs">
+      <div class="subtab active" data-sub="browse">📖 تصفّح</div>
+      <div class="subtab" data-sub="flash">🎴 بطاقات</div>
+      <div class="subtab" data-sub="quiz">✅ اختبار الفئة</div>
+    </nav>
+    <section class="subview active" id="sub-browse">
+      <div class="controls"><input class="search" id="searchInput" placeholder="ابحث داخل هذه الفئة…"></div>
+      <div class="grid" id="grid"></div>
+      <p class="empty" id="emptyMsg" style="display:none;">لا توجد نتائج مطابقة.</p>
+    </section>
+    <section class="subview" id="sub-flash">
+      <div class="fc-wrap">
+        <div class="fc-progress" id="fcProgress">—</div>
+        <div id="fcActiveArea">
+          <div class="fc-scene">
+            <div class="fc-card" id="fcCard">
+              <div class="fc-face fc-front">
+                <div class="rank mono" id="fcRankF">No. 001</div>
+                <div class="tierbadge" id="fcTierF">EASY</div>
+                <div class="big-emoji" id="fcEmojiF">⏰</div>
+                <div class="big-word en" id="fcWordF">time</div>
+                <div class="hint">اضغط للكشف عن المعنى</div>
+              </div>
+              <div class="fc-face fc-back">
+                <div class="rank mono" id="fcRankB">No. 001</div>
+                <div class="big-emoji" id="fcEmojiB">⏰</div>
+                <div class="big-meaning" id="fcMeaningB">الوقت</div>
+              </div>
+            </div>
+          </div>
+          <button class="fc-speak" id="fcSpeakBtn">🔊 استمع للنطق</button>
+          <div class="fc-actions" id="fcAnswerButtons" style="display:none;">
+            <button class="btn btn-hard" id="fcHard">😖 صعب</button>
+            <button class="btn btn-mid" id="fcMid">🙂 متوسط</button>
+            <button class="btn btn-easy" id="fcEasy">😄 سهل</button>
+          </div>
+          <div id="fcFlipHint" style="color:var(--ink-dim);font-size:13px;">اضغط على البطاقة لقلبها ومعرفة المعنى</div>
+        </div>
+        <div id="fcDoneArea" style="display:none;" class="fc-done">
+          <div class="big-emoji">🎉</div>
+          <h3>أنهيت مراجعة هذه الفئة اليوم!</h3>
+          <p class="sub">عُد غدًا، أو راجع كل كلمات الفئة الآن.</p>
+          <button class="btn btn-ghost" id="fcRestartAll">🔁 مراجعة كل كلمات الفئة الآن</button>
+        </div>
+      </div>
+    </section>
+    <section class="subview" id="sub-quiz">
+      <div id="quizIntro" class="quiz-intro">
+        <div class="qi-count" id="qiCount">0</div>
+        <div class="qi-desc">سؤال — بعدد كلمات هذه الفئة بالضبط. الأسئلة السهلة للكلمات الشائعة، والأصعب للكلمات الأقل شيوعًا.</div>
+        <div class="type-legend">
+          <span class="type-chip">✏️ أكمل الجملة</span>
+          <span class="type-chip">🔤 إنجليزي ← عربي</span>
+          <span class="type-chip">🔡 عربي ← إنجليزي</span>
+          <span class="type-chip">🧩 الكلمة الشاذة</span>
+          <span class="type-chip">⌨️ اكتب الكلمة</span>
+        </div>
+        <button class="btn btn-primary" id="startCatQuizBtn">ابدأ اختبار الفئة كاملة</button>
+      </div>
+      <div id="quizActive" style="display:none;" class="q-wrap">
+        <div class="q-top"><span id="qCounter">1 / 1</span><span id="qScore">النقاط: 0</span></div>
+        <div class="q-bar"><div class="q-bar-fill" id="qBarFill" style="width:0%"></div></div>
+        <div class="q-card" id="qCard"></div>
+      </div>
+      <div id="quizResult" style="display:none;" class="result">
+        <div class="score" id="resultScore">0/0</div>
+        <div class="out-of" id="resultLabel">نتيجتك</div>
+        <div id="resultWrongWrap"></div>
+        <button class="btn btn-primary" id="retryQuizBtn">🔁 أعد اختبار الفئة</button>
+      </div>
+    </section>
+  </div>
+  <footer>
+    كل فئة نظام مستقل بالكامل: كلماتها، بطاقاتها، تكرارها المتباعد، واختبارها الخاص بها<br>
+    <b>النسخة v4</b> — الكلمات بلا مجموعة على 3 مستويات + 4 مجالات جديدة
+  </footer>
+</div>
+<script>
+const CATS = {
+  food:    {label:"الطعام والمطبخ",        color:"var(--tier-food)",    emoji:"🍽️", group:"domain"},
+  nature:  {label:"الطبيعة والحيوانات",     color:"var(--tier-nature)",  emoji:"🌳", group:"domain"},
+  home:    {label:"المنزل والأثاث",         color:"var(--tier-home)",    emoji:"🏠", group:"domain"},
+  ideas:   {label:"مفاهيم ومشاعر",          color:"var(--tier-ideas)",   emoji:"💭", group:"domain"},
+  body:    {label:"الجسم والصحة",           color:"var(--tier-body)",    emoji:"🩺", group:"domain"},
+  city:    {label:"المدينة والمواصلات",     color:"var(--tier-city)",    emoji:"🏙️", group:"domain"},
+  school:  {label:"المدرسة والعمل",         color:"var(--tier-school)",  emoji:"🏫", group:"domain"},
+  family:  {label:"الأسرة والناس",          color:"var(--tier-family)",  emoji:"👪", group:"domain"},
+  money:   {label:"المال والتسوق",          color:"var(--tier-money)",   emoji:"💰", group:"domain"},
+  time:    {label:"الوقت والتقويم",         color:"var(--tier-time)",    emoji:"⏰", group:"domain"},
+  clothes: {label:"الملابس والإكسسوارات",   color:"var(--tier-clothes)", emoji:"👕", group:"domain"},
+  tech:    {label:"التكنولوجيا والاتصال",   color:"var(--tier-tech)",    emoji:"💻", group:"domain"},
+  sport:   {label:"الرياضة",                color:"var(--tier-sport)",   emoji:"⚽", group:"domain"},
+  art:     {label:"الفن والموسيقى",         color:"var(--tier-art)",     emoji:"🎨", group:"domain"},
+  weather: {label:"الطقس بالتفصيل",         color:"var(--tier-weather)", emoji:"🌤️", group:"domain"},
+  law:     {label:"القانون والحكومة",       color:"var(--tier-law)",     emoji:"🏛️", group:"domain"},
+  general1:{label:"كلمات عامة · المستوى الأول (الأهم)",   color:"var(--tier-general1)", emoji:"🔹", group:"general"},
+  general2:{label:"كلمات عامة · المستوى الثاني",          color:"var(--tier-general2)", emoji:"🔸", group:"general"},
+  general3:{label:"كلمات عامة · المستوى الثالث (الأدق)",  color:"var(--tier-general3)", emoji:"🔺", group:"general"}
+};
+const RAW = {
+time:[["time","الوقت","⏰"],["day","يوم","☀️"],["night","ليل","🌙"],["morning","صباح","🌅"],["evening","مساء","🌆"],["week","أسبوع","📅"],["month","شهر","🗓️"],["year","سنة","📆"],["hour","ساعة","⏱️"],["minute","دقيقة","⏳"],["second","ثانية","⏲️"],["moment","لحظة","✨"],["season","فصل","🍂"],["spring","ربيع","🌱"],["summer","صيف","🌻"],["autumn","خريف","🍁"],["winter","شتاء","❄️"],["calendar","تقويم","📇"],["clock","ساعة حائط","🕐"],["date","تاريخ","📌"],["today","اليوم","📍"],["tomorrow","غدًا","➡️"],["yesterday","أمس","⬅️"],["weekend","عطلة أسبوعية","🏖️"],["holiday","عطلة","🎉"],["birthday","عيد ميلاد","🎂"],["anniversary","ذكرى سنوية","💐"],["schedule","جدول","🗒️"],["century","قرن","🏛️"],["decade","عقد من الزمن","📈"],["dawn","فجر","🌄"],["midnight","منتصف الليل","🌌"]],
+family:[["family","عائلة","👪"],["mother","أم","👩"],["father","أب","👨"],["parent","والد","🧑"],["brother","أخ","👦"],["sister","أخت","👧"],["son","ابن","👦"],["daughter","ابنة","👧"],["child","طفل","🧒"],["baby","رضيع","👶"],["man","رجل","👨"],["woman","امرأة","👩"],["boy","ولد","👦"],["girl","بنت","👧"],["friend","صديق","🤝"],["neighbor","جار","🏘️"],["people","أناس","👥"],["person","شخص","🙋"],["husband","زوج","🤵"],["wife","زوجة","👰"],["grandmother","جدة","👵"],["grandfather","جد","👴"],["grandparent","جد أو جدة","👴"],["uncle","عم أو خال","🧔"],["aunt","عمة أو خالة","👩‍🦳"],["cousin","ابن عم أو خال","🧑"],["nephew","ابن الأخ","🧒"],["niece","ابنة الأخ","🧒"],["relative","قريب","👨‍👩‍👧"],["twin","توأم","👯"],["teenager","مراهق","🧑‍🎤"],["adult","بالغ","🧑"],["elder","كبير السن","👴"],["stranger","غريب","🚶"],["guest","ضيف","🚪"],["host","مضيف","🙋‍♂️"],["couple","زوجان","💑"],["partner","شريك","🤝"],["colleague","زميل","🧑‍💼"],["boss","رئيس","👔"],["employee","موظف","🧑‍💻"],["citizen","مواطن","🪪"]],
+home:[["house","منزل","🏠"],["home","بيت","🏡"],["room","غرفة","🛋️"],["door","باب","🚪"],["window","نافذة","🪟"],["wall","جدار","🧱"],["roof","سقف","🏚️"],["floor","أرضية","🧹"],["kitchen","مطبخ","🍳"],["bedroom","غرفة نوم","🛏️"],["bathroom","حمام","🚿"],["garden","حديقة","🌷"],["key","مفتاح","🔑"],["table","طاولة","🍽️"],["chair","كرسي","🪑"],["bed","سرير","🛌"],["sofa","أريكة","🛋️"],["mirror","مرآة","🪞"],["lamp","مصباح","💡"],["stairs","سلم","🪜"],["ceiling","سقف الغرفة","🔲"],["corner","زاوية","📐"],["balcony","شرفة","🏙️"],["garage","كراج","🚙"],["fence","سياج","🚧"],["gate","بوابة","🚪"],["yard","ساحة","🌾"],["closet","خزانة ملابس","🚪"],["drawer","درج","🗄️"],["shelf","رف","📚"],["curtain","ستارة","🪟"],["carpet","سجادة","🟫"],["blanket","بطانية","🛏️"],["pillow","وسادة","🛌"],["towel","منشفة","🧻"],["soap","صابون","🧼"],["bucket","دلو","🪣"],["broom","مكنسة","🧹"],["furniture","أثاث","🪑"],["apartment","شقة","🏢"],["building","مبنى","🏢"],["address","عنوان","📍"],["entrance","مدخل","🚪"],["exit","مخرج","🚪"],["hallway","ممر","🚶"],["basement","قبو","🕳️"],["attic","علية","🏠"],["chimney","مدخنة","🏭"],["fireplace","موقد","🔥"],["switch","مفتاح كهرباء","🔌"],["elevator","مصعد","🛗"],["landlord","مالك العقار","🧑‍💼"],["doormat","سجادة الباب","🚪"],["cushion","وسادة زينة","🛋️"],["vase","مزهرية","🏺"],["candle","شمعة","🕯️"],["thermostat","منظم حرارة","🌡️"]],
+food:[["food","طعام","🍽️"],["water","ماء","💧"],["bread","خبز","🍞"],["milk","حليب","🥛"],["egg","بيضة","🥚"],["meat","لحم","🥩"],["fish","سمك","🐟"],["rice","أرز","🍚"],["sugar","سكر","🍬"],["salt","ملح","🧂"],["tea","شاي","🍵"],["coffee","قهوة","☕"],["fruit","فاكهة","🍎"],["vegetable","خضار","🥦"],["apple","تفاحة","🍏"],["plate","طبق","🍽️"],["cup","كوب","☕"],["spoon","ملعقة","🥄"],["knife","سكين","🔪"],["pot","قدر","🍲"],["banana","موزة","🍌"],["orange","برتقالة","🍊"],["lemon","ليمونة","🍋"],["grape","عنب","🍇"],["potato","بطاطا","🥔"],["tomato","طماطم","🍅"],["onion","بصل","🧅"],["carrot","جزر","🥕"],["cheese","جبن","🧀"],["butter","زبدة","🧈"],["oil","زيت","🫒"],["honey","عسل","🍯"],["juice","عصير","🧃"],["soup","حساء","🥣"],["salad","سلطة","🥗"],["sandwich","شطيرة","🥪"],["pizza","بيتزا","🍕"],["cake","كعكة","🍰"],["cookie","بسكويت","🍪"],["chocolate","شوكولاتة","🍫"],["candy","حلوى","🍬"],["chicken","دجاج","🍗"],["beef","لحم بقري","🥩"],["lamb","لحم غنم","🍖"],["shrimp","جمبري","🦐"],["pasta","معكرونة","🍝"],["noodle","نودلز","🍜"],["corn","ذرة","🌽"],["bean","فاصولياء","🫘"],["nut","مكسرات","🥜"],["pepper","فلفل","🌶️"],["spice","بهار","🧂"],["jar","برطمان","🫙"],["bowl","وعاء","🥣"],["fork","شوكة","🍴"],["napkin","منديل","🧻"],["oven","فرن","🔥"],["stove","موقد طبخ","🍳"],["fridge","ثلاجة","🧊"],["sink","حوض المطبخ","🚰"],["tray","صينية","🍽️"],["kettle","غلاية","🫖"],["blender","خلاط","🌀"],["recipe","وصفة","📃"],["meal","وجبة","🍽️"],["breakfast","فطور","🍳"],["lunch","غداء","🍛"],["dinner","عشاء","🍽️"],["snack","وجبة خفيفة","🍿"],["dessert","حلوى بعد الطعام","🍮"],["restaurant","مطعم","🍴"],["menu","قائمة طعام","📋"],["waiter","نادل","🧑‍🍳"],["flavor","نكهة","👅"],["taste","طعم","😋"],["spinach","سبانخ","🥬"],["cucumber","خيار","🥒"],["garlic","ثوم","🧄"],["yogurt","زبادي","🥣"],["pancake","فطيرة","🥞"]],
+body:[["body","جسم","🧍"],["head","رأس","🙂"],["eye","عين","👁️"],["ear","أذن","👂"],["nose","أنف","👃"],["mouth","فم","👄"],["hand","يد","✋"],["arm","ذراع","💪"],["leg","ساق","🦵"],["foot","قدم","🦶"],["heart","قلب","❤️"],["blood","دم","🩸"],["hair","شعر","💇"],["tooth","سن","🦷"],["back","ظهر","🔙"],["skin","جلد","🤚"],["health","صحة","🏥"],["doctor","طبيب","🧑‍⚕️"],["hospital","مستشفى","🏥"],["medicine","دواء","💉"],["finger","إصبع","👆"],["toe","إصبع القدم","🦶"],["knee","ركبة","🦵"],["elbow","كوع","💪"],["shoulder","كتف","🤷"],["neck","رقبة","🧣"],["chest","صدر","🫁"],["stomach","معدة","🫃"],["brain","دماغ","🧠"],["lung","رئة","🫁"],["bone","عظم","🦴"],["muscle","عضلة","💪"],["nail","ظفر","💅"],["lip","شفة","👄"],["tongue","لسان","👅"],["cheek","خد","😊"],["chin","ذقن","🧑"],["forehead","جبهة","🧠"],["eyebrow","حاجب","👁️"],["eyelash","رمش","👁️"],["nurse","ممرضة","👩‍⚕️"],["patient","مريض","🤒"],["pill","حبة دواء","💊"],["injection","حقنة","💉"],["bandage","ضمادة","🩹"],["surgery","جراحة","🏥"],["disease","مرض","🦠"],["symptom","عرض","🌡️"],["treatment","علاج","💊"],["clinic","عيادة","🏥"],["pharmacy","صيدلية","💊"],["vitamin","فيتامين","💊"],["therapy","علاج نفسي","🛋️"],["wheelchair","كرسي متحرك","♿"],["virus","فيروس","🦠"]],
+school:[["school","مدرسة","🏫"],["teacher","معلم","🧑‍🏫"],["student","طالب","🎓"],["book","كتاب","📖"],["pen","قلم","🖊️"],["paper","ورقة","📄"],["class","صف","📚"],["lesson","درس","📝"],["exam","امتحان","🧾"],["work","عمل","💼"],["job","وظيفة","🧑‍💼"],["office","مكتب","🏢"],["company","شركة","🏭"],["business","تجارة","📈"],["meeting","اجتماع","🤝"],["project","مشروع","📋"],["idea","فكرة","💡"],["pencil","قلم رصاص","✏️"],["eraser","ممحاة","🧽"],["ruler","مسطرة","📏"],["notebook","دفتر","📓"],["backpack","حقيبة ظهر","🎒"],["classroom","فصل دراسي","🏫"],["homework","واجب منزلي","📝"],["grade","درجة","💯"],["degree","شهادة جامعية","🎓"],["university","جامعة","🏛️"],["college","كلية","🏫"],["library","مكتبة","📚"],["dictionary","قاموس","📖"],["subject","مادة دراسية","📘"],["science","علوم","🔬"],["math","رياضيات","➗"],["history","تاريخ","📜"],["geography","جغرافيا","🌍"],["language","لغة","🗣️"],["chemistry","كيمياء","🧪"],["physics","فيزياء","⚛️"],["biology","أحياء","🧬"],["laboratory","مختبر","🔬"],["experiment","تجربة","⚗️"],["contract","عقد","📜"],["interview","مقابلة","🎙️"],["resume","سيرة ذاتية","📄"],["career","مسيرة مهنية","💼"],["manager","مدير","🧑‍💼"],["client","عميل","🤝"],["department","قسم","🏢"],["factory","مصنع","🏭"],["warehouse","مستودع","📦"]],
+city:[["city","مدينة","🏙️"],["town","بلدة","🏘️"],["street","شارع","🛣️"],["road","طريق","🛤️"],["car","سيارة","🚗"],["bus","حافلة","🚌"],["train","قطار","🚆"],["airport","مطار","✈️"],["shop","متجر","🏪"],["market","سوق","🛒"],["bank","بنك","🏦"],["park","حديقة عامة","🌳"],["bridge","جسر","🌉"],["station","محطة","🚉"],["ticket","تذكرة","🎫"],["map","خريطة","🗺️"],["world","عالم","🌍"],["country","بلد","🌐"],["village","قرية","🛖"],["square","ميدان","🔲"],["traffic","ازدحام مروري","🚦"],["sidewalk","رصيف","🚶"],["highway","طريق سريع","🛣️"],["tunnel","نفق","🚇"],["bicycle","دراجة","🚲"],["motorcycle","دراجة نارية","🏍️"],["taxi","سيارة أجرة","🚕"],["subway","مترو","🚇"],["ship","سفينة","🚢"],["boat","قارب","⛵"],["airplane","طائرة","✈️"],["passenger","راكب","🧑‍✈️"],["driver","سائق","🚘"],["pilot","طيار","👨‍✈️"],["luggage","أمتعة","🧳"],["passport","جواز سفر","📘"],["visa","تأشيرة","🛂"],["hotel","فندق","🏨"],["museum","متحف","🏛️"],["church","كنيسة","⛪"],["mosque","مسجد","🕌"],["temple","معبد","🛕"],["embassy","سفارة","🏛️"],["police","شرطة","🚓"],["fireman","رجل إطفاء","👨‍🚒"],["stadium","ملعب","🏟️"],["theater","مسرح","🎭"],["cinema","سينما","🎬"],["gallery","معرض فني","🖼️"],["zoo","حديقة حيوان","🦁"],["harbor","ميناء","⚓"],["farm","مزرعة","🚜"],["mine","منجم","⛏️"],["monument","نصب تذكاري","🗿"],["skyscraper","ناطحة سحاب","🏙️"]],
+nature:[["sun","شمس","☀️"],["moon","قمر","🌙"],["star","نجمة","⭐"],["sky","سماء","☁️"],["sea","بحر","🌊"],["river","نهر","🏞️"],["mountain","جبل","⛰️"],["tree","شجرة","🌳"],["flower","زهرة","🌸"],["forest","غابة","🌲"],["rain","مطر","🌧️"],["snow","ثلج","❄️"],["wind","رياح","💨"],["fire","نار","🔥"],["earth","أرض","🌍"],["air","هواء","🌬️"],["stone","حجر","🪨"],["sand","رمل","🏖️"],["animal","حيوان","🐾"],["bird","طائر","🐦"],["ocean","محيط","🌊"],["lake","بحيرة","🏞️"],["valley","وادي","🏞️"],["hill","تلة","⛰️"],["island","جزيرة","🏝️"],["desert","صحراء","🏜️"],["jungle","أدغال","🌴"],["cave","كهف","🕳️"],["volcano","بركان","🌋"],["cloud","غيمة","☁️"],["storm","عاصفة","🌪️"],["thunder","رعد","⛈️"],["lightning","برق","⚡"],["fog","ضباب","🌫️"],["ice","جليد","🧊"],["wave","موجة","🌊"],["root","جذر","🌱"],["leaf","ورقة شجر","🍃"],["branch","غصن","🌿"],["seed","بذرة","🌰"],["grass","عشب","🌾"],["dog","كلب","🐕"],["cat","قطة","🐈"],["horse","حصان","🐎"],["cow","بقرة","🐄"],["sheep","خروف","🐑"],["goat","ماعز","🐐"],["lion","أسد","🦁"],["tiger","نمر","🐯"],["elephant","فيل","🐘"],["monkey","قرد","🐒"],["bear","دب","🐻"],["wolf","ذئب","🐺"],["fox","ثعلب","🦊"],["rabbit","أرنب","🐇"],["mouse","فأر","🐭"],["snake","ثعبان","🐍"],["frog","ضفدع","🐸"],["insect","حشرة","🐛"],["butterfly","فراشة","🦋"],["bee","نحلة","🐝"],["spider","عنكبوت","🕷️"],["ant","نملة","🐜"],["rooster","ديك","🐓"],["duck","بطة","🦆"],["eagle","نسر","🦅"],["dolphin","دولفين","🐬"],["turtle","سلحفاة","🐢"],["coral","مرجان","🪸"],["meadow","مرج","🌾"]],
+clothes:[["clothes","ملابس","👕"],["shirt","قميص","👔"],["dress","فستان","👗"],["shoe","حذاء","👞"],["hat","قبعة","🎩"],["coat","معطف","🧥"],["pants","بنطال","👖"],["sock","جورب","🧦"],["bag","حقيبة","👜"],["glove","قفاز","🧤"],["scarf","وشاح","🧣"],["jacket","سترة","🥼"],["umbrella","مظلة","☂️"],["watch","ساعة يد","⌚"],["ring","خاتم","💍"],["necklace","قلادة","📿"],["boot","جزمة","🥾"],["belt","حزام","🪢"],["button","زر","🔘"],["jeans","جينز","👖"],["skirt","تنورة","👗"],["sweater","كنزة صوف","🧶"],["uniform","زي موحد","👔"],["pajama","بيجاما","🥱"],["sunglasses","نظارة شمسية","🕶️"],["earring","قرط","💎"],["bracelet","سوار","💫"],["perfume","عطر","🧴"],["fabric","قماش","🧵"],["sandal","صندل","👡"]],
+ideas:[["love","حب","❤️"],["happiness","سعادة","😊"],["fear","خوف","😨"],["anger","غضب","😠"],["hope","أمل","🌟"],["dream","حلم","💭"],["life","حياة","🧬"],["death","موت","⚰️"],["peace","سلام","☮️"],["war","حرب","⚔️"],["truth","حقيقة","✅"],["freedom","حرية","🕊️"],["power","قوة","⚡"],["knowledge","معرفة","🧠"],["memory","ذاكرة","💾"],["question","سؤال","❓"],["answer","جواب","💬"],["problem","مشكلة","⚠️"],["reason","سبب","🤔"],["story","قصة","📖"],["sadness","حزن","😢"],["joy","فرح","😄"],["surprise","مفاجأة","😲"],["courage","شجاعة","🦁"],["patience","صبر","⏳"],["honesty","صدق","🤝"],["kindness","لطف","💗"],["respect","احترام","🙏"],["trust","ثقة","🤝"],["jealousy","غيرة","😒"],["pride","فخر","🦚"],["shame","خجل","😳"],["guilt","شعور بالذنب","😔"],["comfort","راحة","🛋️"],["luck","حظ","🍀"],["chance","فرصة","🎲"],["risk","مخاطرة","⚠️"],["choice","اختيار","🔀"],["decision","قرار","✅"],["opinion","رأي","💭"],["belief","اعتقاد","🙏"],["faith","إيمان","🙏"],["religion","دين","📿"],["culture","ثقافة","🎭"],["tradition","تقليد","🏺"],["custom","عادة","📜"],["habit","عادة شخصية","🔁"],["rule","قاعدة","📏"],["law","قانون","⚖️"],["right","حق","⚖️"],["duty","واجب","📋"],["responsibility","مسؤولية","🎯"],["goal","هدف","🎯"],["plan","خطة","🗺️"],["success","نجاح","🏆"],["failure","فشل","📉"],["effort","جهد","💪"],["challenge","تحدٍّ","🧗"],["opportunity","فرصة سانحة","🚪"],["change","تغيير","🔄"],["wisdom","حكمة","🦉"],["curiosity","فضول","🔍"],["gratitude","امتنان","🙏"],["forgiveness","مسامحة","🤲"],["ambition","طموح","🚀"]],
+tech:[["computer","حاسوب","💻"],["phone","هاتف","📱"],["printer","طابعة","🖨️"],["keyboard","لوحة مفاتيح","⌨️"],["screen","شاشة","🖥️"],["email","بريد إلكتروني","📧"],["internet","إنترنت","🌐"],["website","موقع إلكتروني","🔗"],["password","كلمة سر","🔒"],["app","تطبيق","📲"],["software","برمجيات","💿"],["hardware","عتاد","🖥️"],["network","شبكة","📡"],["server","خادم","🖥️"],["database","قاعدة بيانات","🗄️"],["camera","كاميرا","📷"],["video","فيديو","🎥"],["photo","صورة","📸"],["message","رسالة","✉️"],["signal","إشارة","📶"],["battery","بطارية","🔋"],["charger","شاحن","🔌"],["headphone","سماعة رأس","🎧"],["speaker","مكبر صوت","🔊"],["microphone","ميكروفون","🎙️"],["robot","روبوت","🤖"],["satellite","قمر صناعي","🛰️"],["code","شفرة برمجية","💻"],["program","برنامج","🖥️"],["browser","متصفح","🌐"]],
+money:[["money","مال","💰"],["price","سعر","🏷️"],["cost","تكلفة","💵"],["discount","خصم","🏷️"],["sale","تخفيضات","🛍️"],["receipt","إيصال","🧾"],["cash","نقد","💵"],["coin","عملة معدنية","🪙"],["currency","عملة","💱"],["credit","ائتمان","💳"],["debit","خصم مباشر","💳"],["account","حساب بنكي","🏦"],["budget","ميزانية","📊"],["loan","قرض","🏦"],["debt","دين","📉"],["tax","ضريبة","🧾"],["salary","راتب","💰"],["wage","أجر","💵"],["profit","ربح","📈"],["income","دخل","💵"],["expense","مصروف","💸"],["savings","مدخرات","🐖"],["investment","استثمار","📈"],["dollar","دولار","💵"],["cart","عربة تسوق","🛒"],["checkout","الدفع عند الخروج","🧾"],["cashier","كاشير","🧑‍💼"],["store","متجر كبير","🏬"],["mall","مركز تسوق","🛍️"],["brand","علامة تجارية","™️"],["product","منتج","📦"],["coupon","قسيمة خصم","🎟️"],["bill","فاتورة","🧾"],["wallet","محفظة","👛"]],
+sport:[["sport","رياضة","⚽"],["team","فريق","👥"],["match","مباراة","🥅"],["goalpost","مرمى","🥅"],["coach","مدرب","🧑‍🏫"],["player","لاعب","🏃"],["ball","كرة","⚽"],["game","لعبة","🎮"],["race","سباق","🏁"],["champion","بطل","🏆"],["medal","ميدالية","🥇"],["score","نتيجة المباراة","🔢"],["referee","حكم المباراة","🧑‍⚖️"],["league","دوري","🏆"],["tournament","بطولة","🏆"],["fitness","لياقة بدنية","💪"],["gym","صالة رياضية","🏋️"],["exercise","تمرين","🏋️"],["victory","فوز","🏆"],["defeat","هزيمة","😞"],["opponent","خصم","🤼"],["fan","مشجع","📣"],["jersey","قميص رياضي","👕"],["whistle","صافرة","🎯"],["net","شبكة الهدف","🥅"],["pitch","ملعب","🏟️"],["swimming","سباحة","🏊"],["athlete","رياضي","🏃"],["marathon","ماراثون","🏃‍♂️"],["olympics","أولمبياد","🥇"],["championship","بطولة كبرى","🏆"],["trophy","كأس","🏆"],["lap","شوط","🔁"],["round","جولة","🔁"],["warm-up","إحماء","🔥"]],
+art:[["art","فن","🎨"],["music","موسيقى","🎵"],["painting","لوحة","🖼️"],["instrument","آلة موسيقية","🎸"],["song","أغنية","🎵"],["dance","رقص","💃"],["movie","فيلم","🎬"],["film","فيلم سينمائي","🎞️"],["actor","ممثل","🎭"],["actress","ممثلة","🎭"],["artist","فنان","🎨"],["painter","رسام","🖌️"],["singer","مغني","🎤"],["drawing","رسمة","✏️"],["sculpture","منحوتة","🗿"],["poem","قصيدة","📜"],["novel","رواية","📖"],["author","مؤلف","✍️"],["guitar","جيتار","🎸"],["piano","بيانو","🎹"],["drum","طبلة","🥁"],["orchestra","أوركسترا","🎻"],["concert","حفلة موسيقية","🎤"],["exhibition","معرض","🖼️"],["melody","لحن","🎶"],["rhythm","إيقاع","🥁"],["lyrics","كلمات الأغنية","📝"],["band","فرقة موسيقية","🎸"],["audience","جمهور","👥"],["stage","خشبة المسرح","🎭"],["script","نص مسرحي","📜"],["character","شخصية","🎭"],["plot","حبكة","📖"],["genre","نوع فني","🎞️"]],
+weather:[["weather","طقس","🌤️"],["temperature","درجة حرارة","🌡️"],["humidity","رطوبة","💧"],["forecast","توقعات جوية","📡"],["climate","مناخ","🌍"],["breeze","نسيم","🍃"],["drought","جفاف","🏜️"],["flood","فيضان","🌊"],["hurricane","إعصار","🌀"],["tornado","إعصار قمعي","🌪️"],["rainbow","قوس قزح","🌈"],["frost","صقيع","❄️"],["hail","برد متساقط","🧊"],["drizzle","رذاذ","🌦️"],["gust","هبة ريح","💨"],["heatwave","موجة حر","🥵"],["blizzard","عاصفة ثلجية","🌨️"],["monsoon","موسم الأمطار","🌧️"],["pressure","ضغط جوي","📊"],["atmosphere","غلاف جوي","🌍"],["sunshine","ضوء الشمس","☀️"],["shade","ظل","🌳"],["visibility","مدى الرؤية","👁️"],["warmth","دفء","🔥"],["chill","برودة","🥶"],["overcast","غيوم كثيفة","☁️"],["downpour","وابل مطر","🌧️"],["mist","ضباب خفيف","🌫️"],["dew","ندى","💧"],["sunrise","شروق الشمس","🌅"],["sunset","غروب الشمس","🌇"]],
+law:[["government","حكومة","🏛️"],["law","قانون","⚖️"],["president","رئيس دولة","🎩"],["minister","وزير","🧑‍💼"],["parliament","برلمان","🏛️"],["court","محكمة","⚖️"],["judge","قاضٍ","⚖️"],["jury","هيئة محلفين","👥"],["election","انتخابات","🗳️"],["vote","صوت انتخابي","🗳️"],["constitution","دستور","📜"],["policy","سياسة","📋"],["senate","مجلس الشيوخ","🏛️"],["mayor","عمدة","🎗️"],["ambassador","سفير","🎩"],["treaty","معاهدة","📜"],["committee","لجنة","👥"],["congress","كونغرس","🏛️"],["democracy","ديمقراطية","🗳️"],["republic","جمهورية","🏛️"],["monarchy","ملكية","👑"],["ministry","وزارة","🏛️"],["regulation","لائحة","📋"],["legislation","تشريع","📜"],["verdict","حكم قضائي","⚖️"],["lawsuit","دعوى قضائية","⚖️"],["witness","شاهد","👁️"],["crime","جريمة","🚨"],["candidate","مرشح","🗳️"],["campaign","حملة","📢"]],
+general1:[["thing","شيء","🔹"],["way","طريقة","➰"],["part","جزء","🧩"],["kind","نوع","🏷️"],["type","نمط","🏷️"],["side","جانب","↔️"],["level","مستوى","📶"],["area","منطقة","📍"],["form","شكل أو استمارة","📐"],["system","نظام","⚙️"],["process","عملية","🔄"],["method","أسلوب","🛠️"],["result","نتيجة","🎯"],["effect","تأثير","💥"],["cause","سبب","🔗"],["example","مثال","📌"],["case","حالة","📁"],["point","نقطة","📍"],["matter","أمر أو مادة","🔸"],["topic","موضوع","📝"],["term","مصطلح","🔤"],["sign","علامة","🚩"],["symbol","رمز","🔣"],["mark","علامة تقييم","✔️"],["sample","عينة","🧪"],["model","نموذج","🗿"],["version","إصدار","🔢"],["copy","نسخة","📄"],["piece","قطعة","🧩"],["unit","وحدة","🔲"],["item","عنصر","📦"],["object","غرض","🔷"],["material","مادة خام","🧱"],["substance","مادة","⚗️"],["element","عنصر أساسي","🔬"],["factor","عامل","➗"],["aspect","جانب من الموضوع","🔍"],["feature","ميزة","⭐"],["detail","تفصيل","🔎"],["section","قسم","📑"],["category","فئة","🗂️"],["group","مجموعة","👥"],["list","قائمة","📋"],["series","سلسلة","🔗"],["sequence","تسلسل","➡️"],["order","ترتيب","🔢"],["structure","هيكل","🏗️"],["pattern","نمط متكرر","🔁"],["format","تنسيق","🗒️"],["style","أسلوب أو طراز","🎨"],["standard","معيار","📏"],["quality","جودة","💎"],["quantity","كمية","⚖️"],["amount","كمية محددة","🔢"],["number","رقم","🔢"],["percentage","نسبة مئوية","💯"],["rate","معدل","📈"],["ratio","نسبة","➗"],["scale","مقياس","⚖️"],["size","حجم","📏"],["shape","شكل هندسي","⬛"],["role","دور","🎭"],["extent","مدى","📏"],["range","نطاق","↔️"],["limit","حد","🚧"],["boundary","حدود","🚧"],["edge","حافة","📐"],["surface","سطح","🔲"],["space","فضاء أو مساحة","🌌"],["place","مكان","📍"],["position","موقع أو منصب","📍"],["location","موقع جغرافي","📍"],["direction","اتجاه","🧭"],["distance","مسافة","📏"],["gap","فجوة","➖"],["layer","طبقة","🧅"],["base","قاعدة","🔻"],["foundation","أساس","🏛️"],["source","مصدر","💧"],["origin","أصل","🌱"],["background","خلفية","🖼️"],["context","سياق","📖"],["condition","حالة أو شرط","📋"],["state","حالة عامة","🗺️"],["situation","موقف","🎭"],["circumstance","ظرف","🌦️"],["environment","بيئة","🌍"],["event","حدث","📅"],["occasion","مناسبة","🎊"],["incident","حادثة","⚠️"]],
+general2:[["approach","نهج","🚶"],["attempt","محاولة","🎯"],["achievement","إنجاز","🏆"],["advantage","ميزة إيجابية","✅"],["disadvantage","عيب","❌"],["alternative","بديل","🔀"],["appearance","مظهر","👀"],["arrangement","ترتيب","📐"],["assumption","افتراض","🤔"],["attitude","موقف نفسي","🎭"],["authority","سلطة","⚖️"],["awareness","وعي","💡"],["balance","توازن","⚖️"],["barrier","حاجز","🚧"],["basis","أساس","🧱"],["behavior","سلوك","🚶"],["benefit","فائدة","🎁"],["capacity","سعة","📦"],["circle","دائرة","⭕"],["combination","توليفة","🔗"],["comparison","مقارنة","⚖️"],["complexity","تعقيد","🌀"],["component","مكوّن","🧩"],["concept","مفهوم","💭"],["conclusion","استنتاج","🏁"],["connection","اتصال","🔗"],["consequence","عاقبة","➡️"],["consideration","اعتبار","🤔"],["contact","تواصل","📞"],["content","محتوى","📄"],["contribution","مساهمة","🤲"],["contrast","تباين","⚫"],["control","سيطرة","🎮"],["conversation","محادثة","💬"],["core","جوهر","🎯"],["correction","تصحيح","✔️"],["coverage","تغطية","📡"],["creation","إبداع","✨"],["cycle","دورة","🔄"],["definition","تعريف","📖"],["demand","طلب","📈"],["description","وصف","📝"],["design","تصميم","✏️"],["development","تطوير","📈"],["difference","فرق","↔️"],["dimension","بُعد","📐"],["discovery","اكتشاف","🔭"],["distinction","تمييز","⭐"],["distribution","توزيع","📤"],["division","تقسيم","➗"],["document","وثيقة","📄"],["emphasis","تأكيد","❗"],["energy","طاقة","⚡"],["engagement","تفاعل أو ارتباط","🤝"],["entry","إدخال أو دخول","🚪"],["equation","معادلة","🧮"],["evidence","دليل","🔍"],["evolution","تطور","🧬"],["exception","استثناء","⚠️"],["exchange","تبادل","🔄"],["existence","وجود","🌌"],["expansion","توسع","📈"],["experience","خبرة","🎓"],["expression","تعبير","💬"],["extension","امتداد","➕"]],
+general3:[["fact","حقيقة ثابتة","📌"],["feedback","تغذية راجعة","🔁"],["field","مجال","🌾"],["focus","تركيز","🎯"],["framework","إطار عمل","🖼️"],["function","وظيفة","⚙️"],["generation","جيل","👨‍👩‍👧‍👦"],["guide","دليل إرشادي","🧭"],["guideline","إرشاد","📋"],["image","صورة ذهنية","🖼️"],["impact","أثر","💥"],["implication","دلالة","➡️"],["importance","أهمية","⭐"],["impression","انطباع","🌟"],["improvement","تحسين","📈"],["incentive","حافز","🎁"],["inclusion","شمول","➕"],["indication","مؤشر","📶"],["influence","تأثير على الآخرين","🌊"],["information","معلومات","ℹ️"],["initiative","مبادرة","🚀"],["innovation","ابتكار","💡"],["input","مدخل","⬅️"],["inquiry","استفسار","❓"],["insight","بصيرة","👁️"],["inspiration","إلهام","✨"],["instance","حالة أو مثيل","📌"],["institution","مؤسسة","🏛️"],["instruction","تعليمة","📋"],["integration","تكامل","🔗"],["intent","نية","🎯"],["interaction","تفاعل","🔄"],["interpretation","تفسير","📖"],["intervention","تدخل","✋"],["introduction","مقدمة","📖"],["investigation","تحقيق","🔍"],["involvement","انخراط","🤲"],["issue","قضية","⚠️"],["judgment","حكم","⚖️"],["justification","تبرير","📝"],["label","تسمية","🏷️"],["layout","تخطيط","📐"],["lead","الصدارة","🥇"],["legacy","إرث","🏛️"],["link","رابط","🔗"],["logic","منطق","🧠"],["majority","أغلبية","📊"],["manner","أسلوب أو طريقة","🎭"],["mechanism","آلية","⚙️"],["milestone","معلم بارز","🚩"],["minority","أقلية","📉"],["mission","مهمة","🎯"],["mode","وضع","🔘"],["motivation","دافع","🔥"],["movement","حركة","➡️"],["need","حاجة","❗"],["norm","عرف","📏"],["notion","فكرة عامة","💭"],["objective","هدف موضوعي","🎯"],["observation","ملاحظة","👀"],["obstacle","عقبة","🚧"],["occurrence","حدوث","🔁"],["offer","عرض","🎁"],["operation","عملية تشغيل","⚙️"],["option","خيار","🔘"],["outcome","محصلة","🏁"],["output","مخرج","➡️"],["overview","نظرة عامة","🔭"],["ownership","ملكية","🗝️"]]
+};
+const TEMPLATES = {
+  time:["I will call you next ___.","We need to finish this before the ___.","The meeting starts early in the ___.","She was born in that ___.","Every ___ I go for a walk."],
+  family:["My ___ lives in another city.","I love spending time with my ___.","She introduced me to her ___.","He is the youngest ___ in the house.","We invited every ___ to the party."],
+  home:["Please close the ___ before you leave.","I put the keys near the ___.","The ___ needs to be cleaned today.","There is a lamp next to the ___.","We bought a new ___ for the living room."],
+  food:["I would like some ___, please.","She added some ___ to the dish.","This ___ tastes amazing.","Can you pass me the ___?","We had ___ for dinner last night."],
+  body:["My ___ hurts after the long walk.","The doctor examined his ___ carefully.","She hurt her ___ last winter.","I can't feel my ___ right now.","He covered his ___ with his hand."],
+  school:["The teacher gave us a lot of ___.","I forgot my ___ at home.","She works as a ___ at a big company.","We have an important ___ tomorrow.","He wrote the ___ on the whiteboard."],
+  city:["The ___ was full of people today.","We took the ___ to get downtown.","There is a new ___ near my house.","I got lost looking for the ___.","The ___ was crowded during rush hour."],
+  nature:["The ___ was shining brightly today.","We saw a beautiful ___ near the trail.","A ___ appeared suddenly outside.","The children were watching the ___ closely.","You could hear the ___ from far away."],
+  clothes:["She wore a beautiful ___ to the party.","I need to buy a new ___ for winter.","He forgot his ___ at the gym.","This ___ doesn't fit me anymore.","Where did you get that ___?"],
+  ideas:["___ is something everyone needs in life.","It's hard to explain real ___.","True ___ can change everything.","She spoke about ___ with great passion.","Without ___, nothing great is achieved."],
+  tech:["My ___ stopped working this morning.","I need to update the ___ on my phone.","She sent me a ___ this afternoon.","The ___ is very slow today.","Please charge your ___ before the trip."],
+  money:["I don't have enough ___ for this.","She checked the ___ before buying it.","We saved a lot of ___ this year.","He paid the ___ in cash.","The store offered a big ___ today."],
+  sport:["The ___ won the championship this year.","She practices every weekend as part of her ___.","The crowd cheered loudly for the ___.","We watched the ___ live on TV.","He trained hard to become a better ___."],
+  art:["She has a real talent for ___.","He plays the ___ beautifully.","This ___ became very popular last year.","The museum displayed an amazing ___.","Everyone enjoyed the ___ last night."],
+  weather:["The ___ today is quite unusual.","We checked the ___ before leaving home.","A sudden ___ surprised everyone outside.","The sky showed clear signs of ___.","Local news warned about the coming ___."],
+  law:["The new ___ was announced today.","Citizens took part in the recent ___.","The ___ made an important decision.","Every country has its own ___.","The committee discussed the new ___."],
+  general1:["This is a good ___ of what I mean.","There is no easy ___ to this problem.","We need to change our ___.","Every ___ has its own value.","It all depends on the ___."],
+  general2:["This is a good ___ to consider.","There is a clear ___ between the two options.","We need more ___ before deciding.","Every ___ has some value.","It became an important ___ later on."],
+  general3:["This had a major ___ on everyone.","We gained new ___ from the results.","Their ___ made a big difference.","This is just one ___ of many.","It changed the entire ___."]
+};
+let rank = 1;
+const WORDS = [];
+const CAT_ORDER = Object.keys(RAW).sort((a,b)=>RAW[b].length-RAW[a].length);
+CAT_ORDER.forEach(cat=>{
+  const list = RAW[cat];
+  list.forEach(([e,a,i], idx)=>{
+    const third = list.length/3;
+    const tier = idx < third ? "easy" : (idx < third*2 ? "medium" : "hard");
+    WORDS.push({e, a, i, cat, rank: rank++, tier});
+  });
+});
+const BY_CAT = {};
+CAT_ORDER.forEach(cat=> BY_CAT[cat] = WORDS.filter(w=>w.cat===cat));
+const SRS_KEY = "vocabAll_srs_v4";
+const INTERVAL_DAYS = [0,1,3,7,14,30];
+function loadSRS(){ try{ return JSON.parse(localStorage.getItem(SRS_KEY)) || {}; }catch(e){ return {}; } }
+function saveSRS(data){ try{ localStorage.setItem(SRS_KEY, JSON.stringify(data)); }catch(e){} }
+let srs = loadSRS();
+function getCard(word){ if(!srs[word.e]) srs[word.e] = {level:0, due:0}; return srs[word.e]; }
+function isDue(word){ return getCard(word).due <= Date.now(); }
+function answerCard(word, result){
+  const c = getCard(word); const now = Date.now();
+  if(result === "hard"){ c.level = 0; c.due = now; }
+  else if(result === "mid"){ c.level = Math.min(c.level+1, 5); c.due = now + INTERVAL_DAYS[c.level]*86400000; }
+  else{ c.level = Math.min(c.level+2, 5); c.due = now + INTERVAL_DAYS[c.level]*86400000; }
+  saveSRS(srs);
+}
+function catDue(cat){ return BY_CAT[cat].filter(isDue).length; }
+function catKnownPct(cat){ const list=BY_CAT[cat]; const known=list.filter(w=>getCard(w).level>=3).length; return Math.round(known/list.length*100); }
+function speak(word){
+  if(!("speechSynthesis" in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(word);
+  u.lang="en-US"; u.rate=0.9;
+  window.speechSynthesis.speak(u);
+}
+const NOTIF_LAST_KEY = "vocabAll_lastNotif";
+function totalDue(){ return CAT_ORDER.reduce((s,c)=>s+catDue(c),0); }
+function checkAndNotify(force){
+  if(Notification.permission !== "granted") return;
+  const due = totalDue();
+  if(due<=0) return;
+  const last = Number(localStorage.getItem(NOTIF_LAST_KEY) || 0);
+  const cooldownMs = 3*60*60*1000;
+  if(!force && Date.now()-last < cooldownMs) return;
+  const topCats = CAT_ORDER.filter(c=>catDue(c)>0).slice(0,3).map(c=>CATS[c].label).join("، ");
+  new Notification("🔔 وقت المراجعة!", { body: `لديك ${due} كلمة مستحقة اليوم${topCats ? " — أبرزها في: "+topCats : ""}` });
+  localStorage.setItem(NOTIF_LAST_KEY, String(Date.now()));
+}
+function refreshNotifBtn(){
+  const btn = document.getElementById("notifBtn");
+  if(Notification.permission === "granted"){ btn.textContent="🔔 التذكيرات مفعّلة"; btn.classList.add("on"); }
+  else{ btn.textContent="🔔 فعّل تذكيرات المراجعة"; btn.classList.remove("on"); }
+}
+document.getElementById("notifBtn").addEventListener("click", ()=>{
+  if(!("Notification" in window)){ alert("المتصفح لا يدعم الإشعارات."); return; }
+  if(Notification.permission === "granted"){ checkAndNotify(true); return; }
+  Notification.requestPermission().then(()=>{ refreshNotifBtn(); checkAndNotify(true); });
+});
+if("Notification" in window){
+  refreshNotifBtn();
+  if(Notification.permission==="granted") setTimeout(()=>checkAndNotify(false), 1500);
+  setInterval(()=>checkAndNotify(false), 45*60*1000);
+}
+function hubCardHTML(cat){
+  const list = BY_CAT[cat];
+  const due = catDue(cat);
+  const pct = catKnownPct(cat);
+  const el = document.createElement("div");
+  el.className = "hub-card";
+  el.style.setProperty("--cat-color", CATS[cat].color);
+  el.innerHTML = `
+    <div class="hc-top"><div class="hc-emoji">${CATS[cat].emoji}</div><div class="hc-count mono">${list.length} كلمة</div></div>
+    <h3>${CATS[cat].label}</h3>
+    <div class="hc-due">${due>0 ? `⏰ ${due} مستحقة اليوم` : "✅ لا يوجد مستحق الآن"}</div>
+    <div class="hc-bar"><i style="width:${pct}%"></i></div>
+    <div class="hc-actions">
+      <div class="hc-btn" data-cat="${cat}" data-sub="browse">تصفّح</div>
+      <div class="hc-btn" data-cat="${cat}" data-sub="flash">بطاقات</div>
+      <div class="hc-btn" data-cat="${cat}" data-sub="quiz">اختبار</div>
+    </div>`;
+  el.querySelectorAll(".hc-btn").forEach(btn=> btn.addEventListener("click", ()=> openCategory(btn.dataset.cat, btn.dataset.sub)));
+  return el;
+}
+function renderHub(){
+  const gGeneral = document.getElementById("hubGridGeneral");
+  const gDomains = document.getElementById("hubGridDomains");
+  gGeneral.innerHTML = ""; gDomains.innerHTML = "";
+  CAT_ORDER.forEach(cat=>{
+    const card = hubCardHTML(cat);
+    if(CATS[cat].group === "general") gGeneral.appendChild(card); else gDomains.appendChild(card);
+  });
+}
+let currentCat = null;
+function openCategory(cat, sub){
+  currentCat = cat;
+  document.getElementById("hub").style.display = "none";
+  document.getElementById("catView").style.display = "block";
+  document.getElementById("catEmoji").textContent = CATS[cat].emoji;
+  document.getElementById("catName").textContent = CATS[cat].label;
+  document.getElementById("catCount").textContent = `${BY_CAT[cat].length} كلمة`;
+  document.querySelectorAll(".subtab").forEach(t=>t.style.setProperty("--cat-color", CATS[cat].color));
+  document.getElementById("searchInput").value = "";
+  renderGrid();
+  resetQuizIntro();
+  switchSub(sub || "browse");
+}
+document.getElementById("backBtn").addEventListener("click", ()=>{
+  document.getElementById("catView").style.display = "none";
+  document.getElementById("hub").style.display = "block";
+  renderHub();
+});
+document.querySelectorAll(".subtab").forEach(tab=> tab.addEventListener("click", ()=> switchSub(tab.dataset.sub)));
+function switchSub(sub){
+  document.querySelectorAll(".subtab").forEach(t=>t.classList.toggle("active", t.dataset.sub===sub));
+  document.querySelectorAll(".subview").forEach(v=>v.classList.remove("active"));
+  document.getElementById("sub-"+sub).classList.add("active");
+  if(sub==="flash") initFlashcards();
+}
+function renderGrid(){
+  const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+  const list = BY_CAT[currentCat].filter(w=> !q || w.e.toLowerCase().includes(q) || w.a.includes(q));
+  document.getElementById("emptyMsg").style.display = list.length ? "none" : "block";
+  list.forEach(w=>{
+    const el = document.createElement("div");
+    el.className = "card";
+    el.style.setProperty("--cat-color", CATS[w.cat].color);
+    el.innerHTML = `
+      <div class="rank mono">No. ${String(w.rank).padStart(3,"0")}</div>
+      <div class="tierbadge ${w.tier}">${w.tier==="easy"?"سهل":w.tier==="medium"?"متوسط":"صعب"}</div>
+      <div class="word en">${w.e}</div>
+      <div class="meaning">${w.a} ${w.i}</div>
+      <button class="speak" title="نطق">🔊</button>`;
+    el.querySelector(".speak").addEventListener("click", (ev)=>{ ev.stopPropagation(); speak(w.e); });
+    grid.appendChild(el);
+  });
+}
+document.getElementById("searchInput").addEventListener("input", renderGrid);
+let fcQueue = [], fcCurrent = null, fcTotalToday = 0;
+function initFlashcards(forceAll){
+  let due = forceAll ? BY_CAT[currentCat].slice() : BY_CAT[currentCat].filter(isDue);
+  for(let i=due.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [due[i],due[j]]=[due[j],due[i]]; }
+  fcQueue = due; fcTotalToday = due.length;
+  const restartBtn = document.getElementById("fcRestartAll");
+  if(restartBtn) restartBtn.onclick = ()=>initFlashcards(true);
+  nextFlashcard();
+}
+function tierLabel(t){ return t==="easy"?"سهل":t==="medium"?"متوسط":"صعب"; }
+function nextFlashcard(){
+  const progress = document.getElementById("fcProgress");
+  if(fcQueue.length === 0){
+    document.getElementById("fcActiveArea").style.display = "none";
+    document.getElementById("fcDoneArea").style.display = "block";
+    progress.textContent = "";
+    return;
+  }
+  document.getElementById("fcActiveArea").style.display = "block";
+  document.getElementById("fcDoneArea").style.display = "none";
+  fcCurrent = fcQueue.shift();
+  progress.textContent = `تبقّى ${fcQueue.length+1} من ${fcTotalToday}`;
+  const card = document.getElementById("fcCard");
+  card.classList.remove("flipped");
+  document.getElementById("fcAnswerButtons").style.display = "none";
+  document.getElementById("fcFlipHint").style.display = "block";
+  const rankStr = "No. " + String(fcCurrent.rank).padStart(3,"0");
+  document.getElementById("fcRankF").textContent = rankStr;
+  document.getElementById("fcRankB").textContent = rankStr;
+  document.getElementById("fcTierF").textContent = tierLabel(fcCurrent.tier);
+  document.getElementById("fcTierF").className = "tierbadge "+fcCurrent.tier;
+  document.getElementById("fcCard").querySelectorAll(".fc-face").forEach(f=>f.style.setProperty("--cat-color", CATS[fcCurrent.cat].color));
+  document.getElementById("fcEmojiF").textContent = fcCurrent.i;
+  document.getElementById("fcEmojiB").textContent = fcCurrent.i;
+  document.getElementById("fcWordF").textContent = fcCurrent.e;
+  document.getElementById("fcMeaningB").textContent = fcCurrent.a;
+}
+document.getElementById("fcCard").addEventListener("click", ()=>{
+  const card = document.getElementById("fcCard");
+  const flipping = !card.classList.contains("flipped");
+  card.classList.toggle("flipped");
+  if(flipping){ document.getElementById("fcAnswerButtons").style.display = "flex"; document.getElementById("fcFlipHint").style.display = "none"; }
+});
+document.getElementById("fcSpeakBtn").addEventListener("click", ()=>{ if(fcCurrent) speak(fcCurrent.e); });
+document.getElementById("fcHard").addEventListener("click", ()=>{ answerCard(fcCurrent,"hard"); fcQueue.push(fcCurrent); nextFlashcard(); });
+document.getElementById("fcMid").addEventListener("click", ()=>{ answerCard(fcCurrent,"mid"); nextFlashcard(); });
+document.getElementById("fcEasy").addEventListener("click", ()=>{ answerCard(fcCurrent,"easy"); nextFlashcard(); });
+function shuffled(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function randomOthers(word, n, pool){ const p=(pool||WORDS).filter(w=>w.e!==word.e); return shuffled(p).slice(0,n); }
+const TYPE_POOLS = { easy:["fill","enar","enar","fill"], medium:["aren","fill","odd","enar"], hard:["type","odd","aren","type"] };
+function pickType(tier){ const arr = TYPE_POOLS[tier]; return arr[Math.floor(Math.random()*arr.length)]; }
+function buildQuestion(word){
+  const type = pickType(word.tier);
+  if(type==="fill"){
+    const tmpl = TEMPLATES[word.cat][Math.floor(Math.random()*TEMPLATES[word.cat].length)];
+    const sentence = tmpl.replace("___", '<span class="blank">____</span>');
+    const opts = shuffled([word, ...randomOthers(word,3,BY_CAT[word.cat])]).map(w=>({label:w.e, correct:w.e===word.e}));
+    return {word, type, label:"✏️ أكمل الجملة", promptEn:true, prompt:sentence, opts};
+  }
+  if(type==="enar"){
+    const opts = shuffled([word, ...randomOthers(word,3,BY_CAT[word.cat])]).map(w=>({label:w.a, correct:w.e===word.e}));
+    return {word, type, label:"🔤 إنجليزي ← عربي", promptEn:true, prompt:word.e, opts};
+  }
+  if(type==="aren"){
+    const opts = shuffled([word, ...randomOthers(word,3,BY_CAT[word.cat])]).map(w=>({label:w.e, correct:w.e===word.e}));
+    return {word, type, label:"🔡 عربي ← إنجليزي", promptEn:false, prompt:word.a, opts};
+  }
+  if(type==="odd"){
+    const sameCat = randomOthers(word,2,BY_CAT[word.cat]);
+    const otherCatKey = shuffled(CAT_ORDER.filter(c=>c!==word.cat))[0];
+    const outlier = shuffled(BY_CAT[otherCatKey])[0];
+    const opts = shuffled([word, ...sameCat, outlier]).map(w=>({label:w.e, correct:w.e===outlier.e}));
+    return {word, type, label:"🧩 الكلمة الشاذة", promptEn:false, prompt:`أي كلمة لا تنتمي لفئة «${CATS[word.cat].label}»؟`, opts};
+  }
+  return {word, type:"type", label:"⌨️ اكتب الكلمة", promptEn:false, prompt:word.a};
+}
+let quizQuestions=[], quizIndex=0, quizScore=0, quizWrong=[];
+function resetQuizIntro(){
+  document.getElementById("quizIntro").style.display="block";
+  document.getElementById("quizActive").style.display="none";
+  document.getElementById("quizResult").style.display="none";
+  document.getElementById("qiCount").textContent = BY_CAT[currentCat] ? BY_CAT[currentCat].length : 0;
+}
+document.getElementById("startCatQuizBtn").addEventListener("click", ()=>{
+  quizQuestions = shuffled(BY_CAT[currentCat]).map(buildQuestion);
+  quizIndex=0; quizScore=0; quizWrong=[];
+  document.getElementById("quizIntro").style.display="none";
+  document.getElementById("quizResult").style.display="none";
+  document.getElementById("quizActive").style.display="block";
+  renderQuestion();
+});
+function renderQuestion(){
+  const q = quizQuestions[quizIndex];
+  document.getElementById("qCounter").textContent = `${quizIndex+1} / ${quizQuestions.length}`;
+  document.getElementById("qScore").textContent = `النقاط: ${quizScore}`;
+  document.getElementById("qBarFill").style.width = (quizIndex/quizQuestions.length*100)+"%";
+  const card = document.getElementById("qCard");
+  let html = `
+    <div class="q-typebadge">${q.label}</div>
+    <div class="q-emoji">${q.word.i}</div>
+    <div class="q-prompt-label">${q.type==="odd" ? "" : (q.promptEn ? "ما الكلمة الصحيحة؟" : "ما معناها بالإنجليزي؟")}</div>
+    <div class="q-prompt ${q.promptEn?'en':''}">${q.prompt}</div>`;
+  if(q.type==="type"){
+    html += `
+      <div class="q-input-row"><input class="q-input" id="qTypeInput" placeholder="type here…" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+      <div class="q-feedback" id="qFeedback"></div>
+      <div style="display:flex; gap:10px; justify-content:center;"><button class="btn btn-primary" id="qSubmitBtn">تحقّق</button></div>`;
+  }else{
+    html += `<div class="q-options" id="qOptions"></div><div class="q-feedback" id="qFeedback"></div>`;
+  }
+  card.innerHTML = html;
+  if(q.type==="type"){
+    const input = document.getElementById("qTypeInput");
+    input.focus();
+    const submit = ()=>{ const ok = input.value.trim().toLowerCase() === q.word.e.toLowerCase(); finalizeAnswer(ok, q, null, input); };
+    document.getElementById("qSubmitBtn").addEventListener("click", submit);
+    input.addEventListener("keydown", e=>{ if(e.key==="Enter") submit(); });
+  }else{
+    const optsWrap = document.getElementById("qOptions");
+    q.opts.forEach(opt=>{
+      const btn = document.createElement("div");
+      btn.className = "q-opt" + ((q.type==="aren"||q.type==="odd") ? " en" : "");
+      btn.textContent = opt.label;
+      btn.addEventListener("click", ()=> finalizeAnswer(opt.correct, q, btn));
+      optsWrap.appendChild(btn);
+    });
+  }
+}
+function finalizeAnswer(isCorrect, q, btnEl, inputEl){
+  document.querySelectorAll(".q-opt").forEach(o=>o.style.pointerEvents="none");
+  if(inputEl) inputEl.disabled = true;
+  const submitBtn = document.getElementById("qSubmitBtn");
+  if(submitBtn) submitBtn.disabled = true;
+  const fb = document.getElementById("qFeedback");
+  answerCard(q.word, isCorrect ? "mid" : "hard");
+  if(isCorrect){
+    quizScore++;
+    fb.textContent = "✅ إجابة صحيحة!"; fb.className = "q-feedback ok";
+    if(btnEl) btnEl.classList.add("correct");
+  }else{
+    quizWrong.push(q.word);
+    fb.textContent = q.type==="type" ? `❌ الإجابة الصحيحة: ${q.word.e}` : `❌ إجابة خاطئة`;
+    fb.className = "q-feedback bad";
+    if(btnEl) btnEl.classList.add("wrong");
+    if(q.type!=="type"){
+      document.querySelectorAll(".q-opt").forEach(o=>{
+        const correctOpt = q.opts.find(op=>op.correct);
+        if(correctOpt && o.textContent===correctOpt.label) o.classList.add("correct");
+      });
+    }
+  }
+  const nextBtn = document.createElement("button");
+  nextBtn.className = "btn btn-primary q-next";
+  nextBtn.textContent = quizIndex < quizQuestions.length-1 ? "التالي →" : "عرض النتيجة";
+  nextBtn.addEventListener("click", ()=>{ quizIndex++; if(quizIndex >= quizQuestions.length){ showResult(); } else { renderQuestion(); } });
+  document.getElementById("qCard").appendChild(nextBtn);
+}
+function showResult(){
+  document.getElementById("quizActive").style.display="none";
+  document.getElementById("quizResult").style.display="block";
+  document.getElementById("resultScore").textContent = `${quizScore}/${quizQuestions.length}`;
+  const pct = Math.round(quizScore/quizQuestions.length*100);
+  let msg = "استمر في المراجعة 💪";
+  if(pct>=90) msg="ممتاز جدًا! 🏆"; else if(pct>=70) msg="أداء جيد جدًا 👏"; else if(pct>=50) msg="لا بأس، تحتاج مراجعة أكثر 🙂";
+  document.getElementById("resultLabel").textContent = `${msg} — نتيجتك في فئة ${CATS[currentCat].label}`;
+  const wrapEl = document.getElementById("resultWrongWrap");
+  wrapEl.innerHTML = quizWrong.length ? `<div class="wrong-list"><div style="font-weight:800; margin-bottom:8px;">كلمات تحتاج مراجعة:</div>${quizWrong.map(w=>`<div class="wl-item"><span class="wl-en en">${w.e}</span><span>${w.a}</span></div>`).join("")}</div>` : "";
+}
+document.getElementById("retryQuizBtn").addEventListener("click", resetQuizIntro);
+document.getElementById("titleCount").textContent = WORDS.length;
+document.getElementById("eyebrowTxt").textContent = CAT_ORDER.length + " نظام مستقل";
+renderHub();
+</script>
+</body>
+</html>

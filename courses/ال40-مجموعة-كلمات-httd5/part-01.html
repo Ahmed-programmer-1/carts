@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 تعلم الإنجليزية</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a12;
+    --card: #13131f;
+    --border: #1e1e32;
+    --accent: #f97316;
+    --accent2: #fb923c;
+    --text: #f1f0ec;
+    --muted: #9090a8;
+    --green: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .topbar {
+    background: linear-gradient(135deg, #1a0a00 0%, #0f0f1e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 20px 12px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar h1 { font-size: 20px; font-weight: 800; color: var(--accent); }
+  .topbar p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* Search */
+  .search-wrap { padding: 12px 16px 4px; }
+  .search-input {
+    width: 100%;
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 16px;
+    color: var(--text);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+    direction: rtl;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--muted); }
+
+  /* Categories grid */
+  .cats-wrap {
+    padding: 12px 12px 8px;
+    overflow-x: auto;
+    display: flex;
+    gap: 8px;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+  }
+  .cats-wrap::-webkit-scrollbar { display: none; }
+  .cat-btn {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    color: var(--muted);
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    scroll-snap-align: start;
+  }
+  .cat-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    box-shadow: 0 0 14px rgba(249,115,22,0.4);
+  }
+  .cat-btn:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+
+  /* Group header */
+  .grp-header {
+    padding: 14px 20px 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .grp-emoji { font-size: 26px; }
+  .grp-name { font-size: 19px; font-weight: 800; }
+  .grp-sub { font-size: 12px; color: var(--muted); }
+
+  /* Progress */
+  .prog-wrap { padding: 0 20px 12px; }
+  .prog-bar { background: var(--border); border-radius: 8px; height: 5px; overflow: hidden; }
+  .prog-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 8px;
+    transition: width 0.5s;
+  }
+  .prog-label { font-size: 11px; color: var(--muted); margin-top: 4px; direction: ltr; text-align: left; }
+
+  /* Cards */
+  .cards { padding: 0 12px 110px; display: flex; flex-direction: column; gap: 9px; }
+  .word-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.18s;
+    position: relative;
+    overflow: hidden;
+  }
+  .word-card:hover { border-color: rgba(249,115,22,0.4); transform: translateY(-1px); box-shadow: 0 5px 18px rgba(0,0,0,0.3); }
+  .word-card.playing { border-color: var(--accent); box-shadow: 0 0 18px rgba(249,115,22,0.3); }
+  .word-card.learned { border-color: rgba(34,197,94,0.35); }
+  .word-card.hidden { display: none; }
+
+  .snd-btn {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: rgba(249,115,22,0.1);
+    border: 1.5px solid rgba(249,115,22,0.3);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 17px;
+    transition: all 0.2s;
+  }
+  .word-card.playing .snd-btn { background: var(--accent); border-color: var(--accent); animation: pulse 0.8s infinite; }
+  .word-card.learned .snd-btn { background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.4); }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+
+  .wc { flex: 1; }
+  .w-en { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; direction: ltr; text-align: left; }
+  .w-ar { font-size: 14px; font-weight: 700; color: var(--muted); text-align: right; margin-top: 3px; }
+  .w-check { font-size: 17px; opacity: 0; transition: opacity 0.3s; }
+  .word-card.learned .w-check { opacity: 1; }
+
+  /* Bottom bar */
+  .bottom-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, var(--bg) 70%, transparent);
+    padding: 18px 16px 20px;
+    display: flex; gap: 8px;
+  }
+  .btn-play {
+    flex: 1; background: var(--accent); color: white; border: none;
+    border-radius: 13px; padding: 13px;
+    font-family: 'Tajawal', sans-serif; font-size: 15px; font-weight: 800;
+    cursor: pointer; transition: all 0.2s;
+    box-shadow: 0 4px 18px rgba(249,115,22,0.4);
+  }
+  .btn-play:hover { transform: scale(1.02); }
+  .btn-reset {
+    background: var(--card); border: 1.5px solid var(--border);
+    color: var(--muted); border-radius: 13px; padding: 13px 16px;
+    font-size: 19px; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-reset:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Toast */
+  .toast {
+    position: fixed; top: 76px; left: 50%;
+    transform: translateX(-50%) translateY(-15px);
+    background: var(--green); color: white;
+    padding: 9px 18px; border-radius: 18px;
+    font-size: 13px; font-weight: 700;
+    opacity: 0; transition: all 0.3s;
+    pointer-events: none; z-index: 999;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Search results */
+  .search-results { padding: 0 12px 110px; display: flex; flex-direction: column; gap: 9px; }
+  .no-results { text-align: center; padding: 40px; color: var(--muted); font-size: 15px; }
+
+  #search-view { display: none; }
+  #main-view { display: block; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>🔥 تعلم الإنجليزية</h1>
+  <p>اضغط على أي كلمة لتسمع نطقها</p>
+</div>
+
+<div class="search-wrap">
+  <input class="search-input" id="searchBox" placeholder="🔍 ابحث بالإنجليزي أو العربي..." oninput="handleSearch(this.value)" />
+</div>
+
+<div id="search-view">
+  <div class="search-results" id="searchResults"></div>
+</div>
+
+<div id="main-view">
+  <div class="cats-wrap" id="tabs"></div>
+  <div id="groupContent"></div>
+</div>
+
+<div class="bottom-bar" id="bottomBar">
+  <button class="btn-play" id="btnPlay" onclick="playAll()">▶ تشغيل المجموعة كلها</button>
+  <button class="btn-reset" onclick="resetLearned()" title="إعادة تعيين">↺</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const groups = [
+  { id:"greetings", emoji:"👋", name:"التحيات", words:[
+    {en:"Hello",ar:"مرحباً"},{en:"Hi",ar:"أهلاً"},{en:"Hey",ar:"هاي"},
+    {en:"Good morning",ar:"صباح الخير"},{en:"Good afternoon",ar:"مساء الخير"},
+    {en:"Good evening",ar:"مساء الخير"},{en:"Good night",ar:"تصبح على خير"},
+    {en:"Goodbye",ar:"وداعاً"},{en:"Bye",ar:"باي"},{en:"See you later",ar:"أراك لاحقاً"},
+    {en:"How are you",ar:"كيف حالك"},{en:"I am fine",ar:"أنا بخير"},
+    {en:"Thank you",ar:"شكراً"},{en:"You are welcome",ar:"على الرحب"},
+    {en:"Please",ar:"من فضلك"},{en:"Sorry",ar:"آسف"},
+    {en:"Excuse me",ar:"عفواً / لو سمحت"},{en:"Nice to meet you",ar:"سعيد بلقائك"}
+  ]},
+  { id:"numbers", emoji:"🔢", name:"الأرقام", words:[
+    {en:"Zero",ar:"صفر"},{en:"One",ar:"واحد"},{en:"Two",ar:"اثنان"},
+    {en:"Three",ar:"ثلاثة"},{en:"Four",ar:"أربعة"},{en:"Five",ar:"خمسة"},
+    {en:"Six",ar:"ستة"},{en:"Seven",ar:"سبعة"},{en:"Eight",ar:"ثمانية"},
+    {en:"Nine",ar:"تسعة"},{en:"Ten",ar:"عشرة"},{en:"Eleven",ar:"أحد عشر"},
+    {en:"Twelve",ar:"اثنا عشر"},{en:"Thirteen",ar:"ثلاثة عشر"},{en:"Fourteen",ar:"أربعة عشر"},
+    {en:"Fifteen",ar:"خمسة عشر"},{en:"Sixteen",ar:"ستة عشر"},{en:"Seventeen",ar:"سبعة عشر"},
+    {en:"Eighteen",ar:"ثمانية عشر"},{en:"Nineteen",ar:"تسعة عشر"},{en:"Twenty",ar:"عشرون"},
+    {en:"Thirty",ar:"ثلاثون"},{en:"Forty",ar:"أربعون"},{en:"Fifty",ar:"خمسون"},
+    {en:"Sixty",ar:"ستون"},{en:"Seventy",ar:"سبعون"},{en:"Eighty",ar:"ثمانون"},
+    {en:"Ninety",ar:"تسعون"},{en:"Hundred",ar:"مئة"},{en:"Thousand",ar:"ألف"},
+    {en:"Million",ar:"مليون"},{en:"Billion",ar:"بليون"}
+  ]},
+  { id:"colors", emoji:"🎨", name:"الألوان", words:[
+    {en:"Red",ar:"أحمر"},{en:"Blue",ar:"أزرق"},{en:"Green",ar:"أخضر"},
+    {en:"Yellow",ar:"أصفر"},{en:"Black",ar:"أسود"},{en:"White",ar:"أبيض"},
+    {en:"Orange",ar:"برتقالي"},{en:"Pink",ar:"زهري"},{en:"Brown",ar:"بني"},
+    {en:"Grey",ar:"رمادي"},{en:"Purple",ar:"بنفسجي"},{en:"Gold",ar:"ذهبي"},
+    {en:"Silver",ar:"فضي"},{en:"Dark",ar:"غامق"},{en:"Light",ar:"فاتح"}
+  ]},
+  { id:"family", emoji:"👨‍👩‍👧", name:"العائلة", words:[
+    {en:"Father",ar:"أب"},{en:"Mother",ar:"أم"},{en:"Brother",ar:"أخ"},
+    {en:"Sister",ar:"أخت"},{en:"Son",ar:"ابن"},{en:"Daughter",ar:"بنت"},
+    {en:"Husband",ar:"زوج"},{en:"Wife",ar:"زوجة"},{en:"Grandfather",ar:"جد"},
+    {en:"Grandmother",ar:"جدة"},{en:"Uncle",ar:"عم / خال"},{en:"Aunt",ar:"عمة / خالة"},
+    {en:"Child",ar:"طفل"},{en:"Baby",ar:"رضيع"},{en:"Parent",ar:"والد"},
+    {en:"Parents",ar:"والدين"},{en:"Family",ar:"عائلة"},{en:"Man",ar:"رجل"},
+    {en:"Woman",ar:"امرأة"},{en:"Boy",ar:"ولد"},{en:"Girl",ar:"بنت"}
+  ]},
+  { id:"food", emoji:"🍕", name:"الطعام", words:[
+    {en:"Water",ar:"ماء"},{en:"Food",ar:"طعام"},{en:"Bread",ar:"خبز"},
+    {en:"Rice",ar:"أرز"},{en:"Meat",ar:"لحم"},{en:"Chicken",ar:"دجاج"},
+    {en:"Fish",ar:"سمك"},{en:"Egg",ar:"بيضة"},{en:"Cheese",ar:"جبن"},
+    {en:"Milk",ar:"حليب"},{en:"Coffee",ar:"قهوة"},{en:"Tea",ar:"شاي"},
+    {en:"Juice",ar:"عصير"},{en:"Apple",ar:"تفاحة"},{en:"Orange",ar:"برتقالة"},
+    {en:"Banana",ar:"موزة"},{en:"Lemon",ar:"ليمون"},{en:"Sugar",ar:"سكر"},
+    {en:"Salt",ar:"ملح"},{en:"Soup",ar:"شوربة"},{en:"Cake",ar:"كعكة"},
+    {en:"Breakfast",ar:"إفطار"},{en:"Lunch",ar:"غداء"},{en:"Dinner",ar:"عشاء"},
+    {en:"Beef",ar:"لحم بقر"},{en:"Corn",ar:"ذرة"}
+  ]},
+  { id:"drinks", emoji:"☕", name:"المشروبات", words:[
+    {en:"Water",ar:"ماء"},{en:"Coffee",ar:"قهوة"},{en:"Tea",ar:"شاي"},
+    {en:"Juice",ar:"عصير"},{en:"Milk",ar:"حليب"},{en:"Beer",ar:"جعة"},
+    {en:"Wine",ar:"نبيذ"},{en:"Beverage",ar:"مشروب"},{en:"Ice",ar:"جليد"},
+    {en:"Cup",ar:"كوب"},{en:"Bottle",ar:"زجاجة"},{en:"Glass",ar:"كأس"}
+  ]},
+  { id:"body", emoji:"🫀", name:"جسم الإنسان", words:[
+    {en:"Head",ar:"رأس"},{en:"Eye",ar:"عين"},{en:"Ear",ar:"أذن"},
+    {en:"Nose",ar:"أنف"},{en:"Mouth",ar:"فم"},{en:"Lip",ar:"شفة"},
+    {en:"Tooth",ar:"سن"},{en:"Tongue",ar:"لسان"},{en:"Neck",ar:"رقبة"},
+    {en:"Shoulder",ar:"كتف"},{en:"Arm",ar:"ذراع"},{en:"Hand",ar:"يد"},
+    {en:"Finger",ar:"إصبع"},{en:"Back",ar:"ظهر"},{en:"Chest",ar:"صدر"},
+    {en:"Leg",ar:"ساق"},{en:"Knee",ar:"ركبة"},{en:"Foot",ar:"قدم"},
+    {en:"Toe",ar:"أصبع القدم"},{en:"Skin",ar:"جلد"},{en:"Blood",ar:"دم"},
+    {en:"Bone",ar:"عظمة"},{en:"Brain",ar:"عقل"},{en:"Heart",ar:"قلب"},
+    {en:"Hair",ar:"شعر"},{en:"Beard",ar:"ذقن"},{en:"Body",ar:"جسم"},
+    {en:"Face",ar:"وجه"}
+  ]},
+  { id:"places", emoji:"🏙️", name:"الأماكن", words:[
+    {en:"House",ar:"بيت"},{en:"School",ar:"مدرسة"},{en:"Hospital",ar:"مستشفى"},
+    {en:"Airport",ar:"مطار"},{en:"Bank",ar:"بنك"},{en:"Market",ar:"سوق"},
+    {en:"Restaurant",ar:"مطعم"},{en:"Hotel",ar:"فندق"},{en:"Library",ar:"مكتبة"},
+    {en:"Park",ar:"حديقة"},{en:"Beach",ar:"شاطئ"},{en:"Office",ar:"مكتب"},
+    {en:"Kitchen",ar:"مطبخ"},{en:"Bathroom",ar:"حمام"},{en:"Bedroom",ar:"غرفة نوم"},
+    {en:"Church",ar:"كنيسة"},{en:"Prison",ar:"سجن"},{en:"Theater",ar:"مسرح"},
+    {en:"University",ar:"جامعة"},{en:"Store",ar:"محل"},{en:"Pool",ar:"مسبح"},
+    {en:"Farm",ar:"مزرعة"},{en:"City",ar:"مدينة"},{en:"Camp",ar:"مخيم"},
+    {en:"Club",ar:"نادي"}
+  ]},
+  { id:"transport", emoji:"🚗", name:"المواصلات", words:[
+    {en:"Car",ar:"سيارة"},{en:"Bus",ar:"حافلة"},{en:"Train",ar:"قطار"},
+    {en:"Plane",ar:"طائرة"},{en:"Ship",ar:"سفينة"},{en:"Bicycle",ar:"دراجة"},
+    {en:"Truck",ar:"شاحنة"},{en:"Boat",ar:"قارب"},{en:"Taxi",ar:"سيارة أجرة"},
+    {en:"Ticket",ar:"تذكرة"},{en:"Transport",ar:"مواصلات"},{en:"Drive",ar:"يقود"},
+    {en:"Gasoline",ar:"بنزين"},{en:"Tire",ar:"إطار"},{en:"Engine",ar:"محرك"},
+    {en:"Airport",ar:"مطار"},{en:"Train station",ar:"محطة القطار"}
+  ]},
+  { id:"clothing", emoji:"👕", name:"الملابس", words:[
+    {en:"Shirt",ar:"قميص"},{en:"Pants",ar:"بنطلون"},{en:"Dress",ar:"فستان"},
+    {en:"Shoes",ar:"أحذية"},{en:"Hat",ar:"قبعة"},{en:"Coat",ar:"معطف"},
+    {en:"Suit",ar:"بدلة"},{en:"Skirt",ar:"تنورة"},{en:"T-shirt",ar:"تيشيرت"},
+    {en:"Clothing",ar:"ملابس"},{en:"Pocket",ar:"جيب"},{en:"Ring",ar:"خاتم"},
+    {en:"Watch",ar:"ساعة"}
+  ]},
+  { id:"animals", emoji:"🦁", name:"الحيوانات", words:[
+    {en:"Dog",ar:"كلب"},{en:"Cat",ar:"قطة"},{en:"Bird",ar:"عصفور"},
+    {en:"Fish",ar:"سمك"},{en:"Horse",ar:"حصان"},{en:"Cow",ar:"بقرة"},
+    {en:"Pig",ar:"خنزير"},{en:"Mouse",ar:"فأر"},{en:"Chicken",ar:"دجاجة"},
+    {en:"Animal",ar:"حيوان"},{en:"Wing",ar:"جناح"},{en:"Snake",ar:"ثعبان"}
+  ]},
+  { id:"nature", emoji:"🌿", name:"الطبيعة", words:[
+    {en:"Sun",ar:"شمس"},{en:"Moon",ar:"قمر"},{en:"Star",ar:"نجمة"},
+    {en:"Sky",ar:"سماء"},{en:"Earth",ar:"أرض"},{en:"Water",ar:"ماء"},
+    {en:"Fire",ar:"نار"},{en:"Wind",ar:"رياح"},{en:"Rain",ar:"مطر"},
+    {en:"Snow",ar:"ثلج"},{en:"Ice",ar:"جليد"},{en:"Mountain",ar:"جبل"},
+    {en:"River",ar:"نهر"},{en:"Sea",ar:"بحر"},{en:"Lake",ar:"بحيرة"},
+    {en:"Forest",ar:"غابة"},{en:"Tree",ar:"شجرة"},{en:"Flower",ar:"زهرة"},
+    {en:"Grass",ar:"عشب"},{en:"Leaf",ar:"ورقة"},{en:"Sand",ar:"رمل"},
+    {en:"Dust",ar:"غبار"},{en:"Stone",ar:"حجر"},{en:"Hill",ar:"تل"},
+    {en:"Valley",ar:"وادي"},{en:"Island",ar:"جزيرة"},{en:"Nature",ar:"طبيعة"},
+    {en:"Plant",ar:"نبات"},{en:"Seed",ar:"بذرة"},{en:"Root",ar:"جذر"}
+  ]},
+  { id:"home", emoji:"🏠", name:"المنزل", words:[
+    {en:"House",ar:"بيت"},{en:"Door",ar:"باب"},{en:"Window",ar:"نافذة"},
+    {en:"Wall",ar:"حائط"},{en:"Floor",ar:"أرضية"},{en:"Ceiling",ar:"سقف"},
+    {en:"Roof",ar:"سطح"},{en:"Room",ar:"غرفة"},{en:"Kitchen",ar:"مطبخ"},
+    {en:"Bathroom",ar:"حمام"},{en:"Bedroom",ar:"غرفة نوم"},{en:"Table",ar:"طاولة"},
+    {en:"Chair",ar:"مقعد"},{en:"Bed",ar:"سرير"},{en:"Lamp",ar:"مصباح"},
+    {en:"Clock",ar:"ساعة"},{en:"Key",ar:"مفتاح"},{en:"Lock",ar:"قفل"},
+    {en:"Soap",ar:"صابون"},{en:"Plate",ar:"صحن"},{en:"Cup",ar:"كوب"},
+    {en:"Spoon",ar:"ملعقة"},{en:"Fork",ar:"شوكة"},{en:"Knife",ar:"سكين"},
+    {en:"Bottle",ar:"زجاجة"},{en:"Box",ar:"صندوق"},{en:"Bag",ar:"حقيبة"}
+  ]},
+  { id:"school", emoji:"🎒", name:"المدرسة", words:[
+    {en:"School",ar:"مدرسة"},{en:"Teacher",ar:"مدرس"},{en:"Student",ar:"طالب"},
+    {en:"Book",ar:"كتاب"},{en:"Pen",ar:"قلم"},{en:"Pencil",ar:"قلم رصاص"},
+    {en:"Paper",ar:"ورق"},{en:"Test",ar:"اختبار"},{en:"Study",ar:"يدرس"},
+    {en:"Learn",ar:"يتعلم"},{en:"Read",ar:"يقرأ"},{en:"Write",ar:"يكتب"},
+    {en:"Class",ar:"صف"},{en:"Science",ar:"علم"},{en:"University",ar:"جامعة"},
+    {en:"Magazine",ar:"مجلة"},{en:"Page",ar:"صفحة"}
+  ]},
+  { id:"work", emoji:"💼", name:"العمل", words:[
+    {en:"Work",ar:"عمل"},{en:"Job",ar:"مهنة"},{en:"Doctor",ar:"دكتور"},
+    {en:"Teacher",ar:"مدرس"},{en:"Manager",ar:"مدير"},{en:"Employee",ar:"موظف"},
+    {en:"Lawyer",ar:"محامي"},{en:"Reporter",ar:"مراسل"},{en:"Soldier",ar:"جندي"},
+    {en:"Secretary",ar:"سكرتير"},{en:"Waiter",ar:"نادل"},{en:"Actor",ar:"ممثل"},
+    {en:"Artist",ar:"فنان"},{en:"Company",ar:"شركة"},{en:"Business",ar:"عمل"},
+    {en:"Salary",ar:"راتب"},{en:"Office",ar:"مكتب"},{en:"Report",ar:"تقرير"}
+  ]},
+  { id:"tech", emoji:"💻", name:"التكنولوجيا", words:[
+    {en:"Computer",ar:"كمبيوتر"},{en:"Laptop",ar:"لابتوب"},{en:"Phone",ar:"هاتف"},
+    {en:"Cell phone",ar:"هاتف جوال"},{en:"Television",ar:"تلفزيون"},
+    {en:"Camera",ar:"كاميرا"},{en:"Radio",ar:"راديو"},{en:"Screen",ar:"شاشة"},
+    {en:"Internet",ar:"إنترنت"},{en:"Network",ar:"شبكة"},{en:"Technology",ar:"تكنولوجيا"},
+    {en:"Electronics",ar:"إلكترونيات"},{en:"Program",ar:"برنامج"},
+    {en:"System",ar:"نظام"},{en:"Energy",ar:"طاقة"}
+  ]},
+  { id:"time", emoji:"⏰", name:"الوقت", words:[
+    {en:"Time",ar:"وقت"},{en:"Day",ar:"يوم"},{en:"Night",ar:"ليل"},
+    {en:"Morning",ar:"الصباح"},{en:"Afternoon",ar:"الظهيرة"},{en:"Evening",ar:"مساء"},
+    {en:"Hour",ar:"ساعة"},{en:"Minute",ar:"دقيقة"},{en:"Week",ar:"أسبوع"},
+    {en:"Month",ar:"شهر"},{en:"Year",ar:"عام"},{en:"Today",ar:"اليوم"},
+    {en:"Tomorrow",ar:"غداً"},{en:"Yesterday",ar:"أمس"},{en:"Now",ar:"الآن"},
+    {en:"Season",ar:"موسم"},{en:"Summer",ar:"صيف"},{en:"Winter",ar:"شتاء"},
+    {en:"Spring",ar:"ربيع"},{en:"Date",ar:"تاريخ"}
+  ]},
+  { id:"days", emoji:"📅", name:"أيام الأسبوع", words:[
+    {en:"Sunday",ar:"الأحد"},{en:"Monday",ar:"الاثنين"},{en:"Tuesday",ar:"الثلاثاء"},
+    {en:"Wednesday",ar:"الأربعاء"},{en:"Thursday",ar:"الخميس"},{en:"Friday",ar:"الجمعة"},
+    {en:"Saturday",ar:"السبت"},{en:"Weekend",ar:"عطلة نهاية الأسبوع"},
+    {en:"Holiday",ar:"عطلة"}
+  ]},
+  { id:"months", emoji:"📆", name:"أشهر السنة", words:[
+    {en:"January",ar:"يناير"},{en:"February",ar:"فبراير"},{en:"March",ar:"مارس"},
+    {en:"April",ar:"إبريل"},{en:"May",ar:"مايو"},{en:"June",ar:"يونيو"},
+    {en:"July",ar:"يوليو"},{en:"August",ar:"أغسطس"},{en:"September",ar:"سبتمبر"},
+    {en:"October",ar:"أكتوبر"},{en:"November",ar:"نوفمبر"},{en:"December",ar:"ديسمبر"}
+  ]},
+  { id:"adjectives", emoji:"✨", name:"الصفات", words:[
+    {en:"Good",ar:"جيد"},{en:"Bad",ar:"سيء"},{en:"Big",ar:"كبير"},
+    {en:"Small",ar:"صغير"},{en:"Long",ar:"طويل"},{en:"Short",ar:"قصير"},
+    {en:"Tall",ar:"طويل"},{en:"Fast",ar:"سريع"},{en:"Slow",ar:"بطيء"},
+    {en:"Hot",ar:"ساخن"},{en:"Cold",ar:"بارد"},{en:"Warm",ar:"دافئ"},
+    {en:"New",ar:"جديد"},{en:"Old",ar:"قديم"},{en:"Young",ar:"صغير"},
+    {en:"Beautiful",ar:"جميل"},{en:"Ugly",ar:"قبيح"},{en:"Clean",ar:"نظيف"},
+    {en:"Dirty",ar:"قذر"},{en:"Easy",ar:"سهل"},{en:"Hard",ar:"صعب"},
+    {en:"Happy",ar:"سعيد"},{en:"Sad",ar:"حزين"},{en:"Healthy",ar:"صحي"},
+    {en:"Sick",ar:"مريض"},{en:"Rich",ar:"غني"},{en:"Poor",ar:"فقير"},
+    {en:"Strong",ar:"قوي"},{en:"Weak",ar:"ضعيف"},{en:"Heavy",ar:"ثقيل"},
+    {en:"Light",ar:"خفيف"},{en:"Deep",ar:"عميق"},{en:"Loud",ar:"عالي الصوت"},
+    {en:"Quiet",ar:"هادئ"},{en:"Full",ar:"ممتلئ"},{en:"Empty",ar:"فارغ"},
+    {en:"Free",ar:"مجاني"},{en:"Expensive",ar:"غالي"},{en:"Cheap",ar:"رخيص"},
+    {en:"Important",ar:"مهم"},{en:"Famous",ar:"مشهور"},{en:"Special",ar:"خاص"},
+    {en:"Real",ar:"حقيقي"},{en:"Possible",ar:"ممكن"},{en:"Different",ar:"مختلف"},
+    {en:"Valuable",ar:"ذو قيمة"}
+  ]},
+  { id:"verbs", emoji:"⚡", name:"الأفعال", words:[
+    {en:"Go",ar:"يذهب"},{en:"Come",ar:"يأتي"},{en:"Eat",ar:"يأكل"},
+    {en:"Drink",ar:"يشرب"},{en:"Sleep",ar:"ينام"},{en:"Wake up",ar:"يصحو"},
+    {en:"Run",ar:"يركض"},{en:"Walk",ar:"يمشي"},{en:"Sit",ar:"يجلس"},
+    {en:"Stand",ar:"يقف"},{en:"Give",ar:"يعطي"},{en:"Take",ar:"يأخذ"},
+    {en:"Buy",ar:"يشتري"},{en:"Sell",ar:"يبيع"},{en:"Pay",ar:"يدفع"},
+    {en:"Cook",ar:"يطبخ"},{en:"Clean",ar:"ينظف"},{en:"Wash",ar:"يغسل"},
+    {en:"Open",ar:"يفتح"},{en:"Close",ar:"يغلق"},{en:"Start",ar:"يبدأ"},
+    {en:"Stop",ar:"يتوقف"},{en:"Help",ar:"يساعد"},{en:"Need",ar:"يحتاج"},
+    {en:"Want",ar:"يريد"},{en:"Like",ar:"يعجب"},{en:"Love",ar:"يحب"},
+    {en:"Know",ar:"يعرف"},{en:"Think",ar:"يفكر"},{en:"Feel",ar:"يشعر"},
+    {en:"See",ar:"يرى"},{en:"Hear",ar:"يسمع"},{en:"Speak",ar:"يتحدث"},
+    {en:"Ask",ar:"يسأل"},{en:"Answer",ar:"يجيب"},{en:"Learn",ar:"يتعلم"},
+    {en:"Work",ar:"يعمل"},{en:"Play",ar:"يلعب"},{en:"Sing",ar:"يغني"},
+    {en:"Dance",ar:"يرقص"},{en:"Swim",ar:"يسبح"},{en:"Fly",ar:"يطير"},
+    {en:"Drive",ar:"يقود"},{en:"Write",ar:"يكتب"},{en:"Read",ar:"يقرأ"},
+    {en:"Draw",ar:"يرسم"},{en:"Laugh",ar:"يضحك"},{en:"Cry",ar:"يبكي"},
+    {en:"Fight",ar:"يقاتل"},{en:"Win",ar:"يفوز"},{en:"Lose",ar:"يخسر"},
+    {en:"Live",ar:"يعيش"},{en:"Die",ar:"يموت"},{en:"Build",ar:"يبني"},
+    {en:"Break",ar:"يكسر"},{en:"Cut",ar:"يقطع"},{en:"Jump",ar:"يقفز"},
+    {en:"Throw",ar:"يرمي"},{en:"Catch",ar:"يمسك"}
+  ]},
+  { id:"pronouns", emoji:"🗣️", name:"الضمائر والكلمات الشائعة", words:[
+    {en:"I",ar:"أنا"},{en:"You",ar:"أنت / أنتم"},{en:"He",ar:"هو"},
+    {en:"She",ar:"هي"},{en:"We",ar:"نحن"},{en:"They",ar:"هم"},
+    {en:"It",ar:"هو / هي"},{en:"This",ar:"هذا"},{en:"That",ar:"ذلك"},
+    {en:"Here",ar:"هنا"},{en:"There",ar:"هناك"},{en:"Yes",ar:"نعم"},
+    {en:"No",ar:"لا"},{en:"What",ar:"ما"},{en:"Where",ar:"أين"},
+    {en:"When",ar:"متى"},{en:"Who",ar:"من"},{en:"Why",ar:"لماذا"},
+    {en:"How",ar:"كيف"},{en:"Which",ar:"أي"},{en:"Both",ar:"كلا"},
+    {en:"Each",ar:"كل"},{en:"All",ar:"جميع"},{en:"Many",ar:"العديد"},
+    {en:"More",ar:"أكثر"},{en:"Most",ar:"معظم"},{en:"Also",ar:"أيضاً"},
+    {en:"Always",ar:"دائماً"},{en:"Never",ar:"أبداً"}
+  ]},
+  { id:"directions", emoji:"🧭", name:"الاتجاهات والحركة", words:[
+    {en:"North",ar:"شمال"},{en:"South",ar:"جنوب"},{en:"East",ar:"شرق"},
+    {en:"West",ar:"غرب"},{en:"Right",ar:"يمين"},{en:"Left",ar:"يسار"},
+    {en:"Up",ar:"أعلى"},{en:"Down",ar:"أسفل"},{en:"Front",ar:"أمامي"},
+    {en:"Back",ar:"الخلف"},{en:"Inside",ar:"داخل"},{en:"Outside",ar:"خارج"},
+    {en:"Over",ar:"فوق"},{en:"Under",ar:"تحت"},{en:"Between",ar:"بين"},
+    {en:"Direction",ar:"اتجاه"},{en:"Way",ar:"طريق"},{en:"Turn",ar:"ينعطف"}
+  ]},
+  { id:"feelings", emoji:"❤️", name:"المشاعر", words:[
+    {en:"Happy",ar:"سعيد"},{en:"Sad",ar:"حزين"},{en:"Angry",ar:"غاضب"},
+    {en:"Love",ar:"حب"},{en:"Fear",ar:"خوف"},{en:"Hope",ar:"أمل"},
+    {en:"Dream",ar:"حلم"},{en:"Pain",ar:"ألم"},{en:"Peace",ar:"سلام"},
+    {en:"Care",ar:"اهتمام"},{en:"Kind",ar:"طيب"},{en:"Nice",ar:"لطيف"},
+    {en:"Smile",ar:"يبتسم"},{en:"Cry",ar:"يبكي"},{en:"Laugh",ar:"يضحك"},
+    {en:"Concern",ar:"قلق"},{en:"Interest",ar:"اهتمام"}
+  ]},
+  { id:"health", emoji:"🏥", name:"الصحة والطب", words:[
+    {en:"Doctor",ar:"دكتور"},{en:"Hospital",ar:"مستشفى"},{en:"Medicine",ar:"دواء"},
+    {en:"Disease",ar:"مرض"},{en:"Patient",ar:"مريض"},{en:"Sick",ar:"مريض"},
+    {en:"Healthy",ar:"صحي"},{en:"Pain",ar:"ألم"},{en:"Blood",ar:"دم"},
+    {en:"Heart",ar:"قلب"},{en:"Injury",ar:"إصابة"},{en:"Drug",ar:"دواء"},
+    {en:"Temperature",ar:"درجة الحرارة"},{en:"Death",ar:"وفاة"},
+    {en:"Alive",ar:"على قيد الحياة"},{en:"Dead",ar:"ميت"},
+    {en:"Blind",ar:"كفيف"},{en:"Deaf",ar:"أصم"}
+  ]},
+  { id:"money", emoji:"💰", name:"المال والتسوق", words:[
+    {en:"Money",ar:"مال"},{en:"Price",ar:"سعر"},{en:"Pay",ar:"يدفع"},
+    {en:"Buy",ar:"يشتري"},{en:"Sell",ar:"يبيع"},{en:"Expensive",ar:"غالي"},
+    {en:"Cheap",ar:"رخيص"},{en:"Free",ar:"مجاني"},{en:"Rich",ar:"غني"},
+    {en:"Poor",ar:"فقير"},{en:"Dollar",ar:"دولار"},{en:"Bill",ar:"فاتورة"},
+    {en:"Card",ar:"كارت"},{en:"Bank",ar:"بنك"},{en:"Deal",ar:"صفقة"},
+    {en:"Cost",ar:"تكلفة"},{en:"Salary",ar:"راتب"},{en:"Spend",ar:"ينفق"},
+    {en:"Contract",ar:"عقد"}
+  ]},
+  { id:"sports", emoji:"⚽", name:"الرياضة", words:[
+    {en:"Sport",ar:"رياضة"},{en:"Game",ar:"لعبة"},{en:"Play",ar:"يلعب"},
+    {en:"Team",ar:"فريق"},{en:"Player",ar:"لاعب"},{en:"Win",ar:"يفوز"},
+    {en:"Lose",ar:"يخسر"},{en:"Run",ar:"يركض"},{en:"Jump",ar:"يقفز"},
+    {en:"Swim",ar:"يسبح"},{en:"Exercise",ar:"تمرين"},{en:"Race",ar:"سباق"},
+    {en:"Ball",ar:"كرة"},{en:"Pool",ar:"مسبح"}
+  ]},
+  { id:"arts", emoji:"🎵", name:"الفنون والترفيه", words:[
+    {en:"Music",ar:"موسيقى"},{en:"Song",ar:"أغنية"},{en:"Sing",ar:"يغني"},
+    {en:"Dance",ar:"يرقص"},{en:"Art",ar:"فن"},{en:"Artist",ar:"فنان"},
+    {en:"Movie",ar:"فيلم"},{en:"Theater",ar:"مسرح"},{en:"Television",ar:"تلفزيون"},
+    {en:"Radio",ar:"راديو"},{en:"Book",ar:"كتاب"},{en:"Story",ar:"قصة"},
+    {en:"Draw",ar:"يرسم"},{en:"Paint",ar:"طلاء"},{en:"Camera",ar:"كاميرا"},
+    {en:"Photograph",ar:"صورة"},{en:"Band",ar:"فرقة موسيقية"},
+    {en:"Instrument",ar:"آلة موسيقية"}
+  ]},
+  { id:"education", emoji:"📚", name:"التعليم والمعرفة", words:[
+    {en:"School",ar:"مدرسة"},{en:"University",ar:"جامعة"},{en:"Science",ar:"علم"},
+    {en:"Information",ar:"معلومة"},{en:"Example",ar:"مثال"},{en:"Idea",ar:"فكرة"},
+    {en:"Question",ar:"سؤال"},{en:"Answer",ar:"إجابة"},{en:"Test",ar:"اختبار"},
+    {en:"Course",ar:"دورة"},{en:"Level",ar:"مستوى"},{en:"Result",ar:"نتيجة"},
+    {en:"Problem",ar:"مشكلة"},{en:"System",ar:"نظام"},{en:"Process",ar:"عملية"},
+    {en:"Image",ar:"صورة"}
+  ]},
+  { id:"society", emoji:"🌍", name:"المجتمع والسياسة", words:[
+    {en:"Country",ar:"دولة"},{en:"City",ar:"مدينة"},{en:"Government",ar:"حكومة"},
+    {en:"President",ar:"رئيس"},{en:"King",ar:"ملك"},{en:"Queen",ar:"ملكة"},
+    {en:"Police",ar:"شرطة"},{en:"Army",ar:"جيش"},{en:"War",ar:"حرب"},
+    {en:"Peace",ar:"سلام"},{en:"Election",ar:"انتخابات"},{en:"Law",ar:"قانون"},
+    {en:"Court",ar:"محكمة"},{en:"People",ar:"أشخاص"},{en:"Society",ar:"مجتمع"},
+    {en:"Public",ar:"عام"},{en:"Social",ar:"اجتماعي"},{en:"Political",ar:"سياسي"},
+    {en:"News",ar:"أخبار"},{en:"Report",ar:"تقرير"}
+  ]},
+  { id:"religion", emoji:"🕌", name:"الدين", words:[
+    {en:"God",ar:"الله"},{en:"Religion",ar:"دين"},{en:"Pray",ar:"يصلي"},
+    {en:"Heaven",ar:"جنة"},{en:"Hell",ar:"جحيم"},{en:"Priest",ar:"كاهن"},
+    {en:"Church",ar:"كنيسة"},{en:"Peace",ar:"سلام"}
+  ]},
+  { id:"materials", emoji:"🪨", name:"المواد والأشكال", words:[
+    {en:"Wood",ar:"خشب"},{en:"Stone",ar:"حجر"},{en:"Metal",ar:"معدن"},
+    {en:"Plastic",ar:"بلاستيك"},{en:"Glass",ar:"زجاج"},{en:"Gold",ar:"ذهب"},
+    {en:"Silver",ar:"فضة"},{en:"Diamond",ar:"الماس"},{en:"Copper",ar:"نحاس"},
+    {en:"Iron",ar:"حديد"},{en:"Oil",ar:"زيت"},{en:"Clay",ar:"طين"},
+    {en:"Circle",ar:"دائرة"},{en:"Square",ar:"مربع"},{en:"Line",ar:"خط"},
+    {en:"Shape",ar:"شكل"},{en:"Surface",ar:"سطح"}
+  ]},
+  { id:"measurements", emoji:"📏", name:"القياسات والأوزان", words:[
+    {en:"Meter",ar:"متر"},{en:"Centimeter",ar:"سنتيميتر"},{en:"Kilometer",ar:"كيلومتر"},
+    {en:"Inch",ar:"إنش"},{en:"Foot",ar:"قدم"},{en:"Kilogram",ar:"كيلوجرام"},
+    {en:"Pound",ar:"رطل"},{en:"Temperature",ar:"درجة الحرارة"},{en:"Weight",ar:"وزن"},
+    {en:"Half",ar:"نصف"},{en:"Hundred",ar:"مئة"},{en:"Thousand",ar:"ألف"},
+    {en:"Million",ar:"مليون"},{en:"Number",ar:"رقم"},{en:"Rate",ar:"معدل"}
+  ]},
+  { id:"ordinals", emoji:"🥇", name:"الترتيب", words:[
+    {en:"First",ar:"أول"},{en:"Second",ar:"ثاني"},{en:"Third",ar:"ثالث"},
+    {en:"Fourth",ar:"رابع"},{en:"Fifth",ar:"خامس"},{en:"Last",ar:"الأخير"},
+    {en:"Next",ar:"التالي"},{en:"Once",ar:"مرة واحدة"},{en:"Again",ar:"مرة أخرى"}
+  ]},
+  { id:"prepositions", emoji:"🔗", name:"حروف الجر والربط", words:[
+    {en:"And",ar:"و"},{en:"But",ar:"لكن"},{en:"Or",ar:"أو"},{en:"Because",ar:"لأن"},
+    {en:"Before",ar:"قبل"},{en:"After",ar:"بعد"},{en:"During",ar:"خلال"},
+    {en:"Since",ar:"منذ"},{en:"For",ar:"إلى"},{en:"From",ar:"من"},
+    {en:"With",ar:"مع"},{en:"Into",ar:"داخل"},{en:"Over",ar:"فوق"},
+    {en:"Between",ar:"بين"},{en:"Yet",ar:"بعد"},{en:"Even",ar:"حتى"},
+    {en:"Than",ar:"من"},{en:"While",ar:"بينما"}
+  ]},
+  { id:"misc_adj", emoji:"🔑", name:"كلمات مفيدة أخرى", words:[
+    {en:"New",ar:"الجديد"},{en:"Same",ar:"نفس الشيء"},{en:"Other",ar:"آخر"},
+    {en:"Another",ar:"آخر"},{en:"Any",ar:"أي"},{en:"Everything",ar:"كل شيء"},
+    {en:"Nothing",ar:"لا شيء"},{en:"Anything",ar:"أي شيء"},{en:"Only",ar:"فقط"},
+    {en:"Very",ar:"جداً"},{en:"Too",ar:"أيضاً"},{en:"Well",ar:"بشكل جيد"},
+    {en:"Enough",ar:"كافي"},{en:"A lot",ar:"كثيراً"},{en:"Sure",ar:"بالتأكيد"},
+    {en:"Maybe",ar:"ربما"},{en:"Together",ar:"معاً"},{en:"Alone",ar:"وحيد"},
+    {en:"General",ar:"عام"},{en:"Local",ar:"محلي"},{en:"Main",ar:"أساسي"},
+    {en:"Real",ar:"حقيقي"},{en:"True",ar:"صحيح"},{en:"Wrong",ar:"خطأ"},
+    {en:"Right",ar:"صح"}
+  ]},
+  { id:"communications", emoji:"📱", name:"التواصل", words:[
+    {en:"Talk",ar:"يتكلم"},{en:"Say",ar:"يقول"},{en:"Tell",ar:"يخبر"},
+    {en:"Ask",ar:"يسأل"},{en:"Answer",ar:"يجيب"},{en:"Send",ar:"يرسل"},
+    {en:"Receive",ar:"يستلم"},{en:"Call",ar:"مكالمة"},{en:"Letter",ar:"رسالة"},
+    {en:"Note",ar:"ملاحظة"},{en:"News",ar:"أخبار"},{en:"Message",ar:"رسالة"},
+    {en:"Language",ar:"لغة"},{en:"Word",ar:"كلمة"},{en:"Voice",ar:"صوت"},
+    {en:"Sound",ar:"صوت"},{en:"Share",ar:"يشارك"}
+  ]},
+  { id:"geography", emoji:"🗺️", name:"الجغرافيا", words:[
+    {en:"World",ar:"العالم"},{en:"Country",ar:"دولة"},{en:"City",ar:"مدينة"},
+    {en:"Town",ar:"مدينة"},{en:"Street",ar:"شارع"},{en:"Road",ar:"طريق"},
+    {en:"Bridge",ar:"جسر"},{en:"Mountain",ar:"جبل"},{en:"Valley",ar:"وادي"},
+    {en:"Island",ar:"جزيرة"},{en:"Sea",ar:"بحر"},{en:"River",ar:"نهر"},
+    {en:"Lake",ar:"بحيرة"},{en:"Forest",ar:"غابة"},{en:"Desert",ar:"صحراء"},
+    {en:"Space",ar:"الفضاء"},{en:"Map",ar:"خريطة"},{en:"Location",ar:"موقع"},
+    {en:"Area",ar:"منطقة"},{en:"East",ar:"شرق"},{en:"West",ar:"غرب"},
+    {en:"North",ar:"شمال"},{en:"South",ar:"جنوب"}
+  ]},
+  { id:"food2", emoji:"🥘", name:"أدوات المطبخ", words:[
+    {en:"Plate",ar:"صحن"},{en:"Cup",ar:"كوب"},{en:"Spoon",ar:"ملعقة"},
+    {en:"Fork",ar:"شوكة"},{en:"Knife",ar:"سكين"},{en:"Pot",ar:"قدر"},
+    {en:"Pan",ar:"مقلاة"},{en:"Oven",ar:"فرن"},{en:"Bottle",ar:"زجاجة"},
+    {en:"Box",ar:"صندوق"},{en:"Bag",ar:"حقيبة"},{en:"Cook",ar:"يطبخ"},
+    {en:"Mix",ar:"يخلط"},{en:"Taste",ar:"يتذوق"},{en:"Smell",ar:"يشم"}
+  ]},
+  { id:"abstract", emoji:"💡", name:"مفاهيم مجردة", words:[
+    {en:"Life",ar:"الحياة"},{en:"Death",ar:"وفاة"},{en:"Time",ar:"وقت"},
+    {en:"Power",ar:"قوة"},{en:"Energy",ar:"طاقة"},{en:"Force",ar:"قوة"},
+    {en:"Idea",ar:"فكرة"},{en:"Plan",ar:"خطة"},{en:"Goal",ar:"هدف"},
+    {en:"Value",ar:"القيمة"},{en:"Truth",ar:"حقيقة"},{en:"Problem",ar:"مشكلة"},
+    {en:"Result",ar:"نتيجة"},{en:"Effect",ar:"تأثير"},{en:"Cause",ar:"سبب"},
+    {en:"Reason",ar:"السبب"},{en:"Future",ar:"مستقبل"},{en:"Present",ar:"الحاضر"},
+    {en:"Past",ar:"الماضي"},{en:"Change",ar:"تغيير"},{en:"Freedom",ar:"حرية"},
+    {en:"Experience",ar:"خبرة"},{en:"Knowledge",ar:"معرفة"}
+  ]},
+  { id:"social", emoji:"🤝", name:"الحياة الاجتماعية", words:[
+    {en:"Friend",ar:"صديق"},{en:"Neighbor",ar:"جار"},{en:"Guest",ar:"ضيف"},
+    {en:"Wedding",ar:"زفاف"},{en:"Party",ar:"حفلة"},{en:"Gift",ar:"هدية"},
+    {en:"Visit",ar:"يزور"},{en:"Meet",ar:"يقابل"},{en:"Marriage",ar:"زواج"},
+    {en:"Marry",ar:"يتزوج"},{en:"Celebrate",ar:"يحتفل"},{en:"Together",ar:"معاً"},
+    {en:"Group",ar:"مجموعة"},{en:"Team",ar:"فريق"},{en:"Member",ar:"عضو"},
+    {en:"Community",ar:"مجتمع"}
+  ]},
+  { id:"crime", emoji:"⚖️", name:"القانون والجريمة", words:[
+    {en:"Law",ar:"قانون"},{en:"Police",ar:"شرطة"},{en:"Court",ar:"محكمة"},
+    {en:"Prison",ar:"سجن"},{en:"Crime",ar:"جريمة"},{en:"Attack",ar:"هجوم"},
+    {en:"Victim",ar:"ضحية"},{en:"Murder",ar:"جريمة قتل"},{en:"Steal",ar:"يسرق"},
+    {en:"Fight",ar:"يقاتل"},{en:"Arrest",ar:"يعتقل"},{en:"Judge",ar:"قاضي"},
+    {en:"Lawyer",ar:"محامي"},{en:"Bail",ar:"كفالة"},{en:"Case",ar:"قضية"}
+  ]},
+  { id:"outer", emoji:"🚀", name:"الفضاء والكون", words:[
+    {en:"Space",ar:"الفضاء"},{en:"Star",ar:"نجمة"},{en:"Moon",ar:"قمر"},
+    {en:"Sun",ar:"شمس"},{en:"Earth",ar:"أرض"},{en:"Sky",ar:"سماء"},
+    {en:"Planet",ar:"كوكب"},{en:"Galaxy",ar:"مجرة"},{en:"Nuclear",ar:"نووي"},
+    {en:"Science",ar:"علم"},{en:"Light",ar:"ضوء"},{en:"Dark",ar:"مظلم"},
+    {en:"Universe",ar:"الكون"}
+  ]}
+];
+
+let currentGroup = 0;
+let learned = JSON.parse(localStorage.getItem('eng_learned') || '{}');
+let isPlayingAll = false;
+let searchMode = false;
+
+function init() {
+  const tabs = document.getElementById('tabs');
+  groups.forEach((g, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn' + (i === 0 ? ' active' : '');
+    btn.id = 'tab-' + i;
+    btn.textContent = g.emoji + ' ' + g.name;
+    btn.onclick = () => switchGroup(i);
+    tabs.appendChild(btn);
+  });
+  renderGroup(0);
+}
+
+function switchGroup(i) {
+  stopAll();
+  document.querySelectorAll('.cat-btn').forEach((b, j) => b.classList.toggle('active', j === i));
+  currentGroup = i;
+  renderGroup(i);
+  document.getElementById('tabs').children[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+}
+
+function renderGroup(i) {
+  const g = groups[i];
+  const learned_count = g.words.filter((_, wi) => learned[g.id + '-' + wi]).length;
+  const pct = Math.round(learned_count / g.words.length * 100);
+
+  let html = `
+    <div class="grp-header">
+      <span class="grp-emoji">${g.emoji}</span>
+      <div><div class="grp-name">${g.name}</div><div class="grp-sub">${g.words.length} كلمة</div></div>
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>
+      <div class="prog-label">${learned_count} / ${g.words.length} learned</div>
+    </div>
+    <div class="cards" id="cards">`;
+
+  g.words.forEach((w, wi) => {
+    const key = g.id + '-' + wi;
+    const isL = learned[key] ? ' learned' : '';
+    html += `<div class="word-card${isL}" id="wc-${wi}" onclick="speak('${w.en.replace(/'/g,"\\'")}',${i},${wi})">
+      <div class="snd-btn">🔊</div>
+      <div class="wc">
+        <div class="w-en">${w.en}</div>
+        <div class="w-ar">${w.ar}</div>
+      </div>
+      <div class="w-check">✅</div>
+    </div>`;
+  });
+  html += '</div>';
+  document.getElementById('groupContent').innerHTML = html;
+}
+
+function speak(text, gi, wi) {
+  stopAll();
+  if (!window.speechSynthesis) { showToast("⚠️ المتصفح لا يدعم الصوت"); return; }
+  const key = groups[gi].id + '-' + wi;
+  const card = document.getElementById('wc-' + wi);
+  if (card) card.classList.add('playing');
+
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'en-US'; utt.rate = 0.85;
+  utt.onend = () => {
+    if (card) { card.classList.remove('playing'); card.classList.add('learned'); }
+    learned[key] = true;
+    localStorage.setItem('eng_learned', JSON.stringify(learned));
+    updateProg(gi);
+  };
+  utt.onerror = () => { if (card) card.classList.remove('playing'); };
+  window.speechSynthesis.speak(utt);
+}
+
+function speakSearch(text, key, cardId) {
+  stopAll();
+  if (!window.speechSynthesis) return;
+  const card = document.getElementById(cardId);
+  if (card) card.classList.add('playing');
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'en-US'; utt.rate = 0.85;
+  utt.onend = () => {
+    if (card) { card.classList.remove('playing'); card.classList.add('learned'); }
+    learned[key] = true;
+    localStorage.setItem('eng_learned', JSON.stringify(learned));
+  };
+  utt.onerror = () => { if (card) card.classList.remove('playing'); };
+  window.speechSynthesis.speak(utt);
+}
+
+function stopAll() {
+  window.speechSynthesis && window.speechSynthesis.cancel();
+  document.querySelectorAll('.word-card.playing').forEach(c => c.classList.remove('playing'));
+  isPlayingAll = false;
+  document.getElementById('btnPlay').textContent = '▶ تشغيل المجموعة كلها';
+}
+
+function playAll() {
+  if (searchMode) return;
+  if (isPlayingAll) { stopAll(); return; }
+  stopAll();
+  isPlayingAll = true;
+  document.getElementById('btnPlay').textContent = '⏹ إيقاف';
+  const g = groups[currentGroup];
+  let i = 0;
+  function next() {
+    if (!isPlayingAll || i >= g.words.length) {
+      isPlayingAll = false;
+      document.getElementById('btnPlay').textContent = '▶ تشغيل المجموعة كلها';
+      if (i >= g.words.length) showToast("🎉 انتهيت من المجموعة!");
+      return;
+    }
+    const w = g.words[i];
+    const key = g.id + '-' + i;
+    const card = document.getElementById('wc-' + i);
+    if (card) { card.classList.add('playing'); card.scrollIntoView({behavior:'smooth',block:'center'}); }
+    const utt = new SpeechSynthesisUtterance(w.en);
+    utt.lang = 'en-US'; utt.rate = 0.85;
+    utt.onend = () => {
+      if (card) { card.classList.remove('playing'); card.classList.add('learned'); }
+      learned[key] = true;
+      localStorage.setItem('eng_learned', JSON.stringify(learned));
+      updateProg(currentGroup);
+      i++;
+      setTimeout(next, 550);
+    };
+    utt.onerror = () => { if (card) card.classList.remove('playing'); i++; next(); };
+    window.speechSynthesis.speak(utt);
+  }
+  next();
+}
+
+function updateProg(gi) {
+  const g = groups[gi];
+  const cnt = g.words.filter((_, wi) => learned[g.id + '-' + wi]).length;
+  const pct = Math.round(cnt / g.words.length * 100);
+  const fill = document.querySelector('.prog-fill');
+  const label = document.querySelector('.prog-label');
+  if (fill) fill.style.width = pct + '%';
+  if (label) label.textContent = cnt + ' / ' + g.words.length + ' learned';
+}
+
+function resetLearned() {
+  if (searchMode) return;
+  if (!confirm('هل تريد إعادة تعيين التقدم للمجموعة الحالية؟')) return;
+  const g = groups[currentGroup];
+  g.words.forEach((_, wi) => {
+    delete learned[g.id + '-' + wi];
+    const card = document.getElementById('wc-' + wi);
+    if (card) card.classList.remove('learned');
+  });
+  localStorage.setItem('eng_learned', JSON.stringify(learned));
+  updateProg(currentGroup);
+  showToast("↺ تم إعادة التعيين");
+}
+
+function handleSearch(val) {
+  const q = val.trim().toLowerCase();
+  if (!q) {
+    searchMode = false;
+    document.getElementById('search-view').style.display = 'none';
+    document.getElementById('main-view').style.display = 'block';
+    document.getElementById('bottomBar').style.display = 'flex';
+    return;
+  }
+  searchMode = true;
+  stopAll();
+  document.getElementById('search-view').style.display = 'block';
+  document.getElementById('main-view').style.display = 'none';
+  document.getElementById('bottomBar').style.display = 'none';
+
+  const results = [];
+  groups.forEach((g) => {
+    g.words.forEach((w, wi) => {
+      if (w.en.toLowerCase().includes(q) || w.ar.includes(val.trim())) {
+        results.push({ w, key: g.id + '-' + wi, gname: g.name, gemoji: g.emoji });
+      }
+    });
+  });
+
+  const container = document.getElementById('searchResults');
+  if (results.length === 0) {
+    container.innerHTML = '<div class="no-results">لا توجد نتائج 🔍</div>';
+    return;
+  }
+
+  container.innerHTML = results.map((r, i) => {
+    const isL = learned[r.key] ? ' learned' : '';
+    const cid = 'src-' + i;
+    return `<div class="word-card${isL}" id="${cid}" onclick="speakSearch('${r.w.en.replace(/'/g,"\\'")}','${r.key}','${cid}')">
+      <div class="snd-btn">🔊</div>
+      <div class="wc">
+        <div class="w-en">${r.w.en}</div>
+        <div class="w-ar">${r.w.ar}</div>
+      </div>
+      <div class="w-check">✅</div>
+    </div>`;
+  }).join('');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+init();
+</script>
+</body>
+</html>

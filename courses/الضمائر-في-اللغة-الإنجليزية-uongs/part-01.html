@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الضمائر في اللغة الإنجليزية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy2: #0f2040;
+    --teal: #00b4d8;
+    --teal-dark: #0077a8;
+    --gold: #f4c430;
+    --gold-light: #ffe066;
+    --green: #2ecc71;
+    --white: #f8faff;
+    --muted: #a8bbd4;
+    --card-bg: #0d1f3c;
+    --card-border: rgba(0,180,216,0.18);
+    --radius: 18px;
+    --shadow: 0 8px 40px rgba(0,180,216,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 80px 20px 60px;
+    background: radial-gradient(ellipse at 50% 0%, #0a2a4a 0%, var(--navy) 70%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(0,180,216,0.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(0,180,216,0.15);
+    border: 1px solid var(--teal);
+    color: var(--teal);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 6px 20px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--white) 40%, var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 36px;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+  .hero-groups {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .hero-pill {
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    color: var(--teal);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .22s;
+  }
+  .hero-pill:hover, .hero-pill.active {
+    background: var(--teal);
+    color: var(--navy);
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 18px rgba(0,180,216,0.35);
+  }
+
+  /* ===== NAV TABS ===== */
+  .nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 30px 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navy);
+    border-bottom: 1px solid rgba(0,180,216,0.10);
+    padding-bottom: 18px;
+  }
+  .tab-btn {
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    color: var(--muted);
+    font-family: 'Cairo', sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 9px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .22s;
+  }
+  .tab-btn:hover { color: var(--teal); border-color: var(--teal); }
+  .tab-btn.active {
+    background: var(--teal);
+    color: var(--navy);
+    border-color: var(--teal);
+    box-shadow: 0 4px 18px rgba(0,180,216,0.3);
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  .main { max-width: 1000px; margin: 0 auto; padding: 40px 18px 80px; }
+
+  .section { display: none; animation: fadeIn .4s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ===== SECTION HEADER ===== */
+  .sec-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 32px;
+    padding: 28px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+  }
+  .sec-header::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(0,180,216,0.09) 0%, transparent 70%);
+  }
+  .sec-icon {
+    font-size: 2.6rem;
+    flex-shrink: 0;
+    background: rgba(0,180,216,0.12);
+    border-radius: 14px;
+    padding: 12px 16px;
+    line-height: 1;
+  }
+  .sec-info h2 {
+    font-size: 1.65rem;
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .sec-info .en-name {
+    font-size: 1rem;
+    color: var(--teal);
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .sec-info p {
+    color: var(--muted);
+    font-size: 0.97rem;
+    line-height: 1.7;
+  }
+  .importance-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .importance-label {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .bar-track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50px;
+    overflow: hidden;
+    max-width: 200px;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 50px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+    transition: width 1s ease;
+  }
+  .importance-score {
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* ===== TABLE ===== */
+  .pronoun-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    margin-bottom: 28px;
+  }
+  .pronoun-table thead tr th {
+    background: rgba(0,180,216,0.12);
+    color: var(--teal);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    text-align: right;
+  }
+  .pronoun-table thead tr th:first-child { border-radius: 10px 0 0 10px; }
+  .pronoun-table thead tr th:last-child { border-radius: 0 10px 10px 0; }
+  .pronoun-table tbody tr {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    transition: transform .18s, box-shadow .18s;
+    cursor: default;
+  }
+  .pronoun-table tbody tr:hover {
+    transform: translateX(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--teal);
+  }
+  .pronoun-table tbody td {
+    padding: 14px 20px;
+    font-size: 0.97rem;
+  }
+  .pronoun-table tbody td:first-child { border-radius: 10px 0 0 10px; }
+  .pronoun-table tbody td:last-child { border-radius: 0 10px 10px 0; }
+  .pron-en {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--teal);
+    font-family: 'Tajawal', sans-serif;
+  }
+  .pron-ar {
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .pron-use {
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  /* ===== EXAMPLES GRID ===== */
+  .examples-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .examples-title::after {
+    content: '';
+    flex: 1;
+    height: 1.5px;
+    background: linear-gradient(90deg, var(--teal), transparent);
+  }
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .ex-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    transition: border-color .2s, transform .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .ex-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0,180,216,0.12);
+  }
+  .ex-pronoun-tag {
+    display: inline-block;
+    background: rgba(0,180,216,0.15);
+    color: var(--teal);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .ex-en {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    direction: ltr;
+    text-align: left;
+  }
+  .ex-en .highlight {
+    color: var(--teal);
+    background: rgba(0,180,216,0.12);
+    padding: 1px 6px;
+    border-radius: 5px;
+  }
+  .ex-ar {
+    font-size: 0.92rem;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ===== RULE BOX ===== */
+  .rule-box {
+    background: linear-gradient(135deg, rgba(0,180,216,0.10), rgba(244,196,48,0.07));
+    border: 1.5px solid rgba(244,196,48,0.25);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 28px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .rule-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .rule-text { color: var(--white); font-size: 0.97rem; line-height: 1.75; }
+  .rule-text strong { color: var(--gold); }
+
+  /* ===== COMPARISON ===== */
+  .compare-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .compare-side {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 18px;
+    border: 1.5px solid var(--card-border);
+  }
+  .compare-side h4 {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid var(--card-border);
+  }
+  .compare-side.left h4 { color: var(--teal); }
+  .compare-side.right h4 { color: var(--gold); }
+  .compare-side ul { list-style: none; }
+  .compare-side ul li {
+    font-size: 0.93rem;
+    color: var(--muted);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    direction: ltr;
+    text-align: left;
+  }
+  .compare-side ul li:last-child { border-bottom: none; }
+  .compare-side ul li span { color: var(--white); font-weight: 700; }
+
+  /* ===== QUIZ ===== */
+  .quiz-section {
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-top: 10px;
+  }
+  .quiz-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .quiz-q {
+    margin-bottom: 22px;
+  }
+  .quiz-q p {
+    font-size: 1rem;
+    color: var(--white);
+    margin-bottom: 12px;
+    font-weight: 600;
+    direction: ltr;
+    text-align: left;
+  }
+  .quiz-q p .blank {
+    display: inline-block;
+    width: 80px;
+    height: 24px;
+    border-bottom: 2.5px solid var(--teal);
+    vertical-align: bottom;
+    margin: 0 6px;
+  }
+  .quiz-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .quiz-opt {
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    color: var(--white);
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .quiz-opt:hover { border-color: var(--teal); color: var(--teal); }
+  .quiz-opt.correct { background: rgba(46,204,113,0.15); border-color: var(--green); color: var(--green); }
+  .quiz-opt.wrong { background: rgba(231,76,60,0.15); border-color: #e74c3c; color: #e74c3c; }
+  .quiz-feedback {
+    font-size: 13px;
+    margin-top: 8px;
+    font-weight: 700;
+    min-height: 20px;
+    color: var(--muted);
+  }
+  .quiz-score {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--card-border);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--teal);
+    display: none;
+  }
+  .reset-btn {
+    background: var(--teal);
+    color: var(--navy);
+    border: none;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    padding: 10px 28px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all .2s;
+  }
+  .reset-btn:hover { background: var(--gold); transform: translateY(-2px); }
+
+  /* ===== OVERVIEW ===== */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .ov-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 22px;
+    cursor: pointer;
+    transition: all .22s;
+    position: relative;
+    overflow: hidden;
+  }
+  .ov-card::before {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,180,216,0.09), transparent);
+    transition: all .3s;
+  }
+  .ov-card:hover { border-color: var(--teal); transform: translateY(-5px); box-shadow: var(--shadow); }
+  .ov-card:hover::before { transform: scale(1.8); }
+  .ov-card .ov-icon { font-size: 2rem; margin-bottom: 14px; }
+  .ov-card .ov-num {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--teal);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .ov-card h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .ov-card .ov-en {
+    font-size: 13px;
+    color: var(--teal);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .ov-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .ov-score {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ov-score span { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .ov-bar { flex: 1; height: 5px; background: rgba(255,255,255,0.08); border-radius: 5px; overflow: hidden; }
+  .ov-bar-fill { height: 100%; background: linear-gradient(90deg, var(--teal), var(--gold)); border-radius: 5px; }
+  .ov-score strong { font-size: 13px; color: var(--gold); font-weight: 800; }
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width: 600px) {
+    .compare-box { grid-template-columns: 1fr; }
+    .sec-header { flex-direction: column; gap: 12px; }
+    .hero h1 { font-size: 2rem; }
+    .nav-tabs { gap: 7px; }
+    .tab-btn { font-size: 12px; padding: 7px 14px; }
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--teal-dark); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🇺🇸 American English — zAmericanEnglish</div>
+  <h1>الضمائر في اللغة الإنجليزية</h1>
+  <p class="hero-sub">شرح شامل لكل أنواع الضمائر مع أمثلة مفصلة على كل كلمة — من الصفر للاحتراف</p>
+  <div class="hero-groups">
+    <span class="hero-pill" onclick="showTab('overview')">📋 نظرة عامة</span>
+    <span class="hero-pill" onclick="showTab('subject')">👤 ضمائر الفاعل</span>
+    <span class="hero-pill" onclick="showTab('object')">🎯 ضمائر المفعول</span>
+    <span class="hero-pill" onclick="showTab('poss-adj')">📌 صفات الملكية</span>
+    <span class="hero-pill" onclick="showTab('poss-pron')">💎 ضمائر الملكية</span>
+    <span class="hero-pill" onclick="showTab('reflexive')">🪞 الضمائر الانعكاسية</span>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">📋 نظرة عامة</button>
+  <button class="tab-btn" onclick="showTab('subject')">👤 ضمائر الفاعل</button>
+  <button class="tab-btn" onclick="showTab('object')">🎯 ضمائر المفعول</button>
+  <button class="tab-btn" onclick="showTab('poss-adj')">📌 صفات الملكية</button>
+  <button class="tab-btn" onclick="showTab('poss-pron')">💎 ضمائر الملكية</button>
+  <button class="tab-btn" onclick="showTab('reflexive')">🪞 الانعكاسية</button>
+</div>
+
+<div class="main">
+
+<!-- =================== OVERVIEW =================== -->
+<div class="section active" id="overview">
+  <div class="overview-grid">
+    <div class="ov-card" onclick="showTab('subject')">
+      <div class="ov-icon">👤</div>
+      <div class="ov-num">المجموعة 01</div>
+      <h3>ضمائر الفاعل</h3>
+      <div class="ov-en">Subject Pronouns</div>
+      <p>بتيجي قبل الفعل — هي اللي بتعمل الفعل. <strong>I, He, She, We, They, You, It</strong></p>
+      <div class="ov-score">
+        <span>الأهمية</span>
+        <div class="ov-bar"><div class="ov-bar-fill" style="width:100%"></div></div>
+        <strong>10/10</strong>
+      </div>
+    </div>
+    <div class="ov-card" onclick="showTab('object')">
+      <div class="ov-icon">🎯</div>
+      <div class="ov-num">المجموعة 02</div>
+      <h3>ضمائر المفعول به</h3>
+      <div class="ov-en">Object Pronouns</div>
+      <p>بتيجي بعد الفعل أو بعد حرف الجر. <strong>me, him, her, us, them, it, you</strong></p>
+      <div class="ov-score">
+        <span>الأهمية</span>
+        <div class="ov-bar"><div class="ov-bar-fill" style="width:100%"></div></div>
+        <strong>10/10</strong>
+      </div>
+    </div>
+    <div class="ov-card" onclick="showTab('poss-adj')">
+      <div class="ov-icon">📌</div>
+      <div class="ov-num">المجموعة 03</div>
+      <h3>صفات الملكية</h3>
+      <div class="ov-en">Possessive Adjectives</div>
+      <p>بتيجي قبل اسم لتقول إنه بتاع مين. <strong>my, your, his, her, its, our, their</strong></p>
+      <div class="ov-score">
+        <span>الأهمية</span>
+        <div class="ov-bar"><div class="ov-bar-fill" style="width:90%"></div></div>
+        <strong>9/10</strong>
+      </div>
+    </div>
+    <div class="ov-card" onclick="showTab('poss-pron')">
+      <div class="ov-icon">💎</div>
+      <div class="ov-num">المجموعة 04</div>
+      <h3>ضمائر الملكية</h3>
+      <div class="ov-en">Possessive Pronouns</div>
+      <p>بتيجي لوحدها بدون اسم بعدها. <strong>mine, yours, his, hers, ours, theirs</strong></p>
+      <div class="ov-score">
+        <span>الأهمية</span>
+        <div class="ov-bar"><div class="ov-bar-fill" style="width:75%"></div></div>
+        <strong>7.5/10</strong>
+      </div>
+    </div>
+    <div class="ov-card" onclick="showTab('reflexive')">
+      <div class="ov-icon">🪞</div>
+      <div class="ov-num">المجموعة 05</div>
+      <h3>الضمائر الانعكاسية</h3>
+      <div class="ov-en">Reflexive Pronouns</div>
+      <p>لما الفاعل والمفعول نفس الشخص، أو للتأكيد والتعظيم. <strong>myself, himself, herself...</strong></p>
+      <div class="ov-score">
+        <span>الأهمية</span>
+        <div class="ov-bar"><div class="ov-bar-fill" style="width:80%"></div></div>
+        <strong>8/10</strong>
+      </div>
+    </div>
+    <div class="ov-card" style="border-color: rgba(244,196,48,0.25); cursor:default;" onclick="showTab('quiz')">
+      <div class="ov-icon">🧠</div>
+      <div class="ov-num">اختبر نفسك</div>
+      <h3>تدريبات تفاعلية</h3>
+      <div class="ov-en">Practice Quiz</div>
+      <p>في كل قسم فيه اختبار صغير تقدر تتحقق بيه من فهمك للدرس</p>
+      <div class="ov-score">
+        <span>التغطية</span>
+        <div class="ov-bar"><div class="ov-bar-fill" style="width:100%"></div></div>
+        <strong>5 أقسام</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">💡</span>
+    <div class="rule-text">
+      <strong>الترتيب الصح للدراسة:</strong><br>
+      ابدأ بـ <strong>Subject Pronouns</strong> (الأهم والأساس) → بعدين <strong>Object Pronouns</strong> → بعدين <strong>Possessive Adjectives</strong> → بعدين <strong>Possessive Pronouns</strong> → وأخيراً <strong>Reflexive Pronouns</strong>. كل واحدة بتبني على اللي قبلها!
+    </div>
+  </div>
+</div>
+
+<!-- =================== SUBJECT PRONOUNS =================== -->
+<div class="section" id="subject">
+  <div class="sec-header">
+    <div class="sec-icon">👤</div>
+    <div class="sec-info">
+      <h2>ضمائر الفاعل</h2>
+      <span class="en-name">Subject Pronouns</span>
+      <p>دي الضمائر اللي بتيجي <strong>قبل الفعل</strong> وبتعمله. هي اللي "عاملة" الحاجة في الجملة. بدونها مش هتعرف تتكلم جملة واحدة في الإنجليزي!</p>
+      <div class="importance-bar">
+        <span class="importance-label">الأهمية:</span>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+        <span class="importance-score">10 / 10 ⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">📐</span>
+    <div class="rule-text">
+      <strong>القاعدة:</strong> Subject Pronoun + Verb (فعل) + ...<br>
+      مثال: <strong>She</strong> eats / <strong>He</strong> plays / <strong>They</strong> go<br>
+      <strong>ملحوظة مهمة:</strong> كلمة <strong>"You"</strong> بتتكلم للواحد وللجماعة بنفس الكلمة!
+    </div>
+  </div>
+
+  <table class="pronoun-table">
+    <thead>
+      <tr>
+        <th>الضمير</th><th>المعنى</th><th>متى تستخدمه</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="pron-en">I</td><td class="pron-ar">أنا</td><td class="pron-use">لما تتكلم عن نفسك</td></tr>
+      <tr><td class="pron-en">You</td><td class="pron-ar">أنت / أنتم</td><td class="pron-use">لما تتكلم للشخص اللي قدامك</td></tr>
+      <tr><td class="pron-en">He</td><td class="pron-ar">هو</td><td class="pron-use">لما تتكلم عن ذكر غايب</td></tr>
+      <tr><td class="pron-en">She</td><td class="pron-ar">هي</td><td class="pron-use">لما تتكلم عن أنثى غايبة</td></tr>
+      <tr><td class="pron-en">It</td><td class="pron-ar">هو / هي (غير عاقل)</td><td class="pron-use">لحيوان أو شيء أو فكرة</td></tr>
+      <tr><td class="pron-en">We</td><td class="pron-ar">نحن</td><td class="pron-use">أنت + غيرك</td></tr>
+      <tr><td class="pron-en">They</td><td class="pron-ar">هم / هن</td><td class="pron-use">جماعة غايبين</td></tr>
+    </tbody>
+  </table>
+
+  <div class="examples-title">📝 أمثلة مفصلة على كل ضمير</div>
+  <div class="examples-grid">
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">I — أنا</span>
+      <div class="ex-en"><span class="highlight">I</span> love English.</div>
+      <div class="ex-ar">أنا بحب الإنجليزي.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">I — أنا</span>
+      <div class="ex-en"><span class="highlight">I</span> wake up at 7 every day.</div>
+      <div class="ex-ar">أنا بصحى الساعة 7 كل يوم.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">You — أنت</span>
+      <div class="ex-en"><span class="highlight">You</span> are very smart.</div>
+      <div class="ex-ar">أنت ذكي جداً.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">You — أنتم</span>
+      <div class="ex-en"><span class="highlight">You</span> are my best friends.</div>
+      <div class="ex-ar">أنتم أحسن أصحابي.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">He — هو</span>
+      <div class="ex-en"><span class="highlight">He</span> plays football every Friday.</div>
+      <div class="ex-ar">هو بيلعب كورة كل جمعة.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">He — هو</span>
+      <div class="ex-en"><span class="highlight">He</span> is a doctor in Cairo.</div>
+      <div class="ex-ar">هو دكتور في القاهرة.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">She — هي</span>
+      <div class="ex-en"><span class="highlight">She</span> studies hard every night.</div>
+      <div class="ex-ar">هي بتذاكر بجد كل ليلة.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">She — هي</span>
+      <div class="ex-en"><span class="highlight">She</span> works at a big company.</div>
+      <div class="ex-ar">هي بتشتغل في شركة كبيرة.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">It — غير عاقل</span>
+      <div class="ex-en"><span class="highlight">It</span> is a beautiful cat.</div>
+      <div class="ex-ar">ده قط جميل.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">It — غير عاقل</span>
+      <div class="ex-en"><span class="highlight">It</span> is very hot today.</div>
+      <div class="ex-ar">النهارده حر جداً.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">We — نحن</span>
+      <div class="ex-en"><span class="highlight">We</span> go to school together.</div>
+      <div class="ex-ar">إحنا بنروح المدرسة مع بعض.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">We — نحن</span>
+      <div class="ex-en"><span class="highlight">We</span> are learning English now.</div>
+      <div class="ex-ar">إحنا بنتعلم إنجليزي دلوقتي.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">They — هم</span>
+      <div class="ex-en"><span class="highlight">They</span> live in Alexandria.</div>
+      <div class="ex-ar">هم ساكنين في الإسكندرية.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">They — هم</span>
+      <div class="ex-en"><span class="highlight">They</span> always help each other.</div>
+      <div class="ex-ar">هم دايماً بيساعدوا بعض.</div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-title">🧠 اختبر نفسك — Subject Pronouns</div>
+    <div id="sq1" class="quiz-q">
+      <p>Ahmed is a student. <span class="blank"></span> studies at university.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('sq1',this,'He')">He</button>
+        <button class="quiz-opt" onclick="checkQ('sq1',this,'He')">She</button>
+        <button class="quiz-opt" onclick="checkQ('sq1',this,'He')">It</button>
+        <button class="quiz-opt" onclick="checkQ('sq1',this,'He')">We</button>
+      </div>
+      <div class="quiz-feedback" id="sq1-fb"></div>
+    </div>
+    <div id="sq2" class="quiz-q">
+      <p>Sara and I are friends. <span class="blank"></span> go to the same school.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('sq2',this,'We')">They</button>
+        <button class="quiz-opt" onclick="checkQ('sq2',this,'We')">We</button>
+        <button class="quiz-opt" onclick="checkQ('sq2',this,'We')">I</button>
+        <button class="quiz-opt" onclick="checkQ('sq2',this,'We')">She</button>
+      </div>
+      <div class="quiz-feedback" id="sq2-fb"></div>
+    </div>
+    <div id="sq3" class="quiz-q">
+      <p>The dog is hungry. <span class="blank"></span> wants food.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('sq3',this,'It')">He</button>
+        <button class="quiz-opt" onclick="checkQ('sq3',this,'It')">She</button>
+        <button class="quiz-opt" onclick="checkQ('sq3',this,'It')">It</button>
+        <button class="quiz-opt" onclick="checkQ('sq3',this,'It')">They</button>
+      </div>
+      <div class="quiz-feedback" id="sq3-fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== OBJECT PRONOUNS =================== -->
+<div class="section" id="object">
+  <div class="sec-header">
+    <div class="sec-icon">🎯</div>
+    <div class="sec-info">
+      <h2>ضمائر المفعول به</h2>
+      <span class="en-name">Object Pronouns</span>
+      <p>دي الضمائر اللي بتيجي <strong>بعد الفعل</strong> أو <strong>بعد حرف الجر</strong>. هي اللي "بتاخد" الفعل عليها. لازم تفرق بينها وبين ضمائر الفاعل!</p>
+      <div class="importance-bar">
+        <span class="importance-label">الأهمية:</span>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+        <span class="importance-score">10 / 10 ⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">📐</span>
+    <div class="rule-text">
+      <strong>القاعدة:</strong> Subject + Verb + <strong>Object Pronoun</strong><br>
+      مثال: He helps <strong>him</strong> / She loves <strong>me</strong> / I called <strong>her</strong><br>
+      أو بعد حروف الجر: for <strong>me</strong> / with <strong>us</strong> / to <strong>them</strong>
+    </div>
+  </div>
+
+  <table class="pronoun-table">
+    <thead>
+      <tr><th>الضمير</th><th>المعنى</th><th>مثال سريع</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="pron-en">me</td><td class="pron-ar">أنا (مفعول)</td><td class="pron-use" style="direction:ltr;text-align:left">He sees me.</td></tr>
+      <tr><td class="pron-en">you</td><td class="pron-ar">أنت/أنتم (مفعول)</td><td class="pron-use" style="direction:ltr;text-align:left">I love you.</td></tr>
+      <tr><td class="pron-en">him</td><td class="pron-ar">هو (مفعول)</td><td class="pron-use" style="direction:ltr;text-align:left">She helps him.</td></tr>
+      <tr><td class="pron-en">her</td><td class="pron-ar">هي (مفعول)</td><td class="pron-use" style="direction:ltr;text-align:left">I called her.</td></tr>
+      <tr><td class="pron-en">it</td><td class="pron-ar">هو/هي (غير عاقل)</td><td class="pron-use" style="direction:ltr;text-align:left">I found it.</td></tr>
+      <tr><td class="pron-en">us</td><td class="pron-ar">نحن (مفعول)</td><td class="pron-use" style="direction:ltr;text-align:left">He taught us.</td></tr>
+      <tr><td class="pron-en">them</td><td class="pron-ar">هم (مفعول)</td><td class="pron-use" style="direction:ltr;text-align:left">He feeds them.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="examples-title">📝 أمثلة مفصلة على كل ضمير</div>
+  <div class="examples-grid">
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">me — أنا</span>
+      <div class="ex-en">She loves <span class="highlight">me</span> very much.</div>
+      <div class="ex-ar">هي بتحبني جداً.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">me — أنا</span>
+      <div class="ex-en">Can you help <span class="highlight">me</span> with this?</div>
+      <div class="ex-ar">ممكن تساعدني في ده؟</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">me — أنا</span>
+      <div class="ex-en">He gave a gift to <span class="highlight">me</span>.</div>
+      <div class="ex-ar">هو أدالي هدية.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">you — أنت/أنتم</span>
+      <div class="ex-en">I miss <span class="highlight">you</span> so much.</div>
+      <div class="ex-ar">أنا بوحشني ليك جداً.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">you — أنت/أنتم</span>
+      <div class="ex-en">The teacher is looking for <span class="highlight">you</span>.</div>
+      <div class="ex-ar">المدرس بيدور عليك.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">him — هو</span>
+      <div class="ex-en">He helps <span class="highlight">him</span>. (زي الفيديو)</div>
+      <div class="ex-ar">هو بيساعده.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">him — هو</span>
+      <div class="ex-en">I don't know <span class="highlight">him</span>.</div>
+      <div class="ex-ar">أنا مش عارفه.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">him — هو</span>
+      <div class="ex-en">She talked to <span class="highlight">him</span> yesterday.</div>
+      <div class="ex-ar">هي كلمته امبارح.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">her — هي</span>
+      <div class="ex-en">I called <span class="highlight">her</span> this morning.</div>
+      <div class="ex-ar">أنا كلمتها الصبح.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">her — هي</span>
+      <div class="ex-en">Do you know <span class="highlight">her</span>?</div>
+      <div class="ex-ar">هل عارفها؟</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">it — غير عاقل</span>
+      <div class="ex-en">I found <span class="highlight">it</span> under the bed.</div>
+      <div class="ex-ar">لقيته تحت التخت.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">it — غير عاقل</span>
+      <div class="ex-en">The cat is sick. Take <span class="highlight">it</span> to the vet.</div>
+      <div class="ex-ar">القطة عيانة. خدها للدكتور.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">us — نحن</span>
+      <div class="ex-en">Can you help <span class="highlight">us</span>?</div>
+      <div class="ex-ar">ممكن تساعدنا؟</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">us — نحن</span>
+      <div class="ex-en">He invited <span class="highlight">us</span> to his house.</div>
+      <div class="ex-ar">هو دعانا لبيته.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">them — هم</span>
+      <div class="ex-en">He feeds <span class="highlight">them</span>. (زي الفيديو)</div>
+      <div class="ex-ar">هو بيطعمهم.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">them — هم</span>
+      <div class="ex-en">She teaches <span class="highlight">them</span> English.</div>
+      <div class="ex-ar">هي بتعلمهم إنجليزي.</div>
+    </div>
+  </div>
+
+  <div class="examples-title">⚡ الفرق بين Subject و Object</div>
+  <div class="compare-box">
+    <div class="compare-side left">
+      <h4>Subject — قبل الفعل</h4>
+      <ul>
+        <li><span>He</span> helps him.</li>
+        <li><span>She</span> loves me.</li>
+        <li><span>They</span> called us.</li>
+        <li><span>I</span> know her.</li>
+        <li><span>We</span> need it.</li>
+      </ul>
+    </div>
+    <div class="compare-side right">
+      <h4>Object — بعد الفعل</h4>
+      <ul>
+        <li>He helps <span>him</span>.</li>
+        <li>She loves <span>me</span>.</li>
+        <li>They called <span>us</span>.</li>
+        <li>I know <span>her</span>.</li>
+        <li>We need <span>it</span>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-title">🧠 اختبر نفسك — Object Pronouns</div>
+    <div id="oq1" class="quiz-q">
+      <p>I see Ahmed every day. I know <span class="blank"></span> very well.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('oq1',this,'him')">he</button>
+        <button class="quiz-opt" onclick="checkQ('oq1',this,'him')">him</button>
+        <button class="quiz-opt" onclick="checkQ('oq1',this,'him')">his</button>
+        <button class="quiz-opt" onclick="checkQ('oq1',this,'him')">himself</button>
+      </div>
+      <div class="quiz-feedback" id="oq1-fb"></div>
+    </div>
+    <div id="oq2" class="quiz-q">
+      <p>My mom cooked food. She made it for <span class="blank"></span>. (for me and my sister)</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('oq2',this,'us')">we</button>
+        <button class="quiz-opt" onclick="checkQ('oq2',this,'us')">our</button>
+        <button class="quiz-opt" onclick="checkQ('oq2',this,'us')">us</button>
+        <button class="quiz-opt" onclick="checkQ('oq2',this,'us')">ours</button>
+      </div>
+      <div class="quiz-feedback" id="oq2-fb"></div>
+    </div>
+    <div id="oq3" class="quiz-q">
+      <p>Where is my phone? I can't find <span class="blank"></span>!</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('oq3',this,'it')">its</button>
+        <button class="quiz-opt" onclick="checkQ('oq3',this,'it')">it</button>
+        <button class="quiz-opt" onclick="checkQ('oq3',this,'it')">them</button>
+        <button class="quiz-opt" onclick="checkQ('oq3',this,'it')">he</button>
+      </div>
+      <div class="quiz-feedback" id="oq3-fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== POSSESSIVE ADJECTIVES =================== -->
+<div class="section" id="poss-adj">
+  <div class="sec-header">
+    <div class="sec-icon">📌</div>
+    <div class="sec-info">
+      <h2>صفات الملكية</h2>
+      <span class="en-name">Possessive Adjectives</span>
+      <p>بتيجي <strong>قبل اسم</strong> وبتقول إن الاسم ده بتاع مين. زي صفة بتوصف إن الحاجة "ملك" حد. <strong>لازم يكون في اسم بعدها!</strong></p>
+      <div class="importance-bar">
+        <span class="importance-label">الأهمية:</span>
+        <div class="bar-track"><div class="bar-fill" style="width:90%"></div></div>
+        <span class="importance-score">9 / 10 ⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">📐</span>
+    <div class="rule-text">
+      <strong>القاعدة:</strong> Possessive Adjective + <strong>Noun (اسم)</strong><br>
+      مثال: <strong>my</strong> car / <strong>his</strong> phone / <strong>their</strong> house<br>
+      <strong>مهم:</strong> لازم يجي بعدها اسم — لو مفيش اسم بعدها استخدم Possessive Pronoun!
+    </div>
+  </div>
+
+  <table class="pronoun-table">
+    <thead>
+      <tr><th>الصفة</th><th>المعنى</th><th>مثال</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="pron-en">my</td><td class="pron-ar">بتاعي / ملكي</td><td class="pron-use" style="direction:ltr;text-align:left">my bag, my house</td></tr>
+      <tr><td class="pron-en">your</td><td class="pron-ar">بتاعك / بتاعكم</td><td class="pron-use" style="direction:ltr;text-align:left">your phone, your friends</td></tr>
+      <tr><td class="pron-en">his</td><td class="pron-ar">بتاعه</td><td class="pron-use" style="direction:ltr;text-align:left">his car, his job</td></tr>
+      <tr><td class="pron-en">her</td><td class="pron-ar">بتاعها</td><td class="pron-use" style="direction:ltr;text-align:left">her ring, her name</td></tr>
+      <tr><td class="pron-en">its</td><td class="pron-ar">بتاعه (غير عاقل)</td><td class="pron-use" style="direction:ltr;text-align:left">its color, its name</td></tr>
+      <tr><td class="pron-en">our</td><td class="pron-ar">بتاعنا</td><td class="pron-use" style="direction:ltr;text-align:left">our school, our country</td></tr>
+      <tr><td class="pron-en">their</td><td class="pron-ar">بتاعهم</td><td class="pron-use" style="direction:ltr;text-align:left">their team, their kids</td></tr>
+    </tbody>
+  </table>
+
+  <div class="examples-title">📝 أمثلة مفصلة على كل صفة</div>
+  <div class="examples-grid">
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">my — بتاعي</span>
+      <div class="ex-en">I love <span class="highlight">my</span> mother.</div>
+      <div class="ex-ar">أنا بحب أمي.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">my — بتاعي</span>
+      <div class="ex-en"><span class="highlight">My</span> dream is to travel the world.</div>
+      <div class="ex-ar">حلمي إني أسافر العالم.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">my — بتاعي</span>
+      <div class="ex-en">I forgot <span class="highlight">my</span> phone at home.</div>
+      <div class="ex-ar">أنا نسيت تليفوني في البيت.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">your — بتاعك</span>
+      <div class="ex-en"><span class="highlight">Your</span> English is very good.</div>
+      <div class="ex-ar">إنجليزيك كويس جداً.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">your — بتاعك</span>
+      <div class="ex-en">Is this <span class="highlight">your</span> bag?</div>
+      <div class="ex-ar">الشنطة دي بتاعتك؟</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">his — بتاعه</span>
+      <div class="ex-en"><span class="highlight">His</span> phone is the latest model.</div>
+      <div class="ex-ar">تليفونه أحدث موديل.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">his — بتاعه</span>
+      <div class="ex-en">He lost <span class="highlight">his</span> keys again.</div>
+      <div class="ex-ar">هو ضيع مفاتيحه تاني.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">her — بتاعها</span>
+      <div class="ex-en">This is <span class="highlight">her</span> ring. (زي الفيديو)</div>
+      <div class="ex-ar">ده خاتمها.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">her — بتاعها</span>
+      <div class="ex-en">She forgot <span class="highlight">her</span> umbrella.</div>
+      <div class="ex-ar">هي نسيت شمسيتها.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">its — غير عاقل</span>
+      <div class="ex-en">The cat licked <span class="highlight">its</span> paw.</div>
+      <div class="ex-ar">القطة لحست ودنها.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">its — غير عاقل</span>
+      <div class="ex-en">The car lost <span class="highlight">its</span> brakes.</div>
+      <div class="ex-ar">العربية اتعطل فرامليها.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">our — بتاعنا</span>
+      <div class="ex-en">We love <span class="highlight">our</span> country.</div>
+      <div class="ex-ar">إحنا بنحب بلدنا.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">our — بتاعنا</span>
+      <div class="ex-en"><span class="highlight">Our</span> teacher is amazing.</div>
+      <div class="ex-ar">مدرسنا رائع.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">their — بتاعهم</span>
+      <div class="ex-en"><span class="highlight">Their</span> car broke down.</div>
+      <div class="ex-ar">عربيتهم اتعطلت.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">their — بتاعهم</span>
+      <div class="ex-en">I love <span class="highlight">their</span> cooking style.</div>
+      <div class="ex-ar">أنا بحب طريقة طبخهم.</div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-title">🧠 اختبر نفسك — Possessive Adjectives</div>
+    <div id="paq1" class="quiz-q">
+      <p>Omar has a new car. <span class="blank"></span> car is red.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('paq1',this,'His')">Her</button>
+        <button class="quiz-opt" onclick="checkQ('paq1',this,'His')">His</button>
+        <button class="quiz-opt" onclick="checkQ('paq1',this,'His')">Their</button>
+        <button class="quiz-opt" onclick="checkQ('paq1',this,'His')">Its</button>
+      </div>
+      <div class="quiz-feedback" id="paq1-fb"></div>
+    </div>
+    <div id="paq2" class="quiz-q">
+      <p>We live in this house. This is <span class="blank"></span> house.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('paq2',this,'our')">their</button>
+        <button class="quiz-opt" onclick="checkQ('paq2',this,'our')">my</button>
+        <button class="quiz-opt" onclick="checkQ('paq2',this,'our')">our</button>
+        <button class="quiz-opt" onclick="checkQ('paq2',this,'our')">her</button>
+      </div>
+      <div class="quiz-feedback" id="paq2-fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== POSSESSIVE PRONOUNS =================== -->
+<div class="section" id="poss-pron">
+  <div class="sec-header">
+    <div class="sec-icon">💎</div>
+    <div class="sec-info">
+      <h2>ضمائر الملكية</h2>
+      <span class="en-name">Possessive Pronouns</span>
+      <p>بتيجي <strong>لوحدها بدون اسم بعدها</strong> — بتقول إن الحاجة ملك مين من غير ما تذكر الاسم تاني لأن اتذكر قبل كده. <strong>مفيش اسم بعدها!</strong></p>
+      <div class="importance-bar">
+        <span class="importance-label">الأهمية:</span>
+        <div class="bar-track"><div class="bar-fill" style="width:75%"></div></div>
+        <span class="importance-score">7.5 / 10 ⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">📐</span>
+    <div class="rule-text">
+      <strong>القاعدة:</strong> بتيجي <strong>لوحدها</strong> — مفيش اسم بعدها<br>
+      مثال: This ring is <strong>hers</strong>. / That car is <strong>mine</strong>.<br>
+      <strong>الفرق مع Possessive Adjective:</strong> her ring (+ اسم) vs this ring is hers (لوحده)
+    </div>
+  </div>
+
+  <table class="pronoun-table">
+    <thead>
+      <tr><th>الضمير</th><th>المعنى</th><th>يقابل</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="pron-en">mine</td><td class="pron-ar">بتاعتي</td><td class="pron-use">my + noun</td></tr>
+      <tr><td class="pron-en">yours</td><td class="pron-ar">بتاعتك/بتاعتكم</td><td class="pron-use">your + noun</td></tr>
+      <tr><td class="pron-en">his</td><td class="pron-ar">بتاعته</td><td class="pron-use">his + noun</td></tr>
+      <tr><td class="pron-en">hers</td><td class="pron-ar">بتاعتها</td><td class="pron-use">her + noun</td></tr>
+      <tr><td class="pron-en">ours</td><td class="pron-ar">بتاعتنا</td><td class="pron-use">our + noun</td></tr>
+      <tr><td class="pron-en">theirs</td><td class="pron-ar">بتاعتهم</td><td class="pron-use">their + noun</td></tr>
+    </tbody>
+  </table>
+
+  <div class="examples-title">⚡ المقارنة المهمة جداً — Adjective vs Pronoun</div>
+  <div class="compare-box">
+    <div class="compare-side left">
+      <h4>Possessive Adjective (+ اسم)</h4>
+      <ul>
+        <li>This is <span>my</span> pen.</li>
+        <li>That is <span>your</span> bag.</li>
+        <li>That is <span>his</span> car.</li>
+        <li>This is <span>her</span> ring.</li>
+        <li>This is <span>our</span> house.</li>
+        <li>Those are <span>their</span> shoes.</li>
+      </ul>
+    </div>
+    <div class="compare-side right">
+      <h4>Possessive Pronoun (لوحده)</h4>
+      <ul>
+        <li>This pen is <span>mine</span>.</li>
+        <li>That bag is <span>yours</span>.</li>
+        <li>That car is <span>his</span>.</li>
+        <li>This ring is <span>hers</span>.</li>
+        <li>This house is <span>ours</span>.</li>
+        <li>Those shoes are <span>theirs</span>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="examples-title">📝 أمثلة مفصلة على كل ضمير</div>
+  <div class="examples-grid">
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">mine — بتاعتي</span>
+      <div class="ex-en">That bag? It's <span class="highlight">mine</span>!</div>
+      <div class="ex-ar">الشنطة دي؟ بتاعتي!</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">mine — بتاعتي</span>
+      <div class="ex-en">Your phone is nice, but <span class="highlight">mine</span> is better.</div>
+      <div class="ex-ar">تليفونك حلو، بس بتاعتي أحسن.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">yours — بتاعتك</span>
+      <div class="ex-en">Is this seat <span class="highlight">yours</span>?</div>
+      <div class="ex-ar">الكرسي ده بتاعك؟</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">his — بتاعته</span>
+      <div class="ex-en">Don't touch that! It's <span class="highlight">his</span>.</div>
+      <div class="ex-ar">ماتلمسهاش! دي بتاعته.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">hers — بتاعتها</span>
+      <div class="ex-en">This ring is <span class="highlight">hers</span>. (زي الفيديو)</div>
+      <div class="ex-ar">الخاتم ده بتاعتها.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">hers — بتاعتها</span>
+      <div class="ex-en">I took my bag. That one is <span class="highlight">hers</span>.</div>
+      <div class="ex-ar">أنا اخدت شنطتي. دي بتاعتها.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">ours — بتاعتنا</span>
+      <div class="ex-en">This neighborhood is <span class="highlight">ours</span>.</div>
+      <div class="ex-ar">الحتة دي بتاعتنا.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">theirs — بتاعتهم</span>
+      <div class="ex-en">Those kids? The dog is <span class="highlight">theirs</span>.</div>
+      <div class="ex-ar">العيال دول؟ الكلب بتاعهم.</div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-title">🧠 اختبر نفسك — Possessive Pronouns</div>
+    <div id="ppq1" class="quiz-q">
+      <p>A: Is this your pen? B: Yes, it's <span class="blank"></span>.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('ppq1',this,'mine')">my</button>
+        <button class="quiz-opt" onclick="checkQ('ppq1',this,'mine')">mine</button>
+        <button class="quiz-opt" onclick="checkQ('ppq1',this,'mine')">me</button>
+        <button class="quiz-opt" onclick="checkQ('ppq1',this,'mine')">myself</button>
+      </div>
+      <div class="quiz-feedback" id="ppq1-fb"></div>
+    </div>
+    <div id="ppq2" class="quiz-q">
+      <p>Nour has a red bag. This blue bag is not <span class="blank"></span>.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('ppq2',this,'hers')">her</button>
+        <button class="quiz-opt" onclick="checkQ('ppq2',this,'hers')">she</button>
+        <button class="quiz-opt" onclick="checkQ('ppq2',this,'hers')">hers</button>
+        <button class="quiz-opt" onclick="checkQ('ppq2',this,'hers')">herself</button>
+      </div>
+      <div class="quiz-feedback" id="ppq2-fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== REFLEXIVE PRONOUNS =================== -->
+<div class="section" id="reflexive">
+  <div class="sec-header">
+    <div class="sec-icon">🪞</div>
+    <div class="sec-info">
+      <h2>الضمائر الانعكاسية</h2>
+      <span class="en-name">Reflexive Pronouns</span>
+      <p>بتستخدمها في حالتين: لما <strong>الفاعل والمفعول نفس الشخص</strong> (الاستخدام العادي)، أو للتأكيد والتعظيم إن حد عمل حاجة <strong>بنفسه / شخصياً</strong> (الاستخدام التعظيمي).</p>
+      <div class="importance-bar">
+        <span class="importance-label">الأهمية:</span>
+        <div class="bar-track"><div class="bar-fill" style="width:80%"></div></div>
+        <span class="importance-score">8 / 10 ⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <table class="pronoun-table">
+    <thead>
+      <tr><th>الضمير</th><th>المعنى</th><th>من؟</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="pron-en">myself</td><td class="pron-ar">نفسي</td><td class="pron-use">أنا ← نفسي</td></tr>
+      <tr><td class="pron-en">yourself</td><td class="pron-ar">نفسك</td><td class="pron-use">أنت (واحد) ← نفسك</td></tr>
+      <tr><td class="pron-en">himself</td><td class="pron-ar">نفسه</td><td class="pron-use">هو ← نفسه</td></tr>
+      <tr><td class="pron-en">herself</td><td class="pron-ar">نفسها</td><td class="pron-use">هي ← نفسها</td></tr>
+      <tr><td class="pron-en">itself</td><td class="pron-ar">نفسه (غير عاقل)</td><td class="pron-use">It ← نفسه/ها</td></tr>
+      <tr><td class="pron-en">ourselves</td><td class="pron-ar">أنفسنا</td><td class="pron-use">نحن ← أنفسنا</td></tr>
+      <tr><td class="pron-en">yourselves</td><td class="pron-ar">أنفسكم</td><td class="pron-use">أنتم ← أنفسكم</td></tr>
+      <tr><td class="pron-en">themselves</td><td class="pron-ar">أنفسهم</td><td class="pron-use">هم ← أنفسهم</td></tr>
+    </tbody>
+  </table>
+
+  <div class="rule-box">
+    <span class="rule-icon">1️⃣</span>
+    <div class="rule-text">
+      <strong>الاستخدام الأول — العادي (Reflexive):</strong> لما الفاعل والمفعول نفس الشخص<br>
+      مثال: He talks to <strong>himself</strong>. (هو بيتكلم مع نفسه) — زي الفيديو<br>
+      مثال: I hurt <strong>myself</strong>. (أنا آذيت نفسي)
+    </div>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">2️⃣</span>
+    <div class="rule-text">
+      <strong>الاستخدام الثاني — التعظيمي (Emphatic):</strong> للتأكيد إن حد عمل حاجة شخصياً<br>
+      مثال: The president <strong>himself</strong> was here. (الرئيس شخصياً كان هنا) — زي الفيديو<br>
+      مثال: She <strong>herself</strong> cooked this. (هي بنفسها طبخت ده)
+    </div>
+  </div>
+
+  <div class="examples-title">📝 أمثلة الاستخدام العادي (الفاعل = المفعول)</div>
+  <div class="examples-grid">
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">myself — نفسي</span>
+      <div class="ex-en">I hurt <span class="highlight">myself</span> while cooking.</div>
+      <div class="ex-ar">أنا أذيت نفسي وأنا بطبخ.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">myself — نفسي</span>
+      <div class="ex-en">I taught <span class="highlight">myself</span> English.</div>
+      <div class="ex-ar">أنا علمت نفسي إنجليزي.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">yourself — نفسك</span>
+      <div class="ex-en">Be careful! Don't cut <span class="highlight">yourself</span>.</div>
+      <div class="ex-ar">خد بالك! ماتجرحش نفسك.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">yourself — نفسك</span>
+      <div class="ex-en">You should believe in <span class="highlight">yourself</span>.</div>
+      <div class="ex-ar">لازم تصدق في نفسك.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">himself — نفسه</span>
+      <div class="ex-en">He talks to <span class="highlight">himself</span>. (زي الفيديو)</div>
+      <div class="ex-ar">هو بيتكلم مع نفسه.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">himself — نفسه</span>
+      <div class="ex-en">He looked at <span class="highlight">himself</span> in the mirror.</div>
+      <div class="ex-ar">هو بص في المرايا لنفسه.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">herself — نفسها</span>
+      <div class="ex-en">She made <span class="highlight">herself</span> a cup of tea.</div>
+      <div class="ex-ar">هي عملت لنفسها كوباية شاي.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">herself — نفسها</span>
+      <div class="ex-en">She introduced <span class="highlight">herself</span> to everyone.</div>
+      <div class="ex-ar">هي عرفت بنفسها قدام الكل.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">itself — نفسه</span>
+      <div class="ex-en">The door closed by <span class="highlight">itself</span>.</div>
+      <div class="ex-ar">الباب اتقفل لوحده.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">ourselves — أنفسنا</span>
+      <div class="ex-en">We cooked the food <span class="highlight">ourselves</span>.</div>
+      <div class="ex-ar">إحنا طبخنا الأكل بأنفسنا.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">themselves — أنفسهم</span>
+      <div class="ex-en">They enjoyed <span class="highlight">themselves</span> at the party.</div>
+      <div class="ex-ar">هم استمتعوا بنفسهم في الحفلة.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">yourselves — أنفسكم</span>
+      <div class="ex-en">Help <span class="highlight">yourselves</span> to the food!</div>
+      <div class="ex-ar">كلوا الأكل بحريتكم!</div>
+    </div>
+  </div>
+
+  <div class="examples-title">📝 أمثلة الاستخدام التعظيمي (شخصياً / بنفسه)</div>
+  <div class="examples-grid">
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">himself — شخصياً</span>
+      <div class="ex-en">The president <span class="highlight">himself</span> was here. (زي الفيديو)</div>
+      <div class="ex-ar">الرئيس شخصياً كان هنا.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">myself — بنفسي</span>
+      <div class="ex-en">I <span class="highlight">myself</span> built this table.</div>
+      <div class="ex-ar">أنا بنفسي بنيت الترابيزة دي.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">herself — بنفسها</span>
+      <div class="ex-en">She <span class="highlight">herself</span> told me the news.</div>
+      <div class="ex-ar">هي بنفسها قالتلي الخبر.</div>
+    </div>
+    <div class="ex-card">
+      <span class="ex-pronoun-tag">himself — بنفسه</span>
+      <div class="ex-en">He fixed the car <span class="highlight">himself</span>.</div>
+      <div class="ex-ar">هو صلح العربية بنفسه.</div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-title">🧠 اختبر نفسك — Reflexive Pronouns</div>
+    <div id="rq1" class="quiz-q">
+      <p>Be careful with the knife! Don't cut <span class="blank"></span>!</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('rq1',this,'yourself')">you</button>
+        <button class="quiz-opt" onclick="checkQ('rq1',this,'yourself')">your</button>
+        <button class="quiz-opt" onclick="checkQ('rq1',this,'yourself')">yourself</button>
+        <button class="quiz-opt" onclick="checkQ('rq1',this,'yourself')">yours</button>
+      </div>
+      <div class="quiz-feedback" id="rq1-fb"></div>
+    </div>
+    <div id="rq2" class="quiz-q">
+      <p>The kids made breakfast by <span class="blank"></span>. (no help from anyone)</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('rq2',this,'themselves')">them</button>
+        <button class="quiz-opt" onclick="checkQ('rq2',this,'themselves')">their</button>
+        <button class="quiz-opt" onclick="checkQ('rq2',this,'themselves')">theirs</button>
+        <button class="quiz-opt" onclick="checkQ('rq2',this,'themselves')">themselves</button>
+      </div>
+      <div class="quiz-feedback" id="rq2-fb"></div>
+    </div>
+    <div id="rq3" class="quiz-q">
+      <p>I don't need help. I can do it <span class="blank"></span>.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQ('rq3',this,'myself')">me</button>
+        <button class="quiz-opt" onclick="checkQ('rq3',this,'myself')">I</button>
+        <button class="quiz-opt" onclick="checkQ('rq3',this,'myself')">mine</button>
+        <button class="quiz-opt" onclick="checkQ('rq3',this,'myself')">myself</button>
+      </div>
+      <div class="quiz-feedback" id="rq3-fb"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end main -->
+
+<script>
+  const answers = {
+    'sq1': 'He', 'sq2': 'We', 'sq3': 'It',
+    'oq1': 'him', 'oq2': 'us', 'oq3': 'it',
+    'paq1': 'His', 'paq2': 'our',
+    'ppq1': 'mine', 'ppq2': 'hers',
+    'rq1': 'yourself', 'rq2': 'themselves', 'rq3': 'myself'
+  };
+  const feedbacks = {
+    correct: ['ممتاز! 🎉', 'صح تماماً! ✅', 'برافو! 🌟', 'عظيم! 💪'],
+    wrong: {
+      'sq1': 'Ahmed = male → He هو صح!',
+      'sq2': 'Sara + I = we إحنا',
+      'sq3': 'The dog = animal (غير عاقل) → It',
+      'oq1': 'بعد الفعل "know" نستخدم object pronoun → him',
+      'oq2': 'بعد "for" حرف جر نستخدم object pronoun → us',
+      'oq3': 'phone = شيء (غير عاقل) → it',
+      'paq1': 'Omar = male → his car بتاعته',
+      'paq2': 'We (إحنا) → our house بيتنا',
+      'ppq1': 'بعد "it\'s" لوحده مفيش اسم بعده → mine',
+      'ppq2': 'لوحده مفيش اسم بعده → hers',
+      'rq1': 'الفاعل you → yourself',
+      'rq2': 'الفاعل they → themselves',
+      'rq3': 'الفاعل I → myself'
+    }
+  };
+
+  function checkQ(qid, btn, correct) {
+    const container = document.getElementById(qid);
+    const opts = container.querySelectorAll('.quiz-opt');
+    opts.forEach(o => o.disabled = true);
+    const fb = document.getElementById(qid + '-fb');
+    if (btn.textContent.trim() === correct) {
+      btn.classList.add('correct');
+      const msgs = feedbacks.correct;
+      fb.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+      fb.style.color = '#2ecc71';
+    } else {
+      btn.classList.add('wrong');
+      opts.forEach(o => { if (o.textContent.trim() === correct) o.classList.add('correct'); });
+      fb.textContent = '❌ ' + feedbacks.wrong[qid];
+      fb.style.color = '#e74c3c';
+    }
+  }
+
+  function showTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.hero-pill').forEach(p => p.classList.remove('active'));
+    const sec = document.getElementById(id);
+    if (sec) { sec.classList.add('active'); }
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      if (b.textContent.includes(getTabLabel(id))) b.classList.add('active');
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function getTabLabel(id) {
+    const map = { overview: 'نظرة', subject: 'الفاعل', object: 'المفعول', 'poss-adj': 'الملكية', 'poss-pron': 'ضمائر الملكية', reflexive: 'الانعكاسية' };
+    return map[id] || '';
+  }
+
+  // Animate bars on load
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.bar-fill, .ov-bar-fill').forEach(b => {
+        const w = b.style.width; b.style.width = '0'; 
+        setTimeout(() => b.style.width = w, 100);
+      });
+    }, 300);
+  });
+</script>
+</body>
+</html>

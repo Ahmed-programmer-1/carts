@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قواعد الإنجليزية الشاملة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --navy:#0d1b2e;--navy2:#162336;--blue:#1565c0;
+  --accent:#0288d1;--accent2:#29b6f6;
+  --green:#2e7d32;--gold:#f57f17;--red:#c62828;--purple:#6a1b9a;
+  --bg:#f0f4f8;--card:#fff;--border:#e2e8f0;
+  --text:#1a202c;--muted:#64748b;--teal:#00897b;
+  --sh:0 2px 10px rgba(0,0,0,0.07);--sh2:0 6px 24px rgba(0,0,0,0.12);
+}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+.navbar{background:var(--navy);height:56px;padding:0 14px;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:9px;color:#fff;font-size:16px;font-weight:800}
+.nav-logo-icon{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:17px}
+.nav-logo span{color:var(--accent2)}
+.nav-btns{display:flex;gap:7px}
+.nav-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.nav-btn:hover{background:rgba(255,255,255,0.16)}
+.s-ov{position:fixed;inset:0;z-index:500;background:rgba(13,27,42,0.85);display:none;align-items:flex-start;justify-content:center;padding-top:70px;backdrop-filter:blur(3px)}
+.s-ov.open{display:flex}
+.s-box{background:#fff;border-radius:14px;width:min(92%,520px);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.s-row{display:flex;align-items:center;gap:10px;padding:13px 15px;border-bottom:1px solid var(--border)}
+.s-row span{font-size:18px;color:var(--muted)}
+.s-inp{flex:1;border:none;outline:none;font-family:'Tajawal',sans-serif;font-size:15px;color:var(--text);direction:rtl}
+.s-inp::placeholder{color:var(--muted)}
+.s-close{background:none;border:none;font-size:18px;color:var(--muted);cursor:pointer}
+.s-results{max-height:340px;overflow-y:auto}
+.s-item{display:flex;align-items:center;gap:11px;padding:11px 15px;cursor:pointer;transition:background .15s;border-bottom:1px solid #f1f5f9}
+.s-item:hover{background:#f8fafc}
+.s-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.s-title{font-size:13px;font-weight:700}
+.s-sub{font-size:11px;color:var(--muted)}
+.s-empty{padding:28px;text-align:center;color:var(--muted);font-size:13px}
+.sb-ov{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s}
+.sb-ov.open{opacity:1;pointer-events:all}
+.sidebar{position:fixed;right:0;top:0;bottom:0;width:278px;background:var(--navy);z-index:350;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-6px 0 24px rgba(0,0,0,0.3)}
+.sidebar.open{transform:translateX(0)}
+.sb-head{background:var(--navy2);padding:14px 15px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0}
+.sb-head-title{color:#fff;font-size:14px;font-weight:800}
+.sb-x{background:rgba(255,255,255,0.08);border:none;color:rgba(255,255,255,0.7);font-size:17px;width:30px;height:30px;border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.sb-scroll{overflow-y:auto;flex:1}
+.sb-sec-title{color:rgba(255,255,255,0.3);font-size:10px;font-weight:800;padding:10px 14px 3px;text-transform:uppercase;letter-spacing:1.5px}
+.sb-item{display:flex;align-items:center;gap:9px;padding:9px 14px;color:rgba(255,255,255,0.65);cursor:pointer;font-size:13px;font-weight:600;transition:all .18s;border-right:3px solid transparent}
+.sb-item:hover{background:rgba(255,255,255,0.06);color:#fff}
+.sb-item.active{background:rgba(2,136,209,0.14);color:#fff;border-right-color:var(--accent2)}
+.sb-icon{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.sb-lbl{flex:1}
+.sb-bdg{font-size:9px;padding:1px 5px;border-radius:7px;font-weight:800;flex-shrink:0}
+.beg{background:rgba(46,125,50,0.25);color:#81c784}
+.mid{background:rgba(245,127,23,0.25);color:#ffb74d}
+.adv{background:rgba(198,40,40,0.25);color:#ef9a9a}
+.page{display:none;padding-bottom:80px}
+.page.active{display:block;animation:fadeUp .25s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.p-hero{background:var(--navy);padding:0 15px;position:relative;overflow:hidden}
+.p-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 120% 80% at 80% 50%,rgba(2,136,209,0.13) 0%,transparent 65%);pointer-events:none}
+.p-hero-inner{position:relative;z-index:1;padding:20px 0 0;display:flex;align-items:flex-start;gap:13px}
+.p-hero-icon{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.p-hero-title{color:#fff;font-size:19px;font-weight:900;margin-bottom:3px}
+.p-hero-sub{color:rgba(255,255,255,0.55);font-size:12px;line-height:1.6}
+.p-hero-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.p-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:9px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6)}
+.p-actions{position:relative;z-index:1;display:flex;gap:8px;padding:12px 0 16px}
+.p-btn{flex:1;padding:9px 10px;border-radius:10px;border:1.5px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.8);font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center}
+.p-btn:hover{background:rgba(255,255,255,0.14);color:#fff}
+.p-btn.is-done{background:rgba(34,197,94,0.2);border-color:#22c55e;color:#86efac}
+.p-btn.is-fav{background:rgba(245,158,11,0.2);border-color:#f59e0b;color:#fcd34d}
+.lesson-body{padding:12px 13px}
+.acc{background:var(--card);border-radius:13px;border:1.5px solid var(--border);margin-bottom:9px;overflow:hidden;box-shadow:var(--sh)}
+.acc.open{border-color:rgba(2,136,209,0.22)}
+.acc-head{display:flex;align-items:center;gap:11px;padding:13px 15px;cursor:pointer;user-select:none;transition:background .18s}
+.acc-head:hover{background:#fafcff}
+.acc-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.acc-info{flex:1}
+.acc-title{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:1px}
+.acc-sub{font-size:11px;color:var(--muted)}
+.acc-arr{font-size:19px;color:var(--muted);transition:transform .28s;flex-shrink:0;margin-right:auto;margin-left:0}
+.acc.open .acc-arr{transform:rotate(90deg);color:var(--accent)}
+.acc-body{display:none;padding:0 15px 16px}
+.acc.open .acc-body{display:block}
+.lesson{line-height:1.9;font-size:14px;direction:rtl}
+.lesson h3{font-size:14px;font-weight:800;color:var(--navy);margin:15px 0 7px;padding-right:9px;border-right:4px solid var(--accent)}
+.lesson h4{font-size:13px;font-weight:800;color:var(--blue);margin:11px 0 5px}
+.lesson p{color:#374151;margin-bottom:7px}
+.formula{background:var(--navy);color:#fff;border-radius:11px;padding:12px 14px;margin:9px 0;font-family:'Poppins',sans-serif;font-size:12px;direction:ltr;text-align:left;line-height:2}
+.formula .v{color:var(--accent2);font-weight:700}
+.formula .o{color:#ffd54f}
+.formula .ar{font-family:'Tajawal',sans-serif;direction:rtl;color:rgba(255,255,255,0.5);font-size:11px;display:block;margin-top:3px}
+.ex{background:linear-gradient(135deg,#e3f2fd,#e8f5e9);border-right:4px solid var(--accent);border-radius:0 11px 11px 0;padding:10px 12px;margin:7px 0}
+.ex.neg{background:linear-gradient(135deg,#fff3e0,#fff8e1);border-right-color:var(--gold)}
+.ex.q{background:linear-gradient(135deg,#f3e5f5,#ede7f6);border-right-color:var(--purple)}
+.ex .en{font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;color:var(--navy);direction:ltr;text-align:left;margin-bottom:2px}
+.ex .ar{font-size:12px;color:var(--muted);text-align:right}
+.ex .nt{font-size:11px;color:var(--teal);font-weight:700;margin-top:3px;text-align:right}
+.rule{background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:11px 13px;margin:9px 0}
+.rule .rt{font-size:11px;font-weight:800;color:#b45309;margin-bottom:5px}
+.rule p{color:#78350f;font-size:13px;margin:0}
+.tip{background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:11px 13px;margin:9px 0}
+.tip .tt{font-size:11px;font-weight:800;color:#166534;margin-bottom:5px}
+.tip p{color:#14532d;font-size:13px;margin:0}
+.warn{background:#fff1f2;border:1.5px solid #fecaca;border-radius:10px;padding:11px 13px;margin:9px 0}
+.warn p{color:#991b1b;font-size:13px;margin:0}
+.tbl{overflow-x:auto;margin:9px 0;border-radius:10px;box-shadow:var(--sh)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:var(--navy);color:#fff;padding:8px 10px;text-align:right;font-weight:700;font-size:11px}
+td{padding:8px 10px;border-bottom:1px solid #f1f5f9;color:#374151;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:#f8fafc}
+td .en{font-family:'Poppins',sans-serif;font-weight:600;direction:ltr;display:inline-block}
+td .em{color:var(--accent);font-weight:800}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:9px 0}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:9px 0}
+.mc{background:#f8fafc;border:1.5px solid var(--border);border-radius:9px;padding:9px 11px;text-align:center}
+.mc .en{font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;color:var(--navy);display:block}
+.mc .ar{font-size:11px;color:var(--muted);display:block;margin-top:1px}
+.mc .nt{font-size:10px;color:var(--teal);display:block;margin-top:1px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:9px 0}
+.cmp-c{border-radius:10px;padding:11px 12px}
+.cmp-c.good{background:#f0fdf4;border:1.5px solid #86efac}
+.cmp-c.bad{background:#fff1f2;border:1.5px solid #fecaca}
+.cmp-c .cl{font-size:11px;font-weight:800;margin-bottom:5px}
+.cmp-c.good .cl{color:#166534}
+.cmp-c.bad .cl{color:#991b1b}
+.cmp-c .en{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;direction:ltr;display:block}
+.cmp-c .ar{font-size:11px;color:var(--muted);display:block;margin-top:2px}
+.bdg{display:inline-block;padding:2px 7px;border-radius:7px;font-size:11px;font-weight:700;margin:2px}
+.b-bl{background:#dbeafe;color:#1d4ed8}
+.b-gr{background:#dcfce7;color:#166534}
+.b-re{background:#fee2e2;color:#991b1b}
+.b-go{background:#fef3c7;color:#b45309}
+.b-te{background:#ccfbf1;color:#0f766e}
+.b-pu{background:#f3e8ff;color:#7c3aed}
+.home-banner{background:linear-gradient(135deg,var(--navy) 0%,#1a2f4a 100%);padding:24px 15px 20px;text-align:center;position:relative;overflow:hidden}
+.home-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 50% 100%,rgba(2,136,209,0.14) 0%,transparent 65%)}
+.home-banner h1{color:#fff;font-size:22px;font-weight:900;position:relative;z-index:1;margin-bottom:5px}
+.home-banner h1 span{color:var(--accent2)}
+.home-banner p{color:rgba(255,255,255,0.55);font-size:12px;position:relative;z-index:1;line-height:1.6}
+.home-stats{display:grid;grid-template-columns:repeat(3,1fr);background:var(--navy2);border-bottom:1px solid rgba(255,255,255,0.07)}
+.hs{padding:11px 8px;text-align:center;border-left:1px solid rgba(255,255,255,0.07)}
+.hs:last-child{border-left:none}
+.hs-n{font-size:20px;font-weight:900;color:var(--accent2);line-height:1}
+.hs-l{font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px}
+.home-levels{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:13px}
+.lvl-card{border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;transition:all .2s;border:2px solid transparent}
+.lvl-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,0.15)}
+.lvl-card .lci{font-size:28px;margin-bottom:7px}
+.lvl-card .lcn{font-size:13px;font-weight:900;color:#fff;margin-bottom:2px}
+.lvl-card .lcs{font-size:10px;color:rgba(255,255,255,0.65)}
+.lvl-card .lcc{font-size:11px;color:rgba(255,255,255,0.8);font-weight:700;margin-top:5px}
+.lv-e{background:linear-gradient(135deg,#1b5e20,#2e7d32)}
+.lv-m{background:linear-gradient(135deg,#e65100,#f57f17)}
+.lv-h{background:linear-gradient(135deg,#1a237e,#283593)}
+.section{padding:0 13px 6px}
+.sec-title{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:9px;margin-top:14px;padding-right:3px}
+.tc{background:var(--card);border-radius:13px;border:1.5px solid var(--border);padding:12px;margin-bottom:8px;display:flex;align-items:center;gap:11px;cursor:pointer;transition:all .2s;box-shadow:var(--sh)}
+.tc:hover{transform:translateX(-3px);box-shadow:var(--sh2);border-color:rgba(2,136,209,0.28)}
+.tc-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0}
+.tc-info{flex:1}
+.tc-title{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:2px}
+.tc-sub{font-size:11px;color:var(--muted)}
+.tc-right{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.tc-badge{font-size:9px;font-weight:800;padding:2px 7px;border-radius:7px}
+.done-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;display:none}
+.done-dot.on{display:block}
+.verb-card{background:var(--card);border-radius:13px;border:1.5px solid var(--border);padding:12px;margin-bottom:8px;display:flex;align-items:center;gap:11px;cursor:pointer;transition:all .2s;box-shadow:var(--sh)}
+.verb-card:hover{transform:translateX(-3px);box-shadow:var(--sh2);border-color:rgba(2,136,209,0.28)}
+.verb-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0}
+.verb-info{flex:1}
+.verb-en{font-size:15px;font-weight:800;color:var(--navy);font-family:'Poppins',sans-serif;margin-bottom:2px}
+.verb-sub{font-size:11px;color:var(--muted)}
+.lv-hero{padding:24px 15px 18px;text-align:center;position:relative;overflow:hidden}
+.lv-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(255,255,255,0.08) 0%,transparent 70%)}
+.lv-hero-icon{font-size:48px;margin-bottom:9px;position:relative;z-index:1}
+.lv-hero h1{font-size:20px;font-weight:900;color:#fff;position:relative;z-index:1;margin-bottom:3px}
+.lv-hero p{font-size:12px;color:rgba(255,255,255,0.6);position:relative;z-index:1}
+.lv-prog-bar{background:rgba(255,255,255,0.12);border-radius:20px;height:7px;margin:12px 15px 0;overflow:hidden;position:relative;z-index:1}
+.lv-prog-fill{height:100%;border-radius:20px;background:rgba(255,255,255,0.7);transition:width .5s cubic-bezier(.4,0,.2,1)}
+.lv-prog-lbl{font-size:11px;color:rgba(255,255,255,0.55);padding:5px 15px 0;position:relative;z-index:1;display:flex;justify-content:space-between}
+.fav-empty{text-align:center;padding:56px 20px;color:var(--muted)}
+.fav-empty .fei{font-size:46px;margin-bottom:11px}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);display:flex;z-index:200;box-shadow:0 -3px 16px rgba(0,0,0,0.07)}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7px 4px;cursor:pointer;color:var(--muted);border-top:2px solid transparent;font-size:10px;font-weight:700;transition:all .18s}
+.bn .bni{font-size:19px;margin-bottom:2px;transition:transform .2s}
+.bn:hover .bni{transform:translateY(-2px)}
+.bn.active{color:var(--accent);border-top-color:var(--accent)}
+.toast{position:fixed;top:65px;left:50%;transform:translateX(-50%) translateY(-8px);background:var(--navy);color:#fff;padding:8px 16px;border-radius:18px;font-size:12px;font-weight:700;opacity:0;transition:all .28s;pointer-events:none;z-index:999;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.2)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.ic1{background:linear-gradient(135deg,#e3f2fd,#bbdefb)}
+.ic2{background:linear-gradient(135deg,#e8f5e9,#c8e6c9)}
+.ic3{background:linear-gradient(135deg,#fff3e0,#ffe0b2)}
+.ic4{background:linear-gradient(135deg,#f3e5f5,#e1bee7)}
+.ic5{background:linear-gradient(135deg,#e0f7fa,#b2ebf2)}
+.ic6{background:linear-gradient(135deg,#fff8e1,#ffecb3)}
+.ic7{background:linear-gradient(135deg,#fce4ec,#f8bbd0)}
+.ic8{background:linear-gradient(135deg,#e8eaf6,#c5cae9)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+</style>
+</head>
+<body>
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="nav-logo"><div class="nav-logo-icon">📚</div>قواعد <span>الإنجليزية</span></div>
+  <div class="nav-btns">
+    <button class="nav-btn" onclick="openSearch()">🔍</button>
+    <button class="nav-btn" onclick="openSB()">☰</button>
+  </div>
+</div>
+<!-- SEARCH -->
+<div class="s-ov" id="sOv" onclick="closeSO(event)">
+  <div class="s-box">
+    <div class="s-row"><span>🔍</span><input class="s-inp" id="sInp" placeholder="ابحث عن قاعدة..." oninput="doSearch(this.value)"><button class="s-close" onclick="closeSearch()">✕</button></div>
+    <div class="s-results" id="sRes"><div class="s-empty">ابدأ الكتابة للبحث...</div></div>
+  </div>
+</div>
+<!-- SIDEBAR -->
+<div class="sb-ov" id="sbOv" onclick="closeSB()"></div>
+<div class="sidebar" id="sb">
+  <div class="sb-head"><span class="sb-head-title">📚 قائمة الدروس</span><button class="sb-x" onclick="closeSB()">✕</button></div>
+  <div class="sb-scroll">
+    <div class="sb-sec-title">الرئيسية</div>
+    <div class="sb-item" onclick="nav('home')"><div class="sb-icon ic1">🏠</div><div class="sb-lbl">الصفحة الرئيسية</div></div>
+    <div class="sb-item" onclick="nav('favorites')"><div class="sb-icon ic6">⭐</div><div class="sb-lbl">المفضلة</div></div>
+    <div class="sb-sec-title">📚 المناهج</div>
+    <div class="sb-item" onclick="nav('lv-easy')"><div class="sb-icon lv-e" style="border-radius:6px">🌱</div><div class="sb-lbl">مبتدئ A1/A2</div></div>
+    <div class="sb-item" onclick="nav('lv-mid')"><div class="sb-icon lv-m" style="border-radius:6px">🔥</div><div class="sb-lbl">متوسط A2/B1</div></div>
+    <div class="sb-item" onclick="nav('lv-hard')"><div class="sb-icon lv-h" style="border-radius:6px">💎</div><div class="sb-lbl">متقدم B1/B2</div></div>
+    <div class="sb-sec-title">⚡ الأفعال</div>
+    <div class="sb-item" onclick="nav('verb-be')"><div class="sb-icon ic2">⚡</div><div class="sb-lbl">فعل Be</div></div>
+    <div class="sb-item" onclick="nav('verb-have')"><div class="sb-icon ic3">✋</div><div class="sb-lbl">فعل Have</div></div>
+    <div class="sb-item" onclick="nav('verb-do')"><div class="sb-icon ic4">🔧</div><div class="sb-lbl">فعل Do</div></div>
+    <div class="sb-item" onclick="nav('verb-get')"><div class="sb-icon ic5">🎯</div><div class="sb-lbl">فعل Get</div></div>
+    <div class="sb-item" onclick="nav('verb-mdo')"><div class="sb-icon ic6">⚖️</div><div class="sb-lbl">Make vs Do</div></div>
+    <div class="sb-item" onclick="nav('verb-take')"><div class="sb-icon ic7">📸</div><div class="sb-lbl">فعل Take</div></div>
+    <div class="sb-item" onclick="nav('verb-go')"><div class="sb-icon ic8">🚶</div><div class="sb-lbl">فعل Go</div></div>
+    <div class="sb-item" onclick="nav('verb-come')"><div class="sb-icon ic1">🏠</div><div class="sb-lbl">فعل Come</div></div>
+    <div class="sb-item" onclick="nav('verb-lmh')"><div class="sb-icon ic2">💪</div><div class="sb-lbl">Let/Make/Help</div></div>
+    <div class="sb-sec-title">🟢 مبتدئ A1/A2</div>
+    <div class="sb-item" onclick="nav('sentence')"><div class="sb-icon ic1">🏗️</div><div class="sb-lbl">تركيب الجملة</div><span class="sb-bdg beg">A1</span></div>
+    <div class="sb-item" onclick="nav('ps')"><div class="sb-icon ic4">📅</div><div class="sb-lbl">المضارع البسيط</div><span class="sb-bdg beg">A1</span></div>
+    <div class="sb-item" onclick="nav('pc')"><div class="sb-icon ic5">🔄</div><div class="sb-lbl">المضارع المستمر</div><span class="sb-bdg beg">A1</span></div>
+    <div class="sb-item" onclick="nav('pronouns')"><div class="sb-icon ic1">👤</div><div class="sb-lbl">الضمائر</div><span class="sb-bdg beg">A1</span></div>
+    <div class="sb-item" onclick="nav('articles')"><div class="sb-icon ic6">🏷️</div><div class="sb-lbl">A / An / The</div><span class="sb-bdg beg">A1</span></div>
+    <div class="sb-item" onclick="nav('plural')"><div class="sb-icon ic7">📝</div><div class="sb-lbl">الجمع</div><span class="sb-bdg beg">A1</span></div>
+    <div class="sb-item" onclick="nav('countable')"><div class="sb-icon ic8">📦</div><div class="sb-lbl">معدود / غير معدود</div><span class="sb-bdg beg">A2</span></div>
+    <div class="sb-item" onclick="nav('adjectives')"><div class="sb-icon ic2">🎨</div><div class="sb-lbl">الصفات</div><span class="sb-bdg beg">A1</span></div>
+    <div class="sb-item" onclick="nav('prepositions')"><div class="sb-icon ic3">📍</div><div class="sb-lbl">حروف الجر</div><span class="sb-bdg beg">A1</span></div>
+    <div class="sb-item" onclick="nav('some-any')"><div class="sb-icon ic8">🔵</div><div class="sb-lbl">Some / Any</div><span class="sb-bdg beg">A2</span></div>
+    <div class="sb-item" onclick="nav('much-many')"><div class="sb-icon ic1">📊</div><div class="sb-lbl">Much / Many</div><span class="sb-bdg beg">A2</span></div>
+    <div class="sb-item" onclick="nav('do-q')"><div class="sb-icon ic2">❔</div><div class="sb-lbl">أسئلة Do/Does/Did</div><span class="sb-bdg beg">A2</span></div>
+    <div class="sb-item" onclick="nav('wh-q')"><div class="sb-icon ic3">❓</div><div class="sb-lbl">أسئلة WH</div><span class="sb-bdg beg">A2</span></div>
+    <div class="sb-item" onclick="nav('negation')"><div class="sb-icon ic4">🚫</div><div class="sb-lbl">النفي الشامل</div><span class="sb-bdg beg">A2</span></div>
+    <div class="sb-item" onclick="nav('short-ans')"><div class="sb-icon ic5">💬</div><div class="sb-lbl">Short Answers</div><span class="sb-bdg beg">A2</span></div>
+    <div class="sb-sec-title">🟡 متوسط A2/B1</div>
+    <div class="sb-item" onclick="nav('past')"><div class="sb-icon ic4">⏮️</div><div class="sb-lbl">الماضي البسيط</div><span class="sb-bdg mid">A2</span></div>
+    <div class="sb-item" onclick="nav('past-c')"><div class="sb-icon ic5">🔁</div><div class="sb-lbl">الماضي المستمر</div><span class="sb-bdg mid">B1</span></div>
+    <div class="sb-item" onclick="nav('future')"><div class="sb-icon ic6">🚀</div><div class="sb-lbl">المستقبل</div><span class="sb-bdg mid">A2</span></div>
+    <div class="sb-item" onclick="nav('modals')"><div class="sb-icon ic7">🎯</div><div class="sb-lbl">الأفعال الناقصة</div><span class="sb-bdg mid">B1</span></div>
+    <div class="sb-item" onclick="nav('comp')"><div class="sb-icon ic2">⚖️</div><div class="sb-lbl">المقارنة والتفضيل</div><span class="sb-bdg mid">B1</span></div>
+    <div class="sb-item" onclick="nav('ing')"><div class="sb-icon ic3">➕</div><div class="sb-lbl">استخدامات ING</div><span class="sb-bdg mid">B1</span></div>
+    <div class="sb-item" onclick="nav('adverbs')"><div class="sb-icon ic4">⚡</div><div class="sb-lbl">الظروف</div><span class="sb-bdg mid">B1</span></div>
+    <div class="sb-item" onclick="nav('conj')"><div class="sb-icon ic5">🔗</div><div class="sb-lbl">أدوات الربط</div><span class="sb-bdg mid">B1</span></div>
+    <div class="sb-item" onclick="nav('tag-q')"><div class="sb-icon ic6">🏷️</div><div class="sb-lbl">Question Tags</div><span class="sb-bdg mid">B1</span></div>
+    <div class="sb-item" onclick="nav('few-little')"><div class="sb-icon ic7">🔢</div><div class="sb-lbl">Few / Little</div><span class="sb-bdg mid">B1</span></div>
+    <div class="sb-item" onclick="nav('used-to')"><div class="sb-icon ic5">🔙</div><div class="sb-lbl">Used To</div><span class="sb-bdg mid">B1</span></div>
+    <div class="sb-sec-title">🔴 متقدم B1/B2</div>
+    <div class="sb-item" onclick="nav('pperf')"><div class="sb-icon ic6">✅</div><div class="sb-lbl">المضارع التام</div><span class="sb-bdg adv">B1</span></div>
+    <div class="sb-item" onclick="nav('past-perf')"><div class="sb-icon ic7">⏳</div><div class="sb-lbl">الماضي التام</div><span class="sb-bdg adv">B2</span></div>
+    <div class="sb-item" onclick="nav('pperf-c')"><div class="sb-icon ic1">🔁</div><div class="sb-lbl">المضارع التام المستمر</div><span class="sb-bdg adv">B1</span></div>
+    <div class="sb-item" onclick="nav('passive')"><div class="sb-icon ic8">🔃</div><div class="sb-lbl">المبني للمجهول</div><span class="sb-bdg adv">B1</span></div>
+    <div class="sb-item" onclick="nav('cond')"><div class="sb-icon ic1">🔀</div><div class="sb-lbl">جمل الشرط</div><span class="sb-bdg adv">B2</span></div>
+    <div class="sb-item" onclick="nav('reported')"><div class="sb-icon ic2">💬</div><div class="sb-lbl">الكلام المنقول</div><span class="sb-bdg adv">B2</span></div>
+    <div class="sb-item" onclick="nav('relative')"><div class="sb-icon ic3">🔗</div><div class="sb-lbl">الجمل الوصفية</div><span class="sb-bdg adv">B2</span></div>
+    <div class="sb-item" onclick="nav('gerund')"><div class="sb-icon ic4">📚</div><div class="sb-lbl">Gerund vs Infinitive</div><span class="sb-bdg adv">B2</span></div>
+    <div class="sb-item" onclick="nav('wish')"><div class="sb-icon ic6">⭐</div><div class="sb-lbl">Wish</div><span class="sb-bdg adv">B2</span></div>
+    <div class="sb-item" onclick="nav('phrasal')"><div class="sb-icon ic7">💬</div><div class="sb-lbl">Phrasal Verbs</div><span class="sb-bdg adv">B1</span></div>
+  </div>
+</div>
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="home-banner">
+    <h1>قواعد <span>الإنجليزية</span> الشاملة</h1>
+    <p>من A1 إلى B2 — اختر مستواك وابدأ 🚀</p>
+  </div>
+  <div class="home-stats">
+    <div class="hs"><div class="hs-n" id="stat-done">0</div><div class="hs-l">أتممت</div></div>
+    <div class="hs"><div class="hs-n">50+</div><div class="hs-l">قاعدة</div></div>
+    <div class="hs"><div class="hs-n" id="stat-fav">0</div><div class="hs-l">مفضلة</div></div>
+  </div>
+  <div class="home-levels">
+    <div class="lvl-card lv-e" onclick="nav('lv-easy')"><div class="lci">🌱</div><div class="lcn">مبتدئ</div><div class="lcs">A1/A2</div><div class="lcc" id="lc-easy">0/16</div></div>
+    <div class="lvl-card lv-m" onclick="nav('lv-mid')"><div class="lci">🔥</div><div class="lcn">متوسط</div><div class="lcs">A2/B1</div><div class="lcc" id="lc-mid">0/11</div></div>
+    <div class="lvl-card lv-h" onclick="nav('lv-hard')"><div class="lci">💎</div><div class="lcn">متقدم</div><div class="lcs">B1/B2</div><div class="lcc" id="lc-hard">0/10</div></div>
+  </div>
+  <div class="section">
+    <div class="sec-title">⚡ قسم الأفعال المهمة</div>
+    <div class="verb-card" onclick="nav('verb-be')"><div class="verb-ic ic2">⚡</div><div class="verb-info"><div class="verb-en">Be</div><div class="verb-sub">am / is / are / was / were</div></div><span class="tc-badge b-gr">أساسي</span></div>
+    <div class="verb-card" onclick="nav('verb-have')"><div class="verb-ic ic3">✋</div><div class="verb-info"><div class="verb-en">Have</div><div class="verb-sub">have / has / had</div></div><span class="tc-badge b-gr">أساسي</span></div>
+    <div class="verb-card" onclick="nav('verb-do')"><div class="verb-ic ic4">🔧</div><div class="verb-info"><div class="verb-en">Do</div><div class="verb-sub">مساعد + أساسي</div></div><span class="tc-badge b-gr">أساسي</span></div>
+    <div class="verb-card" onclick="nav('verb-get')"><div class="verb-ic ic5">🎯</div><div class="verb-info"><div class="verb-en">Get</div><div class="verb-sub">get tired / get up / get back...</div></div><span class="tc-badge b-go">متوسط</span></div>
+    <div class="verb-card" onclick="nav('verb-mdo')"><div class="verb-ic ic6">⚖️</div><div class="verb-info"><div class="verb-en">Make vs Do</div><div class="verb-sub">make a cake / do homework</div></div><span class="tc-badge b-go">متوسط</span></div>
+    <div class="verb-card" onclick="nav('verb-take')"><div class="verb-ic ic7">📸</div><div class="verb-info"><div class="verb-en">Take</div><div class="verb-sub">take a shower / take a photo...</div></div><span class="tc-badge b-go">متوسط</span></div>
+    <div class="verb-card" onclick="nav('verb-go')"><div class="verb-ic ic8">🚶</div><div class="verb-info"><div class="verb-en">Go</div><div class="verb-sub">go shopping / go home / go on...</div></div><span class="tc-badge b-go">متوسط</span></div>
+    <div class="verb-card" onclick="nav('verb-come')"><div class="verb-ic ic1">🏠</div><div class="verb-info"><div class="verb-en">Come</div><div class="verb-sub">come back / come in / come from...</div></div><span class="tc-badge b-go">متوسط</span></div>
+    <div class="verb-card" onclick="nav('verb-lmh')"><div class="verb-ic ic2">💪</div><div class="verb-info"><div class="verb-en">Let / Make / Help</div><div class="verb-sub">Let me go. / She made me cry.</div></div><span class="tc-badge b-re">متقدم</span></div>
+  </div>
+  <div class="section">
+    <div class="sec-title">⭐ المفضلة السريعة</div>
+    <div id="fav-quick"><div style="color:var(--muted);font-size:13px;padding:4px 0">لا يوجد دروس محفوظة بعد</div></div>
+  </div>
+</div>
+<!-- LEVEL PAGES -->
+<div class="page" id="page-lv-easy">
+  <div class="lv-hero" style="background:linear-gradient(135deg,#1b5e20,#2e7d32)">
+    <div class="lv-hero-icon">🌱</div><h1>المستوى المبتدئ</h1><p>A1/A2 — الأساسيات</p>
+    <div class="lv-prog-bar"><div class="lv-prog-fill" id="lv-easy-fill" style="width:0%"></div></div>
+    <div class="lv-prog-lbl"><span id="lv-easy-txt">0/16 درس</span><span id="lv-easy-pct">0%</span></div>
+  </div>
+  <div class="section" id="lv-easy-list"></div>
+</div>
+<div class="page" id="page-lv-mid">
+  <div class="lv-hero" style="background:linear-gradient(135deg,#e65100,#f57f17)">
+    <div class="lv-hero-icon">🔥</div><h1>المستوى المتوسط</h1><p>A2/B1 — بناء على الأساسيات</p>
+    <div class="lv-prog-bar"><div class="lv-prog-fill" id="lv-mid-fill" style="width:0%"></div></div>
+    <div class="lv-prog-lbl"><span id="lv-mid-txt">0/11 درس</span><span id="lv-mid-pct">0%</span></div>
+  </div>
+  <div class="section" id="lv-mid-list"></div>
+</div>
+<div class="page" id="page-lv-hard">
+  <div class="lv-hero" style="background:linear-gradient(135deg,#1a237e,#283593)">
+    <div class="lv-hero-icon">💎</div><h1>المستوى المتقدم</h1><p>B1/B2 — الطريق للطلاقة</p>
+    <div class="lv-prog-bar"><div class="lv-prog-fill" id="lv-hard-fill" style="width:0%"></div></div>
+    <div class="lv-prog-lbl"><span id="lv-hard-txt">0/10 درس</span><span id="lv-hard-pct">0%</span></div>
+  </div>
+  <div class="section" id="lv-hard-list"></div>
+</div>
+<!-- FAVORITES PAGE -->
+<div class="page" id="page-favorites">
+  <div class="p-hero">
+    <div class="p-hero-inner">
+      <div class="p-hero-icon" style="background:linear-gradient(135deg,#f57f17,#ffa000)">⭐</div>
+      <div><div class="p-hero-title">المفضلة</div><div class="p-hero-sub">الدروس التي حفظتها</div></div>
+    </div>
+    <div style="height:16px"></div>
+  </div>
+  <div class="section" id="fav-list"></div>
+</div>
+<!-- DYNAMIC LESSONS -->
+<div id="dyn"></div>
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <div class="bn active" id="bn-home" onclick="nav('home')"><div class="bni">🏠</div>الرئيسية</div>
+  <div class="bn" id="bn-lvl" onclick="nav('lv-easy')"><div class="bni">📚</div>المناهج</div>
+  <div class="bn" id="bn-vrb" onclick="nav('verb-be')"><div class="bni">⚡</div>الأفعال</div>
+  <div class="bn" id="bn-fav" onclick="nav('favorites')"><div class="bni">⭐</div>المفضلة</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+// ══ LESSONS DATA ══
+const LD = {};
+
+function def(id,title,sub,icon,bg,tags,secs){LD[id]={title,sub,icon,bg,tags,secs};}
+
+function sec(icon,bg,title,sub,html){return{icon,bg,title,sub,html};}
+
+// helper shorthands
+const ex=(en,ar,nt)=>`<div class="ex"><div class="en">${en}</div>${ar?`<div class="ar">${ar}</div>`:''}${nt?`<div class="nt">${nt}</div>`:''}</div>`;
+const exn=(en,ar)=>`<div class="ex neg"><div class="en">${en}</div>${ar?`<div class="ar">${ar}</div>`:''}</div>`;
+const exq=(en,ar)=>`<div class="ex q"><div class="en">${en}</div>${ar?`<div class="ar">${ar}</div>`:''}</div>`;
+const rule=(t,p)=>`<div class="rule"><div class="rt">${t}</div><p>${p}</p></div>`;
+const warn=(p)=>`<div class="warn"><p>${p}</p></div>`;
+const tip=(t,p)=>`<div class="tip"><div class="tt">${t}</div><p>${p}</p></div>`;
+const formula=(html)=>`<div class="formula">${html}</div>`;
+const cmp=(items)=>`<div class="cmp">${items.map(([cls,cl,en,ar])=>`<div class="cmp-c ${cls}"><div class="cl">${cl}</div><span class="en">${en}</span>${ar?`<span class="ar">${ar}</span>`:''}</div>`).join('')}</div>`;
+const tbl=(heads,rows)=>`<div class="tbl"><table><tr>${heads.map(h=>`<th>${h}</th>`).join('')}</tr>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const g2=(items)=>`<div class="g2">${items.map(([en,ar])=>`<div class="mc"><span class="en">${en}</span><span class="ar">${ar}</span></div>`).join('')}</div>`;
+
+// ── VERB BE ──
+def('verb-be','فعل Be الكامل','am/is/are/was/were','⚡','ic2',['أفعال','مبتدئ','A1'],[
+  sec('📊','ic2','التصريف الكامل','مضارع وماضي',`<div class="lesson">
+<h3>المضارع</h3>${tbl(['الضمير','الفعل','المختصر','مثال'],[
+  ['I','<span class="en em">am</span>',"'m",'<span class="en">I am / I\'m a student.</span>'],
+  ['He/She/It','<span class="en em">is</span>',"'s",'<span class="en">She is / She\'s tall.</span>'],
+  ['You/We/They','<span class="en em">are</span>',"'re",'<span class="en">They are / They\'re happy.</span>']
+])}
+<h3>الماضي</h3>${tbl(['الضمير','الفعل','مثال'],[
+  ['I/He/She/It','<span class="en em">was</span>','<span class="en">I was tired.</span>'],
+  ['You/We/They','<span class="en em">were</span>','<span class="en">They were at school.</span>']
+])}</div>`),
+  sec('💡','ic3','استخدامات Be','','<div class="lesson"><h4>1️⃣ وصف الصفات</h4>'+ex('The sky <strong>is</strong> blue. / I <strong>am</strong> very tired.','السماء زرقاء. / أنا متعب جداً.')+'<h4>2️⃣ وصف المكان</h4>'+ex('She <strong>is</strong> at home. / We <strong>are</strong> in Egypt.','هي في البيت. / نحن في مصر.')+'<h4>3️⃣ التعريف بالنفس</h4>'+ex('I <strong>am</strong> Ahmed. I <strong>am</strong> a doctor.','أنا أحمد. أنا طبيب.')+'<h4>4️⃣ العمر والطقس</h4>'+ex('I <strong>am</strong> 25 years old. / It <strong>is</strong> hot today.','عمري 25 سنة. / الجو حار اليوم.')+'</div>'),
+  sec('🚫','ic4','النفي والسؤال',"isn't / aren't / Was he?",'<div class="lesson"><h3>النفي</h3>'+formula('<span class="v">am/is/are/was/were</span> + <span class="o">not</span><span class="ar">المختصر: I\'m not · isn\'t · aren\'t · wasn\'t · weren\'t</span>')+exn("I <strong>am not</strong> (I'm not) angry. / He <strong>isn't</strong> a teacher.")+warn("⚠️ am not لا تختصر إلى amn't — الصحيح: I'm not")+'<h3>السؤال</h3>'+formula('<span class="v">Am/Is/Are/Was/Were</span> + <span class="v">Subject</span> + ...?')+exq("Is she a doctor? — Yes, she is. / No, she isn't.")+exq("Were you at school? — Yes, I was. / No, I wasn't.")+'</div>')
+]);
+
+// ── VERB HAVE ──
+def('verb-have','فعل Have الكامل','have/has/had','✋','ic3',['أفعال','مبتدئ','A1'],[
+  sec('📊','ic3','Have أم Has؟','',`<div class="lesson">${tbl(['الضمائر','الفعل','مثال'],[
+  ['<span class="en">I/You/We/They</span>','<span class="en em">have</span>','<span class="en">I have a car.</span>'],
+  ['<span class="en">He/She/It</span>','<span class="en em">has</span>','<span class="en">She has a cat.</span>'],
+  ['الجميع (ماضي)','<span class="en em">had</span>','<span class="en">I had a dog.</span>']
+])}${tip('💡 القاعدة السهلة','مع He/She/It → has · مع الباقين → have · في الماضي → had')}</div>`),
+  sec('💡','ic4','استخدامات Have','','<div class="lesson"><h4>1️⃣ الامتلاك</h4>'+ex('I <strong>have</strong> a new phone. / He <strong>has</strong> two brothers.')+'<h4>2️⃣ مميزات الجسم</h4>'+ex('She <strong>has</strong> blue eyes and long hair.')+'<h4>3️⃣ الأمراض</h4>'+ex('I <strong>have</strong> a headache / a cold / a fever.')+'<h4>4️⃣ أنشطة مهمة</h4>'+tbl(['تعبير','معنى'],[['<span class="en">have breakfast/lunch/dinner</span>','يتناول الفطار/الغداء/العشاء'],['<span class="en">have a meeting / a shower</span>','يحضر اجتماع / يستحم'],['<span class="en">have a good time</span>','يقضي وقتاً ممتعاً']])+'</div>'),
+  sec('🚫','ic5','النفي والسؤال',"don't have / Does she have?",'<div class="lesson"><h3>النفي</h3>'+formula("I/You/We/They → <span class='v'>don't have</span><br>He/She/It → <span class='v'>doesn't have</span><br>ماضي → <span class='v'>didn't have</span>")+exn("I <strong>don't have</strong> a car. / She <strong>doesn't have</strong> any money.")+'<h3>السؤال</h3>'+formula("<span class='v'>Do</span> you/we/they <span class='o'>have</span> ...?<br><span class='v'>Does</span> he/she/it <span class='o'>have</span> ...?")+exq("Do you have a pen? — Yes, I do.")+exq("Does she have a job? — No, she doesn't.")+'</div>')
+]);
+
+// ── VERB DO ──
+def('verb-do','فعل Do','مساعد وأساسي في آن واحد','🔧','ic4',['أفعال','مبتدئ','A1'],[
+  sec('📊','ic2','Do مساعد vs أساسي','',`<div class="lesson">${tbl(['النوع','الوظيفة','مثال'],[
+  ['<span class="en em">Do مساعد</span>','للسؤال والنفي','<span class="en"><strong>Do</strong> you like it? / I <strong>don\'t</strong> know.</span>'],
+  ['<span class="en em">Do أساسي</span>','يعني "يفعل/ينجز"','<span class="en">I <strong>do</strong> my homework every day.</span>']
+])}${tbl(['تعبير','معنى'],[
+  ['<span class="en">do homework/work</span>','يعمل الواجب/العمل'],
+  ['<span class="en">do the dishes/laundry</span>','يغسل الأطباق/الملابس'],
+  ['<span class="en">do your best</span>','يبذل قصارى جهده'],
+  ['<span class="en">do exercise/sport</span>','يمارس رياضة'],
+  ['<span class="en">do business</span>','يتعامل تجارياً'],
+  ['<span class="en">do research</span>','يجري بحثاً']
+])}</div>`),
+  sec('🚫','ic3','Do كفعل مساعد','','<div class="lesson">'+formula("سؤال: <span class='v'>Do/Does/Did</span> + subject + verb?<br>نفي: subject + <span class='v'>don't/doesn't/didn't</span> + verb")+warn("⚠️ بعد does و did الفعل يرجع لأصله دائماً — لا s ولا ed")+cmp([['bad','❌ خطأ',"Does she <strong>goes</strong>? / Did he <strong>went</strong>?",''],['good','✅ صح',"Does she <strong>go</strong>? / Did he <strong>go</strong>?",'']])+'</div>')
+]);
+
+// ── VERB GET ──
+def('verb-get','فعل Get','من أشهر الأفعال في الإنجليزية','🎯','ic5',['أفعال','متوسط','B1'],[
+  sec('1️⃣','ic5','Get = يحصل على','',`<div class="lesson">${ex("I <strong>got</strong> a new phone.","")}${ex("Can you <strong>get</strong> me some water?","هل تحضر لي بعض الماء؟")}</div>`),
+  sec('2️⃣','ic6','Get = يصبح','get + صفة',`<div class="lesson">${g2([['get tired','يتعب'],['get angry','يغضب'],['get better','يتحسن'],['get married','يتزوج'],['get lost','يضيع'],['get ready','يستعد'],['get dressed','يلبس'],['get bored','يمل']])}${ex("It's <strong>getting</strong> cold. / She <strong>got</strong> angry.",'')}</div>`),
+  sec('3️⃣','ic7','Get في تعبيرات مهمة','',`<div class="lesson">${tbl(['تعبير','معنى','مثال'],[
+  ['<span class="en em">get up</span>','يستيقظ/ينهض','<span class="en">I get up at 7.</span>'],
+  ['<span class="en em">get back</span>','يرجع','<span class="en">I\'ll get back soon.</span>'],
+  ['<span class="en em">get on/off</span>','يركب/ينزل','<span class="en">Get on the bus.</span>'],
+  ['<span class="en em">get along with</span>','ينسجم مع','<span class="en">I get along with my boss.</span>'],
+  ['<span class="en em">get rid of</span>','يتخلص من','<span class="en">Get rid of old stuff.</span>'],
+  ['<span class="en em">get done</span>','ينجز','<span class="en">Let\'s get this done!</span>'],
+  ['<span class="en em">get used to</span>','يتعود على','<span class="en">I\'m getting used to it.</span>']
+])}</div>`)
+]);
+
+// ── MAKE VS DO ──
+def('verb-mdo','Make vs Do','خطأ مشهور جداً','⚖️','ic6',['أفعال','متوسط','B1'],[
+  sec('🔨','ic7','Make — ينشئ شيئاً جديداً','',`<div class="lesson">${tbl(['تعبير','معنى'],[
+  ['<span class="en">make a cake/coffee</span>','يصنع كيكة/قهوة'],['<span class="en">make money/profit</span>','يكسب مالاً'],
+  ['<span class="en">make a mistake</span>','يرتكب خطأ'],['<span class="en">make a decision</span>','يتخذ قراراً'],
+  ['<span class="en">make a phone call</span>','يجري مكالمة'],['<span class="en">make progress</span>','يحرز تقدماً'],
+  ['<span class="en">make friends</span>','يصنع صداقات'],['<span class="en">make sense</span>','يكون منطقياً']
+])}</div>`),
+  sec('✅','ic8','Do — ينجز نشاطاً أو مهمة','',`<div class="lesson">${tbl(['تعبير','معنى'],[
+  ['<span class="en">do homework/work</span>','يعمل الواجب'],['<span class="en">do the dishes/laundry</span>','يغسل الأطباق/الملابس'],
+  ['<span class="en">do your best</span>','يبذل قصارى جهده'],['<span class="en">do exercise</span>','يمارس رياضة'],
+  ['<span class="en">do business</span>','يتعامل تجارياً'],['<span class="en">do research</span>','يجري بحثاً']
+])}${cmp([['bad','❌ خطأ شائع',"I <strong>made</strong> my homework. / She <strong>did</strong> a mistake.",''],['good','✅ صح',"I <strong>did</strong> my homework. / She <strong>made</strong> a mistake.",'']])}</div>`)
+]);
+
+// ── TAKE / GO / COME / LET-MAKE-HELP ──
+def('verb-take','فعل Take','take a shower / take a photo / take a break','📸','ic7',['أفعال','متوسط','B1'],[
+  sec('📋','ic7','Take — تعبيرات أساسية','',`<div class="lesson">${tbl(['تعبير','معنى'],[
+  ['<span class="en em">take a shower/bath</span>','يستحم'],['<span class="en em">take a photo</span>','يلتقط صورة'],
+  ['<span class="en em">take a break/rest</span>','يأخذ استراحة'],['<span class="en em">take medicine</span>','يتناول دواء'],
+  ['<span class="en em">take a bus/taxi</span>','يركب'],['<span class="en em">take time</span>','يستغرق وقتاً'],
+  ['<span class="en em">take care of</span>','يهتم بـ'],['<span class="en em">take off</span>','يقلع/يخلع'],
+  ['<span class="en em">take part in</span>','يشارك في'],['<span class="en em">take place</span>','يحدث/يجري']
+])}</div>`)
+]);
+
+def('verb-go','فعل Go','go shopping / go home / go on...','🚶','ic8',['أفعال','متوسط','B1'],[
+  sec('1️⃣','ic8','Go + ing = ممارسة نشاط','',`<div class="lesson">${g2([['go shopping','يتسوق'],['go swimming','يسبح'],['go running','يركض'],['go hiking','يتجول'],['go dancing','يرقص'],['go fishing','يصطاد']])}</div>`),
+  sec('2️⃣','ic1','تعبيرات Go المهمة','',`<div class="lesson">${tbl(['تعبير','معنى'],[
+  ['<span class="en em">go home</span>','يذهب للبيت'],['<span class="en em">go on</span>','يستمر/يحدث'],
+  ['<span class="en em">go out</span>','يخرج'],['<span class="en em">go back</span>','يرجع'],
+  ['<span class="en em">go wrong</span>','يسوء'],['<span class="en em">go well</span>','يسير بشكل جيد'],
+  ['<span class="en em">go ahead</span>','تفضل/استمر'],['<span class="en em">go through</span>','يمر بتجربة صعبة']
+])}</div>`)
+]);
+
+def('verb-come','فعل Come','come back / come in / come from...','🏠','ic1',['أفعال','متوسط','B1'],[
+  sec('📋','ic1','Come — تعبيرات أساسية','',`<div class="lesson">${cmp([['good','Go — ابتعاد',"I'm going to the market.",''],['good','Come — اقتراب',"Come here! / He came to me.",'']])}${tbl(['تعبير','معنى'],[
+  ['<span class="en em">come back</span>','يرجع/يعود'],['<span class="en em">come in</span>','يدخل'],
+  ['<span class="en em">come out</span>','يخرج/يصدر'],['<span class="en em">come from</span>','أصله من'],
+  ['<span class="en em">come on</span>','يلا/هيا'],['<span class="en em">come up with</span>','يبتكر فكرة'],
+  ['<span class="en em">come across</span>','يصادف بالصدفة'],['<span class="en em">come true</span>','يتحقق']
+])}</div>`)
+]);
+
+def('verb-lmh','Let / Make / Help','Let me go. / She made me cry.','💪','ic2',['أفعال','متقدم','B2'],[
+  sec('1️⃣','ic2','Let — يسمح','Let + object + bare infinitive',`<div class="lesson">${formula("Let + <span class='v'>object</span> + <span class='o'>verb (بدون to)</span>")}${ex("Let me <strong>go</strong>. / Let him <strong>speak</strong>.")}${ex("Let me <strong>know</strong> if you need help.","أخبرني إذا احتجت مساعدة.")}${warn("⚠️ بعد Let لا to: ❌ 'Let me to go' ✅ 'Let me go'")}</div>`),
+  sec('2️⃣','ic3','Make — يجبر','Make + object + bare infinitive',`<div class="lesson">${formula("Make + <span class='v'>object</span> + <span class='o'>verb (بدون to)</span>")}${ex("She <strong>made</strong> me <strong>cry</strong>.","هي جعلتني أبكي.")}${ex("This movie <strong>makes</strong> me <strong>laugh</strong>.","هذا الفيلم يجعلني أضحك.")}</div>`),
+  sec('3️⃣','ic4','Help — يساعد','',`<div class="lesson">${ex("He <strong>helped</strong> me <strong>carry</strong> the bag. ✅ (بدون to)")}${ex("He <strong>helped</strong> me <strong>to carry</strong> the bag. ✅ (كلاهما صح)")}${tbl(['الفعل','المعنى','مثال'],[
+  ['<span class="en em">let</span>','يسمح (باختيار)','<span class="en">She let him go.</span>'],
+  ['<span class="en em">make</span>','يجبر (بدون خيار)','<span class="en">She made him go.</span>'],
+  ['<span class="en em">help</span>','يساعد','<span class="en">She helped him go.</span>']
+])}</div>`)
+]);
+
+// ── GRAMMAR LESSONS ──
+def('sentence','تركيب الجملة وأجزاء الكلام','الأساس الأول','🏗️','ic1',['مبتدئ','A1'],[
+  sec('📦','ic1','أجزاء الكلام الثمانية','Parts of Speech',`<div class="lesson">${tbl(['الجزء','بالإنجليزي','الوظيفة','أمثلة'],[
+  ['الاسم','<span class="en">Noun</span>','شخص، مكان، شيء','<span class="en">dog, city, Ahmed</span>'],
+  ['الضمير','<span class="en">Pronoun</span>','بدل الاسم','<span class="en">I, she, they, it</span>'],
+  ['الفعل','<span class="en">Verb</span>','حدث أو حالة','<span class="en">run, eat, is, have</span>'],
+  ['الصفة','<span class="en">Adjective</span>','يصف الاسم','<span class="en">big, red, happy</span>'],
+  ['الظرف','<span class="en">Adverb</span>','يصف الفعل','<span class="en">quickly, very, always</span>'],
+  ['حرف الجر','<span class="en">Preposition</span>','يربط الاسم','<span class="en">in, on, at, from</span>'],
+  ['الأداة','<span class="en">Article</span>','قبل الاسم','<span class="en">a, an, the</span>'],
+  ['الرابط','<span class="en">Conjunction</span>','يربط الجمل','<span class="en">and, but, because</span>']
+])}</div>`),
+  sec('🏗️','ic2','ترتيب الجملة — S + V + O','ترتيب ثابت لا يتغير',`<div class="lesson">${formula("<span class='v'>Subject</span> + <span class='v'>Verb</span> + <span class='o'>[Object]</span> + <span class='o'>[Place]</span> + <span class='o'>[Time]</span><span class='ar'>الفاعل + الفعل + المفعول + المكان + الزمان</span>")}${ex("I eat pizza every day.","أنا آكل بيتزا كل يوم.","I(فاعل) + eat(فعل) + pizza(مفعول) + every day(زمان)")}${ex("She studies English at school.",'هي تدرس الإنجليزية في المدرسة.')}${rule("⚠️ مهم جداً","في الإنجليزية الفاعل دائماً أول الجملة — لا يمكن قلب الترتيب.")}${cmp([['bad','❌ خطأ','Ate Ahmed food.',''],['good','✅ صح','Ahmed ate food.','']])}</div>`)
+]);
+
+def('ps','المضارع البسيط','Simple Present — العادات والحقائق','📅','ic4',['مبتدئ','A1','أزمنة'],[
+  sec('📋','ic4','متى نستخدمه؟','',`<div class="lesson">${tbl(['الاستخدام','مثال'],[
+  ['العادات اليومية','<span class="en">I drink coffee every morning.</span>'],
+  ['الحقائق الثابتة','<span class="en">The earth goes around the sun.</span>'],
+  ['الجداول','<span class="en">The train leaves at 8 AM.</span>'],
+  ['المشاعر','<span class="en">I love my family.</span>']
+])}${g2([['every day/week','كل يوم/أسبوع'],['always/usually','دائماً/عادةً'],['often/sometimes','كثيراً/أحياناً'],['never/rarely','أبداً/نادراً']])}</div>`),
+  sec('📝','ic5','قاعدة s/es مع He/She/It','',`<div class="lesson">${rule("⚠️ القاعدة المهمة","مع He/She/It نضيف <strong>s</strong> أو <strong>es</strong> للفعل.")}${tbl(['الفعل','I/You/We/They','He/She/It'],[
+  ['go','<span class="en">I go</span>','<span class="en em">He goes</span>'],
+  ['eat','<span class="en">They eat</span>','<span class="en em">She eats</span>'],
+  ['study','<span class="en">We study</span>','<span class="en em">He studies</span>'],
+  ['have','<span class="en">I have</span>','<span class="en em">She has ⚠️</span>']
+])}${warn("⚠️ بعد doesn't يعود الفعل لأصله: She doesn't <strong>go</strong> ❌ 'doesn't goes'")}${exn("I <strong>don't</strong> like coffee. / She <strong>doesn't</strong> speak Arabic.")}${exq("Do you like football? — Yes, I do. / Does he work here? — No, he doesn't.")}</div>`)
+]);
+
+def('pc','المضارع المستمر','Present Continuous — ما يحدث الآن','🔄','ic5',['مبتدئ','A1','أزمنة'],[
+  sec('📋','ic5','التركيب والاستخدام','am/is/are + verb+ing',`<div class="lesson">${formula("<span class='v'>am/is/are</span> + <span class='o'>verb + ing</span>")}${tbl(['الاستخدام','مثال'],[
+  ['يحدث الآن','<span class="en">I am eating now.</span>'],
+  ['موقف مؤقت','<span class="en">She is staying with her sister this week.</span>'],
+  ['خطة محددة','<span class="en">I am meeting Ahmed tomorrow.</span>']
+])}${ex("Look! The children <strong>are playing</strong> in the garden.","انظر! الأطفال يلعبون في الحديقة.")}${rule("قواعد إضافة ING","الفعل العادي + ing · ينتهي بـ e → احذف e + ing · متحرك + ساكن قصير → ضاعف الساكن + ing")}${warn("⚠️ أفعال الحالة لا تأتي في المستمر: know/want/love/hate/need<br>❌ I am knowing ✅ I know")}</div>`)
+]);
+
+def('pronouns','الضمائر بأنواعها','Subject / Object / Possessive / Reflexive','👤','ic1',['مبتدئ','A1'],[
+  sec('👤','ic1','ضمائر الفاعل والمفعول','',`<div class="lesson">${tbl(['المعنى','فاعل','مفعول'],[
+  ['أنا','<span class="en em">I</span>','<span class="en em">me</span>'],
+  ['أنت','<span class="en em">you</span>','<span class="en em">you</span>'],
+  ['هو','<span class="en em">he</span>','<span class="en em">him</span>'],
+  ['هي','<span class="en em">she</span>','<span class="en em">her</span>'],
+  ['هو/هي (شيء)','<span class="en em">it</span>','<span class="en em">it</span>'],
+  ['نحن','<span class="en em">we</span>','<span class="en em">us</span>'],
+  ['هم','<span class="en em">they</span>','<span class="en em">them</span>']
+])}${ex("She loves <strong>him</strong>. / Can you help <strong>me</strong>?")}</div>`),
+  sec('🔑','ic2','ضمائر الملكية','',`<div class="lesson">${tbl(['المعنى','صفة ملكية + اسم','ضمير مستقل'],[
+  ['أنا','<span class="en em">my</span> (my car)','<span class="en em">mine</span>'],
+  ['أنت','<span class="en em">your</span>','<span class="en em">yours</span>'],
+  ['هو','<span class="en em">his</span>','<span class="en em">his</span>'],
+  ['هي','<span class="en em">her</span>','<span class="en em">hers</span>'],
+  ['نحن','<span class="en em">our</span>','<span class="en em">ours</span>'],
+  ['هم','<span class="en em">their</span>','<span class="en em">theirs</span>']
+])}${ex("This is <strong>my</strong> bag. — That bag is <strong>mine</strong>.")}</div>`),
+  sec('🔄','ic3','ضمائر الانعكاس','myself/yourself...',`<div class="lesson">${g2([['myself','نفسي'],['yourself','نفسك'],['himself','نفسه'],['herself','نفسها'],['ourselves','أنفسنا'],['themselves','أنفسهم']])}${ex("She hurt <strong>herself</strong>. / I made this <strong>myself</strong>.")}</div>`)
+]);
+
+def('articles','A / An / The','أدوات التعريف والتنكير','🏷️','ic6',['مبتدئ','A1'],[
+  sec('🔤','ic6','A و An — الفرق','الصوت هو المعيار',`<div class="lesson"><h4>A — قبل الصوت الساكن</h4>${ex("a book · a car · a <strong>u</strong>niversity · a <strong>E</strong>uropean","","university/European تبدأن بصوت يو الساكن")}<h4>An — قبل الصوت المتحرك (A,E,I,O,U)</h4>${ex("an apple · an egg · an idea · an <strong>h</strong>our · an MBA","","hour: الـ H صامتة فصوتها أور")}${rule("⚠️ المهم هو الصوت وليس الحرف!","'a university' لأن صوتها 'يو' ·· 'an hour' لأن الـ H صامتة")}</div>`),
+  sec('🎯','ic7','The — أداة التعريف','',`<div class="lesson">${tbl(['الموقف','مثال'],[
+  ['الذكر للمرة الثانية','<span class="en">I saw <strong>a</strong> cat. <strong>The</strong> cat was black.</span>'],
+  ['شيء وحيد فريد','<span class="en"><strong>The</strong> sun · <strong>the</strong> moon · <strong>the</strong> Earth</span>'],
+  ['اتفاق ضمني','<span class="en">Close <strong>the</strong> door, please.</span>'],
+  ['أنهار وبحار','<span class="en"><strong>The</strong> Nile · <strong>the</strong> Amazon</span>']
+])}<h3>بدون أداة — Zero Article</h3>${ex("I love <strong>music</strong>. (not: the music)","أحب الموسيقى — بشكل عام")}${ex("He goes to <strong>school</strong> by <strong>bus</strong>.")}</div>`)
+]);
+
+def('plural','جمع الكلمات','القواعد + الشاذة','📝','ic7',['مبتدئ','A1'],[
+  sec('📋','ic7','قواعد الجمع','',`<div class="lesson">${tbl(['إذا انتهت بـ','نضيف','أمثلة'],[
+  ['معظم الكلمات','<span class="bdg b-bl">s</span>','<span class="en">book→books · car→cars</span>'],
+  ['<span class="en">s,ss,sh,ch,x,z</span>','<span class="bdg b-go">es</span>','<span class="en">bus→buses · dish→dishes · watch→watches</span>'],
+  ['حرف ساكن + y','<span class="bdg b-pu">y→ies</span>','<span class="en">city→cities · baby→babies</span>'],
+  ['<span class="en">f / fe</span>','<span class="bdg b-te">f→ves</span>','<span class="en">leaf→leaves · wife→wives · knife→knives</span>'],
+  ['<span class="en">o</span> (معظمها)','<span class="bdg b-go">es</span>','<span class="en">tomato→tomatoes · potato→potatoes</span>']
+])}</div>`),
+  sec('⚠️','ic8','الكلمات الشاذة','يجب حفظها',`<div class="lesson">${tbl(['مفرد','جمع','معنى'],[
+  ['<span class="en">man</span>','<span class="en em">men</span>','رجل → رجال'],
+  ['<span class="en">woman</span>','<span class="en em">women</span>','امرأة → نساء'],
+  ['<span class="en">child</span>','<span class="en em">children</span>','طفل → أطفال'],
+  ['<span class="en">person</span>','<span class="en em">people</span>','شخص → أشخاص'],
+  ['<span class="en">tooth</span>','<span class="en em">teeth</span>','سن → أسنان'],
+  ['<span class="en">foot</span>','<span class="en em">feet</span>','قدم → أقدام'],
+  ['<span class="en">mouse</span>','<span class="en em">mice</span>','فأر → فئران'],
+  ['<span class="en">sheep</span>','<span class="en em">sheep</span>','خروف → خراف (لا يتغير)'],
+  ['<span class="en">fish</span>','<span class="en em">fish</span>','سمكة → سمك (لا يتغير)']
+])}</div>`)
+]);
+
+def('countable','المعدود وغير المعدود','Countable & Uncountable','📦','ic8',['مبتدئ','A2'],[
+  sec('🔢','ic8','الاسم المعدود','',`<div class="lesson">${g2([['a book / 3 books','كتاب / 3 كتب'],['a car / 2 cars','سيارة / سيارتان'],['an apple / 4 apples','تفاحة / 4 تفاحات'],['a chair / 5 chairs','كرسي / 5 كراسي']])}${tbl(['أداة','استخدام','مثال'],[
+  ['<span class="bdg b-bl">a/an</span>','مفرد غير محدد','<span class="en">a book, an apple</span>'],
+  ['<span class="bdg b-go">many/few</span>','كثير/قليل','<span class="en">many books · few chairs</span>'],
+  ['<span class="bdg b-te">some/any</span>','بعض','<span class="en">some books · any chairs?</span>']
+])}</div>`),
+  sec('💧','ic1','الاسم غير المعدود','',`<div class="lesson">${g2([['water 💧','ماء'],['milk 🥛','حليب'],['money 💰','مال'],['rice 🍚','أرز'],['time ⏰','وقت'],['advice 💬','نصيحة']])}${warn("❌ لا يأخذ a/an · ❌ لا يُجمع · ✅ يأخذ some/much/a little/a lot of")}${ex("I need <strong>some</strong> water. / There is <strong>little</strong> time left.")}</div>`)
+]);
+
+def('adjectives','الصفات وترتيبها','Adjectives','🎨','ic2',['مبتدئ','A1'],[
+  sec('📋','ic2','مكان الصفة وترتيبها','',`<div class="lesson"><h4>1️⃣ قبل الاسم</h4>${ex("a <strong>beautiful</strong> house · a <strong>red</strong> car · a <strong>tall</strong> man")}<h4>2️⃣ بعد فعل Be</h4>${ex("The house is <strong>beautiful</strong>. / The car is <strong>red</strong>.")}${rule("📌 ترتيب الصفات المتعددة","Opinion → Size → Age → Shape → Color → Origin → Material<br>a <strong>lovely little old</strong> red French car")}${tbl(['الفئة','أمثلة'],[
+  ['الحجم','<span class="en">big, small, large, tiny, huge, tall, short</span>'],
+  ['الألوان','<span class="en">red, blue, green, black, white</span>'],
+  ['الحالة','<span class="en">hot, cold, clean, dirty, new, old</span>'],
+  ['الشخصية','<span class="en">kind, funny, smart, lazy, honest</span>']
+])}</div>`)
+]);
+
+def('prepositions','حروف الجر','in/on/at/to/for/with/by/from','📍','ic3',['مبتدئ','A1'],[
+  sec('📅','ic3','in/on/at للزمن','',`<div class="lesson">${tbl(['الحرف','الاستخدام','أمثلة'],[
+  ['<span class="en em">in</span>','أشهر · سنوات · فصول','<span class="en">in January · in 2024 · in summer · in the morning</span>'],
+  ['<span class="en em">on</span>','أيام الأسبوع · تواريخ','<span class="en">on Monday · on July 4th</span>'],
+  ['<span class="en em">at</span>','أوقات محددة','<span class="en">at 8 o\'clock · at noon</span>']
+])}${ex("I was born <strong>in</strong> 1999, <strong>on</strong> a Monday, <strong>at</strong> 6 AM.")}</div>`),
+  sec('📍','ic4','in/on/at للمكان','',`<div class="lesson">${tbl(['الحرف','الاستخدام','أمثلة'],[
+  ['<span class="en em">in</span>','داخل شيء · مدينة · دولة','<span class="en">in the box · in Cairo · in Egypt</span>'],
+  ['<span class="en em">on</span>','على سطح','<span class="en">on the table · on the wall</span>'],
+  ['<span class="en em">at</span>','نقطة محددة','<span class="en">at the bus stop · at home</span>']
+])}</div>`),
+  sec('🔗','ic5','حروف الجر الأخرى','',`<div class="lesson">${tbl(['الحرف','الاستخدام','مثال'],[
+  ['<span class="en em">to</span>','الاتجاه','<span class="en">I\'m going <strong>to</strong> school.</span>'],
+  ['<span class="en em">for</span>','الغرض · المدة','<span class="en">This is <strong>for</strong> you. / I waited <strong>for</strong> 2 hours.</span>'],
+  ['<span class="en em">with</span>','المرافقة','<span class="en">I came <strong>with</strong> Ahmed.</span>'],
+  ['<span class="en em">from</span>','المصدر','<span class="en">I\'m <strong>from</strong> Egypt.</span>'],
+  ['<span class="en em">by</span>','وسيلة النقل','<span class="en">go <strong>by</span> bus.</span>'],
+  ['<span class="en em">about</span>','الموضوع','<span class="en">Tell me <strong>about</strong> yourself.</span>']
+])}</div>`)
+]);
+
+def('some-any','Some / Any',"I have some money. / Do you have any?",'🔵','ic8',['مبتدئ','A2'],[
+  sec('📋','ic8','القاعدة الأساسية','',`<div class="lesson">${tbl(['','some','any'],[
+  ['جمل إيجابية ✅','<span class="en em">✓ some</span>','<span class="en">✗</span>'],
+  ['جمل سلبية ❌','<span class="en">✗</span>','<span class="en em">✓ any</span>'],
+  ['أسئلة ❓','<span class="en">عروض/طلبات</span>','<span class="en em">✓ معظم الأسئلة</span>']
+])}${ex("I have <strong>some</strong> money. (إيجاب)")}${exn("I don't have <strong>any</strong> money. (نفي)")}${exq("Do you have <strong>any</strong> money? (سؤال)")}${exq("Would you like <strong>some</strong> tea? (عرض)")}</div>`)
+]);
+
+def('much-many','Much / Many','How much? / How many?','📊','ic1',['مبتدئ','A2'],[
+  sec('📋','ic1','القاعدة الأساسية','',`<div class="lesson">${cmp([['good','many — مع المعدود',"<strong>many</strong> books · <strong>many</strong> students",''],['good','much — مع غير المعدود',"<strong>much</strong> water · <strong>much</strong> time",'']])}${rule("📌 في الجمل الإيجابية","نفضل <strong>a lot of</strong> بدلاً من much/many:<br>✅ I have <strong>a lot of</strong> money. (طبيعي)")}${exq("How much water do you drink? / How many books do you have?")}${tip("💡 للسعر دائماً How much","How much is this? / How much does it cost?")}</div>`)
+]);
+
+def('do-q','أسئلة Do / Does / Did','متى نستخدم كل منها','❔','ic2',['مبتدئ','A2'],[
+  sec('📊','ic2','الجدول الكامل','',`<div class="lesson">${tbl(['الفعل المساعد','مع من؟','الزمن'],[
+  ['<span class="en em">Do</span>','<span class="en">I/You/We/They</span>','المضارع'],
+  ['<span class="en em">Does</span>','<span class="en">He/She/It</span>','المضارع'],
+  ['<span class="en em">Did</span>','الجميع','الماضي']
+])}${formula("<span class='v'>Do/Does/Did</span> + <span class='v'>Subject</span> + <span class='o'>verb (أصل)</span> + ...?")}${exq("Do you speak English? / Does she work here? / Did they go yesterday?")}${cmp([['bad','❌ خطأ شائع',"Does she <strong>goes</strong>? / Did he <strong>went</strong>?",''],['good','✅ صح',"Does she <strong>go</strong>? / Did he <strong>go</strong>?",'']])}${warn("⚠️ مع Be: ✅ 'Is she tired?' ❌ 'Does she is tired?'")}</div>`),
+  sec('💬','ic3','Short Answers','الإجابات المختصرة',`<div class="lesson">${tbl(['السؤال','نعم','لا'],[
+  ['<span class="en">Is she a teacher?</span>','<span class="en">Yes, she <strong>is</strong>.</span>','<span class="en">No, she <strong>isn\'t</strong>.</span>'],
+  ['<span class="en">Are you ready?</span>','<span class="en">Yes, I <strong>am</strong>.</span>','<span class="en">No, I<strong>\'m not</strong>.</span>'],
+  ['<span class="en">Do you like it?</span>','<span class="en">Yes, I <strong>do</strong>.</span>','<span class="en">No, I <strong>don\'t</strong>.</span>'],
+  ['<span class="en">Does she work here?</span>','<span class="en">Yes, she <strong>does</strong>.</span>','<span class="en">No, she <strong>doesn\'t</strong>.</span>'],
+  ['<span class="en">Did they come?</span>','<span class="en">Yes, they <strong>did</strong>.</span>','<span class="en">No, they <strong>didn\'t</strong>.</span>'],
+  ['<span class="en">Can you swim?</span>','<span class="en">Yes, I <strong>can</strong>.</span>','<span class="en">No, I <strong>can\'t</strong>.</span>'],
+  ['<span class="en">Will she come?</span>','<span class="en">Yes, she <strong>will</strong>.</span>','<span class="en">No, she <strong>won\'t</strong>.</span>']
+])}</div>`)
+]);
+
+def('wh-q','أسئلة WH الكاملة','What/Where/When/Why/Who/How...','❓','ic3',['مبتدئ','A2'],[
+  sec('🏗️','ic3','تركيب سؤال WH','WH + Auxiliary + Subject + Verb',`<div class="lesson">${formula("<span class='v'>WH</span> + <span class='v'>Auxiliary</span> + <span class='v'>Subject</span> + <span class='o'>Verb</span> + ...?")}${tbl(['مثال','التحليل'],[
+  ['<span class="en">What <strong>do</strong> you <strong>do</strong>?</span>','What + do + you + do'],
+  ['<span class="en">Where <strong>does</strong> she <strong>live</strong>?</span>','Where + does + she + live'],
+  ['<span class="en">Why <strong>are</strong> you sad?</span>','Why + are + you (فعل be)'],
+  ['<span class="en">How <strong>did</strong> you <strong>learn</strong> English?</span>','How + did + you + learn']
+])}</div>`),
+  sec('📌','ic4','كل كلمات WH','',`<div class="lesson">${tbl(['الكلمة','المعنى','مثال'],[
+  ['<span class="en em">What</span>','ماذا / ما','<span class="en">What is your name? / What do you do?</span>'],
+  ['<span class="en em">Where</span>','أين','<span class="en">Where do you live?</span>'],
+  ['<span class="en em">When</span>','متى','<span class="en">When did you arrive?</span>'],
+  ['<span class="en em">Why</span>','لماذا','<span class="en">Why are you sad?</span>'],
+  ['<span class="en em">Who</span>','من (للأشخاص)','<span class="en">Who called you?</span>'],
+  ['<span class="en em">How</span>','كيف','<span class="en">How are you?</span>'],
+  ['<span class="en em">Which</span>','أيّ (اختيار)','<span class="en">Which color do you prefer?</span>'],
+  ['<span class="en em">Whose</span>','لمن (ملكية)','<span class="en">Whose car is this?</span>']
+])}${g2([['How much?','كم؟ (غير معدود)'],['How many?','كم؟ (معدود)'],['How long?','كم المدة؟'],['How old?','كم العمر؟'],['How often?','كم مرة؟'],['How far?','كم المسافة؟']])}</div>`)
+]);
+
+def('negation','النفي الشامل','not/no/none/nobody/nothing/never/neither','🚫','ic4',['مبتدئ','A2'],[
+  sec('📊','ic4','جدول كلمات النفي','',`<div class="lesson">${tbl(['كلمة','المعنى','مثال'],[
+  ['<span class="en em">not</span>','لا/ليس','<span class="en">I do <strong>not</strong> know.</span>'],
+  ['<span class="en em">no</span>','لا (قبل الأسماء)','<span class="en">There is <strong>no</strong> time.</span>'],
+  ['<span class="en em">none</span>','لا أحد/شيء (ضمير)','<span class="en"><strong>None</strong> of them came.</span>'],
+  ['<span class="en em">nobody/no one</span>','لا أحد','<span class="en"><strong>Nobody</strong> knows.</span>'],
+  ['<span class="en em">nothing</span>','لا شيء','<span class="en">I have <strong>nothing</strong> to say.</span>'],
+  ['<span class="en em">nowhere</span>','لا مكان','<span class="en">I have <strong>nowhere</strong> to go.</span>'],
+  ['<span class="en em">never</span>','أبداً','<span class="en">I <strong>never</strong> eat fast food.</span>'],
+  ['<span class="en em">neither</span>','لا هذا ولا ذاك','<span class="en"><strong>Neither</strong> answer is right.</span>']
+])}${warn("⚠️ لا نجمع نفيين: ❌ 'I don't have nothing' ✅ 'I don't have anything' أو 'I have nothing'")}</div>`)
+]);
+
+def('short-ans','Short Answers',"Yes, I do. / No, she isn't.",'💬','ic5',['مبتدئ','A2'],[
+  sec('📋','ic5','الإجابات المختصرة','',`<div class="lesson">${rule("📌 القاعدة","في الإجابة المختصرة نكرر الفعل المساعد فقط — لا نكرر الفعل الرئيسي")}${tbl(['السؤال','نعم','لا'],[
+  ['<span class="en">Is she a teacher?</span>','<span class="en">Yes, she <strong>is</strong>.</span>','<span class="en">No, she <strong>isn\'t</strong>.</span>'],
+  ['<span class="en">Are you ready?</span>','<span class="en">Yes, I <strong>am</strong>.</span>','<span class="en">No, I\'m not.</span>'],
+  ['<span class="en">Do you like it?</span>','<span class="en">Yes, I <strong>do</strong>.</span>','<span class="en">No, I <strong>don\'t</strong>.</span>'],
+  ['<span class="en">Does she work?</span>','<span class="en">Yes, she <strong>does</strong>.</span>','<span class="en">No, she <strong>doesn\'t</strong>.</span>'],
+  ['<span class="en">Did they come?</span>','<span class="en">Yes, they <strong>did</strong>.</span>','<span class="en">No, they <strong>didn\'t</strong>.</span>'],
+  ['<span class="en">Can you swim?</span>','<span class="en">Yes, I <strong>can</strong>.</span>','<span class="en">No, I <strong>can\'t</strong>.</span>'],
+  ['<span class="en">Will she come?</span>','<span class="en">Yes, she <strong>will</strong>.</span>','<span class="en">No, she <strong>won\'t</strong>.</span>'],
+  ['<span class="en">Have you eaten?</span>','<span class="en">Yes, I <strong>have</strong>.</span>','<span class="en">No, I <strong>haven\'t</strong>.</span>']
+])}</div>`)
+]);
+
+// INTERMEDIATE
+def('past','الماضي البسيط','Simple Past','⏮️','ic4',['متوسط','A2','أزمنة'],[
+  sec('📋','ic4','متى نستخدمه؟','',`<div class="lesson">${tbl(['الاستخدام','مثال'],[
+  ['حدث انتهى في وقت محدد','<span class="en">I went to school yesterday.</span>'],
+  ['سلسلة أحداث ماضية','<span class="en">I woke up, ate, and left.</span>'],
+  ['عادة ماضية','<span class="en">When I was a child, I played football.</span>']
+])}${g2([['yesterday','أمس'],['last week/year','الأسبوع الماضي'],['ago','منذ (3 days ago)'],['in 2020','في سنة معينة']])}</div>`),
+  sec('📝','ic5','تصريف الأفعال','منتظمة وشاذة',`<div class="lesson"><h4>الأفعال المنتظمة — أضف ed</h4>${ex("play→<strong>played</strong> · live→<strong>lived</strong> · study→<strong>studied</strong> · stop→<strong>stopped</strong>")}<h4>أهم الأفعال الشاذة</h4>${tbl(['أصل','ماضي','معنى'],[
+  ['<span class="en">go</span>','<span class="en em">went</span>','يذهب'],
+  ['<span class="en">come</span>','<span class="en em">came</span>','يأتي'],
+  ['<span class="en">see</span>','<span class="en em">saw</span>','يرى'],
+  ['<span class="en">eat</span>','<span class="en em">ate</span>','يأكل'],
+  ['<span class="en">take</span>','<span class="en em">took</span>','يأخذ'],
+  ['<span class="en">make</span>','<span class="en em">made</span>','يصنع'],
+  ['<span class="en">know</span>','<span class="en em">knew</span>','يعرف'],
+  ['<span class="en">give</span>','<span class="en em">gave</span>','يعطي'],
+  ['<span class="en">get</span>','<span class="en em">got</span>','يحصل'],
+  ['<span class="en">write</span>','<span class="en em">wrote</span>','يكتب'],
+  ['<span class="en">speak</span>','<span class="en em">spoke</span>','يتكلم']
+])}${formula("النفي: <span class='v'>didn't</span> + verb (أصل)<br>السؤال: <span class='v'>Did</span> + subject + verb (أصل)?")}${warn("⚠️ مع didn't و Did يعود الفعل لأصله: ❌ 'Did he went?' ✅ 'Did he go?'")}</div>`)
+]);
+
+def('past-c','الماضي المستمر','Past Continuous — was/were + ing','🔁','ic5',['متوسط','B1','أزمنة'],[
+  sec('📋','ic5','التركيب والاستخدام','',`<div class="lesson">${formula("<span class='v'>was/were</span> + <span class='o'>verb + ing</span><span class='ar'>I/He/She/It → was · You/We/They → were</span>")}${tbl(['الاستخدام','مثال'],[
+  ['فعل مستمر في وقت معين','<span class="en">At 8 PM, I was watching TV.</span>'],
+  ['فعل مستمر قُطع بحدث','<span class="en">I was sleeping when the phone rang.</span>'],
+  ['فعلان في نفس الوقت','<span class="en">While she was cooking, he was watching TV.</span>']
+])}${ex("They <strong>were playing</strong> football when it started raining.","كانوا يلعبون كرة القدم عندما بدأ المطر.")}${cmp([['good','Simple Past — انتهى',"I watched a movie.",''],['good','Past Continuous — كان مستمراً',"I was watching a movie (at 9 PM).",'']])}</div>`)
+]);
+
+def('future','أزمنة المستقبل','Will / Going to','🚀','ic6',['متوسط','A2','أزمنة'],[
+  sec('⚡','ic6','Will — قرارات فورية وتوقعات','',`<div class="lesson">${formula("<span class='v'>will</span> + verb (أصل)<span class='ar'>المختصر: 'll — النفي: won't</span>")}${tbl(['الاستخدام','مثال'],[
+  ['قرار فوري','<span class="en">I\'ll have the pizza, please.</span>'],
+  ['عرض ووعد','<span class="en">I\'ll help you. / I will never forget you.</span>'],
+  ['توقعات','<span class="en">I think it will rain tomorrow.</span>']
+])}</div>`),
+  sec('📅','ic7','Going to — خطط مسبقة','',`<div class="lesson">${formula("<span class='v'>am/is/are</span> + <span class='o'>going to</span> + verb")}${ex("I <strong>am going to</strong> visit my parents this weekend.","خطة مسبقة")}${ex("Look at those clouds — it's <strong>going to</strong> rain.","توقع بدليل")}${cmp([['good','Will — قرار فوري',"I'll have coffee. (فكرت الآن)",''],['good','Going to — خطة مسبقة',"I'm going to buy a car. (خططت)",'']])}</div>`)
+]);
+
+def('modals','الأفعال الناقصة','can/could/should/must/might/would','🎯','ic7',['متوسط','B1'],[
+  sec('💪','ic7','Can / Could','القدرة والإذن',`<div class="lesson">${tbl(['الفعل','الاستخدام','مثال'],[
+  ['<span class="en em">can</span>','القدرة (مضارع)','<span class="en">I can swim.</span>'],
+  ['<span class="en em">can</span>','طلب الإذن','<span class="en">Can I use your phone?</span>'],
+  ['<span class="en em">could</span>','القدرة (ماضي)','<span class="en">I could run fast when I was young.</span>'],
+  ['<span class="en em">could</span>','طلب مؤدب','<span class="en">Could you help me, please?</span>']
+])}</div>`),
+  sec('⚠️','ic1','Should / Must / Have to','النصيحة والضرورة',`<div class="lesson">${tbl(['الفعل','الاستخدام','مثال'],[
+  ['<span class="en em">should</span>','نصيحة','<span class="en">You should see a doctor.</span>'],
+  ['<span class="en em">must</span>','إلزام قوي','<span class="en">You must wear a seatbelt.</span>'],
+  ['<span class="en em">mustn\'t</span>','نهي قوي','<span class="en">You mustn\'t smoke here.</span>'],
+  ['<span class="en em">have to</span>','ضرورة خارجية','<span class="en">I have to work on Saturdays.</span>'],
+  ['<span class="en em">don\'t have to</span>','ليس ضرورياً','<span class="en">You don\'t have to come.</span>']
+])}${cmp([['bad','mustn\'t — محظور تماماً',"You mustn't park here. ❌",''],['good','don\'t have to — اختياري',"You don't have to come. ✅",'']])}</div>`),
+  sec('🎲','ic2','Might / May / Would','الاحتمال والتهذيب',`<div class="lesson">${tbl(['الفعل','الاستخدام','مثال'],[
+  ['<span class="en em">might/may</span>','احتمال (50%)','<span class="en">I might come tomorrow.</span>'],
+  ['<span class="en em">would</span>','طلب مؤدب جداً','<span class="en">Would you like some tea?</span>']
+])}</div>`)
+]);
+
+def('comp','المقارنة والتفضيل','bigger / the biggest / as...as','⚖️','ic2',['متوسط','B1'],[
+  sec('⚖️','ic2','Comparative — أكبر من','',`<div class="lesson">${formula("صفة قصيرة: <span class='v'>adj + er</span> + than<br>صفة طويلة: <span class='v'>more</span> + adj + than")}${tbl(['','','مثال'],[
+  ['<span class="en">big →</span>','<span class="en em">bigger than</span>','<span class="en">He is bigger than me.</span>'],
+  ['<span class="en">beautiful →</span>','<span class="en em">more beautiful than</span>','<span class="en">She is more beautiful.</span>'],
+  ['<span class="en">good →</span>','<span class="en em">better than ⚠️</span>','<span class="en">This is better than that.</span>'],
+  ['<span class="en">bad →</span>','<span class="en em">worse than ⚠️</span>','<span class="en">Today is worse than yesterday.</span>']
+])}</div>`),
+  sec('🏆','ic3','Superlative — الأكبر','',`<div class="lesson">${formula("<span class='v'>the</span> + adj + <span class='o'>est</span><br><span class='v'>the most</span> + adj (للصفات الطويلة)")}${tbl(['','','مثال'],[
+  ['<span class="en">big →</span>','<span class="en em">the biggest</span>','<span class="en">He is the biggest in the class.</span>'],
+  ['<span class="en">beautiful →</span>','<span class="en em">the most beautiful</span>','<span class="en">It\'s the most beautiful city.</span>'],
+  ['<span class="en">good →</span>','<span class="en em">the best ⚠️</span>','<span class="en">This is the best movie ever!</span>']
+])}<h3>as...as — بنفس الدرجة</h3>${ex("I am <strong>as tall as</strong> my brother. / This is <strong>not as expensive as</strong> that.")}</div>`)
+]);
+
+def('ing','كل استخدامات ING','Gerund & Present Participle','➕','ic3',['متوسط','B1'],[
+  sec('1️⃣','ic3','ING في المضارع المستمر','',`<div class="lesson">${ex("I <strong>am eating</strong> now. / She <strong>is studying</strong>. / They <strong>are playing</strong>.")}</div>`),
+  sec('2️⃣','ic4','ING كاسم — Gerund','فعل يعمل عمل الاسم',`<div class="lesson">${ex("<strong>Swimming</strong> is good for health.","السباحة مفيدة للصحة. (فاعل)")}${ex("I love <strong>reading</strong> books. / He stopped <strong>smoking</strong>.")}${tbl(['أفعال','مثال'],[
+  ['<span class="bdg b-bl">enjoy/like/love/hate</span>','<span class="en">I enjoy swimming.</span>'],
+  ['<span class="bdg b-gr">stop/finish/avoid/keep</span>','<span class="en">Stop talking!</span>'],
+  ['<span class="bdg b-go">suggest/recommend/mind</span>','<span class="en">I suggest going early.</span>']
+])}</div>`),
+  sec('3️⃣','ic5','ING بعد حروف الجر','',`<div class="lesson">${ex("I'm interested <strong>in learning</strong> English.")}${ex("She left <strong>without saying</strong> goodbye.")}${ex("He is good <strong>at cooking</strong>. / Thank you <strong>for coming</strong>.")}</div>`)
+]);
+
+def('adverbs','الظروف','quickly/very/always/already','⚡','ic4',['متوسط','B1'],[
+  sec('📋','ic4','أنواع الظروف','',`<div class="lesson">${tbl(['النوع','أمثلة','جملة'],[
+  ['الحال (كيف؟)','<span class="en">quickly, slowly, well</span>','<span class="en">She sings <strong>beautifully</strong>.</span>'],
+  ['الزمن (متى؟)','<span class="en">now, today, soon, already</span>','<span class="en">I\'ll call you <strong>soon</strong>.</span>'],
+  ['التكرار (كم مرة؟)','<span class="en">always, usually, often, never</span>','<span class="en">I <strong>always</strong> wake up early.</span>'],
+  ['الدرجة','<span class="en">very, quite, too, enough, so</span>','<span class="en">She is <strong>very</strong> tall.</span>']
+])}${rule("📌 موضع ظروف التكرار","قبل الفعل الرئيسي / بعد be:<br>I <strong>always</strong> eat breakfast. / She is <strong>often</strong> late.")}</div>`)
+]);
+
+def('conj','أدوات الربط','and/but/because/although/however','🔗','ic5',['متوسط','B1'],[
+  sec('🔗','ic5','الروابط الأساسية','',`<div class="lesson">${tbl(['الرابط','المعنى','مثال'],[
+  ['<span class="en em">and</span>','و','<span class="en">I like tea <strong>and</strong> coffee.</span>'],
+  ['<span class="en em">but</span>','لكن','<span class="en">I\'m tired, <strong>but</strong> I\'ll come.</span>'],
+  ['<span class="en em">or</span>','أو','<span class="en">Tea <strong>or</strong> coffee?</span>'],
+  ['<span class="en em">so</span>','لذلك','<span class="en">I was tired, <strong>so</strong> I slept.</span>'],
+  ['<span class="en em">because</span>','لأن','<span class="en">I left <strong>because</strong> I was tired.</span>'],
+  ['<span class="en em">although</span>','رغم أن','<span class="en"><strong>Although</strong> it was cold, we went out.</span>'],
+  ['<span class="en em">when</span>','عندما','<span class="en">Call me <strong>when</strong> you arrive.</span>'],
+  ['<span class="en em">if</span>','إذا','<span class="en"><strong>If</strong> it rains, I\'ll stay home.</span>'],
+  ['<span class="en em">however</span>','ومع ذلك','<span class="en">I was tired. <strong>However</strong>, I came.</span>'],
+  ['<span class="en em">unless</span>','إلا إذا','<span class="en">I won\'t go <strong>unless</strong> you come.</span>']
+])}</div>`)
+]);
+
+def('tag-q','Question Tags',"You're tired, aren't you?",'🏷️','ic6',['متوسط','B1'],[
+  sec('📋','ic6','ما هي Question Tags؟','',`<div class="lesson">${rule("📌 القاعدة الذهبية","جملة إيجابية → tag سلبية · جملة سلبية → tag إيجابية")}${tbl(['الجملة','الـ Tag'],[
+  ["<span class='en'>You're tired,</span>",'<span class="en em">aren\'t you?</span>'],
+  ["<span class='en'>She is a doctor,</span>",'<span class="en em">isn\'t she?</span>'],
+  ["<span class='en'>He isn\'t here,</span>",'<span class="en em">is he?</span>'],
+  ["<span class='en'>You like coffee,</span>",'<span class="en em">don\'t you?</span>'],
+  ["<span class='en'>She works here,</span>",'<span class="en em">doesn\'t she?</span>'],
+  ["<span class='en'>They went to Paris,</span>",'<span class="en em">didn\'t they?</span>'],
+  ["<span class='en'>You will help me,</span>",'<span class="en em">won\'t you?</span>'],
+  ["<span class='en'>She can drive,</span>",'<span class="en em">can\'t she?</span>'],
+  ["<span class='en'>I am right,</span>",'<span class="en em">aren\'t I? ⚠️</span>']
+])}</div>`)
+]);
+
+def('few-little','Few / A few / Little / A little','من أكثر ما يُربك المتعلمين','🔢','ic7',['متوسط','B1'],[
+  sec('📋','ic7','الفرق الأساسي','',`<div class="lesson">${tbl(['','مع المعدود','مع غير المعدود','المعنى'],[
+  ['بدون A 😢','<span class="en em">few</span>','<span class="en em">little</span>','قليل جداً (سلبي)'],
+  ['مع A 🙂','<span class="en em">a few</span>','<span class="en em">a little</span>','قليل لكن كافٍ (إيجابي)']
+])}${cmp([['bad','few/little — سلبي 😢',"I have <strong>few</strong> friends.","أصدقائي قليلون جداً. (مؤسف)"],['good','a few/a little — إيجابي 🙂',"I have <strong>a few</strong> friends.","عندي بعض الأصدقاء. (كافٍ)"]])}${ex("There is <strong>little</strong> hope. 😔 / There is <strong>a little</strong> hope. 🙂")}</div>`)
+]);
+
+def('used-to','Used To / Be Used To / Get Used To','الفرق بين الثلاثة','🔙','ic5',['متوسط','B1'],[
+  sec('1️⃣','ic5','Used To — عادة ماضية انتهت','',`<div class="lesson">${formula("<span class='v'>used to</span> + verb (أصل)")}${ex("I <strong>used to play</strong> football every day.","كنت ألعب كرة القدم كل يوم. (لم أعد أفعل)")}${exn("I <strong>didn't use to</strong> like vegetables, but now I love them.")}</div>`),
+  sec('2️⃣','ic6','Be Used To — اعتدت عليه','',`<div class="lesson">${formula("<span class='v'>am/is/are</span> + <span class='o'>used to</span> + noun/ing")}${ex("I <strong>am used to waking up</strong> early.","اعتدت — ليس صعباً")}</div>`),
+  sec('3️⃣','ic7','Get Used To — في طور التعود','',`<div class="lesson">${formula("<span class='v'>get used to</span> + noun/ing")}${ex("I'm <strong>getting used to</strong> waking up early.","في طور التعود")}${tbl(['القاعدة','المعنى','مثال'],[
+  ['<span class="en em">used to + inf</span>','عادة ماضية انتهت','<span class="en">I used to smoke. (توقفت)</span>'],
+  ['<span class="en em">be used to + ing</span>','اعتدت عليه الآن','<span class="en">I am used to it.</span>'],
+  ['<span class="en em">get used to + ing</span>','في طور التعود','<span class="en">I\'m getting used to it.</span>']
+])}</div>`)
+]);
+
+// ADVANCED
+def('pperf','المضارع التام','Present Perfect — have/has + V3','✅','ic6',['متقدم','B1','أزمنة'],[
+  sec('📋','ic6','التركيب والاستخدام','',`<div class="lesson">${formula("<span class='v'>have/has</span> + <span class='o'>past participle (V3)</span>")}${tbl(['الاستخدام','مثال'],[
+  ['تجربة في الحياة','<span class="en">I have visited Paris.</span>'],
+  ['حدث انتهى ونتيجته موجودة','<span class="en">She has broken her leg.</span>'],
+  ['مع for و since','<span class="en">I have lived here for 5 years / since 2019.</span>']
+])}${cmp([['bad','Simple Past — وقت محدد',"I went to Paris <strong>in 2020</strong>.",''],['good','Present Perfect — تجربة',"I have been to Paris. (بدون وقت)",'']])}</div>`),
+  sec('📌','ic7','just/already/yet/ever/never/for/since','',`<div class="lesson">${tbl(['كلمة','المعنى','مثال'],[
+  ['<span class="en em">just</span>','للتو','<span class="en">I\'ve <strong>just</strong> arrived.</span>'],
+  ['<span class="en em">already</span>','بالفعل','<span class="en">She has <strong>already</strong> left.</span>'],
+  ['<span class="en em">yet</span>','بعد (نفي/سؤال)','<span class="en">I haven\'t eaten <strong>yet</strong>.</span>'],
+  ['<span class="en em">ever</span>','في أي وقت','<span class="en">Have you <strong>ever</strong> tried?</span>'],
+  ['<span class="en em">never</span>','أبداً','<span class="en">I\'ve <strong>never</strong> been there.</span>'],
+  ['<span class="en em">for</span>','لمدة','<span class="en">I\'ve lived here <strong>for</strong> 3 years.</span>'],
+  ['<span class="en em">since</span>','منذ','<span class="en">Since <strong>2018</strong>.</span>']
+])}</div>`)
+]);
+
+def('past-perf','الماضي التام','Past Perfect — had + V3','⏳','ic7',['متقدم','B2','أزمنة'],[
+  sec('📋','ic7','التركيب والاستخدام','حدث قبل حدث آخر في الماضي',`<div class="lesson">${formula("<span class='v'>had</span> + <span class='o'>V3</span><span class='ar'>نفس التصريف للجميع</span>")}${ex("When I arrived, she <strong>had already left</strong>.","عندما وصلت، هي كانت قد غادرت.")}${ex("He was tired because he <strong>hadn't slept</strong> well.","كان متعباً لأنه لم يكن قد نام جيداً.")}</div>`)
+]);
+
+def('pperf-c','المضارع التام المستمر','Present Perfect Continuous — have been + ing','🔁','ic1',['متقدم','B1','أزمنة'],[
+  sec('📋','ic1','التركيب والاستخدام','',`<div class="lesson">${formula("<span class='v'>have/has been</span> + <span class='o'>verb + ing</span>")}${ex("I <strong>have been waiting</strong> for you for an hour!","أنا أنتظرك منذ ساعة! (ما زلت أنتظر)")}${ex("She <strong>has been working</strong> on this project since Monday.")}${cmp([['good','Present Perfect — النتيجة',"I have studied English. (انتهيت)",''],['good','Pres. Perf. Cont. — المدة',"I have been studying for 2 hours.",'']])}</div>`)
+]);
+
+def('passive','المبني للمجهول','Passive Voice — be + past participle','🔃','ic8',['متقدم','B1'],[
+  sec('📋','ic8','التركيب — جدول كل الأزمنة','',`<div class="lesson">${formula("<span class='v'>be (بالزمن المناسب)</span> + <span class='o'>past participle (V3)</span>")}${tbl(['الزمن','معلوم','مجهول'],[
+  ['مضارع بسيط','<span class="en">They clean the room.</span>','<span class="en em">The room is cleaned.</span>'],
+  ['ماضي بسيط','<span class="en">Someone stole my car.</span>','<span class="en em">My car was stolen.</span>'],
+  ['مضارع تام','<span class="en">They have built a bridge.</span>','<span class="en em">A bridge has been built.</span>'],
+  ['مستقبل','<span class="en">They will deliver it.</span>','<span class="en em">It will be delivered.</span>'],
+  ['should/must','<span class="en">They should clean it.</span>','<span class="en em">It should be cleaned.</span>']
+])}${ex("This novel <strong>was written by</strong> Naguib Mahfouz.","هذه الرواية كتبها نجيب محفوظ.")}</div>`)
+]);
+
+def('cond','جمل الشرط الأربعة','Zero/First/Second/Third Conditional','🔀','ic1',['متقدم','B2'],[
+  sec('0️⃣','ic1','Zero — حقائق ثابتة','if + present, present',`<div class="lesson">${formula("If + <span class='v'>present simple</span>, <span class='o'>present simple</span>")}${ex("If you heat water to 100°C, it <strong>boils</strong>.","إذا سخّنت الماء لـ100 درجة، يغلي.")}</div>`),
+  sec('1️⃣','ic2','First — احتمال حقيقي','if + present, will',`<div class="lesson">${formula("If + <span class='v'>present simple</span>, <span class='o'>will + verb</span>")}${ex("If it rains tomorrow, I <strong>will</strong> stay home.","إذا أمطر غداً، سأبقى في البيت.")}</div>`),
+  sec('2️⃣','ic3','Second — غير محتمل','if + past, would',`<div class="lesson">${formula("If + <span class='v'>past simple</span>, <span class='o'>would + verb</span>")}${ex("If I <strong>had</strong> a million dollars, I <strong>would</strong> travel the world.","لو كان عندي مليون دولار، كنت سأسافر. (لكنني لا أملكها)")}</div>`),
+  sec('3️⃣','ic4','Third — الماضي المستحيل','if + past perfect, would have',`<div class="lesson">${formula("If + <span class='v'>past perfect</span>, <span class='o'>would have + V3</span>")}${ex("If I <strong>had studied</strong> harder, I <strong>would have passed</strong>.","لو كنت ذاكرت أكثر، كنت نجحت. (لكنني لم أذاكر)")}</div>`)
+]);
+
+def('reported','الكلام المنقول','He said that... / She told me...','💬','ic2',['متقدم','B2'],[
+  sec('💬','ic2','تحويل الكلام المباشر','',`<div class="lesson">${tbl(['المباشر','يصبح'],[
+  ['<span class="en">present simple</span>','<span class="en em">past simple</span>'],
+  ['<span class="en">will</span>','<span class="en em">would</span>'],
+  ['<span class="en">can</span>','<span class="en em">could</span>'],
+  ['<span class="en">past simple</span>','<span class="en em">past perfect (had + V3)</span>']
+])}${ex('"I am tired." → She said (that) she <strong>was</strong> tired.')}${ex('"I will come." → He said he <strong>would</strong> come.')}${cmp([['good','say — بدون شخص',"She <strong>said</strong> she was tired.",''],['good','tell — مع شخص',"She <strong>told me</strong> she was tired.",'']])}</div>`)
+]);
+
+def('relative','الجمل الوصفية','who/which/that/where/when/whose','🔗','ic3',['متقدم','B2'],[
+  sec('📋','ic3','الضمائر الوصلية','',`<div class="lesson">${tbl(['الضمير','يُستخدم مع','مثال'],[
+  ['<span class="en em">who</span>','أشخاص','<span class="en">The man <strong>who</strong> called you is my uncle.</span>'],
+  ['<span class="en em">which</span>','أشياء وحيوانات','<span class="en">The book <strong>which</strong> I read was amazing.</span>'],
+  ['<span class="en em">that</span>','أشخاص وأشياء','<span class="en">The car <strong>that</span> I bought is red.</span>'],
+  ['<span class="en em">where</span>','أماكن','<span class="en">The city <strong>where</strong> I was born is Cairo.</span>'],
+  ['<span class="en em">whose</span>','ملكية','<span class="en">The girl <strong>whose</strong> bag was stolen is crying.</span>']
+])}</div>`)
+]);
+
+def('gerund','Gerund vs Infinitive','enjoy reading / want to read','📚','ic4',['متقدم','B2'],[
+  sec('📖','ic4','أفعال + ING دائماً','',`<div class="lesson">${tbl(['أفعال','مثال'],[
+  ['<span class="en em">enjoy/like/love/hate</span>','<span class="en">I enjoy <strong>swimming</strong>.</span>'],
+  ['<span class="en em">finish/stop/avoid/keep</span>','<span class="en">He stopped <strong>smoking</strong>.</span>'],
+  ['<span class="en em">suggest/recommend/mind</span>','<span class="en">I suggest <strong>going</strong> early.</span>'],
+  ['<span class="en em">miss/consider/imagine</span>','<span class="en">I miss <strong>seeing</strong> you.</span>']
+])}</div>`),
+  sec('📝','ic5','أفعال + to + verb دائماً','',`<div class="lesson">${tbl(['أفعال','مثال'],[
+  ['<span class="en em">want/need/would like</span>','<span class="en">I want <strong>to eat</strong>.</span>'],
+  ['<span class="en em">decide/plan/hope</span>','<span class="en">I decided <strong>to leave</strong>.</span>'],
+  ['<span class="en em">promise/refuse/agree</span>','<span class="en">He refused <strong>to help</strong>.</span>']
+])}</div>`),
+  sec('⚖️','ic6','أفعال تقبل الاثنين — المعنى يختلف!','',`<div class="lesson"><h4>stop</h4>${cmp([['good','+ ing = توقف عن',"He stopped <strong>smoking</strong>.",''],['good','+ to = توقف لأجل',"He stopped <strong>to smoke</strong>.",'']])}<h4>remember / forget</h4>${cmp([['good','+ ing = تذكّر شيء حدث',"I remember <strong>seeing</strong> him.",''],['good','+ to = لا تنسى تفعل',"Remember <strong>to call</strong> me!",'']])}</div>`)
+]);
+
+def('wish','Wish','I wish I were... / I wish I had...','⭐','ic6',['متقدم','B2'],[
+  sec('1️⃣','ic6','Wish لتمني الحاضر','wish + past simple',`<div class="lesson">${formula("Wish + <span class='v'>past simple</span>")}${ex("I <strong>wish I were</strong> taller.","أتمنى لو كنت أطول. (لكنني لست كذلك)")}${ex("I <strong>wish I had</strong> more money.","أتمنى لو كان معي مزيد من المال.")}</div>`),
+  sec('2️⃣','ic7','Wish لتمني الماضي','wish + past perfect',`<div class="lesson">${formula("Wish + <span class='v'>past perfect (had + V3)</span>")}${ex("I <strong>wish I had studied</strong> harder.","أتمنى لو كنت ذاكرت أكثر. (لكنني لم أفعل)")}${ex("I <strong>wish I hadn't said</strong> that.","أتمنى لو لم أقل ذلك.")}</div>`)
+]);
+
+def('phrasal','Phrasal Verbs','get up / give up / look for / put off...','💬','ic7',['متقدم','B1'],[
+  sec('📋','ic7','أهم Phrasal Verbs','',`<div class="lesson">${rule("⚠️ مهم","معنى الـ Phrasal Verb لا يمكن تخمينه من الكلمتين منفردتين — لازم تحفظه.")}${tbl(['تعبير','معنى','مثال'],[
+  ['<span class="en em">get up</span>','يستيقظ','<span class="en">I get up at 7.</span>'],
+  ['<span class="en em">give up</span>','يستسلم','<span class="en">Don\'t give up!</span>'],
+  ['<span class="en em">look for</span>','يبحث عن','<span class="en">I\'m looking for my keys.</span>'],
+  ['<span class="en em">look after</span>','يهتم بـ','<span class="en">She looks after her mother.</span>'],
+  ['<span class="en em">put off</span>','يؤجل','<span class="en">Don\'t put off your work.</span>'],
+  ['<span class="en em">take off</span>','يقلع/يخلع','<span class="en">The plane took off.</span>'],
+  ['<span class="en em">find out</span>','يكتشف','<span class="en">I found out the truth.</span>'],
+  ['<span class="en em">run out of</span>','ينفد','<span class="en">We ran out of milk.</span>'],
+  ['<span class="en em">break down</span>','يتعطل','<span class="en">My car broke down.</span>'],
+  ['<span class="en em">come across</span>','يصادف بالصدفة','<span class="en">I came across an old friend.</span>'],
+  ['<span class="en em">turn on/off</span>','يشغّل/يطفئ','<span class="en">Turn on the TV.</span>'],
+  ['<span class="en em">carry on</span>','يواصل','<span class="en">Carry on with your work.</span>']
+])}</div>`)
+]);
+
+// ══ CURRICULUM ══
+const CUR = {
+  easy:{ids:['sentence','verb-be','verb-have','verb-do','pronouns','ps','pc','articles','plural','countable','adjectives','prepositions','some-any','much-many','do-q','wh-q','negation'],total:17},
+  mid:{ids:['short-ans','past','past-c','future','modals','comp','ing','adverbs','conj','tag-q','few-little'],total:11},
+  hard:{ids:['used-to','pperf','past-perf','pperf-c','passive','cond','reported','relative','gerund','wish','phrasal'],total:11}
+};
+
+// ══ PROGRESS & FAVORITES ══
+let DONE={},FAVS=new Set();
+function loadData(){try{const d=localStorage.getItem('egv5d'),f=localStorage.getItem('egv5f');if(d)DONE=JSON.parse(d);if(f)FAVS=new Set(JSON.parse(f));}catch(e){}}
+function saveData(){try{localStorage.setItem('egv5d',JSON.stringify(DONE));localStorage.setItem('egv5f',JSON.stringify([...FAVS]));}catch(e){}}
+function markDone(id,e){if(e)e.stopPropagation();DONE[id]?delete DONE[id]:(DONE[id]=true);saveData();toast(DONE[id]?'✅ تم إتمام الدرس!':'↩️ إلغاء الإتمام');refreshPageBtns(id);refreshStats();}
+function toggleFav(id,e){if(e)e.stopPropagation();FAVS.has(id)?FAVS.delete(id):FAVS.add(id);saveData();toast(FAVS.has(id)?'⭐ أُضيف للمفضلة!':'تم الحذف من المفضلة');refreshPageBtns(id);refreshStats();}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+function refreshPageBtns(id){const db=document.getElementById('pb-d-'+id),fb=document.getElementById('pb-f-'+id);if(db){db.className='p-btn'+(DONE[id]?' is-done':'');db.textContent=DONE[id]?'✅ تم إتمامه':'☑️ أتمم الدرس';}if(fb){fb.className='p-btn'+(FAVS.has(id)?' is-fav':'');fb.textContent=FAVS.has(id)?'⭐ محفوظ':'☆ مفضلة';}}
+function refreshStats(){
+  document.getElementById('stat-done').textContent=Object.keys(DONE).length;
+  document.getElementById('stat-fav').textContent=FAVS.size;
+  Object.entries(CUR).forEach(([lv,c])=>{
+    const done=c.ids.filter(id=>DONE[id]).length,pct=Math.round(done/c.total*100);
+    const f=document.getElementById('lv-'+lv+'-fill'),tx=document.getElementById('lv-'+lv+'-txt'),pc=document.getElementById('lv-'+lv+'-pct'),lc=document.getElementById('lc-'+lv);
+    if(f)f.style.width=pct+'%';if(tx)tx.textContent=done+'/'+c.total+' درس';if(pc)pc.textContent=pct+'%';if(lc)lc.textContent=done+'/'+c.total;
+  });
+  document.querySelectorAll('[data-lid]').forEach(row=>{const id=row.dataset.lid;const d=row.querySelector('.done-dot');if(d)d.className='done-dot'+(DONE[id]?' on':'');});
+  renderFavQuick();
+}
+
+// ══ LEVEL PAGES ══
+function buildLevel(lv){
+  const el=document.getElementById('lv-'+lv+'-list');if(!el||el.dataset.built)return;el.dataset.built='1';
+  el.innerHTML=CUR[lv].ids.map(id=>{const d=LD[id]||{};return`<div class="tc" data-lid="${id}" onclick="nav('${id}')"><div class="tc-ic ${d.bg||'ic1'}">${d.icon||'📖'}</div><div class="tc-info"><div class="tc-title">${d.title||id}</div><div class="tc-sub">${d.sub||''}</div></div><div class="tc-right"><div class="done-dot${DONE[id]?' on':''}"></div><button onclick="toggleFav('${id}',event)" style="border:none;background:none;font-size:15px;cursor:pointer">${FAVS.has(id)?'⭐':'☆'}</button></div></div>`;}).join('');
+}
+
+// ══ FAV PAGE ══
+function renderFavPage(){
+  const el=document.getElementById('fav-list');if(!el)return;
+  if(!FAVS.size){el.innerHTML='<div class="fav-empty"><div class="fei">⭐</div><p>لم تضف أي درس للمفضلة بعد</p><p style="font-size:12px;margin-top:6px">اضغط ☆ في أي درس لإضافته</p></div>';return;}
+  el.innerHTML=[...FAVS].map(id=>{const d=LD[id]||{};return`<div class="tc" onclick="nav('${id}')"><div class="tc-ic ${d.bg||'ic1'}">${d.icon||'📖'}</div><div class="tc-info"><div class="tc-title">${d.title||id}</div><div class="tc-sub">${d.sub||''}</div></div><div class="tc-right"><div class="done-dot${DONE[id]?' on':''}"></div><button onclick="toggleFav('${id}',event)" style="border:none;background:none;font-size:15px;cursor:pointer">⭐</button></div></div>`;}).join('');
+}
+
+function renderFavQuick(){
+  const el=document.getElementById('fav-quick');if(!el)return;
+  if(!FAVS.size){el.innerHTML='<div style="color:var(--muted);font-size:13px;padding:4px 0">لا يوجد دروس محفوظة بعد</div>';return;}
+  el.innerHTML=[...FAVS].slice(0,4).map(id=>{const d=LD[id]||{};return`<div class="tc" onclick="nav('${id}')"><div class="tc-ic ${d.bg||'ic1'}">${d.icon||'📖'}</div><div class="tc-info"><div class="tc-title">${d.title||id}</div></div></div>`;}).join('');
+}
+
+// ══ LESSON PAGE BUILDER ══
+function buildLesson(id){
+  if(document.getElementById('page-'+id))return;
+  const d=LD[id];if(!d)return;
+  const pg=document.createElement('div');pg.className='page';pg.id='page-'+id;
+  const tags=(d.tags||[]).map(t=>`<span class="p-tag">${t}</span>`).join('');
+  let html=`<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-icon ${d.bg}">${d.icon}</div><div><div class="p-hero-title">${d.title}</div><div class="p-hero-sub">${d.sub}</div><div class="p-hero-tags">${tags}</div></div></div><div class="p-actions"><button id="pb-d-${id}" class="p-btn${DONE[id]?' is-done':''}" onclick="markDone('${id}')">${DONE[id]?'✅ تم إتمامه':'☑️ أتمم الدرس'}</button><button id="pb-f-${id}" class="p-btn${FAVS.has(id)?' is-fav':''}" onclick="toggleFav('${id}')">${FAVS.has(id)?'⭐ محفوظ':'☆ مفضلة'}</button></div></div><div class="lesson-body">`;
+  d.secs.forEach((s,i)=>{const sid=`a-${id}-${i}`;html+=`<div class="acc${i===0?' open':''}" id="${sid}"><div class="acc-head" onclick="toggleAcc('${sid}')"><div class="acc-ic ${s.bg}">${s.icon}</div><div class="acc-info"><div class="acc-title">${s.title}</div>${s.sub?`<div class="acc-sub">${s.sub}</div>`:''}</div><div class="acc-arr">›</div></div><div class="acc-body">${s.html}</div></div>`;});
+  html+='</div>';pg.innerHTML=html;document.getElementById('dyn').appendChild(pg);
+}
+function toggleAcc(id){document.getElementById(id).classList.toggle('open');}
+
+// ══ NAVIGATION ══
+const VERB_IDS=['verb-be','verb-have','verb-do','verb-get','verb-mdo','verb-take','verb-go','verb-come','verb-lmh'];
+let CUR_PAGE='home';
+function nav(id){
+  if(LD[id])buildLesson(id);
+  if(id.startsWith('lv-'))buildLevel(id.replace('lv-',''));
+  if(id==='favorites')renderFavPage();
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg=document.getElementById('page-'+id);if(pg)pg.classList.add('active');
+  CUR_PAGE=id;closeSB();window.scrollTo(0,0);
+  document.querySelectorAll('.bn').forEach(b=>b.classList.remove('active'));
+  if(id==='home')document.getElementById('bn-home').classList.add('active');
+  else if(id.startsWith('lv-'))document.getElementById('bn-lvl').classList.add('active');
+  else if(id==='favorites')document.getElementById('bn-fav').classList.add('active');
+  else if(VERB_IDS.includes(id))document.getElementById('bn-vrb').classList.add('active');
+  if(id.startsWith('lv-'))refreshStats();
+}
+
+// ══ SIDEBAR ══
+function openSB(){document.getElementById('sb').classList.add('open');document.getElementById('sbOv').classList.add('open');}
+function closeSB(){document.getElementById('sb').classList.remove('open');document.getElementById('sbOv').classList.remove('open');}
+
+// ══ SEARCH ══
+const SIDX=Object.entries(LD).map(([id,d])=>({id,title:d.title,sub:d.sub,icon:d.icon,bg:d.bg}));
+function openSearch(){document.getElementById('sOv').classList.add('open');setTimeout(()=>document.getElementById('sInp').focus(),80);}
+function closeSearch(){document.getElementById('sOv').classList.remove('open');document.getElementById('sInp').value='';document.getElementById('sRes').innerHTML='<div class="s-empty">ابدأ الكتابة للبحث...</div>';}
+function closeSO(e){if(e.target===document.getElementById('sOv'))closeSearch();}
+function doSearch(v){
+  const q=v.trim().toLowerCase(),res=document.getElementById('sRes');
+  if(!q){res.innerHTML='<div class="s-empty">ابدأ الكتابة للبحث...</div>';return;}
+  const found=SIDX.filter(x=>x.title.toLowerCase().includes(q)||x.sub.toLowerCase().includes(q));
+  if(!found.length){res.innerHTML='<div class="s-empty">لا توجد نتائج 🔍</div>';return;}
+  res.innerHTML=found.map(x=>`<div class="s-item" onclick="closeSearch();nav('${x.id}')"><div class="s-icon ${x.bg}">${x.icon}</div><div><div class="s-title">${x.title}</div><div class="s-sub">${x.sub}</div></div></div>`).join('');
+}
+
+// ══ INIT ══
+loadData();refreshStats();
+</script>
+</body>
+</html>

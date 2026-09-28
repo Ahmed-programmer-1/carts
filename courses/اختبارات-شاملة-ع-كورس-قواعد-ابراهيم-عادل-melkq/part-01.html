@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كورس القواعد — دفتر الأستاذ التفاعلي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rakkas&family=Tajawal:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --board:#173229;
+  --board2:#1e3f33;
+  --chalk:#f2ecd9;
+  --paper:#faf6ea;
+  --paper2:#f0e9d6;
+  --ink:#26241c;
+  --ink-soft:#5b5646;
+  --mustard:#e7b23a;
+  --mustard-deep:#c88f1f;
+  --red:#c1443b;
+  --red-deep:#9c322a;
+  --green:#3e8e63;
+  --green-deep:#2c6b49;
+  --line: rgba(242,236,217,.14);
+  --shadow: 0 18px 40px -18px rgba(0,0,0,.55);
+  --radius: 16px;
+  --serif-ar:'Rakkas', serif;
+  --body-ar:'Tajawal', sans-serif;
+  --mono:'JetBrains Mono', monospace;
+}
+html[data-theme="light"]{
+  --board:#e9e2cd;
+  --board2:#ded4b7;
+  --chalk:#26241c;
+  --paper:#fffdf6;
+  --paper2:#f3ecd8;
+  --ink:#26241c;
+  --ink-soft:#6b6550;
+  --line: rgba(38,36,28,.12);
+  --shadow: 0 14px 30px -16px rgba(80,70,40,.35);
+}
+html[data-theme="light"] body{
+  background:
+    radial-gradient(1200px 700px at 12% -10%, rgba(231,178,58,.14), transparent 60%),
+    radial-gradient(900px 600px at 110% 10%, rgba(62,142,99,.10), transparent 55%),
+    var(--board);
+}
+html[data-theme="light"] .quiz-top,
+html[data-theme="light"] .ld-head{ color:#f2ecd9; }
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:
+    radial-gradient(1200px 700px at 12% -10%, rgba(231,178,58,.10), transparent 60%),
+    radial-gradient(900px 600px at 110% 10%, rgba(62,142,99,.14), transparent 55%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.015) 0px, rgba(255,255,255,.015) 1px, transparent 1px, transparent 34px),
+    var(--board);
+  color:var(--chalk);
+  font-family:var(--body-ar);
+  transition: background .25s, color .25s;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--mustard);color:var(--ink);}
+button{font-family:inherit;cursor:pointer;}
+a{color:inherit;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;}
+
+/* ---------- Topbar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  backdrop-filter:blur(10px);
+  background:linear-gradient(180deg, rgba(23,50,41,.96), rgba(23,50,41,.85));
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{max-width:1180px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand-badge{
+  width:46px;height:46px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #fff5, transparent 55%), conic-gradient(from 220deg, var(--mustard), var(--red), var(--green), var(--mustard));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-weight:700;color:var(--ink);
+  box-shadow:0 0 0 3px rgba(242,236,217,.12), var(--shadow);
+  flex-shrink:0;
+}
+.brand h1{font-family:var(--serif-ar);font-size:22px;margin:0;letter-spacing:.5px;color:var(--chalk);}
+.brand p{margin:0;font-size:12px;color:#c9c2a6;font-family:var(--mono);letter-spacing:.5px;}
+.nav-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.nav-btn{
+  border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--chalk);
+  padding:9px 16px;border-radius:999px;font-size:14px;font-weight:700;
+  transition:.18s;display:flex;align-items:center;gap:6px;
+}
+.nav-btn:hover{background:rgba(231,178,58,.14);border-color:var(--mustard);}
+.nav-btn.active{background:var(--mustard);color:var(--ink);border-color:var(--mustard);}
+
+/* ---------- Layout ---------- */
+main{max-width:1180px;margin:0 auto;padding:28px 20px 80px;}
+.view{display:none;animation:fadeUp .35s ease both;}
+.view.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ---------- Hero / stats strip ---------- */
+.hero{
+  border:1px solid var(--line); border-radius:22px; padding:28px;
+  background:linear-gradient(135deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
+  position:relative;overflow:hidden;margin-bottom:22px;
+}
+.hero:before{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(circle, rgba(242,236,217,.18) 1px, transparent 1px);
+  background-size:16px 16px; opacity:.25; pointer-events:none;
+}
+.hero h2{font-family:var(--serif-ar);font-size:32px;margin:0 0 6px;color:var(--mustard);position:relative;}
+.hero p.sub{margin:0 0 18px;color:#d8d2ba;max-width:640px;position:relative;line-height:1.9;font-size:15px;}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;position:relative;}
+.stat-chip{
+  background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+}
+.stat-chip .num{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--mustard);}
+.stat-chip .lbl{font-size:12.5px;color:#c9c2a6;margin-top:2px;}
+
+/* ---------- Search + filter ---------- */
+.toolrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:22px 0 16px;}
+.search{
+  flex:1;min-width:220px;background:rgba(0,0,0,.2);border:1px solid var(--line);border-radius:12px;
+  padding:11px 16px;color:var(--chalk);font-size:14px;
+}
+.search::placeholder{color:#a29c85;}
+.filter-chip{border:1px solid var(--line);background:rgba(255,255,255,.03);padding:9px 14px;border-radius:999px;font-size:13px;color:var(--chalk);}
+.filter-chip.active{background:var(--green);border-color:var(--green);color:#fff;}
+
+/* ---------- Lesson grid ---------- */
+.lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;}
+.lesson-card{
+  background:var(--paper); color:var(--ink); border-radius:var(--radius); padding:18px;
+  box-shadow:var(--shadow); position:relative; overflow:hidden; cursor:pointer;
+  border:1px solid rgba(0,0,0,.06); transition:.2s transform, .2s box-shadow;
+  display:flex;flex-direction:column;gap:10px; min-height:190px;
+}
+.lesson-card:hover{transform:translateY(-4px);box-shadow:0 22px 44px -16px rgba(0,0,0,.6);}
+.lesson-card .num-tag{
+  position:absolute; top:-10px; left:-10px; width:52px;height:52px;border-radius:50%;
+  background:var(--red); color:#fff; display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono); font-weight:700; font-size:15px; transform:rotate(-14deg);
+  box-shadow:0 6px 14px -4px rgba(0,0,0,.5); border:2px dashed rgba(255,255,255,.5);
+}
+.lesson-card h3{margin:6px 0 0 0;font-family:var(--serif-ar);font-size:19px;color:var(--ink);padding-right:8px;}
+.lesson-card .en{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);letter-spacing:.5px;text-transform:uppercase;}
+.lesson-card p.desc{font-size:13px;color:var(--ink-soft);line-height:1.7;margin:0;flex:1;}
+.lesson-card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;border-top:1px dashed rgba(0,0,0,.15);padding-top:10px;}
+.qcount{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);}
+.best-badge{font-family:var(--mono);font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;}
+.best-badge.none{background:#e7e0cb;color:#8a836b;}
+.best-badge.low{background:#fbdcd7;color:var(--red-deep);}
+.best-badge.mid{background:#fdedc2;color:#8a6a12;}
+.best-badge.high{background:#d9f0e2;color:var(--green-deep);}
+
+/* ---------- Lesson detail ---------- */
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--mustard);font-weight:700;font-size:14px;margin-bottom:14px;background:none;border:none;padding:0;}
+.lesson-detail{background:var(--paper);color:var(--ink);border-radius:22px;padding:0;overflow:hidden;box-shadow:var(--shadow);}
+.ld-head{background:linear-gradient(120deg, var(--board2), var(--board)); color:var(--chalk);padding:26px 30px;position:relative;}
+.ld-head .tag{font-family:var(--mono);font-size:12px;color:var(--mustard);letter-spacing:1px;}
+.ld-head h2{font-family:var(--serif-ar);font-size:30px;margin:6px 0;}
+.ld-head .en{font-family:var(--mono);color:#c9c2a6;font-size:13px;}
+.ld-body{padding:26px 30px;}
+.rule-block{margin-bottom:22px;}
+.rule-block h4{font-family:var(--serif-ar);font-size:18px;margin:0 0 10px;color:var(--red-deep);border-right:4px solid var(--mustard);padding-right:10px;}
+.rule-block .content{font-size:14.5px;line-height:2.05;color:#3a3626;}
+.rule-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;}
+.rule-table th,.rule-table td{border:1px solid rgba(0,0,0,.12);padding:8px 10px;text-align:center;}
+.rule-table th{background:var(--paper2);font-family:var(--body-ar);font-weight:700;}
+.rule-table td.en{font-family:var(--mono);color:var(--green-deep);font-weight:700;}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
+.tag-chip{background:var(--paper2);border:1px solid rgba(0,0,0,.1);border-radius:10px;padding:6px 12px;font-size:13px;}
+.tag-chip b{font-family:var(--mono);color:var(--red-deep);}
+.example{background:var(--paper2);border-radius:12px;padding:10px 14px;margin:6px 0;font-size:14px;border-right:3px solid var(--green);}
+.example .en{font-family:var(--mono);font-weight:700;color:var(--green-deep);display:block;}
+.example .ar{color:var(--ink-soft);font-size:13px;}
+.start-cta{
+  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  background:linear-gradient(120deg, #fff3d9, #fbead0); border:1.5px dashed var(--mustard-deep);
+  border-radius:16px; padding:18px 22px; margin-top:10px;
+}
+.start-cta .info{font-size:13.5px;color:var(--ink-soft);}
+.start-cta .info b{display:block;font-family:var(--serif-ar);font-size:18px;color:var(--ink);}
+.btn{
+  border:none;border-radius:12px;padding:13px 26px;font-weight:800;font-size:15px;
+  background:var(--red); color:#fff; box-shadow:0 10px 20px -8px rgba(193,68,59,.6);
+  transition:.15s; display:inline-flex;align-items:center;gap:8px;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 26px -8px rgba(193,68,59,.7);}
+.btn.ghost{background:transparent;border:2px solid var(--ink);color:var(--ink);box-shadow:none;}
+.btn.green{background:var(--green);box-shadow:0 10px 20px -8px rgba(62,142,99,.6);}
+.btn.mustard{background:var(--mustard);color:var(--ink);box-shadow:0 10px 20px -8px rgba(231,178,58,.6);}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.opt-len{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.opt-len button{border:1px solid rgba(0,0,0,.18);background:#fff;border-radius:10px;padding:7px 14px;font-size:13px;font-weight:700;color:var(--ink-soft);}
+.opt-len button.sel{background:var(--ink);color:var(--chalk);border-color:var(--ink);}
+
+/* ---------- Quiz ---------- */
+.quiz-shell{background:var(--paper);color:var(--ink);border-radius:22px;box-shadow:var(--shadow);overflow:hidden;}
+.quiz-top{background:var(--board2);padding:16px 24px;color:var(--chalk);}
+.quiz-top-row{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;}
+.quiz-title{font-family:var(--serif-ar);font-size:17px;color:var(--mustard);}
+.quiz-meta{display:flex;gap:14px;font-family:var(--mono);font-size:12.5px;color:#c9c2a6;}
+.quiz-meta span b{color:var(--chalk);}
+.progress-rail{height:10px;border-radius:99px;background:rgba(255,255,255,.08);margin-top:12px;overflow:hidden;position:relative;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--mustard),var(--green));border-radius:99px;transition:width .4s ease;}
+.streak-badge{font-family:var(--mono);font-size:12px;background:rgba(231,178,58,.16);color:var(--mustard);padding:4px 10px;border-radius:999px;border:1px solid rgba(231,178,58,.4);}
+
+.qcard{padding:30px;}
+.qtype-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.5px;background:var(--paper2);color:var(--ink-soft);padding:4px 10px;border-radius:8px;margin-bottom:12px;}
+.qprompt{font-size:19px;line-height:1.85;font-weight:700;color:var(--ink);margin-bottom:22px;}
+.qprompt .en-inline{font-family:var(--mono);color:var(--red-deep);background:#fff2ee;padding:1px 6px;border-radius:6px;}
+.opts{display:grid;gap:12px;}
+.opt-btn{
+  text-align:right;border:2px solid rgba(0,0,0,.12);background:#fff;border-radius:14px;
+  padding:14px 18px;font-size:16px;font-family:var(--mono);font-weight:600;color:var(--ink);
+  display:flex;justify-content:space-between;align-items:center;transition:.14s;
+}
+.opt-btn:hover{border-color:var(--mustard-deep);background:#fffaf0;}
+.opt-btn .letter{width:26px;height:26px;border-radius:50%;background:var(--paper2);display:flex;align-items:center;justify-content:center;font-size:12px;font-family:var(--body-ar);font-weight:700;flex-shrink:0;}
+.opt-btn.correct{background:#e4f6ea;border-color:var(--green);}
+.opt-btn.correct .letter{background:var(--green);color:#fff;}
+.opt-btn.wrong{background:#fdecea;border-color:var(--red);}
+.opt-btn.wrong .letter{background:var(--red);color:#fff;}
+.opt-btn.dim{opacity:.55;}
+.opt-btn[disabled]{cursor:default;}
+.tf-row{display:flex;gap:14px;}
+.tf-row .opt-btn{flex:1;justify-content:center;font-size:17px;}
+.fill-row{display:flex;gap:10px;flex-wrap:wrap;}
+.fill-row input{
+  flex:1;min-width:220px;padding:14px 16px;border-radius:14px;border:2px solid rgba(0,0,0,.15);
+  font-family:var(--mono);font-size:17px;background:#fff;color:var(--ink);
+}
+.fill-row input:focus{outline:none;border-color:var(--mustard-deep);}
+.fill-row button{border-radius:14px;padding:0 22px;background:var(--ink);color:var(--chalk);border:none;font-weight:700;}
+
+.feedback{margin-top:20px;border-radius:14px;padding:16px 18px;display:none;}
+.feedback.show{display:block;animation:fadeUp .25s ease both;}
+.feedback.ok{background:#e4f6ea;border:1.5px solid var(--green);}
+.feedback.bad{background:#fdecea;border:1.5px solid var(--red);}
+.feedback .head{font-weight:800;font-size:15px;display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.feedback.ok .head{color:var(--green-deep);}
+.feedback.bad .head{color:var(--red-deep);}
+.feedback .why{font-size:13.5px;line-height:1.9;color:#4a4636;}
+.qcard-foot{display:flex;justify-content:space-between;align-items:center;margin-top:24px;flex-wrap:wrap;gap:10px;}
+.hint-btn{background:none;border:1px dashed var(--ink-soft);color:var(--ink-soft);border-radius:10px;padding:8px 14px;font-size:12.5px;}
+
+/* ---------- Result ---------- */
+.result-shell{background:var(--paper);color:var(--ink);border-radius:22px;box-shadow:var(--shadow);padding:34px;}
+.result-top{display:flex;gap:28px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center;}
+.stamp{
+  width:150px;height:150px;border-radius:50%;border:6px double var(--red);color:var(--red);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-9deg);
+  font-family:var(--mono);animation:stamp .5s cubic-bezier(.2,1.6,.4,1) both;flex-shrink:0;
+}
+.stamp .sc{font-size:40px;font-weight:800;}
+.stamp .lbl{font-size:11px;letter-spacing:1px;}
+@keyframes stamp{0%{transform:scale(2.4) rotate(-9deg);opacity:0;}100%{transform:scale(1) rotate(-9deg);opacity:1;}}
+.result-grade{font-family:var(--serif-ar);font-size:26px;color:var(--ink);}
+.result-grade small{display:block;font-family:var(--body-ar);font-size:14px;color:var(--ink-soft);font-weight:400;margin-top:4px;}
+.res-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:26px 0;}
+.res-chip{background:var(--paper2);border-radius:12px;padding:12px;text-align:center;}
+.res-chip .n{font-family:var(--mono);font-size:22px;font-weight:800;}
+.res-chip .l{font-size:12px;color:var(--ink-soft);}
+.res-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:10px;}
+.mistake-list{margin-top:22px;border-top:1px dashed rgba(0,0,0,.18);padding-top:18px;}
+.mistake-list h4{font-family:var(--serif-ar);font-size:18px;color:var(--red-deep);}
+.mistake-item{background:#fff;border:1px solid rgba(0,0,0,.08);border-right:4px solid var(--red);border-radius:12px;padding:14px 16px;margin-bottom:10px;}
+.mistake-item .mq{font-weight:700;font-size:14.5px;margin-bottom:8px;}
+.mistake-item .row{font-size:13px;margin:3px 0;}
+.mistake-item .row.your{color:var(--red-deep);}
+.mistake-item .row.right{color:var(--green-deep);}
+.mistake-item .why{font-size:12.5px;color:var(--ink-soft);margin-top:6px;background:var(--paper2);padding:8px 10px;border-radius:8px;}
+
+/* ---------- Stats view ---------- */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:22px;}
+.badge-row{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0;}
+.badge{background:var(--paper);color:var(--ink);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);font-size:13.5px;font-weight:700;}
+.badge .ic{font-size:22px;}
+.lesson-stat-row{background:var(--paper);color:var(--ink);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:8px;box-shadow:0 8px 20px -14px rgba(0,0,0,.5);}
+.lesson-stat-row .lname{flex:1;font-weight:700;font-size:14px;}
+.mini-bar{flex:2;height:10px;background:var(--paper2);border-radius:99px;overflow:hidden;min-width:120px;}
+.mini-bar > div{height:100%;background:linear-gradient(90deg,var(--red),var(--mustard),var(--green));}
+.lesson-stat-row .pct{font-family:var(--mono);font-weight:800;width:52px;text-align:left;}
+.empty-note{background:rgba(255,255,255,.04);border:1px dashed var(--line);border-radius:14px;padding:24px;text-align:center;color:#c9c2a6;font-size:14px;}
+
+footer{text-align:center;padding:30px 0 50px;color:#8f8a72;font-size:12px;font-family:var(--mono);}
+@media (max-width:640px){
+  .ld-head, .ld-body{padding:20px;}
+  .result-top{flex-direction:column;}
+  .qcard{padding:20px;}
+}
+.kbd{font-family:var(--mono);background:rgba(0,0,0,.06);padding:1px 6px;border-radius:5px;font-size:11px;border:1px solid rgba(0,0,0,.15);}
+
+/* ---------- Topbar status: XP / streak / due ---------- */
+.topbar-status{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.xp-chip{display:flex;flex-direction:column;gap:3px;background:rgba(231,178,58,.12);border:1px solid rgba(231,178,58,.4);border-radius:10px;padding:6px 12px;font-size:11.5px;font-weight:700;color:var(--mustard);min-width:110px;}
+.xp-bar{display:block;width:100%;height:5px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;}
+.xp-bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--mustard),var(--green));}
+.streak-chip{background:rgba(193,68,59,.14);border:1px solid rgba(193,68,59,.4);border-radius:999px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#ff9a90;}
+.due-chip{background:rgba(62,142,99,.16);border:1px solid rgba(62,142,99,.45);border-radius:999px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#8fe3b6;cursor:pointer;}
+.icon-btn{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--chalk);width:38px;height:38px;border-radius:50%;font-size:16px;display:flex;align-items:center;justify-content:center;}
+.icon-btn:hover{background:rgba(231,178,58,.14);border-color:var(--mustard);}
+
+/* ---------- Featured cards ---------- */
+.featured-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0;}
+.featured-card{
+  display:flex;align-items:center;gap:14px;cursor:pointer;border-radius:16px;padding:16px 18px;
+  border:1.5px solid var(--line); background:linear-gradient(120deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
+  transition:.18s;
+}
+.featured-card:hover{transform:translateY(-3px);border-color:var(--mustard);}
+.featured-card.exam{border-color:rgba(231,178,58,.4);}
+.featured-card.review{border-color:rgba(62,142,99,.4);}
+.fc-ic{font-size:30px;flex-shrink:0;}
+.fc-body{flex:1;display:flex;flex-direction:column;gap:2px;}
+.fc-body b{font-family:var(--serif-ar);font-size:17px;color:var(--chalk);}
+.fc-body span{font-size:12.5px;color:#c9c2a6;}
+.fc-arrow{font-size:20px;color:var(--mustard);}
+@media (max-width:640px){ .featured-row{grid-template-columns:1fr;} }
+
+/* ---------- Mini-lesson interstitial ---------- */
+.mini-lesson{margin-top:12px;background:#fff8e6;border:1.5px dashed var(--mustard-deep);border-radius:12px;padding:12px 14px;}
+.mini-lesson-title{font-weight:800;font-size:13px;color:var(--mustard-deep);margin-bottom:8px;}
+.mini-lesson-ex{background:#fff;border-radius:8px;padding:7px 10px;margin-bottom:6px;font-size:13px;}
+.mini-lesson-ex .en{font-family:var(--mono);color:var(--green-deep);font-weight:700;display:block;}
+.mini-lesson-ex .ar{color:var(--ink-soft);font-size:12px;}
+
+/* ---------- Text-to-speech: 🔈 phrase buttons ---------- */
+.say-phrase{ display:inline; white-space:normal; }
+.say-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  cursor:pointer; user-select:none; font-size:9.5px; line-height:1;
+  width:14px; height:14px; border-radius:50%; margin-left:2px; margin-right:1px;
+  background:rgba(231,178,58,.10); border:1px solid rgba(231,178,58,.32);
+  opacity:.62; transition:.15s; vertical-align:middle; position:relative; top:-1px;
+}
+.say-btn:hover{opacity:1; background:rgba(231,178,58,.4); transform:scale(1.2);}
+.say-btn:active{transform:scale(.9);}
+.say-btn.speaking{opacity:1; background:var(--mustard); box-shadow:0 0 0 3px rgba(231,178,58,.22);}
+.say-text{font-family:var(--mono); color:var(--green-deep); font-weight:600;}
+html[data-theme="light"] .say-text{color:var(--green-deep);}
+.qprompt .say-text, .mistake-item .say-text{color:var(--red-deep);}
+.opt-btn .say-text{color:inherit;}
+.tts-hint{font-size:11.5px;color:var(--ink-soft);margin:8px 0 4px;display:flex;align-items:center;gap:5px;}
+#quizBox .tts-hint{color:#c9c2a6;}
+
+/* ---------- Print ---------- */
+#printArea{display:none;}
+@media print{
+  body.printing > *:not(#printArea){display:none !important;}
+  body.printing #printArea{display:block !important; color:#000; background:#fff; padding:20px;}
+  body.printing #printArea .rule-table{border-color:#000;}
+  body.printing #printArea .no-print{display:none !important;}
+  .no-print{}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-badge">GZ</div>
+      <div>
+        <h1>كورس القواعد التفاعلي</h1>
+        <p>GRAMMAR Z — AMERICAN ENGLISH · المستوى الأول</p>
+      </div>
+    </div>
+    <div class="topbar-status" id="topbarStatus"></div>
+    <div class="nav-btns">
+      <button class="nav-btn" data-nav="home">📚 الدروس</button>
+      <button class="nav-btn" data-nav="review">🧠 مراجعة ذكية</button>
+      <button class="nav-btn" data-nav="stats">📊 إحصائياتي</button>
+      <button class="icon-btn" id="themeToggleBtn" title="تبديل الوضع الليلي/النهاري">☀️</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- HOME -->
+  <section id="view-home" class="view active">
+    <div class="hero">
+      <h2>23 حلقة، وقاعدة واحدة: ذاكر ثم اختبر نفسك</h2>
+      <p class="sub">دفتر تفاعلي يجمع كل قواعد المستوى الأول من الكورس، مع اختبارات كبيرة ومتنوعة لكل درس (اختيار من متعدد، صح/خطأ، إكمال فراغ، وترجمة)، مستويات صعوبة، مراجعة ذكية متباعدة، ونظام نقاط وتحديات.</p>
+      <div class="stat-row" id="homeStats"></div>
+    </div>
+
+    <div class="featured-row">
+      <div class="featured-card exam" id="featuredFinalExam">
+        <div class="fc-ic">🏆</div>
+        <div class="fc-body"><b>الامتحان الشامل النهائي</b><span>أسئلة من كل الحلقات الـ23 في امتحان واحد</span></div>
+        <div class="fc-arrow">←</div>
+      </div>
+      <div class="featured-card review" id="featuredReview">
+        <div class="fc-ic">🧠</div>
+        <div class="fc-body"><b>مراجعة ذكية</b><span id="featuredReviewSub">راجع أخطاءك القديمة في الوقت المناسب</span></div>
+        <div class="fc-arrow">←</div>
+      </div>
+    </div>
+
+    <div class="toolrow">
+      <input id="searchBox" class="search" placeholder="🔍 ابحث عن درس... (مثال: الأزمنة، الصفات، الجمع)">
+      <button class="filter-chip active" data-filter="all">الكل</button>
+      <button class="filter-chip" data-filter="notstarted">لم تبدأ</button>
+      <button class="filter-chip" data-filter="weak">تحتاج مراجعة (أقل من 70)</button>
+      <button class="filter-chip" data-filter="mastered">متقنة (90+)</button>
+    </div>
+
+    <div class="lesson-grid" id="lessonGrid"></div>
+  </section>
+
+  <!-- LESSON DETAIL -->
+  <section id="view-lesson" class="view">
+    <button class="back-link" data-nav="home">→ عودة لكل الدروس</button>
+    <div id="lessonDetailBox"></div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="view-quiz" class="view">
+    <div id="quizBox"></div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="view-result" class="view">
+    <div id="resultBox"></div>
+  </section>
+
+  <!-- SMART REVIEW -->
+  <section id="view-review" class="view">
+    <button class="back-link" data-nav="home">→ عودة لكل الدروس</button>
+    <div id="reviewBox"></div>
+  </section>
+
+  <!-- STATS -->
+  <section id="view-stats" class="view">
+    <div class="hero">
+      <h2>لوحة الإحصائيات</h2>
+      <p class="sub">تقدمك محفوظ تلقائيًا. راجع نقاط ضعفك وأعد اختبار الأخطاء فقط في أي وقت.</p>
+    </div>
+    <div id="statsBox"></div>
+  </section>
+
+</main>
+
+<div id="printArea"></div>
+
+<footer class="no-print">صُنع بالطباشير والحبر الأحمر 🖍️ — Grammar Z, Level One Companion</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.2/confetti.browser.min.js"></script>
+<script>
+/* =========================================================================
+   UTILITIES
+========================================================================= */
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function sample(arr,n){return shuffle(arr).slice(0,Math.min(n,arr.length));}
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function uid(){return Math.random().toString(36).slice(2,10);}
+function norm(s){return (s||'').toString().trim().toLowerCase().replace(/[’']/g,"'").replace(/[^a-z0-9'\u0600-\u06FF]+/g,'');}
+function esc(s){return (s+'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function mk(type, prompt, extra, explain){return Object.assign({id:uid(), type, prompt, explain: explain||''}, extra||{});}
+function mcq(prompt, options, correctIdx, explain){return mk('mcq', prompt, {options, correct: correctIdx}, explain);}
+function tf(prompt, isTrue, explain){return mk('tf', prompt, {correct: !!isTrue}, explain);}
+function fillQ(prompt, accepted, explain){return mk('fill', prompt, {accepted: accepted.map(norm), display: accepted[0]}, explain);}
+
+/* =========================================================================
+   TEXT-TO-SPEECH: a 🔈 button reads a whole English phrase/sentence at once
+   (not word-by-word) — e.g. "🔈 an apple" speaks "an apple" as one utterance.
+========================================================================= */
+let ttsVoice = null;
+function pickEnglishVoice(){
+  try{
+    const voices = window.speechSynthesis.getVoices();
+    ttsVoice = voices.find(v=>/en-US/i.test(v.lang)) || voices.find(v=>/^en/i.test(v.lang)) || null;
+  }catch(e){ ttsVoice = null; }
+}
+if(typeof window!=='undefined' && 'speechSynthesis' in window){
+  pickEnglishVoice();
+  window.speechSynthesis.onvoiceschanged = pickEnglishVoice;
+}
+function speak(text){
+  try{
+    if(!('speechSynthesis' in window) || !text) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text.trim());
+    u.lang = 'en-US';
+    u.rate = 0.88;
+    u.pitch = 1;
+    if(ttsVoice) u.voice = ttsVoice;
+    window.speechSynthesis.speak(u);
+  }catch(e){ /* speech not supported — fail silently */ }
+}
+/* Find every contiguous English phrase inside an HTML string (a run of Latin
+   letters/digits held together by spaces or normal sentence punctuation, e.g.
+   "an apple" / "This is a ring." / "He has a beautiful bike.") and prefix it
+   with a small clickable 🔈 icon that speaks that WHOLE phrase in one go.
+   Tags/attributes are left completely untouched (processed only outside
+   `<...>` boundaries), and Arabic text is never matched (regex is Latin-only),
+   so this is safe to run on rich lesson-summary HTML as well as plain text
+   (quiz options). */
+const PHRASE_RE = /[A-Za-z][A-Za-z0-9'-]*(?:[ ,.!?;:()_]+[A-Za-z0-9_][A-Za-z0-9'-]*)*[.,!?;:]?/g;
+function speakify(html){
+  if(!html) return html;
+  return html.replace(/(<[^>]+>)|([^<]+)/g, (m, tag, text)=>{
+    if(tag) return tag;
+    return text.replace(PHRASE_RE, phrase=>{
+      const clean = phrase.replace(/_+/g,' ').replace(/\s+/g,' ').trim();
+      if(clean.length<1) return phrase;
+      return `<span class="say-phrase"><span class="say-btn" data-say="${clean.replace(/"/g,'&quot;')}" title="اسمع النطق">🔈</span><span class="say-text">${phrase}</span></span>`;
+    });
+  });
+}
+/* Single delegated listener in the CAPTURE phase: fires before any click
+   listener on ancestor elements (like an MCQ option button), so tapping the
+   🔈 icon only speaks the phrase and never also "selects" that answer. */
+document.addEventListener('click', (e)=>{
+  const btn = e.target && e.target.closest && e.target.closest('.say-btn');
+  if(!btn) return;
+  speak(btn.dataset.say || btn.parentElement.textContent);
+  btn.classList.add('speaking');
+  setTimeout(()=>btn.classList.remove('speaking'), 400);
+  e.stopPropagation();
+  e.preventDefault();
+}, true);
+
+function optionsFrom(correctVal, pool, count, labelFn){
+  labelFn = labelFn || (x=>x);
+  const wrongPool = [...new Set(pool)].filter(x=>x!==correctVal);
+  const wrong = sample(wrongPool, Math.max(0,count-1));
+  const opts = shuffle([correctVal, ...wrong]);
+  return {options: opts.map(labelFn), correctIdx: opts.indexOf(correctVal)};
+}
+/* Safely build a shuffled MCQ from a correct string + an array of candidate wrong
+   strings. De-dupes (and drops accidental matches with the correct answer), then
+   computes the correct index AFTER shuffling — never hard-code index 0 after shuffle. */
+function mcqShuffled(prompt, correct, wrongCandidates, explain){
+  const uniqueWrongs = [...new Set(wrongCandidates)].filter(w=>w!==correct);
+  const opts = shuffle([correct, ...uniqueWrongs]);
+  return mcq(prompt, opts, opts.indexOf(correct), explain);
+}
+
+function cap(arr, target){
+  const t = shuffle(arr);
+  return t.slice(0, Math.min(target, t.length));
+}
+
+/* =========================================================================
+   DATA BANKS
+========================================================================= */
+const A_WORDS = [["cat","قطة"],["ball","كرة"],["chair","كرسي"],["minute","دقيقة"],["uniform","زي موحّد"],["donut","دونات"],
+["university","جامعة"],["book","كتاب"],["pen","قلم"],["house","منزل"],["car","سيارة"],["teacher","معلمة"],["student","طالب"],
+["doctor","طبيب"],["nurse","ممرضة"],["banana","موزة"],["table","طاولة"],["star","نجمة"],["dog","كلب"],["problem","مشكلة"],
+["friend","صديق"],["seat","مقعد"],["business","عمل تجاري"],["box","صندوق"],["police officer","ضابط شرطة"],["movie star","نجم سينمائي"]];
+const AN_WORDS = [["elephant","فيل"],["umbrella","مظلة"],["egg","بيضة"],["hour","ساعة (وقت)"],["x-ray","أشعة سينية"],
+["apple","تفاحة"],["orange","برتقالة"],["owl","بومة"],["idea","فكرة"],["artist","فنان"],["actor","ممثل"],["engineer","مهندس"],
+["island","جزيرة"],["uncle","عم / خال"],["ant","نملة"],["office","مكتب"],["old legend","أسطورة قديمة"],
+["evil twin","توأم شرير"],["invention","اختراع"],["honor","شرف"],["honest man","رجل صادق"]];
+const ALL_AR = [...A_WORDS,...AN_WORDS].map(w=>w[1]);
+
+function genArticles(){
+  const items = [...A_WORDS.map(w=>({en:w[0],ar:w[1],art:'a'})), ...AN_WORDS.map(w=>({en:w[0],ar:w[1],art:'an'}))];
+  const qs=[];
+  items.forEach(it=>{
+    qs.push(mcq(`أي أداة تناسب الكلمة التالية؟ <span class="en-inline">___ ${it.en}</span> (${it.ar})`,
+      ['a','an'], it.art==='a'?0:1,
+      `نستخدم <b>an</b> قبل الأسماء التي تبدأ بصوت حرف متحرك (a-e-i-o-u) مثل "an ${it.art==='an'?it.en:AN_WORDS[0][0]}"، ونستخدم <b>a</b> قبل باقي الأسماء التي تبدأ بصوت ساكن.`));
+    qs.push(fillQ(`أكمل الجملة: This is ___ ${it.en}. (${it.ar})`, [it.art],
+      `الكلمة "${it.en}" ${it.art==='an'?'تبدأ بصوت حرف متحرك، لذلك نضع "an"':'تبدأ بصوت ساكن، لذلك نضع "a"'}.`));
+    const wrongArt = it.art==='a'?'an':'a';
+    const showWrong = Math.random()<0.5;
+    qs.push(tf(`العبارة التالية صحيحة نحويًا: <span class="en-inline">${showWrong?wrongArt:it.art} ${it.en}</span>`,
+      !showWrong,
+      `الصيغة الصحيحة هي "${it.art} ${it.en}" لأن الكلمة ${it.art==='an'?'تبدأ بصوت حرف متحرك':'تبدأ بصوت ساكن'}.`));
+    const {options,correctIdx} = optionsFrom(it.ar, ALL_AR, 4);
+    qs.push(mcq(`ما معنى الكلمة: <span class="en-inline">${it.art} ${it.en}</span> ؟`, options, correctIdx,
+      `"${it.art} ${it.en}" تعني "${it.ar}" بالعربية.`));
+  });
+  return cap(qs, 55);
+}
+
+/* ---- Demonstratives ---- */
+const SING_NOUNS = [["ring","خاتم"],["umbrella","مظلة"],["flower","وردة"],["book","كتاب"],["car","سيارة"],["pen","قلم"],
+["chair","كرسي"],["witch","ساحرة"],["box","صندوق"],["cat","قطة"],["dog","كلب"],["picture","صورة"],["phone","هاتف"],
+["laptop","حاسوب محمول"],["tree","شجرة"],["house","منزل"],["girl","بنت"],["glass","زجاج"],["dress","فستان"],["business","عمل"]];
+const PLUR_NOUNS = [["cows","أبقار"],["cars","سيارات"],["friends","أصدقاء"],["flowers","ورود"],["trees","أشجار"],
+["phones","هواتف"],["computers","حواسيب"],["doctors","أطباء"],["clowns","مهرجون"],["scientists","علماء"],
+["bananas","موز"],["rings","خواتم"],["bats","وطاويط"],["clothes","ملابس"],["birds","طيور"],["drums","طبول"],
+["rabbits","أرانب"],["rocks","صخور"],["blinds","ستائر"],["pills","حبوب دواء"]];
+
+function genThisThat(){
+  const qs=[];
+  SING_NOUNS.forEach(([en,ar])=>{
+    const near = Math.random()<0.5;
+    const correct = near ? 'This' : 'That';
+    const {options,correctIdx} = optionsFrom(correct, ['This','That','These','Those'], 4);
+    qs.push(mcq(`الصورة/الموقف يشير إلى شيء ${near?'قريب':'بعيد'} ومفرد (${ar}). اختر الأداة الصحيحة: ___ is a ${en}.`,
+      options, correctIdx,
+      `"This/That" تُستخدم مع المفرد: <b>This</b> للقريب و<b>That</b> للبعيد. بما أن الشيء ${near?'قريب':'بعيد'}، فالإجابة "${correct}".`));
+    qs.push(fillQ(`أكمل: ___ ${en} is nice. (بمعنى ${near?'هذا/هذه':'ذلك/تلك'} ${ar})`, [correct],
+      `نستخدم "${correct}" لأن "${en}" مفرد و${near?'قريب':'بعيد'}.`));
+  });
+  const {options:o1,correctIdx:c1} = optionsFrom('صحيحة', ['صحيحة','خاطئة'], 2);
+  SING_NOUNS.slice(0,10).forEach(([en,ar])=>{
+    const stmtNear = Math.random()<0.5;
+    const usedWord = stmtNear ? 'This' : 'That';
+    const actuallyNear = Math.random()<0.5;
+    const isCorrect = (usedWord==='This')===actuallyNear;
+    qs.push(tf(`الجملة "<span class="en-inline">${usedWord} ${en}</span>" استُخدمت للإشارة إلى شيء ${actuallyNear?'قريب':'بعيد'} — هل الاستخدام صحيح؟`,
+      isCorrect,
+      `"This" للإشارة إلى القريب و"That" للإشارة إلى البعيد. ${isCorrect?'الاستخدام هنا مطابق للقاعدة.':'الاستخدام هنا مخالف للقاعدة.'}`));
+  });
+  return cap(qs, 48);
+}
+
+function genTheseThose(){
+  const qs=[];
+  PLUR_NOUNS.forEach(([en,ar])=>{
+    const near = Math.random()<0.5;
+    const correct = near ? 'These' : 'Those';
+    const {options,correctIdx} = optionsFrom(correct, ['This','That','These','Those'], 4);
+    qs.push(mcq(`الإشارة إلى مجموعة ${near?'قريبة':'بعيدة'} من (${ar}). اختر الأداة الصحيحة: ___ are ${en}.`,
+      options, correctIdx,
+      `"These/Those" تُستخدم مع الجمع: <b>These</b> للقريب و<b>Those</b> للبعيد. الإجابة الصحيحة "${correct}".`));
+    qs.push(fillQ(`أكمل: ___ ${en} are mine. (${near?'هؤلاء':'أولئك'} ${ar})`, [correct],
+      `"${en}" اسم جمع و${near?'قريب لذلك نستخدم These':'بعيد لذلك نستخدم Those'}.`));
+  });
+  PLUR_NOUNS.slice(0,10).forEach(([en,ar])=>{
+    const singularTrap = Math.random()<0.5;
+    const word = singularTrap ? pick(['This','That']) : pick(['These','Those']);
+    qs.push(tf(`"<span class="en-inline">${word} ${en}</span>" — هل هذا التركيب صحيح نحويًا؟ (${en} اسم جمع)`,
+      !singularTrap,
+      `الاسم "${en}" جمع، لذا يجب استخدام "These" أو "Those" وليس "This/That" التي تُستخدم مع المفرد فقط.`));
+  });
+  return cap(qs, 46);
+}
+
+/* ---- Verb to Be ---- */
+const BE_SUBJECTS = [["I","am","أنا"],["He","is","هو"],["She","is","هي"],["It","is","هو/هي (غير عاقل)"],
+["You","are","أنت"],["We","are","نحن"],["They","are","هم"]];
+const BE_PREDICATES = ["a teacher","a student","happy","a doctor","from Sudan","rich","a nurse","an artist","a farmer","tall","friends","trees"];
+
+function genBeAffirmative(){
+  const qs=[];
+  BE_SUBJECTS.forEach(([sub,be,ar])=>{
+    BE_PREDICATES.slice(0,7).forEach(pred=>{
+      const {options,correctIdx} = optionsFrom(be, ['am','is','are'], 3);
+      qs.push(mcq(`اختر الفعل المساعد الصحيح: <span class="en-inline">${sub} ___ ${pred}.</span>`, options, correctIdx,
+        `الفاعل "${sub}" (${ar}) يأخذ الفعل المساعد "${be}". القاعدة: I → am, He/She/It → is, You/We/They → are.`));
+    });
+  });
+  const fixList = [
+    ["He is soccer play.", "He plays soccer.", "ترتيب الجملة خطأ؛ الفعل يجب أن يأتي بصورته الصحيحة بعد الفاعل."],
+    ["Sarah is teacher.", "Sarah is a teacher.", "ينقصها أداة النكرة \"a\" قبل الاسم المفرد المعدود \"teacher\"."],
+    ["I amn't a student.", "I am not a student.", "لا توجد صيغة \"amn't\" في الإنجليزية؛ نفي am هو \"am not\" فقط."],
+    ["They is trees.", "They are trees.", "الفاعل \"They\" جمع، فيجب أن يقترن بـ \"are\" وليس \"is\"."],
+    ["We are a nurses.", "We are nurses.", "لا نضع أداة النكرة \"a\" قبل اسم جمع مثل \"nurses\"."]
+  ];
+  fixList.forEach(([wrong,right,why])=>{
+    const distractors = [wrong, right.replace('is','are'), right+' too', right.replace('a ','')];
+    const {options,correctIdx} = optionsFrom(right, distractors, 4);
+    qs.push(mcq(`صحّح الجملة التالية: <span class="en-inline">${wrong}</span>`, options, correctIdx, why));
+  });
+  BE_SUBJECTS.forEach(([sub,be,ar])=>{
+    qs.push(fillQ(`اكتب الفعل المساعد الصحيح فقط: ${sub} ___ happy.`, [be], `"${sub}" (${ar}) يقترن دائمًا بـ "${be}".`));
+  });
+  return cap(qs, 55);
+}
+
+function genBeNegQuestion(){
+  const qs=[];
+  BE_SUBJECTS.forEach(([sub,be,ar])=>{
+    const neg = be==='am'?'am not': be==='is'?"isn't":"aren't";
+    const {options,correctIdx} = optionsFrom(neg, ["isn't","aren't","am not","don't"], 4);
+    qs.push(mcq(`ما هي الصيغة الصحيحة لنفي: <span class="en-inline">${sub} ___ tired.</span>`, options, correctIdx,
+      `نفي verb to be يكون بإضافة not بعده مباشرة: ${be} + not → "${neg}".`));
+    qs.push(mcq(`كيف نكوّن سؤال Yes/No من: <span class="en-inline">${sub} ${be} ready.</span>`,
+      shuffle([`${be.charAt(0).toUpperCase()+be.slice(1)} ${sub.toLowerCase()==='i'?'I':sub} ready?`, `${sub} ${be} ready?`, `Do ${sub} ${be} ready?`, `${be} ready ${sub}?`]),
+      0, `لتكوين السؤال بـ verb to be، ننقل (am/is/are) إلى بداية الجملة قبل الفاعل.`));
+  });
+  BE_SUBJECTS.forEach(([sub,be,ar])=>{
+    const neg = be==='am'?'am not': be==='is'?"isn't":"aren't";
+    qs.push(fillQ(`اكتب صيغة النفي الكاملة (فعل مساعد + not): ${sub} ___ ready.`, [neg, be+' not'],
+      `نفي "${sub}" (${ar}) يكون بـ "${neg}" أو بالصيغة الكاملة "${be} not".`));
+  });
+  const shortAns = [
+    ["Is he ok?", true, "he", "is"],["Is it dead?", true, "it", "is"],["Are we on a spaceship?", false, "we", "are"],
+    ["Is he Michael?", true, "he", "is"],["Is she beautiful?", true, "she", "is"],["Are you happy?", true, "you", "are"],
+    ["Is Amy a doctor?", true, "she", "is"],["Are they students?", false, "they", "are"],
+    ["Is it a hospital?", true, "it", "is"],["Are they gorillas?", true, "they", "are"],
+    ["Is Steve a student?", false, "he", "is"],["Are they soccer players?", false, "they", "are"]
+  ];
+  shortAns.forEach(([q,ansYes,pron,be])=>{
+    const correct = ansYes ? `Yes, ${pron} ${be}.` : `No, ${pron} ${be==='am'?'am not':be+" not/"+(be==='is'?"isn't":"aren't")}.`;
+    const wrongForm = ansYes ? `No, ${pron} ${be==='is'?"isn't":"aren't"}.` : `Yes, ${pron} ${be}.`;
+    const {options,correctIdx} = optionsFrom(correct, [correct, wrongForm, `${pron} ${be}`, `Maybe`], 3);
+    qs.push(mcq(`اختر الإجابة القصيرة المناسبة للسؤال: <span class="en-inline">${q}</span>`, options, correctIdx,
+      `الإجابة القصيرة تكرر الفعل المساعد المستخدم في السؤال فقط، دون تكرار باقي الجملة.`));
+  });
+  return cap(qs, 45);
+}
+
+/* ---- WH questions ---- */
+const WH_LIST = [
+  ["What","ماذا / ما","What is your opinion?","ما هو رأيك؟"],
+  ["How","كيف","How is she?","كيف حالها؟"],
+  ["Where","أين","Where are my dragons?","أين تنانيني؟"],
+  ["Who","من","Who are these men?","من هؤلاء الرجال؟"],
+  ["When","متى","When is your birthday?","متى عيد ميلادك؟"],
+  ["Why","لماذا","Why are your eyes so wide?","لماذا عيناك واسعتان جدًا؟"]
+];
+function genWhQuestions(){
+  const qs=[];
+  WH_LIST.forEach(([w,ar,ex,exAr])=>{
+    const {options,correctIdx} = optionsFrom(w, WH_LIST.map(x=>x[0]), 4);
+    qs.push(mcq(`أي أداة استفهام تعني: "${ar}"؟`, options, correctIdx, `"${w}" هي أداة الاستفهام التي تعني "${ar}"، مثال: ${ex} — ${exAr}`));
+    qs.push(fillQ(`أكمل السؤال بأداة الاستفهام المناسبة: ___ ${ex.split(' ').slice(1).join(' ')} (${exAr})`, [w],
+      `"${w}" هي أداة الاستفهام التي تعني "${ar}"، وتأتي قبل الفعل المساعد مباشرة.`));
+    const {options:o2,correctIdx:c2} = optionsFrom(ex, WH_LIST.map(x=>x[2]), 4);
+    qs.push(mcq(`أي جملة تُترجم إلى: "${exAr}"؟`, o2, c2, `"${ex}" تعني "${exAr}".`));
+  });
+  const usage = [
+    ["Where am I?","أين أنا؟"],["Who am I?","من أنا؟"],["Why is no one eating?","لماذا لا يأكل أحد؟"],
+    ["Who is Maria?","من تكون ماريا؟"],["Where is everybody?","أين الجميع؟"],["How are things at home?","ما الأخبار في البيت؟"],
+    ["What is it?","ما هذا؟"],["Is it your pencil?","هل هذا قلمك؟"]
+  ];
+  usage.forEach(([en,ar])=>{
+    const {options,correctIdx} = optionsFrom(ar, usage.map(x=>x[1]), 4);
+    qs.push(mcq(`ما ترجمة الجملة: <span class="en-inline">${en}</span> ؟`, options, correctIdx, `"${en}" تعني "${ar}".`));
+  });
+  qs.push(tf(`نضع أداة الاستفهام (What/Where/Who...) بعد الفعل المساعد (am/is/are) مباشرة.`, false,
+    `القاعدة عكس ذلك: نضع أداة الاستفهام أولًا ثم الفعل المساعد (am/is/are)، مثل: Where is she?`));
+  qs.push(mcq(`رتب الكلمات لتكوين سؤال صحيح: is / your / birthday / when`, ['When is your birthday?','Is when your birthday?','Your birthday is when?','When your birthday is?'], 0,
+    `الترتيب الصحيح: أداة الاستفهام + الفعل المساعد + الفاعل + الباقي.`));
+  qs.push(mcq(`رتب الكلمات: are / my / dragons / where`, ['Where are my dragons?','Are where my dragons?','My dragons are where?','Where my dragons are?'], 0,
+    `أداة الاستفهام "Where" تأتي أولًا، ثم الفعل المساعد "are".`));
+  return cap(qs, 42);
+}
+
+/* ---- Adjective position ---- */
+function genAdjectives(){
+  const items = [
+    ["beautiful","girl","جميلة"],["ugly","spot","قبيحة"],["new","friend","جديد"],["big","universe","كبير"],
+    ["strong","man","قوي"],["rich","man","غني"],["interesting","book","مشوّق"],["tall","child","طويل"],
+    ["angry","bullet","غاضبة"],["hardworking","people","مجتهد"],["clean","uniforms","نظيف"],["cute","smile","لطيفة"],
+    ["good","friend","جيد"]
+  ];
+  const qs=[];
+  items.forEach(([adj,noun,ar])=>{
+    const plural = noun.endsWith('s');
+    const article = /^[aeiou]/i.test(adj) ? 'an' : 'a';
+    const correct = plural ? `${adj} ${noun}` : `${article} ${adj} ${noun}`;
+    const wrong1 = plural ? `${article} ${adj} ${noun}` : `${adj} ${noun}`;
+    const wrong2 = `${adj}${adj} ${noun}`;
+    const wrong3 = `${noun} ${adj}`;
+    const {options,correctIdx} = optionsFrom(correct, [correct, wrong1, wrong2, wrong3], 4);
+    qs.push(mcq(`اختر الصياغة الصحيحة (الصفة قبل الاسم): "${ar} ${noun}"`, options, correctIdx,
+      plural ? `الاسم "${noun}" جمع، فلا نضع أداة نكرة قبل الصفة.` : `الصفة "${adj}" تأتي قبل الاسم المفرد، ونضع أداة النكرة المناسبة (${article}) قبل الصفة نفسها لا قبل الاسم.`));
+    qs.push(fillQ(`أكمل بالأداة الصحيحة (a/an)، أو اكتب "nothing" إن لم تكن هناك حاجة لأداة: ___ ${adj} ${noun}`,
+      [plural ? 'nothing' : article], plural ? `الموصوف "${noun}" جمع فلا تحتاج أداة (nothing).` : `الصفة تبدأ بصوت ${/^[aeiou]/i.test(adj)?'متحرك، فنستخدم an':'ساكن، فنستخدم a'}.`));
+  });
+  const sentenceForm = [
+    ["She is beautiful.", "الصفة في نهاية الجملة، فلا تحتاج أداة."],
+    ["She is a beautiful girl.", "الصفة قبل الموصوف، فنضع (a) قبل الصفة."],
+    ["They are beautiful girls.", "الموصوف جمع، فلا نضع أي أداة."],
+    ["He is very angry.", "الصفة بعد فعل الكينونة مباشرة، بلا أداة."],
+    ["They are rich men.", "اسم جمع بعد صفة، بلا أداة."]
+  ];
+  sentenceForm.forEach(([s,why])=>{
+    qs.push(tf(`الجملة التالية صحيحة قواعديًا: <span class="en-inline">${s}</span>`, true, why));
+  });
+  const homework = [
+    ["We can learn a lot from ___ people.", ["hardworking","a hardworking"], 0, "الموصوف \"people\" جمع، فلا نضع أداة قبل الصفة."],
+    ["My friend has ___ handwriting.", ["beautiful","a beautiful"], 0, "\"handwriting\" اسم غير معدود، فلا يسبقه أداة نكرة."],
+    ["The children have ___ uniforms.", ["clean","a clean"], 0, "\"uniforms\" جمع، فلا نضع أداة قبل الصفة."]
+  ];
+  homework.forEach(([q,opts,idx,why])=>{
+    qs.push(mcq(q, opts, idx, why));
+  });
+  qs.push(tf(`الصفات في اللغة الإنجليزية تُجمع مثل الأسماء (مثال: beautifuls).`, false, `الصفات في الإنجليزية لا تُجمع أبدًا وتبقى بصورة واحدة سواء كان الموصوف مفردًا أو جمعًا.`));
+  return cap(qs, 38);
+}
+
+/* ---- Countable / Uncountable ---- */
+function genCountable(){
+  const countable = [["cat","قطة"],["book","كتاب"],["chair","كرسي"],["cow","بقرة"],["chicken (الحيوان)","دجاجة حية"],["egg","بيضة"]];
+  const uncountable = [["cheese","جبن"],["butter","زبدة"],["sugar","سكر"],["milk","حليب"],["water","ماء"],["food","طعام"],["coffee","قهوة"],["chicken (اللحم)","لحم دجاج"]];
+  const proper = [["Facebook","اسم علم"],["Steve Jobs","اسم علم"],["Mount Everest","اسم علم"],["Egypt","اسم علم"]];
+  const qs=[];
+  countable.forEach(([w,ar])=>{
+    qs.push(mcq(`الاسم "${w}" (${ar}) هو:`, ['اسم معدود (Countable)','اسم غير معدود (Uncountable)','اسم علم (Proper Noun)'], 0,
+      `"${w}" اسم له مفرد وجمع ويمكن عدّه، لذا فهو معدود.`));
+  });
+  uncountable.forEach(([w,ar])=>{
+    qs.push(mcq(`الاسم "${w}" (${ar}) هو:`, ['اسم معدود (Countable)','اسم غير معدود (Uncountable)','اسم علم (Proper Noun)'], 1,
+      `"${w}" مادة لا يمكن عدّها بشكل مباشر (لا نقول two waters عادة)، لذا فهو غير معدود ولا يُجمع ولا يسبقه a/an.`));
+  });
+  proper.forEach(([w,ar])=>{
+    qs.push(mcq(`الاسم "${w}" هو:`, ['اسم معدود (Countable)','اسم غير معدود (Uncountable)','اسم علم (Proper Noun)'], 2,
+      `"${w}" اسم علم (دولة/شخص/جبل...)، يبدأ بحرف كبير ولا تسبقه أداة.`));
+  });
+  const homework = [
+    ["I think I found ___ in my food!", ["hair","a hair"], 0, "\"hair\" بمعنى شعر عمومًا اسم غير معدود."],
+    ["The boy has ___ smile.", ["cute","a cute"], 1, "\"smile\" هنا اسم مفرد معدود، فتحتاج أداة نكرة \"a\"."],
+    ["I would like to travel to ___", ["Brazil","a Brazil"], 0, "\"Brazil\" اسم علم (دولة)، فلا تسبقه أداة."],
+    ["Mom made ___ for dinner.", ["soup","a soup"], 0, "\"soup\" اسم غير معدود عمومًا."],
+    ["Leave me alone. I don't drink ___", ["soda","a soda"], 0, "بصيغتها العامة \"soda\" غير معدودة هنا."]
+  ];
+  homework.forEach(([q,opts,idx,why])=>qs.push(mcq(q, opts, idx, why)));
+  qs.push(tf(`نستطيع أن نقول "two waters" بنفس معنى "كوبين من الماء" دون أي مشكلة قواعدية.`, false,
+    `"water" اسم غير معدود، لا يُجمع مباشرة؛ الصحيح أن نقول "two glasses of water".`));
+  qs.push(tf(`كلمة "chicken" يمكن أن تكون معدودة (الحيوان نفسه) أو غير معدودة (اللحم) حسب المعنى.`, true,
+    `"a chicken / chickens" = الحيوان (معدود)، أما "chicken" بدون أداة = اللحم (غير معدود).`));
+  qs.push(mcq(`أي الجمل التالية صحيحة؟`, ["I need food.","I need a food.","I need foods."], 0,
+    `"food" بمعناها العام اسم غير معدود، فلا تُسبق بأداة ولا تُجمع.`));
+  const morePairs = [
+    ["rice","أرز",false],["tea","شاي",false],["honey","عسل",false],["salt","ملح",false],
+    ["apple","تفاحة",true],["banana","موزة",true],["orange","برتقالة",true],["table","طاولة",true],["car","سيارة",true]
+  ];
+  morePairs.forEach(([w,ar,isCountable])=>{
+    qs.push(tf(`الاسم "${w}" (${ar}) اسم معدود (Countable).`, isCountable,
+      isCountable ? `"${w}" يمكن عدّه ويُجمع، فهو معدود.` : `"${w}" مادة عامة لا تُعد مباشرة، فهو غير معدود.`));
+  });
+  qs.push(mcq(`أي مما يلي اسم علم (Proper Noun)؟`, ["Egypt","country","city"], 0, `"Egypt" اسم دولة محدد يبدأ بحرف كبير، بينما "country/city" أسماء عامة معدودة.`));
+  qs.push(mcq(`لماذا لا نضع "a" قبل "Egypt"؟`, ["لأنه اسم علم","لأنه اسم غير معدود","لأنه صفة"], 0, `أسماء الأعلام (الدول، الأشخاص، الأماكن) لا تُسبق بأداة نكرة أبدًا.`));
+  return cap(qs, 40);
+}
+
+/* ---- Plurals ---- */
+const PLURAL_ITEMS = [
+  ["tree","trees","s","قاعدة عامة: نضيف s"],["game","games","s","قاعدة عامة: نضيف s"],
+  ["bus","buses","es","تنتهي بـ s فنضيف es"],["dish","dishes","es","تنتهي بـ sh فنضيف es"],
+  ["church","churches","es","تنتهي بـ ch فنضيف es"],["fox","foxes","es","تنتهي بـ x فنضيف es"],["quiz","quizzes","es*","تنتهي بـ z فنضيف zzes (تضاعف الحرف)"],
+  ["piano","pianos","o+s","تنتهي بحرف o فنضيف s فقط"],["potato","potatoes","o+es","تنتهي بحرف o فنضيف es"],
+  ["cherry","cherries","y→ies","تنتهي بـ y بعد ساكن، نقلبها i ونضيف es"],["lady","ladies","y→ies","تنتهي بـ y بعد ساكن، نقلبها i ونضيف es"],
+  ["family","families","y→ies","تنتهي بـ y بعد ساكن، نقلبها i ونضيف es"],
+  ["boy","boys","y+s","تنتهي بـ y بعد حرف متحرك، نضيف s فقط"],["monkey","monkeys","y+s","تنتهي بـ y بعد حرف متحرك، نضيف s فقط"],
+  ["wife","wives","f→ves","تنتهي بـ fe، نقلبها v ونضيف es"],["thief","thieves","f→ves","تنتهي بـ f، نقلبها v ونضيف es"],
+  ["leaf","leaves","f→ves","تنتهي بـ f، نقلبها v ونضيف es"],
+  ["chief","chiefs","استثناء","استثناء: تبقى s عادية رغم انتهائها بـ f"],["chef","chefs","استثناء","استثناء: تبقى s عادية"],
+  ["foot","feet","شاذ","جمع تكسير غير قياسي"],["man","men","شاذ","جمع تكسير غير قياسي"],["mouse","mice","شاذ","جمع تكسير غير قياسي"],
+  ["fish","fish","بدون تغيير","لا يتغير في الجمع"],["deer","deer","بدون تغيير","لا يتغير في الجمع"],["sheep","sheep","بدون تغيير","لا يتغير في الجمع"],
+  ["stomach","stomachs","استثناء","رغم انتهائها بـ ch فجمعها s عادية فقط (استثناء)"],
+  ["crisis","crises","أجنبي","أصل الكلمة يوناني/لاتيني"],["analysis","analyses","أجنبي","أصل الكلمة يوناني/لاتيني"],
+  ["buffalo","buffaloes","o+s/es","يقبل s أو es"]
+];
+function genPlurals(){
+  const allPlurals = PLURAL_ITEMS.map(x=>x[1]);
+  const qs=[];
+  PLURAL_ITEMS.forEach(([sing,plur,rule,why])=>{
+    const {options,correctIdx} = optionsFrom(plur, allPlurals, 4);
+    qs.push(mcq(`ما هو جمع الكلمة: <span class="en-inline">${sing}</span> ؟`, options, correctIdx, why));
+    qs.push(fillQ(`اكتب جمع الكلمة: ${sing}`, [plur], why));
+  });
+  PLURAL_ITEMS.slice(0,15).forEach(([sing,plur])=>{
+    const showCorrect = Math.random()<0.5;
+    const wrongGuess = sing+'s'===plur? plur+'es' : sing+'s';
+    qs.push(tf(`جمع "${sing}" هو "${showCorrect?plur:wrongGuess}" — صح أم خطأ؟`, showCorrect,
+      `الجمع الصحيح لكلمة "${sing}" هو "${plur}".`));
+  });
+  return cap(qs, 68);
+}
+
+/* ---- Quantifiers ---- */
+function genQuantifiers(){
+  const countableN = [["friends","أصدقاء"],["people","أشخاص"],["cows","أبقار"],["dogs","كلاب"],["books","كتب"],["chairs","كراسي"]];
+  const uncountableN = [["coffee","قهوة"],["rice","أرز"],["salt","ملح"],["money","نقود"],["water","ماء"],["sugar","سكر"]];
+  const qs=[];
+  countableN.forEach(([n,ar])=>{
+    const {options,correctIdx} = optionsFrom('many', ['many','much'], 2);
+    qs.push(mcq(`أي كلمة تناسب اسمًا معدودًا مثل "${n}" (${ar})؟ How ___ ${n} do you have?`, options, correctIdx,
+      `"How many" تُستخدم مع الأسماء المعدودة الجمع مثل "${n}".`));
+    const wrongPlural = n.endsWith('s') ? n.slice(0,-1) : n+'s';
+    qs.push(mcq(`اختر الصيغة الصحيحة بعد "a few" بخصوص (${ar}):`, [n, wrongPlural], 0, `"a few" تُستخدم مع الأسماء المعدودة الجمع، وصورتها الصحيحة هنا "${n}".`));
+  });
+  uncountableN.forEach(([n,ar])=>{
+    const {options,correctIdx} = optionsFrom('much', ['many','much'], 2);
+    qs.push(mcq(`أي كلمة تناسب اسمًا غير معدود مثل "${n}" (${ar})؟ How ___ ${n} do you have?`, options, correctIdx,
+      `"How much" تُستخدم مع الأسماء غير المعدودة مثل "${n}".`));
+    qs.push(mcq(`اختر الصيغة الصحيحة بعد "a little" بخصوص (${ar}):`, [n, n+'s'], 0, `"a little" تُستخدم مع الأسماء غير المعدودة، ولا تُجمع الأسماء غير المعدودة.`));
+  });
+  const someAny = [
+    ["Would you like ___ coffee?","some","عرض/إيجابي: نستخدم some"],
+    ["He doesn't have ___ money.","any","نفي: نستخدم any"],
+    ["Do you have ___ idea?","any","سؤال: عادة نستخدم any"],
+    ["I need ___ sugar please.","some","طلب/إيجابي: نستخدم some"],
+    ["I didn't tell ___.","anyone","نفي: نستخدم any/anyone"]
+  ];
+  someAny.forEach(([q,ans,why])=>{
+    const {options,correctIdx} = optionsFrom(ans, ['some','any','anyone','a lot'], 3);
+    qs.push(mcq(q, options, correctIdx, why));
+  });
+  const idioms = [
+    ["a bit much","كتير أوي / أكثر من اللازم"],["too much on my plate","عندي مشاغل كتير"],["too many cooks spoil the soup","كثرة الطباخين تُفسد الحساء (كثرة الرؤساء تضر العمل)"]
+  ];
+  idioms.forEach(([en,ar])=>{
+    const {options,correctIdx} = optionsFrom(ar, idioms.map(x=>x[1]), 3);
+    qs.push(mcq(`ما معنى التعبير الاصطلاحي: "<span class="en-inline">${en}</span>" ؟`, options, correctIdx, `تعبير اصطلاحي معناه: "${ar}".`));
+  });
+  qs.push(mcq(`"a lot of" و"lots of" يمكن استخدامها مع:`, ['المعدود فقط','غير المعدود فقط','المعدود وغير المعدود معًا'], 2,
+    `"a lot of" مرنة وتُستخدم مع الأسماء المعدودة وغير المعدودة على حد سواء.`));
+  return cap(qs, 55);
+}
+
+/* ---- Possessive adjectives & pronouns ---- */
+const POSS = [["I","my","mine"],["you","your","yours"],["he","his","his"],["she","her","hers"],["it","its","its"],["we","our","ours"],["they","their","theirs"]];
+const POSS_OBJ = [["laptop","حاسوب محمول"],["car","سيارة"],["school","مدرسة"],["classroom","فصل"],["phone","هاتف"],["book","كتاب"],["bag","حقيبة"],["dog","كلب"],["bike","دراجة"],["ring","خاتم"],["umbrella","مظلة"],["money","نقود"]];
+function genPossessive(){
+  const qs=[];
+  POSS.forEach(([sub,adj,pron])=>{
+    POSS_OBJ.slice(0,6).forEach(([obj,ar])=>{
+      const {options:o1,correctIdx:c1} = optionsFrom(adj, POSS.map(x=>x[1]), 4);
+      qs.push(mcq(`اختر صفة الملكية الصحيحة للفاعل "${sub}": This is ___ ${obj}. (${ar})`, o1, c1,
+        `صفة الملكية المرتبطة بـ "${sub}" هي "${adj}"، وتأتي قبل الاسم مباشرة.`));
+    });
+  });
+  POSS.forEach(([sub,adj,pron])=>{
+    const {options,correctIdx} = optionsFrom(pron, POSS.map(x=>x[2]), 4);
+    qs.push(mcq(`حوّل الجملة لضمير ملكية: This ${POSS_OBJ[0][0]} is ${adj} ${POSS_OBJ[0][0]}. → This ${POSS_OBJ[0][0]} is ___`, options, correctIdx,
+      `ضمير الملكية "${pron}" يحل محل (صفة الملكية + الاسم) في نهاية الجملة، فلا نكرر الاسم بعده.`));
+  });
+  qs.push(tf(`"its" تُستخدم لغير العاقل (حيوان/شيء)، بينما "it's" تعني "it is".`, true,
+    `"its" بدون فاصلة عليا = صفة ملكية لغير العاقل. "it's" = اختصار "it is".`));
+  const transformPairs = [
+    ["This is my laptop.","This laptop is mine."],["That is her ring.","That ring is hers."],
+    ["It has a tail. This is its tail.","This tail is its."],["These cars are ours.","Ours are these cars."]
+  ];
+  transformPairs.forEach(([a,b])=>{
+    qs.push(mcqShuffled(`أعد صياغة الجملة "${a}" باستخدام ضمير الملكية بدل صفة الملكية:`,
+      b, [a, b.replace(/\.$/,'')+' now.', 'It ' + b.charAt(0).toLowerCase()+b.slice(1)],
+      `نستبدل (صفة الملكية + الاسم) بضمير الملكية المناسب في نهاية الجملة.`));
+  });
+  return cap(qs, 55);
+}
+
+/* ---- Objective & reflexive pronouns ---- */
+const OBJ_PRON = [["I","me","myself"],["you","you","yourself"],["he","him","himself"],["she","her","herself"],["it","it","itself"],["we","us","ourselves"],["they","them","themselves"]];
+function genObjReflexive(){
+  const qs=[];
+  const verbs = ["loves","helps","teaches","sees","calls","thanks"];
+  OBJ_PRON.forEach(([sub,obj,refl])=>{
+    const verb = pick(verbs);
+    const {options,correctIdx} = optionsFrom(obj, OBJ_PRON.map(x=>x[1]), 4);
+    qs.push(mcq(`اختر ضمير المفعول به الصحيح ليحل محل "${sub}" في نهاية الجملة: Mike ${verb} ___`, options, correctIdx,
+      `ضمير المفعول به المرتبط بـ "${sub}" هو "${obj}"، ويأتي بعد الفعل مباشرة كمفعول به.`));
+    const {options:o2,correctIdx:c2} = optionsFrom(refl, OBJ_PRON.map(x=>x[2]), 4);
+    qs.push(mcq(`اختر الضمير المنعكس المناسب: ${sub.charAt(0).toUpperCase()+sub.slice(1)} did it ___`, o2, c2,
+      `الضمير المنعكس المرتبط بـ "${sub}" هو "${refl}"، ويُستخدم عندما يعود الفعل على الفاعل نفسه.`));
+  });
+  OBJ_PRON.forEach(([sub,obj,refl])=>{
+    qs.push(fillQ(`اكتب ضمير المفعول به الصحيح: Mike loves ___ (${sub})`, [obj], `ضمير المفعول به لـ "${sub}" هو "${obj}".`));
+    qs.push(fillQ(`اكتب الضمير المنعكس الصحيح: ${sub.charAt(0).toUpperCase()+sub.slice(1)} did it by ___`, [refl], `الضمير المنعكس لـ "${sub}" هو "${refl}".`));
+  });
+  qs.push(tf(`الضمير "myself" يُستخدم عندما يكون الفاعل والمفعول به نفس الشخص.`, true, `صحيح، الضمائر المنعكسة تدل على أن الفاعل قام بالفعل لنفسه.`));
+  qs.push(mcq(`"They talk to ___" (هم يتحدثون مع أنفسهم)`, ['them','themselves','theirs','their'], 1, `الفعل يعود على الفاعل نفسه "They"، فنستخدم الضمير المنعكس "themselves".`));
+  qs.push(mcq(`"He loves ___" (هو يحبها)`, ['she','her','hers','herself'], 1, `"her" ضمير مفعول به يعني "إياها"، بعكس "she" التي تُستخدم كفاعل فقط.`));
+  return cap(qs, 42);
+}
+
+/* ---- Whose ---- */
+function genWhose(){
+  const items = [["chair","كرسي"],["child","طفل"],["car","سيارة"],["pen","قلم"],["hat","قبعة"],["houses","بيوت"],["shoes","أحذية"],["sword","سيف"],["ball","كرة"],["bag","حقيبة"],["doll","دمية"],["book","كتاب"]];
+  const qs=[];
+  items.forEach(([n,ar])=>{
+    const plural = n.endsWith('s');
+    const be = plural?'are':'is';
+    const correct = `Whose ${n} ${be} this${plural?'':''}?`.replace('this?','this?');
+    const correctSentence = `Whose ${n} ${be} ${plural?'these':'this'}?`;
+    const scrambled = [n, 'Whose', be, plural?'these':'this'];
+    const distractor1 = `${be} Whose ${n} ${plural?'these':'this'}?`;
+    const distractor2 = `Whose ${be} ${n} ${plural?'these':'this'}?`;
+    const distractor3 = `${plural?'these':'this'} Whose ${n} ${be}?`;
+    const {options,correctIdx} = optionsFrom(correctSentence, [correctSentence, distractor1, distractor2, distractor3], 4);
+    qs.push(mcq(`رتّب الكلمات لتكوين سؤال ملكية صحيح عن (${ar}):`, options, correctIdx,
+      `الترتيب الصحيح: Whose + الاسم + الفعل المساعد (is/are) + this/these؟`));
+  });
+  const answerForms = [
+    ["Whose ball is this?","ball","my","mine"],["Whose bag is this?","bag","his","his"],
+    ["Whose doll is that?","doll","your","yours"],["Whose shoes are those?","shoes","their","theirs"],
+    ["Whose car is that?","car","her","hers"],["Whose books are those?","books","our","ours"]
+  ];
+  answerForms.forEach(([q,noun,adj,pron])=>{
+    qs.push(mcqShuffled(`أجب باستخدام صفة الملكية المناسبة على: "${q}" → It's ___ ${noun}.`,
+      adj, [pron, 'their', 'my'],
+      `صفة الملكية "${adj}" تأتي قبل الاسم مباشرة، أما ضمير الملكية "${pron}" فيحل محل (الصفة + الاسم) في الإجابة القصيرة.`));
+    qs.push(mcqShuffled(`أجب بضمير الملكية (بدون تكرار الاسم) على: "${q}"`,
+      `It's ${pron}.`, [`It's ${adj}.`, `It's ${adj} ${noun}.`],
+      `في الإجابة القصيرة نستخدم ضمير الملكية "${pron}" وحده دون ذكر الاسم مرة أخرى.`));
+    qs.push(fillQ(`اكتب صفة الملكية المناسبة فقط: "${q}" → It's ___ ${noun}.`, [adj], `صفة الملكية هنا هي "${adj}".`));
+    qs.push(fillQ(`اكتب ضمير الملكية المناسب فقط (بدون الاسم): "${q}" → It's ___.`, [pron], `ضمير الملكية هنا هو "${pron}".`));
+  });
+  return cap(qs, 44);
+}
+
+/* ---- Simple Present ---- */
+const PRESENT_VERBS = [["sleep","ينام"],["play","يلعب"],["want","يريد"],["love","يحب"],["buy","يشتري"],["like","يحب"],
+["eat","يأكل"],["dance","يرقص"],["sell","يبيع"],["build","يبني"],["have","يملك"],["teach","يعلّم"],["do","يفعل"],["listen","يستمع"],["wear","يرتدي"],["work","يعمل"],["make","يصنع"],["watch","يشاهد"],["clean","ينظف"],["write","يكتب"]];
+const PRESENT_SUBJ = [["I","I "],["He","He "],["She","She "],["It","It "],["You","You "],["We","We "],["They","They "]];
+function thirdPersonS(v){
+  if(/[osxz]$|ch$|sh$/.test(v)) return v+'es';
+  if(/[^aeiou]y$/.test(v)) return v.slice(0,-1)+'ies';
+  if(v==='have') return 'has';
+  if(v==='do') return 'does';
+  return v+'s';
+}
+function genPresentSimple(){
+  const qs=[];
+  PRESENT_VERBS.forEach(([v,ar])=>{
+    const s3 = thirdPersonS(v);
+    ["He","She","It"].forEach(sub=>{
+      const {options,correctIdx} = optionsFrom(s3, [v, s3, v+'ing', v+'ed'], 4);
+      qs.push(mcq(`اختر صورة الفعل الصحيحة: ${sub} ___ (${v} — ${ar}) every day.`, options, correctIdx,
+        `مع الفاعل المفرد الغائب (He/She/It) نضيف (s/es) للفعل في المضارع البسيط: "${v}" → "${s3}".`));
+    });
+    ["I","You","We","They"].forEach(sub=>{
+      const {options,correctIdx} = optionsFrom(v, [v, s3], 2);
+      qs.push(mcq(`اختر صورة الفعل الصحيحة: ${sub} ___ (${v}) every day.`, options, correctIdx,
+        `مع I/You/We/They يبقى الفعل في صورته الأساسية بدون إضافة.`));
+    });
+    const neg = "He doesn't "+v+".";
+    const {options:o3,correctIdx:c3} = optionsFrom("doesn't "+v, ["doesn't "+v, "don't "+v, "not "+s3, "isn't "+v], 4);
+    qs.push(mcq(`صيغة النفي الصحيحة: He ___ (${v}) coffee.`, o3, c3,
+      `مع الفاعل المفرد الغائب نستخدم "doesn't" + الفعل الأساسي (بدون s).`));
+    const {options:o4,correctIdx:c4} = optionsFrom("Does he "+v, ["Does he "+v, "Do he "+v, "Is he "+v, "Does he "+s3], 4);
+    qs.push(mcq(`صيغة السؤال الصحيحة عن: He ${s3} coffee.`, o4, c4,
+      `للسؤال مع He/She/It نستخدم "Does" + الفاعل + الفعل الأساسي بدون s.`));
+  });
+  const fixList = [
+    ["MY friend has a three dogs.","My friend has three dogs.","لا نضع أداة \"a\" قبل عدد؛ نحذفها."],
+    ["he go home","he goes home","الفعل مع He يأخذ s: goes."],
+    ["he come to my house","he comes to my house","الفعل مع he يأخذ s: comes."],
+    ["we are do our homework","we do our homework","لا نستخدم am/is/are مع الفعل في المضارع البسيط العادي."],
+    ["I am love my friend","I love my friend","لا نستخدم am مع فعل عادي في المضارع البسيط."]
+  ];
+  fixList.forEach(([wrong,right,why])=>{
+    const {options,correctIdx} = optionsFrom(right, [right, wrong, right+' too', right.replace('.', ' now.')], 4);
+    qs.push(mcq(`صحّح الخطأ في: "${wrong}"`, options, correctIdx, why));
+  });
+  qs.push(mcq(`عند وجود فعلين متتاليين لنفس الفاعل، أين نضع (s)؟`, ["على الفعل الأول فقط","على الفعل الثاني فقط","على الفعلين معًا"], 0,
+    `مثال: "She does not talk very much" — الفعل المساعد الأول فقط يأخذ التصريف.`));
+  return cap(qs, 62);
+}
+
+/* ---- Lesson 15: comprehensive present-simple exam (as in the source) ---- */
+function genPresentExam(){
+  const qs=[];
+  const set1 = [["I ___ lemonade very much. (to like)","like"],["These girls always ___ to pop music. (to listen)","listen"],
+  ["Janet never ___ jeans. (to wear)","wears"],["Mr. Smith ___ Spanish and French. (to teach)","teaches"],["You ___ your homework after school. (to do)","do"]];
+  set1.forEach(([q,a])=>qs.push(fillQ(q,[a],`الفاعل يحدد صورة الفعل: مفرد غائب (he/she/it) → فعل+s/es، وباقي الضمائر → الفعل الأساسي.`)));
+
+  const set2 = [
+    ["لديه دراجة جميلة.",["He have a beautiful bike.","He has a beautiful bike.","He has beautiful bike.","He haves a beautiful bike."],1,"نستخدم has مع he وأداة a قبل الصفة+الاسم المفرد."],
+    ["نحن نحب أن نقرأ.",["We are like to read.","We likes to read.","We are like read.","We like to read."],3,"we تأخذ الفعل الأساسي بدون s وبدون فعل الكينونة."],
+    ["هو لا يشتري أي شيء.",["He don't buy anything.","He doesn't buy anything.","He isn't buy anything.","He doesn't buys anything."],1,"النفي مع he: doesn't + الفعل الأساسي بدون s."],
+    ["هل تعرف أخي؟",["Are you know my brother?","Are you to know my brother?","Do you know me brother?","Do you know my brother?"],3,"السؤال بفعل عادي: Do + فاعل + فعل أساسي؛ my وليس me قبل الاسم."],
+    ["هل لديها نقود؟",["Is she have money?","Is she has money?","Does she have money?","Does she has money?"],2,"السؤال مع she وفعل have: Does she have...?"]
+  ];
+  set2.forEach(([q,opts,idx,why])=>qs.push(mcq(q,opts,idx,why)));
+
+  const set3 = [["We ___ a nice garden.","have"],["She ___ six years old.","is"],["Simon ___ two rabbits.","has"],["I ___ from Egypt.","am"],["They ___ my friends.","are"]];
+  set3.forEach(([q,a])=>qs.push(fillQ(q,[a],`اختر من (has, have, am, is, are) حسب الفاعل ونوع الجملة.`)));
+
+  const set4 = [
+    ["you - English - speak","Do you speak English?"],["home - to - you - go - want","Do you want to go home?"],
+    ["friends - your - tall","Is your friend tall?"],["Jack - in a - work - supermarket","Does Jack work in a supermarket?"],
+    ["they - students - your","Are they your students?"]
+  ];
+  set4.forEach(([scrambled,right])=>{
+    const d1 = right.startsWith('Do ') ? right.replace('Do ','Does ')
+             : right.startsWith('Does ') ? right.replace('Does ','Do ')
+             : right.startsWith('Is ') ? right.replace('Is ','Are ')
+             : right.replace('Are ','Is ');
+    qs.push(mcqShuffled(`كوّن سؤالًا صحيحًا من الكلمات: ${scrambled}`, right, [d1, right+' now', right.replace('?','.')],
+      `استخدم Do/Does/Is/Are في بداية السؤال حسب الفاعل ونوع الفعل.`));
+  });
+
+  const set5 = [
+    ["My father makes breakfast.","My father doesn't make breakfast.","My father don't make breakfast."],
+    ["They are hungry.","They are not hungry.","They doesn't hungry."],
+    ["She writes a letter.","She doesn't write a letter.","She don't write a letter."],
+    ["He speaks Italian.","He doesn't speak Italian.","He don't speak Italian."],
+    ["The students clean the classroom.","The students don't clean the classroom.","The students doesn't clean the classroom."]
+  ];
+  set5.forEach(([q,right,wrongAux])=>{
+    qs.push(mcqShuffled(`حوّل الجملة إلى صيغة النفي: "${q}"`, right, [q, wrongAux],
+      `في النفي: he/she/it → doesn't + فعل أساسي؛ باقي الضمائر → don't + فعل أساسي. أما verb to be فينفى بإضافة not مباشرة.`));
+  });
+
+  const set6 = [
+    ["Does Tommy have a ball?","No, he doesn't."],["Does Meg sit on the chair?","Yes, she does."],
+    ["Are they students?","Yes, they are."],["Do police officers wear T-shirts?","No, they don't."],["Is Jack from Canada?","No, he isn't."]
+  ];
+  set6.forEach(([q,right])=>{
+    const {options,correctIdx} = optionsFrom(right, [right, right.replace('Yes','No'), right.replace('No','Yes'), right.replace('.', ' maybe.')], 4);
+    qs.push(mcq(`اختر الإجابة القصيرة الصحيحة عن: "${q}"`, options, correctIdx, `الإجابة القصيرة تستخدم نفس الفعل المساعد في السؤال (do/does/is/are).`));
+  });
+
+  const mistakes = [
+    ["MY friend has a three dogs.","a"],["he go home","go → goes"],["he come to my house","come → comes"],
+    ["we are do our homework","احذف are"],["I am love my friend","احذف am"]
+  ];
+  mistakes.forEach(([sent,fix])=>{
+    qs.push(fillQ(`ما هو الخطأ في هذه الجملة (اكتب الكلمة الخطأ فقط أو التصحيح المختصر): "${sent}"`, [fix.split('→')[0].trim(), fix], `الخطأ هنا: ${fix}.`));
+  });
+
+  return cap(qs, 68);
+}
+
+/* ---- Present continuous ---- */
+const ING_VERBS = [["do","doing","حرف متحرك واحد: نضيف ing"],["make","making","نحذف e الصامتة ثم نضيف ing"],
+["sit","sitting","نضاعف الحرف الأخير (C.V.C) ثم نضيف ing"],["gain","gaining","لا نضاعف مع (حرفين متحركين + ساكن) نضيف ing فقط"],
+["play","playing","لا تنطبق القاعدة: تنتهي بـ y فنضيف ing مباشرة"],["go","going","حرف متحرك واحد: نضيف ing"],
+["stop","stopping","نضاعف الحرف الأخير"],["bake","baking","نحذف e الصامتة"],["run","running","نضاعف الحرف الأخير"],
+["smile","smiling","نحذف e الصامتة"],["push","pushing","نضيف ing مباشرة"],["fix","fixing","تنتهي بـ x فلا تُضاعف، نضيف ing"],
+["stay","staying","تنتهي بـ y فنضيف ing مباشرة"],["swim","swimming","نضاعف الحرف الأخير"],["wear","wearing","نضيف ing مباشرة"],
+["call","calling","نضيف ing مباشرة"],["talk","talking","نضيف ing مباشرة"],["sleep","sleeping","نضيف ing مباشرة"],
+["drink","drinking","نضيف ing مباشرة"],["kill","killing","نضيف ing مباشرة"],["beg","begging","نضاعف الحرف الأخير"]];
+function genPresentContinuous(){
+  const allIng = ING_VERBS.map(x=>x[1]);
+  const qs=[];
+  ING_VERBS.forEach(([v,ing,rule])=>{
+    const {options,correctIdx} = optionsFrom(ing, allIng, 4);
+    qs.push(mcq(`ما هي صيغة (ing) الصحيحة للفعل: <span class="en-inline">${v}</span> ؟`, options, correctIdx, rule));
+  });
+  const subjSet = [["He","is"],["I","am"],["They","are"],["She","is"],["We","are"],["You","are"],["It","is"]];
+  subjSet.forEach(([sub,be])=>{
+    const v = pick(ING_VERBS);
+    const {options,correctIdx} = optionsFrom(be, ['am','is','are'], 3);
+    qs.push(mcq(`اختر الفعل المساعد الصحيح: ${sub} ___ ${v[1]} now.`, options, correctIdx, `الفاعل "${sub}" يقترن بـ "${be}" في المضارع المستمر.`));
+  });
+  qs.push(mcq(`صيغة النفي الصحيحة: He is ___ playing.`, ['not','no','don\'t'], 0, `ننفي المضارع المستمر بوضع not مباشرة بعد am/is/are.`));
+  qs.push(mcq(`صيغة السؤال الصحيحة من: They are coming.`, ['Are they coming?','Do they coming?','They are coming?','Is they coming?'], 0,
+    `ننقل (am/is/are) لبداية الجملة لتكوين السؤال.`));
+  const translate = [
+    ["الولد يقفز عاليًا.","The boy is jumping high.",["The boy jumps high.","The boy are jumping high.","The boy is jump high."]],
+    ["هل هي تتناول الغداء؟","Is she having lunch?",["Does she having lunch?","She is having lunch?","Is she have lunch?"]],
+    ["هم يسيرون.","They are walking.",["They is walking.","They walk.","They are walk."]],
+    ["هو لا يذاكر الآن.","He is not studying now.",["He doesn't studying now.","He not is studying now.","He is studying now."]]
+  ];
+  translate.forEach(([ar,en,wrongs])=>{
+    qs.push(mcqShuffled(`ترجم إلى الإنجليزية: "${ar}"`, en, wrongs, `الجملة الصحيحة: "${en}"`));
+  });
+  return cap(qs, 55);
+}
+
+/* ---- Be vs Do ---- */
+function genBeVsDo(){
+  const qs = [];
+  const items = [
+    ["Is she tall?","صفة (tall) — نستخدم verb to be","Is"],
+    ["Are you John?","اسم (John) — نستخدم verb to be","Are"],
+    ["Do you watch movies?","فعل لا يحدث الآن (عادة) — نستخدم do","Do"],
+    ["Are you watching the movie now?","فعل يحدث الآن (مستمر) — نستخدم verb to be + ing","Are"],
+    ["Is he a doctor?","اسم (a doctor) — نستخدم verb to be","Is"],
+    ["Does he play soccer every day?","فعل عادة متكررة — نستخدم does","Does"],
+    ["Is it raining now?","فعل يحدث الآن — نستخدم verb to be + ing","Is"],
+    ["Do they live here?","فعل حقيقة عامة — نستخدم do","Do"],
+    ["Is your sister a nurse?","اسم (a nurse) — نستخدم verb to be","Is"],
+    ["Does your father work in a bank?","فعل عادة/حقيقة — نستخدم does","Does"],
+    ["Are they happy?","صفة (happy) — نستخدم verb to be","Are"],
+    ["Do you like coffee?","فعل عادة/تفضيل عام — نستخدم do","Do"],
+    ["Is she cooking dinner now?","فعل يحدث الآن (مستمر) — نستخدم verb to be + ing","Is"],
+    ["Does she cook dinner every night?","فعل عادة متكررة — نستخدم does","Does"]
+  ];
+  items.forEach(([q,why,aux])=>{
+    const usesBe = /^(Is|Are|Am)/.test(q);
+    const {options,correctIdx} = optionsFrom(usesBe?'Be (am/is/are)':'Do/Does', ['Be (am/is/are)','Do/Does'], 2);
+    qs.push(mcq(`لتكوين السؤال التالي، هل نستخدم Be أم Do/Does؟ "${q}"`, options, correctIdx, why));
+    const {options:o2,correctIdx:c2} = optionsFrom(aux, ['Do','Does','Is','Are','Am'], 4);
+    qs.push(mcq(`أكمل السؤال بالأداة الصحيحة: ${'___ '+q.split(' ').slice(1).join(' ')}`, o2, c2, why));
+  });
+  qs.push(tf(`نستخدم (am/is/are) للسؤال عن اسم، أو صفة، أو فعل يحدث الآن (مستمر).`, true, `هذه هي حالات استخدام verb to be في تكوين الأسئلة.`));
+  qs.push(tf(`نستخدم (do/does) فقط مع الأفعال التي لا تحدث الآن (عادات وحقائق).`, true, `صحيح، do/does تُستخدم مع المضارع البسيط (الفعل غير الحادث في هذه اللحظة).`));
+  qs.push(mcq(`أكمل: ___ you like coffee?`, ['Do','Are','Is'], 0, `"like" فعل يعبر عن حقيقة/عادة عامة، فنستخدم "Do".`));
+  qs.push(mcq(`أكمل: ___ you tired right now?`, ['Do','Are','Does'], 1, `"tired" صفة، فنستخدم verb to be "Are".`));
+  qs.push(mcq(`أكمل: ___ your sister cooking dinner now?`, ['Do','Is','Does'], 1, `فعل يحدث الآن (مستمر: cooking)، فنستخدم verb to be.`));
+  qs.push(mcq(`أكمل: ___ your sister cook every night?`, ['Do','Is','Does'], 2, `فعل عادة متكررة (كل ليلة)، فنستخدم Does مع she/sister.`));
+  return cap(qs, 34);
+}
+
+/* ---- Simple Past ---- */
+const REG_PAST = [["play","played"],["wait","waited"],["love","loved"],["help","helped"],["visit","visited"],["stay","stayed"],["like","liked"],["walk","walked"],["cook","cooked"],["finish","finished"],["travel","travelled"],["watch","watched"],["clean","cleaned"],["want","wanted"]];
+const IRR_PAST = [["go","went"],["break","broke"],["sing","sang"],["cut","cut"],["eat","ate"],["make","made"],["drink","drank"],["see","saw"],["run","ran"],["buy","bought"],["sell","sold"],["meet","met"],["win","won"],["tell","told"],["have","had"],["do","did"]];
+function genPastSimple(){
+  const allReg = REG_PAST.map(x=>x[1]), allIrr = IRR_PAST.map(x=>x[1]);
+  const qs=[];
+  REG_PAST.forEach(([v,p])=>{
+    const {options,correctIdx} = optionsFrom(p, [...allReg, v+'ing'], 4);
+    qs.push(mcq(`ما هو الماضي البسيط للفعل المنتظم: <span class="en-inline">${v}</span> ؟`, options, correctIdx, `الأفعال المنتظمة يُضاف لها (d) أو (ed): "${v}" → "${p}".`));
+    qs.push(mcq(`الفعل "${v}" في الماضي البسيط يُصنَّف على أنه:`, ['فعل منتظم (Regular)','فعل غير منتظم (Irregular)'], 0, `يتبع القاعدة العامة بإضافة ed، فهو منتظم.`));
+  });
+  IRR_PAST.forEach(([v,p])=>{
+    const {options,correctIdx} = optionsFrom(p, allIrr, 4);
+    qs.push(mcq(`ما هو الماضي البسيط للفعل غير المنتظم: <span class="en-inline">${v}</span> ؟`, options, correctIdx, `"${v}" فعل غير منتظم، شكله في الماضي "${p}" ويُحفظ كما هو.`));
+    qs.push(mcq(`الفعل "${v}" في الماضي البسيط يُصنَّف على أنه:`, ['فعل منتظم (Regular)','فعل غير منتظم (Irregular)'], 1, `لا يتبع قاعدة (ed)، له صيغة خاصة "${p}"، فهو غير منتظم.`));
+  });
+  qs.push(mcq(`صيغة النفي في الماضي البسيط:`, ["didn't + الفعل الأساسي","don't + الفعل الأساسي","didn't + الفعل في الماضي"], 0,
+    `النفي: didn't + الفعل في صورته الأساسية (المصدر) بغض النظر عن الفاعل.`));
+  qs.push(mcq(`صيغة السؤال في الماضي البسيط:`, ["Did + فاعل + فعل أساسي","Did + فاعل + فعل ماضٍ","Do + فاعل + فعل ماضٍ"], 0,
+    `السؤال: Did + الفاعل + الفعل في صورته الأساسية.`));
+  const fixList = [
+    ["I didn't drinked milk last night.","I didn't drink milk last night.","بعد didn't نستخدم الفعل الأساسي وليس الماضي."],
+    ["Did they ate a big meal for dinner?","Did they eat a big meal for dinner?","بعد Did نستخدم الفعل الأساسي وليس الماضي."],
+    ["We didn't went to my friend's a house.","We didn't go to my friend's house.","بعد didn't نستخدم الفعل الأساسي؛ ولا نكرر أداة النكرة بعد إضافة الملكية."],
+    ["Sarah take a pencil to school yesterday.","Sarah took a pencil to school yesterday.","الجملة عن الأمس (yesterday) فيجب تصريف الفعل في الماضي."]
+  ];
+  fixList.forEach(([wrong,right,why])=>{
+    const {options,correctIdx} = optionsFrom(right, [right, wrong, right.replace('.', ' too.'), right.replace('a ','')], 4);
+    qs.push(mcq(`صحّح الجملة: "${wrong}"`, options, correctIdx, why));
+  });
+  const translate = [["هل اشتريت منزلًا جديدًا؟","Did you buy a new house?"],["مارك طهى العشاء من أجلنا.","Mark cooked dinner for us."]];
+  translate.forEach(([ar,en])=>{
+    const {options,correctIdx} = optionsFrom(en, [en, en.replace('Did','Do'), en.replace('cooked','cook'), en+' yesterday'], 4);
+    qs.push(mcq(`ترجم: "${ar}"`, options, correctIdx, `الترجمة الصحيحة: "${en}"`));
+  });
+  qs.push(mcq(`صيغة verb to be في الماضي مع "He/She/It":`, ['was','were'], 0, `المفرد (he/she/it/I) يأخذ "was".`));
+  qs.push(mcq(`صيغة verb to be في الماضي مع "They/We/You":`, ['was','were'], 1, `الجمع (they/we/you) يأخذ "were".`));
+  return cap(qs, 64);
+}
+
+/* ---- Past continuous ---- */
+function genPastContinuous(){
+  const qs=[];
+  const homeworkItems = [["Paul","walk outside"],["Beth and I","make sandwiches"],["He","do yoga"],["Kate","teach a class"],["They","listen to music"]];
+  homeworkItems.forEach(([sub,verb])=>{
+    const be = /and| We|They|You/.test(sub) || sub==='They' ? 'were' : (sub==='I'?'was': (['He','She','It','Kate','Paul'].includes(sub)?'was':'were'));
+    const ingBase = verb.split(' ')[0];
+    let ing = ingBase.endsWith('e') && ingBase!=='be' ? ingBase.slice(0,-1)+'ing' : ingBase+'ing';
+    if(ingBase==='sit') ing='sitting';
+    const rest = verb.split(' ').slice(1).join(' ');
+    const otherBe = be==='was' ? 'were' : 'was';
+    const full = `${sub} ${be} ${ing}${rest?' '+rest:''}.`;
+    qs.push(mcqShuffled(`كوّن جملة مثبتة صحيحة من: "${sub} - ${verb}"`, full,
+      [`${sub} ${otherBe} ${ing}${rest?' '+rest:''}.`, `${sub} ${be} ${ingBase}${rest?' '+rest:''}.`, `${sub} ${ing}${rest?' '+rest:''}.`],
+      `التكوين: الفاعل + was/were (حسب الفاعل) + الفعل+ing.`));
+    const negOtherBe = otherBe==='was' ? "wasn't" : "weren't";
+    const neg = `${sub} ${be==='was'?"wasn't":"weren't"} ${ing}${rest?' '+rest:''}.`;
+    qs.push(mcqShuffled(`كوّن جملة منفية من: "${sub} - ${verb}"`, neg,
+      [full, `${sub} ${negOtherBe} ${ing}${rest?' '+rest:''}.`, `${sub} not ${be} ${ing}${rest?' '+rest:''}.`],
+      `النفي: الفاعل + wasn't/weren't + الفعل+ing.`));
+    const q1 = `${be.charAt(0).toUpperCase()+be.slice(1)} ${sub.toLowerCase()==='i'?'I':sub} ${ing}${rest?' '+rest:''}?`;
+    const q1OtherBe = `${otherBe.charAt(0).toUpperCase()+otherBe.slice(1)} ${sub.toLowerCase()==='i'?'I':sub} ${ing}${rest?' '+rest:''}?`;
+    qs.push(mcqShuffled(`كوّن سؤالًا من: "${sub} - ${verb}"`, q1, [q1OtherBe, full],
+      `السؤال: was/were + الفاعل + الفعل+ing؟`));
+  });
+  const usage = [
+    ["I was watching TV when my friend called.","حدث كان يحصل أثناء وقوع حدث آخر"],
+    ["Last night at 8 PM, I was eating dinner.","تحديد لحظة زمنية معينة في الماضي (Pinpoint)"],
+    ["She was studying while her mom was making dinner.","حدثان مستمران متوازيان في نفس الوقت"],
+    ["My father was watching TV, my mom was cooking dinner...","وصف مشهد/جو عام في الماضي"],
+    ["He was always coming late to class.","حدث تكرر بشكل مزعج/مستفز في الماضي"],
+    ["I was taking a shower when the electricity went out.","حدث كان يحصل أثناء وقوع حدث آخر"],
+    ["I was surfing the internet when I found your channel.","حدث كان يحصل أثناء وقوع حدث آخر"]
+  ];
+  usage.forEach(([ex,use])=>{
+    const {options,correctIdx} = optionsFrom(use, usage.map(x=>x[1]), 4);
+    qs.push(mcq(`أي استخدام للماضي المستمر يناسب هذا المثال؟ "${ex}"`, options, correctIdx, `هذا من استخدامات الماضي المستمر: ${use}.`));
+  });
+  const extraSubjects = [["We","play video games"],["The children","watch a movie"],["My mom","cook lunch"]];
+  extraSubjects.forEach(([sub,verb])=>{
+    const be = (sub==='We'||sub==='The children') ? 'were' : 'was';
+    const otherBe = be==='was'?'were':'was';
+    const ingBase = verb.split(' ')[0];
+    const ing = ingBase.endsWith('e') ? ingBase.slice(0,-1)+'ing' : ingBase+'ing';
+    const rest = verb.split(' ').slice(1).join(' ');
+    const full = `${sub} ${be} ${ing} ${rest}.`.replace('  ',' ');
+    qs.push(mcqShuffled(`اختر الصيغة الصحيحة للماضي المستمر: "${sub} - ${verb}"`, full,
+      [`${sub} ${otherBe} ${ing} ${rest}.`.replace('  ',' '), `${sub} ${be} ${ingBase} ${rest}.`.replace('  ',' ')],
+      `الفاعل "${sub}" يقترن بـ "${be}" في الماضي المستمر.`));
+  });
+  return cap(qs, 42);
+}
+
+/* ---- When / While ---- */
+function genWhenWhile(){
+  const qs=[];
+  const pairs = [
+    ["Mom was cooking","Messy dropped the dishes"],["I was taking a shower","the electricity went out"],
+    ["I was surfing the internet","I found your channel"],["she sat with Pete","he was dying"],
+    ["I was walking home","it started to rain"],["we were watching the movie","the power went out"],
+    ["he was driving","he saw an old friend"],["they were sleeping","the phone rang"]
+  ];
+  pairs.forEach(([ongoing,sudden])=>{
+    qs.push(mcq(`أي أداة ربط تناسب: "${ongoing} ___ ${sudden}." (حدث مفاجئ طرأ أثناء حدث مستمر)`, ['When','While'], 0,
+      `"When" تُستخدم قبل الحدث المفاجئ (القصير) الذي طرأ أثناء الحدث المستمر.`));
+    qs.push(mcq(`أي أداة ربط تناسب إذا بدأنا بالحدث المستمر أولًا: "___ ${ongoing}, ${sudden}."`, ['When','While'], 1,
+      `"While" تُستخدم قبل الحدث المستمر (الخلفية)، ولا يليها الحدث الطارئ مباشرة.`));
+  });
+  qs.push(tf(`إذا جاءت أداة الربط (When/While) في بداية الجملة، نضع فاصلة "," بين الجملتين.`, true, `صحيح، الفاصلة تفصل بين جملة الأداة والجملة الرئيسية عندما تبدأ بها الجملة.`));
+  qs.push(tf(`لا يوجد أي قيد على الزمن الذي يأتي بعد When أو While، فقط يجب أن يكون المعنى صحيحًا.`, true, `صحيح، When/While أدوات ربط تصلح لربط أي زمنين طالما المعنى منطقي.`));
+  const translate = [
+    ["في اثناء ما كنت اطير طائرتي، هو دفعني.","While I was flying my kite, he pushed me."],
+    ["عندما تصل إلى المطار، اتصل بي.","When you arrive at the airport, call me."],
+    ["في أثناء ما كنت نائمًا، كانت هي تذاكر.","While I was sleeping, she was studying."]
+  ];
+  translate.forEach(([ar,en])=>{
+    const {options,correctIdx} = optionsFrom(en, [en, en.replace('While','When'), en.replace('When','While'), en.replace(',', '')], 4);
+    qs.push(mcq(`ترجم: "${ar}"`, options, correctIdx, `الترجمة الصحيحة: "${en}"`));
+  });
+  qs.push(mcq(`"Messy dropped the dishes ___ Mom was cooking." أكمل بالأداة الصحيحة:`, ['When','While'], 0,
+    `الحدث المفاجئ "dropped" يُتبع بـ When، والحدث المستمر يأتي بعدها في صيغة الماضي المستمر.`));
+  qs.push(tf(`الجملة "While the electricity went out, I was taking a shower." صحيحة الترتيب (While قبل الحدث المفاجئ).`, false,
+    `"While" يجب أن تسبق الحدث المستمر (taking a shower) وليس الحدث المفاجئ (went out). الصحيح: While I was taking a shower, the electricity went out.`));
+  qs.push(tf(`يمكن استبدال "When" بـ "While" في كل الجمل دون أي تغيير في المعنى أو الصحة النحوية.`, false,
+    `لا، فـ When تسبق الحدث المفاجئ بينما While تسبق الحدث المستمر، والخلط بينهما قد يُغيّر بنية الجملة.`));
+  qs.push(mcq(`أي كلمة تُستخدم عادة مع الفعل في صيغة الماضي المستمر (was/were + ing) مباشرة بعدها؟`, ['While','When','Both equally'], 0,
+    `"While" غالبًا ما يتبعها فعل في الماضي المستمر (الحدث الخلفي المستمر).`));
+  return cap(qs, 34);
+}
+
+/* ---- Future ---- */
+function genFuture(){
+  const qs=[];
+  const acts = [["visit my friend","سأزور صديقي"],["play computer games","سيلعب ألعاب الكمبيوتر"],["turn off the light","سيطفئ النور"],
+  ["watch the show","سيشاهدون العرض"],["go to the market","سأذهب إلى السوق"],["accept surrender","سأقبل الاستسلام"],["rain","ستمطر"],["help you","سأساعدك"]];
+  acts.forEach(([act,ar])=>{
+    qs.push(mcqShuffled(`أي صياغة تعبّر عن المستقبل بشكل صحيح لفعل "${act}" (${ar}) مع الفاعل I؟`,
+      `I will ${act}.`, [`I am ${act}.`, `I going to ${act}.`, `I to ${act}.`],
+      `المستقبل البسيط: will + الفعل الأساسي، أو am/is/are + going to + الفعل الأساسي.`));
+    qs.push(mcqShuffled(`اختر صيغة "going to" الصحيحة لفعل (${ar}) مع الفاعل I:`,
+      `I am going to ${act}.`, [`I will going to ${act}.`, `I going to ${act}.`, `I am go to ${act}.`],
+      `صيغة going to: am/is/are + going to + الفعل الأساسي.`));
+  });
+  qs.push(mcq(`صيغة النفي بـ will:`, ["will not / won't","don't will","will don't"], 0, `النفي: will not، ويُختصر إلى won't.`));
+  qs.push(mcq(`صيغة النفي بـ going to (مع They):`, ["aren't going to","isn't going to","won't going to"], 0, `النفي: am/is/are + not + going to؛ مع They تكون aren't.`));
+  qs.push(mcq(`صيغة السؤال بـ will:`, ["Will + فاعل + فعل؟","Do + فاعل + will + فعل؟","Will + فعل + فاعل؟"], 0, `السؤال: Will + الفاعل + الفعل الأساسي؟`));
+  qs.push(tf(`"I'll" هي الصورة المختصرة المستخدمة غالبًا في الكلام العادي، بينما "I will" تُستخدم للتشديد على معنى معين.`, true,
+    `صحيح، "I'll" للكلام العادي، و"I will" الكاملة تُستخدم عند إرادة التوكيد.`));
+  qs.push(tf(`"going to" تُستخدم أكثر في الكتابات الرسمية مثل الأبحاث العلمية والتقارير.`, false,
+    `العكس صحيح: "will" هي الأنسب للكتابات الرسمية، بينما "going to" أكثر شيوعًا في الكتابة غير الرسمية (الدردشة، الرسائل).`));
+  qs.push(mcq(`"Going to" في الكلام المنطوق غالبًا تُختصر إلى:`, ['gonna','goingto','gona'], 0, `في الكلام غير الرسمي: going to = gonna.`));
+  const shortAns = [["Will I go to the market?",true,'you','will'],["Will he play computer games?",true,'he','will'],["Will they watch the show?",false,'they','will']];
+  shortAns.forEach(([q,yes,pron,aux])=>{
+    const correct = yes?`Yes, ${pron} ${aux}.`:`No, ${pron} won't.`;
+    const {options,correctIdx} = optionsFrom(correct, [correct, yes?`No, ${pron} won't.`:`Yes, ${pron} ${aux}.`, `${pron} ${aux}`, 'Maybe so'], 4);
+    qs.push(mcq(`اختر الإجابة القصيرة الصحيحة: "${q}"`, options, correctIdx, `الإجابة القصيرة تستخدم will/won't فقط دون تكرار الفعل الأساسي.`));
+  });
+  return cap(qs, 46);
+}
+
+/* ---- Comparative ---- */
+const COMP_ADJ = [
+  ["small","smaller","صفة قصيرة: نضيف er"],["fast","faster","صفة قصيرة: نضيف er"],["tall","taller","صفة قصيرة: نضيف er"],
+  ["short","shorter","صفة قصيرة: نضيف er"],["long","longer","صفة قصيرة: نضيف er"],["strong","stronger","صفة قصيرة: نضيف er"],
+  ["big","bigger","(C.V.C) نضاعف الحرف الأخير ثم نضيف er"],["fat","fatter","(C.V.C) نضاعف الحرف الأخير ثم نضيف er"],
+  ["hot","hotter","(C.V.C) نضاعف الحرف الأخير ثم نضيف er"],["thin","thinner","(C.V.C) نضاعف الحرف الأخير ثم نضيف er"],
+  ["happy","happier","تنتهي بـ y: نقلبها i ونضيف er"],["pretty","prettier","تنتهي بـ y: نقلبها i ونضيف er"],
+  ["easy","easier","تنتهي بـ y: نقلبها i ونضيف er"],["hungry","hungrier","تنتهي بـ y: نقلبها i ونضيف er"],
+  ["naughty","naughtier","تنتهي بـ y: نقلبها i ونضيف er"],
+  ["expensive","more expensive","صفة متعددة المقاطع: نضيف more قبلها"],["colorful","more colorful","صفة متعددة المقاطع: نضيف more قبلها"],
+  ["difficult","more difficult","صفة متعددة المقاطع: نضيف more قبلها"],["interesting","more interesting","صفة متعددة المقاطع: نضيف more قبلها"],
+  ["careful","more careful","صفة متعددة المقاطع: نضيف more قبلها"],["beautiful","more beautiful","صفة متعددة المقاطع: نضيف more قبلها"]
+];
+function genComparative(){
+  const allComp = COMP_ADJ.map(x=>x[1]);
+  const qs=[];
+  COMP_ADJ.forEach(([adj,comp,rule])=>{
+    const {options,correctIdx} = optionsFrom(comp, allComp, 4);
+    qs.push(mcq(`ما هي صيغة المقارنة الصحيحة للصفة: <span class="en-inline">${adj}</span> ؟`, options, correctIdx, rule));
+    qs.push(fillQ(`اكتب صيغة المقارنة للصفة: ${adj}`, [comp], rule));
+  });
+  const sentences = [
+    ["My dog is ___ than your cat. (big)","bigger"],["Elephants are ___ than monkeys. (big)","bigger"],
+    ["My homework is ___ than yours. (difficult)","more difficult"],["Jack is ___ than Tim. (naughty)","naughtier"],
+    ["This car is ___ than that car. (expensive)","more expensive"]
+  ];
+  sentences.forEach(([q,a])=>qs.push(fillQ(q,[a], `نستخدم صفة المقارنة + than لمقارنة شيئين.`)));
+  qs.push(tf(`يمكن تقوية معنى المقارنة بإضافة "more" حتى للصفات القصيرة، مثل "more rude than" بدل "ruder than".`, true,
+    `صحيح، تُستخدم "more" أحيانًا للتأكيد وتعميق المعنى حتى مع صفات تأخذ er عادة.`));
+  return cap(qs, 58);
+}
+
+/* ---- Comparative + Superlative ---- */
+const SUP_ADJ = [
+  ["small","smaller","the smallest"],["fast","faster","the fastest"],["tall","taller","the tallest"],
+  ["thin","thinner","the thinnest"],["big","bigger","the biggest"],["hot","hotter","the hottest"],
+  ["happy","happier","the happiest"],["pretty","prettier","the prettiest"],
+  ["expensive","more expensive","the most expensive"],["interesting","more interesting","the most interesting"],
+  ["colorful","more colorful","the most colorful"],["difficult","more difficult","the most difficult"],
+  ["good","better","the best"],["bad","worse","the worst"]
+];
+function genComparativeSuperlative(){
+  const allSup = SUP_ADJ.map(x=>x[2]);
+  const allComp = SUP_ADJ.map(x=>x[1]);
+  const qs=[];
+  SUP_ADJ.forEach(([adj,comp,sup])=>{
+    const {options,correctIdx} = optionsFrom(sup, allSup, 4);
+    qs.push(mcq(`ما هي صيغة التفضيل (الأعلى/الأكثر) الصحيحة للصفة: <span class="en-inline">${adj}</span> ؟`, options, correctIdx,
+      (adj==='good'||adj==='bad') ? 'صفة شاذة (غير منتظمة) يجب حفظ صورتها.' : `صيغة التفضيل هنا: "${sup}".`));
+    const {options:o2,correctIdx:c2} = optionsFrom(comp, allComp, 4);
+    qs.push(mcq(`ما هي صيغة المقارنة (بين اثنين) الصحيحة للصفة: <span class="en-inline">${adj}</span> ؟`, o2, c2,
+      (adj==='good'||adj==='bad') ? 'صفة شاذة (غير منتظمة) يجب حفظ صورتها.' : `صيغة المقارنة هنا: "${comp}".`));
+  });
+  const realExamples = [
+    ["The cheetah is ___ animal in the world. (fast)","the fastest"],
+    ["The redwood is ___ tree in the world. (tall)","the tallest"],
+    ["The blue whale is ___ mammal in the world. (large)","the largest"],
+    ["The elephant is ___ land animal in the world. (heavy)","the heaviest"],
+    ["History is ___ subject in school. (interesting)","the most interesting"],
+    ["Coffee is ___ than juice. (good)","better"],["Water is ___. (good, بين أكثر من شيئين)","the best"],
+    ["Loneliness is a bad feeling, but nothing is ___ than it.","worse"]
+  ];
+  realExamples.forEach(([q,a])=>qs.push(fillQ(q,[a], `نستخدم صيغة التفضيل (the + est/most) عند المقارنة بين ثلاثة أو أكثر، وصيغة المقارنة (er/more) بين اثنين فقط.`)));
+  const homework = [
+    ["Canada is large. Russia is ___ than Canada.","larger"],["Jana is beautiful. Mary is ___ than Jane.","prettier"],
+    ["A pencil is long. A rule is ___ than a pencil.","longer"],["The students are noisy. The children are ___ than the students.","noisier"],
+    ["John is fat. Jason is ___ than John.","fatter"]
+  ];
+  homework.forEach(([q,a])=>qs.push(fillQ(q,[a],`استخدم صيغة المقارنة الصحيحة حسب نوع الصفة (er أو more).`)));
+  qs.push(mcq(`نستخدم صيغة التفضيل (Superlative) عندما نقارن بين:`, ['شيئين فقط','ثلاثة أشياء أو أكثر','لا فرق'], 1,
+    `صيغة المقارنة (Comparative) بين شيئين، وصيغة التفضيل (Superlative) بين ثلاثة أو أكثر، وغالبًا تُسبق بـ "the".`));
+  qs.push(tf(`صفة "good" في صيغة التفضيل تصبح "gooder".`, false, `"good" صفة شاذة: good → better → the best.`));
+  qs.push(tf(`صفة "bad" في صيغة المقارنة تصبح "worse".`, true, `صحيح: bad → worse → the worst.`));
+  return cap(qs, 68);
+}
+
+/* =========================================================================
+   LESSON DEFINITIONS
+========================================================================= */
+const LESSONS = [
+{id:'l1', num:1, tag:'الأدوات', title:'A – An', titleEn:'Articles: A / An', gen:genArticles,
+ desc:'متى نستخدم a ومتى نستخدم an قبل الاسم المفرد.',
+ summary:`
+  <div class="rule-block"><h4>القاعدة الأساسية</h4><div class="content">
+  الأسماء في اللغة الإنجليزية لا تدل على عدد بمفردها (elephant, ball)، لذلك نضيف <b>a</b> أو <b>an</b> لجعل الاسم بصيغة المفرد.
+  </div></div>
+  <div class="rule-block"><h4>a أم an؟</h4><table class="rule-table"><tr><th>an</th><th>a</th></tr>
+  <tr><td>إذا كان الاسم يبدأ <b>بصوت</b> حرف متحرك (a-e-i-o-u)</td><td>إذا كان الاسم لا يبدأ بصوت حرف متحرك</td></tr></table>
+  <div class="chip-row"><span class="tag-chip">an <b>e</b>gg 🥚</span><span class="tag-chip">an <b>h</b>our ⏰ (الـ h صامتة)</span><span class="tag-chip">an <b>u</b>mbrella ☂️</span><span class="tag-chip">a <b>u</b>niform (تُنطق y) 👔</span><span class="tag-chip">a <b>ch</b>air 🪑</span></div>
+  </div>
+  <div class="rule-block"><h4>أمثلة</h4>
+  <div class="example"><span class="en">I'm a girl. / Are you a doctor?</span><span class="ar">أنا بنت. / هل أنت طبيب؟</span></div>
+  <div class="example"><span class="en">An owl lives in a tree.</span><span class="ar">بومة تعيش في شجرة.</span></div>
+  </div>`},
+
+{id:'l2', num:2, tag:'أسماء الإشارة', title:'This – That', titleEn:'This / That (Singular)', gen:genThisThat,
+ desc:'الإشارة إلى المفرد القريب (This) والمفرد البعيد (That).',
+ summary:`<div class="rule-block"><h4>القاعدة</h4><table class="rule-table"><tr><th>This</th><th>That</th></tr>
+ <tr><td>هذا / هذه — للمفرد القريب</td><td>ذلك / تلك — للمفرد البعيد</td></tr></table>
+ <div class="content">تُستخدم بصيغتين: <b>This is a flower.</b> (هذه تكون وردة) أو <b>This flower.</b> (هذه الوردة).</div></div>
+ <div class="rule-block"><h4>أمثلة</h4>
+ <div class="example"><span class="en">This is pure glass.</span><span class="ar">هذا زجاج نقي.</span></div>
+ <div class="example"><span class="en">That boy will die. / Look at that cat.</span><span class="ar">ذلك الولد سوف يموت. / انظر إلى تلك القطة.</span></div></div>`},
+
+{id:'l3', num:3, tag:'أسماء الإشارة', title:'These – Those', titleEn:'These / Those (Plural)', gen:genTheseThose,
+ desc:'الإشارة إلى الجمع القريب (These) والجمع البعيد (Those).',
+ summary:`<div class="rule-block"><h4>القاعدة</h4><table class="rule-table"><tr><th>These</th><th>Those</th></tr>
+ <tr><td>هؤلاء — للجمع القريب</td><td>أولئك — للجمع البعيد</td></tr></table></div>
+ <div class="rule-block"><h4>أمثلة</h4>
+ <div class="example"><span class="en">These are my cars. / These are scientists.</span><span class="ar">هؤلاء سياراتي. / هؤلاء علماء.</span></div>
+ <div class="example"><span class="en">Those are my friends. / Cross those rocks.</span><span class="ar">أولئك أصدقائي. / اعبر أولئك الصخور.</span></div></div>`},
+
+{id:'l4', num:4, tag:'Verb to Be', title:'Verb To Be — إثبات', titleEn:'Verb To Be (Affirmative)', gen:genBeAffirmative,
+ desc:'تكوين جملة verb to be وربط الفاعل بالفعل المساعد الصحيح.',
+ summary:`<div class="rule-block"><h4>التكوين</h4><table class="rule-table"><tr><th>الفاعل</th><th>الفعل المساعد</th></tr>
+ <tr><td>I</td><td class="en">am</td></tr><tr><td>He / She / It</td><td class="en">is</td></tr><tr><td>You / We / They</td><td class="en">are</td></tr></table>
+ <div class="content">يُستخدم verb to be قبل: الاسم، الصفة، الرقم، الضمير، أو حرف الجر.</div></div>
+ <div class="rule-block"><h4>أمثلة</h4>
+ <div class="example"><span class="en">They are from Sudan. / I am your king. / She is 37.</span><span class="ar">هم من السودان. / أنا ملكك. / هي عمرها 37.</span></div>
+ <div class="example"><span class="en">I am rich. / He is Philip.</span><span class="ar">أنا غني. / هو فيليب.</span></div></div>`},
+
+{id:'l5', num:5, tag:'Verb to Be', title:'Verb To Be — نفي وسؤال', titleEn:'Verb To Be (Negative & Question)', gen:genBeNegQuestion,
+ desc:'نفي وسؤال verb to be، والإجابات القصيرة.',
+ summary:`<div class="rule-block"><h4>النفي</h4><div class="content">نضع <b>not</b> بعد (am/is/are). للنفي العادي: isn't / aren't. للتأكيد: is not / are not.</div>
+ <div class="example"><span class="en">She is not a nurse. = She isn't a nurse.</span><span class="ar">هي ليست ممرضة.</span></div></div>
+ <div class="rule-block"><h4>السؤال</h4><div class="content">نضع (Am/Is/Are) في بداية الجملة بمعنى "هل".</div>
+ <div class="example"><span class="en">Is she beautiful? / Am I hungry?</span><span class="ar">هل هي جميلة؟ / هل أنا جائع؟</span></div></div>
+ <div class="rule-block"><h4>الإجابة القصيرة</h4>
+ <div class="example"><span class="en">Yes, I am. — No, I am not.</span><span class="ar">نعم، أنا كذلك. — لا، أنا لست كذلك.</span></div></div>`},
+
+{id:'l6', num:6, tag:'الاستفهام', title:'أدوات الاستفهام', titleEn:'WH-Questions', gen:genWhQuestions,
+ desc:'What, How, Where, Who, When, Why مع verb to be.',
+ summary:`<div class="rule-block"><h4>القاعدة</h4><div class="content">نضع (am/is/are) بعد أداة الاستفهام مباشرة.</div>
+ <table class="rule-table"><tr><th>الأداة</th><th>المعنى</th></tr>
+ <tr><td class="en">What</td><td>ماذا / ما</td></tr><tr><td class="en">How</td><td>كيف</td></tr>
+ <tr><td class="en">Where</td><td>أين</td></tr><tr><td class="en">Who</td><td>من</td></tr>
+ <tr><td class="en">When</td><td>متى</td></tr><tr><td class="en">Why</td><td>لماذا</td></tr></table></div>
+ <div class="rule-block"><h4>أمثلة</h4>
+ <div class="example"><span class="en">Where are my dragons? / Who are these men?</span><span class="ar">أين تنانيني؟ / من هؤلاء الرجال؟</span></div>
+ <div class="example"><span class="en">When is your birthday? / Why are your eyes so wide?</span><span class="ar">متى عيد ميلادك؟ / لماذا عيناك واسعتان جدًا؟</span></div></div>`},
+
+{id:'l7', num:7, tag:'الصفات', title:'الصفات واستخدامها', titleEn:'Adjectives & Position', gen:genAdjectives,
+ desc:'موضع الصفة في الجملة، ومتى تحتاج a/an.',
+ summary:`<div class="rule-block"><h4>القاعدة</h4><ul class="content">
+ <li>إذا جاءت الصفة في آخر الجملة: لا نضع أي أداة. <span class="en-inline">She is beautiful.</span></li>
+ <li>إذا جاءت الصفة قبل الموصوف المفرد: نضع (a/an) قبل الصفة. <span class="en-inline">She is a beautiful girl.</span></li>
+ <li>إذا كان الموصوف جمعًا: لا نضع أي أداة. <span class="en-inline">They are beautiful girls.</span></li>
+ <li>الصفات في الإنجليزية لا تُجمع أبدًا.</li>
+ </ul></div>
+ <div class="rule-block"><h4>أمثلة</h4>
+ <div class="example"><span class="en">He is very angry. / They are rich men.</span><span class="ar">هو غاضب جدًا. / إنهم رجال أغنياء.</span></div>
+ <div class="example"><span class="en">This is an interesting book.</span><span class="ar">هذا كتاب مشوّق.</span></div></div>`},
+
+{id:'l8', num:8, tag:'الأسماء', title:'المعدودة وغير المعدودة', titleEn:'Countable / Uncountable Nouns', gen:genCountable,
+ desc:'تصنيف الأسماء: معدودة، غير معدودة، أعلام، ومتقلبة.',
+ summary:`<div class="rule-block"><h4>الأنواع</h4><table class="rule-table"><tr><th>النوع</th><th>القاعدة</th><th>مثال</th></tr>
+ <tr><td>معدود</td><td>له مفرد وجمع، يسبقه a/an في المفرد</td><td class="en">a cat / cats</td></tr>
+ <tr><td>غير معدود</td><td>لا يُجمع ولا يسبقه a/an</td><td class="en">cheese, butter</td></tr>
+ <tr><td>اسم علم</td><td>لا أداة، أول حرف كبير</td><td class="en">Facebook, Egypt</td></tr>
+ <tr><td>متقلب</td><td>حسب المعنى (حيوان/مادة)</td><td class="en">a chicken / chicken</td></tr></table></div>
+ <div class="rule-block"><h4>كيف تميّز؟</h4><div class="content">ضع رقمًا قبل الاسم واقرأ الجملة: "5 قطط" ✔️ معدود، "5 ذكاء" ❌ غير معدود.</div></div>`},
+
+{id:'l9', num:9, tag:'الأسماء', title:'إضافة s-es-ies للجمع', titleEn:'Plural Nouns Rules', gen:genPlurals,
+ desc:'كل قواعد جمع الأسماء المنتظمة والشاذة (أكبر بنك أسئلة في الكورس).',
+ summary:`<div class="rule-block"><h4>القواعد</h4><table class="rule-table"><tr><th>الحالة</th><th>القاعدة</th><th>مثال</th></tr>
+ <tr><td>عام</td><td>+s</td><td class="en">tree → trees</td></tr>
+ <tr><td>تنتهي بـ s/sh/ch/x/z</td><td>+es</td><td class="en">bus → buses, fox → foxes</td></tr>
+ <tr><td>تنتهي بـ o</td><td>+s أو +es</td><td class="en">piano → pianos, potato → potatoes</td></tr>
+ <tr><td>ساكن + y</td><td>y ← ies</td><td class="en">lady → ladies</td></tr>
+ <tr><td>متحرك + y</td><td>+s فقط</td><td class="en">boy → boys</td></tr>
+ <tr><td>f / fe</td><td>← ves</td><td class="en">leaf → leaves (استثناء: chief → chiefs)</td></tr>
+ <tr><td>شاذة</td><td>تُحفظ</td><td class="en">man → men, foot → feet, mouse → mice</td></tr>
+ <tr><td>بدون تغيير</td><td>—</td><td class="en">sheep, deer, fish</td></tr>
+ <tr><td>أصل أجنبي</td><td>—</td><td class="en">crisis → crises</td></tr></table></div>`},
+
+{id:'l10', num:10, tag:'الكمية', title:'many / much / a lot of / some / any', titleEn:'Quantifiers', gen:genQuantifiers,
+ desc:'التعبير عن الكمية والعدد، والفرق بين some وany.',
+ summary:`<div class="rule-block"><h4>القاعدة</h4><table class="rule-table"><tr><th>الأداة</th><th>الاستخدام</th></tr>
+ <tr><td class="en">many / a few / How many</td><td>مع الأسماء المعدودة الجمع</td></tr>
+ <tr><td class="en">much / a little / How much</td><td>مع الأسماء غير المعدودة</td></tr>
+ <tr><td class="en">a lot of</td><td>مع الاثنين معًا</td></tr>
+ <tr><td class="en">some</td><td>إيجابي / عرض / طلب</td></tr>
+ <tr><td class="en">any</td><td>نفي / سؤال</td></tr></table></div>
+ <div class="rule-block"><h4>تعابير اصطلاحية</h4>
+ <div class="example"><span class="en">a bit much</span><span class="ar">أكثر من اللازم</span></div>
+ <div class="example"><span class="en">too many cooks spoil the soup</span><span class="ar">كثرة الطباخين تُفسد الحساء</span></div></div>`},
+
+{id:'l11', num:11, tag:'الملكية', title:'صفات وضمائر الملكية', titleEn:'Possessive Adjectives & Pronouns', gen:genPossessive,
+ desc:'my/your/his... مقابل mine/yours/his...',
+ summary:`<div class="rule-block"><h4>الجدول الكامل</h4><table class="rule-table"><tr><th>الفاعل</th><th>صفة الملكية</th><th>ضمير الملكية</th></tr>
+ <tr><td>I</td><td class="en">my</td><td class="en">mine</td></tr><tr><td>you</td><td class="en">your</td><td class="en">yours</td></tr>
+ <tr><td>he</td><td class="en">his</td><td class="en">his</td></tr><tr><td>she</td><td class="en">her</td><td class="en">hers</td></tr>
+ <tr><td>it</td><td class="en">its</td><td class="en">its</td></tr><tr><td>we</td><td class="en">our</td><td class="en">ours</td></tr>
+ <tr><td>they</td><td class="en">their</td><td class="en">theirs</td></tr></table>
+ <div class="content">صفة الملكية تأتي قبل الاسم <span class="en-inline">This is my laptop</span>، أما ضمير الملكية فيحل محل (الصفة+الاسم) <span class="en-inline">This laptop is mine</span>.</div></div>`},
+
+{id:'l12', num:12, tag:'الضمائر', title:'ضمائر المفعول والضمائر المنعكسة', titleEn:'Objective & Reflexive Pronouns', gen:genObjReflexive,
+ desc:'me/him/her... و myself/himself/herself...',
+ summary:`<div class="rule-block"><h4>الجدول</h4><table class="rule-table"><tr><th>الفاعل</th><th>المفعول به</th><th>المنعكس</th></tr>
+ <tr><td>I</td><td class="en">me</td><td class="en">myself</td></tr><tr><td>you</td><td class="en">you</td><td class="en">yourself</td></tr>
+ <tr><td>he</td><td class="en">him</td><td class="en">himself</td></tr><tr><td>she</td><td class="en">her</td><td class="en">herself</td></tr>
+ <tr><td>it</td><td class="en">it</td><td class="en">itself</td></tr><tr><td>we</td><td class="en">us</td><td class="en">ourselves</td></tr>
+ <tr><td>they</td><td class="en">them</td><td class="en">themselves</td></tr></table></div>`},
+
+{id:'l13', num:13, tag:'الملكية', title:'Whose — لمن؟', titleEn:'Whose', gen:genWhose,
+ desc:'تكوين سؤال الملكية والإجابة عنه بصفة أو ضمير الملكية.',
+ summary:`<div class="rule-block"><h4>القاعدة</h4><div class="content">لتكوين سؤال بـ Whose نقدّم الفعل المساعد بعده مباشرة، والشيء الذي نسأل عنه يأتي مباشرة بعد أداة الاستفهام.</div>
+ <div class="example"><span class="en">Whose chair is this? / Whose birds are these?</span><span class="ar">لمن هذا الكرسي؟ / لمن هؤلاء الطيور؟</span></div></div>
+ <div class="rule-block"><h4>الإجابة</h4><table class="rule-table"><tr><th>السؤال</th><th>بصفة الملكية</th><th>بضمير الملكية</th></tr>
+ <tr><td class="en">Whose ball is this?</td><td class="en">It's my ball.</td><td class="en">It's mine.</td></tr>
+ <tr><td class="en">Whose shoes are those?</td><td class="en">They're their shoes.</td><td class="en">They're theirs.</td></tr></table></div>`},
+
+{id:'l14', num:14, tag:'الأزمنة', title:'المضارع البسيط', titleEn:'Simple Present Tense', gen:genPresentSimple,
+ desc:'التكوين، الإثبات، النفي، والسؤال في زمن المضارع البسيط.',
+ summary:`<div class="rule-block"><h4>الاستخدام</h4><div class="content">للتعبير عن عادة/روتين متكرر (<span class="en-inline">I wake up every day at 6 am</span>) أو حقيقة عامة (<span class="en-inline">The sun rises in the east</span>).</div></div>
+ <div class="rule-block"><h4>التكوين</h4><table class="rule-table"><tr><th></th><th>الصيغة</th></tr>
+ <tr><td>إثبات</td><td class="en">Subject + verb(+s للمفرد الغائب) + object</td></tr>
+ <tr><td>نفي</td><td class="en">Subject + don't/doesn't + verb</td></tr>
+ <tr><td>سؤال</td><td class="en">Do/Does + subject + verb?</td></tr></table>
+ <div class="content">نضيف (s) للفعل فقط مع طرف ثالث مفرد (he, she, it).</div></div>`},
+
+{id:'l15', num:15, tag:'مراجعة', title:'الاختبار الشامل — المضارع البسيط', titleEn:'Comprehensive Review Exam', gen:genPresentExam,
+ desc:'اختبار شامل ومكثف يجمع كل جوانب المضارع البسيط في امتحان واحد كبير.',
+ summary:`<div class="rule-block"><h4>عن هذا الاختبار</h4><div class="content">
+ هذه الحلقة في الكورس الأصلي عبارة عن اختبار شامل واحد لزمن المضارع البسيط بسبعة أنواع من الأسئلة: تكوين جملة، اختيار الجملة الصحيحة، إكمال الفراغ بالفعل المناسب، تكوين سؤال، تكوين نفي، سؤال وجواب، وتصحيح الأخطاء. أعدنا بناءه هنا كامتحان تفاعلي كبير مع تصحيح فوري وسبب كل إجابة.</div></div>`},
+
+{id:'l16', num:16, tag:'الأزمنة', title:'المضارع المستمر', titleEn:'Present Continuous Tense', gen:genPresentContinuous,
+ desc:'قاعدة إضافة ing، والتكوين والنفي والسؤال.',
+ summary:`<div class="rule-block"><h4>الاستخدام والتكوين</h4><table class="rule-table"><tr><th></th><th>الصيغة</th></tr>
+ <tr><td>إثبات</td><td class="en">Subject + am/is/are + V-ing</td></tr>
+ <tr><td>نفي</td><td class="en">Subject + am/is/are + not + V-ing</td></tr>
+ <tr><td>سؤال</td><td class="en">Am/Is/Are + subject + V-ing?</td></tr></table></div>
+ <div class="rule-block"><h4>قاعدة إضافة ing</h4><table class="rule-table"><tr><th>الحالة</th><th>القاعدة</th><th>مثال</th></tr>
+ <tr><td>حرف متحرك واحد بالنهاية</td><td>+ing</td><td class="en">go → going</td></tr>
+ <tr><td>تنتهي بـ e صامتة</td><td>تُحذف e ثم ing</td><td class="en">make → making</td></tr>
+ <tr><td>(C.V.C) مقطع واحد</td><td>يُضاعف الحرف الأخير</td><td class="en">sit → sitting</td></tr>
+ <tr><td>(V.V.C)</td><td>+ing بدون مضاعفة</td><td class="en">gain → gaining</td></tr>
+ <tr><td>تنتهي بـ w/x/y</td><td>+ing مباشرة (لا تنطبق القاعدة)</td><td class="en">play → playing</td></tr></table></div>`},
+
+{id:'l17', num:17, tag:'الأزمنة', title:'Be مقابل Do', titleEn:'Be vs Do', gen:genBeVsDo,
+ desc:'متى نستخدم am/is/are ومتى نستخدم do/does لتكوين السؤال.',
+ summary:`<div class="rule-block"><h4>القاعدة</h4><div class="content">
+ نستخدم <b>am/is/are</b> للسؤال عن: اسم، صفة، أو فعل يحدث الآن (مستمر).<br>
+ نستخدم <b>do/does</b> للسؤال عن فعل عادي لا يحدث الآن (مضارع بسيط).</div>
+ <div class="example"><span class="en">Is she tall? / Are you John?</span><span class="ar">هل هي طويلة؟ / هل أنت جون؟ (اسم/صفة)</span></div>
+ <div class="example"><span class="en">Do you watch movies? / Are you watching the movie now?</span><span class="ar">هل تشاهد أفلامًا (عادة)؟ / هل تشاهد الفيلم الآن (مستمر)؟</span></div></div>`},
+
+{id:'l18', num:18, tag:'الأزمنة', title:'الماضي البسيط', titleEn:'Simple Past Tense', gen:genPastSimple,
+ desc:'الأفعال المنتظمة وغير المنتظمة، والتكوين الكامل.',
+ summary:`<div class="rule-block"><h4>التكوين</h4><table class="rule-table"><tr><th></th><th>الصيغة</th></tr>
+ <tr><td>إثبات</td><td class="en">Subject + was/were (لـ be) أو Subject + V-ed</td></tr>
+ <tr><td>نفي</td><td class="en">Subject + didn't + الفعل الأساسي</td></tr>
+ <tr><td>سؤال</td><td class="en">Did + subject + الفعل الأساسي؟</td></tr></table></div>
+ <div class="rule-block"><h4>الأفعال</h4><div class="content">
+ <b>منتظمة:</b> يُضاف لها d أو ed مثل play → played.<br>
+ <b>غير منتظمة:</b> لها صيغة خاصة تُحفظ مثل go → went, eat → ate, make → made.</div></div>`},
+
+{id:'l19', num:19, tag:'الأزمنة', title:'الماضي المستمر', titleEn:'Past Continuous Tense', gen:genPastContinuous,
+ desc:'التكوين واستخدامات الماضي المستمر الخمسة.',
+ summary:`<div class="rule-block"><h4>التكوين</h4><table class="rule-table"><tr><th></th><th>الصيغة</th></tr>
+ <tr><td>إثبات</td><td class="en">Subject + was/were + V-ing</td></tr>
+ <tr><td>نفي</td><td class="en">Subject + wasn't/weren't + V-ing</td></tr>
+ <tr><td>سؤال</td><td class="en">Was/Were + subject + V-ing؟</td></tr></table></div>
+ <div class="rule-block"><h4>خمس استخدامات رئيسية</h4><ol class="content">
+ <li>حدث طرأ أثناء وقوع حدث آخر: <span class="en-inline">I was watching TV when my friend called.</span></li>
+ <li>تحديد لحظة زمنية دقيقة: <span class="en-inline">Last night at 8 PM, I was eating dinner.</span></li>
+ <li>حدثان متوازيان لا يتقاطعان: <span class="en-inline">She was studying while her mom was cooking.</span></li>
+ <li>وصف مشهد/جو عام: عدة أحداث مستمرة معًا في نفس اللحظة.</li>
+ <li>حدث متكرر بشكل مزعج (غالبًا مع always): <span class="en-inline">He was always coming late.</span></li>
+ </ol></div>`},
+
+{id:'l20', num:20, tag:'الربط', title:'When / While', titleEn:'Connectors: When / While', gen:genWhenWhile,
+ desc:'الفرق بين When (عندما) و While (بينما/في أثناء) في ربط الأحداث.',
+ summary:`<div class="rule-block"><h4>القاعدة</h4><div class="content">
+ <b>When (عندما):</b> يأتي بعدها دائمًا الحدث الطارئ المفاجئ (القصير).<br>
+ <b>While (بينما/في أثناء):</b> لا يأتي بعدها الحدث الطارئ، بل الحدث المستمر (الخلفية).<br>
+ إذا جاءت أداة الربط في بداية الجملة، نضع فاصلة "," بين الجملتين.</div>
+ <div class="example"><span class="en">Mom was cooking when Messy dropped the dishes.</span><span class="ar">أمي كانت تطبخ عندما أوقعت ميسي الأطباق.</span></div>
+ <div class="example"><span class="en">While Mom was cooking, Messy dropped the dish.</span><span class="ar">في أثناء ما كانت أمي تطبخ، أوقعت ميسي الطبق.</span></div></div>`},
+
+{id:'l21', num:21, tag:'الأزمنة', title:'المستقبل البسيط', titleEn:'Simple Future: Will / Going to', gen:genFuture,
+ desc:'صيغتا التعبير عن المستقبل: will و going to، والفرق بينهما في الاستخدام.',
+ summary:`<div class="rule-block"><h4>التكوين</h4><table class="rule-table"><tr><th></th><th class="en">will</th><th class="en">going to</th></tr>
+ <tr><td>إثبات</td><td class="en">S + will + verb</td><td class="en">S + am/is/are + going to + verb</td></tr>
+ <tr><td>نفي</td><td class="en">S + will not/won't + verb</td><td class="en">S + am/is/are + not + going to + verb</td></tr>
+ <tr><td>سؤال</td><td class="en">Will + S + verb?</td><td class="en">Am/Is/Are + S + going to + verb?</td></tr></table></div>
+ <div class="rule-block"><h4>ملاحظة الاستخدام</h4><div class="content">
+ في الكلام لا فرق عمليًا بينهما. لكن في الكتابة: <b>will</b> تُستخدم في الكتابات الرسمية (أبحاث، تقارير)، بينما <b>going to</b> (وتُختصر gonna) تُستخدم في الكتابات غير الرسمية (دردشة، رسائل).</div></div>`},
+
+{id:'l22', num:22, tag:'الصفات', title:'صفات المقارنة', titleEn:'Comparative Adjectives', gen:genComparative,
+ desc:'مقارنة بين شيئين باستخدام er/more...than.',
+ summary:`<div class="rule-block"><h4>القواعد الأربع</h4><table class="rule-table"><tr><th>نوع الصفة</th><th>القاعدة</th><th>مثال</th></tr>
+ <tr><td>مقطع واحد</td><td>+er</td><td class="en">small → smaller</td></tr>
+ <tr><td>مقطع واحد (C.V.C)</td><td>يُضاعف آخر حرف + er</td><td class="en">big → bigger</td></tr>
+ <tr><td>مقطعان تنتهي بـ y</td><td>y ← ier</td><td class="en">happy → happier</td></tr>
+ <tr><td>متعددة المقاطع</td><td>+ more قبلها</td><td class="en">expensive → more expensive</td></tr></table>
+ <div class="content">نضيف <b>than</b> بعد صفة المقارنة عند ذكر الطرف الثاني: <span class="en-inline">My friend is faster than me.</span></div></div>`},
+
+{id:'l23', num:23, tag:'الصفات', title:'المقارنة والتفضيل', titleEn:'Comparative & Superlative Adjectives', gen:genComparativeSuperlative,
+ desc:'إضافة صيغة التفضيل (الأعلى/الأكثر) للمقارنة بين ثلاثة أشياء أو أكثر، والصفات الشاذة.',
+ summary:`<div class="rule-block"><h4>القاعدة</h4><table class="rule-table"><tr><th>الصفة</th><th>المقارنة (بين اثنين)</th><th>التفضيل (بين 3 فأكثر)</th></tr>
+ <tr><td class="en">big</td><td class="en">bigger</td><td class="en">the biggest</td></tr>
+ <tr><td class="en">expensive</td><td class="en">more expensive</td><td class="en">the most expensive</td></tr>
+ <tr><td class="en">good</td><td class="en">better</td><td class="en">the best</td></tr>
+ <tr><td class="en">bad</td><td class="en">worse</td><td class="en">the worst</td></tr></table>
+ <div class="content">صيغة التفضيل غالبًا تُسبق بـ <b>the</b> لأنها تحدد شيئًا واحدًا فريدًا ضمن مجموعة.</div>
+ <div class="example"><span class="en">The cheetah is the fastest animal in the world.</span><span class="ar">الفهد الصياد هو أسرع حيوان في العالم.</span></div></div>`}
+];
+
+/* =========================================================================
+   PERSISTENT STORAGE
+========================================================================= */
+const DEFAULT_STATS = ()=>({lessons:{}, totalAttempts:0, totalCorrect:0, totalQuestions:0, createdAt:Date.now(),
+  xp:0, streak:{count:0,lastDate:''}, theme:'dark', srs:{items:{}}});
+let STATS = DEFAULT_STATS();
+
+async function loadStats(){
+  try{
+    const res = await window.storage.get('gz_stats_v1', false);
+    if(res && res.value){ STATS = Object.assign(DEFAULT_STATS(), JSON.parse(res.value)); }
+  }catch(e){ STATS = DEFAULT_STATS(); }
+  if(!STATS.srs) STATS.srs = {items:{}};
+  if(!STATS.streak) STATS.streak = {count:0,lastDate:''};
+  if(!STATS.theme) STATS.theme = 'dark';
+  if(typeof STATS.xp!=='number') STATS.xp = 0;
+}
+let saveTimer = null;
+async function saveStats(){
+  try{ await window.storage.set('gz_stats_v1', JSON.stringify(STATS), false); }catch(e){ /* best effort */ }
+}
+function lessonStat(id){
+  if(!STATS.lessons[id]) STATS.lessons[id] = {attempts:0, best:0, last:0, wrong:[], lastDate:0, correctStreakBest:0, history:[]};
+  if(!STATS.lessons[id].history) STATS.lessons[id].history = [];
+  return STATS.lessons[id];
+}
+
+/* =========================================================================
+   XP / LEVELS
+========================================================================= */
+const LEVEL_TITLES = ['🌱 مبتدئ','📗 دارس','📘 مجتهد','🧠 متمكّن','⚔️ محارب القواعد','🏆 خبير','🎓 أستاذ صغير','👑 أسطورة القواعد'];
+function xpForLevel(lv){ return 60 * lv * lv; } // cumulative xp needed to REACH level lv (0-indexed thresholds)
+function levelFromXp(xp){
+  let lv = 0;
+  while(xp >= xpForLevel(lv+1) && lv < LEVEL_TITLES.length-1) lv++;
+  return lv;
+}
+function xpProgress(xp){
+  const lv = levelFromXp(xp);
+  const cur = xpForLevel(lv), next = xpForLevel(lv+1);
+  const pct = lv>=LEVEL_TITLES.length-1 ? 100 : Math.round(((xp-cur)/(next-cur))*100);
+  return {lv, title:LEVEL_TITLES[lv], cur, next, pct, xp};
+}
+function xpForAnswer(type, streakAtAnswer){
+  let base = type==='fill' ? 15 : type==='tf' ? 8 : 10;
+  if(streakAtAnswer>=5) base += 5;
+  if(streakAtAnswer>=10) base += 5;
+  return base;
+}
+async function addXp(n){
+  STATS.xp = (STATS.xp||0) + n;
+  await saveStats();
+  renderTopbarStatus();
+}
+
+/* =========================================================================
+   DAILY STREAK
+========================================================================= */
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+async function bumpDailyStreak(){
+  const today = todayStr();
+  const st = STATS.streak || {count:0,lastDate:''};
+  if(st.lastDate===today){ /* already counted today */ }
+  else{
+    const y = new Date(); y.setDate(y.getDate()-1);
+    const yesterday = y.toISOString().slice(0,10);
+    st.count = (st.lastDate===yesterday) ? (st.count||0)+1 : 1;
+    st.lastDate = today;
+    STATS.streak = st;
+    await saveStats();
+  }
+  renderTopbarStatus();
+}
+
+/* =========================================================================
+   SPACED REPETITION (SRS) — leech tracking across all lessons
+   Uses SM-2-lite intervals measured in real days. Any question answered
+   incorrectly anywhere becomes a tracked "due" item; answering it correctly
+   later (in Smart Review or by chance elsewhere) pushes its next-due date
+   further out, until it "graduates" out of the review queue.
+========================================================================= */
+const SRS_INTERVALS_DAYS = [0, 1, 3, 7, 16, 35]; // index = reps
+const SRS_MAX_ITEMS = 400;
+function hashStr(s){
+  let h1 = 0, h2 = 0;
+  for(let i=0;i<s.length;i++){
+    const c = s.charCodeAt(i);
+    h1 = (Math.imul(31,h1) + c)|0;
+    h2 = (Math.imul(131,h2) + c + i)|0;
+  }
+  return (h1>>>0).toString(36) + '_' + (h2>>>0).toString(36) + '_' + s.length;
+}
+function srsKeyFor(lessonId, q){ return lessonId+'_'+hashStr(q.prompt+'|'+q.type); }
+async function srsRecordWrong(lessonId, lessonTitle, q){
+  const key = srsKeyFor(lessonId, q);
+  const items = STATS.srs.items;
+  const existing = items[key];
+  if(existing){ existing.reps = Math.max(0, (existing.reps||0)-2); existing.lapses=(existing.lapses||0)+1; existing.due = Date.now(); existing.q = q; }
+  else{
+    items[key] = {key, lessonId, lessonTitle, q, reps:0, lapses:1, due: Date.now(), created: Date.now()};
+    const keys = Object.keys(items);
+    if(keys.length > SRS_MAX_ITEMS){
+      keys.sort((a,b)=>{
+        const ga = items[a].reps>=5?1:0, gb = items[b].reps>=5?1:0;
+        if(ga!==gb) return gb-ga; // evict graduated first
+        return items[a].created - items[b].created;
+      });
+      delete items[keys[0]];
+    }
+  }
+  await saveStats();
+}
+async function srsRecordCorrect(lessonId, q){
+  const key = srsKeyFor(lessonId, q);
+  const item = STATS.srs.items[key];
+  if(!item) return; // only track items that were previously missed
+  item.reps = Math.min(SRS_INTERVALS_DAYS.length-1, (item.reps||0)+1);
+  const days = SRS_INTERVALS_DAYS[item.reps];
+  item.due = Date.now() + days*24*60*60*1000;
+  if(item.reps >= SRS_INTERVALS_DAYS.length-1){ item.graduated = true; }
+  await saveStats();
+}
+function srsDueItems(){
+  const now = Date.now();
+  return Object.values(STATS.srs.items).filter(it=>it.due<=now && !it.graduated);
+}
+function srsAllActiveCount(){
+  return Object.values(STATS.srs.items).filter(it=>!it.graduated).length;
+}
+
+/* =========================================================================
+   DIFFICULTY LEVELS
+========================================================================= */
+const DIFFICULTY_INFO = {
+  easy:   {label:'سهل 🟢',   desc:'اختيار من متعدد فقط (تمييز الإجابة)'},
+  medium: {label:'متوسط 🟡', desc:'اختيار من متعدد + صح وخطأ'},
+  hard:   {label:'صعب 🔴',   desc:'إكمال فراغ بدون اختيارات (استدعاء حر)'},
+  mixed:  {label:'خليط ⚪',  desc:'كل أنواع الأسئلة مجتمعة'}
+};
+function filterByDifficulty(bank, diff){
+  if(!diff || diff==='mixed') return bank;
+  if(diff==='easy'){ const f=bank.filter(q=>q.type==='mcq'); return f.length>=8?f:bank; }
+  if(diff==='medium'){ const f=bank.filter(q=>q.type==='mcq'||q.type==='tf'); return f.length>=8?f:bank; }
+  if(diff==='hard'){
+    let f=bank.filter(q=>q.type==='fill');
+    if(f.length>=10) return f;
+    f=bank.filter(q=>q.type==='fill'||q.type==='tf');
+    if(f.length>=10) return f;
+    return bank;
+  }
+  return bank;
+}
+
+/* =========================================================================
+   MINI-LESSON ON REPEATED MISTAKES (per-lesson extra examples)
+========================================================================= */
+const EXTRA_HELP = {
+  l1:[["an apple","تفاحة — تبدأ بصوت حرف متحرك"],["a university","جامعة — تبدأ بصوت y رغم أن أول حرف u"]],
+  l2:[["This is my phone (قريب مني).","هذا هاتفي"],["That is your car (بعيد عنك).","تلك سيارتك"]],
+  l3:[["These are my keys (قريبة).","هذه مفاتيحي"],["Those are their bikes (بعيدة).","تلك دراجاتهم"]],
+  l4:[["We are teachers.","نحن معلمون — We تأخذ are"],["She is a nurse.","هي ممرضة — She تأخذ is"]],
+  l5:[["He isn't tired.","هو ليس متعبًا"],["Are you ready? Yes, I am.","هل أنت جاهز؟ نعم"]],
+  l6:[["Where is the book?","أين الكتاب؟"],["Why are you late?","لماذا أنت متأخر؟"]],
+  l7:[["a smart boy — الصفة قبل الاسم المفرد تحتاج a/an",""],["They are smart. — الصفة آخر الجملة بلا أداة",""]],
+  l8:[["I drink water every day.","الماء غير معدود، بلا أداة ولا جمع"],["I have three books.","الكتب معدودة، تُجمع بحرية"]],
+  l9:[["box → boxes","تنتهي بـ x فتأخذ es"],["city → cities","تنتهي بساكن+y فتتحول لـ ies"]],
+  l10:[["How much water do you need?","much مع غير المعدود"],["How many books do you have?","many مع المعدود"]],
+  l11:[["This is her bag.","صفة ملكية قبل الاسم"],["This bag is hers.","ضمير ملكية بدل الاسم"]],
+  l12:[["I did it myself.","فعلته بنفسي"],["He helped her.","هو ساعدها — her مفعول به"]],
+  l13:[["Whose pen is this? It's mine.","لمن هذا القلم؟ إنه ملكي"]],
+  l14:[["She works every day.","مفرد غائب فيأخذ الفعل s"],["I don't like tea.","نفي بـ don't مع I"]],
+  l15:[["Does he play football? Yes, he does.","سؤال وجواب قصير"]],
+  l16:[["I am reading now.","المضارع المستمر: am/is/are + ing"],["They are not playing.","نفي المضارع المستمر"]],
+  l17:[["Are you tired? (صفة)","نستخدم be"],["Do you work here? (فعل عادي)","نستخدم do"]],
+  l18:[["I went to school yesterday.","went فعل شاذ لـ go"],["She didn't call me.","نفي الماضي: didn't + فعل أساسي"]],
+  l19:[["I was reading when you called.","حدث مستمر قاطعه حدث مفاجئ"]],
+  l20:[["When the phone rang, I was sleeping.","When تسبق الحدث المفاجئ"],["While I was sleeping, the phone rang.","While تسبق الحدث المستمر"]],
+  l21:[["I will call you tomorrow.","وعد/قرار فوري"],["I am going to study tonight.","خطة مُسبقة"]],
+  l22:[["My brother is taller than me.","صفة قصيرة + er + than"]],
+  l23:[["This is the best day ever.","best صيغة تفضيل شاذة لـ good"]]
+};
+LESSONS.forEach(l=>{ l.extraHelp = EXTRA_HELP[l.id] || []; });
+
+/* =========================================================================
+   VIRTUAL LESSONS: Final Exam + Smart Review
+========================================================================= */
+function genFinalExamBank(){
+  let all = [];
+  LESSONS.forEach(l=>{
+    const bank = l.gen();
+    const picked = sample(bank, 5).map(q=>Object.assign({}, q, {sourceLessonId:l.id, sourceLessonTitle:l.title}));
+    all = all.concat(picked);
+  });
+  return shuffle(all);
+}
+const VIRTUAL_LESSONS = {
+  'final-exam': {
+    id:'final-exam', num:'🏆', tag:'امتحان نهائي شامل', title:'الامتحان الشامل النهائي', titleEn:'Final Comprehensive Exam',
+    desc:'امتحان واحد كبير يسحب أسئلة عشوائية من كل الحلقات الـ23 لاختبار مستواك العام في المستوى الأول بأكمله.',
+    gen: genFinalExamBank, extraHelp:[],
+    summary: `<div class="rule-block"><h4>عن هذا الامتحان</h4><div class="content">
+      يجمع هذا الامتحان أسئلة عشوائية (5 من كل حلقة تقريبًا) من جميع دروس المستوى الأول الـ23 —
+      من A/An إلى صفات المقارنة والتفضيل — في اختبار واحد شامل لقياس مستواك العام، وليس درسًا واحدًا فقط.
+      كل سؤال يوضّح من أي حلقة جاء حتى تعرف بالضبط أين نقطة ضعفك.</div></div>`
+  },
+  'smart-review': {
+    id:'smart-review', num:'🧠', tag:'مراجعة متباعدة', title:'مراجعة ذكية (Spaced Repetition)', titleEn:'Smart Review',
+    desc:'يعيد لك بالضبط الأسئلة اللي غلطت فيها من قبل في أي درس، في مواعيد مدروسة تضمن رسوخها في الذاكرة.',
+    gen: ()=>[], extraHelp:[], summary:''
+  }
+};
+
+/* =========================================================================
+   APP STATE & NAVIGATION
+========================================================================= */
+let currentLessonId = null;
+let session = null; // {lesson, questions, idx, answers[], answered, startTime, streak, bestStreak, wrongStreak, difficulty, timedMode}
+
+function showView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.nav===name));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.querySelectorAll('[data-nav]').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    const target = el.dataset.nav;
+    if(target==='stats') renderStats();
+    if(target==='home') renderHome();
+    if(target==='review') renderSmartReview();
+    showView(target);
+  });
+});
+
+/* ---------- HOME ---------- */
+let activeFilter = 'all';
+function renderHomeStats(){
+  const total = LESSONS.length;
+  let mastered=0, started=0, sumBest=0;
+  LESSONS.forEach(l=>{ const st = STATS.lessons[l.id]; if(st && st.attempts>0){started++; sumBest+=st.best; if(st.best>=90) mastered++;} });
+  const avg = started? Math.round(sumBest/started) : 0;
+  document.getElementById('homeStats').innerHTML = `
+    <div class="stat-chip"><div class="num">${total}</div><div class="lbl">حلقة دراسية</div></div>
+    <div class="stat-chip"><div class="num">${started}/${total}</div><div class="lbl">دروس بدأتها</div></div>
+    <div class="stat-chip"><div class="num">${mastered}</div><div class="lbl">دروس متقنة (90+)</div></div>
+    <div class="stat-chip"><div class="num">${avg}%</div><div class="lbl">متوسط أفضل النتائج</div></div>
+    <div class="stat-chip"><div class="num">${STATS.totalQuestions||0}</div><div class="lbl">سؤال أجبت عنه</div></div>
+  `;
+}
+function badgeClassFor(v){ if(v===0) return 'none'; if(v<60) return 'low'; if(v<90) return 'mid'; return 'high'; }
+function renderHome(){
+  renderHomeStats();
+  updateFeaturedReviewSub();
+  const q = (document.getElementById('searchBox').value||'').trim().toLowerCase();
+  const grid = document.getElementById('lessonGrid');
+  let list = LESSONS.filter(l=>{
+    const st = STATS.lessons[l.id];
+    if(activeFilter==='notstarted' && st && st.attempts>0) return false;
+    if(activeFilter==='weak' && !(st && st.attempts>0 && st.best<70)) return false;
+    if(activeFilter==='mastered' && !(st && st.best>=90)) return false;
+    if(q){
+      const hay = (l.title+' '+l.titleEn+' '+l.desc+' '+l.tag).toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    return true;
+  });
+  if(list.length===0){ grid.innerHTML = `<div class="empty-note" style="grid-column:1/-1;">لا توجد دروس مطابقة لبحثك أو الفلتر المختار.</div>`; return; }
+  grid.innerHTML = list.map(l=>{
+    const st = STATS.lessons[l.id];
+    const best = st? st.best : 0;
+    const bClass = badgeClassFor(best);
+    const bankSize = (l._bankSize || '30-70');
+    return `<div class="lesson-card" data-open="${l.id}">
+      <div class="num-tag">${l.num}</div>
+      <h3>${l.title}</h3>
+      <div class="en">${l.titleEn}</div>
+      <p class="desc">${l.desc}</p>
+      <div class="foot">
+        <span class="qcount">🧠 بنك أسئلة كبير</span>
+        <span class="best-badge ${bClass}">${best? 'أفضل نتيجة '+best+'%' : 'لم تُختبر بعد'}</span>
+      </div>
+    </div>`;
+  }).join('');
+  grid.querySelectorAll('[data-open]').forEach(c=>c.addEventListener('click', ()=>openLesson(c.dataset.open)));
+}
+document.getElementById('searchBox').addEventListener('input', renderHome);
+document.querySelectorAll('.filter-chip').forEach(ch=>{
+  ch.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+    ch.classList.add('active'); activeFilter = ch.dataset.filter; renderHome();
+  });
+});
+
+/* ---------- LESSON DETAIL ---------- */
+let chosenLen = null;
+let chosenDifficulty = 'mixed';
+let chosenTimed = false;
+function findLessonById(id){ return LESSONS.find(x=>x.id===id) || VIRTUAL_LESSONS[id]; }
+
+function sparklineSVG(history){
+  if(!history || history.length<2) return '';
+  const w=260,h=54,pad=6;
+  const pts = history.slice(-12);
+  const stepX = (w-pad*2)/Math.max(1,pts.length-1);
+  const coords = pts.map((p,i)=>{
+    const x = pad + i*stepX;
+    const y = h-pad - (p.score/100)*(h-pad*2);
+    return [x,y];
+  });
+  const line = coords.map(c=>c.join(',')).join(' ');
+  const lastColor = pts[pts.length-1].score>=90?'#3e8e63':pts[pts.length-1].score>=60?'#e7b23a':'#c1443b';
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="display:block;">
+    <polyline points="${line}" fill="none" stroke="${lastColor}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    ${coords.map((c,i)=>`<circle cx="${c[0]}" cy="${c[1]}" r="${i===coords.length-1?4:2.5}" fill="${lastColor}"/>`).join('')}
+  </svg>`;
+}
+
+function openLesson(id){
+  currentLessonId = id;
+  const l = findLessonById(id);
+  const st = lessonStat(id);
+  chosenLen = 35; chosenDifficulty = 'mixed'; chosenTimed = false;
+  const diffChips = Object.keys(DIFFICULTY_INFO).map(k=>`<button data-diff="${k}" class="${k==='mixed'?'sel':''}" title="${DIFFICULTY_INFO[k].desc}">${DIFFICULTY_INFO[k].label}</button>`).join('');
+  document.getElementById('lessonDetailBox').innerHTML = `
+    <div class="lesson-detail" id="printableLesson">
+      <div class="ld-head">
+        <div class="tag">حلقة ${l.num} · ${l.tag}</div>
+        <h2>${l.title}</h2>
+        <div class="en">${l.titleEn}</div>
+      </div>
+      <div class="ld-body">
+        <div class="tts-hint no-print">🔈 اضغط أيقونة السماعة بجانب أي جملة إنجليزية لسماع نطقها كاملة</div>
+        ${speakify(l.summary)}
+        <div class="no-print" style="text-align:left;margin-bottom:14px;">
+          <button class="hint-btn" id="printLessonBtn">🖨️ طباعة/تصدير PDF للقاعدة</button>
+        </div>
+        <div class="start-cta no-print">
+          <div class="info">
+            <b>جاهز للاختبار؟</b>
+            اخترت طول الاختبار ومستوى الصعوبة — كل مرة تحصل على أسئلة بترتيب وخيارات مختلفة.
+            ${st.attempts>0? `<br>📈 أفضل نتيجة سابقة: <b style="color:var(--green-deep)">${st.best}%</b> · عدد المحاولات: ${st.attempts}`:''}
+            ${st.history && st.history.length>=2? `<div style="margin-top:10px;">${sparklineSVG(st.history)}<div style="font-size:11px;color:var(--ink-soft);">تطور آخر ${Math.min(12,st.history.length)} محاولة</div></div>`:''}
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--ink-soft);margin-bottom:4px;">عدد الأسئلة</div>
+            <div class="opt-len" id="lenPicker"></div>
+            <div style="font-size:12px;color:var(--ink-soft);margin:10px 0 4px;">مستوى الصعوبة</div>
+            <div class="opt-len" id="diffPicker">${diffChips}</div>
+            <label style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;cursor:pointer;">
+              <input type="checkbox" id="timedToggle"> ⏱️ تفعيل تحدي الوقت (15 ثانية لكل سؤال)
+            </label>
+            <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn" id="startQuizBtn">🚀 ابدأ الاختبار</button>
+              ${st.wrong && st.wrong.length? `<button class="btn ghost" id="retestWrongBtn">🔁 إعادة اختبار الأخطاء (${st.wrong.length})</button>`:''}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  const lenPicker = document.getElementById('lenPicker');
+  const lens = [20,35,50,'الكل'];
+  lenPicker.innerHTML = lens.map((n,i)=>`<button data-len="${n}" class="${i===1?'sel':''}">${n==='الكل'?'الكل':n+' سؤال'}</button>`).join('');
+  lenPicker.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      lenPicker.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel');
+      chosenLen = b.dataset.len==='الكل' ? Infinity : parseInt(b.dataset.len);
+    });
+  });
+  const diffPicker = document.getElementById('diffPicker');
+  diffPicker.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      diffPicker.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel');
+      chosenDifficulty = b.dataset.diff;
+    });
+  });
+  document.getElementById('timedToggle').addEventListener('change', e=>{ chosenTimed = e.target.checked; });
+  document.getElementById('startQuizBtn').addEventListener('click', ()=>startQuiz(l, chosenLen, chosenDifficulty, chosenTimed));
+  const retestBtn = document.getElementById('retestWrongBtn');
+  if(retestBtn) retestBtn.addEventListener('click', ()=>startWrongOnlyQuiz(l));
+  document.getElementById('printLessonBtn').addEventListener('click', ()=>printContent(document.getElementById('printableLesson').innerHTML, l.title));
+  showView('lesson');
+}
+
+/* ---------- QUIZ ENGINE ---------- */
+function beginSession(lesson, questions, opts){
+  session = Object.assign({
+    lesson, questions, idx:0, answers:[], answered:false, startTime:Date.now(),
+    streak:0, bestStreak:0, isRetest:false, isReview:false, isFinalExam:false,
+    difficulty:'mixed', timedMode:false, wrongStreak:0, timerHandle:null, timePerQ:15, xpEarned:0
+  }, opts||{});
+  renderQuiz();
+  showView('quiz');
+}
+function startQuiz(lesson, len, difficulty, timed){
+  let bank = lesson.gen();
+  lesson._bankSize = bank.length;
+  bank = filterByDifficulty(bank, difficulty);
+  let questions = len===Infinity ? shuffle(bank) : sample(bank, len);
+  beginSession(lesson, questions, {difficulty, timedMode:!!timed});
+}
+function startWrongOnlyQuiz(lesson){
+  const st = lessonStat(lesson.id);
+  if(!st.wrong || st.wrong.length===0) return;
+  const questions = shuffle(st.wrong.map(w=>Object.assign({}, w.q)));
+  beginSession(lesson, questions, {isRetest:true});
+}
+function startSmartReview(){
+  let due = srsDueItems();
+  if(due.length===0){
+    due = Object.values(STATS.srs.items).filter(it=>!it.graduated).sort((a,b)=>a.due-b.due).slice(0,20);
+  } else {
+    due = shuffle(due).slice(0,40);
+  }
+  if(due.length===0) return;
+  const questions = due.map(it=>Object.assign({}, it.q, {sourceLessonId:it.lessonId, sourceLessonTitle:it.lessonTitle}));
+  beginSession(VIRTUAL_LESSONS['smart-review'], shuffle(questions), {isReview:true});
+}
+function startFinalExam(){
+  const bank = VIRTUAL_LESSONS['final-exam'].gen();
+  beginSession(VIRTUAL_LESSONS['final-exam'], bank, {isFinalExam:true});
+}
+
+function clearQuizTimer(){
+  if(session && session.timerHandle){ clearInterval(session.timerHandle); session.timerHandle = null; }
+}
+
+function renderQuiz(){
+  clearQuizTimer();
+  const {lesson, questions, idx} = session;
+  const q = questions[idx];
+  const pct = Math.round((idx/questions.length)*100);
+  const typeLabel = {mcq:'اختيار من متعدد', tf:'صح أم خطأ', fill:'أكمل الفراغ'}[q.type];
+  const sourceTag = q.sourceLessonTitle ? ` · من: ${q.sourceLessonTitle}` : '';
+  let bodyHtml = '';
+  if(q.type==='mcq'){
+    bodyHtml = `<div class="opts">` + q.options.map((o,i)=>
+      `<button class="opt-btn" data-i="${i}"><span>${speakify(o)}</span><span class="letter">${'أبجد'[i]||i+1}</span></button>`).join('') + `</div>
+      <div class="tts-hint">🔈 اضغط أيقونة السماعة لسماع نطق الاختيار كاملًا · اضغط الحرف (أ ب ج د) لاختيار الإجابة</div>`;
+  } else if(q.type==='tf'){
+    bodyHtml = `<div class="tf-row">
+      <button class="opt-btn" data-tf="true"><span>✅ صحيحة</span></button>
+      <button class="opt-btn" data-tf="false"><span>❌ خاطئة</span></button>
+    </div>`;
+  } else if(q.type==='fill'){
+    bodyHtml = `<div class="fill-row">
+      <input type="text" id="fillInput" placeholder="اكتب إجابتك هنا..." autocomplete="off">
+      <button id="fillSubmit">تحقق</button>
+    </div>`;
+  }
+  document.getElementById('quizBox').innerHTML = `
+    <div class="quiz-shell">
+      <div class="quiz-top">
+        <div class="quiz-top-row">
+          <div class="quiz-title">${session.isRetest? '🔁 إعادة اختبار الأخطاء — ':session.isReview?'🧠 مراجعة ذكية':session.isFinalExam?'🏆 الامتحان الشامل':''}${!session.isReview && !session.isFinalExam ? lesson.title:''}</div>
+          <div class="quiz-meta">
+            <span>السؤال <b>${idx+1}</b> / ${questions.length}</span>
+            <span class="streak-badge">🔥 متتالية: ${session.streak}</span>
+            ${session.timedMode? `<span class="streak-badge" id="timerChip">⏱️ 15.0s</span>`:''}
+          </div>
+        </div>
+        <div class="progress-rail"><div class="progress-fill" style="width:${pct}%"></div></div>
+      </div>
+      <div class="qcard">
+        <span class="qtype-tag">${typeLabel}${sourceTag}</span>
+        <div class="qprompt">${speakify(q.prompt)}</div>
+        ${bodyHtml}
+        <div class="feedback" id="feedbackBox"></div>
+        <div class="qcard-foot">
+          <button class="btn ghost" id="quitQuizBtn">إنهاء الاختبار الآن</button>
+          <button class="btn mustard" id="nextBtn" style="display:none;">${idx+1===questions.length?'عرض النتيجة النهائية 🏁':'السؤال التالي ←'}</button>
+        </div>
+      </div>
+    </div>`;
+  session.answered = false;
+
+  if(q.type==='mcq'){
+    document.querySelectorAll('.opt-btn[data-i]').forEach(btn=>{
+      btn.addEventListener('click', ()=> submitAnswer(parseInt(btn.dataset.i)===q.correct, btn, ()=>{
+        document.querySelectorAll('.opt-btn[data-i]').forEach(b=>{
+          const i=parseInt(b.dataset.i);
+          if(i===q.correct) b.classList.add('correct');
+          else if(b===btn) b.classList.add('wrong');
+          else b.classList.add('dim');
+          b.disabled = true;
+        });
+      }, q.options[q.correct]));
+    });
+  } else if(q.type==='tf'){
+    document.querySelectorAll('.opt-btn[data-tf]').forEach(btn=>{
+      const val = btn.dataset.tf==='true';
+      btn.addEventListener('click', ()=> submitAnswer(val===q.correct, btn, ()=>{
+        document.querySelectorAll('.opt-btn[data-tf]').forEach(b=>{
+          const v = b.dataset.tf==='true';
+          if(v===q.correct) b.classList.add('correct');
+          else if(b===btn) b.classList.add('wrong');
+          else b.classList.add('dim');
+          b.disabled = true;
+        });
+      }, q.correct? 'صحيحة ✅':'خاطئة ❌'));
+    });
+  } else if(q.type==='fill'){
+    const input = document.getElementById('fillInput');
+    const doSubmit = ()=>{
+      if(session.answered) return;
+      const val = input.value;
+      const ok = q.accepted.includes(norm(val));
+      submitAnswer(ok, null, ()=>{ input.disabled = true; document.getElementById('fillSubmit').disabled = true; }, q.display, val);
+    };
+    document.getElementById('fillSubmit').addEventListener('click', doSubmit);
+    input.addEventListener('keydown', e=>{ if(e.key==='Enter') doSubmit(); });
+    setTimeout(()=>input.focus(), 50);
+  }
+  document.getElementById('quitQuizBtn').addEventListener('click', ()=>{ clearQuizTimer(); finishQuiz(); });
+
+  if(session.timedMode){
+    let remaining = session.timePerQ*10; // deciseconds
+    const chip = document.getElementById('timerChip');
+    session.timerHandle = setInterval(()=>{
+      remaining--;
+      if(chip) chip.textContent = `⏱️ ${(remaining/10).toFixed(1)}s`;
+      if(remaining<=0){
+        clearQuizTimer();
+        if(!session.answered){
+          if(q.type==='mcq') submitAnswer(false, null, ()=>{document.querySelectorAll('.opt-btn[data-i]').forEach(b=>{const i=parseInt(b.dataset.i); if(i===q.correct)b.classList.add('correct'); else b.classList.add('dim'); b.disabled=true;});}, q.options[q.correct]);
+          else if(q.type==='tf') submitAnswer(false, null, ()=>{document.querySelectorAll('.opt-btn[data-tf]').forEach(b=>{const v=b.dataset.tf==='true'; if(v===q.correct)b.classList.add('correct'); else b.classList.add('dim'); b.disabled=true;});}, q.correct?'صحيحة ✅':'خاطئة ❌');
+          else submitAnswer(false, null, ()=>{ const fi=document.getElementById('fillInput'); if(fi)fi.disabled=true; const fs=document.getElementById('fillSubmit'); if(fs)fs.disabled=true; }, q.display, '(انتهى الوقت)');
+        }
+      }
+    }, 100);
+  }
+}
+
+function submitAnswer(isCorrect, btnEl, disableAllFn, correctText, userTextRaw){
+  if(session.answered) return;
+  session.answered = true;
+  clearQuizTimer();
+  const q = session.questions[session.idx];
+  disableAllFn();
+  session.answers.push({q, correct:isCorrect, userText: userTextRaw!==undefined ? userTextRaw : (btnEl? btnEl.innerText:'')});
+
+  const lessonIdForQ = q.sourceLessonId || session.lesson.id;
+  const lessonTitleForQ = q.sourceLessonTitle || session.lesson.title;
+
+  if(isCorrect){
+    session.streak++; session.bestStreak = Math.max(session.bestStreak, session.streak); session.wrongStreak = 0;
+    const xp = xpForAnswer(q.type, session.streak);
+    session.xpEarned += xp; addXp(xp);
+    if(lessonIdForQ!=='final-exam' && lessonIdForQ!=='smart-review') srsRecordCorrect(lessonIdForQ, q);
+  } else {
+    session.streak = 0; session.wrongStreak++;
+    if(lessonIdForQ!=='final-exam' && lessonIdForQ!=='smart-review') srsRecordWrong(lessonIdForQ, lessonTitleForQ, q);
+  }
+
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback show ' + (isCorrect?'ok':'bad');
+  let extraBlock = '';
+  if(!isCorrect && session.wrongStreak>=3){
+    const helpLesson = findLessonById(lessonIdForQ);
+    const help = (helpLesson && helpLesson.extraHelp) || [];
+    if(help.length){
+      extraBlock = `<div class="mini-lesson">
+        <div class="mini-lesson-title">🎓 لاحظنا إنك بتغلط في نفس النقطة — خد أمثلة إضافية:</div>
+        ${help.map(h=>`<div class="mini-lesson-ex"><span class="en">${speakify(h[0])}</span>${h[1]?`<span class="ar">${h[1]}</span>`:''}</div>`).join('')}
+      </div>`;
+    }
+    session.wrongStreak = 0;
+  }
+  fb.innerHTML = `<div class="head">${isCorrect? '✅ إجابة صحيحة! (+'+xpForAnswer(q.type, session.streak||1)+' XP)' : '❌ إجابة غير صحيحة — الصحيح: '+speakify(correctText)}</div>
+    <div class="why">${speakify(q.explain || '')}</div>${extraBlock}`;
+  document.getElementById('nextBtn').style.display = 'inline-flex';
+  document.getElementById('nextBtn').onclick = ()=>{
+    if(session.idx+1 >= session.questions.length){ finishQuiz(); }
+    else { session.idx++; renderQuiz(); }
+  };
+}
+
+async function finishQuiz(){
+  clearQuizTimer();
+  const {lesson, answers, questions} = session;
+  const answeredCount = answers.length;
+  const correctCount = answers.filter(a=>a.correct).length;
+  const totalForScore = answeredCount || 1;
+  const score = Math.round((correctCount/totalForScore)*100);
+  const timeSec = Math.round((Date.now()-session.startTime)/1000);
+  const wrongAnswers = answers.filter(a=>!a.correct);
+
+  if(!session.isRetest && !session.isReview && !session.isFinalExam){
+    const st = lessonStat(lesson.id);
+    st.attempts++; st.last = score; st.best = Math.max(st.best, score);
+    st.lastDate = Date.now();
+    st.correctStreakBest = Math.max(st.correctStreakBest||0, session.bestStreak);
+    st.wrong = wrongAnswers.map(a=>({q:a.q, date:Date.now()})).slice(0,60);
+    st.history.push({date:Date.now(), score}); if(st.history.length>20) st.history = st.history.slice(-20);
+    STATS.totalAttempts++; STATS.totalCorrect += correctCount; STATS.totalQuestions += answeredCount;
+    await saveStats();
+  } else if(session.isFinalExam){
+    STATS.finalExamHistory = STATS.finalExamHistory || [];
+    STATS.finalExamHistory.push({date:Date.now(), score});
+    STATS.finalExamBest = Math.max(STATS.finalExamBest||0, score);
+    await saveStats();
+  }
+  await bumpDailyStreak();
+
+  let grade, gradeColor;
+  if(score>=90){grade='ممتاز 🌟';gradeColor='var(--green-deep)';}
+  else if(score>=75){grade='جيد جدًا 👏';gradeColor='var(--green-deep)';}
+  else if(score>=60){grade='جيد، يحتاج مراجعة 🙂';gradeColor='var(--mustard-deep)';}
+  else {grade='يحتاج مذاكرة أكثر 💪';gradeColor='var(--red-deep)';}
+
+  if(score>=85 && typeof confetti==='function'){
+    try{ confetti({particleCount:110, spread:80, origin:{y:.4}, colors:['#e7b23a','#3e8e63','#c1443b','#f2ecd9']}); }catch(e){}
+  }
+
+  const dueNow = srsDueItems().length;
+  const titleLine = session.isReview?'🧠 مراجعة ذكية':session.isFinalExam?'🏆 الامتحان الشامل النهائي':lesson.title;
+
+  document.getElementById('resultBox').innerHTML = `
+    <div class="result-shell" id="printableResult">
+      <div class="result-top">
+        <div class="stamp"><div class="sc">${score}</div><div class="lbl">من 100</div></div>
+        <div class="result-grade" style="color:${gradeColor}">${grade}<small>${titleLine} ${session.isRetest?'— إعادة اختبار الأخطاء':''}</small></div>
+      </div>
+      <div class="res-stats">
+        <div class="res-chip"><div class="n" style="color:var(--green-deep)">${correctCount}</div><div class="l">إجابات صحيحة</div></div>
+        <div class="res-chip"><div class="n" style="color:var(--red-deep)">${wrongAnswers.length}</div><div class="l">إجابات خاطئة</div></div>
+        <div class="res-chip"><div class="n">${answeredCount}</div><div class="l">إجمالي الأسئلة</div></div>
+        <div class="res-chip"><div class="n">${session.bestStreak}</div><div class="l">أطول متتالية صحيحة</div></div>
+        <div class="res-chip"><div class="n">${timeSec}s</div><div class="l">الوقت المستغرق</div></div>
+        <div class="res-chip"><div class="n" style="color:var(--mustard-deep)">+${session.xpEarned}</div><div class="l">نقاط خبرة XP</div></div>
+      </div>
+      <div class="res-actions no-print">
+        ${!session.isReview && !session.isFinalExam? `<button class="btn" id="retryFullBtn">🔄 إعادة الاختبار الكامل</button>`:''}
+        ${wrongAnswers.length? `<button class="btn green" id="retryMistakesBtn">🎯 اختبار الأخطاء فقط (${wrongAnswers.length})</button>`:''}
+        <button class="btn mustard" id="backLessonsBtn">📚 العودة للدروس</button>
+        <button class="btn ghost" id="viewStatsBtn">📊 عرض إحصائياتي</button>
+        ${wrongAnswers.length? `<button class="btn ghost" id="printMistakesBtn">🖨️ طباعة الأخطاء</button>`:''}
+        ${dueNow>0? `<button class="btn ghost" id="goReviewBtn">🧠 لديك ${dueNow} سؤال جاهز للمراجعة الذكية</button>`:''}
+      </div>
+      ${wrongAnswers.length? `<div class="mistake-list">
+        <h4>مراجعة أخطائك (${wrongAnswers.length})</h4>
+        ${wrongAnswers.map(a=>`
+          <div class="mistake-item">
+            <div class="mq">${speakify(a.q.prompt)}${a.q.sourceLessonTitle?` <span style="font-size:11px;color:var(--ink-soft);">(${a.q.sourceLessonTitle})</span>`:''}</div>
+            <div class="row your">إجابتك: ${speakify(esc(a.userText || '—'))}</div>
+            <div class="row right">الإجابة الصحيحة: ${a.q.type==='mcq'? speakify(esc(a.q.options[a.q.correct])) : a.q.type==='tf'? (a.q.correct?'صحيحة ✅':'خاطئة ❌') : speakify(esc(a.q.display))}</div>
+            <div class="why">💡 السبب: ${a.q.explain}</div>
+          </div>`).join('')}
+      </div>` : `<div class="empty-note">🎉 لا توجد أي أخطاء — أداء مثالي في هذه المحاولة!</div>`}
+    </div>`;
+
+  const rfb = document.getElementById('retryFullBtn');
+  if(rfb) rfb.addEventListener('click', ()=> startQuiz(lesson, questions.length, session.difficulty, session.timedMode));
+  const rmb = document.getElementById('retryMistakesBtn');
+  if(rmb) rmb.addEventListener('click', ()=> beginSession(lesson, shuffle(wrongAnswers.map(a=>a.q)), {isRetest:true}));
+  document.getElementById('backLessonsBtn').addEventListener('click', ()=>{ renderHome(); showView('home'); });
+  document.getElementById('viewStatsBtn').addEventListener('click', ()=>{ renderStats(); showView('stats'); });
+  const pmb = document.getElementById('printMistakesBtn');
+  if(pmb) pmb.addEventListener('click', ()=> printContent(document.getElementById('printableResult').innerHTML, 'مراجعة الأخطاء — '+titleLine));
+  const grb = document.getElementById('goReviewBtn');
+  if(grb) grb.addEventListener('click', ()=>{ startSmartReview(); });
+  renderTopbarStatus();
+  showView('result');
+}
+
+/* ---------- STATS VIEW ---------- */
+function renderStats(){
+  const box = document.getElementById('statsBox');
+  const started = LESSONS.filter(l=>STATS.lessons[l.id] && STATS.lessons[l.id].attempts>0);
+  const xpInfo = xpProgress(STATS.xp||0);
+  const dueCount = srsDueItems().length;
+  const activeSrs = srsAllActiveCount();
+  const topHeader = `
+    <div class="stats-grid">
+      <div class="stat-chip" style="background:var(--paper);color:var(--ink);"><div class="num" style="color:var(--mustard-deep)">${xpInfo.title}</div><div class="lbl">مستواك · ${STATS.xp||0} XP</div></div>
+      <div class="stat-chip" style="background:var(--paper);color:var(--ink);"><div class="num" style="color:var(--red-deep)">🔥 ${(STATS.streak&&STATS.streak.count)||0}</div><div class="lbl">أيام مذاكرة متتالية</div></div>
+      <div class="stat-chip" style="background:var(--paper);color:var(--ink);"><div class="num" style="color:var(--red-deep)">${dueCount}</div><div class="lbl">سؤال جاهز للمراجعة الآن</div></div>
+      <div class="stat-chip" style="background:var(--paper);color:var(--ink);"><div class="num" style="color:var(--red-deep)">${activeSrs}</div><div class="lbl">إجمالي عناصر قيد المتابعة</div></div>
+      ${STATS.finalExamBest? `<div class="stat-chip" style="background:var(--paper);color:var(--ink);"><div class="num" style="color:var(--red-deep)">${STATS.finalExamBest}%</div><div class="lbl">أفضل نتيجة بالامتحان الشامل</div></div>`:''}
+    </div>
+    <div class="res-actions" style="justify-content:flex-start;margin:14px 0 4px;">
+      <button class="btn green" id="goReviewBtnStats">🧠 ابدأ مراجعة ذكية ${dueCount?`(${dueCount})`:''}</button>
+      <button class="btn mustard" id="goFinalExamBtnStats">🏆 الامتحان الشامل النهائي</button>
+    </div>`;
+  if(started.length===0){
+    box.innerHTML = topHeader + `<div class="empty-note" style="margin-top:18px;">لم تبدأ أي اختبار بعد. ابدأ أول اختبار من صفحة الدروس وستظهر إحصائياتك هنا 📈</div>`;
+    wireStatsButtons(box);
+    return;
+  }
+  const avg = Math.round(started.reduce((s,l)=>s+STATS.lessons[l.id].best,0)/started.length);
+  const mastered = started.filter(l=>STATS.lessons[l.id].best>=90).length;
+  const totalQ = STATS.totalQuestions||0;
+  const totalCorrect = STATS.totalCorrect||0;
+  const acc = totalQ? Math.round((totalCorrect/totalQ)*100):0;
+  const bestStreakOverall = Math.max(0, ...LESSONS.map(l=> (STATS.lessons[l.id] && STATS.lessons[l.id].correctStreakBest)||0 ));
+
+  let badges = [];
+  if(mastered>=1) badges.push(['🏅','أول درس متقن']);
+  if(mastered>=5) badges.push(['🎖️','خمسة دروس متقنة']);
+  if(mastered===LESSONS.length) badges.push(['👑','أتقنت الكورس بالكامل']);
+  if(bestStreakOverall>=10) badges.push(['🔥','متتالية 10 إجابات صحيحة']);
+  if(started.length===LESSONS.length) badges.push(['📖','جربت كل الدروس']);
+  if(acc>=85 && totalQ>=50) badges.push(['🎯','دقة إجابات فوق 85%']);
+  if((STATS.streak&&STATS.streak.count||0)>=3) badges.push(['📅','3 أيام مذاكرة متتالية']);
+  if(xpInfo.lv>=3) badges.push(['⚔️','وصلت لمستوى '+xpInfo.title]);
+  if(STATS.finalExamBest>=70) badges.push(['🏆','نجحت في الامتحان الشامل']);
+
+  box.innerHTML = topHeader + `
+    ${badges.length? `<div class="badge-row">${badges.map(b=>`<div class="badge"><span class="ic">${b[0]}</span>${b[1]}</div>`).join('')}</div>`:''}
+    <div class="stats-grid" style="margin-top:6px;">
+      <div class="stat-chip" style="background:var(--paper);color:var(--ink);"><div class="num" style="color:var(--red-deep)">${avg}%</div><div class="lbl">متوسط أفضل النتائج</div></div>
+      <div class="stat-chip" style="background:var(--paper);color:var(--ink);"><div class="num" style="color:var(--red-deep)">${mastered}/${LESSONS.length}</div><div class="lbl">دروس متقنة (90%+)</div></div>
+      <div class="stat-chip" style="background:var(--paper);color:var(--ink);"><div class="num" style="color:var(--red-deep)">${acc}%</div><div class="lbl">دقة الإجابة الكلية</div></div>
+      <div class="stat-chip" style="background:var(--paper);color:var(--ink);"><div class="num" style="color:var(--red-deep)">${totalQ}</div><div class="lbl">إجمالي الأسئلة المجابة</div></div>
+      <div class="stat-chip" style="background:var(--paper);color:var(--ink);"><div class="num" style="color:var(--red-deep)">${bestStreakOverall}</div><div class="lbl">أفضل متتالية صحيحة</div></div>
+    </div>
+    <div style="margin-top:20px;">
+      ${LESSONS.map(l=>{
+        const st = STATS.lessons[l.id];
+        const best = st? st.best:0;
+        const attempts = st? st.attempts:0;
+        return `<div class="lesson-stat-row">
+          <div class="lname">${l.num}. ${l.title}</div>
+          <div class="mini-bar"><div style="width:${best}%"></div></div>
+          <div class="pct">${attempts? best+'%':'—'}</div>
+          <button class="btn ghost" style="padding:8px 14px;font-size:12px;" data-open="${l.id}">فتح</button>
+        </div>`;
+      }).join('')}
+    </div>`;
+  box.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click', ()=>openLesson(b.dataset.open)));
+  wireStatsButtons(box);
+}
+function wireStatsButtons(box){
+  const g1 = document.getElementById('goReviewBtnStats');
+  if(g1) g1.addEventListener('click', ()=>{ renderSmartReview(); showView('review'); });
+  const g2 = document.getElementById('goFinalExamBtnStats');
+  if(g2) g2.addEventListener('click', ()=> openLesson('final-exam'));
+}
+
+/* ---------- SMART REVIEW VIEW ---------- */
+function renderSmartReview(){
+  const box = document.getElementById('reviewBox');
+  const due = srsDueItems();
+  const activeAll = Object.values(STATS.srs.items).filter(it=>!it.graduated);
+  const byLesson = {};
+  activeAll.forEach(it=>{ byLesson[it.lessonTitle] = (byLesson[it.lessonTitle]||0)+1; });
+  const rows = Object.entries(byLesson).sort((a,b)=>b[1]-a[1]).slice(0,12);
+  box.innerHTML = `
+    <div class="lesson-detail">
+      <div class="ld-head">
+        <div class="tag">مبني على نظام التكرار المتباعد (Spaced Repetition)</div>
+        <h2>🧠 المراجعة الذكية</h2>
+        <div class="en">Smart Review</div>
+      </div>
+      <div class="ld-body">
+        <div class="rule-block"><h4>كيف تعمل؟</h4><div class="content">
+          كل سؤال تغلط فيه — في أي درس وفي أي وقت — يُحفظ هنا تلقائيًا. بعد كل إجابة صحيحة عليه هنا، تكبر
+          المسافة الزمنية قبل ما يرجع يظهرلك تاني (يوم، ٣ أيام، أسبوع، ثم يتخرّج من قائمة المراجعة نهائيًا).
+          هذا أثبت علميًا أنه أفضل طريقة لترسيخ المعلومة في الذاكرة طويلة المدى.
+        </div></div>
+        <div class="stat-row" style="margin-bottom:18px;">
+          <div class="stat-chip" style="background:var(--paper2);color:var(--ink);"><div class="num" style="color:var(--red-deep)">${due.length}</div><div class="lbl">جاهز للمراجعة الآن</div></div>
+          <div class="stat-chip" style="background:var(--paper2);color:var(--ink);"><div class="num" style="color:var(--red-deep)">${activeAll.length}</div><div class="lbl">إجمالي قيد المتابعة</div></div>
+        </div>
+        ${rows.length? `<div class="rule-block"><h4>أكثر الدروس التي تحتاج مراجعة</h4>
+          <div class="chip-row">${rows.map(r=>`<span class="tag-chip">${r[0]} <b>${r[1]}</b></span>`).join('')}</div></div>`:''}
+        <div class="start-cta">
+          <div class="info"><b>${due.length? 'جاهز؟ يلا نراجع الأسئلة اللي غلطت فيها.' : activeAll.length? 'لا يوجد شيء مستحق الآن، لكن يمكنك المراجعة المبكرة.' : 'رصيدك فاضي! ذاكر أي درس وأخطاؤك هتتسجل هنا تلقائيًا 🎉'}</b></div>
+          <div>${(due.length||activeAll.length)? `<button class="btn green" id="startReviewBtn">🚀 ابدأ المراجعة (${due.length||activeAll.length})</button>`:''}</div>
+        </div>
+      </div>
+    </div>`;
+  const srb = document.getElementById('startReviewBtn');
+  if(srb) srb.addEventListener('click', ()=> startSmartReview());
+}
+
+/* ---------- FEATURED CARDS (Final Exam / Smart Review) ---------- */
+function wireFeaturedCards(){
+  const f1 = document.getElementById('featuredFinalExam');
+  if(f1) f1.addEventListener('click', ()=> openLesson('final-exam'));
+  const f2 = document.getElementById('featuredReview');
+  if(f2) f2.addEventListener('click', ()=>{ renderSmartReview(); showView('review'); });
+}
+function updateFeaturedReviewSub(){
+  const el = document.getElementById('featuredReviewSub');
+  if(!el) return;
+  const due = srsDueItems().length;
+  const active = srsAllActiveCount();
+  el.textContent = due>0 ? `${due} سؤال جاهز الآن للمراجعة` : active>0 ? `${active} سؤال قيد المتابعة، لا شيء مستحق الآن` : 'راجع أخطاءك القديمة في الوقت المناسب';
+}
+
+/* ---------- TOPBAR STATUS (XP / Streak) ---------- */
+function renderTopbarStatus(){
+  const el = document.getElementById('topbarStatus');
+  if(!el) return;
+  const xpInfo = xpProgress(STATS.xp||0);
+  const streakN = (STATS.streak && STATS.streak.count) || 0;
+  const dueN = srsDueItems().length;
+  el.innerHTML = `
+    <span class="xp-chip" title="${xpInfo.title} — ${STATS.xp||0} XP">
+      <span>${xpInfo.title}</span>
+      <span class="xp-bar"><span style="width:${xpInfo.pct}%"></span></span>
+    </span>
+    <span class="streak-chip" title="أيام مذاكرة متتالية">🔥 ${streakN}</span>
+    ${dueN? `<span class="due-chip" title="أسئلة جاهزة للمراجعة" data-nav="review">🧠 ${dueN}</span>`:''}
+  `;
+  el.querySelectorAll('[data-nav]').forEach(elm=>{
+    elm.addEventListener('click', ()=>{ renderSmartReview(); showView('review'); });
+  });
+  updateFeaturedReviewSub();
+}
+
+/* ---------- THEME ---------- */
+function applyTheme(theme){
+  document.documentElement.setAttribute('data-theme', theme);
+  const btn = document.getElementById('themeToggleBtn');
+  if(btn) btn.textContent = theme==='light' ? '🌙' : '☀️';
+}
+async function toggleTheme(){
+  STATS.theme = STATS.theme==='light' ? 'dark' : 'light';
+  applyTheme(STATS.theme);
+  await saveStats();
+}
+
+/* ---------- PRINT ---------- */
+function printContent(html, title){
+  const area = document.getElementById('printArea');
+  area.innerHTML = `<h1 style="font-family:'Rakkas',serif;">${title||'كورس القواعد'}</h1>` + html;
+  document.body.classList.add('printing');
+  window.print();
+  setTimeout(()=>{ document.body.classList.remove('printing'); }, 300);
+}
+
+/* ---------- KEYBOARD SHORTCUTS ---------- */
+document.addEventListener('keydown', (e)=>{
+  if(!document.getElementById('view-quiz').classList.contains('active') || !session) return;
+  if(document.activeElement && document.activeElement.id==='fillInput') return; // let typing happen
+  const nextBtn = document.getElementById('nextBtn');
+  if(e.key==='Enter' && nextBtn && nextBtn.style.display!=='none'){ e.preventDefault(); nextBtn.click(); return; }
+  if(session.answered) return;
+  if(['1','2','3','4'].includes(e.key)){
+    const i = parseInt(e.key)-1;
+    const btns = document.querySelectorAll('.opts .opt-btn, .tf-row .opt-btn');
+    if(btns[i] && !btns[i].disabled){ e.preventDefault(); btns[i].click(); }
+  }
+  if(e.key==='Escape'){ e.preventDefault(); clearQuizTimer(); finishQuiz(); }
+});
+
+/* ---------- INIT ---------- */
+(async function init(){
+  await loadStats();
+  applyTheme(STATS.theme||'dark');
+  const themeBtn = document.getElementById('themeToggleBtn');
+  if(themeBtn) themeBtn.addEventListener('click', toggleTheme);
+  wireFeaturedCards();
+  renderHome();
+  renderTopbarStatus();
+  showView('home');
+})();
+</script>
+</body>
+</html>
