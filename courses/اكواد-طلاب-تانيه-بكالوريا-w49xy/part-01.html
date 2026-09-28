@@ -1,0 +1,2663 @@
+<html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بوابة طلاب الصف الأول الثانوي - المتانيا الثانوية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --card: #1a2235;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #0ea5e9;
+    --gold: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --success: #10b981;
+    --danger: #ef4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(0,212,255,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(14,165,233,0.05) 0%, transparent 50%);
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0d1b2e 0%, #0a1628 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+  }
+
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(0,212,255,0.3);
+  }
+
+  .logo-text h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .logo-text p {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  .stats-bar {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .stat-chip {
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .stat-chip span { color: var(--text); font-size: 14px; font-weight: 700; }
+
+  /* MAIN */
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 28px 24px;
+  }
+
+  /* SEARCH & FILTER */
+  .search-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-wrapper {
+    flex: 1;
+    min-width: 260px;
+    position: relative;
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 18px;
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 46px 12px 16px;
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .search-input::placeholder { color: var(--muted); }
+  .search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,212,255,0.1);
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .filter-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    color: var(--muted);
+    font-family: 'Cairo', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+  }
+
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active {
+    background: rgba(0,212,255,0.12);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .sort-select {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s;
+  }
+  .sort-select:focus { border-color: var(--accent); }
+
+  /* RESULTS BAR */
+  .results-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .results-count {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .results-count strong { color: var(--accent); }
+
+  .view-toggle {
+    display: flex;
+    gap: 6px;
+  }
+  .view-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .view-btn.active { background: rgba(0,212,255,0.12); border-color: var(--accent); color: var(--accent); }
+
+  /* GRID VIEW */
+  .students-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .students-grid.list-view {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* STUDENT CARD */
+  .student-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    animation: fadeIn 0.3s ease forwards;
+  }
+
+  .student-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .student-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,212,255,0.1);
+  }
+
+  .student-card:hover::before { opacity: 1; }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0a0f1e;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,212,255,0.25);
+  }
+
+  .card-title {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .student-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+    word-break: break-word;
+  }
+
+  .student-number {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .card-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .field-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+
+  .field-label {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .field-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    direction: ltr;
+    letter-spacing: 0.5px;
+  }
+
+  .field-value.id-val { color: var(--accent); }
+  .field-value.pass-val { color: var(--gold); }
+
+  /* LIST VIEW CARD */
+  .list-view .student-card {
+    padding: 12px 18px;
+  }
+
+  .list-view .card-header {
+    margin-bottom: 0;
+    justify-content: space-between;
+  }
+
+  .list-view .card-fields {
+    display: none;
+  }
+
+  .list-view .student-card.expanded .card-fields {
+    display: flex;
+    margin-top: 12px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .list-view .student-card.expanded .field-row {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .list-view .student-card .list-inline {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .list-view .student-card .list-field {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .list-view .student-card .list-field strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    margin-right: 4px;
+  }
+
+  .list-view .student-card .list-field .id-inline { color: var(--accent); }
+  .list-view .student-card .list-field .pass-inline { color: var(--gold); }
+
+  /* COPY BTN */
+  .copy-btn {
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.2);
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    transition: all 0.15s;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 600;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .copy-btn:hover { background: rgba(0,212,255,0.2); border-color: var(--accent); transform: scale(1.05); }
+  .copy-btn.pass-copy {
+    background: rgba(245,158,11,0.08);
+    border-color: rgba(245,158,11,0.3);
+    color: var(--gold);
+  }
+  .copy-btn.pass-copy:hover { background: rgba(245,158,11,0.2); border-color: var(--gold); }
+
+  /* EMPTY STATE */
+  .empty-state {
+    text-align: center;
+    padding: 80px 24px;
+    color: var(--muted);
+    display: none;
+  }
+  .empty-state.show { display: block; }
+  .empty-state .emoji { font-size: 48px; margin-bottom: 16px; }
+  .empty-state h3 { font-size: 18px; margin-bottom: 8px; color: var(--text); }
+
+  /* PAGINATION */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+
+  .page-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    color: var(--muted);
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 40px;
+    text-align: center;
+  }
+  .page-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .page-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0a0f1e;
+    font-weight: 700;
+  }
+  .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--success);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+    z-index: 999;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .highlight {
+    background: rgba(0,212,255,0.25);
+    border-radius: 3px;
+    padding: 0 2px;
+    color: var(--accent);
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    header { padding: 14px 16px; }
+    main { padding: 16px 12px; }
+    .students-grid { grid-template-columns: 1fr; }
+    .search-section { padding: 14px 16px; }
+    .stats-bar { gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-section">
+      <div class="logo-icon">🎓</div>
+      <div class="logo-text">
+        <h1>بوابة الطلاب — الصف الأول الثانوي</h1>
+        <p>المتانيا الثانوية · الجيزة · منصة البرمجة والذكاء الاصطناعي</p>
+      </div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-chip">إجمالي الطلاب <span id="totalCount">535</span></div>
+      <div class="stat-chip">نتائج البحث <span id="filteredCount">535</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="search-section">
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="ابحث بالاسم أو كود الطالب أو كلمة المرور..." autocomplete="off">
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">ترتيب:</span>
+      <select class="sort-select" id="sortSelect">
+        <option value="num-asc">رقم تصاعدي</option>
+        <option value="num-desc">رقم تنازلي</option>
+        <option value="name-asc">الاسم أ–ي</option>
+        <option value="name-desc">الاسم ي–أ</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">عرض:</span>
+      <div class="view-toggle">
+        <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')" title="بطاقات">⊞</button>
+        <button class="view-btn" id="listViewBtn" onclick="setView('list')" title="قائمة">☰</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results-bar">
+    <div class="results-count" id="resultsText">عرض <strong>535</strong> طالب</div>
+    <div style="font-size:12px;color:var(--muted)">📋 انقر زر النسخ لنسخ اسم المستخدم أو كلمة المرور مباشرة</div>
+  </div>
+
+  <div class="students-grid" id="studentsGrid">
+      <div class="student-card" style="animation-delay:0s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">ايانوب منصور سعد كامل عريان</div>
+            <div class="student-number">طالب رقم 1</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">477364687</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">477364687</span>
+              <button class="copy-btn" onclick="copyText('477364687','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">PmKqtP!7</span>
+              <button class="copy-btn pass-copy" onclick="copyText('PmKqtP!7','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.025s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">ابراهيم حماده محمد فهيم</div>
+            <div class="student-number">طالب رقم 2</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">470897242</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">470897242</span>
+              <button class="copy-btn" onclick="copyText('470897242','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">sQ7r?CYK</span>
+              <button class="copy-btn pass-copy" onclick="copyText('sQ7r?CYK','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.05s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">ابراهيم محمود ابراهيم حبيب</div>
+            <div class="student-number">طالب رقم 3</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">470896301</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">470896301</span>
+              <button class="copy-btn" onclick="copyText('470896301','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">fD8BRX_M</span>
+              <button class="copy-btn pass-copy" onclick="copyText('fD8BRX_M','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.07500000000000001s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد امين مرسى امين</div>
+            <div class="student-number">طالب رقم 4</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">467252164</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">467252164</span>
+              <button class="copy-btn" onclick="copyText('467252164','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">_Ax7KpV3</span>
+              <button class="copy-btn pass-copy" onclick="copyText('_Ax7KpV3','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.1s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد ايهاب محمود عبدالغفار</div>
+            <div class="student-number">طالب رقم 5</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471615677</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471615677</span>
+              <button class="copy-btn" onclick="copyText('471615677','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">6nN7_sXv</span>
+              <button class="copy-btn pass-copy" onclick="copyText('6nN7_sXv','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.125s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد بدوى محمد عبدالمنعم</div>
+            <div class="student-number">طالب رقم 6</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">470896595</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">470896595</span>
+              <button class="copy-btn" onclick="copyText('470896595','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">!xDB8c2?</span>
+              <button class="copy-btn pass-copy" onclick="copyText('!xDB8c2?','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.15000000000000002s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد توبه جابر على</div>
+            <div class="student-number">طالب رقم 7</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">470686623</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">470686623</span>
+              <button class="copy-btn" onclick="copyText('470686623','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">YXz7X_aF</span>
+              <button class="copy-btn pass-copy" onclick="copyText('YXz7X_aF','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.17500000000000002s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد جمعه رمضان مامون</div>
+            <div class="student-number">طالب رقم 8</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471527694</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471527694</span>
+              <button class="copy-btn" onclick="copyText('471527694','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">Vjc4rp!w</span>
+              <button class="copy-btn pass-copy" onclick="copyText('Vjc4rp!w','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.2s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد جمعه سعيد سعداوى</div>
+            <div class="student-number">طالب رقم 9</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471027918</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471027918</span>
+              <button class="copy-btn" onclick="copyText('471027918','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">GVyk?5ms</span>
+              <button class="copy-btn pass-copy" onclick="copyText('GVyk?5ms','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.225s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد جمعه كمال احمد</div>
+            <div class="student-number">طالب رقم 10</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">463750045</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">463750045</span>
+              <button class="copy-btn" onclick="copyText('463750045','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">_FciYw5X</span>
+              <button class="copy-btn pass-copy" onclick="copyText('_FciYw5X','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.25s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد حاتم لطفى احمد عبدالمنعم</div>
+            <div class="student-number">طالب رقم 11</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471218939</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471218939</span>
+              <button class="copy-btn" onclick="copyText('471218939','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">S2auHQw!</span>
+              <button class="copy-btn pass-copy" onclick="copyText('S2auHQw!','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.275s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد حماده حمدان قرنى</div>
+            <div class="student-number">طالب رقم 12</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">470834714</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">470834714</span>
+              <button class="copy-btn" onclick="copyText('470834714','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">SF_aka9Q</span>
+              <button class="copy-btn pass-copy" onclick="copyText('SF_aka9Q','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.30000000000000004s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد حمدى احمد عبدالرازق جادالمولى</div>
+            <div class="student-number">طالب رقم 13</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471328799</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471328799</span>
+              <button class="copy-btn" onclick="copyText('471328799','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">fw?ngV95</span>
+              <button class="copy-btn pass-copy" onclick="copyText('fw?ngV95','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.325s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد راضى فريح سلامه</div>
+            <div class="student-number">طالب رقم 14</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471159225</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471159225</span>
+              <button class="copy-btn" onclick="copyText('471159225','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">626?B!p?</span>
+              <button class="copy-btn pass-copy" onclick="copyText('626?B!p?','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.35000000000000003s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد رجب محمد احمد شومان</div>
+            <div class="student-number">طالب رقم 15</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">472378748</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">472378748</span>
+              <button class="copy-btn" onclick="copyText('472378748','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">8_CwMVLq</span>
+              <button class="copy-btn pass-copy" onclick="copyText('8_CwMVLq','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.375s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد رفعت عبدالمنعم مامون</div>
+            <div class="student-number">طالب رقم 16</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">468570383</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">468570383</span>
+              <button class="copy-btn" onclick="copyText('468570383','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">s_p2NUeY</span>
+              <button class="copy-btn pass-copy" onclick="copyText('s_p2NUeY','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.4s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد رمضان نور النبى عبدالفتاح</div>
+            <div class="student-number">طالب رقم 17</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471754915</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471754915</span>
+              <button class="copy-btn" onclick="copyText('471754915','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">Cu?WT_v5</span>
+              <button class="copy-btn pass-copy" onclick="copyText('Cu?WT_v5','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.42500000000000004s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد شعبان حسين محمد</div>
+            <div class="student-number">طالب رقم 18</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471157092</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471157092</span>
+              <button class="copy-btn" onclick="copyText('471157092','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">_9_jVwWh</span>
+              <button class="copy-btn pass-copy" onclick="copyText('_9_jVwWh','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.45s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد شعبان كمال ابوطالب</div>
+            <div class="student-number">طالب رقم 19</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471159131</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471159131</span>
+              <button class="copy-btn" onclick="copyText('471159131','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">vmv_4yVL</span>
+              <button class="copy-btn pass-copy" onclick="copyText('vmv_4yVL','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.47500000000000003s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد صاوى عبدالله امام</div>
+            <div class="student-number">طالب رقم 20</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">470834735</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">470834735</span>
+              <button class="copy-btn" onclick="copyText('470834735','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">5a_Euc?A</span>
+              <button class="copy-btn pass-copy" onclick="copyText('5a_Euc?A','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.5s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد عبدالمنعم حسن محمد</div>
+            <div class="student-number">طالب رقم 21</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471852430</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471852430</span>
+              <button class="copy-btn" onclick="copyText('471852430','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">H5sv_Js3</span>
+              <button class="copy-btn pass-copy" onclick="copyText('H5sv_Js3','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.525s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد عزالدين حسنى موسى</div>
+            <div class="student-number">طالب رقم 22</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">464591547</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">464591547</span>
+              <button class="copy-btn" onclick="copyText('464591547','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">SL?U9k8U</span>
+              <button class="copy-btn pass-copy" onclick="copyText('SL?U9k8U','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.55s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد علاء عيسى اسماعيل</div>
+            <div class="student-number">طالب رقم 23</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">477375775</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">477375775</span>
+              <button class="copy-btn" onclick="copyText('477375775','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">8?_H3kys</span>
+              <button class="copy-btn pass-copy" onclick="copyText('8?_H3kys','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.5750000000000001s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد علاء مصطفى عبدالمحسن</div>
+            <div class="student-number">طالب رقم 24</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">467714370</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">467714370</span>
+              <button class="copy-btn" onclick="copyText('467714370','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">9!fsMv8k</span>
+              <button class="copy-btn pass-copy" onclick="copyText('9!fsMv8k','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.6000000000000001s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد محمد ابراهيم حبيب</div>
+            <div class="student-number">طالب رقم 25</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">467202122</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">467202122</span>
+              <button class="copy-btn" onclick="copyText('467202122','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">pMv4A!GN</span>
+              <button class="copy-btn pass-copy" onclick="copyText('pMv4A!GN','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.625s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد محمد احمد عبدالحميد</div>
+            <div class="student-number">طالب رقم 26</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">464544857</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">464544857</span>
+              <button class="copy-btn" onclick="copyText('464544857','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">8?AmE3E?</span>
+              <button class="copy-btn pass-copy" onclick="copyText('8?AmE3E?','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.65s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد محمد احمد مصطفى احمد</div>
+            <div class="student-number">طالب رقم 27</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">472375817</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">472375817</span>
+              <button class="copy-btn" onclick="copyText('472375817','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">4wC_ygj9</span>
+              <button class="copy-btn pass-copy" onclick="copyText('4wC_ygj9','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.675s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد محمد ربيع محمد</div>
+            <div class="student-number">طالب رقم 28</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">467713692</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">467713692</span>
+              <button class="copy-btn" onclick="copyText('467713692','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">h43Y__U6</span>
+              <button class="copy-btn pass-copy" onclick="copyText('h43Y__U6','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.7000000000000001s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد محمد سعدالدين محمود</div>
+            <div class="student-number">طالب رقم 29</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">463986510</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">463986510</span>
+              <button class="copy-btn" onclick="copyText('463986510','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">MkbQ?C8w</span>
+              <button class="copy-btn pass-copy" onclick="copyText('MkbQ?C8w','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.7250000000000001s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد محمد سيد قرنى</div>
+            <div class="student-number">طالب رقم 30</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">462810105</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">462810105</span>
+              <button class="copy-btn" onclick="copyText('462810105','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">nS_A2pfD</span>
+              <button class="copy-btn pass-copy" onclick="copyText('nS_A2pfD','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.75s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد محمد عبدالحكيم احمد</div>
+            <div class="student-number">طالب رقم 31</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">464544012</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">464544012</span>
+              <button class="copy-btn" onclick="copyText('464544012','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">tEF9?Rz?</span>
+              <button class="copy-btn pass-copy" onclick="copyText('tEF9?Rz?','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.775s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد محمد عبدالحكيم على</div>
+            <div class="student-number">طالب رقم 32</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">463152246</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">463152246</span>
+              <button class="copy-btn" onclick="copyText('463152246','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">D3qAW?Gg</span>
+              <button class="copy-btn pass-copy" onclick="copyText('D3qAW?Gg','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.8s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد محمود بيلى اسماعيل</div>
+            <div class="student-number">طالب رقم 33</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">463058335</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">463058335</span>
+              <button class="copy-btn" onclick="copyText('463058335','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">6S_xTXmB</span>
+              <button class="copy-btn pass-copy" onclick="copyText('6S_xTXmB','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.8250000000000001s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد محمود طه محمود</div>
+            <div class="student-number">طالب رقم 34</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">467714398</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">467714398</span>
+              <button class="copy-btn" onclick="copyText('467714398','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">r6P_nXr8</span>
+              <button class="copy-btn pass-copy" onclick="copyText('r6P_nXr8','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.8500000000000001s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد ناصر احمد سيد</div>
+            <div class="student-number">طالب رقم 35</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">463538008</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">463538008</span>
+              <button class="copy-btn" onclick="copyText('463538008','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">M_qH9n!h</span>
+              <button class="copy-btn pass-copy" onclick="copyText('M_qH9n!h','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.875s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد وليد سليمان محمد</div>
+            <div class="student-number">طالب رقم 36</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471091968</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471091968</span>
+              <button class="copy-btn" onclick="copyText('471091968','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">cNw_T_5z</span>
+              <button class="copy-btn pass-copy" onclick="copyText('cNw_T_5z','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.9s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">احمد وليد عادل محمد</div>
+            <div class="student-number">طالب رقم 37</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471171804</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471171804</span>
+              <button class="copy-btn" onclick="copyText('471171804','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">3FAwM_2n</span>
+              <button class="copy-btn pass-copy" onclick="copyText('3FAwM_2n','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.925s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">ادهم احمد عبدالتواب عبدالواحد</div>
+            <div class="student-number">طالب رقم 38</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471198090</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471198090</span>
+              <button class="copy-btn" onclick="copyText('471198090','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">!9?pU!ym</span>
+              <button class="copy-btn pass-copy" onclick="copyText('!9?pU!ym','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.9500000000000001s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">ادهم جلال فكرى امين</div>
+            <div class="student-number">طالب رقم 39</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">481857094</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">481857094</span>
+              <button class="copy-btn" onclick="copyText('481857094','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">Si_K35iR</span>
+              <button class="copy-btn pass-copy" onclick="copyText('Si_K35iR','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="student-card" style="animation-delay:0.9750000000000001s">
+        <div class="card-header">
+          <div class="avatar">ا</div>
+          <div class="card-title">
+            <div class="student-name">ادهم خميس سلامه عبدالله</div>
+            <div class="student-number">طالب رقم 40</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471777467</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">471777467</span>
+              <button class="copy-btn" onclick="copyText('471777467','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">E3nxfrk?</span>
+              <button class="copy-btn pass-copy" onclick="copyText('E3nxfrk?','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="empty-state" id="emptyState">
+    <div class="emoji">🔍</div>
+    <h3>لا توجد نتائج</h3>
+    <p>جرب البحث بكلمات مختلفة</p>
+  </div>
+  <div class="pagination" id="pagination"><button class="page-btn" onclick="goPage(0)" disabled="">◀</button><button class="page-btn active" onclick="goPage(1)">1</button><button class="page-btn " onclick="goPage(2)">2</button><button class="page-btn " onclick="goPage(3)">3</button><span style="color:var(--muted);padding:0 4px">…</span><button class="page-btn " onclick="goPage(14)">14</button><button class="page-btn" onclick="goPage(2)">▶</button></div>
+</main>
+
+<div class="toast" id="toast">تم النسخ! ✓</div>
+
+<script>
+const STUDENTS = [
+  {n:1,name:"ايانوب منصور سعد كامل عريان",id:"477364687",pass:"PmKqtP!7"},
+  {n:2,name:"ابراهيم حماده محمد فهيم",id:"470897242",pass:"sQ7r?CYK"},
+  {n:3,name:"ابراهيم محمود ابراهيم حبيب",id:"470896301",pass:"fD8BRX_M"},
+  {n:4,name:"احمد امين مرسى امين",id:"467252164",pass:"_Ax7KpV3"},
+  {n:5,name:"احمد ايهاب محمود عبدالغفار",id:"471615677",pass:"6nN7_sXv"},
+  {n:6,name:"احمد بدوى محمد عبدالمنعم",id:"470896595",pass:"!xDB8c2?"},
+  {n:7,name:"احمد توبه جابر على",id:"470686623",pass:"YXz7X_aF"},
+  {n:8,name:"احمد جمعه رمضان مامون",id:"471527694",pass:"Vjc4rp!w"},
+  {n:9,name:"احمد جمعه سعيد سعداوى",id:"471027918",pass:"GVyk?5ms"},
+  {n:10,name:"احمد جمعه كمال احمد",id:"463750045",pass:"_FciYw5X"},
+  {n:11,name:"احمد حاتم لطفى احمد عبدالمنعم",id:"471218939",pass:"S2auHQw!"},
+  {n:12,name:"احمد حماده حمدان قرنى",id:"470834714",pass:"SF_aka9Q"},
+  {n:13,name:"احمد حمدى احمد عبدالرازق جادالمولى",id:"471328799",pass:"fw?ngV95"},
+  {n:14,name:"احمد راضى فريح سلامه",id:"471159225",pass:"626?B!p?"},
+  {n:15,name:"احمد رجب محمد احمد شومان",id:"472378748",pass:"8_CwMVLq"},
+  {n:16,name:"احمد رفعت عبدالمنعم مامون",id:"468570383",pass:"s_p2NUeY"},
+  {n:17,name:"احمد رمضان نور النبى عبدالفتاح",id:"471754915",pass:"Cu?WT_v5"},
+  {n:18,name:"احمد شعبان حسين محمد",id:"471157092",pass:"_9_jVwWh"},
+  {n:19,name:"احمد شعبان كمال ابوطالب",id:"471159131",pass:"vmv_4yVL"},
+  {n:20,name:"احمد صاوى عبدالله امام",id:"470834735",pass:"5a_Euc?A"},
+  {n:21,name:"احمد عبدالمنعم حسن محمد",id:"471852430",pass:"H5sv_Js3"},
+  {n:22,name:"احمد عزالدين حسنى موسى",id:"464591547",pass:"SL?U9k8U"},
+  {n:23,name:"احمد علاء عيسى اسماعيل",id:"477375775",pass:"8?_H3kys"},
+  {n:24,name:"احمد علاء مصطفى عبدالمحسن",id:"467714370",pass:"9!fsMv8k"},
+  {n:25,name:"احمد محمد ابراهيم حبيب",id:"467202122",pass:"pMv4A!GN"},
+  {n:26,name:"احمد محمد احمد عبدالحميد",id:"464544857",pass:"8?AmE3E?"},
+  {n:27,name:"احمد محمد احمد مصطفى احمد",id:"472375817",pass:"4wC_ygj9"},
+  {n:28,name:"احمد محمد ربيع محمد",id:"467713692",pass:"h43Y__U6"},
+  {n:29,name:"احمد محمد سعدالدين محمود",id:"463986510",pass:"MkbQ?C8w"},
+  {n:30,name:"احمد محمد سيد قرنى",id:"462810105",pass:"nS_A2pfD"},
+  {n:31,name:"احمد محمد عبدالحكيم احمد",id:"464544012",pass:"tEF9?Rz?"},
+  {n:32,name:"احمد محمد عبدالحكيم على",id:"463152246",pass:"D3qAW?Gg"},
+  {n:33,name:"احمد محمود بيلى اسماعيل",id:"463058335",pass:"6S_xTXmB"},
+  {n:34,name:"احمد محمود طه محمود",id:"467714398",pass:"r6P_nXr8"},
+  {n:35,name:"احمد ناصر احمد سيد",id:"463538008",pass:"M_qH9n!h"},
+  {n:36,name:"احمد وليد سليمان محمد",id:"471091968",pass:"cNw_T_5z"},
+  {n:37,name:"احمد وليد عادل محمد",id:"471171804",pass:"3FAwM_2n"},
+  {n:38,name:"ادهم احمد عبدالتواب عبدالواحد",id:"471198090",pass:"!9?pU!ym"},
+  {n:39,name:"ادهم جلال فكرى امين",id:"481857094",pass:"Si_K35iR"},
+  {n:40,name:"ادهم خميس سلامه عبدالله",id:"471777467",pass:"E3nxfrk?"},
+  {n:41,name:"ادهم محمد عبدالرؤف عبدالتواب",id:"476537807",pass:"aH_4mFZt"},
+  {n:42,name:"اروه هانى عبدالباقى على",id:"471455315",pass:"!xk6QV32"},
+  {n:43,name:"اروى رجب محمد عثمان",id:"477348994",pass:"Kzit44Z!"},
+  {n:44,name:"اروى على صالح على",id:"467841034",pass:"nm?YZn5N"},
+  {n:45,name:"اروى فكرى مصطفى محمد عثمان",id:"477237936",pass:"btQ8c5!i"},
+  {n:46,name:"سراء ابراهيم احمد البدوى",id:"471653063",pass:"nv_7_Wm4"},
+  {n:47,name:"اسراء احمد رشدى محمد محمد",id:"472980109",pass:"p8_mnfZc"},
+  {n:48,name:"سراء دسوقى زكريا براكات ابراهيم",id:"472115267",pass:"7?nSpv9c"},
+  {n:49,name:"سراء رضا عبدالرحيم عبدالوهاب",id:"471851418",pass:"__weB2mT"},
+  {n:50,name:"سراء صبرى عبدالتواب سليمان",id:"471500843",pass:"_da5ZxaB"},
+  {n:51,name:"سراء محمد ابراهيم محمود رحيم",id:"464357334",pass:"XxT3?kr6"},
+  {n:52,name:"اسلام ايمن معوض امام على",id:"472707500",pass:"79NsD!Wa"},
+  {n:53,name:"اسلام عاشور عباس مدكور",id:"471661063",pass:"_2mV_pA6"},
+  {n:54,name:"اسلام عبدالله مدروك حسانين",id:"471636003",pass:"__pZ2x3X"},
+  {n:55,name:"اسماء احمد عبدالحافظ عبدالمجيد",id:"463752320",pass:"mVLJd4!X"},
+  {n:56,name:"اسماء عنتر اسماعيل سيد",id:"462804001",pass:"?FVCd7_v"},
+  {n:57,name:"اسماء محمد مصطفى على",id:"463152378",pass:"Tc64Uv8!"},
+  {n:58,name:"اسماء نور صاوى عبدالستار",id:"466676227",pass:"yWCg74Q_"},
+  {n:59,name:"اسماعيل هشام اسماعيل عبدالرازق",id:"463749954",pass:"Q_n!sZD3"},
+  {n:60,name:"اشرف حسن محمد محمد",id:"467881082",pass:"4X8!m?FM"},
+  {n:61,name:"اشرف صابر احمد حنفى",id:"467714323",pass:"_EmMJ?8t"},
+  {n:62,name:"اشرقت ضياءالدين احمد عبدالكريم",id:"471170367",pass:"V2!b!NP4"},
+  {n:63,name:"اشرقت محمد زكريا محمد",id:"462816220",pass:"ZCnVDF6?"},
+  {n:64,name:"الاء اكرامى احمد محمد",id:"486088930",pass:"!iga7tV5"},
+  {n:65,name:"الاء طه يحيى محمد سالم",id:"472424853",pass:"USfyx6!k"},
+  {n:66,name:"الاء عبدالرحمن سيد احمد",id:"471454641",pass:"g2Ftu44!"},
+  {n:67,name:"الاء لاشين امام امين",id:"471607314",pass:"NMqub_4j"},
+  {n:68,name:"الاء مامون مصطفى عويس",id:"463752282",pass:"JsM!U9Z6"},
+  {n:69,name:"الاء محمد موسى حسين",id:"471634939",pass:"9_b9EHgq"},
+  {n:70,name:"الهام محمد ابراهيم عبدالحميد",id:"471652715",pass:"D_HpP4Yh"},
+  {n:71,name:"امجد حسن عبدالمنعم حسن",id:"463152257",pass:"WuSF_K9s"},
+  {n:72,name:"امل طارق مصطفى قرنى",id:"467714000",pass:"k!eYLD42"},
+  {n:73,name:"امنيه محمد اسد احمد حسن عليوه",id:"462803846",pass:"sV8w?cFC"},
+  {n:74,name:"اميره احمد محمد مدبولى محمد",id:"471323987",pass:"_e3kjpCe"},
+  {n:75,name:"اميره على الله سيد مبروك",id:"462816435",pass:"j9asYd?S"},
+  {n:76,name:"اميره محمود سليم عواد",id:"471138932",pass:"erz?kZ4V"},
+  {n:77,name:"انهار محمد سعدالدين حسن خليفه",id:"477365214",pass:"?G4z6fuj"},
+  {n:78,name:"ايات اسامه محمد عبدالقوى",id:"463152507",pass:"QzZc?9eP"},
+  {n:79,name:"ايات اسماعيل سيد صديق اسماعيل",id:"471742340",pass:"t_v?Xwz2"},
+  {n:80,name:"ياد حاتم زغلول مبروك",id:"470834771",pass:"FR_dWAi2"},
+  {n:81,name:"ايسل عماد عبدالله عبدالظاهر ابوزيد",id:"471988448",pass:"DDF7PX?a"},
+  {n:82,name:"ايمان ايمن سلامه سالم",id:"471455414",pass:"QMcJ4j3_"},
+  {n:83,name:"ايمان توبه لطيف عبدالله",id:"471676663",pass:"3z!bEtyB"},
+  {n:84,name:"ايمان حنفى رمضان ابراهيم",id:"468398813",pass:"qBJ!mu6x"},
+  {n:85,name:"ايمان عبده محمد سعيد كامل",id:"470834667",pass:"adxR2TH?"},
+  {n:86,name:"ايمان محمد سلطان على",id:"471882889",pass:"mabMYc9!"},
+  {n:87,name:"ايمان محمد على ابراهيم صالح",id:"477365380",pass:"5rH2Gj!k"},
+  {n:88,name:"ايمان نادى سمير مليجى",id:"471171290",pass:"b2PT_5s!"},
+  {n:89,name:"ايه احمد رجب عبدالفتاح",id:"467714016",pass:"jpX_YP32"},
+  {n:90,name:"ايه احمد محمد عبدالخالق",id:"463303065",pass:"MmdM8KK_"},
+  {n:91,name:"ايه اسامه عبدالله عبدالغنى",id:"471634978",pass:"YATT8_zq"},
+  {n:92,name:"ايه سامح عبدالحافظ محمد",id:"471639996",pass:"Bj95NEP!"},
+  {n:93,name:"باسم حاتم جاب الله سيد",id:"467201297",pass:"RX6??X9j"},
+  {n:94,name:"بسمله اشرف محمد عبدالعاطى محمد",id:"472703369",pass:"Gf?YpW7e"},
+  {n:95,name:"بسمله خالد سيد سالم",id:"471170064",pass:"Dk8!ubBT"},
+  {n:96,name:"بسمله رمضان معوض امام",id:"471651908",pass:"_MCu?3VT"},
+  {n:97,name:"بسمله سعيد عبدالستار عبدالرحمن",id:"470834911",pass:"Jx8yhs?x"},
+  {n:98,name:"بسمله عطيه حسن محمد حسن",id:"472386095",pass:"Mtcc4x5!"},
+  {n:99,name:"بسمله وائل رمضان ابراهيم مجاور",id:"505352425",pass:"GT3!U7Fp"},
+  {n:100,name:"بسمله يحيى كمال محمد",id:"463152373",pass:"a2tD?rh8"},
+  {n:101,name:"بسمه خالد محمد جارحى قرنى",id:"471196046",pass:"SAp3p_Ec"},
+  {n:102,name:"بسمه دسوقى محمد ابراهيم عبدالله",id:"466780227",pass:"d!u85WUF"},
+  {n:103,name:"بسمه شعبان سيد مبروك",id:"471195955",pass:"_z63sSSF"},
+  {n:104,name:"بسمه محمد ابراهيم اسماعيل",id:"471195908",pass:"yD_7S8Wx"},
+  {n:105,name:"بسنت عبدالله رمضان سيد",id:"463355609",pass:"mE5Vk?F6"},
+  {n:106,name:"بشرى على محمد على",id:"471171277",pass:"!s!Hh86g"},
+  {n:107,name:"بلال الحسين حسن عبدالمجيد",id:"467881341",pass:"tzHA?zD7"},
+  {n:108,name:"بيسان يسرى محمد احمد",id:"471284667",pass:"6Nsy!FyD"},
+  {n:109,name:"جلا سيد عبدالخالق عبدالحميد",id:"471635097",pass:"cSyHQ3Z!"},
+  {n:110,name:"جمال ابراهيم عبدالرؤف فهيم",id:"470834809",pass:"_B2WYqR6"},
+  {n:111,name:"جمعه حسن حسين حسن",id:"471629901",pass:"8ueAnE_9"},
+  {n:112,name:"جنا ايهاب ابراهيم عبدالمجيد",id:"464542528",pass:"?3V?b9uw"},
+  {n:113,name:"جنا عمار جمال طه",id:"467713808",pass:"?3CqVfbn"},
+  {n:114,name:"جنا محمد محمد عبدالتواب",id:"464541666",pass:"_8S_xEa5"},
+  {n:115,name:"جنات سعيد مهدى عبدالله",id:"471028544",pass:"?L6St9Nj"},
+  {n:116,name:"جنات سيد خميس سيد",id:"477522703",pass:"_Ys4FREK"},
+  {n:117,name:"جنات عبدالرحمن يحيى محمد",id:"467713976",pass:"6Vdq6!mQ"},
+  {n:118,name:"جنه سعيد محمد محمد",id:"471028241",pass:"!u733gY7"},
+  {n:119,name:"جنه طارق يحى عمار",id:"476147146",pass:"y47YKY?n"},
+  {n:120,name:"جنه ياسر حبيب محمد",id:"471157885",pass:"9kh3JNZ_"},
+  {n:121,name:"جنى احمد حسين احمد",id:"463752740",pass:"4WL7!Vjy"},
+  {n:122,name:"جنى احمد محمد ابراهيم",id:"471771666",pass:"wfw!jR57"},
+  {n:123,name:"جنى بديع سعيد كامل",id:"471798844",pass:"GyJh?7?i"},
+  {n:124,name:"جنى ربيع شحات محمد عبدالغنى",id:"470422889",pass:"TATy?q33"},
+  {n:125,name:"جنى شريف ابراهيم سكوته",id:"471649862",pass:"gq2aUn_J"},
+  {n:126,name:"جنى شريف عبدالتواب دسوقى",id:"471852177",pass:"m2?pXmDP"},
+  {n:127,name:"جنى صلاح امام الهم",id:"463991574",pass:"6QTDP_Ga"},
+  {n:128,name:"جنى عزالدين راضى سيد",id:"463752708",pass:"J7D5?jpG"},
+  {n:129,name:"جنى عمرو داود غريب",id:"471171260",pass:"Gx_?K6vr"},
+  {n:130,name:"جنى محمد صلاح صالح",id:"471028526",pass:"C!uvF9qT"},
+  {n:131,name:"جنى محمد طنطاوى احمد",id:"471197721",pass:"sPHQ?bF8"},
+  {n:132,name:"جنى مصطفى نصر على",id:"471882360",pass:"G2EmSwN?"},
+  {n:133,name:"جنى هانى شعبان سيد",id:"463057039",pass:"Yf2?m?H9"},
+  {n:134,name:"جهاد محمود فتحى عبده",id:"470687965",pass:"RWDri4!X"},
+  {n:135,name:"جومانه جميل عبدالجليل محمد",id:"471455287",pass:"6Q_UcDk2"},
+  {n:136,name:"حاتم على شعبان على",id:"476737387",pass:"k7Q_GPKK"},
+  {n:137,name:"حبيبه اسماعيل فتحى اسماعيل",id:"471637682",pass:"q_!6?2dW"},
+  {n:138,name:"حبيبه سيد محمد محمد",id:"462804144",pass:"c8DS254?"},
+  {n:139,name:"حبيبه عبدالرحمن يوسف عبدالرحمن",id:"471028910",pass:"9_jJBCrQ"},
+  {n:140,name:"حبيبه عمرو لملوم عبدالمقصود",id:"471798876",pass:"Vh_4tJ62"},
+  {n:141,name:"حبيبه محمود محمد محمود",id:"471635085",pass:"8x_Stvsg"},
+  {n:142,name:"حبيبه وائل عبدالبارى محمد",id:"471339543",pass:"t8pC2m!4"},
+  {n:143,name:"حبيبه يوسف سعيد يوسف",id:"471028334",pass:"?yCwJj2z"},
+  {n:144,name:"حسام طه حميده طه",id:"471637328",pass:"9QytwwG_"},
+  {n:145,name:"حسن عبدالحليم حسن عبدالحليم",id:"463750166",pass:"U!N5CZvd"},
+  {n:146,name:"حسناء احمد عبدالغنى على",id:"470898516",pass:"Hht9?Kfs"},
+  {n:147,name:"حسناء يوسف محمد محمود",id:"471754739",pass:"QY?4edb4"},
+  {n:148,name:"حسين حامد حسين احمد",id:"471870984",pass:"N7?tbeKV"},
+  {n:149,name:"حفصه ربيع عبدالتواب بريك",id:"480594678",pass:"8R6tauW_"},
+  {n:150,name:"حلا صبرى سعد سعداوى",id:"480593377",pass:"u3PLQc!_"},
+  {n:151,name:"حنان على الهم على",id:"471378221",pass:"RLdWB!j7"},
+  {n:152,name:"حنين سعيد نادى شاكر",id:"471792274",pass:"t_CUWkK4"},
+  {n:153,name:"حنين مجدى عبدالغنى عبدالجواد",id:"463056873",pass:"sZS!7fxm"},
+  {n:154,name:"حنين محمد شعبان عبداللطيف",id:"470995275",pass:"bEE3G4_3"},
+  {n:155,name:"خلود عادل سيد عبدالغنى",id:"471157593",pass:"t?xG2?MG"},
+  {n:156,name:"دعاء احمد شاكر عبدالتواب",id:"464542299",pass:"Ba4qVzF!"},
+  {n:157,name:"دعاء اشرف رجب عبدالظاهر",id:"471169996",pass:"vn9R?Cpv"},
+  {n:158,name:"دنيا عماد فوزى كامل",id:"463753027",pass:"2tztYv2?"},
+  {n:159,name:"رانيا اسماعيل عبدالحافظ مبروك",id:"462804274",pass:"?cq_?Vc4"},
+  {n:160,name:"رحمه جمال بدوى صديق",id:"471749640",pass:"2!jEwG8G"},
+  {n:161,name:"رحمه حمدى رجب ابراهيم حسانين",id:"476969998",pass:"g4Y?NSQQ"},
+  {n:162,name:"رحمه رمضان بكر يوسف ابوبكر",id:"472181317",pass:"?zJN8Tr_"},
+  {n:163,name:"رحمه عصام قرنى محمد",id:"471171248",pass:"pc9M2VP!"},
+  {n:164,name:"رحمه محمد زين العابدين حسين",id:"462804249",pass:"?Pz65t5y"},
+  {n:165,name:"رحمه محمد صالح عبدالحليم على",id:"470444091",pass:"?Ucj9e2C"},
+  {n:166,name:"رحمه مدحت جمال محمد",id:"471329484",pass:"_Jayzv4_"},
+  {n:167,name:"رحمه مسعد احمد يوسف ابوبكر",id:"472181374",pass:"WXFEN4_f"},
+  {n:168,name:"رحمه مصطفى محمد سيد",id:"471403897",pass:"c?V626!F"},
+  {n:169,name:"رحمه هلال صابر عبدالمنتصف",id:"471028475",pass:"v3B?gk!X"},
+  {n:170,name:"رشاد على رشاد عواد",id:"471754830",pass:"8xGT_e62"},
+  {n:171,name:"رضا فارس عويس عباس",id:"462578382",pass:"i5wU3U_6"},
+  {n:172,name:"رضوى عادل سيد اسماعيل",id:"463753193",pass:"7U3pXt!t"},
+  {n:173,name:"رضوى محمد محمد عبدالفتاح محمود",id:"472181453",pass:"Cnk!Rap6"},
+  {n:174,name:"رضوى محمود عبدالحليم محمود",id:"471754725",pass:"MNcX8!iW"},
+  {n:175,name:"رضوى وائل فتحى محمد",id:"471255254",pass:"FQ97g??4"},
+  {n:176,name:"رقيه صابر محمد سالم",id:"471640188",pass:"Qf!S7jUU"},
+  {n:177,name:"رمضان شحات سيد عبدالله",id:"471778611",pass:"c8dZkbB?"},
+  {n:178,name:"رمضان كريم رمضان طه",id:"463750271",pass:"ss5Bc8t!"},
+  {n:179,name:"رميساء عبدالله شحات دسوقى",id:"471157501",pass:"26?PdkPX"},
+  {n:180,name:"رنا عماد فتحى على",id:"467198431",pass:"uu7D_gug"},
+  {n:181,name:"رنا محمد احمد مرسى",id:"463753172",pass:"Gd!y98!Z"},
+  {n:182,name:"رنا محمد رمضان زكى",id:"470767046",pass:"hQX!3Udi"},
+  {n:183,name:"رنا مظهر فوزى عبدالمعطى",id:"467714042",pass:"9k!VUibQ"},
+  {n:184,name:"روان ايمن سيف النصر محمد",id:"471027969",pass:"K2PP!wqU"},
+  {n:185,name:"روان كمال حافظ نافع",id:"463399174",pass:"uz?Ejbt8"},
+  {n:186,name:"رودينا حامد سيد ابراهيم",id:"470722511",pass:"Z?PQd3LY"},
+  {n:187,name:"رودينه محمد على محمد",id:"471634987",pass:"La93LPu_"},
+  {n:188,name:"روضه محمود سيد مناع",id:"463152456",pass:"!hmMyt3_"},
+  {n:189,name:"رؤف جمال عبدالله احمد",id:"468398954",pass:"8GDeJh3_"},
+  {n:190,name:"روميساء عبدالوهاب شعيب محمد",id:"471635036",pass:"9_g73Z?k"},
+  {n:191,name:"رويدا سيد حسن ابوالسعود",id:"467713832",pass:"_b2R4!9J"},
+  {n:192,name:"ريفال امى اسماعيل محمد",id:"473140374",pass:"5Qz8Xx9?"},
+  {n:193,name:"ريم احمد عبدالمنعم مامون",id:"471211748",pass:"!ZRq24b5"},
+  {n:194,name:"ريم حاتم رجاء محمود محمد",id:"476970041",pass:"HcJjC4_P"},
+  {n:195,name:"ريم سمير سيد علام",id:"463752971",pass:"3!a3EHAP"},
+  {n:196,name:"ريم محمد احمد مرسى",id:"463753135",pass:"qC2G?ykX"},
+  {n:197,name:"ريم محمود خليل ابراهيم محمد",id:"472703945",pass:"P37tfUU?"},
+  {n:198,name:"ريم محمود محمد سعداوى",id:"463303058",pass:"y3W3r!F9"},
+  {n:199,name:"ريماس خالد رمضان رمضان",id:"471635165",pass:"Cux4?!6v"},
+  {n:200,name:"ريماس محمد صلاح محمد حسن",id:"471988849",pass:"FT_yxt6w"},
+  {n:201,name:"ريهام خالد على عبدالحميد",id:"471606968",pass:"pXU!5PPY"},
+  {n:202,name:"ريهام خالد يونس سيد",id:"463152463",pass:"85jVp??_"},
+  {n:203,name:"ريهام محمد زكريا محمود محمد",id:"472181941",pass:"FB7jcT3!"},
+  {n:204,name:"زكريا عبدالعزيز زكريا محمود",id:"463750326",pass:"M?W8w5?A"},
+  {n:205,name:"زكريا محمد زكريا احمد",id:"471754862",pass:"TVv!rd6G"},
+  {n:206,name:"زمزم احمد سيد محمد",id:"464542856",pass:"6E7SUqL?"},
+  {n:207,name:"زياد احمد جمال حسين",id:"471663805",pass:"SxKtPf9!"},
+  {n:208,name:"زياد احمد عيد عبدالله",id:"480582262",pass:"jbJS5?QF"},
+  {n:209,name:"زياد اسامه اسماعيل عبدالمطلب",id:"463972331",pass:"7t_CGx6S"},
+  {n:210,name:"زياد جاب الله محمود عطوه",id:"470686609",pass:"7df?yzQG"},
+  {n:211,name:"زياد حسام الدين احمد جابر عبدالحليم",id:"464328536",pass:"!4uQTedc"},
+  {n:212,name:"زياد حمدى عطيه عبدالسلام",id:"467200285",pass:"7_uYhDE4"},
+  {n:213,name:"زياد خليل ابراهيم خليل",id:"463152260",pass:"3??jeySX"},
+  {n:214,name:"زياد رجب ابراهيم سعداوى",id:"463987198",pass:"8w!9HQMW"},
+  {n:215,name:"زياد طارق احمد عبدالعزيز",id:"467714425",pass:"T26FUKv?"},
+  {n:216,name:"زياد محمد انور اسماعيل",id:"471255158",pass:"J7?7bnVK"},
+  {n:217,name:"زياد محمد محمود حسن",id:"471636151",pass:"!2GL6_pa"},
+  {n:218,name:"زينب اسامه امين سعد",id:"467252110",pass:"Qrs?e74P"},
+  {n:219,name:"زينب عايد عبدالله عيد",id:"472244740",pass:"9UJ9Ye!J"},
+  {n:220,name:"ساره احمد ابراهيم احمد عبدالله",id:"471328609",pass:"jF?Ng!5b"},
+  {n:221,name:"ساره ايهاب عبدالحكيم فخرالدين",id:"481429186",pass:"rPGK?5yD"},
+  {n:222,name:"ساره عبدالحميد محمد محمد",id:"471171304",pass:"96_?Dvee"},
+  {n:223,name:"ساره عصام فتحى كامل",id:"481725056",pass:"qd_wD69k"},
+  {n:224,name:"ساره محمد عبدالمنعم صالح",id:"464542764",pass:"t?7zXBP!"},
+  {n:225,name:"سعيد محمد عبدالله فراج",id:"471636020",pass:"?6D9yvUU"},
+  {n:226,name:"سلمى احمد ابوزيد يونس",id:"471180100",pass:"_Jhg82vp"},
+  {n:227,name:"سلمى احمد سلامه سيد",id:"471615607",pass:"3s_ug3HQ"},
+  {n:228,name:"سلمى رشدى جابر رشدى",id:"471237171",pass:"W!3nuV4P"},
+  {n:229,name:"سلمى رمضان سالم كامل",id:"470766962",pass:"?C!7v67g"},
+  {n:230,name:"سلمى سمير عبدالله رمضان",id:"471640021",pass:"h2Xu9!qc"},
+  {n:231,name:"سلمى محمد احمد عبدالمجيد",id:"471097115",pass:"NkJH4!Ey"},
+  {n:232,name:"سلمى محمد حسين احمد",id:"471871934",pass:"V8rGX6?Y"},
+  {n:233,name:"سلمى محمد حويحى صابر",id:"463152496",pass:"y4kRPM_w"},
+  {n:234,name:"سما على يوسف عويس",id:"470766389",pass:"uVjjQy?3"},
+  {n:235,name:"سما محمد محمود طه",id:"463753219",pass:"wM6huH_V"},
+  {n:236,name:"سما منير عبدالله احمد",id:"470995518",pass:"3xAWE?T9"},
+  {n:237,name:"سميه اشرف رمضان على",id:"471094998",pass:"!97dJtLD"},
+  {n:238,name:"سميه حافظ عزيز عبدالحافظ",id:"464357582",pass:"_mtrqGw9"},
+  {n:239,name:"سندس بليغ حمدى سيد",id:"471211209",pass:"?pPGf9D9"},
+  {n:240,name:"سهير احمد عبدالنافع فهيم",id:"471607141",pass:"!5kCaj6N"},
+  {n:241,name:"سهيله رابح عبدالمنعم حسن",id:"463152486",pass:"2c6h?Pcb"},
+  {n:242,name:"سهيله محمد سمحان محمد",id:"470995544",pass:"A54r4_hL"},
+  {n:243,name:"سيد شهاب الدين فتحى حسين",id:"464544558",pass:"cj!E2dSi"},
+  {n:244,name:"سيد ياسر سيد عبدالعاطى",id:"473598294",pass:"r_44Bfvf"},
+  {n:245,name:"سيف محمد فتحى كامل",id:"464545002",pass:"V3F!?Tuy"},
+  {n:246,name:"ثروق رضا على ابراهيم",id:"471652302",pass:"7?vkCTvP"},
+  {n:247,name:"شروق عبدالحميد عزت محمد",id:"471851993",pass:"T7_KMphM"},
+  {n:248,name:"شمس محمود صلاح الدين على",id:"471170163",pass:"2!7iBXqd"},
+  {n:249,name:"شهد سالم عطيه سلمى",id:"471779313",pass:"Y4i?_W7u"},
+  {n:250,name:"شهد سعد سليم عواد",id:"471157641",pass:"4cgv_tS3"},
+  {n:251,name:"شهد صبحى شكرى عبدالمعبود",id:"471159043",pass:"sBNzf!i6"},
+  {n:252,name:"شهد عبدالوهاب زكريا محمود احمد",id:"470394952",pass:"tKFu_3f7"},
+  {n:253,name:"شهد عيد سيد محمد",id:"471447772",pass:"Q4QJw?j3"},
+  {n:254,name:"شهد محمد رمضان غريب",id:"471447672",pass:"2!n9zGe6"},
+  {n:255,name:"شهد مسعود رجب عبدالحميد",id:"471255203",pass:"rHw7g8?U"},
+  {n:256,name:"شيماء احمد فوزى قرنى ابوطالب",id:"477365287",pass:"JtYQ_k3m"},
+  {n:257,name:"شيماء محمد ابراهيم ابراهيم طافش",id:"472265850",pass:"9WHh!Zgw"},
+  {n:258,name:"شيماء محمد عبدالله عبدالرحمن",id:"470686649",pass:"uu!8GA9Z"},
+  {n:259,name:"صافى ربيع محمد منصور احمد",id:"471742943",pass:"Ru4kvUC!"},
+  {n:260,name:"صلاح اشرف صلاح حسين",id:"471253978",pass:"P38s!Q?B"},
+  {n:261,name:"ضحى ايمن محمود غريب",id:"470686547",pass:"4n7y?uBr"},
+  {n:262,name:"ضحى ربيع عبدالقوى محمد",id:"497450184",pass:"xH8y?eSe"},
+  {n:263,name:"ضحى على محمد حميده",id:"471650031",pass:"sWb6_!!K"},
+  {n:264,name:"ضحى محمود محمد محمد",id:"464542918",pass:"qTaH6Xs!"},
+  {n:265,name:"طه محمد طه محمد",id:"471197854",pass:"P5!Nq8_g"},
+  {n:266,name:"عبدالرحمن احمد جميل عبدالتواب",id:"463152271",pass:"sqca_W84"},
+  {n:267,name:"عبدالرحمن حسين محمد على",id:"462809800",pass:"su9um?Nx"},
+  {n:268,name:"عبدالرحمن صالح عويس معتمد",id:"463750925",pass:"jPPwt?p8"},
+  {n:269,name:"عبدالرحمن فاضل صالح عبدالعليم",id:"464544520",pass:"vyNw2E_9"},
+  {n:270,name:"عبدالرحمن محفوظ ابراهيم عبدالمقصود",id:"463750753",pass:"ZMf?K53J"},
+  {n:271,name:"عبدالرحمن محمد عطيه سلمى",id:"471778172",pass:"5vv2FG_8"},
+  {n:272,name:"عبدالرحمن محمود ابراهيم محمود",id:"467714197",pass:"jHc!r2JA"},
+  {n:273,name:"عبدالرؤف محمد مجاهد محمد محمود",id:"471198203",pass:"Xf7EyL2_"},
+  {n:274,name:"عبداللطيف اسماعيل ابراهيم عبداللطيف",id:"471629758",pass:"J?fxi2t8"},
+  {n:275,name:"عبدالله احمد امام سيد",id:"467714266",pass:"XXQj7g4_"},
+  {n:276,name:"عبدالله بدر عبدالمعز محمد",id:"462809723",pass:"crec3i_N"},
+  {n:277,name:"عبدالله رجب عبداللطيف طايع",id:"505318662",pass:"?K7yS8T7"},
+  {n:278,name:"عبدالله على محمود على",id:"467200103",pass:"cN!b62pF"},
+  {n:279,name:"عبدالله محمد محمد ابراهيم محمد",id:"472720046",pass:"wd_K74Lp"},
+  {n:280,name:"عبدالمجيد مامون محمد عبدالمجيد",id:"485261505",pass:"74XC?wYu"},
+  {n:281,name:"عبدالمعز محمد سيد احمد",id:"471636402",pass:"9Xf_hYyS"},
+  {n:282,name:"عبده احمد محمد عبده",id:"463431569",pass:"n!YVs9Er"},
+  {n:283,name:"علاء احمد علاء نورالدين",id:"464544734",pass:"z?qzn7N8"},
+  {n:284,name:"عمر احمد سيد مبروك",id:"467198091",pass:"?5mLf4MM"},
+  {n:285,name:"عمر احمد طه ابراهيم",id:"463750703",pass:"ut7CWY_6"},
+  {n:286,name:"عمر احمد محمود محمود",id:"481404321",pass:"X!a9syQh"},
+  {n:287,name:"عمر ايمن صالح رشدى",id:"490960250",pass:"v_2PWcdd"},
+  {n:288,name:"عمر ايمن عطيه محمد عبدالله",id:"472378528",pass:"i3SCrzV_"},
+  {n:289,name:"عمر ايهاب محمد عبدالرؤف",id:"471171747",pass:"?X45QuJB"},
+  {n:290,name:"عمر عبدالحميد صلاح عبدالحميد",id:"471094851",pass:"TaW_gJ9P"},
+  {n:291,name:"عمر محمد خليفه احمد",id:"470834647",pass:"ACb4D3_p"},
+  {n:292,name:"عمر محمد صاوى عبدالستار",id:"464358643",pass:"Su?qB4fJ"},
+  {n:293,name:"عمر محمد صلاح جارحى",id:"463303055",pass:"qC!wL93R"},
+  {n:294,name:"عمر محمد عثمان عبدالنعيم",id:"471027713",pass:"S7?yvMZW"},
+  {n:295,name:"عمر محمد عمر سعد",id:"463750657",pass:"5_dnGZux"},
+  {n:296,name:"عمر محمد ممدوح على",id:"467714178",pass:"eF6Fn6?9"},
+  {n:297,name:"عمر محمد يسرى ابراهيم",id:"462810136",pass:"qcqKdU6!"},
+  {n:298,name:"عمر ياسر داود طه",id:"475794673",pass:"_AUp!?9E"},
+  {n:299,name:"عمرو سعيد كامل عبدالباقى",id:"471713072",pass:"sV?9bQc5"},
+  {n:300,name:"عمرو محمد جمال عبدالمعطى داهش",id:"471956635",pass:"3_dZhnbs"},
+  {n:301,name:"عمرو محمد خليفه عبدالحافظ",id:"466838433",pass:"nTv7P__C"},
+  {n:302,name:"عمرو محمود سيد محمود",id:"463751020",pass:"rq5ey!SB"},
+  {n:303,name:"عياد عطيه عياد ابراهيم",id:"471779193",pass:"tUzEG6w?"},
+  {n:304,name:"عيد صابر فوزى احمد",id:"471629909",pass:"5!zs!BA9"},
+  {n:305,name:"عيد عطيه عيد عطيه",id:"471778715",pass:"U5_fChsB"},
+  {n:306,name:"غاده عبدالتواب هاشم راشد",id:"476611711",pass:"dCvgR?p7"},
+  {n:307,name:"غاده هشام فرج عويس",id:"471607158",pass:"mdJS!3va"},
+  {n:308,name:"فاطمه احمد يحيى طه محمود",id:"471328556",pass:"cQCjQ?7X"},
+  {n:309,name:"فاطمه صلاح عبدالحليم اسماعيل",id:"467197924",pass:"bs9sBn_5"},
+  {n:310,name:"فاطمه عادل محمد حسن",id:"463993445",pass:"S8Jmr28!"},
+  {n:311,name:"فاطمه عيد بدوى توفيق سيد",id:"471195843",pass:"B68s_ZyK"},
+  {n:312,name:"فرحه ضياء مبروك عثمان",id:"470834976",pass:"T?nVq3aD"},
+  {n:313,name:"فهمى عبدالرحمن يوسف عبدالرحمن",id:"471028883",pass:"JdCPKf_6"},
+  {n:314,name:"فيبى ميلاد عادل عبدالنور فرج",id:"471328628",pass:"gm5!k68U"},
+  {n:315,name:"كريم جميل ديب عبدالمنعم",id:"468441426",pass:"F4?fKxgw"},
+  {n:316,name:"كريم طارق محمد محمود",id:"471881822",pass:"uTZA5s5_"},
+  {n:317,name:"كريم محمد مصطفى محمد عثمان",id:"471956580",pass:"V2_m9viA"},
+  {n:318,name:"لمياء حمدى محمد محمد",id:"471378366",pass:"fQ_VwC7n"},
+  {n:319,name:"لوجين حسام الدين محمد ابوزيد نصر",id:"471955439",pass:"D2FZ2bb_"},
+  {n:320,name:"مارسيل جرجس يوسف جرجس",id:"467714092",pass:"_S6YzRPW"},
+  {n:321,name:"ماريه دسوقى احمد محمود محمد",id:"471328583",pass:"4z!bS9Zz"},
+  {n:322,name:"مازن محمد عبدالقوى",id:"467338389",pass:"H3gt9_2e"},
+  {n:323,name:"مازن محمود محمد ثابت",id:"470767118",pass:"NbsVr8k_"},
+  {n:324,name:"محاسن احمد روبى عبدالستار",id:"463753533",pass:"zV8r!n9S"},
+  {n:325,name:"محمد ابراهيم شاذلى محمد عبدالشافى",id:"471197948",pass:"?a89sKDN"},
+  {n:326,name:"محمد احمد ابراهيم محمود",id:"463537967",pass:"6XhE8Q_K"},
+  {n:327,name:"محمد احمد اسماعيل عبدالحليم سيد",id:"481661808",pass:"KeG?4jFX"},
+  {n:328,name:"محمد احمد حسن محمد",id:"471629464",pass:"M_6W4d8V"},
+  {n:329,name:"محمد احمد رفاعى دسوقى محمد",id:"485559262",pass:"H!Ggsn3r"},
+  {n:330,name:"محمد احمد عبدالفتاح عبدالحافظ",id:"471754867",pass:"d4ZK!yQx"},
+  {n:331,name:"محمد احمد فوزى مجاور",id:"470834854",pass:"4sGm2XM!"},
+  {n:332,name:"محمد اسماعيل صلاح امين",id:"471636190",pass:"dT6FMnW!"},
+  {n:333,name:"محمد اشرف هاشم محمد",id:"471636375",pass:"3nEA_TXY"},
+  {n:334,name:"محمد ايمن شعبان عبدالنبى",id:"470896354",pass:"z_S!S99a"},
+  {n:335,name:"محمد جمال سلامه على",id:"471527683",pass:"T9!KhHc?"},
+  {n:336,name:"محمد جوده زكريا جوده",id:"482490248",pass:"w_9?Qj36"},
+  {n:337,name:"محمد حسن محمد حسن",id:"468400349",pass:"!Kq_J4v7"},
+  {n:338,name:"محمد خليل على يوسف",id:"464544879",pass:"bza2nr!B"},
+  {n:339,name:"محمد ربيع خالد حسن",id:"467201287",pass:"Dx_B5esB"},
+  {n:340,name:"محمد رمضان عبدالبارى ابوالعلا",id:"471607279",pass:"e?DU2d_b"},
+  {n:341,name:"محمد سامى صالح محمد",id:"467252228",pass:"u9n?9DNM"},
+  {n:342,name:"محمد سعد محمد حداد",id:"463751317",pass:"FHT7j6_3"},
+  {n:343,name:"محمد سعيد يحيى حسن عبدالظاهر",id:"471219295",pass:"24_Rctup"},
+  {n:344,name:"محمد سيد احمد اسماعيل",id:"471629875",pass:"vLyY9?Kq"},
+  {n:345,name:"محمد سيد عبدالعال ابراهيم",id:"464544057",pass:"8vX_rdNk"},
+  {n:346,name:"محمد سيد عثمان احمد",id:"463152304",pass:"7RLVqv?x"},
+  {n:347,name:"محمد سيد عمر محمد حسانين",id:"471197868",pass:"c9cExPG!"},
+  {n:348,name:"محمد شاكر جميل شاكر عبدالعزيز",id:"477364273",pass:"!ASH7NbU"},
+  {n:349,name:"محمد شعبان عبدالحميد عبدالعزيز",id:"463751780",pass:"v_4qkY5q"},
+  {n:350,name:"محمد شعبان كمال ابوطالب",id:"471159252",pass:"_5q7KWa?"},
+  {n:351,name:"محمد صبرى محمد عويس",id:"463751942",pass:"TULRs_2S"},
+  {n:352,name:"محمد ضيف حلمى محمد",id:"476611567",pass:"E?q8HN8W"},
+  {n:353,name:"محمد طه شرقاوى محمد",id:"471527915",pass:"AP8pC!xZ"},
+  {n:354,name:"محمد عاطف محمود حماده",id:"471618421",pass:"k9S?gQP6"},
+  {n:355,name:"محمد عبدالرؤف صلاح عبدالرحمن",id:"471455458",pass:"5j!W2HWW"},
+  {n:356,name:"محمد عبدالعظيم عبدالرازق اسماعيل",id:"476611639",pass:"Rby4UP7?"},
+  {n:357,name:"محمد عبدالله احمد فاضل حسن",id:"471956328",pass:"3GcXE6?H"},
+  {n:358,name:"محمد عبدالله غانم عبدالله",id:"471171823",pass:"6X?kgs3f"},
+  {n:359,name:"محمد عصام محمد عبدالمجيد",id:"471637404",pass:"4Awm6??X"},
+  {n:360,name:"محمد عمرو محمد اسماعيل",id:"464544652",pass:"aEzy!m2D"},
+  {n:361,name:"محمد مجدى حماده كامل طلبه",id:"471957165",pass:"a5!M!JB!"},
+  {n:362,name:"محمد مجدى محمد على",id:"471170142",pass:"2JwWWJd?"},
+  {n:363,name:"محمد محمد جمعه عبدالستار",id:"471339575",pass:"GS8t!!C!"},
+  {n:364,name:"محمد محمود شعبان محمد مبروك",id:"471989982",pass:"f7zBWG?!"},
+  {n:365,name:"محمد محمود محمد غريب",id:"472095801",pass:"Yfx?X6rf"},
+  {n:366,name:"محمد محمود محمود مدكور",id:"471204782",pass:"3kMzYXx_"},
+  {n:367,name:"محمد محمود مصطفى خليفه",id:"470995299",pass:"!k5WC7RD"},
+  {n:368,name:"محمد ناصر غريب محمد",id:"464544972",pass:"qw_QX5v9"},
+  {n:369,name:"محمد هانى محمد محمود",id:"464357724",pass:"xP!s_7q_"},
+  {n:370,name:"محمد وليد رجب ابوحمد",id:"463988590",pass:"uPjzt3!3"},
+  {n:371,name:"محمد ياسر حجاج فتحى",id:"471427862",pass:"57?qHjgS"},
+  {n:372,name:"محمد ياسر عبدالرؤف عبدالتواب",id:"468638201",pass:"J?kkjPm3"},
+  {n:373,name:"محمد ياسر عبدالمنعم مامون",id:"498391919",pass:"!FzTFT9g"},
+  {n:374,name:"محمد يسرى كمال امين محمد",id:"470394958",pass:"t4pq__FZ"},
+  {n:375,name:"محمد يسرى محمد حامد",id:"467714170",pass:"F7!gc86S"},
+  {n:376,name:"محمود احمد ابراهيم طه",id:"463751501",pass:"8J7buUq?"},
+  {n:377,name:"محمود اسماعيل محمد عيسى دريوه",id:"481729878",pass:"zg_42s!G"},
+  {n:378,name:"محمود سعيد حسان سيد",id:"471170011",pass:"!R69eSEc"},
+  {n:379,name:"محمود سعيد فوزى مجاور",id:"470834851",pass:"!Q3VNz5R"},
+  {n:380,name:"محمود عثمان عبدالله ابراهيم",id:"471629964",pass:"vkN2_hC2"},
+  {n:381,name:"محمود عيد محمد عبدالمعبود",id:"464358034",pass:"gJ2t7Y?r"},
+  {n:382,name:"محمود محمد سعدالدين محمود",id:"463989482",pass:"3k?vNr?_"},
+  {n:383,name:"مروان محمود كمال الدين صديق",id:"467078128",pass:"tnnG!5qv"},
+  {n:384,name:"مروه حجاج محمد محمود",id:"471169824",pass:"bq!8e6dH"},
+  {n:385,name:"مروه سعد محمد محمد",id:"471640151",pass:"8?MuJ?QE"},
+  {n:386,name:"مروه عبدالرازق عباس خضر منظور",id:"472024820",pass:"wu2AYK!7"},
+  {n:387,name:"مروه محمود محمد عواد",id:"471447810",pass:"9B?cQ?rE"},
+  {n:388,name:"مريم احمد فاروق سعفان",id:"462803899",pass:"jVh4_QMk"},
+  {n:389,name:"مريم اسامه قرنى صالح",id:"463431618",pass:"dMrZ6Vr!"},
+  {n:390,name:"مريم جميل ابراهيم عوض الله واصف",id:"472220406",pass:"e7YAvcs?"},
+  {n:391,name:"مريم جميل فاضل محمد",id:"462816398",pass:"tV4!pK!W"},
+  {n:392,name:"مريم رمضان محمود حسن",id:"462803877",pass:"bBE!7Dwa"},
+  {n:393,name:"مريم سيد على احمد",id:"462815329",pass:"n5?rDR3X"},
+  {n:394,name:"مريم عاطف عبدالجواد طه",id:"471882669",pass:"f_N4?qZ4"},
+  {n:395,name:"مريم فتح الباب احمد محمود محمد",id:"481225680",pass:"fP4!rX_c"},
+  {n:396,name:"مريم محمد جنيدى ابراهيم",id:"471637656",pass:"_xVwZzX9"},
+  {n:397,name:"مريم محمد حفنى فاضل حسن",id:"471196441",pass:"!9ZWvYTM"},
+  {n:398,name:"مريم محمد يوسف عبدالرؤف",id:"467713967",pass:"Jf!6mkC!"},
+  {n:399,name:"مريم نور محمود محمد",id:"481378808",pass:"c9nfAW_N"},
+  {n:400,name:"مريم هانى رجب احمد محمد مدين",id:"470422870",pass:"9RuNn3?Y"},
+  {n:401,name:"مريم وائل شتات ابوالعلا سيد",id:"474223126",pass:"dnd?KGH9"},
+  {n:402,name:"مريم وائل طه زكى",id:"463753674",pass:"_ACX_?c6"},
+  {n:403,name:"مريم وليد رجب عبدالفتاح",id:"467199785",pass:"jiT2E?Km"},
+  {n:404,name:"مصطفى ابراهيم احمد ابراهيم",id:"463152289",pass:"J_sSJ5nv"},
+  {n:405,name:"مصطفى احمد شعبان بدوى",id:"463521638",pass:"i__R2_Gv"},
+  {n:406,name:"مصطفى ادرى خليفه ابراهيم",id:"471660810",pass:"mu!5HTSK"},
+  {n:407,name:"مصطفى حسين محمد بيومى توفيق سليم",id:"471956861",pass:"9hDuj_S7"},
+  {n:408,name:"مصطفى رجب فتحى كيلانى",id:"463751541",pass:"!Sf3u!3z"},
+  {n:409,name:"مصطفى سعيد عبدالجيد فولى",id:"471219516",pass:"e2A4M?Wr"},
+  {n:410,name:"مصطفى سمير صلاح احمد",id:"467199874",pass:"tNr9cN?A"},
+  {n:411,name:"مصطفى شعبان عويس محمد ابوزيد",id:"471956469",pass:"hBgg_C59"},
+  {n:412,name:"مصطفى شعبان يحيى زكى حسانين",id:"477364121",pass:"LUDaF?9e"},
+  {n:413,name:"مصطفى صلاح كامل",id:"464544901",pass:"J5Sgw9p_"},
+  {n:414,name:"مصطفى علاء محفوظ مبروك",id:"471028150",pass:"!rRbLyH8"},
+  {n:415,name:"مصطفى فرجانى مهدى محمد",id:"462815192",pass:"TXaR7D!a"},
+  {n:416,name:"مصطفى فضل عصام مصطفى",id:"476611470",pass:"3e67_WBv"},
+  {n:417,name:"مصطفى كامل انور شاكر",id:"467714111",pass:"C6xv_s!J"},
+  {n:418,name:"مصطفى محمد محمد ابراهيم",id:"464544773",pass:"Vm?umC5w"},
+  {n:419,name:"مصطفى محمود احمد محمود",id:"472449010",pass:"3AUbQ_k7"},
+  {n:420,name:"مصطفى محمود محمد عطيه",id:"463057712",pass:"5w6B65?z"},
+  {n:421,name:"مصطفى محمود مصطفى عويس",id:"463751345",pass:"MrSM2_sy"},
+  {n:422,name:"مصطفى هلال محمد عبدالرشيد",id:"471636072",pass:"N8_3dWEK"},
+  {n:423,name:"مصطفى ياسر مصطفى كامل",id:"463751605",pass:"7?4pAuY3"},
+  {n:424,name:"مظهر وائل مظهر شاكر عبدالحليم",id:"480290395",pass:"VHNS2!8z"},
+  {n:425,name:"معتز احمد محمود ابراهيم",id:"471455511",pass:"mU6sC6_E"},
+  {n:426,name:"ملك احمد مهدى حسن",id:"462803866",pass:"yCJ3a!nk"},
+  {n:427,name:"ملك اسامه عبدالعزيز احمد",id:"471615629",pass:"kN3?7Hfh"},
+  {n:428,name:"ملك اسماعيل سعد اسماعيل",id:"463152415",pass:"8tnsA?cE"},
+  {n:429,name:"ملك جمال كمال امام",id:"468297621",pass:"Un2?vcMf"},
+  {n:430,name:"ملك جمعه عبدالحليم جمعه",id:"471651986",pass:"RXp3bSv_"},
+  {n:431,name:"ملك حامد سعد سعداوى",id:"464358255",pass:"E!7pA_54"},
+  {n:432,name:"بلك حسين احمد درديرى ابراهيم",id:"472705899",pass:"36!82fFb"},
+  {n:433,name:"ملك حسين على حامد",id:"463753603",pass:"89!J7qEb"},
+  {n:434,name:"ملك حمدى كامل رحيم",id:"464359090",pass:"x?jcm8wN"},
+  {n:435,name:"علك زغلول سيد بركات",id:"470898602",pass:"t5p5M!fQ"},
+  {n:436,name:"ملك سامح حسين عبدالحافظ محمد",id:"471348188",pass:"E4r5F!sq"},
+  {n:437,name:"ملك سامى فاروق امين",id:"471171127",pass:"94xWi?6P"},
+  {n:438,name:"ملك طلعت فاروق محمد",id:"463152544",pass:"m3gVj!Wi"},
+  {n:439,name:"ملك عرفه سامى كمال",id:"472501842",pass:"_u2tQnkJ"},
+  {n:440,name:"ملك على حسب الله على",id:"471851598",pass:"DWR_9np?"},
+  {n:441,name:"ملك محمد احمد جوده",id:"464542805",pass:"7f_MqFuw"},
+  {n:442,name:"ملك محمد حجازى محمد",id:"471640208",pass:"S6MzBar!"},
+  {n:443,name:"ملك محمد عبدالرحمن محمد",id:"463753799",pass:"!uS4pEwS"},
+  {n:444,name:"ملك محمد عبدالرؤف عبدالظاهر",id:"471635344",pass:"hkM3aB!6"},
+  {n:445,name:"ملك هشام حسن محمود",id:"463753828",pass:"_V7zjuPF"},
+  {n:446,name:"ملك ياسر عبدالعليم محمد",id:"471027650",pass:"?qWc3bgX"},
+  {n:447,name:"منار محمد محيسن اسبتان",id:"464542458",pass:"M89r?LCb"},
+  {n:448,name:"منة الله محمد عصام مصطفى",id:"476611780",pass:"?AF9?rJF"},
+  {n:449,name:"منة الله محمد عويس عبدالحافظ عويس",id:"472705997",pass:"8_DquzBn"},
+  {n:450,name:"منه خالد محمود احمد دسوقى",id:"472183497",pass:"RUt2b!gS"},
+  {n:451,name:"منه رمضان كامل محمد",id:"467713904",pass:"yx5ge?Cj"},
+  {n:452,name:"منه عطاالله احمد سيد عطاالله",id:"462803891",pass:"Jz3!TMa4"},
+  {n:453,name:"منه محمد طه عيد",id:"463753432",pass:"u7A?aQQN"},
+  {n:454,name:"منه محمود فاروق توفيق",id:"463152422",pass:"_Rs4AgAn"},
+  {n:455,name:"منه هشام ربيع عبدالنبى",id:"464358967",pass:"p3VxJ4!Y"},
+  {n:456,name:"منه وليد اسماعيل حسين",id:"467713934",pass:"U_vAwmc7"},
+  {n:457,name:"منيره عبدالتواب على ابوبكر المنشاوى",id:"472219637",pass:"Nzj57yh?"},
+  {n:458,name:"مهاب محمد ربيع اسماعيل",id:"463751268",pass:"zVq?8vu8"},
+  {n:459,name:"مهند احمد محمد عبدالقوى",id:"470897207",pass:"E!rnXgS3"},
+  {n:460,name:"مهند معتصم شكرى عبدالله",id:"464358911",pass:"h?MhD4kq"},
+  {n:461,name:"مؤمن شريف تايب عبدالمنعم منصور",id:"472721442",pass:"!JWuvR8b"},
+  {n:462,name:"مؤمن ناصر طه محمود",id:"471636429",pass:"!z8uwcDs"},
+  {n:463,name:"ميرفت نادى محمد عبدالمجيد",id:"471028747",pass:"w7c_ebJd"},
+  {n:464,name:"ميرنا توفيق زغلول مبروك",id:"470834929",pass:"X5zNLWR!"},
+  {n:465,name:"ميرنا رجب عبدالتواب سيد فرحات",id:"472266140",pass:"hSu7?hgN"},
+  {n:466,name:"نادى احمد عبدالرشيد احمد",id:"462816067",pass:"Bvq5Ec!Q"},
+  {n:467,name:"نادين احمد حسين احمد",id:"471851524",pass:"_2HbtfaG"},
+  {n:468,name:"نادين احمد فهمى عبدالباقى",id:"471027158",pass:"R_3cE!CT"},
+  {n:469,name:"نادين محمد كمال الدين محمد",id:"470611924",pass:"v!9BdyY5"},
+  {n:470,name:"ناديه وفدى سالم عبدالرشيد",id:"463056958",pass:"N!8G53iq"},
+  {n:471,name:"ندا حاتم حنفى عبدالحافظ",id:"470834999",pass:"TZ!W6pJr"},
+  {n:472,name:"ندا رأفت سيد محمد",id:"467252136",pass:"gtbnGb7?"},
+  {n:473,name:"ندا يحيى يوسف فاروق سعفان",id:"475974210",pass:"!7pbntXH"},
+  {n:474,name:"ندى ابراهيم ابوالعتين حسن",id:"471649783",pass:"9sFc2k_e"},
+  {n:475,name:"ندى ربيع حسن على",id:"470835028",pass:"qSr8R_TH"},
+  {n:476,name:"ندى زايد نادى زايد ابوطالب",id:"472266589",pass:"Rgh?hC27"},
+  {n:477,name:"ندى محمود عبدالكريم حسين",id:"470766615",pass:"?ejJmnV9"},
+  {n:478,name:"ندى ممدوح محمد سيد",id:"467252087",pass:"ZfGp_M8d"},
+  {n:479,name:"رفانا فوزى عريان يوسف عوض الله",id:"472707130",pass:"Qeq8Db?s"},
+  {n:480,name:"نعمه سعيد عبدالقادر عبدالعليم",id:"471196498",pass:"Uwb4sK!9"},
+  {n:481,name:"نورا سعد سيد احمد",id:"473627250",pass:"yW?ncj6X"},
+  {n:482,name:"نوران جهاد حامد صلاح",id:"476182037",pass:"TxgJ!4QS"},
+  {n:483,name:"نوراى احمد طه محمود",id:"477522690",pass:"NrJ7zQu_"},
+  {n:484,name:"نورهان صميده احمد مجاور",id:"471527644",pass:"nFB9Yt_d"},
+  {n:485,name:"نورهان عبدالتواب على ابوبكر المنشاوى",id:"472706550",pass:"W?4m95E4"},
+  {n:486,name:"نيرفانا محمد سيف حستى",id:"462808957",pass:"_7UURBri"},
+  {n:487,name:"يره محمود رمضان غريب",id:"471170398",pass:"U!z_Qt8Q"},
+  {n:488,name:"هاجر ابراهيم عبدالتواب احمد",id:"467252062",pass:"8g!GhF_4"},
+  {n:489,name:"هاجر ابوضيف عبدالله رحومه",id:"471028668",pass:"Bj?ZrQa9"},
+  {n:490,name:"هاجر احمد زغلول احمد",id:"471527671",pass:"f_hg8VUH"},
+  {n:491,name:"هاجر سامى عبدالغفار ابوالعزم",id:"467202061",pass:"!8bGp7Q_"},
+  {n:492,name:"هاجر شريف رمضان مامون",id:"471527905",pass:"7k!N8RP5"},
+  {n:493,name:"هاجر محمود كيلانى محمد",id:"471639908",pass:"9X5_NwMJ"},
+  {n:494,name:"هبه شريف تايب عبدالمنعم منصور",id:"472706636",pass:"UPkm??3p"},
+  {n:495,name:"هدى حفنى الهم على",id:"471255129",pass:"sWHi6T6_"},
+  {n:496,name:"هدى شعبان كامل عزب",id:"470686641",pass:"fSw_6Dsq"},
+  {n:497,name:"هدى محمد مصطفى محمد",id:"467713990",pass:"8a_2c85T"},
+  {n:498,name:"هدير عطيه سلمى عطيه",id:"471779408",pass:"xx5LE!TN"},
+  {n:499,name:"هلا مصطفى عبدالتواب محمود",id:"464541700",pass:"22N_8uPG"},
+  {n:500,name:"همسه محمد متولى يحيى سيد",id:"471955568",pass:"xTtru3y!"},
+  {n:501,name:"هنا محمد زينهم كمال جنيدى",id:"472220001",pass:"t5!_yMx_"},
+  {n:502,name:"هنا وليد رجب احمد",id:"471653277",pass:"3GE7!f9n"},
+  {n:503,name:"هناء خالد عبدالمنعم مامون",id:"471171222",pass:"S3F!KpBE"},
+  {n:504,name:"هيام حسين مبروك محمود",id:"463753872",pass:"4Qe?dcRq"},
+  {n:505,name:"وداد صلاح رشدى محمد حسن",id:"471328876",pass:"Zt!mz2!_"},
+  {n:506,name:"وسام ايهاب عزوز عبدالحليم",id:"463152389",pass:"w4C_zNjM"},
+  {n:507,name:"وسام محمد حسين خليل",id:"464541844",pass:"Et7BUT?A"},
+  {n:508,name:"وصال عادل عبدالسلام عبدالمقصود",id:"471674574",pass:"DK4eG??r"},
+  {n:509,name:"ولاء حامد احمد حامد محمد",id:"472266848",pass:"Yqv_rJ8A"},
+  {n:510,name:"وليد محمود محمد زين العابدين رياض",id:"471218386",pass:"w3!y7WV4"},
+  {n:511,name:"يارا وائل صلاح عبدالعال",id:"463753974",pass:"4Hy?Qx_Z"},
+  {n:512,name:"ياسمين احمد محمد على",id:"470995484",pass:"Rm!Ke3Je"},
+  {n:513,name:"ياسمين جمعه محمود ابوبكر",id:"471171365",pass:"5NVWy_4y"},
+  {n:514,name:"ياسمين طارق ممدوح ابراهيم سيد",id:"472220293",pass:"q!VA3!zA"},
+  {n:515,name:"ياسمين عبدالوهاب رجاء محمود",id:"477522708",pass:"RU4MXrT!"},
+  {n:516,name:"ياسين حامد اسماعيل لبيب",id:"471637530",pass:"CawH_36y"},
+  {n:517,name:"يسين سيد رمضان سيد",id:"467714355",pass:"TWvw_7ai"},
+  {n:518,name:"يمنى احمد البدوى سيد عبدالرشيد",id:"462822779",pass:"_n6b4e?Y"},
+  {n:519,name:"يمنى طارق فوزى بركات",id:"471607252",pass:"j7DEe?9e"},
+  {n:520,name:"يوسف احمد سمير سيد",id:"476194284",pass:"Z8q?UxwP"},
+  {n:521,name:"يوسف احمد عاشور يوسف",id:"463752172",pass:"Kd_ibB8y"},
+  {n:522,name:"يوسف اسماعيل جميل ابراهيم",id:"470896654",pass:"?VV!4Cy2"},
+  {n:523,name:"يوسف اشرف حسين عبده",id:"471629977",pass:"Axw3!!B6"},
+  {n:524,name:"يوسف حاتم عيد عباس",id:"462809533",pass:"!CGn3GPC"},
+  {n:525,name:"يوسف حامد شكرى احمد",id:"467713661",pass:"_ffNBCc3"},
+  {n:526,name:"يوسف حسام الدين عبده عبدالهادى",id:"471956940",pass:"8_6WVSAz"},
+  {n:527,name:"يوسف حسن عبدالجواد عبدالله",id:"463057900",pass:"7Aiz?syR"},
+  {n:528,name:"يوسف سعيد ربيع على عبدالحليم",id:"471198059",pass:"_cX9Fxjt"},
+  {n:529,name:"يوسف سعيد يوسف عبدالرحمن",id:"471028939",pass:"A4qnV_5_"},
+  {n:530,name:"يوسف عادل فؤاد امين مبروك",id:"472424526",pass:"Pe_8g_8Y"},
+  {n:531,name:"يوسف فتحى عبدالعال عبدالحميد",id:"467714341",pass:"aA_V7d7k"},
+  {n:532,name:"يوسف محمد سيد غريب",id:"471629563",pass:"xnm?7nuE"},
+  {n:533,name:"يوسف محمد عبود محمود",id:"463990714",pass:"N9nmr!ai"},
+  {n:534,name:"يوسف مصطفى محمد عبدالله",id:"471637476",pass:"N?L89aJH"},
+  {n:535,name:"يوسف وائل محمود ثابت",id:"471198033",pass:"!kX2Zjcx"}
+];
+
+let currentView = 'grid';
+let currentPage = 1;
+const PAGE_SIZE = 40;
+let filtered = [...STUDENTS];
+let expanded = null;
+
+// Get initial from name
+function getInitial(name) {
+  const parts = name.trim().split(' ');
+  return parts[0] ? parts[0][0] : '?';
+}
+
+// Highlight match - smart Arabic aware
+function highlight(text, query) {
+  if (!query) return text;
+  // normalize both sides and try to find match positions
+  const nText = normalizeAr(text);
+  const words = normalizeAr(query).split(/\s+/).filter(Boolean);
+  if (!words.length) return text;
+
+  // Build a char-by-char map: normalized index → original index
+  // Simple approach: highlight each word separately using regex on normalized chars
+  let result = text;
+  words.forEach(word => {
+    // Build a regex that matches the word considering Arabic variants
+    const pattern = word
+      .replace(/ا/g, '[اأإآ]')
+      .replace(/ي/g, '[يى]')
+      .replace(/ه/g, '[هة]');
+    try {
+      const re = new RegExp(`(${pattern})`, 'gi');
+      result = result.replace(re, '<span class="highlight">$1</span>');
+    } catch(e) {}
+  });
+  return result;
+}
+
+// Render
+function render() {
+  const grid = document.getElementById('studentsGrid');
+  const empty = document.getElementById('emptyState');
+  const query = document.getElementById('searchInput').value.trim();
+
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const end = start + PAGE_SIZE;
+  const page = filtered.slice(start, end);
+
+  document.getElementById('filteredCount').textContent = filtered.length;
+  document.getElementById('resultsText').innerHTML = filtered.length === STUDENTS.length
+    ? `عرض <strong>${filtered.length}</strong> طالب`
+    : `<strong>${filtered.length}</strong> نتيجة من ${STUDENTS.length}`;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    empty.classList.add('show');
+    document.getElementById('pagination').innerHTML = '';
+    return;
+  }
+  empty.classList.remove('show');
+
+  const isListView = grid.classList.contains('list-view');
+
+  grid.innerHTML = page.map(s => {
+    const nameH = highlight(s.name, query);
+    const idH = highlight(s.id, query);
+    const passH = highlight(s.pass, query);
+
+    if (isListView) {
+      return `
+        <div class="student-card" onclick="toggleExpand(this)" data-id="${s.n}" style="animation-delay:${(page.indexOf(s)*0.02)}s">
+          <div class="card-header">
+            <div class="avatar">${getInitial(s.name)}</div>
+            <div class="card-title">
+              <div class="student-name">${nameH}</div>
+              <div class="student-number">#${s.n}</div>
+            </div>
+            <div class="list-inline">
+              <span class="list-field">ID: <strong class="id-inline">${idH}</strong></span>
+              <span class="list-field">كلمة المرور: <strong class="pass-inline">${passH}</strong></span>
+            </div>
+          </div>
+          <div class="card-fields">
+            <div class="field-row">
+              <span class="field-label">🆔 كود الطالب</span>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span class="field-value id-val">${idH}</span>
+              </div>
+            </div>
+            <div class="field-row">
+              <span class="field-label">👤 اسم المستخدم</span>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span class="field-value id-val">${idH}</span>
+                <button class="copy-btn" onclick="event.stopPropagation();copyText('${s.id}','اسم المستخدم')">📋 نسخ</button>
+              </div>
+            </div>
+            <div class="field-row">
+              <span class="field-label">🔑 كلمة المرور</span>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span class="field-value pass-val">${passH}</span>
+                <button class="copy-btn pass-copy" onclick="event.stopPropagation();copyText('${s.pass}','كلمة المرور')">🔑 نسخ</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="student-card" style="animation-delay:${(page.indexOf(s)*0.025)}s">
+        <div class="card-header">
+          <div class="avatar">${getInitial(s.name)}</div>
+          <div class="card-title">
+            <div class="student-name">${nameH}</div>
+            <div class="student-number">طالب رقم ${s.n}</div>
+          </div>
+        </div>
+        <div class="card-fields">
+          <div class="field-row">
+            <span class="field-label">🆔 كود الطالب</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">${idH}</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">👤 اسم المستخدم</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value id-val">${idH}</span>
+              <button class="copy-btn" onclick="copyText('${s.id}','اسم المستخدم')">📋 نسخ</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">🔑 كلمة المرور</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="field-value pass-val">${passH}</span>
+              <button class="copy-btn pass-copy" onclick="copyText('${s.pass}','كلمة المرور')">🔑 نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  renderPagination();
+}
+
+function toggleExpand(card) {
+  card.classList.toggle('expanded');
+}
+
+function renderPagination() {
+  const total = Math.ceil(filtered.length / PAGE_SIZE);
+  if (total <= 1) { document.getElementById('pagination').innerHTML = ''; return; }
+
+  let html = '';
+  html += `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>◀</button>`;
+
+  for (let i = 1; i <= total; i++) {
+    if (i === 1 || i === total || Math.abs(i - currentPage) <= 2) {
+      html += `<button class="page-btn ${i===currentPage?'active':''}" onclick="goPage(${i})">${i}</button>`;
+    } else if (Math.abs(i - currentPage) === 3) {
+      html += `<span style="color:var(--muted);padding:0 4px">…</span>`;
+    }
+  }
+
+  html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===total?'disabled':''}>▶</button>`;
+  document.getElementById('pagination').innerHTML = html;
+}
+
+function goPage(p) {
+  const total = Math.ceil(filtered.length / PAGE_SIZE);
+  if (p < 1 || p > total) return;
+  currentPage = p;
+  render();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ===== SMART ARABIC NORMALIZE =====
+function normalizeAr(str) {
+  if (!str) return '';
+  return str
+    .toLowerCase()
+    // همزات الألف → ا
+    .replace(/[أإآ]/g, 'ا')
+    // ة → ه
+    .replace(/ة/g, 'ه')
+    // ى → ي
+    .replace(/ى/g, 'ي')
+    // تشكيل
+    .replace(/[\u064B-\u065F\u0670]/g, '')
+    // شدة
+    .replace(/ّ/g, '')
+    // مسافات زيادة
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// بحث ذكي: كل كلمة في الاستعلام لازم تكون موجودة في الاسم
+function smartMatch(name, query) {
+  const nName = normalizeAr(name);
+  const nQuery = normalizeAr(query);
+  // لو الاستعلام فيه مسافات → كل كلمة لازم تتطابق
+  const words = nQuery.split(/\s+/).filter(Boolean);
+  return words.every(w => nName.includes(w));
+}
+
+function applyFilters() {
+  const q = document.getElementById('searchInput').value.trim();
+  const sort = document.getElementById('sortSelect').value;
+
+  filtered = STUDENTS.filter(s => {
+    if (!q) return true;
+    // بحث ذكي في الاسم
+    if (smartMatch(s.name, q)) return true;
+    // بحث عادي في ID وكلمة المرور والرقم
+    const qLow = q.toLowerCase();
+    return s.id.includes(qLow) ||
+           s.pass.toLowerCase().includes(qLow) ||
+           String(s.n).includes(qLow);
+  });
+
+  filtered.sort((a,b) => {
+    if (sort === 'num-asc') return a.n - b.n;
+    if (sort === 'num-desc') return b.n - a.n;
+    if (sort === 'name-asc') return a.name.localeCompare(b.name, 'ar');
+    if (sort === 'name-desc') return b.name.localeCompare(a.name, 'ar');
+    return 0;
+  });
+
+  currentPage = 1;
+  render();
+}
+
+function setView(view) {
+  currentView = view;
+  const grid = document.getElementById('studentsGrid');
+  document.getElementById('gridViewBtn').classList.toggle('active', view === 'grid');
+  document.getElementById('listViewBtn').classList.toggle('active', view === 'list');
+  grid.classList.toggle('list-view', view === 'list');
+  render();
+}
+
+function copyText(text, label) {
+  navigator.clipboard.writeText(text).then(() => {
+    const toast = document.getElementById('toast');
+    toast.textContent = (label ? label + ': ' : '') + '✓ تم النسخ!';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  });
+}
+
+// Events
+let searchTimer;
+document.getElementById('searchInput').addEventListener('input', () => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(applyFilters, 200);
+});
+
+document.getElementById('sortSelect').addEventListener('change', applyFilters);
+
+// Init
+document.getElementById('totalCount').textContent = STUDENTS.length;
+render();
+</script>
+
+
+</body></html>
