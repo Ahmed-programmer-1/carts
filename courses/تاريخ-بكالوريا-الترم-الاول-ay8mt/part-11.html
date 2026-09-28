@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>مرتكزات الدور المصري إقليميًا ودوليًا | الدرس الحادي عشر - تاريخ البكالوريا المصرية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-void: #0d0c0a;
+    --bg-panel: #16140f;
+    --bg-panel-raised: #1e1b14;
+    --stone: #3a3327;
+    --sand: #c9a227;
+    --sand-bright: #e8c96b;
+    --nile: #2e6f77;
+    --nile-bright: #4fa3ac;
+    --papyrus: #ece2c8;
+    --papyrus-dim: #a89f88;
+    --red-seal: #8c3b2e;
+    --line: rgba(201,162,39,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    background:var(--bg-void);
+    color:var(--papyrus);
+    font-family:'Tajawal', sans-serif;
+    line-height:1.9;
+    overflow-x:hidden;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  ::selection{background:var(--sand); color:#0d0c0a;}
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(46,111,119,0.14), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 100% 10%, rgba(201,162,39,0.12), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  h1,h2,h3,h4{font-family:'Amiri', serif; font-weight:700; color:var(--sand-bright);}
+  a{color:inherit; text-decoration:none;}
+
+  .topbar{
+    position:sticky; top:0; z-index:100;
+    background:rgba(13,12,10,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:calc(14px + env(safe-area-inset-top,0px)) 26px 14px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Amiri',serif; font-size:1.05rem; color:var(--sand-bright); white-space:nowrap;}
+  .brand .glyph{
+    width:34px; height:34px; border:2px solid var(--sand);
+    display:flex; align-items:center; justify-content:center;
+    border-radius:3px; font-size:1rem; color:var(--sand); flex-shrink:0;
+    background:linear-gradient(135deg, rgba(201,162,39,0.15), transparent);
+  }
+  .navlinks{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none;}
+  .navlinks::-webkit-scrollbar{display:none;}
+  .navlinks a{
+    font-size:0.78rem; padding:8px 11px; white-space:nowrap; border-radius:6px;
+    color:var(--papyrus-dim); transition:.2s;
+    border:1px solid transparent;
+  }
+  .navlinks a:hover{color:var(--sand-bright); border-color:var(--line); background:rgba(201,162,39,0.06);}
+
+  .hero{
+    position:relative; min-height:78vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:80px 20px 60px;
+    z-index:1;
+  }
+  .hero .kicker{
+    font-family:'Cairo',sans-serif; letter-spacing:5px; font-size:0.7rem;
+    color:var(--nile-bright); text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .hero .kicker::before, .hero .kicker::after{content:""; width:40px; height:1px; background:var(--nile-bright); opacity:.5;}
+  .hero h1{
+    font-size:clamp(2rem, 6vw, 4rem); line-height:1.35; max-width:920px;
+    text-shadow: 0 0 40px rgba(232,201,107,0.15);
+  }
+  .hero .subtitle{
+    margin-top:22px; font-size:1.08rem; color:var(--papyrus-dim); max-width:700px;
+    font-family:'Cairo',sans-serif; font-weight:300;
+  }
+  .hero .pillars-mini{ display:flex; gap:0; margin-top:56px; align-items:flex-end; flex-wrap:wrap; justify-content:center; }
+  .pillars-mini .col{
+    width:74px; height:100px; margin:0 6px;
+    background:linear-gradient(180deg, var(--bg-panel-raised), var(--bg-panel));
+    border:1px solid var(--line); border-top:3px solid var(--nile);
+    border-radius:4px 4px 0 0;
+    display:flex; align-items:flex-start; justify-content:center; padding-top:14px;
+    font-family:'Amiri',serif; font-size:0.78rem; color:var(--sand-bright);
+    position:relative;
+  }
+  .pillars-mini .col span{writing-mode:vertical-rl; text-orientation:mixed;}
+  .pillars-mini .col:nth-child(2){height:120px; border-top-color:var(--sand);}
+  .pillars-mini .col:nth-child(3){height:90px; border-top-color:var(--sand-bright);}
+  .pillars-mini .col:nth-child(4){height:108px; border-top-color:var(--red-seal);}
+
+  .hero-anchor{margin-top:50px; font-size:.85rem; color:var(--papyrus-dim); display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .hero-anchor .arrow{animation:bob 2s infinite ease-in-out;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+  @media (prefers-reduced-motion: reduce){ .hero-anchor .arrow{animation:none;} }
+
+  section{
+    position:relative; z-index:1;
+    max-width:980px; margin:0 auto; padding:70px 24px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'Cairo',sans-serif; font-size:0.78rem; letter-spacing:3px;
+    color:var(--nile-bright); text-transform:uppercase; margin-bottom:10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .num{
+    background:var(--stone); color:var(--sand-bright); font-family:'Amiri',serif;
+    width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem;
+  }
+  section > h2{font-size:clamp(1.5rem,4vw,2.2rem); margin-bottom:26px;}
+  section h3{font-size:1.2rem; color:var(--nile-bright); margin:28px 0 12px; font-family:'Cairo',sans-serif; font-weight:700;}
+  p{font-size:1.02rem; color:#dcd3ba;}
+  .lead{font-size:1.1rem; color:var(--papyrus); font-family:'Cairo',sans-serif; font-weight:300;}
+
+  .box{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:10px;
+    padding:22px 24px; margin:18px 0;
+  }
+  .box.gold{border-right:4px solid var(--sand);}
+  .box.nile{border-right:4px solid var(--nile);}
+  .box.red{border-right:4px solid var(--red-seal);}
+  .box-title{font-family:'Cairo',sans-serif; font-weight:700; color:var(--sand-bright); margin-bottom:10px; font-size:0.95rem; display:flex; align-items:center; gap:8px;}
+
+  ul.clean{list-style:none; padding:0;}
+  ul.clean li{ position:relative; padding-right:22px; margin:10px 0; color:#dcd3ba; font-size:0.98rem; }
+  ul.clean li::before{content:"◆"; position:absolute; right:0; top:2px; color:var(--sand); font-size:0.6rem;}
+
+  .quote{
+    font-family:'Amiri',serif; font-style:italic; font-size:1.12rem; color:var(--sand-bright);
+    border-right:3px solid var(--sand); padding:6px 22px; margin:20px 0; line-height:2;
+  }
+  .quote cite{display:block; font-family:'Cairo',sans-serif; font-style:normal; font-size:0.8rem; color:var(--papyrus-dim); margin-top:10px;}
+
+  .pillars-wrap{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:36px 0;}
+  .pillar-card{
+    background:linear-gradient(180deg, var(--bg-panel-raised), var(--bg-panel));
+    border:1px solid var(--line); border-top:4px solid var(--sand);
+    border-radius:8px; padding:20px 14px; text-align:center;
+    transition:.25s;
+  }
+  .pillar-card:hover{transform:translateY(-6px); border-top-color:var(--sand-bright); box-shadow:0 12px 30px rgba(0,0,0,0.4);}
+  .pillar-card .ic{font-size:1.8rem; margin-bottom:10px;}
+  .pillar-card h4{font-size:1.0rem; color:var(--sand-bright); margin-bottom:8px;}
+  .pillar-card p{font-size:0.85rem; color:var(--papyrus-dim);}
+  @media(max-width:760px){.pillars-wrap{grid-template-columns:repeat(2,1fr);}}
+
+  .article-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:20px 0;}
+  .article-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:18px;
+    font-size:0.92rem;
+  }
+  .article-card .tag{color:var(--nile-bright); font-family:'Cairo',sans-serif; font-weight:700; font-size:0.8rem; margin-bottom:8px; display:block;}
+  @media(max-width:760px){.article-grid{grid-template-columns:1fr;}}
+
+  .measures{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;}
+  .measure{background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:16px 18px; display:flex; gap:12px; align-items:flex-start;}
+  .measure .ic{font-size:1.3rem; flex-shrink:0;}
+  .measure p{font-size:0.92rem; margin:0;}
+  @media(max-width:700px){.measures{grid-template-columns:1fr;}}
+
+  .qa{
+    background:var(--bg-panel-raised); border:1px dashed var(--line); border-radius:8px;
+    padding:16px 20px; margin:16px 0; font-size:0.95rem;
+  }
+  .qa b{color:var(--nile-bright);}
+
+  .cta-row{display:flex; justify-content:center; margin:40px 0 0; flex-wrap:wrap; gap:14px;}
+  .btn{
+    background:linear-gradient(135deg, var(--sand), #a5811e);
+    color:#181206; font-family:'Cairo',sans-serif; font-weight:700; font-size:1rem;
+    padding:14px 34px; border-radius:30px; border:none; cursor:pointer;
+    transition:.2s; box-shadow:0 6px 20px rgba(201,162,39,0.25);
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(201,162,39,0.35);}
+  .btn.ghost{background:transparent; border:1px solid var(--sand); color:var(--sand-bright); box-shadow:none;}
+
+  .summary-section{background:var(--bg-panel);}
+  .summary-block{margin-bottom:30px;}
+  .summary-block h3{color:var(--sand-bright); border-bottom:1px solid var(--line); padding-bottom:8px;}
+  .summary-block ul.clean li::before{color:var(--nile-bright);}
+  .mini-table{width:100%; border-collapse:collapse; margin:14px 0; font-size:0.9rem;}
+  .mini-table th, .mini-table td{border:1px solid var(--line); padding:10px 12px; text-align:right;}
+  .mini-table th{background:var(--bg-panel-raised); color:var(--sand-bright); font-family:'Cairo',sans-serif;}
+  .mini-table{display:block; overflow-x:auto; white-space:nowrap;}
+
+  .exam-section{background:linear-gradient(180deg, var(--bg-void), #0a0908);}
+  .exam-head{text-align:center; margin-bottom:36px;}
+  .exam-progress{
+    position:sticky; top:calc(66px + env(safe-area-inset-top,0px)); z-index:50; background:var(--bg-panel);
+    border:1px solid var(--line); border-radius:20px; padding:8px 18px;
+    display:flex; align-items:center; gap:14px; font-size:0.85rem; max-width:400px; margin:0 auto 30px;
+  }
+  .bar{flex:1; height:6px; background:var(--stone); border-radius:6px; overflow:hidden;}
+  .bar-fill{height:100%; background:linear-gradient(90deg, var(--nile), var(--sand)); width:0%; transition:.3s;}
+
+  .q-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:12px;
+    padding:26px; margin-bottom:22px;
+  }
+  .q-num{color:var(--nile-bright); font-family:'Cairo',sans-serif; font-weight:700; font-size:0.85rem; margin-bottom:8px;}
+  .q-text{font-size:1.03rem; color:var(--papyrus); margin-bottom:18px; font-family:'Cairo',sans-serif; font-weight:500;}
+  .opts{display:flex; flex-direction:column; gap:10px;}
+  .opt{
+    display:flex; align-items:center; gap:12px; padding:12px 16px;
+    background:var(--bg-panel-raised); border:1px solid var(--line); border-radius:8px;
+    cursor:pointer; transition:.15s; font-size:0.94rem;
+  }
+  .opt:hover{border-color:var(--sand);}
+  .opt.selected{border-color:var(--nile-bright); background:rgba(46,111,119,0.12);}
+  .opt.correct{border-color:#5aa66b; background:rgba(90,166,107,0.15);}
+  .opt.wrong{border-color:var(--red-seal); background:rgba(140,59,46,0.18);}
+  .opt .letter{
+    width:26px; height:26px; border-radius:50%; background:var(--stone); color:var(--sand-bright);
+    display:flex; align-items:center; justify-content:center; font-size:0.8rem; flex-shrink:0; font-family:'Cairo',sans-serif;
+  }
+  .fb{margin-top:14px; font-size:0.88rem; padding:10px 14px; border-radius:6px; display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:rgba(90,166,107,0.12); color:#8fd39f; border:1px solid rgba(90,166,107,0.3);}
+  .fb.no{background:rgba(140,59,46,0.12); color:#e6a297; border:1px solid rgba(140,59,46,0.3);}
+
+  .result-panel{
+    display:none; text-align:center; background:var(--bg-panel-raised); border:1px solid var(--sand);
+    border-radius:14px; padding:40px 26px; margin-top:20px;
+  }
+  .result-panel.show{display:block;}
+  .result-score{font-family:'Amiri',serif; font-size:3rem; color:var(--sand-bright);}
+  .result-msg{font-size:1.03rem; margin-top:10px; color:var(--papyrus);}
+
+  footer{text-align:center; padding:40px 20px calc(60px + env(safe-area-inset-bottom,0px)); color:var(--papyrus-dim); font-size:0.82rem; position:relative; z-index:1;}
+
+  :focus-visible{outline:2px solid var(--nile-bright); outline-offset:2px;}
+
+  @media(max-width:640px){
+    .navlinks{display:none;}
+    .article-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="glyph">🌍</span> الدور المصري إقليميًا ودوليًا</div>
+  <nav class="navlinks">
+    <a href="#intro">مدخل الدرس</a>
+    <a href="#jughrafi">الموقع الجيوسياسي</a>
+    <a href="#siyasa">السياسة الخارجية</a>
+    <a href="#quwa-naima">القوة الناعمة</a>
+    <a href="#tadribat">تدريبات الكتاب</a>
+    <a href="#molakhas">الملخص الشامل</a>
+    <a href="#exam">الامتحان</a>
+    <a href="#mindmaps">الصور الذهنية</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="kicker">تاريخ · البكالوريا المصرية · الدرس الحادي عشر</div>
+  <h1>مرتكزات الدور المصري إقليميًا ودوليًا</h1>
+  <p class="subtitle">لم يكن الدور الإقليمي والدولي لمصر نتاجًا للصدفة، بل هو حصيلة تفاعل بين موقع جيوسياسي فريد جعلها تلتقي عندها قارات العالم القديم، وعلى رأسها القوة الناعمة التي وظفتها في دعم حركات التحرر والاستقلال والتوازن الدولي.</p>
+  <div class="pillars-mini" aria-hidden="true">
+    <div class="col"><span>الدائرة العربية</span></div>
+    <div class="col"><span>الدائرة الإفريقية</span></div>
+    <div class="col"><span>الدائرة الإسلامية</span></div>
+    <div class="col"><span>القوة الناعمة</span></div>
+  </div>
+  <div class="hero-anchor"><span>ابدأ الرحلة</span><span class="arrow">↓</span></div>
+</div>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="eyebrow"><span class="num">۰</span> مدخل الدرس</div>
+  <h2>لماذا تُعَد مصر دولة ذات تأثير إقليمي ودولي؟</h2>
+  <p class="lead">لماذا تُعَد مصر دولة ذات تأثير إقليمي ودولي؟ سؤال يقودنا لفهم التفاعل بين الموقع والسياسة والقوة الناعمة.</p>
+
+  <div class="box gold">
+    <div class="box-title">🎯 أهداف الدرس</div>
+    <ul class="clean">
+      <li>تُحدِّد دور الموقع الجيوسياسي وتأثيره على الهُوية الوطنية.</li>
+      <li>تُحدِّد مبادئ السياسة الخارجية لمصر بعد ١٩٥٢م.</li>
+      <li>تُحلِّل دور القيادة المصرية في دعم حركات التحرر.</li>
+      <li>تسرد أدوات القوة الناعمة المصرية وآليات تأثيرها في الوعي العربي والإفريقي.</li>
+      <li>تُقيِّم الدور المصري في دعم حركات التحرر.</li>
+      <li>تُعبِّر عن اعتزازك بالوطن العربي والقارة الإفريقية.</li>
+      <li>تُعبِّر عن تقديرك لمصر الفعَّال في المجال الإقليمي والدولي.</li>
+    </ul>
+  </div>
+
+  <div class="quote">لم يكن الدور الإقليمي والدولي لمصر نتاجًا للصدفة، بل هو حصيلة تفاعل بين موقع جيوسياسي فريد جعلها تلتقي عندها قارات العالم القديم، وعلى رأسها القوة الناعمة التي وظفتها في دعم حركات التحرر والاستقلال والتوازن الدولي، بما عزَّز مكانة مصر بوصفها عضوًا فاعلًا ومؤثرًا في محيطها الإقليمي والدولي.
+    <cite>— الفكرة الرئيسة للدرس</cite>
+  </div>
+
+  <div class="qa">💭 <b>سؤال يقود تعلمنا:</b> لماذا تُعَد مصر دولة ذات تأثير إقليمي ودولي؟</div>
+</section>
+
+<!-- الموقع الجيوسياسي -->
+<section id="jughrafi">
+  <div class="eyebrow"><span class="num">١</span> أولًا</div>
+  <h2>الموقع الجيوسياسي لمصر</h2>
+  <p>كانت مصر دائمًا في قلب الأحداث العالمية عبر تاريخها الطويل، وتكسب دورًا مؤثرًا في محيطها الإقليمي والدولي، وساعدها على ذلك موقعها الإستراتيجي في قلب العالم، وأضافت له قناة السويس أهمية كبيرة بجانب أهميته.</p>
+
+  <p>يرى الجغرافي المصري الراحل جمال حمدان في كتابه «شخصية مصر»: أن مصر ليست مجرد دولة في منطقة، بل هي ملتقى الدوائر الثلاث: الدائرة العربية، والدائرة الإفريقية، والدائرة الإسلامية.</p>
+
+  <div class="qa">
+    <p>١- اشرح المقصود بمفهوم «ملتقى الدوائر الثلاث».</p>
+    <p>٢- لماذا اعتبر جمال حمدان أن مصر ليست مجرد دولة في المنطقة؟</p>
+  </div>
+
+  <p>تتميز مصر بكونها نقطة التقاء ثلاث دوائر حضارية وجيوسياسية كبرى؛ ما يمنحها ثقلًا إستراتيجيًا يتجاوز حدودها الجغرافية.</p>
+
+  <div class="pillars-wrap" style="grid-template-columns:repeat(3,1fr);">
+    <div class="pillar-card"><div class="ic">🕌</div><h4>الدائرة العربية</h4><p>البعد القومي؛ ارتباط مصر بقضايا الأمن القومي العربي، ودور محوري في التفاعلات الإقليمية.</p></div>
+    <div class="pillar-card"><div class="ic">🌍</div><h4>الدائرة الإفريقية</h4><p>البعد القاري؛ مصر بوابة إفريقيا إلى العالم، وجسر للتواصل الحضاري والاقتصادي.</p></div>
+    <div class="pillar-card"><div class="ic">☪️</div><h4>الدائرة الإسلامية</h4><p>البعد الديني والحضاري؛ مصر مركز للفكر الوسطي، والأزهر ينشر الاعتدال عالميًا.</p></div>
+  </div>
+  <p>يؤدي تداخل هذه الدوائر إلى جعل مصر جسرًا بين الحضارات، ويكسبها دورًا محوريًا في محيطها الإقليمي، كما يجعل أمنها القومي شديد الارتباط بالتغيرات في موازين القوى العالمية.</p>
+
+  <div class="box nile">
+    <div class="box-title">📖 مفهوم أتعلمه: الموقع الجيوسياسي</div>
+    <p>موقع الدولة بالنسبة لمحيطها الإقليمي، وأهميته بالنسبة لقوتها وتأثيرها الإستراتيجي والسياسي والعسكري والاقتصادي.</p>
+  </div>
+
+  <div class="box gold">
+    <div class="box-title">💡 قيمة أتعلمها</div>
+    <p>هناك أهمية كبيرة لتنمية الوعي بالانتماء للأمة العربية والقارة الإفريقية والعالم الإسلامي، وإدراك أن أمن مصر القومي جزء لا يتجزأ من أمن محيطها الإقليمي.</p>
+  </div>
+
+  <h3>أقرأ وأحلل: رأيان حول موقع مصر الجيوسياسي</h3>
+  <div class="pillars-wrap" style="grid-template-columns:repeat(2,1fr);">
+    <div class="pillar-card"><div class="ic">🗨️</div><h4>الرأي الأول</h4><p>موقع مصر عند ملتقى الدوائر الثلاث يجعلها لاعبًا لا يمكن تجاهله في قضايا الشرق الأوسط وإفريقيا، ومثَّل لها عبئًا في تحقيق التوازن الإقليمي.</p></div>
+    <div class="pillar-card"><div class="ic">🗨️</div><h4>الرأي الثاني</h4><p>موقع مصر عند ملتقى القارات يجعلها لاعبًا كبيرًا وتحديًا مستمرًا.</p></div>
+  </div>
+  <div class="qa">💭 ناقش الرأيين السابقين، موضحًا أي الرأيين تؤيد ولماذا.</div>
+
+  <p>كما يمثِّل موقع مصر عند ملتقى قارات العالم القديم عنصرًا جيوسياسيًا محوريًا يمنحها دورًا في العلاقات الدولية، ويجعلها حلقة وصل في التوازنات الإقليمية، وطرفًا لا يمكن تجاوزه في أي مشروع يستهدف المنطقة؛ بما يعزِّز مكانتها الجيوسياسية المرتبطة بتغيرات النظام الدولي.</p>
+  <p>كما تمثِّل قناة السويس أحد أهم الممرات الملاحية في العالم؛ فهي شريان حيوي للتجارة الدولية، وركيزة أساسية للأمن الاقتصادي العالمي؛ لذلك فإن استقرار الملاحة فيها يسهم في استقرار حركة العبور إلى التجارة العالمية وسلاسل الإمداد الدولية.</p>
+</section>
+
+<!-- السياسة الخارجية بعد 1952 -->
+<section id="siyasa">
+  <div class="eyebrow"><span class="num">٢</span> ثانيًا</div>
+  <h2>السياسة الخارجية المصرية بعد عام ١٩٥٢م</h2>
+  <p>عندما قامت ثورة ٢٣ يوليو ١٩٥٢م، كانت مصر لا تزال تحت الاحتلال البريطاني، بينما كان العالم يعيش في ظل الحرب الباردة، وانقسم إلى معسكرين متنافسين: المعسكر الشرقي بقيادة الاتحاد السوفيتي، والمعسكر الغربي بقيادة الولايات المتحدة، وواجهت مصر تحديًا في تحديد توجهاتها في السياسة الخارجية في ظل هذا المناخ الدولي المتوتر.</p>
+
+  <h3>١. مبدأ عدم الانحياز واستقلال القرار الوطني</h3>
+  <p>بعد نجاح الثورة، رفضت مصر الانضمام إلى حلف بغداد ١٩٥٥م، وشارك جمال عبد الناصر في مؤتمر باندونج في العام ذاته؛ وكان الهدف من عدم الانضمام إلى أي من المعسكرين الحفاظ على استقلال القرار الوطني، وعدم جعل الدولة ساحة لصراع القوى الكبرى؛ لذلك جاء مبدأ عدم الانحياز ليؤسس لرؤية جديدة في العلاقات الدولية تقوم على استقلال القرار السياسي وترجيح المصلحة الوطنية فوق اعتبارات التحالفات الدولية.</p>
+  <p>وقد تجلَّت ريادة مصر التاريخية في كونها دائمًا الصخرة التي تحطمت عليها أوهام التوسع الاستعماري، والداعم الأول لحركات التحرر العربي.</p>
+
+  <div class="box red">
+    <div class="box-title">🇪🇬 مصر أولًا</div>
+    <p>«سلة العالم»، كما وُصفت مصر في بعض الكتابات القديمة، وربطها أيضًا بعض المؤرخين بكونها «درَّة العالم»؛ بما يعكس أهميتها ومكانتها.</p>
+  </div>
+
+  <div class="box nile">
+    <div class="box-title">📖 مفهوم أتعلمه: عدم الانحياز</div>
+    <p>مبدأ سياسي يقوم على استقلالية القرار الوطني وعدم الانضمام إلى أيٍّ من معسكرَي الحرب الباردة (الشرقي أو الغربي)، مع المشاركة الفعالة في القضايا الدولية.</p>
+  </div>
+
+  <h3>٢. دعم حركات التحرر بوصفها امتدادًا للأمن القومي</h3>
+  <p>لم تكتفِ مصر بتبنِّي مبدأ دعم حركات التحرر والاستقلال في دول إفريقيا وآسيا باعتباره التزامًا قوميًا، بل اعتبرت أن استمرار الاستعمار في محيطها الإقليمي يمثِّل تهديدًا مباشرًا لأمنها القومي؛ لذلك أصبحت القاهرة مركزًا لدعم القوى المناهضة للاستعمار، وأسهم هذا التوجه في تسريع تحرر واستقلال العديد من دول القارة الإفريقية، ودعم حركات التحرر سياسيًا ودبلوماسيًا خلال الفترة من ١٩٥٦م إلى ١٩٦٦م، مثل: جنوب إفريقيا، والجزائر، وغيرها من دول القارة الإفريقية.</p>
+  <div class="qa">💭 وضِّح كيف يمثِّل مبدأ عدم الانحياز مصدر قوة لمصر في علاقاتها الدولية.</div>
+
+  <h3>٣. الوحدة العربية بوصفها إطارًا إستراتيجيًا</h3>
+  <p>تبنَّت مصر مبدأ الوحدة العربية باعتباره أحد مرتكزات سياستها الخارجية، انطلاقًا من قناعة بأن الأمن القومي جزء لا يتجزأ، وأن الانقسام العربي يُضعف قدرة الأمة على مواجهة التحديات المشتركة؛ لذلك عملت على تعزيز التعاون والتكامل العربي من خلال:</p>
+  <ul class="clean">
+    <li>دعم الاتحادات العربية.</li>
+    <li>عقد اتفاقيات الدفاع المشترك (مصر وسوريا ١٩٥٥م).</li>
+    <li>مساندة حركات التحرر في الجزائر واليمن.</li>
+    <li>تبنِّي القضية الفلسطينية بوصفها قضية تجتمع عليها الأمة العربية.</li>
+  </ul>
+  <div class="qa">💭 ما العلاقة بين الأمن القومي المصري والأمن القومي العربي؟</div>
+
+  <h3>٤. مبدأ السيادة وعدم التدخل</h3>
+  <p>قامت السياسة الخارجية المصرية على مبدأ احترام سيادة الدول وعدم التدخل في شئونها الداخلية، مقابل تأكيد احترام السيادة المصرية واستقلال قرارها السياسي، وقد أسهم هذا المبدأ في ترسيخ مكانة مصر بوصفها طرفًا متوازنًا في العلاقات الإقليمية والدولية، كما أتاح لمصر بناء علاقات واسعة مع دول العالم الثالث، في إطار التعاون القائم على الاحترام المتبادل دون التدخل في الشئون الداخلية.</p>
+  <div class="qa">💭 ناقش العبارة، موضحًا أثر هذا المبدأ في مكانة مصر الدولية وعلاقاتها مع دول العالم الثالث.</div>
+
+  <div class="quote">لم تتخلَّ مصر عن دورها القومي العربي حتى في أحلك ظروفها السياسية والاقتصادية، مدفوعة بمسئوليتها التاريخية وأمنها المشترك.</div>
+</section>
+
+<!-- القوة الناعمة -->
+<section id="quwa-naima">
+  <div class="eyebrow"><span class="num">٣</span> ثالثًا</div>
+  <h2>القوة الناعمة المصرية</h2>
+  <div class="qa">💭 لماذا كانت القوة الناعمة المصرية ذات تأثير واسع في العالم العربي والإفريقي رغم محدودية الإمكانات المادية؟</div>
+
+  <p>كانت القوة الناعمة المصرية ذات تأثير واسع؛ من خلال اهتمام الدولة بالتعليم والبحث العلمي والفنون والآداب، ما مكَّنها من ترسيخ حضورها الحضاري والثقافي في محيطها العربي والإفريقي، وقد أسهمت هذه الأدوات في تقديم مصر بوصفها دولة ذات حضور حضاري وثقافي مؤثر، كما امتد دورها إلى التأثير الاقتصادي غير المباشر.</p>
+
+  <p>واعتمدت مصر على أربعة أدوات رئيسة تمثَّلت في:</p>
+  <div class="pillars-wrap">
+    <div class="pillar-card"><div class="ic">📻</div><h4>الإذاعة</h4><p>وسيلة انتشار واسعة للصوت والفكر المصري في العالم العربي والإفريقي.</p></div>
+    <div class="pillar-card"><div class="ic">📰</div><h4>الصحافة</h4><p>نقل الفكر والرأي المصري وتغطية قضايا التحرر والاستقلال.</p></div>
+    <div class="pillar-card"><div class="ic">🗣️</div><h4>المؤتمرات</h4><p>منابر لتنسيق المواقف ودعم حركات التحرر دبلوماسيًا.</p></div>
+    <div class="pillar-card"><div class="ic">🎓</div><h4>البعثات التعليمية والدينية</h4><p>نشر التعليم والفكر الوسطي في الدول العربية والإفريقية.</p></div>
+  </div>
+
+  <div class="quote">السلاح ليس فقط ما يُطلق النار، بل أيضًا ما يُطلق الأفكار.</div>
+  <div class="qa">💭 في ضوء هذه العبارة، كيف يمكن للإعلام والثقافة أن يتحولا إلى أدوات تأثير في دعم قضايا التحرر وتحقيق الاستقلال، والعكس؟</div>
+
+  <div class="qa">💭 «امتلكت مصر مقومات جعلتها دولة فاعلة في محيطها الإقليمي». دلِّل على صحة العبارة، مستشهدًا بالشواهد التاريخية المناسبة.</div>
+  <div class="qa"><b>سؤال التفسير المدعوم بالأدلة:</b> وضِّح العلاقة بين القوة الناعمة والدور السياسي لمصر.</div>
+
+  <div class="box nile">
+    <div class="box-title">📌 مشروع بحثي</div>
+    <p>استعن بمصادر التعلم المختلفة، واكتب مقالًا تحليليًا توضِّح فيه العلاقة بين القوة الناعمة والدور السياسي لمصر.</p>
+  </div>
+</section>
+
+<!-- تدريبات الكتاب -->
+<section id="tadribat">
+  <div class="eyebrow"><span class="num">✎</span> تدريبات الدرس</div>
+  <h2>تدريبات الكتاب (صفحة ١١٧)</h2>
+  <ul class="clean">
+    <li>الفرق بين «الحياد» و«عدم الانحياز»: عدم الانحياز يعني الاستقلال في اتخاذ القرار مع المشاركة الفعالة في القضايا الدولية، وليس الانعزال التام.</li>
+    <li>أهم أهداف حركة عدم الانحياز عند تأسيسها: تحرير القرار الوطني من ضغوط الحرب الباردة.</li>
+    <li>تحليل عبارة: «لم تكن المكانة الإقليمية لمصر نتيجة عامل واحد، بل نتيجة تفاعل بين الموقع الجيوسياسي والإرادة السياسية والقوة الناعمة»، وتحديد العامل الأكثر تأثيرًا مع التبرير.</li>
+    <li>مناقشة رأي: «الموقع الجغرافي هو السبب الرئيس الوحيد في تميُّز الدور المصري إقليميًا ودوليًا».</li>
+    <li>تفسير العلاقات: موقع مصر (ملتقى الدوائر الثلاث) ← الأمن القومي المصري؛ مبدأ عدم الانحياز ← استقلال القرار الوطني؛ القوة الناعمة ← ترسيخ المكانة الإقليمية.</li>
+    <li>ماذا لو لم تكن مصر تمتلك موقعًا إستراتيجيًا عند ملتقى القارات؟</li>
+    <li>المقارنة بين دور مصر في الدائرة العربية ودورها في الدائرة الإفريقية.</li>
+    <li>استنتاج العلاقة بين عدم الانحياز والسيادة، وأثر غياب السيادة على المجتمع المصري تاريخيًا.</li>
+    <li>الاختيار والتبرير: العامل الأكثر تأثيرًا في تعزيز الدور المصري إقليميًا بعد ١٩٥٢م (الموقع الجيوسياسي - مبدأ عدم الانحياز - القوة الناعمة).</li>
+  </ul>
+</section>
+
+<!-- الملخص الشامل -->
+<section id="molakhas" class="summary-section">
+  <div class="eyebrow"><span class="num">Σ</span> مراجعة نهائية</div>
+  <h2>الملخص الشامل للدرس</h2>
+
+  <div class="summary-block">
+    <h3>١. مفهومان أساسيان</h3>
+    <table class="mini-table">
+      <tr><th>المفهوم</th><th>التعريف</th></tr>
+      <tr><td>الموقع الجيوسياسي</td><td>موقع الدولة بالنسبة لمحيطها الإقليمي، وأهميته لقوتها وتأثيرها الإستراتيجي والسياسي والعسكري والاقتصادي.</td></tr>
+      <tr><td>عدم الانحياز</td><td>مبدأ سياسي يقوم على استقلالية القرار الوطني وعدم الانضمام لأي معسكر في الحرب الباردة، مع مشاركة فعالة في القضايا الدولية.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٢. مصر: ملتقى الدوائر الثلاث (جمال حمدان)</h3>
+    <table class="mini-table">
+      <tr><th>الدائرة</th><th>البعد الذي تمثله</th></tr>
+      <tr><td>العربية</td><td>البعد القومي؛ ارتباط مصر بالأمن القومي العربي ودور محوري في التفاعلات الإقليمية.</td></tr>
+      <tr><td>الإفريقية</td><td>البعد القاري؛ مصر بوابة إفريقيا للعالم وجسر تواصل حضاري واقتصادي.</td></tr>
+      <tr><td>الإسلامية</td><td>البعد الديني والحضاري؛ مصر مركز الفكر الوسطي، والأزهر ينشر الاعتدال عالميًا.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٣. مرتكزات السياسة الخارجية المصرية بعد ١٩٥٢م</h3>
+    <table class="mini-table">
+      <tr><th>#</th><th>المرتكز</th><th>أبرز شواهده</th></tr>
+      <tr><td>١</td><td>عدم الانحياز واستقلال القرار</td><td>رفض حلف بغداد ١٩٥٥م، مشاركة عبد الناصر في مؤتمر باندونج ١٩٥٥م.</td></tr>
+      <tr><td>٢</td><td>دعم حركات التحرر</td><td>القاهرة مركز دعم سياسي ودبلوماسي (١٩٥٦-١٩٦٦م) لجنوب إفريقيا والجزائر وغيرها.</td></tr>
+      <tr><td>٣</td><td>الوحدة العربية</td><td>اتفاقية الدفاع المشترك مع سوريا ١٩٥٥م، مساندة الجزائر واليمن، تبنِّي القضية الفلسطينية.</td></tr>
+      <tr><td>٤</td><td>السيادة وعدم التدخل</td><td>احترام سيادة الدول مقابل احترام سيادة مصر، وبناء علاقات مع دول العالم الثالث.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٤. أدوات القوة الناعمة المصرية الأربع</h3>
+    <ul class="clean">
+      <li>الإذاعة: انتشار واسع للصوت والفكر المصري عربيًا وإفريقيًا.</li>
+      <li>الصحافة: نقل الفكر ودعم قضايا التحرر والاستقلال.</li>
+      <li>المؤتمرات: منابر لتنسيق المواقف ودعم حركات التحرر دبلوماسيًا.</li>
+      <li>البعثات التعليمية والدينية: نشر التعليم والفكر الوسطي في الدول العربية والإفريقية.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h3>٥. القيم والدروس المستفادة</h3>
+    <ul class="clean">
+      <li>أهمية تنمية الوعي بالانتماء للأمة العربية والقارة الإفريقية والعالم الإسلامي.</li>
+      <li>أمن مصر القومي جزء لا يتجزأ من أمن محيطها الإقليمي.</li>
+      <li>لم تتخلَّ مصر عن دورها القومي حتى في أحلك الظروف السياسية والاقتصادية.</li>
+      <li>السلاح ليس فقط ما يُطلق النار، بل أيضًا ما يُطلق الأفكار.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h3>٦. الخلاصة الكبرى</h3>
+    <p>لم يكن الدور الإقليمي والدولي لمصر وليد الصدفة، بل نتاج تفاعل ثلاثة عناصر: موقع جيوسياسي فريد يجعلها ملتقى الدوائر العربية والإفريقية والإسلامية، وسياسة خارجية بعد ١٩٥٢م قامت على عدم الانحياز ودعم حركات التحرر والوحدة العربية واحترام السيادة، وقوة ناعمة وظَّفت الإذاعة والصحافة والمؤتمرات والبعثات لترسيخ حضور مصر الحضاري والثقافي؛ فكانت مصر بذلك عضوًا فاعلًا لا يمكن تجاوزه في محيطها الإقليمي والدولي.</p>
+  </div>
+
+  <div class="cta-row">
+    <a href="#exam" class="btn">ابدأ الامتحان الشامل →</a>
+  </div>
+</section>
+
+<!-- EXAM -->
+<section id="exam" class="exam-section">
+  <div class="exam-head">
+    <div class="eyebrow" style="justify-content:center;"><span class="num">✎</span> التقييم الختامي</div>
+    <h2>الامتحان الشامل</h2>
+    <p class="lead">١٥ سؤالًا تغطي كل عناصر الدرس. اختر إجابتك وستظهر لك النتيجة فورًا في نهاية الاختبار.</p>
+  </div>
+
+  <div class="exam-progress">
+    <span id="prog-text">٠ / ١٥</span>
+    <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <div class="cta-row">
+    <button class="btn" id="submit-btn">تصحيح الامتحان</button>
+    <button class="btn ghost" id="reset-btn">إعادة المحاولة</button>
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <div class="result-score" id="result-score">0/15</div>
+    <div class="result-msg" id="result-msg"></div>
+  </div>
+</section>
+
+<!-- الصور الذهنية والترابط -->
+<section id="mindmaps" style="border-bottom:none; text-align:center;">
+  <div class="eyebrow" style="justify-content:center;"><span class="num">🕸️</span> الصورة الكبرى</div>
+  <h2>الصور الذهنية وترابط الأحداث</h2>
+  <p class="lead">خرائط ذهنية توضح إزاي الموقع والسياسة والقوة الناعمة مترابطين في صناعة الدور المصري.</p>
+  <div class="cta-row">
+    <button class="btn" id="toggle-mindmaps">🧠 اعرض الصور الذهنية</button>
+  </div>
+
+  <div id="mindmaps-panel" style="display:none; margin-top:34px; text-align:right;">
+
+    <div class="box gold">
+      <div class="box-title">🕸️ خريطة (١): مصر عند ملتقى الدوائر الثلاث</div>
+      <svg viewBox="0 0 640 460" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <line x1="320" y1="230" x2="320" y2="70" stroke="#c9a227" stroke-width="2"/>
+        <line x1="320" y1="230" x2="140" y2="370" stroke="#c9a227" stroke-width="2"/>
+        <line x1="320" y1="230" x2="500" y2="370" stroke="#c9a227" stroke-width="2"/>
+
+        <circle cx="320" cy="230" r="65" fill="#16140f" stroke="#e8c96b" stroke-width="3"/>
+        <text x="320" y="224" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="15" font-weight="700">مصر</text>
+        <text x="320" y="245" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="13">ملتقى الدوائر</text>
+
+        <rect x="195" y="15" width="250" height="70" rx="10" fill="#1e1b14" stroke="#4fa3ac" stroke-width="2"/>
+        <text x="320" y="46" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">الدائرة العربية</text>
+        <text x="320" y="66" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">الأمن القومي العربي والتفاعلات الإقليمية</text>
+
+        <rect x="20" y="335" width="240" height="70" rx="10" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="140" y="361" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="13" font-weight="700">الدائرة الإفريقية</text>
+        <text x="140" y="381" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">بوابة إفريقيا وجسر التواصل الحضاري</text>
+
+        <rect x="380" y="335" width="240" height="70" rx="10" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="500" y="361" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="13" font-weight="700">الدائرة الإسلامية</text>
+        <text x="500" y="381" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">مركز الفكر الوسطي، الأزهر ينشر الاعتدال</text>
+      </svg>
+    </div>
+
+    <div class="box nile">
+      <div class="box-title">🗺️ خريطة (٢): مرتكزات السياسة الخارجية المصرية بعد ١٩٥٢م</div>
+      <svg viewBox="0 0 620 520" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <defs>
+          <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#2e6f77"/>
+          </marker>
+        </defs>
+        <line x1="310" y1="90" x2="310" y2="126" stroke="#2e6f77" stroke-width="2" marker-end="url(#arrow2)"/>
+        <line x1="310" y1="190" x2="310" y2="226" stroke="#2e6f77" stroke-width="2" marker-end="url(#arrow2)"/>
+        <line x1="310" y1="290" x2="310" y2="326" stroke="#2e6f77" stroke-width="2" marker-end="url(#arrow2)"/>
+
+        <rect x="70" y="30" width="480" height="60" rx="12" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="310" y="55" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">عدم الانحياز (١٩٥٥م)</text>
+        <text x="310" y="76" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">رفض حلف بغداد، مؤتمر باندونج</text>
+
+        <rect x="70" y="130" width="480" height="60" rx="12" fill="#1e1b14" stroke="#4fa3ac" stroke-width="2"/>
+        <text x="310" y="155" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">دعم حركات التحرر (١٩٥٦-١٩٦٦م)</text>
+        <text x="310" y="176" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">القاهرة مركز مساندة إفريقيا وآسيا</text>
+
+        <rect x="70" y="230" width="480" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="310" y="255" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">الوحدة العربية (دفاع مشترك ١٩٥٥م)</text>
+        <text x="310" y="276" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">مصر وسوريا، القضية الفلسطينية</text>
+
+        <rect x="70" y="330" width="480" height="60" rx="12" fill="#1e1b14" stroke="#8c3b2e" stroke-width="3"/>
+        <text x="310" y="355" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">السيادة وعدم التدخل</text>
+        <text x="310" y="376" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">طرف متوازن مع دول العالم الثالث</text>
+
+        <rect x="70" y="430" width="480" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="3"/>
+        <text x="310" y="455" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">مكانة مصر إقليميًا ودوليًا</text>
+        <text x="310" y="476" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">عضو فاعل ومؤثر في محيطها</text>
+      </svg>
+    </div>
+
+    <div class="box red">
+      <div class="box-title">🕸️ خريطة (٣): شبكة أدوات القوة الناعمة المصرية</div>
+      <svg viewBox="0 0 640 460" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <line x1="320" y1="230" x2="520" y2="80" stroke="#8c3b2e" stroke-width="2"/>
+        <line x1="320" y1="230" x2="120" y2="80" stroke="#8c3b2e" stroke-width="2"/>
+        <line x1="320" y1="230" x2="120" y2="380" stroke="#8c3b2e" stroke-width="2"/>
+        <line x1="320" y1="230" x2="520" y2="380" stroke="#8c3b2e" stroke-width="2"/>
+
+        <circle cx="320" cy="230" r="70" fill="#16140f" stroke="#e8c96b" stroke-width="3"/>
+        <text x="320" y="224" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="13" font-weight="700">القوة الناعمة</text>
+        <text x="320" y="245" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="13">المصرية</text>
+
+        <rect x="430" y="40" width="180" height="80" rx="10" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="520" y="72" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">الإذاعة</text>
+        <text x="520" y="94" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">انتشار واسع للصوت والفكر</text>
+
+        <rect x="30" y="40" width="180" height="80" rx="10" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="120" y="72" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">الصحافة</text>
+        <text x="120" y="94" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">نقل الفكر ودعم قضايا التحرر</text>
+
+        <rect x="30" y="340" width="180" height="80" rx="10" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="120" y="368" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">المؤتمرات</text>
+        <text x="120" y="390" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">تنسيق المواقف دبلوماسيًا</text>
+
+        <rect x="430" y="340" width="180" height="80" rx="10" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="520" y="368" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">البعثات التعليمية والدينية</text>
+        <text x="520" y="390" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">نشر التعليم والفكر الوسطي</text>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  موقع مراجعة تفاعلي — الدرس الحادي عشر: مرتكزات الدور المصري إقليميًا ودوليًا — تاريخ البكالوريا المصرية
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "بحسب الجغرافي المصري جمال حمدان في كتابه «شخصية مصر»، تُعَد مصر ملتقى الدوائر الثلاث وهي:",
+    opts: ["العربية والآسيوية والأوروبية", "العربية والإفريقية والإسلامية", "الإفريقية والآسيوية والأمريكية", "الإسلامية والمسيحية واليهودية"],
+    correct: 1,
+    fb: "يرى جمال حمدان أن مصر ليست مجرد دولة في منطقة، بل هي ملتقى الدوائر الثلاث: العربية والإفريقية والإسلامية."
+  },
+  {
+    q: "تمثِّل الدائرة الإفريقية بالنسبة لمصر بصفة أساسية:",
+    opts: ["البعد الديني والحضاري فقط", "البعد القاري؛ إذ تُعَد مصر بوابة إفريقيا إلى العالم", "البعد العسكري فقط", "بعدًا لا علاقة له بالتواصل الاقتصادي"],
+    correct: 1,
+    fb: "تمثِّل الدائرة الإفريقية البعد القاري؛ إذ تُعَد مصر بوابة إفريقيا إلى العالم، وجسرًا للتواصل الحضاري والاقتصادي."
+  },
+  {
+    q: "الموقع الجيوسياسي هو:",
+    opts: ["مجرد الموقع الفلكي للدولة على خطوط الطول والعرض", "موقع الدولة بالنسبة لمحيطها الإقليمي وأهميته لقوتها وتأثيرها الإستراتيجي", "عدد سكان الدولة ومساحتها فقط", "نظام الحكم داخل الدولة"],
+    correct: 1,
+    fb: "الموقع الجيوسياسي هو موقع الدولة بالنسبة لمحيطها الإقليمي، وأهميته بالنسبة لقوتها وتأثيرها الإستراتيجي والسياسي والعسكري والاقتصادي."
+  },
+  {
+    q: "تُعَد قناة السويس أحد أهم الممرات الملاحية في العالم؛ لأنها:",
+    opts: ["لا علاقة لها بالتجارة الدولية", "شريان حيوي للتجارة الدولية وركيزة أساسية للأمن الاقتصادي العالمي", "ممر مغلق أمام الملاحة الدولية", "أقل الممرات المائية أهمية عالميًا"],
+    correct: 1,
+    fb: "تمثِّل قناة السويس شريانًا حيويًا للتجارة الدولية وركيزة أساسية للأمن الاقتصادي العالمي، واستقرار الملاحة فيها يدعم سلاسل الإمداد الدولية."
+  },
+  {
+    q: "رفضت مصر بعد ثورة ١٩٥٢م الانضمام إلى حلف بغداد عام:",
+    opts: ["١٩٥٢م", "١٩٥٥م", "١٩٥٦م", "١٩٦٢م"],
+    correct: 1,
+    fb: "رفضت مصر بعد نجاح الثورة الانضمام إلى حلف بغداد ١٩٥٥م، وشارك جمال عبد الناصر في مؤتمر باندونج في العام نفسه."
+  },
+  {
+    q: "كان الهدف الأساسي من مبدأ عدم الانحياز الذي تبنته مصر هو:",
+    opts: ["الانضمام الكامل للمعسكر الغربي", "الانضمام الكامل للمعسكر الشرقي", "الحفاظ على استقلال القرار الوطني وعدم جعل الدولة ساحة لصراع القوى الكبرى", "الانعزال التام عن كل القضايا الدولية"],
+    correct: 2,
+    fb: "كان الهدف من عدم الانحياز الحفاظ على استقلال القرار الوطني، وعدم جعل مصر ساحة لصراع القوى الكبرى في الحرب الباردة."
+  },
+  {
+    q: "الفرق الجوهري بين «الحياد» و«عدم الانحياز» أن عدم الانحياز يعني:",
+    opts: ["الانعزال التام عن الصراعات الدولية", "الاستقلال في اتخاذ القرار مع المشاركة الفعالة في القضايا الدولية", "الميل الكامل لأحد المعسكرين", "رفض أي علاقات دولية"],
+    correct: 1,
+    fb: "يختلف عدم الانحياز عن الحياد في أنه يعني الاستقلال في اتخاذ القرار الوطني مع المشاركة الفعالة في القضايا الدولية، وليس الانعزال التام."
+  },
+  {
+    q: "أصبحت القاهرة مركزًا لدعم حركات التحرر ومساندة القوى المناهضة للاستعمار خلال الفترة من:",
+    opts: ["١٩٤٥م إلى ١٩٥٢م", "١٩٥٦م إلى ١٩٦٦م", "١٩٧٠م إلى ١٩٨٠م", "١٩٩٠م إلى ٢٠٠٠م"],
+    correct: 1,
+    fb: "دعمت مصر حركات التحرر سياسيًا ودبلوماسيًا خلال الفترة من ١٩٥٦م إلى ١٩٦٦م، مثل جنوب إفريقيا والجزائر وغيرها من دول القارة الإفريقية."
+  },
+  {
+    q: "من أبرز مظاهر تبني مصر مبدأ الوحدة العربية إطارًا إستراتيجيًا لسياستها الخارجية:",
+    opts: ["اتفاقية الدفاع المشترك مع سوريا عام ١٩٥٥م", "الانضمام إلى حلف بغداد", "قطع العلاقات مع كل الدول العربية", "رفض القضية الفلسطينية"],
+    correct: 0,
+    fb: "من مظاهر تبني الوحدة العربية عقد اتفاقيات الدفاع المشترك، مثل اتفاقية مصر وسوريا عام ١٩٥٥م، إلى جانب مساندة الجزائر واليمن وتبنِّي القضية الفلسطينية."
+  },
+  {
+    q: "قامت السياسة الخارجية المصرية على مبدأ احترام سيادة الدول وعدم التدخل في شئونها الداخلية؛ وهو ما أسهم في:",
+    opts: ["عزل مصر عن العالم الثالث تمامًا", "ترسيخ مكانة مصر بوصفها طرفًا متوازنًا في العلاقات الإقليمية والدولية", "إضعاف علاقات مصر مع كل الدول النامية", "إلغاء استقلال القرار السياسي المصري"],
+    correct: 1,
+    fb: "أسهم مبدأ احترام السيادة وعدم التدخل في ترسيخ مكانة مصر طرفًا متوازنًا، وأتاح لها بناء علاقات واسعة مع دول العالم الثالث."
+  },
+  {
+    q: "اعتمدت مصر في توظيف قوتها الناعمة على أربع أدوات رئيسة، وهي:",
+    opts: ["الجيش والاقتصاد والزراعة والصناعة", "الإذاعة والصحافة والمؤتمرات والبعثات التعليمية والدينية", "النفط والغاز والذهب والفوسفات", "السياحة والرياضة والفن التشكيلي فقط"],
+    correct: 1,
+    fb: "اعتمدت مصر على أربع أدوات رئيسة للقوة الناعمة، هي: الإذاعة، والصحافة، والمؤتمرات، والبعثات التعليمية والدينية."
+  },
+  {
+    q: "بحسب عبارة «السلاح ليس فقط ما يُطلق النار، بل أيضًا ما يُطلق الأفكار»، فإن هذا يعبِّر عن:",
+    opts: ["عدم أهمية الإعلام والثقافة في الصراعات", "قدرة الإعلام والثقافة على أن يصبحا أداتين مؤثرتين في دعم قضايا التحرر أو إضعافها", "أن القوة العسكرية وحدها هي الحاسمة دائمًا", "أن الأفكار لا علاقة لها بالسياسة"],
+    correct: 1,
+    fb: "تعبِّر العبارة عن أن الإعلام والثقافة يمكن أن يتحولا إلى أدوات تأثير قوية في دعم قضايا التحرر وتحقيق الاستقلال، أو في عكس ذلك أيضًا."
+  },
+  {
+    q: "وصفت بعض الكتابات القديمة مصر بأنها «سلة العالم»، بينما ربطها بعض المؤرخين بكونها:",
+    opts: ["قلعة العالم", "درَّة العالم", "بوابة العالم فقط", "جزيرة العالم"],
+    correct: 1,
+    fb: "وُصفت مصر بأنها «سلة العالم» في بعض الكتابات القديمة، وربطها بعض المؤرخين أيضًا بكونها «درَّة العالم»؛ بما يعكس أهميتها ومكانتها."
+  },
+  {
+    q: "المكانة الإقليمية لمصر، بحسب الدرس، هي نتيجة تفاعل عدة عوامل أبرزها:",
+    opts: ["الموقع الجيوسياسي فقط دون أي عامل آخر", "الموقع الجيوسياسي والإرادة السياسية والقوة الناعمة معًا", "القوة العسكرية فقط", "عدد السكان فقط"],
+    correct: 1,
+    fb: "لم تكن المكانة الإقليمية لمصر نتيجة عامل واحد، بل نتيجة تفاعل بين عدة عوامل أبرزها الموقع الجيوسياسي والإرادة السياسية والقوة الناعمة."
+  },
+  {
+    q: "يؤدي الأزهر الشريف في إطار الدائرة الإسلامية دورًا عالميًا يتمثل في:",
+    opts: ["نشر التطرف الفكري", "نشر الاعتدال والفكر الوسطي", "الانعزال عن العالم الإسلامي", "دعم الانقسامات المذهبية"],
+    correct: 1,
+    fb: "تُعَد مصر مركزًا للفكر الوسطي في الدائرة الإسلامية، ويؤدي الأزهر الشريف دورًا عالميًا في نشر الاعتدال."
+  }
+];
+
+const container = document.getElementById('quiz-container');
+let answers = new Array(QUESTIONS.length).fill(null);
+let submitted = false;
+
+function render(){
+  container.innerHTML = '';
+  QUESTIONS.forEach((item, qi) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.innerHTML = `
+      <div class="q-num">السؤال ${qi+1} من ${QUESTIONS.length}</div>
+      <div class="q-text">${item.q}</div>
+      <div class="opts" data-qi="${qi}"></div>
+      <div class="fb" id="fb-${qi}"></div>
+    `;
+    const optsWrap = card.querySelector('.opts');
+    const letters = ['أ','ب','ج','د'];
+    item.opts.forEach((opt, oi) => {
+      const el = document.createElement('div');
+      el.className = 'opt';
+      el.setAttribute('role','button');
+      el.setAttribute('tabindex','0');
+      el.innerHTML = `<span class="letter">${letters[oi]}</span><span>${opt}</span>`;
+      el.addEventListener('click', () => selectOpt(qi, oi));
+      el.addEventListener('keydown', (e) => { if(e.key==='Enter' || e.key===' '){ e.preventDefault(); selectOpt(qi, oi); } });
+      optsWrap.appendChild(el);
+    });
+    container.appendChild(card);
+  });
+  updateProgress();
+}
+
+function selectOpt(qi, oi){
+  if(submitted) return;
+  answers[qi] = oi;
+  const optsWrap = document.querySelector(`.opts[data-qi="${qi}"]`);
+  [...optsWrap.children].forEach((el, idx) => {
+    el.classList.toggle('selected', idx === oi);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const answered = answers.filter(a => a !== null).length;
+  document.getElementById('prog-text').textContent = `${toArabicDigits(answered)} / ${toArabicDigits(QUESTIONS.length)}`;
+  document.getElementById('bar-fill').style.width = (answered / QUESTIONS.length * 100) + '%';
+}
+
+function toArabicDigits(n){
+  const map = {'0':'٠','1':'١','2':'٢','3':'٣','4':'٤','5':'٥','6':'٦','7':'٧','8':'٨','9':'٩'};
+  return String(n).split('').map(c => map[c] !== undefined ? map[c] : c).join('');
+}
+
+document.getElementById('submit-btn').addEventListener('click', () => {
+  submitted = true;
+  let score = 0;
+  QUESTIONS.forEach((item, qi) => {
+    const optsWrap = document.querySelector(`.opts[data-qi="${qi}"]`);
+    const chosen = answers[qi];
+    [...optsWrap.children].forEach((el, idx) => {
+      el.style.pointerEvents = 'none';
+      if(idx === item.correct) el.classList.add('correct');
+      else if(idx === chosen && chosen !== item.correct) el.classList.add('wrong');
+    });
+    if(chosen === item.correct) score++;
+    const fb = document.getElementById(`fb-${qi}`);
+    fb.textContent = (chosen === item.correct ? '✓ إجابة صحيحة — ' : (chosen === null ? '— لم تتم الإجابة — ' : '✗ إجابة غير دقيقة — ')) + item.fb;
+    fb.classList.add('show', chosen === item.correct ? 'ok' : 'no');
+  });
+
+  const panel = document.getElementById('result-panel');
+  panel.classList.add('show');
+  document.getElementById('result-score').textContent = `${toArabicDigits(score)} / ${toArabicDigits(QUESTIONS.length)}`;
+  let msg = '';
+  const pct = score / QUESTIONS.length;
+  if(pct === 1) msg = 'ممتاز! إتقان كامل لدرس مرتكزات الدور المصري إقليميًا ودوليًا 🌍';
+  else if(pct >= 0.8) msg = 'مستوى رائع جدًا — راجع الأسئلة التي أخطأت فيها لتثبيت المعلومة.';
+  else if(pct >= 0.6) msg = 'مستوى جيد — يُنصح بمراجعة الملخص الشامل مرة أخرى.';
+  else msg = 'يحتاج الأمر مزيدًا من المراجعة — عد إلى قسم الملخص الشامل قبل إعادة المحاولة.';
+  document.getElementById('result-msg').textContent = msg;
+  panel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  submitted = false;
+  answers = new Array(QUESTIONS.length).fill(null);
+  document.getElementById('result-panel').classList.remove('show');
+  render();
+  document.getElementById('exam').scrollIntoView({behavior:'smooth'});
+});
+
+render();
+
+const mmBtn = document.getElementById('toggle-mindmaps');
+const mmPanel = document.getElementById('mindmaps-panel');
+mmBtn.addEventListener('click', () => {
+  const showing = mmPanel.style.display !== 'none';
+  mmPanel.style.display = showing ? 'none' : 'block';
+  mmBtn.textContent = showing ? '🧠 اعرض الصور الذهنية' : '🙈 إخفاء الصور الذهنية';
+  if(!showing){ mmPanel.scrollIntoView({behavior:'smooth', block:'start'}); }
+});
+</script>
+
+</body>
+</html>
