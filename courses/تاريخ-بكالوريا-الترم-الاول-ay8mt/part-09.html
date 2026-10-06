@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>حركات التحرر الوطني ضد الاحتلال الفرنسي والإيطالي | الدرس التاسع - تاريخ البكالوريا المصرية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-void: #0d0c0a;
+    --bg-panel: #16140f;
+    --bg-panel-raised: #1e1b14;
+    --stone: #3a3327;
+    --sand: #c9a227;
+    --sand-bright: #e8c96b;
+    --nile: #2e6f77;
+    --nile-bright: #4fa3ac;
+    --papyrus: #ece2c8;
+    --papyrus-dim: #a89f88;
+    --red-seal: #8c3b2e;
+    --line: rgba(201,162,39,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    background:var(--bg-void);
+    color:var(--papyrus);
+    font-family:'Tajawal', sans-serif;
+    line-height:1.9;
+    overflow-x:hidden;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  ::selection{background:var(--sand); color:#0d0c0a;}
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(201,162,39,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 100% 10%, rgba(140,59,46,0.10), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  h1,h2,h3,h4{font-family:'Amiri', serif; font-weight:700; color:var(--sand-bright);}
+  a{color:inherit; text-decoration:none;}
+
+  .topbar{
+    position:sticky; top:0; z-index:100;
+    background:rgba(13,12,10,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:calc(14px + env(safe-area-inset-top,0px)) 26px 14px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Amiri',serif; font-size:1.0rem; color:var(--sand-bright); white-space:nowrap;}
+  .brand .glyph{
+    width:34px; height:34px; border:2px solid var(--sand);
+    display:flex; align-items:center; justify-content:center;
+    border-radius:3px; font-size:1rem; color:var(--sand); flex-shrink:0;
+    background:linear-gradient(135deg, rgba(201,162,39,0.15), transparent);
+  }
+  .navlinks{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none;}
+  .navlinks::-webkit-scrollbar{display:none;}
+  .navlinks a{
+    font-size:0.76rem; padding:8px 10px; white-space:nowrap; border-radius:6px;
+    color:var(--papyrus-dim); transition:.2s;
+    border:1px solid transparent;
+  }
+  .navlinks a:hover{color:var(--sand-bright); border-color:var(--line); background:rgba(201,162,39,0.06);}
+
+  .hero{
+    position:relative; min-height:78vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:80px 20px 60px;
+    z-index:1;
+  }
+  .hero .kicker{
+    font-family:'Cairo',sans-serif; letter-spacing:5px; font-size:0.68rem;
+    color:var(--nile-bright); text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .hero .kicker::before, .hero .kicker::after{content:""; width:40px; height:1px; background:var(--nile-bright); opacity:.5;}
+  .hero h1{
+    font-size:clamp(1.8rem, 5.4vw, 3.6rem); line-height:1.35; max-width:940px;
+    text-shadow: 0 0 40px rgba(232,201,107,0.15);
+  }
+  .hero .subtitle{
+    margin-top:22px; font-size:1.05rem; color:var(--papyrus-dim); max-width:740px;
+    font-family:'Cairo',sans-serif; font-weight:300;
+  }
+  .hero .pillars-mini{ display:flex; gap:0; margin-top:56px; align-items:flex-end; flex-wrap:wrap; justify-content:center; }
+  .pillars-mini .col{
+    width:62px; height:92px; margin:0 5px;
+    background:linear-gradient(180deg, var(--bg-panel-raised), var(--bg-panel));
+    border:1px solid var(--line); border-top:3px solid var(--red-seal);
+    border-radius:4px 4px 0 0;
+    display:flex; align-items:flex-start; justify-content:center; padding-top:12px;
+    font-family:'Amiri',serif; font-size:0.72rem; color:var(--sand-bright);
+    position:relative;
+  }
+  .pillars-mini .col span{writing-mode:vertical-rl; text-orientation:mixed;}
+  .pillars-mini .col:nth-child(2){height:110px; border-top-color:var(--sand);}
+  .pillars-mini .col:nth-child(3){height:80px; border-top-color:var(--nile);}
+  .pillars-mini .col:nth-child(4){height:100px; border-top-color:var(--stone);}
+  .pillars-mini .col:nth-child(5){height:122px; border-top-color:var(--sand-bright);}
+
+  .hero-anchor{margin-top:50px; font-size:.85rem; color:var(--papyrus-dim); display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .hero-anchor .arrow{animation:bob 2s infinite ease-in-out;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+  @media (prefers-reduced-motion: reduce){ .hero-anchor .arrow{animation:none;} }
+
+  section{
+    position:relative; z-index:1;
+    max-width:980px; margin:0 auto; padding:70px 24px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'Cairo',sans-serif; font-size:0.78rem; letter-spacing:3px;
+    color:var(--nile-bright); text-transform:uppercase; margin-bottom:10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .num{
+    background:var(--stone); color:var(--sand-bright); font-family:'Amiri',serif;
+    width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem;
+  }
+  section > h2{font-size:clamp(1.5rem,4vw,2.2rem); margin-bottom:26px;}
+  section h3{font-size:1.2rem; color:var(--nile-bright); margin:28px 0 12px; font-family:'Cairo',sans-serif; font-weight:700;}
+  p{font-size:1.02rem; color:#dcd3ba;}
+  .lead{font-size:1.1rem; color:var(--papyrus); font-family:'Cairo',sans-serif; font-weight:300;}
+
+  .box{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:10px;
+    padding:22px 24px; margin:18px 0;
+  }
+  .box.gold{border-right:4px solid var(--sand);}
+  .box.nile{border-right:4px solid var(--nile);}
+  .box.red{border-right:4px solid var(--red-seal);}
+  .box-title{font-family:'Cairo',sans-serif; font-weight:700; color:var(--sand-bright); margin-bottom:10px; font-size:0.95rem; display:flex; align-items:center; gap:8px;}
+
+  ul.clean{list-style:none; padding:0;}
+  ul.clean li{ position:relative; padding-right:22px; margin:10px 0; color:#dcd3ba; font-size:0.98rem; }
+  ul.clean li::before{content:"◆"; position:absolute; right:0; top:2px; color:var(--sand); font-size:0.6rem;}
+
+  .quote{
+    font-family:'Amiri',serif; font-style:italic; font-size:1.1rem; color:var(--sand-bright);
+    border-right:3px solid var(--sand); padding:6px 22px; margin:20px 0; line-height:2;
+  }
+  .quote cite{display:block; font-family:'Cairo',sans-serif; font-style:normal; font-size:0.8rem; color:var(--papyrus-dim); margin-top:10px;}
+
+  .pillars-wrap{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:36px 0;}
+  .pillar-card{
+    background:linear-gradient(180deg, var(--bg-panel-raised), var(--bg-panel));
+    border:1px solid var(--line); border-top:4px solid var(--sand);
+    border-radius:8px; padding:20px 14px; text-align:center;
+    transition:.25s;
+  }
+  .pillar-card:hover{transform:translateY(-6px); border-top-color:var(--sand-bright); box-shadow:0 12px 30px rgba(0,0,0,0.4);}
+  .pillar-card .ic{font-size:1.8rem; margin-bottom:10px;}
+  .pillar-card h4{font-size:0.98rem; color:var(--sand-bright); margin-bottom:8px;}
+  .pillar-card p{font-size:0.83rem; color:var(--papyrus-dim);}
+  @media(max-width:760px){.pillars-wrap{grid-template-columns:repeat(2,1fr);}}
+
+  .article-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:20px 0;}
+  .article-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:18px;
+    font-size:0.92rem;
+  }
+  .article-card .tag{color:var(--nile-bright); font-family:'Cairo',sans-serif; font-weight:700; font-size:0.8rem; margin-bottom:8px; display:block;}
+  @media(max-width:760px){.article-grid{grid-template-columns:1fr;}}
+
+  .measures{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;}
+  .measure{background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:16px 18px; display:flex; gap:12px; align-items:flex-start;}
+  .measure .ic{font-size:1.3rem; flex-shrink:0;}
+  .measure p{font-size:0.92rem; margin:0;}
+  @media(max-width:700px){.measures{grid-template-columns:1fr;}}
+
+  .timeline{position:relative; margin:40px 0 10px; padding-right:30px; border-right:2px solid var(--stone);}
+  .tl-item{position:relative; padding-bottom:36px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; right:-37px; top:4px; width:14px; height:14px;
+    background:var(--sand); border-radius:50%; box-shadow:0 0 0 4px var(--bg-void), 0 0 14px rgba(232,201,107,0.5);
+  }
+  .tl-item .tl-date{font-family:'Amiri',serif; color:var(--sand-bright); font-size:1.05rem; margin-bottom:4px;}
+  .tl-item h4{font-size:1.08rem; margin-bottom:6px;}
+  .tl-item p{font-size:0.95rem;}
+
+  .qa{
+    background:var(--bg-panel-raised); border:1px dashed var(--line); border-radius:8px;
+    padding:16px 20px; margin:16px 0; font-size:0.95rem;
+  }
+  .qa b{color:var(--nile-bright);}
+
+  .cta-row{display:flex; justify-content:center; margin:40px 0 0; flex-wrap:wrap; gap:14px;}
+  .btn{
+    background:linear-gradient(135deg, var(--sand), #a5811e);
+    color:#181206; font-family:'Cairo',sans-serif; font-weight:700; font-size:1rem;
+    padding:14px 34px; border-radius:30px; border:none; cursor:pointer;
+    transition:.2s; box-shadow:0 6px 20px rgba(201,162,39,0.25);
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(201,162,39,0.35);}
+  .btn.ghost{background:transparent; border:1px solid var(--sand); color:var(--sand-bright); box-shadow:none;}
+
+  .summary-section{background:var(--bg-panel);}
+  .summary-block{margin-bottom:30px;}
+  .summary-block h3{color:var(--sand-bright); border-bottom:1px solid var(--line); padding-bottom:8px;}
+  .summary-block ul.clean li::before{color:var(--nile-bright);}
+  .mini-table{width:100%; border-collapse:collapse; margin:14px 0; font-size:0.9rem;}
+  .mini-table th, .mini-table td{border:1px solid var(--line); padding:10px 12px; text-align:right;}
+  .mini-table th{background:var(--bg-panel-raised); color:var(--sand-bright); font-family:'Cairo',sans-serif;}
+  .mini-table{display:block; overflow-x:auto; white-space:nowrap;}
+
+  .exam-section{background:linear-gradient(180deg, var(--bg-void), #0a0908);}
+  .exam-head{text-align:center; margin-bottom:36px;}
+  .exam-progress{
+    position:sticky; top:calc(66px + env(safe-area-inset-top,0px)); z-index:50; background:var(--bg-panel);
+    border:1px solid var(--line); border-radius:20px; padding:8px 18px;
+    display:flex; align-items:center; gap:14px; font-size:0.85rem; max-width:400px; margin:0 auto 30px;
+  }
+  .bar{flex:1; height:6px; background:var(--stone); border-radius:6px; overflow:hidden;}
+  .bar-fill{height:100%; background:linear-gradient(90deg, var(--nile), var(--sand)); width:0%; transition:.3s;}
+
+  .q-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:12px;
+    padding:26px; margin-bottom:22px;
+  }
+  .q-num{color:var(--nile-bright); font-family:'Cairo',sans-serif; font-weight:700; font-size:0.85rem; margin-bottom:8px;}
+  .q-text{font-size:1.03rem; color:var(--papyrus); margin-bottom:18px; font-family:'Cairo',sans-serif; font-weight:500;}
+  .opts{display:flex; flex-direction:column; gap:10px;}
+  .opt{
+    display:flex; align-items:center; gap:12px; padding:12px 16px;
+    background:var(--bg-panel-raised); border:1px solid var(--line); border-radius:8px;
+    cursor:pointer; transition:.15s; font-size:0.94rem;
+  }
+  .opt:hover{border-color:var(--sand);}
+  .opt.selected{border-color:var(--nile-bright); background:rgba(46,111,119,0.12);}
+  .opt.correct{border-color:#5aa66b; background:rgba(90,166,107,0.15);}
+  .opt.wrong{border-color:var(--red-seal); background:rgba(140,59,46,0.18);}
+  .opt .letter{
+    width:26px; height:26px; border-radius:50%; background:var(--stone); color:var(--sand-bright);
+    display:flex; align-items:center; justify-content:center; font-size:0.8rem; flex-shrink:0; font-family:'Cairo',sans-serif;
+  }
+  .fb{margin-top:14px; font-size:0.88rem; padding:10px 14px; border-radius:6px; display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:rgba(90,166,107,0.12); color:#8fd39f; border:1px solid rgba(90,166,107,0.3);}
+  .fb.no{background:rgba(140,59,46,0.12); color:#e6a297; border:1px solid rgba(140,59,46,0.3);}
+
+  .result-panel{
+    display:none; text-align:center; background:var(--bg-panel-raised); border:1px solid var(--sand);
+    border-radius:14px; padding:40px 26px; margin-top:20px;
+  }
+  .result-panel.show{display:block;}
+  .result-score{font-family:'Amiri',serif; font-size:3rem; color:var(--sand-bright);}
+  .result-msg{font-size:1.03rem; margin-top:10px; color:var(--papyrus);}
+
+  footer{text-align:center; padding:40px 20px calc(60px + env(safe-area-inset-bottom,0px)); color:var(--papyrus-dim); font-size:0.82rem; position:relative; z-index:1;}
+
+  :focus-visible{outline:2px solid var(--nile-bright); outline-offset:2px;}
+
+  @media(max-width:640px){
+    .navlinks{display:none;}
+    .article-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="glyph">✊</span> حركات التحرر الوطني</div>
+  <nav class="navlinks">
+    <a href="#intro">مدخل الدرس</a>
+    <a href="#faransa">آليات فرنسا</a>
+    <a href="#italia">آليات إيطاليا</a>
+    <a href="#muqawama">أساليب المقاومة</a>
+    <a href="#tadribat">تدريبات الكتاب</a>
+    <a href="#molakhas">الملخص الشامل</a>
+    <a href="#exam">الامتحان</a>
+    <a href="#mindmaps">الصور الذهنية</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="kicker">تاريخ · البكالوريا المصرية · حركات التحرر الوطني · الدرس التاسع</div>
+  <h1>حركات التحرر الوطني ضد الاحتلال الفرنسي والإيطالي في العالم العربي</h1>
+  <p class="subtitle">لم يقتصر الاستعمار الفرنسي والإيطالي في الوطن العربي على القوة العسكرية، بل مثَّل مشروعًا استعماريًا متكاملًا للسيطرة على الأرض واستغلال الاقتصاد والموارد وفرض الهيمنة الثقافية، ولم يهنأ الاستعمار بوجوده؛ حيث واجهته قوى وطنية أسهمت في تحقيق الاستقلال.</p>
+  <div class="pillars-mini" aria-hidden="true">
+    <div class="col"><span>عسكري</span></div>
+    <div class="col"><span>اقتصادي</span></div>
+    <div class="col"><span>ثقافي</span></div>
+    <div class="col"><span>اجتماعي</span></div>
+    <div class="col"><span>مقاومة</span></div>
+  </div>
+  <div class="hero-anchor"><span>ابدأ الرحلة</span><span class="arrow">↓</span></div>
+</div>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="eyebrow"><span class="num">۰</span> مدخل الدرس</div>
+  <h2>هل قامت السيطرة الاستعمارية على القوة العسكرية فقط؟</h2>
+  <p class="lead">هل كانت السيطرة الاستعمارية الفرنسية والإيطالية قائمة على القوة العسكرية فقط، أم على منظومة متكاملة من الآليات؟ برِّر إجابتك.</p>
+
+  <div class="box gold">
+    <div class="box-title">🎯 أهداف الدرس</div>
+    <ul class="clean">
+      <li>تُميِّز بين الآليات المختلفة للاحتلال الفرنسي والإيطالي في الوطن العربي في إطار التوسع الاستعماري الأوروبي.</li>
+      <li>تُقارن بين أشكال المقاومة ضد الاحتلال الفرنسي والإيطالي في الوطن العربي.</li>
+      <li>تُعبِّر عن تقديرك لدور القيادات الوطنية العربية في التصدي للاحتلال الفرنسي والإيطالي.</li>
+    </ul>
+  </div>
+
+  <div class="quote">لم يقتصر الاستعمار الفرنسي والإيطالي في الوطن العربي على القوة العسكرية، بل مثَّل مشروعًا استعماريًا متكاملًا للسيطرة على الأرض واستغلال الاقتصاد والموارد وفرض الهيمنة الثقافية، ولم يهنأ الاستعمار بوجوده؛ حيث واجهته قوى وطنية أسهمت في تحقيق الاستقلال.
+    <cite>— الفكرة الرئيسة للدرس</cite>
+  </div>
+
+  <div class="qa">💭 <b>سؤال يقود تعلمنا:</b> هل كانت السيطرة الاستعمارية الفرنسية والإيطالية قائمة على القوة العسكرية فقط أم على منظومة متكاملة من الآليات؟</div>
+</section>
+
+<!-- آليات فرنسا -->
+<section id="faransa">
+  <div class="eyebrow"><span class="num">١</span> أولًا</div>
+  <h2>آليات السيطرة الاستعمارية الفرنسية في الوطن العربي</h2>
+  <p>اعتمد الاستعمار الفرنسي على منظومة متكاملة من الآليات لفرض سيطرته على الدول العربية التي احتلها؛ حيث جمع بين القوة العسكرية والوسائل الاقتصادية والثقافية والاجتماعية لتحقيق أهدافه الاستعمارية.</p>
+
+  <h3>١. السيطرة العسكرية</h3>
+  <p>سعت فرنسا إلى فرض سيطرتها على أجزاء من الوطن العربي لأسباب متعددة، من أهمها:</p>
+  <ul class="clean">
+    <li>التوسع الاستعماري ومنافسة القوى الأوروبية.</li>
+    <li>السيطرة على الطرق التجارية والمواقع الإستراتيجية.</li>
+    <li>استغلال الموارد الاقتصادية.</li>
+    <li>نشر النفوذ السياسي والثقافي الفرنسي.</li>
+  </ul>
+
+  <div class="box nile">
+    <div class="box-title">📖 مفهوم أتعلمه: الانتداب</div>
+    <p>نظام دولي نشأ بعد الحرب العالمية الأولى يضع دولة تحت إدارة دولة أخرى بحجة المساعدة على الاستقلال.</p>
+  </div>
+
+  <p>تمثَّلت مظاهر السيطرة العسكرية في الغزو المباشر للدول العربية التي احتلتها فرنسا، واستخدام العنف المنظم لإخضاع الشعوب، إلى جانب إقامة قواعد عسكرية لضمان استمرار الوجود الاستعماري وترسيخ نفوذه.</p>
+
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-date">١٧٩٨-١٨٠١م</div><h4>الحملة الفرنسية على مصر</h4><p>بداية السيطرة العسكرية الفرنسية في المنطقة العربية.</p></div>
+    <div class="tl-item"><div class="tl-date">١٨٣٠م</div><h4>احتلال الجزائر</h4><p>أول احتلال استيطاني فرنسي مباشر وطويل الأمد في المغرب العربي.</p></div>
+    <div class="tl-item"><div class="tl-date">١٨٨١م</div><h4>فرض الحماية على تونس</h4><p>توسيع النفوذ الفرنسي في شمال إفريقيا.</p></div>
+    <div class="tl-item"><div class="tl-date">١٩١٢م</div><h4>فرض الحماية على المغرب</h4><p>وامتداد النفوذ الفرنسي إلى موريتانيا لاحقًا.</p></div>
+    <div class="tl-item"><div class="tl-date">١٩٢٠م</div><h4>الانتداب على سوريا ولبنان</h4><p>عقب الحرب العالمية الأولى، بذريعة المساعدة على الاستقلال.</p></div>
+  </div>
+
+  <div class="qa">
+    <p>💭 <b>أقرأ وأجيب — ذريعة الاحتلال الفرنسي للجزائر:</b> طلب حاكم الجزائر الداي حسين من القنصل الفرنسي سداد ديون قديمة، فتهرَّب القنصل بطريقة اعتبرها الداي إهانة، فضربه بمروحة اليد؛ فاستغلت فرنسا الحادثة، وفرضت حصارًا ثلاث سنوات، ثم احتلت الجزائر عام ١٨٣٠م. لكن المؤرخين يرون أن حادثة المروحة كانت سببًا ظاهريًا فقط، أما الأسباب الحقيقية فكانت رغبة فرنسا في التوسع الاستعماري والسيطرة على الجزائر.</p>
+    <p>١- استنتج الهدف الحقيقي للتدخل الفرنسي في الجزائر.</p>
+    <p>٢- قارن بين دوافع فرنسا للتوسع ودوافعها الاقتصادية في الجزائر.</p>
+  </div>
+
+  <h3>٢. الاستغلال الاقتصادي</h3>
+  <p>اعتمد الاحتلال الفرنسي على الاستغلال الاقتصادي أداةً أساسية لتثبيت سيطرته، حيث سعى إلى توجيه الموارد لخدمة مصالحه المباشرة، من خلال:</p>
+  <ul class="clean">
+    <li>استنزاف الثروات الطبيعية للدول العربية.</li>
+    <li>استغلال الموارد البشرية.</li>
+    <li>ربط اقتصاد المستعمرات بالاقتصاد الفرنسي.</li>
+  </ul>
+  <div class="article-grid">
+    <div class="article-card"><span class="tag">🍇 الجزائر</span>تحويل أغلب الأراضي الزراعية لزراعة الكروم (العنب)؛ للاستفادة منها في صناعة الخمور.</div>
+    <div class="article-card"><span class="tag">⛏️ موريتانيا</span>استغلال خام الحديد لتنشيط المصانع الفرنسية ودعم الصناعات الثقيلة بفرنسا.</div>
+  </div>
+  <p>حقَّق هذا الاستغلال مكاسب اقتصادية كبيرة لفرنسا، مع إهمال التنمية الاقتصادية والاجتماعية للدول العربية؛ مما وسَّع الفجوة الاجتماعية داخل المجتمع الواحد.</p>
+
+  <div class="box gold">
+    <div class="box-title">💡 قيمة أتعلمها</div>
+    <p>سيادة الوطن واستقلاله.</p>
+  </div>
+  <div class="quote">تعلَّم لغة عدوك تأمن شره وتعرف مكائده.</div>
+  <div class="qa">💭 قدِّم توقعًا واحدًا في حال وُجِّهت الموارد لصالح السكان المحليين في الدول العربية التي احتلتها فرنسا.</div>
+
+  <h3>٣. الهيمنة الثقافية</h3>
+  <p>استغل الاحتلال الفرنسي الهيمنة الثقافية أداةً إستراتيجية لترسيخ سيطرته، من خلال التأثير في العقول وتوجيه القيم واللغة والتعليم، عبر:</p>
+  <ul class="clean">
+    <li>التحكم في النظام التعليمي وتوجيهه لخدمة أهداف استعمارية.</li>
+    <li>إضعاف الهُوية الوطنية وتشويه القيم الثقافية الأصيلة.</li>
+  </ul>
+
+  <div class="box nile">
+    <div class="box-title">📖 مفهوم أتعلمه: الهيمنة الثقافية</div>
+    <p>سيطرة دولة على ثقافة دولة أخرى من خلال التعليم واللغة والقيم؛ بهدف توجيه المجتمع وخدمة أهدافها الاستعمارية.</p>
+  </div>
+
+  <p>ورغم امتداد تأثير الهيمنة الثقافية، فإنها لم تتمكَّن من القضاء على الهُوية الوطنية، بل أسهمت في إيقاظ الوعي الوطني وظهور مقاومة فكرية وثقافية ساعدت على تقويض الاستعمار.</p>
+  <div class="quote">فرضت السلطات الاستعمارية اللغة الفرنسية في الإدارة والتعليم بتونس، وربطت التقدم الاجتماعي بإتقانها؛ ما أدى إلى تهميش اللغة العربية وإضعاف الهُوية الوطنية.</div>
+  <div class="qa">
+    <p>١- كيف نجحت فرنسا في تحقيق أهدافها الاستعمارية؟ أَيِّد إجابتك بأدلة تاريخية.</p>
+    <p>٢- استنتج أهداف السياسة التعليمية الاستعمارية الفرنسية في بلاد المغرب.</p>
+  </div>
+
+  <h3>٤. تفكيك البنية الاجتماعية</h3>
+  <p>اعتمد الاحتلال الفرنسي على سياسة تفكيك البنية الاجتماعية، عبر تعميق الانقسامات الداخلية وإضعاف التماسك المجتمعي؛ بما يضمن إحكام السيطرة، من خلال:</p>
+  <ul class="clean">
+    <li>إثارة النزاعات الطائفية والعرقية داخل المجتمع الواحد.</li>
+    <li>تفكيك الروابط الاجتماعية وإضعاف التضامن بين الأفراد.</li>
+    <li>تهميش القيادات الوطنية وإضعاف تأثيرها في المجتمع.</li>
+  </ul>
+
+  <div class="box red">
+    <div class="box-title">💡 تطبيقات حياتية</div>
+    <p>إن ما يفعله الاستعمار قديمًا يمكن أن يحدث حاليًا وبشكل أكثر خطورة.</p>
+  </div>
+
+  <div class="article-grid">
+    <div class="article-card"><span class="tag">🇲🇦 المغرب</span>إثارة الانقسامات الطائفية والعرقية، ودعم نخب موالية للاحتلال على حساب القوى الوطنية.</div>
+    <div class="article-card"><span class="tag">🇲🇷 موريتانيا</span>استغلال البنية القبلية، وإعادة توزيع النفوذ بين القبائل ودعم زعامات على حساب أخرى؛ لإضعاف الوحدة الاجتماعية.</div>
+  </div>
+
+  <p>أسفرت هذه السياسات عن إضعاف تماسك المجتمع، لكنها أسهمت لاحقًا في تنامي الوعي الوطني بأهمية الوحدة؛ ما جعلها أداة فعالة مؤقتًا، لكنها غير كافية لضمان استمرار النفوذ الاستعماري.</p>
+  <div class="qa">💭 هل كان تفكيك المجتمع أداة أكثر خطورة من القوة العسكرية؟ برِّر إجابتك.</div>
+</section>
+
+<!-- آليات إيطاليا -->
+<section id="italia">
+  <div class="eyebrow"><span class="num">٢</span> ثانيًا</div>
+  <h2>آليات السيطرة الاستعمارية الإيطالية في ليبيا</h2>
+  <p>اتبعت إيطاليا في ليبيا مجموعة من الآليات للسيطرة الاستعمارية، تشابهت بدرجة كبيرة مع سياسات الاحتلال الفرنسي؛ حيث جمعت بين القوة العسكرية والسياسات الاستيطانية والاقتصادية والاجتماعية؛ بهدف إخضاع المجتمع الليبي واستغلال موارده.</p>
+
+  <h3>١. السيطرة العسكرية</h3>
+  <p>سعت إيطاليا لمنافسة القوى الاستعمارية الأوروبية والحصول على مستعمرة في شمال إفريقيا، كما جذبتها أهمية موقع ليبيا على البحر المتوسط، ورغبتها في استغلال الأراضي والموارد الاقتصادية وتوسيع نفوذها في المنطقة.</p>
+  <p>تجلَّت مظاهر السيطرة العسكرية في شن حملات عسكرية مكثفة لإخضاع القبائل والمناطق الداخلية (مثل فزان)، وإنشاء قواعد وتحصينات عسكرية، إلى جانب استخدام العنف لقمع المقاومة الوطنية، واستمرار العمليات العسكرية ضد المقاومة في برقة وطرابلس، ومواجهة المقاومة الليبية بقيادة عمر المختار حتى إعدامه سنة ١٩٣١م. وأدَّى ذلك إلى:</p>
+  <ul class="clean">
+    <li>إخضاع مساحات واسعة من ليبيا بالقوة العسكرية.</li>
+    <li>استمرار المقاومة الوطنية لفترات طويلة رغم القمع الشديد.</li>
+    <li>وقوع خسائر كبيرة بين السكان نتيجة السياسات العسكرية.</li>
+  </ul>
+
+  <h3>٢. الاستغلال الاقتصادي</h3>
+  <p>استهدفت إيطاليا السيطرة على موارد ليبيا وإخضاع اقتصادها وفرض تبعية اقتصادية لها، وقد نجحت في تعزيز سيطرتها على الموارد؛ ما أدَّى إلى تدهور مستوى معيشة السكان، لكنه أسهم في استمرار المقاومة ضد الاحتلال.</p>
+  <div class="quote">عملت السلطات الإيطالية على الاستيلاء على الأراضي الزراعية الخصبة في ليبيا ومنحها للمستوطنين الإيطاليين؛ ما أدى إلى حرمان السكان المحليين من كثير من أراضيهم.</div>
+  <div class="qa">
+    <p>١- ما الهدف من سياسة الاستيلاء على الأراضي الزراعية التي اتبعتها السلطات الإيطالية في ليبيا؟</p>
+    <p>٢- ما النتائج المترتبة على حرمان السكان المحليين من أراضيهم الزراعية؟</p>
+  </div>
+
+  <h3>٣. الهيمنة الثقافية</h3>
+  <p>تشابهت أساليب الاحتلال الإيطالي مع الفرنسي في الهيمنة الثقافية، لكن إيطاليا ضيَّقت الخناق على التعليم الديني في الزوايا والكتاتيب بليبيا، ونشرت المدارس الإيطالية بشكل واضح، لكن أساليب الهيمنة الإيطالية لم تؤثر بوضوح على الشعب الليبي بقدر تأثر الشعوب تحت الاحتلال الفرنسي.</p>
+  <div class="qa">💭 أيهما كان أكثر تأثيرًا: محاولات الطمس الثقافي أم المقاومة الشعبية؟</div>
+
+  <h3>٤. تفكيك البنية الاجتماعية</h3>
+  <p>سيطرت إيطاليا اجتماعيًا على ليبيا، وتشابهت في ذلك مع فرنسا، من خلال:</p>
+  <ul class="clean">
+    <li>استخدام أساليب القمع والترهيب.</li>
+    <li>إقامة معسكرات اعتقال لتجميع السكان.</li>
+    <li>تهجير بعض القبائل وإبعادها عن مناطقها الأصلية.</li>
+    <li>فرض رقابة صارمة على الحياة اليومية للسكان.</li>
+  </ul>
+  <p>أسفرت هذه السياسات عن تفكك الروابط الاجتماعية وزيادة معاناة السكان، مع تصاعد مشاعر الغضب والرفض للاحتلال.</p>
+  <div class="qa">💭 توقَّع رد فعل المقاومة الشعبية إزاء الإجراءات التي اتخذتها إيطاليا في ليبيا.</div>
+</section>
+
+<!-- أساليب المقاومة -->
+<section id="muqawama">
+  <div class="eyebrow"><span class="num">٣</span> ثالثًا</div>
+  <h2>أساليب مقاومة الشعوب العربية للاحتلال</h2>
+  <p>تنوَّعت أساليب مقاومة الشعوب العربية ضد الاحتلال؛ فقد اندلعت ثورات وانتفاضات شعبية منظمة، وظهرت حركات مقاومة مسلحة، واستُخدمت العمليات الفدائية لمواجهة التفوق العسكري الاستعماري، وتوحَّدت فئات المجتمع في إطار نضال وطني مشترك؛ من أجل الوطن وطلب الاستقلال والسيادة الوطنية، وحماية حرية الأجيال القادمة من قيود التبعية.</p>
+
+  <h3>١. المقاومة المسلحة</h3>
+  <div class="pillars-wrap">
+    <div class="pillar-card"><div class="ic">🇱🇾</div><h4>ليبيا</h4><p>المقاومة الشعبية ضد الاحتلال الإيطالي بقيادة عمر المختار.</p></div>
+    <div class="pillar-card"><div class="ic">🇩🇿</div><h4>الجزائر</h4><p>ثورة التحرير (١٩٥٤-١٩٦٢م) بقيادة جبهة التحرير الوطني: أحمد بن بلة، هواري بومدين، العربي بن مهيدي.</p></div>
+    <div class="pillar-card"><div class="ic">🇸🇾</div><h4>سوريا</h4><p>الثورة السورية الكبرى ١٩٢٥م بقيادة سلطان باشا الأطرش.</p></div>
+    <div class="pillar-card"><div class="ic">🇲🇷</div><h4>موريتانيا</h4><p>مقاومة ذات طابع قبلي، أبرز رموزها الشيخ ماء العينين.</p></div>
+  </div>
+
+  <h3>٢. العمل السياسي والتنظيمي</h3>
+  <p>برز العمل التنظيمي والسياسي أداةً فعالة في قيادة النضال الوطني، من خلال إنشاء التنظيمات والأحزاب الوطنية وتعبئة الرأي العام والمطالبة بالاستقلال بالوسائل السياسية والدبلوماسية:</p>
+  <ul class="clean">
+    <li><b>المغرب:</b> حزب الاستقلال بقيادة علال الفاسي، مع دعم السلطان محمد الخامس.</li>
+    <li><b>تونس:</b> الحزب الدستوري الجديد بقيادة الحبيب بورقيبة.</li>
+    <li><b>سوريا:</b> الكتلة الوطنية، ولعبت دورًا محوريًا في مواجهة الانتداب الفرنسي.</li>
+  </ul>
+
+  <h3>٣. القيادة الوطنية</h3>
+  <p>تُعَد القيادة الوطنية ركيزة أساسية في مواجهة الهيمنة وبناء الدولة الحديثة؛ إذ تتجسَّد في زعماء وحركات وطنية تولَّت توجيه طاقات الشعب نحو التحرر، ورفع مستوى الوعي الوطني، وتحفيز المشاركة الشعبية، من خلال:</p>
+  <ul class="clean">
+    <li>بروز زعماء وطنيين يمتلكون الإرادة الوطنية.</li>
+    <li>توحيد الصفوف الشعبية حول أهداف وطنية مشتركة.</li>
+    <li>تمثيل القضية الوطنية داخليًا وخارجيًا.</li>
+  </ul>
+
+  <div class="box gold">
+    <div class="box-title">💡 قيمة أتعلمها</div>
+    <p>ضرورة العمل من أجل الوطن دائمًا، وحماية السيادة الوطنية وحقوق الأجيال القادمة.</p>
+  </div>
+
+  <div class="quote">نحن لا نستسلم... ننتصر أو نموت.
+    <cite>— عمر المختار</cite>
+  </div>
+  <div class="quote">إن الثورة ليست هدفًا في حد ذاتها، بل وسيلة لاسترجاع الحرية والاستقلال.
+    <cite>— أحمد بن بلة</cite>
+  </div>
+  <div class="qa">
+    <p>١- ما الهدف المشترك بين هذه الأقوال؟</p>
+    <p>٢- قارن بين رؤية الزعماء الوطنيين في الوطن العربي لطريقة تحقيق الاستقلال في ضوء الأقوال.</p>
+  </div>
+
+  <p>أسهم تفاعل العمل السياسي والتنظيمي والقيادة الوطنية والتنسيق بين حركات التحرر في تراجع النفوذ الاستعماري، وتعزيز الوعي الوطني، واتساع المشاركة الشعبية، وظهور حركات وطنية أكثر تنظيمًا، وتنامي روح التضامن بين الشعوب؛ ما مهَّد الطريق لتحقيق الاستقلال وبناء الدولة الوطنية الحديثة.</p>
+
+  <div class="box nile">
+    <div class="box-title">📌 مشروع بحثي</div>
+    <p>صمِّم عرضًا تقديميًا بعنوان «حركات التحرر الوطني ضد الاحتلال الفرنسي والإيطالي في الوطن العربي»، مضمِّنًا أشكال المقاومة الوطنية وأمثلتها ونتائجها، مع صور مناسبة ومصادر موثوقة.</p>
+  </div>
+  <div class="qa"><b>سؤال التفسير المدعوم بالأدلة:</b> «استخدمت الشعوب العربية أساليب عدة في مواجهة المحتل». ناقش العبارة، مدلِّلًا تاريخيًا.</div>
+</section>
+
+<!-- تدريبات الكتاب -->
+<section id="tadribat">
+  <div class="eyebrow"><span class="num">✎</span> تدريبات الدرس</div>
+  <h2>تدريبات الكتاب (صفحة ١٠٣-١٠٤)</h2>
+  <ul class="clean">
+    <li>تحليل العلاقة بين الاستغلال الاقتصادي وتنامي الوعي الوطني: الاختلالات الاجتماعية العميقة أسهمت في تنامي الوعي، لا العكس.</li>
+    <li>تحديد أهم تحول أحدثه العمل السياسي والتنظيمي: تحويل النضال من مواجهة عفوية إلى عمل منظَّم قائم على القيادة والأحزاب.</li>
+    <li>تحليل عبارة: «لم تكن السيطرة الاستعمارية الفرنسية نتيجة قوة عسكرية فقط، بل منظومة متكاملة من الآليات»، وتحديد الآلية الأكثر تأثيرًا.</li>
+    <li>مناقشة: «الهيمنة الثقافية كانت أخطر من السيطرة العسكرية في ترسيخ الاستعمار الفرنسي».</li>
+    <li>تفسير العلاقات: السياسات الاقتصادية الفرنسية ← تنامي الوعي الوطني؛ تفكيك البنية الاجتماعية الإيطالي ← المقاومة المسلحة؛ العمل السياسي والتنظيمي ← تحقيق الاستقلال.</li>
+    <li>ماذا لو فشلت المقاومة المسلحة؟ وماذا لو لم تنشأ الأحزاب الوطنية في الجزائر؟</li>
+    <li>المقارنة بين السياسات الفرنسية في الجزائر والإيطالية في ليبيا من حيث الأساليب والنتائج.</li>
+    <li>استنتاج الهدف الحقيقي للسياسة التعليمية الفرنسية في بلاد الشام، وأثرها على الهُوية الوطنية.</li>
+    <li>الاختيار والتبرير: أكثر العوامل تأثيرًا في نجاح حركات التحرر (القيادة الوطنية - العمل السياسي - التنسيق بين الحركات).</li>
+    <li>تحليل مقولة عمر المختار: «نحن لا نستسلم، ننتصر أو نموت»، وتوضيح تعبيرها عن وحدة الهدف رغم اختلاف الظروف.</li>
+  </ul>
+</section>
+
+<!-- الملخص الشامل -->
+<section id="molakhas" class="summary-section">
+  <div class="eyebrow"><span class="num">Σ</span> مراجعة نهائية</div>
+  <h2>الملخص الشامل للدرس</h2>
+
+  <div class="summary-block">
+    <h3>١. مفهومان أساسيان</h3>
+    <table class="mini-table">
+      <tr><th>المفهوم</th><th>التعريف</th></tr>
+      <tr><td>الانتداب</td><td>نظام دولي بعد الحرب العالمية الأولى يضع دولة تحت إدارة دولة أخرى بحجة المساعدة على الاستقلال.</td></tr>
+      <tr><td>الهيمنة الثقافية</td><td>سيطرة دولة على ثقافة دولة أخرى عبر التعليم واللغة والقيم؛ لتوجيه المجتمع وخدمة أهدافها الاستعمارية.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٢. آليات الاستعمار الفرنسي الأربع</h3>
+    <table class="mini-table">
+      <tr><th>الآلية</th><th>أمثلة من الدرس</th></tr>
+      <tr><td>عسكرية</td><td>الحملة على مصر ١٧٩٨، احتلال الجزائر ١٨٣٠، حماية تونس ١٨٨١ والمغرب ١٩١٢، انتداب سوريا ولبنان ١٩٢٠.</td></tr>
+      <tr><td>اقتصادية</td><td>زراعة الكروم في الجزائر لصناعة الخمور، استغلال خام الحديد في موريتانيا.</td></tr>
+      <tr><td>ثقافية</td><td>فرض اللغة الفرنسية في الإدارة والتعليم بتونس وربط التقدم بها.</td></tr>
+      <tr><td>اجتماعية</td><td>إثارة الانقسامات الطائفية بالمغرب، وإعادة توزيع النفوذ القبلي بموريتانيا.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٣. آليات الاستعمار الإيطالي في ليبيا</h3>
+    <table class="mini-table">
+      <tr><th>الآلية</th><th>مظاهرها</th></tr>
+      <tr><td>عسكرية</td><td>إخضاع فزان وبرقة وطرابلس، ومواجهة عمر المختار حتى إعدامه ١٩٣١م.</td></tr>
+      <tr><td>اقتصادية</td><td>الاستيلاء على الأراضي الزراعية الخصبة ومنحها للمستوطنين الإيطاليين.</td></tr>
+      <tr><td>ثقافية</td><td>تضييق التعليم الديني في الزوايا والكتاتيب، ونشر المدارس الإيطالية.</td></tr>
+      <tr><td>اجتماعية</td><td>معسكرات اعتقال، تهجير القبائل، رقابة صارمة على الحياة اليومية.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٤. أساليب المقاومة العربية</h3>
+    <table class="mini-table">
+      <tr><th>الأسلوب</th><th>أمثلة</th></tr>
+      <tr><td>مقاومة مسلحة</td><td>ليبيا (عمر المختار)، الجزائر (ثورة ١٩٥٤-١٩٦٢: بن بلة، بومدين، بن مهيدي)، سوريا (ثورة ١٩٢٥: سلطان باشا الأطرش)، موريتانيا (الشيخ ماء العينين).</td></tr>
+      <tr><td>عمل سياسي وتنظيمي</td><td>المغرب (حزب الاستقلال، علال الفاسي)، تونس (الحزب الدستوري الجديد، بورقيبة)، سوريا (الكتلة الوطنية).</td></tr>
+      <tr><td>قيادة وطنية</td><td>زعماء وحَّدوا الصفوف الشعبية ومثَّلوا القضية الوطنية داخليًا وخارجيًا.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٥. مقارنة سريعة: فرنسا في الجزائر مقابل إيطاليا في ليبيا</h3>
+    <table class="mini-table">
+      <tr><th>وجه المقارنة</th><th>فرنسا في الجزائر</th><th>إيطاليا في ليبيا</th></tr>
+      <tr><td>الذريعة</td><td>حادثة المروحة (١٨٢٧م)، وراءها رغبة حقيقية في التوسع.</td><td>منافسة القوى الأوروبية والموقع على المتوسط.</td></tr>
+      <tr><td>الاقتصاد</td><td>تحويل الأرض لزراعة الكروم لخدمة صناعة الخمور الفرنسية.</td><td>الاستيلاء على الأراضي الخصبة ومنحها للمستوطنين.</td></tr>
+      <tr><td>المقاومة الأبرز</td><td>ثورة التحرير ١٩٥٤-١٩٦٢م.</td><td>مقاومة عمر المختار حتى إعدامه ١٩٣١م.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٦. القيم والدروس المستفادة</h3>
+    <ul class="clean">
+      <li>سيادة الوطن واستقلاله قيمة لا تقبل المساومة.</li>
+      <li>تعلَّم لغة عدوك تأمن شره وتعرف مكائده.</li>
+      <li>ما فعله الاستعمار قديمًا يمكن أن يتكرر اليوم بشكل أكثر خطورة.</li>
+      <li>ضرورة العمل من أجل الوطن دائمًا، وحماية السيادة وحقوق الأجيال القادمة.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h3>٧. الخلاصة الكبرى</h3>
+    <p>لم تكن السيطرة الاستعمارية الفرنسية والإيطالية على العالم العربي مجرد قوة عسكرية عابرة، بل منظومة متكاملة جمعت بين السلاح والاقتصاد والثقافة وتفكيك المجتمع؛ ومع ذلك لم تفلح هذه الأدوات مجتمعة في إخماد إرادة الشعوب، التي واجهت الاحتلال بالمقاومة المسلحة (عمر المختار، ثورة التحرير الجزائرية، الثورة السورية الكبرى)، وبالعمل السياسي والتنظيمي (حزب الاستقلال، الدستوري الجديد، الكتلة الوطنية)، وبقيادات وطنية وحَّدت الشعوب حول هدف واحد: الاستقلال والسيادة الوطنية.</p>
+  </div>
+
+  <div class="cta-row">
+    <a href="#exam" class="btn">ابدأ الامتحان الشامل →</a>
+  </div>
+</section>
+
+<!-- EXAM -->
+<section id="exam" class="exam-section">
+  <div class="exam-head">
+    <div class="eyebrow" style="justify-content:center;"><span class="num">✎</span> التقييم الختامي</div>
+    <h2>الامتحان الشامل</h2>
+    <p class="lead">١٥ سؤالًا تغطي كل عناصر الدرس. اختر إجابتك وستظهر لك النتيجة فورًا في نهاية الاختبار.</p>
+  </div>
+
+  <div class="exam-progress">
+    <span id="prog-text">٠ / ١٥</span>
+    <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <div class="cta-row">
+    <button class="btn" id="submit-btn">تصحيح الامتحان</button>
+    <button class="btn ghost" id="reset-btn">إعادة المحاولة</button>
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <div class="result-score" id="result-score">0/15</div>
+    <div class="result-msg" id="result-msg"></div>
+  </div>
+</section>
+
+<!-- الصور الذهنية والترابط -->
+<section id="mindmaps" style="border-bottom:none; text-align:center;">
+  <div class="eyebrow" style="justify-content:center;"><span class="num">🕸️</span> الصورة الكبرى</div>
+  <h2>الصور الذهنية وترابط الأحداث</h2>
+  <p class="lead">خرائط ذهنية توضح إزاي آليات الاستعمار وأساليب المقاومة مترابطة ببعض عبر الوطن العربي.</p>
+  <div class="cta-row">
+    <button class="btn" id="toggle-mindmaps">🧠 اعرض الصور الذهنية</button>
+  </div>
+
+  <div id="mindmaps-panel" style="display:none; margin-top:34px; text-align:right;">
+
+    <div class="box gold">
+      <div class="box-title">🗺️ خريطة (١): التوسع الاستعماري الفرنسي عبر الزمن</div>
+      <svg viewBox="0 0 620 620" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <defs>
+          <marker id="arrow1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#c9a227"/>
+          </marker>
+        </defs>
+        <line x1="310" y1="90" x2="310" y2="126" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="190" x2="310" y2="226" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="290" x2="310" y2="326" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="390" x2="310" y2="426" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="490" x2="310" y2="526" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+
+        <rect x="70" y="30" width="480" height="60" rx="12" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="310" y="55" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">مصر (١٧٩٨-١٨٠١م)</text>
+        <text x="310" y="76" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">الحملة الفرنسية، بداية التوسع</text>
+
+        <rect x="70" y="130" width="480" height="60" rx="12" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="310" y="155" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">الجزائر (١٨٣٠م)</text>
+        <text x="310" y="176" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">احتلال استيطاني مباشر وطويل الأمد</text>
+
+        <rect x="70" y="230" width="480" height="60" rx="12" fill="#1e1b14" stroke="#4fa3ac" stroke-width="2"/>
+        <text x="310" y="255" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">تونس (١٨٨١م)</text>
+        <text x="310" y="276" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">فرض نظام الحماية الفرنسية</text>
+
+        <rect x="70" y="330" width="480" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="310" y="355" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">المغرب وموريتانيا (١٩١٢م)</text>
+        <text x="310" y="376" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">توسع النفوذ الفرنسي في المغرب العربي</text>
+
+        <rect x="70" y="430" width="480" height="60" rx="12" fill="#1e1b14" stroke="#8c3b2e" stroke-width="3"/>
+        <text x="310" y="455" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">سوريا ولبنان (١٩٢٠م)</text>
+        <text x="310" y="476" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">الانتداب بعد الحرب العالمية الأولى</text>
+
+        <rect x="70" y="530" width="480" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="3"/>
+        <text x="310" y="555" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">المقاومة الوطنية المتصاعدة</text>
+        <text x="310" y="576" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">مسلحة وسياسية تمهِّد لاستقلال كل دولة</text>
+      </svg>
+    </div>
+
+    <div class="box nile">
+      <div class="box-title">🕸️ خريطة (٢): شبكة آليات الاستعمار الأربع (فرنسا وإيطاليا)</div>
+      <svg viewBox="0 0 640 460" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <line x1="320" y1="230" x2="520" y2="80" stroke="#4fa3ac" stroke-width="2"/>
+        <line x1="320" y1="230" x2="120" y2="80" stroke="#4fa3ac" stroke-width="2"/>
+        <line x1="320" y1="230" x2="120" y2="380" stroke="#4fa3ac" stroke-width="2"/>
+        <line x1="320" y1="230" x2="520" y2="380" stroke="#4fa3ac" stroke-width="2"/>
+
+        <circle cx="320" cy="230" r="70" fill="#16140f" stroke="#e8c96b" stroke-width="3"/>
+        <text x="320" y="224" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="14" font-weight="700">آليات</text>
+        <text x="320" y="245" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="13">الاستعمار</text>
+
+        <rect x="430" y="40" width="180" height="80" rx="10" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="520" y="72" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">عسكرية</text>
+        <text x="520" y="94" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">غزو، قواعد، قمع المقاومة</text>
+
+        <rect x="30" y="40" width="180" height="80" rx="10" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="120" y="72" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">اقتصادية</text>
+        <text x="120" y="94" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">استنزاف الموارد وربط الاقتصاد</text>
+
+        <rect x="30" y="340" width="180" height="80" rx="10" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="120" y="368" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">ثقافية</text>
+        <text x="120" y="390" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">تعليم ولغة وهيمنة قيمية</text>
+
+        <rect x="430" y="340" width="180" height="80" rx="10" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="520" y="368" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">اجتماعية</text>
+        <text x="520" y="390" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">تفكيك الروابط وإثارة الانقسامات</text>
+      </svg>
+    </div>
+
+    <div class="box red">
+      <div class="box-title">🕸️ خريطة (٣): شبكة أساليب المقاومة العربية الثلاثة</div>
+      <svg viewBox="0 0 640 460" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <line x1="320" y1="230" x2="320" y2="70" stroke="#8c3b2e" stroke-width="2"/>
+        <line x1="320" y1="230" x2="140" y2="370" stroke="#8c3b2e" stroke-width="2"/>
+        <line x1="320" y1="230" x2="500" y2="370" stroke="#8c3b2e" stroke-width="2"/>
+
+        <circle cx="320" cy="230" r="65" fill="#16140f" stroke="#e8c96b" stroke-width="3"/>
+        <text x="320" y="224" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="13" font-weight="700">أساليب المقاومة</text>
+        <text x="320" y="244" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="13">العربية</text>
+
+        <rect x="195" y="15" width="250" height="70" rx="10" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="320" y="46" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">المقاومة المسلحة</text>
+        <text x="320" y="66" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">عمر المختار، ثورة الجزائر، ثورة سوريا الكبرى</text>
+
+        <rect x="20" y="335" width="240" height="70" rx="10" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="140" y="361" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="13" font-weight="700">العمل السياسي والتنظيمي</text>
+        <text x="140" y="381" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">حزب الاستقلال، الدستوري الجديد، الكتلة الوطنية</text>
+
+        <rect x="380" y="335" width="240" height="70" rx="10" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="500" y="361" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="13" font-weight="700">القيادة الوطنية</text>
+        <text x="500" y="381" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">توحيد الصفوف وتمثيل القضية دوليًا</text>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  موقع مراجعة تفاعلي — الدرس التاسع: حركات التحرر الوطني ضد الاحتلال الفرنسي والإيطالي في العالم العربي — تاريخ البكالوريا المصرية
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "الانتداب نظام دولي نشأ بعد الحرب العالمية الأولى، ويعني:",
+    opts: ["استقلال الدولة الكامل فورًا", "وضع دولة تحت إدارة دولة أخرى بحجة المساعدة على الاستقلال", "اتحادًا عسكريًا بين دولتين متكافئتين", "معاهدة تجارية حرة بين دولتين"],
+    correct: 1,
+    fb: "الانتداب نظام دولي نشأ بعد الحرب العالمية الأولى يضع دولة تحت إدارة دولة أخرى بحجة المساعدة على الاستقلال."
+  },
+  {
+    q: "بدأت السيطرة العسكرية الفرنسية في الوطن العربي بالحملة الفرنسية على مصر، ثم توالت باحتلال الجزائر عام:",
+    opts: ["١٧٩٨م", "١٨٣٠م", "١٨٨١م", "١٩١٢م"],
+    correct: 1,
+    fb: "بعد الحملة الفرنسية على مصر (١٧٩٨-١٨٠١م)، احتلت فرنسا الجزائر عام ١٨٣٠م، تلتها الحماية على تونس ١٨٨١م والمغرب ١٩١٢م."
+  },
+  {
+    q: "بحسب الدرس، اعتبر المؤرخون أن حادثة المروحة بين الداي حسين والقنصل الفرنسي كانت:",
+    opts: ["السبب الحقيقي الوحيد لاحتلال الجزائر", "سببًا ظاهريًا، بينما كانت الأسباب الحقيقية رغبة فرنسا في التوسع الاستعماري", "حادثة لا علاقة لها بالاحتلال الفرنسي إطلاقًا", "سببًا اقتصاديًا بحتًا لا علاقة له بالتوسع"],
+    correct: 1,
+    fb: "يرى المؤرخون أن حادثة المروحة كانت سببًا ظاهريًا فقط، أما الأسباب الحقيقية فكانت رغبة فرنسا في التوسع الاستعماري والسيطرة على الجزائر."
+  },
+  {
+    q: "حوَّلت فرنسا أغلب الأراضي الزراعية في الجزائر لزراعة محصول الكروم من أجل:",
+    opts: ["دعم الأمن الغذائي للجزائريين", "الاستفادة منه في صناعة الخمور الفرنسية", "تصديره لدول عربية أخرى", "إنشاء صناعة نسيج جزائرية"],
+    correct: 1,
+    fb: "حوَّلت فرنسا أغلب الأراضي الزراعية في الجزائر لزراعة الكروم (العنب)؛ للاستفادة منها في صناعة الخمور الفرنسية."
+  },
+  {
+    q: "استغلت فرنسا خام الحديد في موريتانيا من أجل:",
+    opts: ["تطوير الصناعة المحلية الموريتانية", "تنشيط المصانع الفرنسية ودعم الصناعات الثقيلة بفرنسا", "بيعه لدول أوروبية منافسة", "استخدامه في بناء المدارس المحلية"],
+    correct: 1,
+    fb: "استغلت فرنسا خام الحديد في موريتانيا؛ لتنشيط المصانع الفرنسية ودعم الصناعات الثقيلة داخل فرنسا نفسها."
+  },
+  {
+    q: "الهيمنة الثقافية، بحسب مفهوم الدرس، تعني سيطرة دولة على ثقافة دولة أخرى من خلال:",
+    opts: ["القوة العسكرية المباشرة فقط", "التعليم واللغة والقيم؛ بهدف توجيه المجتمع وخدمة أهدافها الاستعمارية", "المعاهدات التجارية فقط", "التحالفات العسكرية الدفاعية"],
+    correct: 1,
+    fb: "الهيمنة الثقافية هي سيطرة دولة على ثقافة دولة أخرى عبر التعليم واللغة والقيم؛ بهدف توجيه المجتمع وخدمة الأهداف الاستعمارية."
+  },
+  {
+    q: "من مظاهر تفكيك البنية الاجتماعية التي اتبعتها فرنسا في المغرب:",
+    opts: ["توحيد الصفوف الوطنية ضد الاحتلال", "إثارة الانقسامات الطائفية والعرقية ودعم نخب موالية للاحتلال", "دعم القيادات الوطنية المستقلة", "تعزيز الروابط الاجتماعية بين القبائل"],
+    correct: 1,
+    fb: "اعتمد الاستعمار الفرنسي في المغرب على إثارة الانقسامات الطائفية والعرقية، ودعم نخب موالية للاحتلال على حساب القوى الوطنية."
+  },
+  {
+    q: "من أسباب سعي إيطاليا لاحتلال ليبيا:",
+    opts: ["رغبة إيطاليا في الانعزال عن المنافسة الأوروبية", "منافسة القوى الاستعمارية الأوروبية وأهمية موقع ليبيا على البحر المتوسط", "غياب أي موارد اقتصادية في ليبيا", "رفض إيطاليا التوسع خارج أوروبا"],
+    correct: 1,
+    fb: "سعت إيطاليا لمنافسة القوى الاستعمارية الأوروبية والحصول على مستعمرة في شمال إفريقيا، وجذبتها أهمية موقع ليبيا على البحر المتوسط ومواردها."
+  },
+  {
+    q: "قاد المقاومة الليبية ضد الاحتلال الإيطالي حتى إعدامه عام ١٩٣١م الزعيم:",
+    opts: ["أحمد بن بلة", "سلطان باشا الأطرش", "عمر المختار", "الشيخ ماء العينين"],
+    correct: 2,
+    fb: "قاد عمر المختار المقاومة الليبية في برقة وطرابلس ضد الاحتلال الإيطالي حتى أُعدم عام ١٩٣١م."
+  },
+  {
+    q: "اتبعت إيطاليا في ليبيا سياسة تفكيك اجتماعي شملت إقامة معسكرات اعتقال، وتشابهت في ذلك مع سياسة:",
+    opts: ["فرنسا في مستعمراتها العربية", "بريطانيا في الهند فقط", "الدولة العثمانية", "إسبانيا في أمريكا اللاتينية"],
+    correct: 0,
+    fb: "تشابهت إيطاليا مع فرنسا في تفكيك البنية الاجتماعية، عبر القمع والترهيب وإقامة معسكرات اعتقال وتهجير القبائل وفرض الرقابة الصارمة."
+  },
+  {
+    q: "قادت جبهة التحرير الوطني ثورة التحرير الجزائرية (١٩٥٤-١٩٦٢م)، ومن أبرز قياداتها الميدانية:",
+    opts: ["الحبيب بورقيبة وعلال الفاسي", "أحمد بن بلة وهواري بومدين والعربي بن مهيدي", "سلطان باشا الأطرش والشيخ ماء العينين", "عمر المختار ومحمد الخامس"],
+    correct: 1,
+    fb: "برزت في ثورة التحرير الجزائرية بقيادة جبهة التحرير الوطني قيادات ميدانية مثل أحمد بن بلة وهواري بومدين والعربي بن مهيدي."
+  },
+  {
+    q: "انطلقت الثورة السورية الكبرى عام ١٩٢٥م ضد الاحتلال الفرنسي بقيادة:",
+    opts: ["الشيخ ماء العينين", "سلطان باشا الأطرش", "علال الفاسي", "الحبيب بورقيبة"],
+    correct: 1,
+    fb: "قاد سلطان باشا الأطرش الثورة السورية الكبرى عام ١٩٢٥م، وتُعَد نموذجًا بارزًا للمقاومة المسلحة ضد الاحتلال الفرنسي."
+  },
+  {
+    q: "أسهم حزب الاستقلال، بقيادة علال الفاسي مع دعم السلطان محمد الخامس، في قيادة العمل الوطني نحو الاستقلال في:",
+    opts: ["تونس", "المغرب", "الجزائر", "ليبيا"],
+    correct: 1,
+    fb: "أسهم حزب الاستقلال بقيادة علال الفاسي، مع دعم السلطان محمد الخامس، في قيادة العمل الوطني وتوجيهه نحو استقلال المغرب."
+  },
+  {
+    q: "برز دور الحزب الدستوري الجديد بقيادة الحبيب بورقيبة في العمل السياسي والتنظيمي في:",
+    opts: ["الجزائر", "ليبيا", "تونس", "موريتانيا"],
+    correct: 2,
+    fb: "برز دور الحزب الدستوري الجديد بقيادة الحبيب بورقيبة في تونس، ضمن أساليب العمل السياسي والتنظيمي لمواجهة الاستعمار الفرنسي."
+  },
+  {
+    q: "بحسب عبارة عمر المختار «نحن لا نستسلم... ننتصر أو نموت»، فإن هذه المقولة تعبِّر بصفة أساسية عن:",
+    opts: ["قبول التفاوض مع المحتل بأي ثمن", "الإصرار على المقاومة حتى تحقيق النصر أو الاستشهاد", "الرغبة في الهجرة من ليبيا", "الدعوة للاستسلام لتجنب الخسائر"],
+    correct: 1,
+    fb: "تعبِّر مقولة عمر المختار عن الإصرار المطلق على مواصلة المقاومة حتى تحقيق النصر، ورفض أي شكل من أشكال الاستسلام للاحتلال."
+  }
+];
+
+const container = document.getElementById('quiz-container');
+let answers = new Array(QUESTIONS.length).fill(null);
+let submitted = false;
+
+function render(){
+  container.innerHTML = '';
+  QUESTIONS.forEach((item, qi) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.innerHTML = `
+      <div class="q-num">السؤال ${qi+1} من ${QUESTIONS.length}</div>
+      <div class="q-text">${item.q}</div>
+      <div class="opts" data-qi="${qi}"></div>
+      <div class="fb" id="fb-${qi}"></div>
+    `;
+    const optsWrap = card.querySelector('.opts');
+    const letters = ['أ','ب','ج','د'];
+    item.opts.forEach((opt, oi) => {
+      const el = document.createElement('div');
+      el.className = 'opt';
+      el.setAttribute('role','button');
+      el.setAttribute('tabindex','0');
+      el.innerHTML = `<span class="letter">${letters[oi]}</span><span>${opt}</span>`;
+      el.addEventListener('click', () => selectOpt(qi, oi));
+      el.addEventListener('keydown', (e) => { if(e.key==='Enter' || e.key===' '){ e.preventDefault(); selectOpt(qi, oi); } });
+      optsWrap.appendChild(el);
+    });
+    container.appendChild(card);
+  });
+  updateProgress();
+}
+
+function selectOpt(qi, oi){
+  if(submitted) return;
+  answers[qi] = oi;
+  const optsWrap = document.querySelector(`.opts[data-qi="${qi}"]`);
+  [...optsWrap.children].forEach((el, idx) => {
+    el.classList.toggle('selected', idx === oi);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const answered = answers.filter(a => a !== null).length;
+  document.getElementById('prog-text').textContent = `${toArabicDigits(answered)} / ${toArabicDigits(QUESTIONS.length)}`;
+  document.getElementById('bar-fill').style.width = (answered / QUESTIONS.length * 100) + '%';
+}
+
+function toArabicDigits(n){
+  const map = {'0':'٠','1':'١','2':'٢','3':'٣','4':'٤','5':'٥','6':'٦','7':'٧','8':'٨','9':'٩'};
+  return String(n).split('').map(c => map[c] !== undefined ? map[c] : c).join('');
+}
+
+document.getElementById('submit-btn').addEventListener('click', () => {
+  submitted = true;
+  let score = 0;
+  QUESTIONS.forEach((item, qi) => {
+    const optsWrap = document.querySelector(`.opts[data-qi="${qi}"]`);
+    const chosen = answers[qi];
+    [...optsWrap.children].forEach((el, idx) => {
+      el.style.pointerEvents = 'none';
+      if(idx === item.correct) el.classList.add('correct');
+      else if(idx === chosen && chosen !== item.correct) el.classList.add('wrong');
+    });
+    if(chosen === item.correct) score++;
+    const fb = document.getElementById(`fb-${qi}`);
+    fb.textContent = (chosen === item.correct ? '✓ إجابة صحيحة — ' : (chosen === null ? '— لم تتم الإجابة — ' : '✗ إجابة غير دقيقة — ')) + item.fb;
+    fb.classList.add('show', chosen === item.correct ? 'ok' : 'no');
+  });
+
+  const panel = document.getElementById('result-panel');
+  panel.classList.add('show');
+  document.getElementById('result-score').textContent = `${toArabicDigits(score)} / ${toArabicDigits(QUESTIONS.length)}`;
+  let msg = '';
+  const pct = score / QUESTIONS.length;
+  if(pct === 1) msg = 'ممتاز! إتقان كامل لدرس حركات التحرر الوطني ضد الاحتلال الفرنسي والإيطالي ✊';
+  else if(pct >= 0.8) msg = 'مستوى رائع جدًا — راجع الأسئلة التي أخطأت فيها لتثبيت المعلومة.';
+  else if(pct >= 0.6) msg = 'مستوى جيد — يُنصح بمراجعة الملخص الشامل مرة أخرى.';
+  else msg = 'يحتاج الأمر مزيدًا من المراجعة — عد إلى قسم الملخص الشامل قبل إعادة المحاولة.';
+  document.getElementById('result-msg').textContent = msg;
+  panel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  submitted = false;
+  answers = new Array(QUESTIONS.length).fill(null);
+  document.getElementById('result-panel').classList.remove('show');
+  render();
+  document.getElementById('exam').scrollIntoView({behavior:'smooth'});
+});
+
+render();
+
+const mmBtn = document.getElementById('toggle-mindmaps');
+const mmPanel = document.getElementById('mindmaps-panel');
+mmBtn.addEventListener('click', () => {
+  const showing = mmPanel.style.display !== 'none';
+  mmPanel.style.display = showing ? 'none' : 'block';
+  mmBtn.textContent = showing ? '🧠 اعرض الصور الذهنية' : '🙈 إخفاء الصور الذهنية';
+  if(!showing){ mmPanel.scrollIntoView({behavior:'smooth', block:'start'}); }
+});
+</script>
+
+</body>
+</html>

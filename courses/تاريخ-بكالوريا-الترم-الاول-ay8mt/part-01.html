@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بناء الدولة المصرية | الدرس الأول - تاريخ البكالوريا المصرية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-void: #0d0c0a;
+    --bg-panel: #16140f;
+    --bg-panel-raised: #1e1b14;
+    --stone: #3a3327;
+    --sand: #c9a227;
+    --sand-bright: #e8c96b;
+    --nile: #2e6f77;
+    --nile-bright: #4fa3ac;
+    --papyrus: #ece2c8;
+    --papyrus-dim: #a89f88;
+    --red-seal: #8c3b2e;
+    --line: rgba(201,162,39,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg-void);
+    color:var(--papyrus);
+    font-family:'Tajawal', sans-serif;
+    line-height:1.9;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--sand); color:#0d0c0a;}
+
+  /* background texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(201,162,39,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 100% 10%, rgba(46,111,119,0.10), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  h1,h2,h3,h4{font-family:'Amiri', serif; font-weight:700; color:var(--sand-bright);}
+
+  a{color:inherit; text-decoration:none;}
+
+  /* ===== NAV ===== */
+  .topbar{
+    position:sticky; top:0; z-index:100;
+    background:rgba(13,12,10,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:14px 26px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Amiri',serif; font-size:1.25rem; color:var(--sand-bright); white-space:nowrap;}
+  .brand .glyph{
+    width:34px; height:34px; border:2px solid var(--sand);
+    display:flex; align-items:center; justify-content:center;
+    border-radius:3px; font-size:1rem; color:var(--sand); flex-shrink:0;
+    background:linear-gradient(135deg, rgba(201,162,39,0.15), transparent);
+  }
+  .navlinks{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none;}
+  .navlinks::-webkit-scrollbar{display:none;}
+  .navlinks a{
+    font-size:0.82rem; padding:8px 12px; white-space:nowrap; border-radius:6px;
+    color:var(--papyrus-dim); transition:.2s;
+    border:1px solid transparent;
+  }
+  .navlinks a:hover{color:var(--sand-bright); border-color:var(--line); background:rgba(201,162,39,0.06);}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative; min-height:78vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:80px 20px 60px;
+    z-index:1;
+  }
+  .hero .kicker{
+    font-family:'Cairo',sans-serif; letter-spacing:6px; font-size:0.75rem;
+    color:var(--nile-bright); text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .hero .kicker::before, .hero .kicker::after{content:""; width:40px; height:1px; background:var(--nile-bright); opacity:.5;}
+  .hero h1{
+    font-size:clamp(2.4rem, 7vw, 5rem); line-height:1.25; max-width:900px;
+    text-shadow: 0 0 40px rgba(232,201,107,0.15);
+  }
+  .hero .subtitle{
+    margin-top:22px; font-size:1.15rem; color:var(--papyrus-dim); max-width:640px;
+    font-family:'Cairo',sans-serif; font-weight:300;
+  }
+  .hero .pillars-mini{
+    display:flex; gap:0; margin-top:56px; align-items:flex-end;
+  }
+  .pillars-mini .col{
+    width:64px; height:110px; margin:0 6px;
+    background:linear-gradient(180deg, var(--bg-panel-raised), var(--bg-panel));
+    border:1px solid var(--line); border-top:3px solid var(--sand);
+    border-radius:4px 4px 0 0;
+    display:flex; align-items:flex-start; justify-content:center; padding-top:14px;
+    font-family:'Amiri',serif; font-size:0.78rem; color:var(--sand-bright);
+    position:relative;
+  }
+  .pillars-mini .col span{writing-mode:vertical-rl; text-orientation:mixed;}
+  .pillars-mini .col:nth-child(2){height:130px;}
+  .pillars-mini .col:nth-child(3){height:95px;}
+
+  .hero-anchor{margin-top:50px; font-size:.85rem; color:var(--papyrus-dim); display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .hero-anchor .arrow{animation:bob 2s infinite ease-in-out;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+  @media (prefers-reduced-motion: reduce){ .hero-anchor .arrow{animation:none;} }
+
+  /* ===== SECTION GENERAL ===== */
+  section{
+    position:relative; z-index:1;
+    max-width:980px; margin:0 auto; padding:70px 24px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'Cairo',sans-serif; font-size:0.78rem; letter-spacing:3px;
+    color:var(--nile-bright); text-transform:uppercase; margin-bottom:10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .num{
+    background:var(--stone); color:var(--sand-bright); font-family:'Amiri',serif;
+    width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem;
+  }
+  section > h2{font-size:clamp(1.6rem,4vw,2.3rem); margin-bottom:26px;}
+  section h3{font-size:1.25rem; color:var(--nile-bright); margin:28px 0 12px; font-family:'Cairo',sans-serif; font-weight:700;}
+  p{font-size:1.02rem; color:#dcd3ba;}
+  .lead{font-size:1.12rem; color:var(--papyrus); font-family:'Cairo',sans-serif; font-weight:300;}
+
+  /* boxes */
+  .box{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:10px;
+    padding:22px 24px; margin:18px 0;
+  }
+  .box.gold{border-right:4px solid var(--sand);}
+  .box.nile{border-right:4px solid var(--nile);}
+  .box.red{border-right:4px solid var(--red-seal);}
+  .box-title{font-family:'Cairo',sans-serif; font-weight:700; color:var(--sand-bright); margin-bottom:10px; font-size:0.95rem; display:flex; align-items:center; gap:8px;}
+
+  ul.clean{list-style:none; padding:0;}
+  ul.clean li{
+    position:relative; padding-right:22px; margin:10px 0; color:#dcd3ba; font-size:0.98rem;
+  }
+  ul.clean li::before{content:"◆"; position:absolute; right:0; top:2px; color:var(--sand); font-size:0.6rem;}
+
+  .quote{
+    font-family:'Amiri',serif; font-style:italic; font-size:1.15rem; color:var(--sand-bright);
+    border-right:3px solid var(--sand); padding:6px 22px; margin:20px 0; line-height:2;
+  }
+  .quote cite{display:block; font-family:'Cairo',sans-serif; font-style:normal; font-size:0.8rem; color:var(--papyrus-dim); margin-top:10px;}
+
+  /* pillars diagram */
+  .pillars-wrap{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:36px 0;}
+  .pillar-card{
+    background:linear-gradient(180deg, var(--bg-panel-raised), var(--bg-panel));
+    border:1px solid var(--line); border-top:4px solid var(--sand);
+    border-radius:8px; padding:20px 14px; text-align:center;
+    transition:.25s;
+  }
+  .pillar-card:hover{transform:translateY(-6px); border-top-color:var(--sand-bright); box-shadow:0 12px 30px rgba(0,0,0,0.4);}
+  .pillar-card .ic{font-size:1.8rem; margin-bottom:10px;}
+  .pillar-card h4{font-size:1.05rem; color:var(--sand-bright); margin-bottom:8px;}
+  .pillar-card p{font-size:0.85rem; color:var(--papyrus-dim);}
+  @media(max-width:760px){.pillars-wrap{grid-template-columns:repeat(2,1fr);}}
+
+  /* article/constitution card */
+  .article-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:20px 0;}
+  .article-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:16px;
+    font-size:0.88rem;
+  }
+  .article-card .tag{color:var(--nile-bright); font-family:'Cairo',sans-serif; font-weight:700; font-size:0.78rem; margin-bottom:8px; display:block;}
+  @media(max-width:760px){.article-grid{grid-template-columns:1fr 1fr;}}
+
+  /* cards grid (list of measures) */
+  .measures{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;}
+  .measure{background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:16px 18px; display:flex; gap:12px; align-items:flex-start;}
+  .measure .ic{font-size:1.3rem; flex-shrink:0;}
+  .measure p{font-size:0.92rem; margin:0;}
+  @media(max-width:700px){.measures{grid-template-columns:1fr;}}
+
+  /* timeline */
+  .timeline{position:relative; margin:40px 0 10px; padding-right:30px; border-right:2px solid var(--stone);}
+  .tl-item{position:relative; padding-bottom:36px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; right:-37px; top:4px; width:14px; height:14px;
+    background:var(--sand); border-radius:50%; box-shadow:0 0 0 4px var(--bg-void), 0 0 14px rgba(232,201,107,0.5);
+  }
+  .tl-item .tl-date{font-family:'Amiri',serif; color:var(--sand-bright); font-size:1.05rem; margin-bottom:4px;}
+  .tl-item h4{font-size:1.1rem; margin-bottom:6px;}
+  .tl-item p{font-size:0.95rem;}
+
+  /* highlight recall box */
+  .qa{
+    background:var(--bg-panel-raised); border:1px dashed var(--line); border-radius:8px;
+    padding:16px 20px; margin:16px 0; font-size:0.95rem;
+  }
+  .qa b{color:var(--nile-bright);}
+
+  /* footer link to test */
+  .cta-row{display:flex; justify-content:center; margin:40px 0 0;}
+  .btn{
+    background:linear-gradient(135deg, var(--sand), #a5811e);
+    color:#181206; font-family:'Cairo',sans-serif; font-weight:700; font-size:1rem;
+    padding:14px 34px; border-radius:30px; border:none; cursor:pointer;
+    transition:.2s; box-shadow:0 6px 20px rgba(201,162,39,0.25);
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(201,162,39,0.35);}
+  .btn.ghost{background:transparent; border:1px solid var(--sand); color:var(--sand-bright); box-shadow:none;}
+
+  /* ===== SUMMARY SECTION ===== */
+  .summary-section{background:var(--bg-panel);}
+  .summary-block{margin-bottom:30px;}
+  .summary-block h3{color:var(--sand-bright); border-bottom:1px solid var(--line); padding-bottom:8px;}
+  .summary-block ul.clean li::before{color:var(--nile-bright);}
+  .mini-table{width:100%; border-collapse:collapse; margin:14px 0; font-size:0.9rem;}
+  .mini-table th, .mini-table td{border:1px solid var(--line); padding:10px 12px; text-align:right;}
+  .mini-table th{background:var(--bg-panel-raised); color:var(--sand-bright); font-family:'Cairo',sans-serif;}
+
+  /* ===== EXAM ===== */
+  .exam-section{background:linear-gradient(180deg, var(--bg-void), #0a0908);}
+  .exam-head{text-align:center; margin-bottom:36px;}
+  .exam-progress{
+    position:sticky; top:66px; z-index:50; background:var(--bg-panel);
+    border:1px solid var(--line); border-radius:20px; padding:8px 18px;
+    display:flex; align-items:center; gap:14px; font-size:0.85rem; max-width:400px; margin:0 auto 30px;
+  }
+  .bar{flex:1; height:6px; background:var(--stone); border-radius:6px; overflow:hidden;}
+  .bar-fill{height:100%; background:linear-gradient(90deg, var(--nile), var(--sand)); width:0%; transition:.3s;}
+
+  .q-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:12px;
+    padding:26px; margin-bottom:22px;
+  }
+  .q-num{color:var(--nile-bright); font-family:'Cairo',sans-serif; font-weight:700; font-size:0.85rem; margin-bottom:8px;}
+  .q-text{font-size:1.05rem; color:var(--papyrus); margin-bottom:18px; font-family:'Cairo',sans-serif; font-weight:500;}
+  .opts{display:flex; flex-direction:column; gap:10px;}
+  .opt{
+    display:flex; align-items:center; gap:12px; padding:12px 16px;
+    background:var(--bg-panel-raised); border:1px solid var(--line); border-radius:8px;
+    cursor:pointer; transition:.15s; font-size:0.94rem;
+  }
+  .opt:hover{border-color:var(--sand);}
+  .opt.selected{border-color:var(--nile-bright); background:rgba(46,111,119,0.12);}
+  .opt.correct{border-color:#5aa66b; background:rgba(90,166,107,0.15);}
+  .opt.wrong{border-color:var(--red-seal); background:rgba(140,59,46,0.18);}
+  .opt .letter{
+    width:26px; height:26px; border-radius:50%; background:var(--stone); color:var(--sand-bright);
+    display:flex; align-items:center; justify-content:center; font-size:0.8rem; flex-shrink:0; font-family:'Cairo',sans-serif;
+  }
+  .fb{margin-top:14px; font-size:0.88rem; padding:10px 14px; border-radius:6px; display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:rgba(90,166,107,0.12); color:#8fd39f; border:1px solid rgba(90,166,107,0.3);}
+  .fb.no{background:rgba(140,59,46,0.12); color:#e6a297; border:1px solid rgba(140,59,46,0.3);}
+
+  .essay textarea{
+    width:100%; min-height:90px; background:var(--bg-void); border:1px solid var(--line);
+    border-radius:8px; padding:12px 14px; color:var(--papyrus); font-family:'Tajawal',sans-serif; font-size:0.94rem;
+    resize:vertical;
+  }
+  .essay textarea:focus{outline:2px solid var(--nile-bright); border-color:transparent;}
+  .essay-hint{font-size:0.82rem; color:var(--papyrus-dim); margin-top:8px;}
+
+  .result-panel{
+    display:none; text-align:center; background:var(--bg-panel-raised); border:1px solid var(--sand);
+    border-radius:14px; padding:40px 26px; margin-top:20px;
+  }
+  .result-panel.show{display:block;}
+  .result-score{font-family:'Amiri',serif; font-size:3.2rem; color:var(--sand-bright);}
+  .result-msg{font-size:1.05rem; margin-top:10px; color:var(--papyrus);}
+
+  footer{text-align:center; padding:40px 20px 60px; color:var(--papyrus-dim); font-size:0.82rem; position:relative; z-index:1;}
+
+  :focus-visible{outline:2px solid var(--nile-bright); outline-offset:2px;}
+
+  @media(max-width:640px){
+    .navlinks{display:none;}
+    .article-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="glyph">𓊪</span> بناء الدولة المصرية</div>
+  <nav class="navlinks">
+    <a href="#intro">مدخل الوحدة</a>
+    <a href="#dawla">مفهوم الدولة</a>
+    <a href="#shaab">الشعب</a>
+    <a href="#hayez">الحيز الجغرافي</a>
+    <a href="#solta">السلطة</a>
+    <a href="#siyada">السيادة</a>
+    <a href="#moqawwemat">مقومات النشأة</a>
+    <a href="#marahel">مراحل التطور</a>
+    <a href="#tadribat">تدريبات الكتاب</a>
+    <a href="#molakhas">الملخص الشامل</a>
+    <a href="#exam">الامتحان</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="kicker">تاريخ · البكالوريا المصرية · الوحدة الأولى</div>
+  <h1>بناء الدولة المصرية</h1>
+  <p class="subtitle">مصر بين الماضي والحاضر — كيف نشأت الدولة المصرية، ولماذا كانت عبر التاريخ هدفًا للأطماع الخارجية، وكيف استطاعت رغم ذلك أن تحافظ على استمرارية دولتها؟</p>
+  <div class="pillars-mini" aria-hidden="true">
+    <div class="col"><span>الشعب</span></div>
+    <div class="col"><span>السلطة</span></div>
+    <div class="col"><span>الحيز</span></div>
+    <div class="col"><span>السيادة</span></div>
+  </div>
+  <div class="hero-anchor"><span>ابدأ الرحلة</span><span class="arrow">↓</span></div>
+</div>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="eyebrow"><span class="num">۰</span> مدخل الوحدة الأولى</div>
+  <h2>مصر بين الماضي والحاضر</h2>
+  <p class="lead">حول نهر النيل قامت واحدة من أعظم الحضارات في العالم، وعلى أراضي مصر قامت أول دولة مركزية عرفتها البشرية. لم تكن مصر مجرد مكان على الخريطة، بل كانت دولة ذات موضع وموقع أَّثر في كثير من أحداث التاريخ في عصوره المختلفة، وموطنًا لحضارة امتد أثرها عبر العصور. لهذا كانت مصر دائمًا محَّط أنظار العالم.</p>
+
+  <div class="box gold">
+    <div class="box-title">🧭 السؤال المحوري للوحدة</div>
+    <p>كيف نشأت الدولة المصرية، ولماذا كانت مصر عبر التاريخ هدفًا للأطماع الخارجية، وكيف استطاعت رغم ذلك أن تحافظ على استمرارية دولتها؟</p>
+  </div>
+
+  <h3>أهداف الوحدة الأولى (في نهايتها يكون الطالب قادرًا على أن):</h3>
+  <ul class="clean">
+    <li>يُحدِّد مفهوم الدولة وأركانها الأساسية.</li>
+    <li>يحدد العوامل التي ساعدت على نشأة الدولة المصرية.</li>
+    <li>يُحلِّل أهم التحولات التي مرت بمصر طوال تاريخها.</li>
+    <li>يُصنِّف مراحل تطور الدولة المصرية عبر التاريخ.</li>
+    <li>يحلل عناصر قوة الدولة وأثرها في تحقيق الاستقرار والتنمية.</li>
+    <li>يستكشف العوامل التي ساعدت على استمرار الدولة المصرية عبر العصور.</li>
+    <li>يعبر عن تقديره لقيمة الوحدة الوطنية في بناء الدولة.</li>
+    <li>يعبر عن انتمائه واعتزازه بالهوية الوطنية.</li>
+    <li>يحلل الوثائق والنصوص التاريخية المتعلقة بالأحداث التاريخية بالوحدة.</li>
+    <li>يقيّم دور بعض الشخصيات في بناء الدولة المصرية.</li>
+    <li>يوظف المفاهيم التاريخية في تفسير قضايا معاصرة.</li>
+  </ul>
+
+  <h3>مفتاح التواريخ (استرشادية) — أهم عشر محطات</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-date">١ — ٣٢٠٠ ق.م</div><h4>توحيد القُطرين</h4><p>توحيد القُطرين على يد الملك مينا (نعارمر) وبداية عصر الأسرات.</p></div>
+    <div class="tl-item"><div class="tl-date">٢ — ٣٣٢ ق.م</div><h4>دخول الإسكندر الأكبر مصر</h4><p>بداية العصر الهيليني في مصر.</p></div>
+    <div class="tl-item"><div class="tl-date">٣ — ٣٠ ق.م</div><h4>دخول مصر تحت الحكم الروماني</h4></div>
+    <div class="tl-item"><div class="tl-date">٤ — ٦٤١ م</div><h4>الفتح الإسلامي لمصر</h4></div>
+    <div class="tl-item"><div class="tl-date">٥ — ١٥١٧ م</div><h4>دخول مصر تحت الحكم العثماني</h4></div>
+    <div class="tl-item"><div class="tl-date">٦ — ١٧٩٨ م</div><h4>الحملة الفرنسية على مصر</h4></div>
+    <div class="tl-item"><div class="tl-date">٧ — ١٨٠٥ م</div><h4>تولي محمد علي حكم مصر</h4><p>وبداية بناء الدولة الحديثة.</p></div>
+    <div class="tl-item"><div class="tl-date">٨ — ١٨٨٢ م</div><h4>الاحتلال البريطاني لمصر</h4></div>
+    <div class="tl-item"><div class="tl-date">٩ — ١٩١٩ م</div><h4>ثورة الشعب المصري</h4><p>ضد الاحتلال البريطاني.</p></div>
+    <div class="tl-item"><div class="tl-date">١٠ — ١٩٥٢ م</div><h4>ثورة ٢٣ يوليو</h4><p>وبناء الجمهورية.</p></div>
+  </div>
+</section>
+
+<!-- مفهوم الدولة وأركانها -->
+<section id="dawla">
+  <div class="eyebrow"><span class="num">١</span> الدرس الأول</div>
+  <h2>مفهوم الدولة وأركانها</h2>
+
+  <div class="box nile">
+    <div class="box-title">🎯 أهداف الدرس</div>
+    <ul class="clean">
+      <li>يتعرف مفهوم الدولة وأركانها الأربعة.</li>
+      <li>يُميز بين مفهومي السيادة على الشؤون الداخلية والسيادة على الشؤون الخارجية في الدولة المصرية.</li>
+      <li>يسرد مقومات نشأة الدولة المصرية واستمرارها عبر العصور.</li>
+      <li>يعرض مراحل تطور الدولة المصرية عبر التاريخ.</li>
+      <li>يحلل نصًا دستوريًا أو وثيقة تاريخية ليستخرج منها أركان الدولة.</li>
+      <li>يفسر العلاقة بين نهر النيل ونشأة السلطة المركزية في مصر القديمة.</li>
+      <li>يستنتج نتائج غياب أحد أركان الدولة.</li>
+      <li>يقترح طريقة واحدة للمشاركة الإيجابية في الحفاظ على الهوية الوطنية وتعزيز الاستقرار.</li>
+    </ul>
+  </div>
+
+  <div class="quote">الدولة كيان سياسي منظم يقوم على أركان أساسية مترابطة؛ إذا اختل أحدها تأثَّر كيان الدولة بأكمله، ولا يكتمل وجود الدولة إلا بتوافر مقومات تدعم نشأتها وتحافظ على استقرارها، وقد عرَفت مصر فكرة الدولة منذ آلاف السنين.
+    <cite>— الفكرة الرئيسة للدرس</cite>
+  </div>
+
+  <div class="qa">💭 <b>سؤال يدفعنا للتعلم:</b> لماذا استطاعت بعض الدول أن تستمر عبر التاريخ بينما أخفقت دول أخرى؟</div>
+
+  <h3>ما هي الدولة؟</h3>
+  <p>الدولة هي وحدة سياسية تشغل حيزًا جغرافيًا مُحدَّدًا، وتضم شعبًا يُقيم إقامة دائمة ويخضع لقوانينها، وتديرها سلطة منظمة تباشر اختصاصاتها بما يحقق الأمن والاستقرار، وتمارس سيادتها على شؤونها الداخلية والخارجية.</p>
+
+  <h3>نص من الدستور المصري ٢٠١٤م (نشاط: ابحث وحدد)</h3>
+  <div class="quote">
+    تنص المادة الأولى من الدستور المصري على أن «جمهورية مصر العربية دولة ذات سيادة، موحدة لا تقبل التجزئة، ولا ينزل عن شيء منها، نظامها جمهوري ديمقراطي، يقوم على أساس المواطنة وسيادة القانون.
+    الشعب المصري جزء من الأمة العربية يعمل على تكاملها ووحدتها، ومصر جزء من العالم الإسلامي، وتنتمي إلى القارة الإفريقية، وتعتز بامتدادها الآسيوي، وتسهم في بناء الحضارة الإنسانية».
+    <cite>— الدستور المصري، المادة الأولى، ٢٠١٤م</cite>
+  </div>
+  <p><b>الاستنتاج المطلوب:</b> نستنتج من هذا النص أن مصر تمتلك مقومات الدولة الرئيسية: تضم شعبًا (المواطنين المصريين)، ولها حيز جغرافي بحدود مُعترَف بها، ولديها سلطة حاكمة (رئيس، حكومة، برلمان، نظام قضائي) تدير شؤونها الداخلية والخارجية، وتتمتع بالسيادة.</p>
+
+  <h3>أركان الدولة الأربعة</h3>
+  <div class="pillars-wrap">
+    <div class="pillar-card"><div class="ic">👥</div><h4>الشعب</h4><p>جميع المواطنين المقيمين داخل حدود الدولة أو خارجها ممن يحملون جنسيتها.</p></div>
+    <div class="pillar-card"><div class="ic">⚖️</div><h4>السلطة</h4><p>المؤسسات التي تدير شؤون الدولة وتضع القوانين وتعمل على تنفيذها.</p></div>
+    <div class="pillar-card"><div class="ic">🗺️</div><h4>الحيز الجغرافي</h4><p>الرقعة المُحدَّدة التي تمارس الدولة سيادتها عليها (اليابس والمياه والمجال الجوي).</p></div>
+    <div class="pillar-card"><div class="ic">🌐</div><h4>السيادة</h4><p>استقلال الدولة في اتخاذ قراراتها الداخلية والخارجية دون خضوع لسلطة خارجية.</p></div>
+  </div>
+</section>
+
+<!-- الشعب -->
+<section id="shaab">
+  <div class="eyebrow"><span class="num">٢</span> الركن الأول</div>
+  <h2>الشعب</h2>
+  <div class="qa">💭 لماذا يُعَد الشعب ركنًا رئيسًا من أركان الدولة؟</div>
+  <p>يشمل الشعب جميع المواطنين المقيمين داخل حدود الدولة أو خارجها ممن يحملون الجنسية المصرية، وتبسط الدولة سيادتها عليهم وفقًا للقانون. وكلما كان الشعب واعيًا بحقوقه وواجباته، كانت الدولة أقوى وأكثر تقدمًا. ولا يقتصر دور الشعب على الوجود العددي فقط، بل يمتد ليشمل المشاركة الفعّالة في بناء الدولة وتنميتها وحمايتها عن طريق ما يلي:</p>
+
+  <div class="measures">
+    <div class="measure"><div class="ic">🗳️</div><p><b>المشاركة السياسية:</b> اختيار الحكام وممثلي الشعب عبر الانتخابات، وإبداء الرأي في القضايا العامة، والانضمام إلى الأحزاب السياسية ومؤسسات المجتمع المدني، ومراقبة أداء الحكومة والمطالبة بالإصلاح من خلال ممثليهم في مجلس النواب.</p></div>
+    <div class="measure"><div class="ic">🛡️</div><p><b>دعم أمن الدولة واستقرارها:</b> الالتزام بالدستور والقوانين المختلفة واحترامها والتعاون مع مؤسسات الدولة، ونبذ العنف والتطرف والإرهاب.</p></div>
+    <div class="measure"><div class="ic">📈</div><p><b>المساهمة في تحقيق التنمية الاقتصادية:</b> العمل والإنتاج في مختلف القطاعات، ودفع الضرائب التي تُمول المشروعات العامة، وتشجيع الاستثمار والمبادرات المجتمعية.</p></div>
+    <div class="measure"><div class="ic">🏛️</div><p><b>الحفاظ على هوية المجتمع:</b> الحفاظ على التراث المادي والثقافي واحترام عادات وتقاليد المجتمع، وتعزيز قيم الانتماء والولاء للوطن.</p></div>
+    <div class="measure"><div class="ic">🎖️</div><p><b>الدفاع عن الوطن:</b> مساندة القوات المسلحة ودعمها معنويًا، والمشاركة في الأعمال التطوعية وقت الأزمات والكوارث، وعدم نشر الشائعات التي تزعزع أمن الدولة المصرية واستقرارها.</p></div>
+  </div>
+
+  <div class="box gold">
+    <div class="box-title">💡 قيم أتعلمها</div>
+    <p>المشاركة الإيجابية في تحقيق التنمية وبناء الدولة المصرية واجب وطني.</p>
+    <p>أعتز بهويتي المصرية وأعمل على الحفاظ على تراث بلدي.</p>
+  </div>
+
+  <h3>فكر وأجب: ثورة ١٩١٩م ودور الشعب</h3>
+  <p>أثبتت ثورة ١٩١٩م أن الشعب المصري شعب مرتبط بأرضه وأن الأرض عنده كالعِرض، وهو القوة الحقيقية للتغيير، وأن تماسكه ووحدته يُؤثِّر تأثيرًا حاسمًا في بقاء الدولة وتطوير نظامها السياسي، حيث شارك الشعب بجميع فئاته من طلاب وعمال وفلاحين، وخرجت النساء في مظاهرات لأول مرة في تاريخ مصر، وتعاون جميع المصريين تحت شعار «الدين لله والوطن للجميع» للمطالبة بحقوقهم المشروعة.</p>
+  <div class="qa">
+    <p>١- وضح أثر خروج الشعب المصري في ثورة ١٩١٩م على أوضاع مصر السياسية؟</p>
+    <p>٢- يحفل تاريخ الشعب المصري بعديد من الأمثلة التي توضح دوره في تماسك الدولة المصرية. ناقش ذلك.</p>
+    <p>٣- حدِّد من وجهة نظرك دورك كمواطن مسؤول في الدولة المصرية.</p>
+  </div>
+</section>
+
+<!-- الحيز الجغرافي -->
+<section id="hayez">
+  <div class="eyebrow"><span class="num">٣</span> الركن الثاني</div>
+  <h2>الحيز الجغرافي</h2>
+  <div class="qa">💭 لماذا من الضروري وضع حدود فاصلة بين الدول؟</div>
+  <p>الحيز الجغرافي للدولة هو الرقعة المُحدَّدة التي تمارس الدولة سيادتها عليها، وتشمل: اليابس (الأرض) والمياه الإقليمية والمجال الجوي، ولا تقوم دولة من دون وجود حدود محددة مُعترَف بها.</p>
+
+  <h3>أولًا: اليابس</h3>
+  <p>هو المساحة الأرضية التي يعيش عليها السكان وتمتد داخل إطار الحدود السياسية للدولة، وتتمثل حدود مصر البرية فيما يلي:</p>
+  <div class="article-grid">
+    <div class="article-card"><span class="tag">الحدود الجنوبية</span>دائرة عرض ٢٢ درجة شمالًا عند الحدود الجنوبية، والتي رُسِّمت عام ١٨٩٩م لتفصل مصر عن السودان.</div>
+    <div class="article-card"><span class="tag">الحدود الشمالية</span>خط ساحل البحر المتوسط شمالًا.</div>
+    <div class="article-card"><span class="tag">الحدود الشرقية</span>خط ساحل البحر الأحمر وخليج العقبة شرقًا، بالإضافة لخط الحدود البرية بين مصر وفلسطين، والتي رُسِّمت في عام ١٩٠٦م.</div>
+    <div class="article-card"><span class="tag">الحدود الغربية</span>خط طول ٢٥ درجة شرقًا عند الحدود الغربية، وتُمثِّل الحدود السياسية الفاصلة بين مصر وليبيا، والتي رُسِّمت في عام ١٩٢٥م.</div>
+  </div>
+
+  <h3>ثانيًا: المياه الإقليمية</h3>
+  <p>هي المساحات البحرية التي تمتد عادةً لمسافة ١٢ ميلًا بحريًا من الخط الأساسي للساحل، غير أن الدولة المصرية أدركت أهمية الثروات المختلفة في المياه الإقليمية عند حدودها الشمالية؛ فعيَّنت حدودها البحرية بشكل دقيق في البحر المتوسط؛ لضمان الحفاظ على تلك الموارد.</p>
+
+  <h3>ثالثًا: المجال الجوي</h3>
+  <p>هو المساحة الرأسية التي تعلو الحيز الجغرافي للدولة (اليابس والمياه الإقليمية)، وتمارس الدولة سيادتها عليه.</p>
+
+  <div class="box nile">
+    <div class="box-title">💡 قيمة في معلومة</div>
+    <p>أثبت التاريخ المصري أن وحدة الأرض كانت أساس قيام الدولة، والحفاظ على هذه الأرض والدفاع عنها كان دائمًا شرطًا أساسيًا لاستمرار الدولة وقوتها.</p>
+  </div>
+
+  <div class="quote">تُعَد حدود مصر من أكثر الحدود ثباتًا واستقرارًا عبر التاريخ، والتي أسهمت في تحديد شخصيتها منذ العصور القديمة وحتى الآن.</div>
+
+  <div class="qa">
+    <p>١- دلِّل على صحة العبارة التالية: الدولة ليست مجرد أرض، بل هي كيان متكامل تمارس فيه الدولة سلطتها وتحمي مصالحها.</p>
+    <p>٢- اشرح علامَ تدل العبارات التالية في ضوء دراستك لمفهوم الدولة وأركانها:</p>
+    <ul class="clean">
+      <li>لا يُسمح لأي طائرة بدخول المجال الجوي المصري من دون تصريح رسمي من الدولة.</li>
+      <li>الدولة مسؤولة عن حماية قناة السويس ومراقبة السفن العابرة للتأكد من سلامة الملاحة.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- السلطة -->
+<section id="solta">
+  <div class="eyebrow"><span class="num">٤</span> الركن الثالث</div>
+  <h2>السلطة</h2>
+  <div class="qa">💭 ما أهمية وجود سلطة حاكمة في الدولة؟</div>
+  <p>تشمل السلطة المؤسسات التي تدير شؤون الدولة وتضع القوانين وتعمل على تنفيذها، وتحافظ على الأمن العام، وقد نص الدستور المصري على مكونات السلطة.</p>
+
+  <h3>مواد الدستور المصري ٢٠١٤م المتعلقة بالسلطة</h3>
+  <div class="article-grid">
+    <div class="article-card"><span class="tag">مادة (١٠١)</span>يتولى مجلس النواب سلطة التشريع، وإقرار السياسة العامة للدولة، والخطة العامة للتنمية الاقتصادية والاجتماعية، والموازنة العامة للدولة، ويمارس الرقابة على أعمال السلطة التنفيذية، وذلك كله على النحو المبين في الدستور.</div>
+    <div class="article-card"><span class="tag">مادة (١٣٩)</span>رئيس الجمهورية هو رئيس الدولة، ورئيس السلطة التنفيذية، يرعى مصالح الشعب ويحافظ على استقلال الوطن ووحدة أراضيه وسلامتها.</div>
+    <div class="article-card"><span class="tag">مادة (١٦٣)</span>الحكومة هي الهيئة التنفيذية والإدارية العليا للدولة، وتتكون من رئيس مجلس الوزراء، ونوابه، والوزراء، ونوابهم.</div>
+    <div class="article-card"><span class="tag">مادة (١٨٤)</span>السلطة القضائية مستقلة، تتولاها المحاكم على اختلاف أنواعها ودرجاتها، وتصدر أحكامها وفقًا للقانون.</div>
+  </div>
+
+  <h3>سلطات الدولة الثلاث</h3>
+  <div class="pillars-wrap">
+    <div class="pillar-card"><div class="ic">🏛️</div><h4>السلطة التشريعية</h4><p>تختص بسن القوانين وإقرار السياسة العامة للدولة ومراقبة السلطة التنفيذية.</p></div>
+    <div class="pillar-card"><div class="ic">🏢</div><h4>السلطة التنفيذية</h4><p>تختص بإدارة شؤون الدولة وتنفيذ القوانين ورعاية مصالح الشعب.</p></div>
+    <div class="pillar-card"><div class="ic">⚖️</div><h4>السلطة القضائية</h4><p>تختص بالفصل في المنازعات وإصدار الأحكام وفقًا للقانون، وهي مستقلة.</p></div>
+  </div>
+
+  <h3>أهمية السلطة للدولة</h3>
+  <ul class="clean">
+    <li>الحفاظ على النظام والقانون.</li>
+    <li>تحقيق الاستقرار السياسي والاجتماعي.</li>
+    <li>حماية حقوق الأفراد والجماعات.</li>
+    <li>تمكين الدولة من ممارسة سيادتها.</li>
+  </ul>
+
+  <div class="qa">
+    <p><b>تأمل وفكر:</b> ما العلاقة بين قوة المؤسسات واستقرار الدولة؟ ارسم شكلًا تخطيطيًا يُعبِّر عن العلاقة بين سلطات الدولة المصرية.</p>
+    <p>تخيل مجتمعًا يعيش في مكان واحد، ويعمل أفراده في المجالات المختلفة، ولهم عادات مشتركة، لكن هذا المجتمع لا يملك نظامًا يحكم العلاقات بين الناس، ولا توجد سلطة تنظم شؤونهم أو تحمي حدودهم، ماذا سيكون وضع هذا المجتمع؟</p>
+  </div>
+</section>
+
+<!-- السيادة -->
+<section id="siyada">
+  <div class="eyebrow"><span class="num">٥</span> الركن الرابع</div>
+  <h2>السيادة</h2>
+  <div class="qa">💭 كيف يمكن أن يؤثر غياب السيادة على قدرة الدولة في اتخاذ قراراتها؟</div>
+  <p>السيادة تعني استقلال الدولة في اتخاذ قراراتها فيما يتعلق بشؤونها الداخلية والخارجية من دون خضوع لسلطة خارجية.</p>
+
+  <div class="pillars-wrap" style="grid-template-columns:repeat(2,1fr);">
+    <div class="pillar-card"><div class="ic">🏠</div><h4>السيادة على الشؤون الداخلية</h4><p>تشمل حرية الدولة في سن القوانين، وحفظ الأمن، وإدارة شؤون المواطنين بدون أي ضغوط خارجية.</p></div>
+    <div class="pillar-card"><div class="ic">🌍</div><h4>السيادة على الشؤون الخارجية</h4><p>تشمل استقلال الدولة في علاقاتها الدولية، وحريتها في إبرام المعاهدات، وإقامة العلاقات الدبلوماسية، وحماية المصالح الوطنية، والتمثيل أمام المنظمات الدولية.</p></div>
+  </div>
+
+  <div class="box red">
+    <div class="box-title">📜 كلمات للتاريخ</div>
+    <div class="quote" style="border:none; padding:0; margin:0;">إن مصر ستظل منيعة بجبهتها الداخلية المتماسكة، عصية على المؤامرات والفتن، مبصرة بكل ما يُحاك حولها.
+      <cite>— جزء من خطاب الرئيس عبد الفتاح السيسي في الذكرى ٧٣ لثورة ٢٣ يوليو</cite>
+    </div>
+  </div>
+
+  <div class="qa">💭 <b>أفكر وأحلل:</b> اذكر أمثلة من التاريخ القديم والحديث تسعى مصر لتحقيق استقلال إرادتها الوطنية من دون أي تأثير خارجي (الهكسوس - الاحتلال الإنجليزي).</div>
+</section>
+
+<!-- مقومات نشأة الدولة -->
+<section id="moqawwemat">
+  <div class="eyebrow"><span class="num">٦</span> عوامل الاستمرار</div>
+  <h2>مقومات نشأة الدولة المصرية وعوامل استمرارها عبر الزمن</h2>
+  <p>تنشأ الدول نتيجة تضافر عدد من المقومات التي تُحوِّل المجتمع من مجرد تجمعات بشرية مشتتة إلى كيان سياسي منظم.</p>
+  <div class="qa">💭 <b>تأمل ذاتي:</b> كيف تحولت التجمعات التي عاشت على ضفاف نهر النيل إلى دولة قوية؟</div>
+
+  <h3>١. الموقع الجغرافي والحدود الطبيعية</h3>
+  <p>وقوع مصر في قلب العالم القديم جعلها مركزًا مهمًا للتواصل الحضاري والتبادل التجاري بين الشعوب. وتتمتع مصر بحدود طبيعية مثلت حواجز طبيعية قامت بدور حماية قلب الدولة (الوادي والدلتا). كما ساعد الموقع الجغرافي على استقرار المجتمع المصري عبر التاريخ؛ ما سمح لهم بالتركيز على البناء والزراعة، وهو ما دعم عملية الاستقرار ونشأة الدولة.</p>
+  <div class="quote">في مصر بالذات لن تفهم كيانها أو تفهم تاريخها بشكل صحيح خارج إطار الموقع وبغير الإشارة إليه؛ فمصر موضع دولة نهر، وموقع دولة برزخ، ولو لم يكن النيل فرضًا لفرض الموقع نفسه يقينًا.
+    <cite>— د. جمال حمدان، كتاب «شخصية مصر»</cite>
+  </div>
+
+  <h3>٢. الموارد الطبيعية — نهر النيل</h3>
+  <div class="qa">💭 لماذا يُعَد نهر النيل أساس قيام الحضارة المصرية؟</div>
+  <p>يُعَد نهر النيل أهم مورد طبيعي في مصر، وهو عامل أساسي لنشأة الدولة المصرية وحضارتها، والذي بسببه تحوّل المصري من «جامع للثمار» إلى «مزارع مستقر»، حيث تطلَّب الأمر تنظيمًا للري وبناء السدود والعمل الجماعي ووجود إدارة مركزية قوية، الأمر الذي أدى إلى نشأة «الحكومة» لتنظيم عملية توزيع المياه وحل النزاعات بين الأقاليم، وكان النيل شريان اتصال لربط الشمال بالجنوب.</p>
+  <p>ولقد حبا الله مصر، بالإضافة إلى نهر النيل، موارد طبيعية كثيرة مثل الأراضي الخصبة والمعادن والأحجار التي أسهمت في دعم النشاط الاقتصادي؛ ما ساعد على ازدهار المجتمع المصري وتقدُّم الدولة.</p>
+
+  <div class="box gold">
+    <div class="box-title">🎵 أنشودة النيل (من كتاب الموتى)</div>
+    <p style="font-family:'Amiri',serif; font-size:1.05rem; text-align:center; line-height:2.2;">
+      لـم ألوث مـاء النـهر<br>
+      لم أمنع المـاء فـي موسمه<br>
+      لم أُقِم سدًّا أمام الماء المتدفق
+    </p>
+  </div>
+  <p>رتَّل المصري القديم الأناشيد الدينية تقديسًا لدور النيل في حياته، فقالوا: «تحيةً لك يا حابي، الذي يخرج من الأرض ويصل لكي يعطي الحياة لمصر، أنت الذي أخفى مصادره في الظلمات، أنت الفيضان الذي ينساب على الأرض الخضراء... ليمنح الحياة إلى جميع هؤلاء الظمأى، وعندما ترتفع تشدو الأرض كلها فرحًا».</p>
+  <div class="qa">
+    <p>١- دلل على تقديس المصريين لنهر النيل.</p>
+    <p>٢- «نهر النيل لم يكن مجرد مصدرًا للمياه العذبة». اشرح العبارة.</p>
+    <p>٣- حدِّد أهم الأساليب الفاعلة في الحفاظ على نهر النيل في الوقت الحالي.</p>
+  </div>
+
+  <h3>٣. التجانس البشري والوحدة الوطنية</h3>
+  <p>تُعَد مصر من أكثر دول العالم تجانسًا؛ حيث انصهر سكان وادي النيل في بوتقة ثقافية واحدة منذ فجر التاريخ؛ مما شكَّل «كتلة صلبة» يصعب تفتيتها، وهذا التجانس جعل من «الوحدة السياسية» أمرًا طبيعيًا. وقد ساعد هذا التجانس على عدم تأثر المصريين بثقافة المحتل، بل حافظوا على الهوية المصرية المُميَّزة على مر العصور.</p>
+  <div class="box nile">
+    <div class="box-title">👁️ لاحظ — اللغة المصرية القديمة</div>
+    <p>كانت اللغة المصرية القديمة بكتاباتها المختلفة لغة أهل مصر في العصور القديمة، وتحدَّث المصريون اللغة القبطية فترة الحكم الروماني بعد انتشار المسيحية في مصر، ثم انتشرت اللغة العربية بعد الفتح الإسلامي، واستمرت اللغة العربية بمصر في تاريخها الحديث والمعاصر بلهجتها المُميَّزة بين الشعوب العربية.</p>
+  </div>
+
+  <h3>٤. الحكومة المركزية القوية</h3>
+  <div class="qa">💭 كيف أسهمت الحاجة إلى التنظيم في ظهور السلطة المركزية؟</div>
+  <p>كان قيام حكومة مركزية قوية بعد توحيد القُطرين عام ٣٢٠٠ ق.م، هو الأساس الحقيقي لظهور الدولة المصرية؛ إذ تحوَّلت من تجمعات صغيرة إلى دولة مُنظَّمة ذات سلطة واحدة ونظام إداري موحد.</p>
+
+  <h3>٥. القوة العسكرية</h3>
+  <div class="qa">💭 ما أهمية وجود قوة عسكرية بالنسبة للدولة؟</div>
+  <p>اعتمدت مصر على جيش من أبنائها يدافع عن «أرضها»، فالجيش المصري كان دائمًا ولا يزال هو الأداة التي تحمي حدود الدولة وتصون إنجازاتها الحضارية وتضمن استقرارها السياسي.</p>
+  <div class="box red">
+    <div class="box-title">🎖️ عقيدة الجيش المصري</div>
+    <p>الجيش المصري يبني ويصون ويحمي، ولا يعتدي، ومهما كانت قوته فهي قوة رشيدة.</p>
+  </div>
+
+  <div class="qa">
+    <p>💭 <b>فكر وناقش:</b> لماذا كانت مصر في حاجة لوجود جيش بعد توحيدها على يد الملك مينا (نعارمر)؟ ولماذا هي بحاجة في الوقت الحالي لوجود قوات مسلحة على أعلى جاهزية؟</p>
+  </div>
+
+  <h3>الحفاظ على الهوية المصرية</h3>
+  <div class="box gold">
+    <div class="box-title">🇪🇬 الهوية الوطنية — تعريف</div>
+    <p>مجموعة من الخصائص التي تُميِز الشعب المصري عبر التاريخ وتُشكِّل شخصيته وتعكس انتماءه الوطني، وتتمثل مرتكزاته في: <b>(الدين — اللغة — التاريخ)</b>.</p>
+  </div>
+  <p>يتم الحفاظ على الهوية المصرية من خلال مجموعة من الإجراءات، ولعل من أهمها:</p>
+  <ul class="clean">
+    <li>حماية التراث الحضاري والاحتفال بالمناسبات الوطنية؛ وذلك للحفاظ على الذاكرة التاريخية وتعزيز الانتماء الوطني.</li>
+    <li>تضمين المناهج الدراسية موضوعات عن تاريخ مصر وحضارتها.</li>
+    <li>دعم الثقافة والفنون من خلال دعم المؤسسات الثقافية في مقدمتها دار الأوبرا المصرية وقصور الثقافة، وتشجيع الفنون الشعبية التي تُعبِّر عن التراث المصري.</li>
+  </ul>
+  <div class="quote">الحفاظ على الذاكرة التاريخية من أهم عناصر صمود الهوية أمام الغزو الثقافي.</div>
+</section>
+
+<!-- مراحل تطور الدولة -->
+<section id="marahel">
+  <div class="eyebrow"><span class="num">٧</span> عبر العصور</div>
+  <h2>مراحل تطور الدولة المصرية</h2>
+  <p>مرت الدولة المصرية بعدة مراحل على النحو التالي:</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">١. العصور القديمة</div>
+      <h4>الدولة المصرية في العصور القديمة</h4>
+      <p>عاش المصريون القدماء على ضفاف نهر النيل في تجمعات صغيرة من القرى الزراعية، ومع مرور الزمن بدأت هذه القرى تتوسع وتزداد علاقاتها ببعضها بعض، حتى ظهرت الحاجة إلى سلطة تُنظِّم حياة الناس وتحمي الموارد المشتركة. ويُعَد توحيد القُطرين على يد الملك مينا من أهم الأحداث التي شهدتها مصر في بداية تاريخها والانطلاقة الحقيقية للدولة المصرية؛ إذ أدى هذا الحدث إلى قيام دولة موحدة ذات سلطة مركزية تدير شؤون المجتمع.</p>
+      <p>اضطرت مصر في العصور القديمة لمواجهة بعض الأخطار الخارجية؛ خاصةً من جهاتها الشمالية الشرقية؛ ما اضطرها للتوسع وتكوين إمبراطورية كبيرة لحماية أمنها القومي، وظهر ذلك بشكل واضح في عهد الملك تحتمس الثالث. وتعرضت مصر بعدها لأطماع خارجية كثيرة (الغزو الهكسوسي واليوناني والروماني)، ثم دخلت مصر المسيحية في منتصف القرن الأول الميلادي لتبدأ الحقبة القبطية التي امتزجت فيها الجذور المصرية القديمة مع الفكر المسيحي، وأسهمت في تشكيل جزء مهم من الشخصية المصرية.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">٢. العصر الإسلامي — التحولات الكبرى</div>
+      <h4>مرحلة الدولة في العصر الإسلامي</h4>
+      <p>دخلت مصر مرحلة جديدة بعد الفتح العربي الإسلامي (٦٤١م / ٢١هـ)، ورغم إدخال نُظُم سياسية وإدارية جديدة في مصر فإنها أصبحت مركزًا حضاريًا واقتصاديًا في العالم الإسلامي، وقد كانت مصر في البداية ولاية تابعة للخلافة (الراشدة، الأموية، العباسية)، ثم انتقلت لمرحلة الدولة المستقلة (الطولونية، الإخشيدية، الفاطمية، الأيوبية، المملوكية).</p>
+      <p>في هذه المرحلة استطاعت مصر أن تحمي الدولة الإسلامية وجيرانها من الأخطار التي تعرضت لها قلب العالم الإسلامي (الصليبيين والمغول)، وقد حافظ الإسلام على خصوصية مصر، وأضاف إلى القيم الموروثة من تاريخها القديم مجموعة أخرى من القيم الرائعة، وبعد سقوط دولة المماليك أصبحت مصر تحت الحكم العثماني، وشهدت هذه الفترة بداية ظهور الحقبة الاستعمارية بتعرض مصر للحملة الفرنسية عام ١٧٩٨م.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">٣. عصر محمد علي</div>
+      <h4>بناء الدولة الحديثة في عصر محمد علي</h4>
+      <p>بعد خروج الحملة الفرنسية ١٨٠١م شهدت مصر حالة من الفوضى السياسية، لكن الشعب المصري نجح في اختيار محمد علي واليًا عليها، لتبدأ مصر مرحلة جديدة في تاريخها، عندما تولى محمد علي باشا الحكم عام ١٨٠٥م.</p>
+      <p>قد أدرك محمد علي أن بناء دولة قوية يعتمد على القوة العسكرية وتأسيس مؤسسات اقتصادية وإدارية وتعليمية متطورة تسهم في تحقيق الاستقرار والتقدم؛ لذلك شرع محمد علي في تنفيذ مشروع إصلاحي شامل لإعادة تنظيم شؤون الدولة المصرية، شمل مختلف المجالات؛ بهدف إقامة دولة حديثة قادرة على حماية مصالحها، وتعزيز مكانتها، وتحقيق التنمية.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">٤. بعد ثورة ٢٣ يوليو ١٩٥٢م</div>
+      <h4>الدولة المصرية بعد ثورة ٢٣ يوليو</h4>
+      <p>ظلت مصر تحت حكم أسرة محمد علي حتى قيام ثورة ٢٣ يوليو ١٩٥٢م، والتي شهدت تحولًا سياسيًا واجتماعيًا واقتصاديًا؛ إذ أنهت النظام الملكي، وأعلنت قيام الجمهورية عام ١٩٥٣م، لتبدأ مرحلة جديدة في بناء الدولة على أسس وطنية تستهدف ترسيخ مبدأ السيادة الوطنية، والتحرر من النفوذ الأجنبي، وبناء مؤسسات قادرة على إدارة شؤون البلاد بكفاءة، كما شهدت الدولة توجهًا نحو تحقيق العدالة الاجتماعية، وتعزيز دورها في مجالات التعليم والصناعة والإصلاح الزراعي؛ بهدف إحداث تنمية شاملة تُعزِّز استقلال الوطن.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">٥. الدولة المصرية المعاصرة</div>
+      <h4>مصر المعاصرة</h4>
+      <p>عقب الإنجازات التي حققتها مصر بعد ثورة ٢٣ يوليو ١٩٥٢م، واصلت الدولة المصرية تطورها في إطار متغيرات إقليمية ودولية متسارعة، مُحافظةً على كيانها ومؤسساتها، وساعية إلى التوازن بين متطلبات الاستقرار السياسي ومتطلبات التنمية الاقتصادية والاجتماعية، فعملت الدولة المصرية المعاصرة على:</p>
+      <ul class="clean">
+        <li>ترسيخ النظام الجمهوري القائم على مؤسسات دستورية تُنظِّم العلاقة بين السلطات.</li>
+        <li>تعزيز دور الدولة في التنمية من خلال المشروعات القومية والبنية التحتية.</li>
+        <li>تعزيز مفهوم المواطنة والهوية الوطنية باعتبارها عنصرًا رئيسيًا في استقرار الدولة واستمراريتها.</li>
+        <li>الحفاظ على الأمن القومي واستقلال القرار الوطني.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa">
+    <p>💭 <b>فكر وناقش:</b> لماذا اعتُبِرت ثورة ٢٣ يوليو ١٩٥٢م نقطة تحول في تاريخ الدولة المصرية؟ استنتج العلاقة بين إعلان الجمهورية وتعزيز السيادة الوطنية.</p>
+    <p>💭 <b>فكر وأجب:</b> توقع إلى أي مدى تعتبر ثورة ٢٣ يوليو نقطة تحول حقيقية في تاريخ مصر؟ ادعم إجابتك.</p>
+  </div>
+
+  <div class="box nile">
+    <div class="box-title">🔬 مشروع بحثي</div>
+    <p>في ضوء دراستك السابقة، سجِّل على الخط الزمني مراحل تطور الدولة المصرية منذ توحيد البلاد وحتى الوقت الحاضر، وتبادلها مع زملائك، ثم ناقِشها مع معلمك.</p>
+  </div>
+  <div class="qa">💭 <b>سؤال التفسير المدعوم بالأدلة:</b> فسِّر أهمية السلطة والسيادة واستقلالية الدولة المصرية في اتخاذ قراراتها.</div>
+</section>
+
+<!-- تدريبات الكتاب -->
+<section id="tadribat">
+  <div class="eyebrow"><span class="num">٨</span> من الكتاب المدرسي</div>
+  <h2>تدريبات الدرس كما وردت في الكتاب</h2>
+
+  <div class="box gold">
+    <div class="box-title">١</div>
+    <p>«نشأة الدولة المصرية لم تكن نتيجة عامل واحد، بل ناتج تفاعل مجموعة من العوامل». حلِّل العبارة في ضوء: الموقع الجغرافي — الموارد الطبيعية — التجانس السكاني — الحكومة المركزية. ثم حدِّد العامل الأكثر تأثيرًا مع التبرير.</p>
+  </div>
+  <div class="box gold">
+    <div class="box-title">٢</div>
+    <p>«نهر النيل هو العامل الحاسم في قيام الدولة المصرية». ناقش العبارة: مؤيدًا / معارضًا. ثم قدِّم رأيًا نهائيًا مُدعَّمًا.</p>
+  </div>
+  <div class="box gold">
+    <div class="box-title">٣</div>
+    <p>فسِّر العلاقة بين: الشعب ↔ استقرار الدولة • السلطة ↔ تحقيق النظام • السيادة ↔ استقلال القرار • القوة العسكرية ↔ استمرارية الدولة.</p>
+  </div>
+  <div class="box gold">
+    <div class="box-title">٤</div>
+    <p>ماذا لو...؟ غابت السلطة المركزية.</p>
+  </div>
+  <div class="box gold">
+    <div class="box-title">٥</div>
+    <p>قارن بين: دور الشعب في نشأة الدولة ودوره في استمراريتها.</p>
+  </div>
+  <div class="box gold">
+    <div class="box-title">٦</div>
+    <p>«الدولة التي تفقد أحد أركانها تصبح مُهدَّدة بالانهيار». حلِّل العبارة، مُوضِّحًا أثر غياب كل ركن.</p>
+  </div>
+  <div class="box gold">
+    <div class="box-title">٧</div>
+    <p>أي العوامل التالية كان الأكثر تأثيرًا في استمرار الدولة المصرية؟ الموقع الجغرافي — الحكومة المركزية — الجيش. اختر مع تبرير اختيارك.</p>
+  </div>
+  <div class="box gold">
+    <div class="box-title">٨</div>
+    <p>اكتب فقرة تُفسِّر فيها كيف أسهم تكامل أركان الدولة في استمراريتها.</p>
+  </div>
+  <div class="box gold">
+    <div class="box-title">٩ — اختر الإجابة المناسبة</div>
+    <p><b>يتضح من دراسة نشأة الدولة المصرية أن العامل الحاسم في التحول من تجمعات سكانية إلى دولة مركزية هو ...........</b><br>
+    أ) وجود جيش قوي &nbsp; ب) الموقع الجغرافي &nbsp; ج) زيادة عدد السكان &nbsp; د) التوسع الزراعي</p>
+    <p><b>يمكن تفسير العلاقة بين التجانس السكاني والاستقرار السياسي في مصر عبر تاريخها بأن التجانس ...........</b><br>
+    أ) يقلل من الصراعات الداخلية &nbsp; ب) يؤدي لزيادة السكان &nbsp; ج) يمنع الغزو الخارجي &nbsp; د) يحقق التنمية الاقتصادية</p>
+    <p><b>يمكن استنتاج أن الدولة التي غابت عنها سيادتها ...........</b><br>
+    أ) تفقد قدرتها على اتخاذ القرار &nbsp; ب) تنقص لديها الموارد الطبيعية &nbsp; ج) لا تمتلك موقعًا جغرافيًا مميزًا &nbsp; د) ينقص عدد سكانها بشكل ملحوظ</p>
+  </div>
+</section>
+
+<!-- الملخص الشامل -->
+<section id="molakhas" class="summary-section">
+  <div class="eyebrow"><span class="num">📋</span> قبل الامتحان</div>
+  <h2>الملخص الشامل للدرس</h2>
+  <p class="lead">كل ما تحتاج مراجعته قبل الامتحان — في مكان واحد.</p>
+
+  <div class="summary-block">
+    <h3>١. مفهوم الدولة</h3>
+    <p>وحدة سياسية تشغل حيزًا جغرافيًا مُحدَّدًا، تضم شعبًا يخضع لقوانينها، تديرها سلطة منظمة، وتمارس سيادتها على شؤونها الداخلية والخارجية.</p>
+  </div>
+
+  <div class="summary-block">
+    <h3>٢. أركان الدولة الأربعة</h3>
+    <table class="mini-table">
+      <tr><th>الركن</th><th>التعريف المختصر</th></tr>
+      <tr><td>الشعب</td><td>جميع المواطنين حاملي الجنسية، مشاركتهم سياسية واقتصادية واجتماعية ودفاعية.</td></tr>
+      <tr><td>الحيز الجغرافي</td><td>اليابس (الحدود الأربعة) + المياه الإقليمية (١٢ ميلًا بحريًا) + المجال الجوي.</td></tr>
+      <tr><td>السلطة</td><td>تشريعية (مجلس النواب) + تنفيذية (رئيس الجمهورية والحكومة) + قضائية (المحاكم المستقلة).</td></tr>
+      <tr><td>السيادة</td><td>داخلية (سن القوانين وحفظ الأمن) وخارجية (العلاقات الدولية والمعاهدات).</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٣. حدود مصر الأربعة (اليابس)</h3>
+    <ul class="clean">
+      <li>جنوبًا: خط عرض ٢٢° شمالًا (رُسِّم ١٨٩٩م) — يفصل مصر عن السودان.</li>
+      <li>شمالًا: ساحل البحر المتوسط.</li>
+      <li>شرقًا: ساحل البحر الأحمر وخليج العقبة + الحدود مع فلسطين (رُسِّمت ١٩٠٦م).</li>
+      <li>غربًا: خط طول ٢٥° شرقًا (رُسِّم ١٩٢٥م) — يفصل مصر عن ليبيا.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h3>٤. مقومات نشأة الدولة المصرية واستمرارها (٥ عوامل)</h3>
+    <ul class="clean">
+      <li><b>الموقع الجغرافي:</b> مركز حضاري وتجاري بين آسيا وأفريقيا وأوروبا، حدود طبيعية حامية.</li>
+      <li><b>الموارد الطبيعية (نهر النيل):</b> حوّل المصري من جامع ثمار إلى مزارع مستقر؛ أوجب تنظيم الري والعمل الجماعي، فنشأت الحكومة.</li>
+      <li><b>التجانس البشري والوحدة الوطنية:</b> تجانس ثقافي منذ فجر التاريخ جعل الوحدة السياسية أمرًا طبيعيًا وحافظ على الهوية أمام الاحتلال.</li>
+      <li><b>الحكومة المركزية القوية:</b> نشأت بعد توحيد القُطرين ٣٢٠٠ ق.م على يد الملك مينا (نعارمر).</li>
+      <li><b>القوة العسكرية:</b> الجيش المصري يحمي الحدود ويصون الإنجازات الحضارية والاستقرار السياسي — عقيدته: يبني، يصون، يحمي، ولا يعتدي.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h3>٥. الهوية الوطنية</h3>
+    <p>مجموعة خصائص تُميِز الشعب المصري وتُشكِّل شخصيته، مرتكزاتها: <b>الدين — اللغة — التاريخ</b>. تُحفَظ عبر: حماية التراث والاحتفال بالمناسبات، تضمين المناهج الدراسية، ودعم الثقافة والفنون (دار الأوبرا، قصور الثقافة).</p>
+  </div>
+
+  <div class="summary-block">
+    <h3>٦. مراحل تطور الدولة المصرية (بالترتيب الزمني)</h3>
+    <table class="mini-table">
+      <tr><th>#</th><th>المرحلة</th><th>أبرز ما فيها</th></tr>
+      <tr><td>١</td><td>العصور القديمة</td><td>توحيد القُطرين ٣٢٠٠ ق.م (الملك مينا)، إمبراطورية تحتمس الثالث، غزوات الهكسوس/اليونان/الرومان، ثم الحقبة القبطية.</td></tr>
+      <tr><td>٢</td><td>العصر الإسلامي</td><td>الفتح العربي ٦٤١م، ولاية تابعة للخلافة ثم دول مستقلة (طولونية، فاطمية، أيوبية، مملوكية)، مواجهة الصليبيين والمغول، ثم الحكم العثماني والحملة الفرنسية ١٧٩٨م.</td></tr>
+      <tr><td>٣</td><td>عصر محمد علي</td><td>تولي الحكم ١٨٠٥م، بناء دولة حديثة تعتمد القوة العسكرية والمؤسسات الاقتصادية والتعليمية.</td></tr>
+      <tr><td>٤</td><td>بعد ثورة ١٩٥٢</td><td>إنهاء النظام الملكي، إعلان الجمهورية ١٩٥٣م، ترسيخ السيادة الوطنية والتحرر من النفوذ الأجنبي، العدالة الاجتماعية والإصلاح الزراعي.</td></tr>
+      <tr><td>٥</td><td>مصر المعاصرة</td><td>ترسيخ النظام الجمهوري الدستوري، تعزيز التنمية والمشروعات القومية، تعزيز المواطنة والهوية الوطنية، الحفاظ على الأمن القومي.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٧. تواريخ يجب حفظها</h3>
+    <ul class="clean">
+      <li>٣٢٠٠ ق.م: توحيد القُطرين (مينا/نعارمر).</li>
+      <li>٣٣٢ ق.م: دخول الإسكندر الأكبر مصر.</li>
+      <li>٣٠ ق.م: دخول مصر تحت الحكم الروماني.</li>
+      <li>٦٤١م: الفتح الإسلامي لمصر.</li>
+      <li>١٥١٧م: دخول مصر تحت الحكم العثماني.</li>
+      <li>١٧٩٨م: الحملة الفرنسية على مصر.</li>
+      <li>١٨٠٥م: تولي محمد علي حكم مصر.</li>
+      <li>١٨٨٢م: الاحتلال البريطاني لمصر.</li>
+      <li>١٩١٩م: ثورة الشعب المصري ضد الاحتلال البريطاني.</li>
+      <li>١٩٥٢م: ثورة ٢٣ يوليو وبناء الجمهورية.</li>
+    </ul>
+  </div>
+
+  <div class="cta-row">
+    <a href="#exam" class="btn">ابدأ الامتحان الشامل →</a>
+  </div>
+</section>
+
+<!-- EXAM -->
+<section id="exam" class="exam-section">
+  <div class="exam-head">
+    <div class="eyebrow" style="justify-content:center;"><span class="num">✎</span> التقييم الختامي</div>
+    <h2>الامتحان الشامل</h2>
+    <p class="lead">١٥ سؤالًا تغطي كل عناصر الدرس. اختر إجابتك وستظهر لك النتيجة فورًا في نهاية الاختبار.</p>
+  </div>
+
+  <div class="exam-progress">
+    <span id="prog-text">٠ / ١٥</span>
+    <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <div class="cta-row">
+    <button class="btn" id="submit-btn">تصحيح الامتحان</button>
+    <button class="btn ghost" id="reset-btn" style="margin-right:14px;">إعادة المحاولة</button>
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <div class="result-score" id="result-score">0/15</div>
+    <div class="result-msg" id="result-msg"></div>
+  </div>
+</section>
+
+<footer>
+  موقع مراجعة تفاعلي — الدرس الأول: بناء الدولة المصرية — تاريخ البكالوريا المصرية، الوحدة الأولى: مصر بين الماضي والحاضر
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "ما المقصود بمفهوم الدولة؟",
+    opts: [
+      "وحدة سياسية تشغل حيزًا جغرافيًا محددًا، وتضم شعبًا دائمًا يخضع لقوانينها، وتديرها سلطة منظمة تمارس سيادتها",
+      "أي تجمع بشري يعيش في منطقة جغرافية واحدة بغض النظر عن وجود سلطة",
+      "مجموعة من القوانين المكتوبة في وثيقة رسمية فقط",
+      "الأرض الجغرافية بمساحتها ومواردها الطبيعية فقط"
+    ],
+    correct: 0,
+    fb: "الدولة تجمع بين أربعة أركان: شعب، حيز جغرافي، سلطة، وسيادة — وليست مجرد أرض أو قانون أو تجمع بشري بمفرده."
+  },
+  {
+    q: "أركان الدولة الأربعة كما وردت في الدرس هي:",
+    opts: [
+      "الشعب، الجيش، الاقتصاد، الثقافة",
+      "الشعب، الحيز الجغرافي، السلطة، السيادة",
+      "الحكومة، البرلمان، القضاء، الجيش",
+      "اللغة، الدين، التاريخ، الجغرافيا"
+    ],
+    correct: 1,
+    fb: "الأركان الأربعة المتفق عليها دستوريًا: الشعب - الحيز الجغرافي - السلطة - السيادة."
+  },
+  {
+    q: "وفقًا للمادة الأولى من الدستور المصري ٢٠١٤، فإن مصر دولة:",
+    opts: ["اتحادية تقبل التجزئة", "ذات سيادة، موحدة لا تقبل التجزئة", "ملكية دستورية", "تابعة لدولة أخرى في قراراتها"],
+    correct: 1,
+    fb: "نص الدستور: «جمهورية مصر العربية دولة ذات سيادة، موحدة لا تقبل التجزئة، ولا ينزل عن شيء منها»."
+  },
+  {
+    q: "أي مما يلي ليس من صور المشاركة السياسية للشعب كما وردت في الدرس؟",
+    opts: [
+      "اختيار الحكام وممثلي الشعب عبر الانتخابات",
+      "الانضمام إلى الأحزاب السياسية ومؤسسات المجتمع المدني",
+      "نشر الشائعات التي تزعزع أمن الدولة",
+      "مراقبة أداء الحكومة والمطالبة بالإصلاح عبر مجلس النواب"
+    ],
+    correct: 2,
+    fb: "نشر الشائعات يهدد أمن الدولة واستقرارها، وهو عكس دور الشعب في دعم الدولة."
+  },
+  {
+    q: "ثورة ١٩١٩م أثبتت أن الشعب المصري:",
+    opts: [
+      "غير مهتم بالشأن السياسي",
+      "شعب مرتبط بأرضه، وتماسكه له تأثير حاسم في بقاء الدولة",
+      "اقتصر نشاطه على الطلاب فقط دون بقية الفئات",
+      "كان مؤيدًا للاحتلال البريطاني"
+    ],
+    correct: 1,
+    fb: "شارك في الثورة طلاب وعمال وفلاحون، وخرجت النساء لأول مرة في مظاهرات، تحت شعار «الدين لله والوطن للجميع»."
+  },
+  {
+    q: "يتكون الحيز الجغرافي للدولة من:",
+    opts: ["اليابس فقط", "اليابس والمياه الإقليمية والمجال الجوي", "المياه الإقليمية فقط", "المجال الجوي والشعب"],
+    correct: 1,
+    fb: "الحيز الجغرافي يشمل: اليابس (الأرض) + المياه الإقليمية + المجال الجوي."
+  },
+  {
+    q: "الحدود الجنوبية لمصر رُسِّمت عام ١٨٩٩م عند خط عرض:",
+    opts: ["٢٢ درجة شمالًا", "٢٥ درجة شرقًا", "١٢ درجة جنوبًا", "٣٠ درجة شمالًا"],
+    correct: 0,
+    fb: "دائرة عرض ٢٢ درجة شمالًا عند الحدود الجنوبية، رُسِّمت عام ١٨٩٩م لتفصل مصر عن السودان."
+  },
+  {
+    q: "تمتد المياه الإقليمية لمصر عادةً لمسافة:",
+    opts: ["٦ أميال بحرية", "١٢ ميلًا بحريًا", "٢٠ ميلًا بحريًا", "٣٠ ميلًا بحريًا"],
+    correct: 1,
+    fb: "المياه الإقليمية تمتد عادةً ١٢ ميلًا بحريًا من الخط الأساسي للساحل."
+  },
+  {
+    q: "أيٌّ من هذه السلطات مسؤول عن التشريع وإقرار السياسة العامة للدولة وفقًا للمادة ١٠١ من الدستور؟",
+    opts: ["مجلس النواب", "رئيس الجمهورية", "مجلس الوزراء", "المحاكم"],
+    correct: 0,
+    fb: "المادة ١٠١: يتولى مجلس النواب سلطة التشريع، وإقرار السياسة العامة والخطة العامة للتنمية والموازنة العامة."
+  },
+  {
+    q: "من الذي يُعَد رئيسًا للدولة ورئيسًا للسلطة التنفيذية وفقًا للمادة ١٣٩؟",
+    opts: ["رئيس الجمهورية", "رئيس مجلس الوزراء", "رئيس مجلس النواب", "رئيس السلطة القضائية"],
+    correct: 0,
+    fb: "المادة ١٣٩: رئيس الجمهورية هو رئيس الدولة، ورئيس السلطة التنفيذية."
+  },
+  {
+    q: "السيادة على الشؤون الداخلية تعني:",
+    opts: [
+      "حرية الدولة في إبرام المعاهدات الدولية فقط",
+      "حرية الدولة في سن القوانين وحفظ الأمن وإدارة شؤون المواطنين دون ضغوط خارجية",
+      "خضوع الدولة لقرارات دول أخرى في شؤونها الداخلية",
+      "تمثيل الدولة أمام المنظمات الدولية فقط"
+    ],
+    correct: 1,
+    fb: "السيادة الداخلية = حرية سن القوانين وحفظ الأمن وإدارة شؤون المواطنين دون خضوع لسلطة خارجية."
+  },
+  {
+    q: "ما العامل الذي حوّل المصري القديم من «جامع للثمار» إلى «مزارع مستقر»؟",
+    opts: ["الغزو الهكسوسي", "نهر النيل والحاجة لتنظيم الري", "دخول المسيحية", "الفتح الإسلامي"],
+    correct: 1,
+    fb: "الاعتماد على نهر النيل تطلّب تنظيمًا للري وبناء السدود والعمل الجماعي، فنشأت الحكومة لتنظيم توزيع المياه."
+  },
+  {
+    q: "أدى توحيد القُطرين على يد الملك مينا (نعارمر) عام ٣٢٠٠ ق.م إلى:",
+    opts: [
+      "زوال الدولة المصرية",
+      "قيام دولة موحدة ذات سلطة مركزية ونظام إداري موحد",
+      "زيادة التجزئة السياسية في مصر",
+      "دخول مصر تحت الحكم الروماني"
+    ],
+    correct: 1,
+    fb: "توحيد القُطرين هو الحدث التأسيسي الذي أدى لقيام دولة موحدة ذات سلطة مركزية، وهو بداية عصر الأسرات."
+  },
+  {
+    q: "رتب مراحل تطور الدولة المصرية التالية: أ) عصر محمد علي ب) العصر الإسلامي ج) العصور القديمة د) ثورة ١٩٥٢ — الترتيب الصحيح هو:",
+    opts: ["ج، ب، أ، د", "أ، ب، ج، د", "د، ج، ب، أ", "ب، ج، أ، د"],
+    correct: 0,
+    fb: "الترتيب الزمني الصحيح: العصور القديمة ← العصر الإسلامي ← عصر محمد علي ← ثورة ١٩٥٢."
+  },
+  {
+    q: "مرتكزات الهوية الوطنية المصرية كما وردت في الدرس هي:",
+    opts: ["الاقتصاد - الجيش - التعليم", "الدين - اللغة - التاريخ", "الجغرافيا - المناخ - الموارد", "الرياضة - الفن - السياحة"],
+    correct: 1,
+    fb: "الهوية الوطنية: مجموعة خصائص تميز الشعب المصري، مرتكزاتها (الدين - اللغة - التاريخ)."
+  }
+];
+
+const container = document.getElementById('quiz-container');
+let answers = new Array(QUESTIONS.length).fill(null);
+let submitted = false;
+
+function render(){
+  container.innerHTML = '';
+  QUESTIONS.forEach((item, qi) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.innerHTML = `
+      <div class="q-num">السؤال ${qi+1} من ${QUESTIONS.length}</div>
+      <div class="q-text">${item.q}</div>
+      <div class="opts" data-qi="${qi}"></div>
+      <div class="fb" id="fb-${qi}"></div>
+    `;
+    const optsWrap = card.querySelector('.opts');
+    const letters = ['أ','ب','ج','د'];
+    item.opts.forEach((opt, oi) => {
+      const el = document.createElement('div');
+      el.className = 'opt';
+      el.setAttribute('role','button');
+      el.setAttribute('tabindex','0');
+      el.innerHTML = `<span class="letter">${letters[oi]}</span><span>${opt}</span>`;
+      el.addEventListener('click', () => selectOpt(qi, oi));
+      el.addEventListener('keydown', (e) => { if(e.key==='Enter' || e.key===' '){ e.preventDefault(); selectOpt(qi, oi); } });
+      optsWrap.appendChild(el);
+    });
+    container.appendChild(card);
+  });
+  updateProgress();
+}
+
+function selectOpt(qi, oi){
+  if(submitted) return;
+  answers[qi] = oi;
+  const optsWrap = document.querySelector(`.opts[data-qi="${qi}"]`);
+  [...optsWrap.children].forEach((el, idx) => {
+    el.classList.toggle('selected', idx === oi);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const answered = answers.filter(a => a !== null).length;
+  document.getElementById('prog-text').textContent = `${toArabicDigits(answered)} / ${toArabicDigits(QUESTIONS.length)}`;
+  document.getElementById('bar-fill').style.width = (answered / QUESTIONS.length * 100) + '%';
+}
+
+function toArabicDigits(n){
+  const map = {'0':'٠','1':'١','2':'٢','3':'٣','4':'٤','5':'٥','6':'٦','7':'٧','8':'٨','9':'٩'};
+  return String(n).split('').map(c => map[c] !== undefined ? map[c] : c).join('');
+}
+
+document.getElementById('submit-btn').addEventListener('click', () => {
+  submitted = true;
+  let score = 0;
+  QUESTIONS.forEach((item, qi) => {
+    const optsWrap = document.querySelector(`.opts[data-qi="${qi}"]`);
+    const chosen = answers[qi];
+    [...optsWrap.children].forEach((el, idx) => {
+      el.style.pointerEvents = 'none';
+      if(idx === item.correct) el.classList.add('correct');
+      else if(idx === chosen && chosen !== item.correct) el.classList.add('wrong');
+    });
+    if(chosen === item.correct) score++;
+    const fb = document.getElementById(`fb-${qi}`);
+    fb.textContent = (chosen === item.correct ? '✓ إجابة صحيحة — ' : (chosen === null ? '— لم تتم الإجابة — ' : '✗ إجابة غير دقيقة — ')) + item.fb;
+    fb.classList.add('show', chosen === item.correct ? 'ok' : 'no');
+  });
+
+  const panel = document.getElementById('result-panel');
+  panel.classList.add('show');
+  document.getElementById('result-score').textContent = `${toArabicDigits(score)} / ${toArabicDigits(QUESTIONS.length)}`;
+  let msg = '';
+  const pct = score / QUESTIONS.length;
+  if(pct === 1) msg = 'ممتاز! إتقان كامل لدرس بناء الدولة المصرية 🏛️';
+  else if(pct >= 0.8) msg = 'مستوى رائع جدًا — راجع الأسئلة التي أخطأت فيها لتثبيت المعلومة.';
+  else if(pct >= 0.6) msg = 'مستوى جيد — يُنصح بمراجعة الملخص الشامل مرة أخرى.';
+  else msg = 'يحتاج الأمر مزيدًا من المراجعة — عد إلى قسم الملخص الشامل قبل إعادة المحاولة.';
+  document.getElementById('result-msg').textContent = msg;
+  panel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  submitted = false;
+  answers = new Array(QUESTIONS.length).fill(null);
+  document.getElementById('result-panel').classList.remove('show');
+  render();
+  document.getElementById('exam').scrollIntoView({behavior:'smooth'});
+});
+
+render();
+</script>
+
+</body>
+</html>

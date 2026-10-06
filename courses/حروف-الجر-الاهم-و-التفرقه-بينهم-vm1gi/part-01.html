@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مُفرِّق — الفرق بين حروف الجر المتشابهة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;0,600;1,500;1,600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12161d; --bg2:#0d1015;
+    --card:#faf3e6; --card-line:#e4d5b3;
+    --ink:#241f18; --ink-muted:#7d715a;
+    --teal:#2f6f6a; --terra:#b1502e; --gold:#c99a3a;
+    --paper-text:#f3ede0; --muted-dark:#8b93a3;
+    --line-dark:rgba(243,237,224,0.1);
+  }
+  *{margin:0; padding:0; box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--paper-text); font-family:'IBM Plex Sans Arabic',sans-serif; line-height:1.9; min-height:100vh;}
+  ::selection{background:var(--gold); color:#1c1607;}
+  .eng{font-family:'Newsreader',serif;}
+
+  /* HEADER */
+  header{
+    position:sticky; top:0; z-index:200; background:rgba(18,22,29,0.92); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-dark); padding:20px 26px;
+  }
+  .head-top{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; max-width:1080px; margin:0 auto;}
+  .brand{display:flex; align-items:baseline; gap:12px;}
+  .brand h1{font-family:'Newsreader',serif; font-style:italic; font-weight:600; font-size:1.9rem; color:var(--gold);}
+  .brand span{font-size:0.82rem; color:var(--muted-dark);}
+  .cat-nav{display:flex; gap:8px; overflow-x:auto; margin-top:16px; max-width:1080px; margin-left:auto; margin-right:auto; padding-bottom:2px;}
+  .cat-nav::-webkit-scrollbar{height:4px;}
+  .cat-nav a{
+    white-space:nowrap; font-size:0.82rem; padding:7px 16px; border-radius:20px; color:var(--muted-dark);
+    border:1px solid var(--line-dark); transition:.2s; font-weight:500;
+  }
+  .cat-nav a:hover{color:var(--paper-text); border-color:var(--gold);}
+
+  /* HERO */
+  .hero{max-width:780px; margin:0 auto; padding:70px 24px 50px; text-align:center;}
+  .hero .kicker{font-size:0.78rem; letter-spacing:3px; color:var(--teal); text-transform:uppercase; margin-bottom:18px;}
+  .hero h2{font-family:'Newsreader',serif; font-style:italic; font-size:clamp(1.8rem,5vw,2.7rem); font-weight:500; line-height:1.5; color:var(--paper-text);}
+  .hero h2 b{color:var(--gold); font-weight:600;}
+  .hero p{margin-top:20px; color:var(--muted-dark); font-size:1rem; max-width:560px; margin-left:auto; margin-right:auto;}
+  .scale-icon{font-size:2.6rem; margin-bottom:18px; display:inline-block;}
+
+  main{max-width:1080px; margin:0 auto; padding:10px 20px 100px;}
+
+  .category-block{margin-bottom:56px;}
+  .category-title{
+    display:flex; align-items:center; gap:14px; margin:0 0 22px; padding-top:20px;
+  }
+  .category-title .idx{
+    font-family:'Newsreader',serif; font-style:italic; color:var(--gold); font-size:1.1rem; flex-shrink:0;
+  }
+  .category-title h3{font-size:1.35rem; color:var(--paper-text); font-weight:700;}
+  .category-title .line{flex:1; height:1px; background:var(--line-dark);}
+
+  /* COMPARISON CARD */
+  .compare-card{
+    background:var(--card); color:var(--ink); border-radius:14px; margin-bottom:26px;
+    box-shadow:0 20px 45px rgba(0,0,0,0.35); overflow:hidden; position:relative;
+    border:1px solid var(--card-line);
+  }
+  .vs-badge{
+    position:absolute; top:-1px; left:50%; transform:translateX(-50%);
+    background:var(--gold); color:#241f18; font-weight:700; font-size:0.72rem;
+    padding:5px 14px; border-radius:0 0 10px 10px; letter-spacing:1px; z-index:5;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  }
+  .words-row{display:grid; padding:34px 24px 20px;}
+  .words-row.n2{grid-template-columns:1fr 1fr;}
+  .words-row.n3{grid-template-columns:repeat(3,1fr);}
+  @media(max-width:680px){ .words-row.n2, .words-row.n3{grid-template-columns:1fr;} }
+
+  .word-col{padding:0 16px; position:relative;}
+  .word-col:not(:last-child){border-left:1px dashed var(--card-line);}
+  @media(max-width:680px){ .word-col:not(:last-child){border-left:none; border-bottom:1px dashed var(--card-line); padding-bottom:22px; margin-bottom:18px;} }
+
+  .word-col.a .word-en{color:var(--teal);}
+  .word-col.b .word-en{color:var(--terra);}
+  .word-col.c .word-en{color:var(--gold);}
+
+  .word-head{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  .word-en{font-family:'Newsreader',serif; font-style:italic; font-weight:600; font-size:2rem; direction:ltr;}
+  .speak-btn{
+    background:var(--ink); color:var(--card); border:none; width:34px; height:34px; border-radius:50%;
+    cursor:pointer; font-size:0.95rem; flex-shrink:0; transition:.15s; display:flex; align-items:center; justify-content:center;
+  }
+  .speak-btn:hover{transform:scale(1.12); background:var(--teal);}
+  .speak-btn.playing{animation:sp-pulse .8s infinite;}
+  @keyframes sp-pulse{0%,100%{box-shadow:0 0 0 0 rgba(47,111,106,.5)} 50%{box-shadow:0 0 0 7px rgba(47,111,106,0)}}
+
+  .meaning{font-weight:700; font-size:1rem; margin-bottom:14px; color:var(--ink);}
+  .meaning .lbl{font-size:0.72rem; color:var(--ink-muted); font-weight:500; display:block; margin-bottom:3px;}
+
+  .example-box{background:rgba(36,31,24,0.05); border-radius:8px; padding:12px 14px;}
+  .example-en{font-family:'Newsreader',serif; font-style:italic; font-size:0.98rem; direction:ltr; text-align:left; display:flex; align-items:center; gap:8px; color:var(--ink);}
+  .example-ar{font-size:0.86rem; color:var(--ink-muted); margin-top:8px;}
+  .mini-speak{
+    background:transparent; border:1px solid var(--card-line); color:var(--ink); width:26px; height:26px; border-radius:50%;
+    cursor:pointer; font-size:0.75rem; flex-shrink:0; transition:.15s;
+  }
+  .mini-speak:hover{background:var(--ink); color:var(--card);}
+
+  /* Difference note + real life example */
+  .diff-note{padding:6px 24px 22px;}
+  .diff-title{font-size:0.85rem; font-weight:700; color:var(--terra); margin-bottom:8px; display:flex; align-items:center; gap:6px;}
+  .diff-text{font-size:0.94rem; color:var(--ink); margin-bottom:16px;}
+
+  .life-example{
+    background:linear-gradient(90deg, rgba(201,154,58,0.18), rgba(201,154,58,0.05));
+    border-right:4px solid var(--gold); border-radius:6px; padding:14px 18px; margin:0 24px 24px;
+    font-size:0.92rem; color:var(--ink);
+  }
+  .life-example b{color:var(--terra);}
+
+  footer{text-align:center; padding:40px 20px 70px; color:var(--muted-dark); font-size:0.8rem;}
+  footer .eng{color:var(--gold);}
+
+  :focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-top">
+    <div class="brand">
+      <h1 class="eng">Mufarriq</h1>
+      <span>مُفرِّق — الفرق بين حروف الجر المتشابهة</span>
+    </div>
+  </div>
+  <nav class="cat-nav">
+    <a href="#cat-time">⏱ الزمان</a>
+    <a href="#cat-place">📍 المكان والاتجاه</a>
+    <a href="#cat-manner">🔗 المصدر والأداة والموضوع</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="scale-icon">⚖️</div>
+  <h2>حروف الجر مش بتترجم... <b>هي بتتحسّ من السياق.</b></h2>
+  <p>هنا هتلاقي كل زوجين (أو تلاتة) بيتلخبطوا مع بعض، جنب بعض في نفس البطاقة، عشان تشوف الفرق الدقيق بينهم بعينك، وتسمع نطقهم، وتفهمهم من مثال حقيقي من حياتنا اليومية.</p>
+</div>
+
+<main id="content"></main>
+
+<footer>
+  مُفرِّق — مرجعك الشخصي لحروف الجر الإنجليزية · اضغط <span class="eng">🔊</span> لسماع النطق الأمريكي لأي كلمة أو جملة
+</footer>
+
+<script>
+const DATA = [
+  {
+    id:'cat-time', icon:'⏱', title:'الزمان — Time',
+    groups:[
+      {
+        words:[
+          { w:'For', meaning:'لمدة (فترة زمنية مستمرة)', ex:'I have lived in Cairo for five years.', exAr:'أعيش في القاهرة لمدة خمس سنوات.' },
+          { w:'Since', meaning:'منذ (نقطة بداية محددة)', ex:'I have lived in Cairo since 2018.', exAr:'أعيش في القاهرة منذ عام ٢٠١٨.' }
+        ],
+        diff:'"For" بنستخدمها مع مدة زمنية (كام يوم، كام سنة)، أما "Since" بنستخدمها مع نقطة بداية محددة (تاريخ أو حدث) وليس مع المدة نفسها.',
+        life:'زي لما تقول لصاحبك: "أنا باذاكر إنجليزي <b>من سنة ٢٠٢٣</b>" (Since 2023) — ده تاريخ بداية، لكن لو قلت "باذاكر <b>من سنتين</b>" (For two years) — ده مدة استمرت.'
+      },
+      {
+        words:[
+          { w:'In / On / At', meaning:'في (تدرج من الأكبر للأصغر زمنيًا)', ex:'—', exAr:'—', special:true }
+        ],
+        threeInOne:true,
+        subWords:[
+          { w:'In', meaning:'في (شهور، سنين، فصول، عقود)', ex:'I was born in 2005.', exAr:'وُلدت في عام ٢٠٠٥.' },
+          { w:'On', meaning:'في (أيام وتواريخ محددة)', ex:'The exam is on Sunday.', exAr:'الامتحان يوم الأحد.' },
+          { w:'At', meaning:'في / عند (ساعة أو لحظة دقيقة)', ex:'We meet at 6 PM.', exAr:'نلتقي الساعة السادسة مساءً.' }
+        ],
+        diff:'فكر فيها كأنها "زووم" بيقرب شوية شوية: "In" للفترات الواسعة (السنة، الشهر، الفصل)، "On" لليوم أو التاريخ بالظبط، و"At" للحظة أو الساعة المحددة جدًا. ونفس الترتيب بيتكرر مع المكان: In (مدينة/دولة كبيرة) → On (شارع/سطح) → At (نقطة محددة زي "at the door").',
+        life:'زي لما تقول: "الامتحان <b>في</b> شهر يونيو (In June)، <b>في</b> يوم الأحد (On Sunday)، <b>الساعة</b> ٩ الصبح بالظبط (At 9 AM)" — كل ما بتقرّب من التفاصيل، الحرف بيتغير من In لـ On لـ At.'
+      },
+      {
+        words:[
+          { w:'Before', meaning:'قبل (في الزمن أو الترتيب)', ex:'Please arrive before 9 AM.', exAr:'من فضلك احضر قبل الساعة التاسعة صباحًا.' },
+          { w:'After', meaning:'بعد (في الزمن أو الترتيب)', ex:'We will eat after the prayer.', exAr:'سنأكل بعد الصلاة.' }
+        ],
+        diff:'مباشرة وواضحة: "Before" = قبل، "After" = بعد. الالتباس بيحصل غالبًا مع الترتيب في الجمل الطويلة، فلازم تحدد إيه اللي حصل الأول وإيه اللي حصل بعده.',
+        life:'زي لما تقول: "خد بالك تراجع <b>قبل</b> الامتحان (Before the exam)، مش <b>بعد</b> ما تدخل (After you enter)!"'
+      },
+      {
+        words:[
+          { w:'During', meaning:'خلال / أثناء (+ اسم لفترة زمنية)', ex:'He fell asleep during the movie.', exAr:'نام أثناء الفيلم.' },
+          { w:'While', meaning:'بينما / أثناء (+ جملة كاملة بفعل)', ex:'He fell asleep while watching the movie.', exAr:'نام بينما كان يشاهد الفيلم.' }
+        ],
+        diff:'القاعدة الذهبية: "During" بييجي بعده اسم بس (during the meeting)، أما "While" بييجي بعده جملة فيها فعل (while I was studying). المعنى قريب جدًا لكن التركيب مختلف.',
+        life:'تقول: "نمت <b>خلال</b> الحصة" (During the class = اسم)، أو "نمت <b>وأنا</b> باذاكر" (While I was studying = جملة بفعل).'
+      },
+      {
+        words:[
+          { w:'Until', meaning:'حتى (استمرار الفعل لحد نقطة معينة)', ex:'I will wait until midnight.', exAr:'سأنتظر حتى منتصف الليل.' },
+          { w:'By', meaning:'بحلول / في موعد أقصاه (الفعل يحصل قبل أو في هذا الوقت، مش هيستمر بعده)', ex:'Submit the report by Monday.', exAr:'سلّم التقرير بحلول يوم الاثنين.' }
+        ],
+        diff:'"Until" معناها إن الحاجة مستمرة لحد وقت معين وبعدين تخلص أو تتوقف. أما "By" معناها إن الفعل المفروض يحصل في أي وقت قبل أو عند هذا الموعد كـ"ديدلاين" (deadline)، مش استمرارية.',
+        life:'تقول: "هستناك <b>لحد</b> الساعة ٥" (Until 5 — يعني الانتظار مستمر لحد ٥)، لكن "لازم أخلّص الواجب <b>بحلول</b> الساعة ٥" (By 5 — يعني الموعد النهائي، ممكن أخلص قبلها بكتير).'
+      }
+    ]
+  },
+  {
+    id:'cat-place', icon:'📍', title:'المكان والاتجاه — Place & Direction',
+    groups:[
+      {
+        words:[
+          { w:'Over', meaning:'فوق (بحركة، أو بتغطية، أو أكثر من رقم معين)', ex:'The plane flew over the city.', exAr:'حلّقت الطائرة فوق المدينة.' },
+          { w:'Above', meaning:'أعلى من (فرق مستوى بدون حركة أو تلامس)', ex:'The clock is above the door.', exAr:'الساعة أعلى الباب.' }
+        ],
+        diff:'"Over" غالبًا فيها إحساس بالحركة أو التغطية أو تجاوز رقم ("over 100 people")، أما "Above" بتوصف مكان أعلى من حاجة تانية بشكل ثابت من غير حركة.',
+        life:'تقول: "الطيارة كانت <b>فوق</b> المدينة وبتتحرك" (Over — حركة)، لكن "الساعة معلّقة <b>فوق</b> الباب وثابتة مكانها" (Above — موقع ثابت).'
+      },
+      {
+        words:[
+          { w:'Under', meaning:'تحت (مباشرة، ملامس أو قريب جدًا)', ex:'The cat is under the table.', exAr:'القطة تحت الطاولة.' },
+          { w:'Below', meaning:'تحت / أقل من (فرق مستوى، مش شرط ملامس)', ex:'The temperature is below zero.', exAr:'درجة الحرارة تحت الصفر.' }
+        ],
+        diff:'"Under" بتستخدمها لما الحاجة فعليًا تحت حاجة تانية وملاصقة أو قريبة منها جدًا. أما "Below" بتستخدمها للمقارنة بمستوى أو خط (زي درجة الحرارة، أو "below average").',
+        life:'تقول: "القطة نايمة <b>تحت</b> الترابيزة" (Under — تحتها فعليًا)، لكن "درجاتك <b>أقل من</b> المتوسط" (Below average — مقارنة مستوى مش موقع فعلي).'
+      },
+      {
+        words:[
+          { w:'Behind', meaning:'خلف', ex:'The garden is behind the house.', exAr:'الحديقة خلف المنزل.' },
+          { w:'In front of', meaning:'أمام', ex:'He is standing in front of the school.', exAr:'يقف أمام المدرسة.' }
+        ],
+        diff:'عكسان تمامًا وواضحان: "Behind" = خلف، "In front of" = أمام. الالتباس بيحصل بس في السرعة أثناء الكلام، فخليك واعي للاتجاه اللي بتوصفه.',
+        life:'تقول: "وقف <b>خلفي</b> في الطابور" (Behind me) عكس "وقف <b>قدامي</b>" (In front of me).'
+      },
+      {
+        words:[
+          { w:'Between', meaning:'بين (شيئين أو شخصين محددين، أو أشياء معدودة بوضوح)', ex:'There is a wall between the two houses.', exAr:'يوجد حائط بين المنزلين.' },
+          { w:'Among', meaning:'بين / وسط (مجموعة غير محددة بالعدد، أكتر من اتنين)', ex:'He was popular among his classmates.', exAr:'كان محبوبًا بين زملائه في الفصل.' }
+        ],
+        diff:'"Between" بتستخدمها لما تقدر تعدّ العناصر بوضوح (خصوصًا اتنين، أو أشياء منفصلة معروفة). "Among" بتستخدمها لما بتتكلم عن جزء من مجموعة غير محددة أو كتلة واحدة.',
+        life:'تقول: "الاختيار <b>بين</b> شغلانتين" (Between two jobs — عدد واضح)، لكن "هو معروف <b>وسط</b> زمايله" (Among his friends — مجموعة عامة).'
+      },
+      {
+        words:[
+          { w:'Beside', meaning:'بجانب (مكانيًا، حرفيًا)', ex:'She sat beside me.', exAr:'جلست بجانبي.' },
+          { w:'Besides', meaning:'بالإضافة إلى / غير أن (بيضيف معلومة، مش مكان)', ex:'Besides English, he speaks French.', exAr:'بالإضافة إلى الإنجليزية، يتحدث الفرنسية.' }
+        ],
+        diff:'الكلمتين بينطقوا شبه بعض تمامًا وده أكتر حاجة بتلخبط الطلاب، بس معناهم مختلف كليًا: "Beside" مكان (بجانب)، و"Besides" إضافة معلومة (غير أن / علاوة على).',
+        life:'تقول: "قعدت <b>بجانبه</b> في الأتوبيس" (Beside him — مكان)، لكن "<b>غير</b> إنه ذكي، هو كمان مجتهد" (Besides being smart — إضافة).'
+      },
+      {
+        words:[
+          { w:'Near', meaning:'قريب من (مش شرط ملاصق)', ex:'My house is near the school.', exAr:'بيتي قريب من المدرسة.' },
+          { w:'By', meaning:'بجوار / عند (قرب مباشر جدًا من نقطة معينة)', ex:'She was standing by the window.', exAr:'كانت واقفة بجوار النافذة.' }
+        ],
+        diff:'"Near" بتدي إحساس إن المسافة قريبة نسبيًا (كام شارع مثلًا)، أما "By" هنا (مش "by bus") بتدي إحساس القرب المباشر جدًا، زي إنك ملاصق للنقطة دي فعلًا.',
+        life:'تقول: "بيتي <b>قريب من</b> المدرسة" (Near — يعني قريب بس مش جنبها بالظبط)، لكن "كانت واقفة <b>جنب</b> الشباك بالظبط" (By the window — ملاصقة تمامًا).'
+      },
+      {
+        words:[
+          { w:'Into', meaning:'إلى داخل (حركة من الخارج للداخل)', ex:'She walked into the classroom.', exAr:'دخلت الفصل.' },
+          { w:'Onto', meaning:'إلى أعلى سطح شيء (حركة تنتهي فوق سطح)', ex:'The cat jumped onto the roof.', exAr:'قفزت القطة فوق السطح.' }
+        ],
+        diff:'"Into" بتوصف الحركة لما حد أو حاجة تدخل جوه مكان مقفول أو محاط (أوضة، سيارة، صندوق). "Onto" بتوصف الحركة لما حاجة تنتقل فوق سطح مفتوح (طاولة، سطح البيت، الأرض).',
+        life:'تقول: "دخل <b>الأوضة</b>" (Walked into the room — لجوه)، عكس "القطة قفزت <b>فوق</b> الطاولة" (Jumped onto the table — لسطح).'
+      },
+      {
+        words:[
+          { w:'To', meaning:'إلى (اتجاه الحركة نحو مكان أو شخص)', ex:'I go to school every day.', exAr:'أذهب إلى المدرسة كل يوم.' },
+          { w:'Next to', meaning:'بجانب (موقع ثابت وملاصق)', ex:'The bank is next to the pharmacy.', exAr:'البنك بجانب الصيدلية.' }
+        ],
+        diff:'"To" بتوصف اتجاه حركة نحو وجهة (رايح فين)، أما "Next to" بتوصف موقع ثابت لشيء بجانب شيء تاني (مش حركة، مجرد وصف مكان).',
+        life:'تقول: "أنا رايح <b>المدرسة</b>" (I go to school — اتجاه)، لكن "البنك <b>جنب</b> الصيدلية بالظبط" (Next to the pharmacy — موقع ثابت).'
+      },
+      {
+        words:[
+          { w:'Off', meaning:'من على / بعيدًا عن (سطح أو حالة اتصال)', ex:'He got off the bus.', exAr:'نزل من الأتوبيس.' },
+          { w:'Out of', meaning:'من داخل ... إلى خارج (خروج من حيز مغلق)', ex:'She got out of the car.', exAr:'خرجت من السيارة.' }
+        ],
+        diff:'"Off" بتستخدمها للنزول من على حاجة مرتفعة أو مواصلة كبيرة زي الأتوبيس أو الدراجة (كأنك كنت راكب فوقها). "Out of" بتستخدمها للخروج من حاجة أنت جواها زي السيارة أو الأوضة.',
+        life:'تقول: "نزل <b>من على</b> الأتوبيس" (Off the bus — كان راكب فوقه/جواه لكن التعبير الشائع Off)، عكس "خرج <b>من جوه</b> العربية" (Out of the car — كان جواها).'
+      }
+    ]
+  },
+  {
+    id:'cat-manner', icon:'🔗', title:'المصدر والأداة والموضوع — Source, Tool & Topic',
+    groups:[
+      {
+        words:[
+          { w:'Of', meaning:'لـ / تابع لـ / جزء من (ملكية أو انتماء)', ex:'This is the capital of Egypt.', exAr:'هذه عاصمة مصر.' },
+          { w:'About', meaning:'عن / بخصوص (الموضوع اللي بيتكلم عليه الكلام)', ex:'This book is about ancient Egypt.', exAr:'هذا الكتاب عن مصر القديمة.' },
+          { w:'From', meaning:'من (المصدر أو نقطة الانطلاق أو الأصل)', ex:'She is from Alexandria.', exAr:'هي من الإسكندرية.' }
+        ],
+        threeInOne:true,
+        diff:'"Of" بتربط بين شيء وأصله أو ملكيته (جزء من كل، أو انتماء). "About" بتحدد موضوع الكلام أو الموضوع اللي بتتكلم عنه. "From" بتحدد مصدر الحاجة أو نقطة بدايتها (بلد، مكان، شخص).',
+        life:'زي ما تقول: "ده <b>كتاب عن</b> التاريخ" (About = الموضوع) مختلف عن "ده <b>غلاف</b> الكتاب" (Of = جزء من الكتاب) ومختلف عن "الكتاب ده <b>من</b> المكتبة" (From = المصدر).'
+      },
+      {
+        words:[
+          { w:'With', meaning:'مع / بـ (أداة تستخدمها، أو مصاحبة شخص)', ex:'I cut the paper with scissors.', exAr:'قطعت الورقة بالمقص.' },
+          { w:'By', meaning:'بواسطة / عن طريق (الفاعل الحقيقي، أو وسيلة انتقال)', ex:'This novel was written by a famous author.', exAr:'كُتبت هذه الرواية بواسطة كاتب مشهور.' }
+        ],
+        diff:'"With" بتستخدمها للأداة اللي بتستخدمها بإيدك (with a pen)، أو لما تكون مع حد (with my friend). "By" بتستخدمها لما بتقول مين عمل الفعل في جملة المبني للمجهول، أو وسيلة المواصلات (by bus, by car).',
+        life:'تقول: "راح <b>بالباص</b>" (By bus — وسيلة)، عكس "راح <b>مع</b> صاحبه" (With his friend — مصاحبة)، وعكس "قطعت الورقة <b>بالمقص</b>" (With scissors — أداة).'
+      },
+      {
+        words:[
+          { w:'Like', meaning:'مثل / زي (تشبيه شيء بشيء تاني)', ex:'She sings like an angel.', exAr:'تغني مثل الملاك.' },
+          { w:'As', meaning:'بصفته / كـ (دور أو وظيفة حقيقية يقوم بها الشخص)', ex:'He works as a doctor.', exAr:'يعمل كطبيب.' }
+        ],
+        diff:'"Like" بتستخدمها للتشبيه بس (هو مش كده فعلًا، بس شبهه)، أما "As" بتستخدمها لما الشخص فعلًا بيقوم بالدور ده حقيقي (هو دكتور فعلًا مش بس شبه دكتور).',
+        life:'تقول: "بيسبح <b>زي</b> السمكة" (Like a fish — تشبيه، هو مش سمكة)، عكس "بيشتغل <b>كـ</b>دكتور" (As a doctor — ده شغلانته فعلًا).'
+      },
+      {
+        words:[
+          { w:'Through', meaning:'خلال / من خلال (حركة عبر مساحة أو زمن من طرف لطرف)', ex:'We walked through the forest.', exAr:'مشينا عبر الغابة.' },
+          { w:'Throughout', meaning:'طوال / في جميع أنحاء (شمولية زمنية أو مكانية كاملة)', ex:'It rained throughout the day.', exAr:'أمطرت طوال اليوم.' }
+        ],
+        diff:'"Through" بتوصف حركة أو مرور من نقطة لنقطة (دخلت من طرف وخرجت من التاني). "Throughout" بتوصف إن الحاجة مستمرة أو منتشرة في كل الفترة أو كل المكان من غير ما تقصد "عبور".',
+        life:'تقول: "مشينا <b>خلال</b> النفق" (Through the tunnel — عبور من طرف لطرف)، عكس "الاحتفالات مستمرة <b>طوال</b> السنة" (Throughout the year — شمولية كاملة).'
+      }
+    ]
+  }
+];
+
+function speak(text, btn){
+  if(!('speechSynthesis' in window)){ alert('المتصفح ده مش بيدعم خاصية النطق.'); return; }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = 0.92;
+  if(btn){
+    btn.classList.add('playing');
+    u.onend = () => btn.classList.remove('playing');
+    u.onerror = () => btn.classList.remove('playing');
+  }
+  window.speechSynthesis.speak(u);
+}
+
+function wordColClass(i){ return i===0?'a':(i===1?'b':'c'); }
+
+function renderWordCol(item, i){
+  const cls = wordColClass(i);
+  return `
+    <div class="word-col ${cls}">
+      <div class="word-head">
+        <span class="word-en eng">${item.w}</span>
+        <button class="speak-btn" onclick="speak('${item.w.replace(/'/g,"\\'")}', this)" aria-label="استمع لنطق ${item.w}">🔊</button>
+      </div>
+      <div class="meaning"><span class="lbl">المعنى الدقيق</span>${item.meaning}</div>
+      <div class="example-box">
+        <div class="example-en eng">
+          <button class="mini-speak" onclick="speak('${item.ex.replace(/'/g,"\\'")}', this)" aria-label="استمع للمثال">🔊</button>
+          <span>${item.ex}</span>
+        </div>
+        <div class="example-ar">${item.exAr}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderGroup(g){
+  let wordsHtml = '';
+  if(g.threeInOne && g.subWords){
+    wordsHtml = `<div class="words-row n3">${g.subWords.map((w,i)=>renderWordCol(w,i)).join('')}</div>`;
+  } else if(g.threeInOne){
+    wordsHtml = `<div class="words-row n3">${g.words.map((w,i)=>renderWordCol(w,i)).join('')}</div>`;
+  } else {
+    const n = g.words.length;
+    wordsHtml = `<div class="words-row ${n===3?'n3':'n2'}">${g.words.map((w,i)=>renderWordCol(w,i)).join('')}</div>`;
+  }
+  return `
+    <div class="compare-card">
+      <div class="vs-badge">VS</div>
+      ${wordsHtml}
+      <div class="diff-note">
+        <div class="diff-title">🔍 الفرق الدقيق</div>
+        <div class="diff-text">${g.diff}</div>
+      </div>
+      <div class="life-example">💡 <b>مثال من حياتنا:</b> ${g.life}</div>
+    </div>
+  `;
+}
+
+function render(){
+  const main = document.getElementById('content');
+  main.innerHTML = DATA.map((cat, ci) => `
+    <div class="category-block" id="${cat.id}">
+      <div class="category-title">
+        <span class="idx eng">${cat.icon}</span>
+        <h3>${cat.title}</h3>
+        <span class="line"></span>
+      </div>
+      ${cat.groups.map(renderGroup).join('')}
+    </div>
+  `).join('');
+}
+
+render();
+</script>
+</body>
+</html>

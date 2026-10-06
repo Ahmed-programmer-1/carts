@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قاموس الحياة — تعلّم الإنجليزية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Lexend+Deca:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #161b27;
+    --card: #1e2535;
+    --border: #2a3347;
+    --accent1: #f5a623;
+    --accent2: #4ecdc4;
+    --accent3: #ff6b6b;
+    --accent4: #a78bfa;
+    --text: #e8eaf0;
+    --muted: #8892a4;
+    --radius: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #1a1f2e 0%, #0d0f14 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 24px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: 1400px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.6rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+  }
+
+  .stats-bar {
+    display: flex;
+    gap: 20px;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .stats-bar span { color: var(--accent1); font-weight: 700; }
+
+  .search-wrap {
+    width: 100%;
+    max-width: 520px;
+    position: relative;
+  }
+
+  #searchInput {
+    width: 100%;
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 50px;
+    padding: 10px 20px 10px 44px;
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color .2s;
+    direction: ltr;
+  }
+  #searchInput:focus { border-color: var(--accent2); }
+  #searchInput::placeholder { color: var(--muted); }
+
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  #clearBtn {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 1rem;
+    display: none;
+  }
+
+  /* ── FILTER TABS ── */
+  .filter-section {
+    max-width: 1400px;
+    margin: 20px auto 0;
+    padding: 0 24px;
+  }
+
+  .filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .tab-btn {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 50px;
+    padding: 6px 16px;
+    color: var(--muted);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all .2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+  .tab-btn.active { background: var(--accent2); border-color: var(--accent2); color: #000; font-weight: 700; }
+
+  /* ── MAIN GRID ── */
+  .main {
+    max-width: 1400px;
+    margin: 28px auto;
+    padding: 0 24px 60px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 36px;
+  }
+
+  .section-emoji { font-size: 1.6rem; }
+
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  .section-count {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-right: auto;
+  }
+
+  /* ── TOPIC CARD ── */
+  .topic-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 20px;
+    transition: border-color .2s;
+  }
+  .topic-block:hover { border-color: var(--border); }
+
+  .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    background: var(--surface);
+    border-bottom: 1px solid transparent;
+    transition: background .2s;
+    user-select: none;
+  }
+  .topic-header:hover { background: #1f2840; }
+  .topic-header.open { border-bottom-color: var(--border); }
+
+  .topic-num {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .topic-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+  .topic-name-ar {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .topic-name-en {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 1px;
+    font-family: 'Lexend Deca', sans-serif;
+  }
+
+  .topic-meta {
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .word-count-badge {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.73rem;
+    color: var(--muted);
+  }
+
+  .chevron {
+    color: var(--muted);
+    font-size: 0.8rem;
+    transition: transform .3s;
+    flex-shrink: 0;
+  }
+  .topic-header.open .chevron { transform: rotate(180deg); }
+
+  /* ── WORDS GRID ── */
+  .words-container {
+    display: none;
+    padding: 20px;
+  }
+  .words-container.open { display: block; }
+
+  .sub-group {
+    margin-bottom: 20px;
+  }
+
+  .sub-group-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Lexend Deca', sans-serif;
+  }
+
+  .words-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .word-card {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all .18s;
+    position: relative;
+  }
+  .word-card:hover {
+    border-color: var(--accent1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(245,166,35,0.15);
+  }
+  .word-card.saved { border-color: var(--accent4); }
+  .word-card.speaking { border-color: var(--accent2); background: rgba(78,205,196,0.08); }
+
+  .word-card-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .word-text { flex: 1; }
+
+  .speak-btn {
+    background: rgba(245,166,35,0.15);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    transition: all .2s;
+    color: var(--accent1);
+  }
+  .speak-btn:hover { background: rgba(245,166,35,0.35); transform: scale(1.15); }
+  .speak-btn.active { background: var(--accent2); color: #000; }
+
+  .word-en {
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text);
+    direction: ltr;
+    text-align: left;
+  }
+
+  .word-ar {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 2px;
+    text-align: right;
+  }
+
+  /* ── SEARCH RESULTS ── */
+  #searchResults {
+    display: none;
+  }
+
+  #searchResults.active {
+    display: block;
+  }
+
+  .search-results-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .search-word-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 16px;
+    transition: all .18s;
+  }
+  .search-word-card:hover { border-color: var(--accent2); }
+
+  .search-word-en {
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    direction: ltr;
+    text-align: left;
+  }
+  .search-word-ar { font-size: 0.77rem; color: var(--muted); margin-top: 2px; }
+  .search-word-topic { font-size: 0.7rem; color: var(--accent2); margin-top: 3px; font-family: 'Lexend Deca', sans-serif; }
+
+  .no-results {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px;
+    font-size: 1rem;
+  }
+
+  /* ── SAVED WORDS PANEL ── */
+  #savedPanel {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    background: var(--surface);
+    border: 1.5px solid var(--accent4);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    min-width: 200px;
+    max-width: 320px;
+    max-height: 320px;
+    overflow-y: auto;
+    display: none;
+    z-index: 200;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  #savedPanel.show { display: block; }
+
+  .saved-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent4);
+  }
+
+  .saved-panel-header button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .saved-list { font-family: 'Lexend Deca', sans-serif; font-size: 0.82rem; direction: ltr; }
+  .saved-item { padding: 3px 0; color: var(--text); border-bottom: 1px solid var(--border); }
+  .saved-item:last-child { border: none; }
+
+  /* ── FLOATING BUTTONS ── */
+  .float-buttons {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 200;
+  }
+
+  .float-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .float-btn:hover { transform: scale(1.1); }
+
+  .btn-saved-toggle { background: var(--accent4); color: #fff; }
+  .btn-top { background: var(--card); color: var(--muted); border: 1px solid var(--border); }
+  .btn-expand-all { background: var(--accent2); color: #000; font-size: 0.7rem; font-weight: 700; font-family: 'Cairo', sans-serif; }
+  .btn-play-all { background: var(--accent1); color: #000; font-size: 0.75rem; font-weight: 700; font-family: 'Cairo', sans-serif; }
+  .btn-play-all.playing { background: var(--accent3); color: #fff; }
+
+  /* ── CATEGORY DIVIDERS ── */
+  .category-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 40px 0 20px;
+  }
+  .category-divider-line { flex: 1; height: 1px; background: var(--border); }
+  .category-divider-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+  .category-divider-emoji { font-size: 1.1rem; }
+
+  /* ── HIGHLIGHT ── */
+  mark { background: rgba(245,166,35,0.3); color: var(--accent1); border-radius: 3px; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar-wrap {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--border);
+    z-index: 999;
+  }
+  #progressBar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    transition: width .1s;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .header-inner { flex-direction: column; align-items: flex-start; }
+    .search-wrap { max-width: 100%; }
+    .stats-bar { font-size: 0.75rem; }
+    .main { padding: 0 14px 60px; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar-wrap"><div id="progressBar"></div></div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">📖 قاموس الحياة</div>
+    <div class="stats-bar">
+      <div>الموضوعات: <span>40</span></div>
+      <div>الكلمات: <span id="totalCount">0</span></div>
+      <div>المحفوظة: <span id="savedCount">0</span></div>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="ابحث عن أي كلمة..." autocomplete="off">
+      <button id="clearBtn">✕</button>
+    </div>
+  </div>
+</header>
+
+<div class="filter-section">
+  <div class="filter-tabs" id="filterTabs">
+    <button class="tab-btn active" data-cat="all">الكل</button>
+    <button class="tab-btn" data-cat="basics">الأساسيات</button>
+    <button class="tab-btn" data-cat="daily">الحياة اليومية</button>
+    <button class="tab-btn" data-cat="real">الحياة الواقعية</button>
+    <button class="tab-btn" data-cat="world">العالم</button>
+    <button class="tab-btn" data-cat="tech">التكنولوجيا</button>
+    <button class="tab-btn" data-cat="movement">الحركة</button>
+    <button class="tab-btn" data-cat="language">اللغة</button>
+    <button class="tab-btn" data-cat="concepts">المفاهيم</button>
+    <button class="tab-btn" data-cat="tools">الأدوات</button>
+  </div>
+</div>
+
+<div class="main">
+  <div id="searchResults"></div>
+  <div id="topicsContainer"></div>
+</div>
+
+<div class="float-buttons">
+  <button class="float-btn btn-saved-toggle" id="savedToggle" title="كلماتي المحفوظة">⭐</button>
+  <button class="float-btn btn-play-all" id="playAllBtn" title="تشغيل الكل">▶</button>
+  <button class="float-btn btn-expand-all" id="expandAll" title="فتح / إغلاق الكل">فتح</button>
+  <button class="float-btn btn-top" id="topBtn" title="للأعلى">↑</button>
+</div>
+
+<div id="savedPanel">
+  <div class="saved-panel-header">
+    <span>⭐ كلماتي</span>
+    <button id="clearSaved">مسح الكل</button>
+  </div>
+  <div class="saved-list" id="savedList"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// DATA — 40 TOPICS WITH COMPREHENSIVE WORD LISTS
+// ═══════════════════════════════════════════════════════════
+const TOPICS = [
+  // ──────────────────── BASICS ────────────────────
+  {
+    id: 1, cat: "basics", emoji: "⏰", nameAr: "الوقت والأزمنة", nameEn: "Time & Tenses",
+    groups: [
+      { title: "Days of the Week", words: [
+        {en:"Monday",ar:"الاثنين"},{en:"Tuesday",ar:"الثلاثاء"},{en:"Wednesday",ar:"الأربعاء"},
+        {en:"Thursday",ar:"الخميس"},{en:"Friday",ar:"الجمعة"},{en:"Saturday",ar:"السبت"},
+        {en:"Sunday",ar:"الأحد"},{en:"weekday",ar:"يوم عمل"},{en:"weekend",ar:"نهاية الأسبوع"},
+        {en:"workday",ar:"يوم عمل"},{en:"day off",ar:"يوم إجازة"},{en:"holiday",ar:"عطلة رسمية"}
+      ]},
+      { title: "Months of the Year", words: [
+        {en:"January",ar:"يناير"},{en:"February",ar:"فبراير"},{en:"March",ar:"مارس"},
+        {en:"April",ar:"أبريل"},{en:"May",ar:"مايو"},{en:"June",ar:"يونيو"},
+        {en:"July",ar:"يوليو"},{en:"August",ar:"أغسطس"},{en:"September",ar:"سبتمبر"},
+        {en:"October",ar:"أكتوبر"},{en:"November",ar:"نوفمبر"},{en:"December",ar:"ديسمبر"}
+      ]},
+      { title: "Time of Day", words: [
+        {en:"morning",ar:"الصباح"},{en:"afternoon",ar:"بعد الظهر"},{en:"evening",ar:"المساء"},
+        {en:"night",ar:"الليل"},{en:"midnight",ar:"منتصف الليل"},{en:"noon",ar:"الظهيرة"},
+        {en:"dawn",ar:"الفجر"},{en:"dusk",ar:"الغسق"},{en:"sunrise",ar:"شروق الشمس"},
+        {en:"sunset",ar:"غروب الشمس"},{en:"twilight",ar:"الشفق"},{en:"daytime",ar:"النهار"},
+        {en:"nighttime",ar:"الليل"},{en:"bedtime",ar:"وقت النوم"},{en:"lunchtime",ar:"وقت الغداء"}
+      ]},
+      { title: "Clock & Hours", words: [
+        {en:"hour",ar:"ساعة"},{en:"minute",ar:"دقيقة"},{en:"second",ar:"ثانية"},
+        {en:"clock",ar:"ساعة حائط"},{en:"watch",ar:"ساعة يد"},{en:"alarm",ar:"منبه"},
+        {en:"timer",ar:"مؤقت"},{en:"o'clock",ar:"تماماً"},{en:"half past",ar:"والنصف"},
+        {en:"quarter to",ar:"إلا ربعاً"},{en:"quarter past",ar:"والربع"},{en:"sharp",ar:"بالضبط"}
+      ]},
+      { title: "Relative Time", words: [
+        {en:"today",ar:"اليوم"},{en:"yesterday",ar:"أمس"},{en:"tomorrow",ar:"غداً"},
+        {en:"now",ar:"الآن"},{en:"soon",ar:"قريباً"},{en:"later",ar:"لاحقاً"},
+        {en:"recently",ar:"مؤخراً"},{en:"already",ar:"بالفعل"},{en:"still",ar:"لا يزال"},
+        {en:"yet",ar:"حتى الآن"},{en:"just",ar:"للتو"},{en:"ago",ar:"منذ"},
+        {en:"earlier",ar:"قبل ذلك"},{en:"lately",ar:"في الآونة الأخيرة"}
+      ]},
+      { title: "Longer Periods", words: [
+        {en:"week",ar:"أسبوع"},{en:"month",ar:"شهر"},{en:"year",ar:"سنة"},
+        {en:"decade",ar:"عقد"},{en:"century",ar:"قرن"},{en:"millennium",ar:"ألفية"},
+        {en:"season",ar:"موسم"},{en:"quarter",ar:"ربع سنة"},{en:"semester",ar:"فصل دراسي"},
+        {en:"annual",ar:"سنوي"},{en:"monthly",ar:"شهري"},{en:"weekly",ar:"أسبوعي"},
+        {en:"daily",ar:"يومي"},{en:"hourly",ar:"كل ساعة"}
+      ]},
+      { title: "Seasons", words: [
+        {en:"spring",ar:"الربيع"},{en:"summer",ar:"الصيف"},{en:"autumn",ar:"الخريف"},
+        {en:"fall",ar:"الخريف (أمريكي)"},{en:"winter",ar:"الشتاء"}
+      ]},
+      { title: "Tenses & Grammar Time", words: [
+        {en:"past",ar:"الماضي"},{en:"present",ar:"الحاضر"},{en:"future",ar:"المستقبل"},
+        {en:"tense",ar:"زمن"},{en:"deadline",ar:"موعد نهائي"},{en:"schedule",ar:"جدول زمني"},
+        {en:"appointment",ar:"موعد"},{en:"date",ar:"تاريخ"},{en:"time",ar:"وقت"},
+        {en:"period",ar:"فترة"},{en:"duration",ar:"مدة"},{en:"moment",ar:"لحظة"},
+        {en:"instant",ar:"آن"},{en:"era",ar:"حقبة"},{en:"age",ar:"عصر"}
+      ]}
+    ]
+  },
+  {
+    id: 2, cat: "basics", emoji: "🔥", nameAr: "الأفعال الأساسية", nameEn: "Core Verbs",
+    groups: [
+      { title: "Movement Verbs", words: [
+        {en:"go",ar:"يذهب"},{en:"come",ar:"يأتي"},{en:"run",ar:"يركض"},
+        {en:"walk",ar:"يمشي"},{en:"move",ar:"يتحرك"},{en:"stop",ar:"يتوقف"},
+        {en:"start",ar:"يبدأ"},{en:"return",ar:"يعود"},{en:"enter",ar:"يدخل"},
+        {en:"leave",ar:"يغادر"},{en:"arrive",ar:"يصل"},{en:"pass",ar:"يمر"},
+        {en:"turn",ar:"يلتفت"},{en:"jump",ar:"يقفز"},{en:"climb",ar:"يتسلق"}
+      ]},
+      { title: "Action Verbs", words: [
+        {en:"do",ar:"يفعل"},{en:"make",ar:"يصنع"},{en:"take",ar:"يأخذ"},
+        {en:"get",ar:"يحصل"},{en:"have",ar:"يملك"},{en:"give",ar:"يعطي"},
+        {en:"put",ar:"يضع"},{en:"keep",ar:"يحتفظ"},{en:"use",ar:"يستخدم"},
+        {en:"try",ar:"يحاول"},{en:"help",ar:"يساعد"},{en:"want",ar:"يريد"},
+        {en:"need",ar:"يحتاج"},{en:"hold",ar:"يمسك"},{en:"show",ar:"يُظهر"},
+        {en:"find",ar:"يجد"},{en:"bring",ar:"يجلب"},{en:"carry",ar:"يحمل"},
+        {en:"open",ar:"يفتح"},{en:"close",ar:"يغلق"},{en:"break",ar:"يكسر"},
+        {en:"build",ar:"يبني"},{en:"create",ar:"يخلق"},{en:"change",ar:"يغير"},
+        {en:"fix",ar:"يصلح"},{en:"cut",ar:"يقطع"},{en:"pull",ar:"يسحب"},
+        {en:"push",ar:"يدفع"},{en:"throw",ar:"يرمي"},{en:"catch",ar:"يمسك"}
+      ]},
+      { title: "Mental Verbs", words: [
+        {en:"think",ar:"يفكر"},{en:"know",ar:"يعرف"},{en:"understand",ar:"يفهم"},
+        {en:"remember",ar:"يتذكر"},{en:"forget",ar:"ينسى"},{en:"learn",ar:"يتعلم"},
+        {en:"believe",ar:"يؤمن"},{en:"decide",ar:"يقرر"},{en:"choose",ar:"يختار"},
+        {en:"plan",ar:"يخطط"},{en:"guess",ar:"يخمن"},{en:"realize",ar:"يدرك"},
+        {en:"notice",ar:"يلاحظ"},{en:"imagine",ar:"يتخيل"},{en:"wonder",ar:"يتساءل"}
+      ]},
+      { title: "Communication Verbs", words: [
+        {en:"say",ar:"يقول"},{en:"tell",ar:"يخبر"},{en:"ask",ar:"يسأل"},
+        {en:"answer",ar:"يجيب"},{en:"talk",ar:"يتحدث"},{en:"speak",ar:"يتكلم"},
+        {en:"listen",ar:"يستمع"},{en:"read",ar:"يقرأ"},{en:"write",ar:"يكتب"},
+        {en:"call",ar:"يتصل"},{en:"reply",ar:"يرد"},{en:"explain",ar:"يشرح"},
+        {en:"describe",ar:"يصف"},{en:"agree",ar:"يوافق"},{en:"disagree",ar:"يخالف"},
+        {en:"promise",ar:"يعد"},{en:"warn",ar:"يحذر"},{en:"suggest",ar:"يقترح"}
+      ]},
+      { title: "Feeling Verbs", words: [
+        {en:"feel",ar:"يشعر"},{en:"love",ar:"يحب"},{en:"hate",ar:"يكره"},
+        {en:"like",ar:"يعجبه"},{en:"enjoy",ar:"يستمتع"},{en:"miss",ar:"يشتاق"},
+        {en:"hope",ar:"يأمل"},{en:"fear",ar:"يخاف"},{en:"worry",ar:"يقلق"},
+        {en:"care",ar:"يهتم"},{en:"hurt",ar:"يؤلم"},{en:"suffer",ar:"يعاني"},
+        {en:"laugh",ar:"يضحك"},{en:"cry",ar:"يبكي"},{en:"smile",ar:"يبتسم"}
+      ]}
+    ]
+  },
+  {
+    id: 3, cat: "basics", emoji: "👤", nameAr: "الضمائر", nameEn: "Pronouns",
+    groups: [
+      { title: "Subject Pronouns", words: [
+        {en:"I",ar:"أنا"},{en:"you",ar:"أنت / أنتِ"},{en:"he",ar:"هو"},
+        {en:"she",ar:"هي"},{en:"it",ar:"هو / هي (للأشياء)"},{en:"we",ar:"نحن"},
+        {en:"they",ar:"هم"},{en:"one",ar:"المرء"}
+      ]},
+      { title: "Object Pronouns", words: [
+        {en:"me",ar:"أنا (مفعول)"},{en:"him",ar:"إياه"},{en:"her",ar:"إياها"},
+        {en:"us",ar:"إيانا"},{en:"them",ar:"إياهم"},{en:"you",ar:"إياك"}
+      ]},
+      { title: "Possessive Pronouns", words: [
+        {en:"my",ar:"لي"},{en:"your",ar:"لك"},{en:"his",ar:"له"},
+        {en:"her",ar:"لها"},{en:"its",ar:"له / لها"},{en:"our",ar:"لنا"},
+        {en:"their",ar:"لهم"},{en:"mine",ar:"ملكي"},{en:"yours",ar:"ملكك"},
+        {en:"theirs",ar:"ملكهم"},{en:"ours",ar:"ملكنا"}
+      ]},
+      { title: "Reflexive Pronouns", words: [
+        {en:"myself",ar:"نفسي"},{en:"yourself",ar:"نفسك"},{en:"himself",ar:"نفسه"},
+        {en:"herself",ar:"نفسها"},{en:"ourselves",ar:"أنفسنا"},{en:"themselves",ar:"أنفسهم"},
+        {en:"itself",ar:"نفسه / نفسها"}
+      ]},
+      { title: "Demonstrative & Other", words: [
+        {en:"this",ar:"هذا"},{en:"that",ar:"ذاك"},{en:"these",ar:"هؤلاء"},
+        {en:"those",ar:"أولئك"},{en:"who",ar:"من"},{en:"which",ar:"أيٌّ"},
+        {en:"what",ar:"ما / ماذا"},{en:"each other",ar:"بعضهم البعض"},
+        {en:"everyone",ar:"الجميع"},{en:"someone",ar:"شخص ما"},{en:"nobody",ar:"لا أحد"}
+      ]}
+    ]
+  },
+  {
+    id: 4, cat: "basics", emoji: "⚡", nameAr: "كلمات الربط", nameEn: "Conjunctions & Connectors",
+    groups: [
+      { title: "Basic Conjunctions", words: [
+        {en:"and",ar:"و"},{en:"but",ar:"لكن"},{en:"or",ar:"أو"},
+        {en:"nor",ar:"ولا"},{en:"so",ar:"إذن"},{en:"yet",ar:"ومع ذلك"},
+        {en:"for",ar:"لأن"},{en:"both...and",ar:"كلاهما"},{en:"either...or",ar:"إما...أو"},
+        {en:"neither...nor",ar:"لا...ولا"}
+      ]},
+      { title: "Subordinating", words: [
+        {en:"because",ar:"لأن"},{en:"since",ar:"منذ / بما أن"},{en:"although",ar:"رغم أن"},
+        {en:"if",ar:"إذا"},{en:"unless",ar:"إلا إذا"},{en:"when",ar:"عندما"},
+        {en:"while",ar:"بينما"},{en:"before",ar:"قبل أن"},{en:"after",ar:"بعد أن"},
+        {en:"until",ar:"حتى"},{en:"as soon as",ar:"بمجرد أن"},{en:"even though",ar:"حتى وإن"},
+        {en:"as long as",ar:"طالما"},{en:"in case",ar:"في حال"},{en:"whether",ar:"سواء"}
+      ]},
+      { title: "Transition Words", words: [
+        {en:"however",ar:"ومع ذلك"},{en:"therefore",ar:"لذلك"},{en:"moreover",ar:"علاوة على ذلك"},
+        {en:"furthermore",ar:"فضلاً عن ذلك"},{en:"meanwhile",ar:"في هذه الأثناء"},
+        {en:"finally",ar:"أخيراً"},{en:"first",ar:"أولاً"},{en:"then",ar:"ثم"},
+        {en:"next",ar:"بعد ذلك"},{en:"also",ar:"أيضاً"},{en:"too",ar:"أيضاً"},
+        {en:"instead",ar:"بدلاً من ذلك"},{en:"otherwise",ar:"وإلا"},{en:"still",ar:"ومع ذلك"},
+        {en:"anyway",ar:"على أي حال"},{en:"besides",ar:"بالإضافة إلى"}
+      ]}
+    ]
+  },
+  {
+    id: 5, cat: "basics", emoji: "🔢", nameAr: "الأرقام والأعداد", nameEn: "Numbers & Quantities",
+    groups: [
+      { title: "1–20", words: [
+        {en:"one",ar:"واحد"},{en:"two",ar:"اثنان"},{en:"three",ar:"ثلاثة"},
+        {en:"four",ar:"أربعة"},{en:"five",ar:"خمسة"},{en:"six",ar:"ستة"},
+        {en:"seven",ar:"سبعة"},{en:"eight",ar:"ثمانية"},{en:"nine",ar:"تسعة"},
+        {en:"ten",ar:"عشرة"},{en:"eleven",ar:"أحد عشر"},{en:"twelve",ar:"اثنا عشر"},
+        {en:"thirteen",ar:"ثلاثة عشر"},{en:"fourteen",ar:"أربعة عشر"},{en:"fifteen",ar:"خمسة عشر"},
+        {en:"sixteen",ar:"ستة عشر"},{en:"seventeen",ar:"سبعة عشر"},{en:"eighteen",ar:"ثمانية عشر"},
+        {en:"nineteen",ar:"تسعة عشر"},{en:"twenty",ar:"عشرون"}
+      ]},
+      { title: "Tens & Large Numbers", words: [
+        {en:"thirty",ar:"ثلاثون"},{en:"forty",ar:"أربعون"},{en:"fifty",ar:"خمسون"},
+        {en:"sixty",ar:"ستون"},{en:"seventy",ar:"سبعون"},{en:"eighty",ar:"ثمانون"},
+        {en:"ninety",ar:"تسعون"},{en:"hundred",ar:"مئة"},{en:"thousand",ar:"ألف"},
+        {en:"million",ar:"مليون"},{en:"billion",ar:"مليار"},{en:"zero",ar:"صفر"},
+        {en:"dozen",ar:"دزينة"},{en:"half",ar:"نصف"},{en:"quarter",ar:"ربع"}
+      ]},
+      { title: "Ordinal Numbers", words: [
+        {en:"first",ar:"الأول"},{en:"second",ar:"الثاني"},{en:"third",ar:"الثالث"},
+        {en:"fourth",ar:"الرابع"},{en:"fifth",ar:"الخامس"},{en:"last",ar:"الأخير"},
+        {en:"next",ar:"التالي"},{en:"previous",ar:"السابق"},{en:"middle",ar:"الوسط"}
+      ]},
+      { title: "Math & Calculation", words: [
+        {en:"add",ar:"يجمع"},{en:"subtract",ar:"يطرح"},{en:"multiply",ar:"يضرب"},
+        {en:"divide",ar:"يقسم"},{en:"equals",ar:"يساوي"},{en:"plus",ar:"زائد"},
+        {en:"minus",ar:"ناقص"},{en:"total",ar:"المجموع"},{en:"average",ar:"المتوسط"},
+        {en:"percent",ar:"بالمئة"},{en:"number",ar:"رقم"},{en:"count",ar:"عدد / يعد"},
+        {en:"calculate",ar:"يحسب"},{en:"estimate",ar:"يقدّر"},{en:"measure",ar:"يقيس"}
+      ]}
+    ]
+  },
+  // ──────────────────── DAILY LIFE ────────────────────
+  {
+    id: 6, cat: "daily", emoji: "👨‍👩‍👦", nameAr: "العائلة", nameEn: "Family",
+    groups: [
+      { title: "Immediate Family", words: [
+        {en:"mother",ar:"أم"},{en:"father",ar:"أب"},{en:"brother",ar:"أخ"},
+        {en:"sister",ar:"أخت"},{en:"son",ar:"ابن"},{en:"daughter",ar:"ابنة"},
+        {en:"parents",ar:"الوالدان"},{en:"children",ar:"الأطفال"},{en:"sibling",ar:"أخ / أخت"},
+        {en:"twin",ar:"توأم"},{en:"baby",ar:"رضيع"},{en:"infant",ar:"طفل رضيع"},
+        {en:"toddler",ar:"طفل صغير"},{en:"teenager",ar:"مراهق"},{en:"adult",ar:"بالغ"}
+      ]},
+      { title: "Extended Family", words: [
+        {en:"grandmother",ar:"جدة"},{en:"grandfather",ar:"جد"},{en:"grandparents",ar:"الأجداد"},
+        {en:"grandchild",ar:"حفيد"},{en:"uncle",ar:"عم / خال"},{en:"aunt",ar:"عمة / خالة"},
+        {en:"cousin",ar:"ابن عم / ابن خال"},{en:"nephew",ar:"ابن الأخ / الأخت"},
+        {en:"niece",ar:"ابنة الأخ / الأخت"},{en:"relative",ar:"قريب"},{en:"family",ar:"عائلة"}
+      ]},
+      { title: "Marriage & Relationships", words: [
+        {en:"husband",ar:"زوج"},{en:"wife",ar:"زوجة"},{en:"spouse",ar:"شريك الحياة"},
+        {en:"partner",ar:"شريك"},{en:"fiancé",ar:"خطيب"},{en:"fiancée",ar:"خطيبة"},
+        {en:"marry",ar:"يتزوج"},{en:"wedding",ar:"زفاف"},{en:"divorce",ar:"طلاق"},
+        {en:"in-laws",ar:"الأصهار"},{en:"mother-in-law",ar:"حماة"},{en:"father-in-law",ar:"حمو"},
+        {en:"stepfather",ar:"زوج الأم"},{en:"stepmother",ar:"زوجة الأب"},
+        {en:"half-brother",ar:"أخ غير شقيق"},{en:"adopted",ar:"متبنى"},
+        {en:"orphan",ar:"يتيم"},{en:"guardian",ar:"وصي"}
+      ]}
+    ]
+  },
+  {
+    id: 7, cat: "daily", emoji: "🍔", nameAr: "الطعام والشراب", nameEn: "Food & Drink",
+    groups: [
+      { title: "Basic Foods", words: [
+        {en:"food",ar:"طعام"},{en:"water",ar:"ماء"},{en:"bread",ar:"خبز"},
+        {en:"rice",ar:"أرز"},{en:"meat",ar:"لحم"},{en:"chicken",ar:"دجاج"},
+        {en:"fish",ar:"سمك"},{en:"egg",ar:"بيضة"},{en:"cheese",ar:"جبن"},
+        {en:"butter",ar:"زبدة"},{en:"milk",ar:"حليب"},{en:"oil",ar:"زيت"},
+        {en:"salt",ar:"ملح"},{en:"sugar",ar:"سكر"},{en:"flour",ar:"دقيق"}
+      ]},
+      { title: "Fruits", words: [
+        {en:"apple",ar:"تفاحة"},{en:"banana",ar:"موزة"},{en:"orange",ar:"برتقالة"},
+        {en:"grape",ar:"عنب"},{en:"mango",ar:"مانجو"},{en:"lemon",ar:"ليمون"},
+        {en:"strawberry",ar:"فراولة"},{en:"watermelon",ar:"بطيخ"},{en:"pineapple",ar:"أناناس"},
+        {en:"peach",ar:"خوخ"},{en:"pear",ar:"إجاص"},{en:"cherry",ar:"كرز"},
+        {en:"coconut",ar:"جوز هند"},{en:"dates",ar:"تمر"},{en:"pomegranate",ar:"رمان"}
+      ]},
+      { title: "Vegetables", words: [
+        {en:"tomato",ar:"طماطم"},{en:"potato",ar:"بطاطس"},{en:"onion",ar:"بصل"},
+        {en:"garlic",ar:"ثوم"},{en:"carrot",ar:"جزرة"},{en:"cucumber",ar:"خيارة"},
+        {en:"lettuce",ar:"خس"},{en:"spinach",ar:"سبانخ"},{en:"pepper",ar:"فلفل"},
+        {en:"corn",ar:"ذرة"},{en:"mushroom",ar:"فطر"},{en:"eggplant",ar:"باذنجان"},
+        {en:"zucchini",ar:"كوسة"},{en:"peas",ar:"بازلاء"},{en:"beans",ar:"فاصوليا"}
+      ]},
+      { title: "Drinks", words: [
+        {en:"coffee",ar:"قهوة"},{en:"tea",ar:"شاي"},{en:"juice",ar:"عصير"},
+        {en:"soda",ar:"مشروب غازي"},{en:"beer",ar:"بيرة"},{en:"wine",ar:"نبيذ"},
+        {en:"smoothie",ar:"عصير كثيف"},{en:"lemonade",ar:"ليموناضة"},{en:"cocktail",ar:"كوكتيل"},
+        {en:"hot chocolate",ar:"شوكولاتة ساخنة"},{en:"energy drink",ar:"مشروب طاقة"}
+      ]},
+      { title: "Meals & Cooking", words: [
+        {en:"breakfast",ar:"فطور"},{en:"lunch",ar:"غداء"},{en:"dinner",ar:"عشاء"},
+        {en:"snack",ar:"وجبة خفيفة"},{en:"meal",ar:"وجبة"},{en:"recipe",ar:"وصفة"},
+        {en:"cook",ar:"يطبخ"},{en:"bake",ar:"يخبز"},{en:"fry",ar:"يقلى"},
+        {en:"boil",ar:"يغلي"},{en:"grill",ar:"يشوي"},{en:"roast",ar:"يحمص"},
+        {en:"steam",ar:"يبخر"},{en:"chop",ar:"يقطع"},{en:"mix",ar:"يخلط"},
+        {en:"restaurant",ar:"مطعم"},{en:"menu",ar:"قائمة طعام"},{en:"waiter",ar:"نادل"},
+        {en:"portion",ar:"حصة"},{en:"ingredient",ar:"مكوّن"},{en:"flavor",ar:"نكهة"},
+        {en:"spicy",ar:"حار"},{en:"sweet",ar:"حلو"},{en:"sour",ar:"حامض"},
+        {en:"bitter",ar:"مر"},{en:"salty",ar:"مملح"},{en:"delicious",ar:"لذيذ"}
+      ]}
+    ]
+  },
+  {
+    id: 8, cat: "daily", emoji: "😄", nameAr: "المشاعر والعواطف", nameEn: "Emotions & Feelings",
+    groups: [
+      { title: "Positive Emotions", words: [
+        {en:"happy",ar:"سعيد"},{en:"excited",ar:"متحمس"},{en:"joyful",ar:"مبهوج"},
+        {en:"cheerful",ar:"مرح"},{en:"proud",ar:"فخور"},{en:"grateful",ar:"ممتنن"},
+        {en:"hopeful",ar:"متفائل"},{en:"confident",ar:"واثق"},{en:"relaxed",ar:"مرتاح"},
+        {en:"content",ar:"راضٍ"},{en:"satisfied",ar:"مكتفٍ"},{en:"enthusiastic",ar:"متحمس جداً"},
+        {en:"inspired",ar:"ملهَم"},{en:"peaceful",ar:"هادئ"},{en:"loved",ar:"محبوب"},
+        {en:"amused",ar:"مسلَّى"},{en:"energetic",ar:"نشيط"}
+      ]},
+      { title: "Negative Emotions", words: [
+        {en:"sad",ar:"حزين"},{en:"angry",ar:"غاضب"},{en:"scared",ar:"خائف"},
+        {en:"worried",ar:"قلق"},{en:"anxious",ar:"متوتر"},{en:"lonely",ar:"وحيد"},
+        {en:"depressed",ar:"مكتئب"},{en:"frustrated",ar:"محبَط"},{en:"confused",ar:"محتار"},
+        {en:"jealous",ar:"غيور"},{en:"guilty",ar:"مذنب"},{en:"ashamed",ar:"خجول"},
+        {en:"disappointed",ar:"خائب الأمل"},{en:"disgusted",ar:"مشمئز"},
+        {en:"nervous",ar:"عصبي"},{en:"stressed",ar:"مضغوط"},{en:"bored",ar:"يشعر بالملل"},
+        {en:"tired",ar:"متعب"},{en:"exhausted",ar:"منهَك"},{en:"overwhelmed",ar:"مثقَل"}
+      ]},
+      { title: "Mixed / Complex", words: [
+        {en:"surprised",ar:"مفاجأ"},{en:"shocked",ar:"مصدوم"},{en:"curious",ar:"فضولي"},
+        {en:"nostalgic",ar:"حنين"},{en:"homesick",ar:"مشتاق للوطن"},{en:"embarrassed",ar:"محرَج"},
+        {en:"jealous",ar:"حسود"},{en:"envious",ar:"يشعر بالحسد"},{en:"amazed",ar:"مندهش"},
+        {en:"impressed",ar:"مبهور"},{en:"moved",ar:"متأثر"},{en:"emotional",ar:"عاطفي"}
+      ]}
+    ]
+  },
+  {
+    id: 9, cat: "daily", emoji: "⭐", nameAr: "الصفات الأساسية", nameEn: "Basic Adjectives",
+    groups: [
+      { title: "Size & Shape", words: [
+        {en:"big",ar:"كبير"},{en:"small",ar:"صغير"},{en:"large",ar:"ضخم"},
+        {en:"tiny",ar:"ضئيل"},{en:"huge",ar:"هائل"},{en:"long",ar:"طويل"},
+        {en:"short",ar:"قصير"},{en:"tall",ar:"طويل القامة"},{en:"wide",ar:"عريض"},
+        {en:"narrow",ar:"ضيق"},{en:"thick",ar:"سميك"},{en:"thin",ar:"رفيع"},
+        {en:"round",ar:"مستدير"},{en:"flat",ar:"مسطح"},{en:"sharp",ar:"حاد"},
+        {en:"straight",ar:"مستقيم"},{en:"curved",ar:"منحنٍ"}
+      ]},
+      { title: "Quality", words: [
+        {en:"good",ar:"جيد"},{en:"bad",ar:"سيء"},{en:"great",ar:"رائع"},
+        {en:"terrible",ar:"فظيع"},{en:"perfect",ar:"مثالي"},{en:"awful",ar:"مريع"},
+        {en:"excellent",ar:"ممتاز"},{en:"poor",ar:"رديء"},{en:"amazing",ar:"مذهل"},
+        {en:"wonderful",ar:"رائع"},{en:"horrible",ar:"مروّع"},{en:"beautiful",ar:"جميل"},
+        {en:"ugly",ar:"قبيح"},{en:"clean",ar:"نظيف"},{en:"dirty",ar:"متسخ"},
+        {en:"new",ar:"جديد"},{en:"old",ar:"قديم"},{en:"modern",ar:"عصري"},
+        {en:"ancient",ar:"قديم جداً"},{en:"broken",ar:"مكسور"},{en:"useful",ar:"مفيد"}
+      ]},
+      { title: "Speed & Temperature", words: [
+        {en:"fast",ar:"سريع"},{en:"slow",ar:"بطيء"},{en:"quick",ar:"سريع"},
+        {en:"hot",ar:"ساخن"},{en:"cold",ar:"بارد"},{en:"warm",ar:"دافئ"},
+        {en:"cool",ar:"بارد نسبياً"},{en:"freezing",ar:"متجمد"},{en:"boiling",ar:"يغلي"}
+      ]},
+      { title: "Other Common Adjectives", words: [
+        {en:"easy",ar:"سهل"},{en:"hard",ar:"صعب"},{en:"simple",ar:"بسيط"},
+        {en:"complex",ar:"معقد"},{en:"heavy",ar:"ثقيل"},{en:"light",ar:"خفيف"},
+        {en:"strong",ar:"قوي"},{en:"weak",ar:"ضعيف"},{en:"rich",ar:"ثري"},
+        {en:"poor",ar:"فقير"},{en:"full",ar:"ممتلئ"},{en:"empty",ar:"فارغ"},
+        {en:"open",ar:"مفتوح"},{en:"closed",ar:"مغلق"},{en:"safe",ar:"آمن"},
+        {en:"dangerous",ar:"خطير"},{en:"important",ar:"مهم"},{en:"interesting",ar:"مثير"},
+        {en:"boring",ar:"ممل"},{en:"funny",ar:"مضحك"},{en:"serious",ar:"جاد"},
+        {en:"quiet",ar:"هادئ"},{en:"loud",ar:"صاخب"},{en:"busy",ar:"مشغول"},
+        {en:"free",ar:"حر / مجاني"},{en:"ready",ar:"جاهز"},{en:"late",ar:"متأخر"},
+        {en:"early",ar:"مبكر"},{en:"right",ar:"صحيح"},{en:"wrong",ar:"خاطئ"}
+      ]}
+    ]
+  },
+  {
+    id: 10, cat: "daily", emoji: "🔄", nameAr: "الأفعال اليومية", nameEn: "Daily Routine Verbs",
+    groups: [
+      { title: "Morning Routine", words: [
+        {en:"wake up",ar:"يستيقظ"},{en:"get up",ar:"ينهض"},{en:"stretch",ar:"يتمطى"},
+        {en:"yawn",ar:"يتثاءب"},{en:"wash",ar:"يغسل"},{en:"shower",ar:"يستحم"},
+        {en:"brush teeth",ar:"يغسل أسنانه"},{en:"comb hair",ar:"يمشط شعره"},
+        {en:"get dressed",ar:"يرتدي ملابسه"},{en:"eat breakfast",ar:"يتناول الفطور"},
+        {en:"drink coffee",ar:"يشرب القهوة"}
+      ]},
+      { title: "During the Day", words: [
+        {en:"work",ar:"يعمل"},{en:"study",ar:"يدرس"},{en:"drive",ar:"يقود"},
+        {en:"commute",ar:"يتنقل"},{en:"shop",ar:"يتسوق"},{en:"cook",ar:"يطبخ"},
+        {en:"clean",ar:"ينظف"},{en:"exercise",ar:"يمارس الرياضة"},
+        {en:"meet",ar:"يلتقي"},{en:"check phone",ar:"يتحقق من الهاتف"},
+        {en:"read",ar:"يقرأ"},{en:"browse",ar:"يتصفح"},{en:"type",ar:"يكتب"},
+        {en:"call",ar:"يتصل"},{en:"pay",ar:"يدفع"},{en:"travel",ar:"يسافر"}
+      ]},
+      { title: "Evening Routine", words: [
+        {en:"relax",ar:"يسترخي"},{en:"watch TV",ar:"يشاهد التلفاز"},{en:"eat dinner",ar:"يتعشى"},
+        {en:"chat",ar:"يتحدث"},{en:"read book",ar:"يقرأ كتاباً"},{en:"take bath",ar:"يأخذ حماماً"},
+        {en:"brush teeth",ar:"يغسل أسنانه"},{en:"go to bed",ar:"يذهب للنوم"},
+        {en:"fall asleep",ar:"ينام"},{en:"dream",ar:"يحلم"},{en:"snore",ar:"يشخر"}
+      ]}
+    ]
+  },
+  // ──────────────────── REAL LIFE ────────────────────
+  {
+    id: 11, cat: "real", emoji: "🏠", nameAr: "المنزل", nameEn: "Home & House",
+    groups: [
+      { title: "Parts of the House", words: [
+        {en:"house",ar:"منزل"},{en:"apartment",ar:"شقة"},{en:"room",ar:"غرفة"},
+        {en:"bedroom",ar:"غرفة نوم"},{en:"bathroom",ar:"حمام"},{en:"kitchen",ar:"مطبخ"},
+        {en:"living room",ar:"غرفة معيشة"},{en:"dining room",ar:"غرفة طعام"},
+        {en:"basement",ar:"قبو"},{en:"attic",ar:"علية"},{en:"garage",ar:"مرآب"},
+        {en:"garden",ar:"حديقة"},{en:"balcony",ar:"شرفة"},{en:"roof",ar:"سطح"},
+        {en:"floor",ar:"طابق / أرضية"},{en:"ceiling",ar:"سقف"},{en:"wall",ar:"جدار"},
+        {en:"staircase",ar:"درج"},{en:"hallway",ar:"ممر"},{en:"porch",ar:"رواق"}
+      ]},
+      { title: "Doors, Windows & Parts", words: [
+        {en:"door",ar:"باب"},{en:"window",ar:"نافذة"},{en:"key",ar:"مفتاح"},
+        {en:"lock",ar:"قفل"},{en:"bell",ar:"جرس"},{en:"fence",ar:"سياج"},
+        {en:"gate",ar:"بوابة"},{en:"step",ar:"درجة"},{en:"shelf",ar:"رف"},
+        {en:"drawer",ar:"درج"},{en:"closet",ar:"خزانة"},{en:"curtain",ar:"ستارة"}
+      ]},
+      { title: "Furniture", words: [
+        {en:"bed",ar:"سرير"},{en:"sofa",ar:"أريكة"},{en:"chair",ar:"كرسي"},
+        {en:"table",ar:"طاولة"},{en:"desk",ar:"مكتب"},{en:"wardrobe",ar:"خزانة ملابس"},
+        {en:"mirror",ar:"مرآة"},{en:"lamp",ar:"مصباح"},{en:"pillow",ar:"وسادة"},
+        {en:"blanket",ar:"بطانية"},{en:"rug",ar:"سجادة"},{en:"bookshelf",ar:"رف كتب"},
+        {en:"refrigerator",ar:"ثلاجة"},{en:"oven",ar:"فرن"},{en:"microwave",ar:"ميكروويف"},
+        {en:"sink",ar:"حوض"},{en:"bathtub",ar:"حوض استحمام"},{en:"toilet",ar:"مرحاض"},
+        {en:"washing machine",ar:"غسالة"},{en:"air conditioner",ar:"مكيف"}
+      ]}
+    ]
+  },
+  {
+    id: 12, cat: "real", emoji: "👕", nameAr: "الملابس والأزياء", nameEn: "Clothes & Fashion",
+    groups: [
+      { title: "Basic Clothing", words: [
+        {en:"shirt",ar:"قميص"},{en:"pants",ar:"بنطلون"},{en:"dress",ar:"فستان"},
+        {en:"skirt",ar:"تنورة"},{en:"jacket",ar:"جاكيت"},{en:"coat",ar:"معطف"},
+        {en:"suit",ar:"بدلة"},{en:"jeans",ar:"جينز"},{en:"shorts",ar:"شورت"},
+        {en:"blouse",ar:"بلوزة"},{en:"sweater",ar:"كنزة صوفية"},{en:"hoodie",ar:"هودي"},
+        {en:"t-shirt",ar:"تيشيرت"},{en:"vest",ar:"صديري"},{en:"uniform",ar:"زي رسمي"}
+      ]},
+      { title: "Shoes & Accessories", words: [
+        {en:"shoes",ar:"حذاء"},{en:"boots",ar:"حذاء طويل"},{en:"sandals",ar:"صندل"},
+        {en:"sneakers",ar:"حذاء رياضي"},{en:"socks",ar:"جوارب"},{en:"belt",ar:"حزام"},
+        {en:"hat",ar:"قبعة"},{en:"cap",ar:"كاب"},{en:"scarf",ar:"وشاح"},
+        {en:"gloves",ar:"قفازات"},{en:"tie",ar:"ربطة عنق"},{en:"glasses",ar:"نظارة"},
+        {en:"sunglasses",ar:"نظارة شمسية"},{en:"bag",ar:"حقيبة"},{en:"backpack",ar:"حقيبة ظهر"},
+        {en:"wallet",ar:"محفظة"},{en:"umbrella",ar:"مظلة"},{en:"ring",ar:"خاتم"},
+        {en:"necklace",ar:"قلادة"},{en:"watch",ar:"ساعة يد"},{en:"bracelet",ar:"سوار"}
+      ]},
+      { title: "Fabric & Style", words: [
+        {en:"cotton",ar:"قطن"},{en:"wool",ar:"صوف"},{en:"leather",ar:"جلد"},
+        {en:"silk",ar:"حرير"},{en:"fabric",ar:"قماش"},{en:"size",ar:"مقاس"},
+        {en:"style",ar:"أسلوب"},{en:"fashion",ar:"موضة"},{en:"brand",ar:"ماركة"},
+        {en:"fit",ar:"مقياس"},{en:"loose",ar:"فضفاض"},{en:"tight",ar:"ضيق"},
+        {en:"casual",ar:"غير رسمي"},{en:"formal",ar:"رسمي"},{en:"trendy",ar:"عصري"}
+      ]}
+    ]
+  },
+  {
+    id: 13, cat: "real", emoji: "💪", nameAr: "جسم الإنسان", nameEn: "Human Body",
+    groups: [
+      { title: "Head & Face", words: [
+        {en:"head",ar:"رأس"},{en:"face",ar:"وجه"},{en:"hair",ar:"شعر"},
+        {en:"eye",ar:"عين"},{en:"ear",ar:"أذن"},{en:"nose",ar:"أنف"},
+        {en:"mouth",ar:"فم"},{en:"lips",ar:"شفتان"},{en:"teeth",ar:"أسنان"},
+        {en:"tongue",ar:"لسان"},{en:"chin",ar:"ذقن"},{en:"cheek",ar:"خد"},
+        {en:"forehead",ar:"جبهة"},{en:"eyebrow",ar:"حاجب"},{en:"eyelash",ar:"رمش"},
+        {en:"jaw",ar:"فك"},{en:"neck",ar:"عنق"},{en:"throat",ar:"حلق"}
+      ]},
+      { title: "Upper Body", words: [
+        {en:"shoulder",ar:"كتف"},{en:"arm",ar:"ذراع"},{en:"elbow",ar:"كوع"},
+        {en:"hand",ar:"يد"},{en:"wrist",ar:"معصم"},{en:"finger",ar:"إصبع"},
+        {en:"thumb",ar:"إبهام"},{en:"nail",ar:"ظفر"},{en:"chest",ar:"صدر"},
+        {en:"back",ar:"ظهر"},{en:"spine",ar:"عمود فقري"},{en:"stomach",ar:"بطن"},
+        {en:"waist",ar:"خصر"}
+      ]},
+      { title: "Lower Body", words: [
+        {en:"leg",ar:"ساق"},{en:"knee",ar:"ركبة"},{en:"thigh",ar:"فخذ"},
+        {en:"foot",ar:"قدم"},{en:"ankle",ar:"كاحل"},{en:"toe",ar:"إصبع قدم"},
+        {en:"heel",ar:"كعب"},{en:"hip",ar:"ورك"}
+      ]},
+      { title: "Internal Organs", words: [
+        {en:"heart",ar:"قلب"},{en:"brain",ar:"دماغ"},{en:"lung",ar:"رئة"},
+        {en:"liver",ar:"كبد"},{en:"kidney",ar:"كلية"},{en:"stomach",ar:"معدة"},
+        {en:"blood",ar:"دم"},{en:"bone",ar:"عظمة"},{en:"muscle",ar:"عضلة"},
+        {en:"skin",ar:"جلد"},{en:"nerve",ar:"عصب"}
+      ]}
+    ]
+  },
+  {
+    id: 14, cat: "real", emoji: "🏥", nameAr: "الصحة والطب", nameEn: "Health & Medicine",
+    groups: [
+      { title: "Medical People & Places", words: [
+        {en:"doctor",ar:"طبيب"},{en:"nurse",ar:"ممرضة"},{en:"patient",ar:"مريض"},
+        {en:"dentist",ar:"طبيب أسنان"},{en:"surgeon",ar:"جراح"},{en:"pharmacist",ar:"صيدلاني"},
+        {en:"hospital",ar:"مستشفى"},{en:"clinic",ar:"عيادة"},{en:"pharmacy",ar:"صيدلية"},
+        {en:"emergency",ar:"طوارئ"},{en:"ambulance",ar:"سيارة إسعاف"},
+        {en:"operating room",ar:"غرفة عمليات"}
+      ]},
+      { title: "Illnesses & Symptoms", words: [
+        {en:"sick",ar:"مريض"},{en:"pain",ar:"ألم"},{en:"fever",ar:"حمى"},
+        {en:"headache",ar:"صداع"},{en:"cough",ar:"سعال"},{en:"cold",ar:"نزلة برد"},
+        {en:"flu",ar:"إنفلونزا"},{en:"allergy",ar:"حساسية"},{en:"infection",ar:"التهاب"},
+        {en:"injury",ar:"إصابة"},{en:"wound",ar:"جرح"},{en:"fracture",ar:"كسر"},
+        {en:"rash",ar:"طفح جلدي"},{en:"vomit",ar:"قيء"},{en:"diarrhea",ar:"إسهال"},
+        {en:"dizzy",ar:"دوخة"},{en:"nausea",ar:"غثيان"},{en:"swelling",ar:"تورم"},
+        {en:"bleeding",ar:"نزيف"},{en:"diabetes",ar:"سكري"},{en:"cancer",ar:"سرطان"}
+      ]},
+      { title: "Medicines & Treatment", words: [
+        {en:"medicine",ar:"دواء"},{en:"pill",ar:"حبة دواء"},{en:"tablet",ar:"قرص"},
+        {en:"injection",ar:"حقنة"},{en:"vaccine",ar:"لقاح"},{en:"surgery",ar:"جراحة"},
+        {en:"bandage",ar:"ضمادة"},{en:"X-ray",ar:"أشعة سينية"},{en:"prescription",ar:"وصفة طبية"},
+        {en:"dose",ar:"جرعة"},{en:"treatment",ar:"علاج"},{en:"cure",ar:"شفاء"},
+        {en:"checkup",ar:"فحص دوري"},{en:"diagnosis",ar:"تشخيص"},{en:"symptom",ar:"عرض"}
+      ]},
+      { title: "Healthy Lifestyle", words: [
+        {en:"exercise",ar:"رياضة"},{en:"diet",ar:"نظام غذائي"},{en:"sleep",ar:"نوم"},
+        {en:"healthy",ar:"صحي"},{en:"fit",ar:"لياقة"},{en:"vitamin",ar:"فيتامين"},
+        {en:"nutrition",ar:"تغذية"},{en:"hygiene",ar:"نظافة شخصية"},
+        {en:"meditation",ar:"تأمل"},{en:"stress",ar:"ضغط نفسي"}
+      ]}
+    ]
+  },
+  {
+    id: 15, cat: "real", emoji: "📚", nameAr: "المدرسة والتعليم", nameEn: "School & Education",
+    groups: [
+      { title: "People", words: [
+        {en:"teacher",ar:"معلم"},{en:"student",ar:"طالب"},{en:"principal",ar:"مدير مدرسة"},
+        {en:"professor",ar:"أستاذ جامعي"},{en:"classmate",ar:"زميل"},
+        {en:"headmaster",ar:"ناظر"},{en:"tutor",ar:"مدرس خاص"},{en:"lecturer",ar:"محاضر"}
+      ]},
+      { title: "Places & Things", words: [
+        {en:"school",ar:"مدرسة"},{en:"university",ar:"جامعة"},{en:"college",ar:"كلية"},
+        {en:"classroom",ar:"فصل دراسي"},{en:"library",ar:"مكتبة"},{en:"laboratory",ar:"معمل"},
+        {en:"gym",ar:"صالة رياضية"},{en:"canteen",ar:"كافتيريا"},{en:"board",ar:"سبورة"},
+        {en:"desk",ar:"مقعد"},{en:"notebook",ar:"كراسة"},{en:"textbook",ar:"كتاب مدرسي"},
+        {en:"pen",ar:"قلم"},{en:"pencil",ar:"قلم رصاص"},{en:"ruler",ar:"مسطرة"},
+        {en:"eraser",ar:"ممحاة"},{en:"backpack",ar:"حقيبة مدرسية"},{en:"calculator",ar:"آلة حاسبة"}
+      ]},
+      { title: "Academic", words: [
+        {en:"lesson",ar:"درس"},{en:"exam",ar:"امتحان"},{en:"homework",ar:"واجب منزلي"},
+        {en:"grade",ar:"درجة"},{en:"pass",ar:"ينجح"},{en:"fail",ar:"يرسب"},
+        {en:"certificate",ar:"شهادة"},{en:"degree",ar:"درجة علمية"},{en:"diploma",ar:"دبلوم"},
+        {en:"scholarship",ar:"منحة دراسية"},{en:"semester",ar:"فصل دراسي"},
+        {en:"essay",ar:"مقال"},{en:"project",ar:"مشروع"},{en:"quiz",ar:"اختبار قصير"},
+        {en:"lecture",ar:"محاضرة"},{en:"assignment",ar:"تكليف"},{en:"subject",ar:"مادة دراسية"},
+        {en:"curriculum",ar:"منهج دراسي"},{en:"graduation",ar:"تخرج"}
+      ]}
+    ]
+  },
+  // ──────────────────── WORLD ────────────────────
+  {
+    id: 16, cat: "world", emoji: "🏙️", nameAr: "الأماكن في المدينة", nameEn: "Places in the City",
+    groups: [
+      { title: "Public Places", words: [
+        {en:"city",ar:"مدينة"},{en:"town",ar:"بلدة"},{en:"village",ar:"قرية"},
+        {en:"street",ar:"شارع"},{en:"road",ar:"طريق"},{en:"avenue",ar:"جادة"},
+        {en:"square",ar:"ميدان"},{en:"park",ar:"حديقة عامة"},{en:"market",ar:"سوق"},
+        {en:"mall",ar:"مركز تسوق"},{en:"shop",ar:"دكان"},{en:"store",ar:"متجر"},
+        {en:"bank",ar:"بنك"},{en:"post office",ar:"مكتب بريد"},{en:"police station",ar:"مركز شرطة"},
+        {en:"fire station",ar:"إطفاء"},{en:"museum",ar:"متحف"},{en:"theater",ar:"مسرح"},
+        {en:"cinema",ar:"سينما"},{en:"stadium",ar:"ملعب"},{en:"zoo",ar:"حديقة حيوانات"}
+      ]},
+      { title: "Services", words: [
+        {en:"hospital",ar:"مستشفى"},{en:"school",ar:"مدرسة"},{en:"church",ar:"كنيسة"},
+        {en:"mosque",ar:"مسجد"},{en:"temple",ar:"معبد"},{en:"hotel",ar:"فندق"},
+        {en:"restaurant",ar:"مطعم"},{en:"cafe",ar:"مقهى"},{en:"gym",ar:"نادي رياضي"},
+        {en:"salon",ar:"صالون"},{en:"laundry",ar:"مغسلة"},{en:"gas station",ar:"محطة وقود"},
+        {en:"parking lot",ar:"موقف سيارات"},{en:"embassy",ar:"سفارة"},
+        {en:"court",ar:"محكمة"},{en:"prison",ar:"سجن"}
+      ]}
+    ]
+  },
+  {
+    id: 17, cat: "world", emoji: "🧭", nameAr: "الاتجاهات والمواقع", nameEn: "Directions & Locations",
+    groups: [
+      { title: "Basic Directions", words: [
+        {en:"left",ar:"يسار"},{en:"right",ar:"يمين"},{en:"up",ar:"فوق"},
+        {en:"down",ar:"تحت"},{en:"forward",ar:"للأمام"},{en:"backward",ar:"للخلف"},
+        {en:"straight",ar:"مستقيم"},{en:"turn",ar:"استدر"}
+      ]},
+      { title: "Position Words", words: [
+        {en:"near",ar:"قريب"},{en:"far",ar:"بعيد"},{en:"here",ar:"هنا"},
+        {en:"there",ar:"هناك"},{en:"inside",ar:"داخل"},{en:"outside",ar:"خارج"},
+        {en:"above",ar:"أعلى"},{en:"below",ar:"أسفل"},{en:"next to",ar:"بجانب"},
+        {en:"opposite",ar:"مقابل"},{en:"between",ar:"بين"},{en:"behind",ar:"خلف"},
+        {en:"in front of",ar:"أمام"},{en:"corner",ar:"زاوية"},{en:"block",ar:"مبنى / كتلة"},
+        {en:"intersection",ar:"تقاطع"},{en:"north",ar:"شمال"},{en:"south",ar:"جنوب"},
+        {en:"east",ar:"شرق"},{en:"west",ar:"غرب"},{en:"center",ar:"مركز"},
+        {en:"distance",ar:"مسافة"},{en:"address",ar:"عنوان"},{en:"landmark",ar:"معلم"}
+      ]}
+    ]
+  },
+  {
+    id: 18, cat: "world", emoji: "☀️", nameAr: "الطقس والمناخ", nameEn: "Weather & Climate",
+    groups: [
+      { title: "Weather Conditions", words: [
+        {en:"sun",ar:"شمس"},{en:"rain",ar:"مطر"},{en:"wind",ar:"ريح"},
+        {en:"snow",ar:"ثلج"},{en:"cloud",ar:"سحابة"},{en:"fog",ar:"ضباب"},
+        {en:"storm",ar:"عاصفة"},{en:"thunder",ar:"رعد"},{en:"lightning",ar:"برق"},
+        {en:"hail",ar:"برد"},{en:"ice",ar:"جليد"},{en:"flood",ar:"فيضان"},
+        {en:"drought",ar:"جفاف"},{en:"hurricane",ar:"إعصار"},{en:"tornado",ar:"إعصار دوامي"},
+        {en:"rainbow",ar:"قوس قزح"},{en:"dew",ar:"ندى"},{en:"mist",ar:"رذاذ"}
+      ]},
+      { title: "Temperature & Descriptions", words: [
+        {en:"hot",ar:"حار"},{en:"cold",ar:"بارد"},{en:"warm",ar:"دافئ"},
+        {en:"cool",ar:"لطيف"},{en:"humid",ar:"رطب"},{en:"dry",ar:"جاف"},
+        {en:"sunny",ar:"مشمس"},{en:"cloudy",ar:"غائم"},{en:"rainy",ar:"ممطر"},
+        {en:"windy",ar:"عاصف"},{en:"snowy",ar:"مثلج"},{en:"freezing",ar:"قارس البرودة"},
+        {en:"mild",ar:"معتدل"},{en:"severe",ar:"شديد"},{en:"forecast",ar:"توقعات الطقس"},
+        {en:"temperature",ar:"درجة الحرارة"},{en:"climate",ar:"مناخ"},{en:"season",ar:"موسم"},
+        {en:"degree",ar:"درجة"},{en:"humidity",ar:"رطوبة"},{en:"pressure",ar:"ضغط جوي"}
+      ]}
+    ]
+  },
+  {
+    id: 19, cat: "world", emoji: "🌳", nameAr: "الطبيعة والبيئة", nameEn: "Nature & Environment",
+    groups: [
+      { title: "Nature Elements", words: [
+        {en:"tree",ar:"شجرة"},{en:"flower",ar:"زهرة"},{en:"grass",ar:"عشب"},
+        {en:"leaf",ar:"ورقة شجر"},{en:"seed",ar:"بذرة"},{en:"root",ar:"جذر"},
+        {en:"branch",ar:"غصن"},{en:"fruit",ar:"ثمرة"},{en:"forest",ar:"غابة"},
+        {en:"jungle",ar:"أدغال"},{en:"desert",ar:"صحراء"},{en:"mountain",ar:"جبل"},
+        {en:"valley",ar:"وادي"},{en:"river",ar:"نهر"},{en:"lake",ar:"بحيرة"},
+        {en:"ocean",ar:"محيط"},{en:"sea",ar:"بحر"},{en:"beach",ar:"شاطئ"},
+        {en:"island",ar:"جزيرة"},{en:"cave",ar:"كهف"},{en:"volcano",ar:"بركان"},
+        {en:"cliff",ar:"منحدر صخري"},{en:"waterfall",ar:"شلال"}
+      ]},
+      { title: "Sky & Space", words: [
+        {en:"sky",ar:"سماء"},{en:"sun",ar:"شمس"},{en:"moon",ar:"قمر"},
+        {en:"star",ar:"نجمة"},{en:"cloud",ar:"سحابة"},{en:"planet",ar:"كوكب"},
+        {en:"space",ar:"فضاء"},{en:"galaxy",ar:"مجرة"},{en:"universe",ar:"كون"},
+        {en:"earth",ar:"أرض"},{en:"atmosphere",ar:"غلاف جوي"}
+      ]},
+      { title: "Elements & Environment", words: [
+        {en:"water",ar:"ماء"},{en:"fire",ar:"نار"},{en:"earth",ar:"تراب"},
+        {en:"air",ar:"هواء"},{en:"rock",ar:"صخرة"},{en:"soil",ar:"تربة"},
+        {en:"sand",ar:"رمل"},{en:"mud",ar:"طين"},{en:"ice",ar:"جليد"},
+        {en:"nature",ar:"طبيعة"},{en:"environment",ar:"بيئة"},{en:"ecosystem",ar:"نظام بيئي"},
+        {en:"pollution",ar:"تلوث"},{en:"recycle",ar:"يعيد التدوير"},{en:"energy",ar:"طاقة"},
+        {en:"solar",ar:"شمسي"},{en:"fossil fuel",ar:"وقود أحفوري"},{en:"climate change",ar:"تغير المناخ"}
+      ]}
+    ]
+  },
+  {
+    id: 20, cat: "world", emoji: "🐾", nameAr: "الحيوانات", nameEn: "Animals",
+    groups: [
+      { title: "Pets & Common", words: [
+        {en:"dog",ar:"كلب"},{en:"cat",ar:"قطة"},{en:"fish",ar:"سمكة"},
+        {en:"bird",ar:"طائر"},{en:"rabbit",ar:"أرنب"},{en:"hamster",ar:"هامستر"},
+        {en:"turtle",ar:"سلحفاة"},{en:"parrot",ar:"ببغاء"},{en:"guinea pig",ar:"خنزير غيني"}
+      ]},
+      { title: "Wild Animals", words: [
+        {en:"lion",ar:"أسد"},{en:"tiger",ar:"نمر"},{en:"elephant",ar:"فيل"},
+        {en:"giraffe",ar:"زرافة"},{en:"monkey",ar:"قرد"},{en:"bear",ar:"دب"},
+        {en:"wolf",ar:"ذئب"},{en:"fox",ar:"ثعلب"},{en:"deer",ar:"غزال"},
+        {en:"zebra",ar:"حمار وحشي"},{en:"rhinoceros",ar:"وحيد القرن"},{en:"hippo",ar:"فرس نهر"},
+        {en:"crocodile",ar:"تمساح"},{en:"snake",ar:"ثعبان"},{en:"eagle",ar:"نسر"},
+        {en:"whale",ar:"حوت"},{en:"dolphin",ar:"دلفين"},{en:"shark",ar:"قرش"}
+      ]},
+      { title: "Farm Animals & Insects", words: [
+        {en:"cow",ar:"بقرة"},{en:"horse",ar:"حصان"},{en:"sheep",ar:"خروف"},
+        {en:"goat",ar:"ماعز"},{en:"pig",ar:"خنزير"},{en:"chicken",ar:"دجاجة"},
+        {en:"duck",ar:"بطة"},{en:"bee",ar:"نحلة"},{en:"butterfly",ar:"فراشة"},
+        {en:"ant",ar:"نملة"},{en:"mosquito",ar:"بعوضة"},{en:"spider",ar:"عنكبوت"},
+        {en:"fly",ar:"ذبابة"},{en:"worm",ar:"دودة"}
+      ]}
+    ]
+  },
+  // ──────────────────── TECHNOLOGY ────────────────────
+  {
+    id: 21, cat: "tech", emoji: "💻", nameAr: "التكنولوجيا", nameEn: "Technology",
+    groups: [
+      { title: "Devices", words: [
+        {en:"phone",ar:"هاتف"},{en:"computer",ar:"حاسوب"},{en:"laptop",ar:"لابتوب"},
+        {en:"tablet",ar:"تابلت"},{en:"screen",ar:"شاشة"},{en:"keyboard",ar:"لوحة مفاتيح"},
+        {en:"mouse",ar:"فأرة"},{en:"printer",ar:"طابعة"},{en:"camera",ar:"كاميرا"},
+        {en:"headphones",ar:"سماعات"},{en:"speaker",ar:"مكبر صوت"},{en:"charger",ar:"شاحن"},
+        {en:"battery",ar:"بطارية"},{en:"cable",ar:"كابل"},{en:"remote",ar:"ريموت"},
+        {en:"smart TV",ar:"تلفاز ذكي"},{en:"smartwatch",ar:"ساعة ذكية"}
+      ]},
+      { title: "Internet & Software", words: [
+        {en:"internet",ar:"إنترنت"},{en:"website",ar:"موقع إلكتروني"},{en:"app",ar:"تطبيق"},
+        {en:"software",ar:"برنامج"},{en:"download",ar:"تنزيل"},{en:"upload",ar:"رفع"},
+        {en:"search",ar:"بحث"},{en:"click",ar:"نقرة"},{en:"login",ar:"تسجيل دخول"},
+        {en:"password",ar:"كلمة مرور"},{en:"account",ar:"حساب"},{en:"profile",ar:"ملف شخصي"},
+        {en:"notification",ar:"إشعار"},{en:"update",ar:"تحديث"},{en:"install",ar:"تثبيت"},
+        {en:"browser",ar:"متصفح"},{en:"link",ar:"رابط"},{en:"email",ar:"بريد إلكتروني"},
+        {en:"virus",ar:"فيروس"},{en:"hack",ar:"اختراق"},{en:"cloud",ar:"سحابة إلكترونية"},
+        {en:"data",ar:"بيانات"},{en:"server",ar:"خادم"},{en:"network",ar:"شبكة"}
+      ]},
+      { title: "AI & Modern Tech", words: [
+        {en:"artificial intelligence",ar:"ذكاء اصطناعي"},{en:"robot",ar:"روبوت"},
+        {en:"algorithm",ar:"خوارزمية"},{en:"code",ar:"كود"},{en:"program",ar:"برنامج"},
+        {en:"digital",ar:"رقمي"},{en:"virtual",ar:"افتراضي"},{en:"online",ar:"على الإنترنت"},
+        {en:"offline",ar:"غير متصل"},{en:"streaming",ar:"بث مباشر"},{en:"GPS",ar:"نظام التتبع"},
+        {en:"QR code",ar:"رمز QR"},{en:"blockchain",ar:"سلسلة كتل"}
+      ]}
+    ]
+  },
+  {
+    id: 22, cat: "tech", emoji: "📱", nameAr: "التواصل والتفاعل", nameEn: "Communication",
+    groups: [
+      { title: "Channels & Methods", words: [
+        {en:"call",ar:"مكالمة"},{en:"message",ar:"رسالة"},{en:"chat",ar:"محادثة"},
+        {en:"email",ar:"بريد إلكتروني"},{en:"text",ar:"رسالة نصية"},{en:"video call",ar:"مكالمة مرئية"},
+        {en:"voicemail",ar:"بريد صوتي"},{en:"letter",ar:"خطاب"},{en:"note",ar:"ملاحظة"},
+        {en:"newsletter",ar:"نشرة بريدية"},{en:"broadcast",ar:"بث"}
+      ]},
+      { title: "Actions", words: [
+        {en:"send",ar:"يرسل"},{en:"receive",ar:"يستقبل"},{en:"forward",ar:"يحوّل"},
+        {en:"reply",ar:"يرد"},{en:"share",ar:"يشارك"},{en:"post",ar:"ينشر"},
+        {en:"comment",ar:"يعلق"},{en:"like",ar:"يعجبه"},{en:"follow",ar:"يتابع"},
+        {en:"block",ar:"يحجب"},{en:"report",ar:"يبلّغ"},{en:"tag",ar:"يشير إلى"},
+        {en:"upload",ar:"يرفع"},{en:"download",ar:"ينزّل"},{en:"subscribe",ar:"يشترك"},
+        {en:"unsubscribe",ar:"يلغي الاشتراك"}
+      ]},
+      { title: "Social Media", words: [
+        {en:"social media",ar:"وسائل التواصل"},{en:"feed",ar:"صفحة أخبار"},{en:"story",ar:"قصة"},
+        {en:"reel",ar:"ريل"},{en:"live",ar:"بث مباشر"},{en:"hashtag",ar:"وسم"},
+        {en:"trending",ar:"رائج"},{en:"viral",ar:"منتشر"},{en:"content",ar:"محتوى"},
+        {en:"influencer",ar:"مؤثر"},{en:"follower",ar:"متابع"},{en:"group",ar:"مجموعة"},
+        {en:"community",ar:"مجتمع"}
+      ]}
+    ]
+  },
+  // ──────────────────── MOVEMENT ────────────────────
+  {
+    id: 23, cat: "movement", emoji: "✈️", nameAr: "السفر والتنقل", nameEn: "Travel & Transport",
+    groups: [
+      { title: "Vehicles", words: [
+        {en:"car",ar:"سيارة"},{en:"bus",ar:"حافلة"},{en:"train",ar:"قطار"},
+        {en:"plane",ar:"طائرة"},{en:"ship",ar:"سفينة"},{en:"boat",ar:"قارب"},
+        {en:"motorcycle",ar:"دراجة نارية"},{en:"bicycle",ar:"دراجة هوائية"},
+        {en:"taxi",ar:"تاكسي"},{en:"subway",ar:"مترو"},{en:"tram",ar:"ترام"},
+        {en:"helicopter",ar:"مروحية"},{en:"truck",ar:"شاحنة"},{en:"van",ar:"فان"},
+        {en:"scooter",ar:"سكوتر"},{en:"ambulance",ar:"سيارة إسعاف"}
+      ]},
+      { title: "Travel Places", words: [
+        {en:"airport",ar:"مطار"},{en:"station",ar:"محطة"},{en:"port",ar:"ميناء"},
+        {en:"terminal",ar:"صالة"},{en:"gate",ar:"بوابة"},{en:"platform",ar:"رصيف"},
+        {en:"border",ar:"حدود"},{en:"customs",ar:"جمارك"},{en:"passport",ar:"جواز سفر"},
+        {en:"visa",ar:"تأشيرة"},{en:"ticket",ar:"تذكرة"},{en:"boarding pass",ar:"بطاقة صعود"},
+        {en:"luggage",ar:"حقائب"},{en:"check-in",ar:"تسجيل وصول"},{en:"hotel",ar:"فندق"},
+        {en:"hostel",ar:"نزل"},{en:"tour",ar:"رحلة سياحية"},{en:"guide",ar:"مرشد سياحي"}
+      ]},
+      { title: "Travel Actions", words: [
+        {en:"travel",ar:"يسافر"},{en:"fly",ar:"يطير"},{en:"drive",ar:"يقود"},
+        {en:"ride",ar:"يركب"},{en:"walk",ar:"يمشي"},{en:"board",ar:"يصعد"},
+        {en:"depart",ar:"يغادر"},{en:"land",ar:"يهبط"},{en:"navigate",ar:"يتنقل"},
+        {en:"book",ar:"يحجز"},{en:"pack",ar:"يحزم"},{en:"delay",ar:"تأخير"},
+        {en:"cancel",ar:"يلغي"},{en:"transfer",ar:"ينتقل"},{en:"explore",ar:"يستكشف"}
+      ]}
+    ]
+  },
+  {
+    id: 24, cat: "movement", emoji: "🚶", nameAr: "أفعال الحركة", nameEn: "Movement Verbs",
+    groups: [
+      { title: "Basic Movement", words: [
+        {en:"go",ar:"يذهب"},{en:"come",ar:"يأتي"},{en:"leave",ar:"يغادر"},
+        {en:"arrive",ar:"يصل"},{en:"return",ar:"يعود"},{en:"enter",ar:"يدخل"},
+        {en:"exit",ar:"يخرج"},{en:"pass",ar:"يمر"},{en:"cross",ar:"يعبر"},
+        {en:"approach",ar:"يقترب"},{en:"reach",ar:"يصل إلى"}
+      ]},
+      { title: "Speed & Style", words: [
+        {en:"walk",ar:"يمشي"},{en:"run",ar:"يركض"},{en:"jog",ar:"يهرول"},
+        {en:"sprint",ar:"يجري بسرعة"},{en:"crawl",ar:"يزحف"},{en:"jump",ar:"يقفز"},
+        {en:"hop",ar:"يقفز بقدم"},{en:"skip",ar:"يقفز خطوات"},{en:"dance",ar:"يرقص"},
+        {en:"swim",ar:"يسبح"},{en:"climb",ar:"يتسلق"},{en:"slide",ar:"ينزلق"},
+        {en:"roll",ar:"يتدحرج"},{en:"spin",ar:"يدور"},{en:"float",ar:"يطفو"},
+        {en:"fly",ar:"يطير"},{en:"dive",ar:"يغطس"},{en:"stretch",ar:"يمتد"}
+      ]}
+    ]
+  },
+  // ──────────────────── LANGUAGE ────────────────────
+  {
+    id: 25, cat: "language", emoji: "❓", nameAr: "الأسئلة", nameEn: "Question Words",
+    groups: [
+      { title: "WH Questions", words: [
+        {en:"what",ar:"ماذا / ما"},{en:"where",ar:"أين"},{en:"when",ar:"متى"},
+        {en:"why",ar:"لماذا"},{en:"who",ar:"من"},{en:"whom",ar:"لمن"},
+        {en:"whose",ar:"لمن (ملكية)"},{en:"which",ar:"أيٌّ"},{en:"how",ar:"كيف"},
+        {en:"how much",ar:"كم (غير معدود)"},{en:"how many",ar:"كم (معدود)"},
+        {en:"how long",ar:"كم المدة / الطول"},{en:"how often",ar:"كم مرة"},
+        {en:"how far",ar:"كم المسافة"},{en:"how old",ar:"كم عمره"}
+      ]},
+      { title: "Yes/No Questions", words: [
+        {en:"Is / Are",ar:"هل...؟"},{en:"Do / Does",ar:"هل تفعل؟"},{en:"Did",ar:"هل فعل؟"},
+        {en:"Will",ar:"هل سيفعل؟"},{en:"Can",ar:"هل يستطيع؟"},{en:"Should",ar:"هل يجب؟"},
+        {en:"Would",ar:"هل سيوافق؟"},{en:"Have / Has",ar:"هل أنجز؟"}
+      ]}
+    ]
+  },
+  {
+    id: 26, cat: "language", emoji: "🚫", nameAr: "النفي والإنكار", nameEn: "Negation",
+    groups: [
+      { title: "Negation Words", words: [
+        {en:"not",ar:"لا / ليس"},{en:"no",ar:"لا"},{en:"never",ar:"لا أبداً"},
+        {en:"nothing",ar:"لا شيء"},{en:"nobody",ar:"لا أحد"},{en:"nowhere",ar:"في لا مكان"},
+        {en:"neither",ar:"ولا"},{en:"nor",ar:"ولا"},{en:"none",ar:"لا شيء منها"},
+        {en:"hardly",ar:"بالكاد"},{en:"barely",ar:"بالكاد"},{en:"seldom",ar:"نادراً"},
+        {en:"rarely",ar:"نادراً"},{en:"without",ar:"بدون"},{en:"except",ar:"إلا"},
+        {en:"unless",ar:"إلا إذا"},{en:"deny",ar:"ينكر"},{en:"refuse",ar:"يرفض"},
+        {en:"reject",ar:"يرفض"},{en:"avoid",ar:"يتجنب"},{en:"impossible",ar:"مستحيل"}
+      ]}
+    ]
+  },
+  {
+    id: 27, cat: "language", emoji: "🔁", nameAr: "الزمن المتكرر", nameEn: "Frequency Adverbs",
+    groups: [
+      { title: "Frequency Words", words: [
+        {en:"always",ar:"دائماً"},{en:"usually",ar:"عادةً"},{en:"often",ar:"كثيراً"},
+        {en:"sometimes",ar:"أحياناً"},{en:"rarely",ar:"نادراً"},{en:"never",ar:"أبداً"},
+        {en:"generally",ar:"بشكل عام"},{en:"normally",ar:"عادةً"},{en:"regularly",ar:"بانتظام"},
+        {en:"frequently",ar:"بكثرة"},{en:"occasionally",ar:"من حين لآخر"},
+        {en:"seldom",ar:"نادراً جداً"},{en:"once",ar:"مرة واحدة"},{en:"twice",ar:"مرتين"},
+        {en:"daily",ar:"يومياً"},{en:"weekly",ar:"أسبوعياً"},{en:"monthly",ar:"شهرياً"},
+        {en:"yearly",ar:"سنوياً"},{en:"every day",ar:"كل يوم"},{en:"every week",ar:"كل أسبوع"},
+        {en:"every time",ar:"في كل مرة"}
+      ]}
+    ]
+  },
+  {
+    id: 28, cat: "language", emoji: "⏳", nameAr: "المستقبل والماضي", nameEn: "Past & Future",
+    groups: [
+      { title: "Auxiliary Verbs", words: [
+        {en:"will",ar:"سوف (مستقبل)"},{en:"would",ar:"كان سيفعل"},{en:"shall",ar:"سأفعل"},
+        {en:"was",ar:"كان"},{en:"were",ar:"كانوا"},{en:"did",ar:"فعل (ماضي)"},
+        {en:"done",ar:"تم"},{en:"been",ar:"كان (مشارك)"},{en:"had",ar:"كان لديه"},
+        {en:"have",ar:"لديه"},{en:"has",ar:"لديه (مفرد)"},{en:"can",ar:"يستطيع"},
+        {en:"could",ar:"كان بإمكانه"},{en:"may",ar:"ربما"},{en:"might",ar:"قد يكون"},
+        {en:"must",ar:"يجب"},{en:"should",ar:"ينبغي"},{en:"ought to",ar:"ينبغي أن"}
+      ]},
+      { title: "Time Markers", words: [
+        {en:"yesterday",ar:"أمس"},{en:"last week",ar:"الأسبوع الماضي"},{en:"last year",ar:"العام الماضي"},
+        {en:"ago",ar:"منذ"},{en:"before",ar:"قبل"},{en:"previously",ar:"سابقاً"},
+        {en:"tomorrow",ar:"غداً"},{en:"next week",ar:"الأسبوع القادم"},{en:"soon",ar:"قريباً"},
+        {en:"in the future",ar:"في المستقبل"},{en:"later",ar:"لاحقاً"},{en:"eventually",ar:"في نهاية المطاف"},
+        {en:"already",ar:"بالفعل"},{en:"just",ar:"للتو"},{en:"recently",ar:"مؤخراً"},
+        {en:"since",ar:"منذ"},{en:"for",ar:"منذ / لمدة"}
+      ]}
+    ]
+  },
+  // ──────────────────── CONCEPTS ────────────────────
+  {
+    id: 29, cat: "concepts", emoji: "💰", nameAr: "المال والمعاملات", nameEn: "Money & Finance",
+    groups: [
+      { title: "Money Basics", words: [
+        {en:"money",ar:"مال"},{en:"cash",ar:"نقد"},{en:"coin",ar:"عملة معدنية"},
+        {en:"bill",ar:"ورقة نقدية / فاتورة"},{en:"wallet",ar:"محفظة"},{en:"bank",ar:"بنك"},
+        {en:"account",ar:"حساب"},{en:"savings",ar:"مدخرات"},{en:"loan",ar:"قرض"},
+        {en:"debt",ar:"دين"},{en:"budget",ar:"ميزانية"},{en:"salary",ar:"راتب"},
+        {en:"income",ar:"دخل"},{en:"tax",ar:"ضريبة"},{en:"interest",ar:"فائدة"}
+      ]},
+      { title: "Shopping & Transactions", words: [
+        {en:"buy",ar:"يشتري"},{en:"sell",ar:"يبيع"},{en:"pay",ar:"يدفع"},
+        {en:"price",ar:"سعر"},{en:"cost",ar:"تكلفة"},{en:"cheap",ar:"رخيص"},
+        {en:"expensive",ar:"غالي"},{en:"discount",ar:"خصم"},{en:"offer",ar:"عرض"},
+        {en:"receipt",ar:"إيصال"},{en:"invoice",ar:"فاتورة"},{en:"refund",ar:"استرداد"},
+        {en:"exchange",ar:"استبدال"},{en:"currency",ar:"عملة"},{en:"credit card",ar:"بطاقة ائتمان"},
+        {en:"debit card",ar:"بطاقة مدين"},{en:"transfer",ar:"تحويل"},{en:"withdraw",ar:"سحب"},
+        {en:"deposit",ar:"إيداع"},{en:"invest",ar:"يستثمر"},{en:"profit",ar:"ربح"},
+        {en:"loss",ar:"خسارة"},{en:"worth",ar:"يساوي"},{en:"afford",ar:"يستطيع تحمل التكلفة"}
+      ]}
+    ]
+  },
+  {
+    id: 30, cat: "concepts", emoji: "👨‍💼", nameAr: "العمل والمهن", nameEn: "Work & Careers",
+    groups: [
+      { title: "Workplace", words: [
+        {en:"job",ar:"وظيفة"},{en:"work",ar:"عمل"},{en:"boss",ar:"رئيس"},
+        {en:"company",ar:"شركة"},{en:"office",ar:"مكتب"},{en:"employee",ar:"موظف"},
+        {en:"employer",ar:"صاحب عمل"},{en:"colleague",ar:"زميل عمل"},{en:"team",ar:"فريق"},
+        {en:"manager",ar:"مدير"},{en:"director",ar:"مدير تنفيذي"},{en:"staff",ar:"طاقم العمل"},
+        {en:"department",ar:"قسم"},{en:"meeting",ar:"اجتماع"},{en:"project",ar:"مشروع"},
+        {en:"deadline",ar:"موعد التسليم"},{en:"contract",ar:"عقد"},{en:"salary",ar:"راتب"},
+        {en:"promotion",ar:"ترقية"},{en:"resignation",ar:"استقالة"},{en:"fired",ar:"فُصل"}
+      ]},
+      { title: "Professions", words: [
+        {en:"doctor",ar:"طبيب"},{en:"teacher",ar:"معلم"},{en:"engineer",ar:"مهندس"},
+        {en:"lawyer",ar:"محامي"},{en:"accountant",ar:"محاسب"},{en:"programmer",ar:"مبرمج"},
+        {en:"designer",ar:"مصمم"},{en:"journalist",ar:"صحفي"},{en:"chef",ar:"طاهي"},
+        {en:"driver",ar:"سائق"},{en:"pilot",ar:"طيار"},{en:"police officer",ar:"ضابط شرطة"},
+        {en:"firefighter",ar:"إطفائي"},{en:"farmer",ar:"فلاح"},{en:"scientist",ar:"عالم"},
+        {en:"artist",ar:"فنان"},{en:"architect",ar:"مهندس معماري"},{en:"dentist",ar:"طبيب أسنان"},
+        {en:"pharmacist",ar:"صيدلاني"},{en:"electrician",ar:"كهربائي"},{en:"plumber",ar:"سباك"}
+      ]}
+    ]
+  },
+  {
+    id: 31, cat: "concepts", emoji: "📖", nameAr: "التعلم والمعرفة", nameEn: "Learning & Knowledge",
+    groups: [
+      { title: "Learning Actions", words: [
+        {en:"study",ar:"يدرس"},{en:"learn",ar:"يتعلم"},{en:"know",ar:"يعرف"},
+        {en:"understand",ar:"يفهم"},{en:"memorize",ar:"يحفظ"},{en:"practice",ar:"يتدرب"},
+        {en:"review",ar:"يراجع"},{en:"research",ar:"يبحث"},{en:"explore",ar:"يستكشف"},
+        {en:"discover",ar:"يكتشف"},{en:"experiment",ar:"يجرب"},{en:"analyze",ar:"يحلل"},
+        {en:"compare",ar:"يقارن"},{en:"evaluate",ar:"يقيّم"},{en:"solve",ar:"يحل"},
+        {en:"think",ar:"يفكر"},{en:"reason",ar:"يستنتج"},{en:"question",ar:"يتساءل"},
+        {en:"test",ar:"يختبر"},{en:"improve",ar:"يحسّن"}
+      ]},
+      { title: "Knowledge Types", words: [
+        {en:"knowledge",ar:"معرفة"},{en:"information",ar:"معلومات"},{en:"fact",ar:"حقيقة"},
+        {en:"idea",ar:"فكرة"},{en:"theory",ar:"نظرية"},{en:"concept",ar:"مفهوم"},
+        {en:"skill",ar:"مهارة"},{en:"experience",ar:"خبرة"},{en:"education",ar:"تعليم"},
+        {en:"intelligence",ar:"ذكاء"},{en:"wisdom",ar:"حكمة"},{en:"memory",ar:"ذاكرة"},
+        {en:"attention",ar:"انتباه"},{en:"focus",ar:"تركيز"},{en:"creativity",ar:"إبداع"}
+      ]}
+    ]
+  },
+  {
+    id: 32, cat: "concepts", emoji: "🎨", nameAr: "الألوان", nameEn: "Colors",
+    groups: [
+      { title: "Basic Colors", words: [
+        {en:"red",ar:"أحمر"},{en:"blue",ar:"أزرق"},{en:"green",ar:"أخضر"},
+        {en:"yellow",ar:"أصفر"},{en:"orange",ar:"برتقالي"},{en:"purple",ar:"بنفسجي"},
+        {en:"pink",ar:"وردي"},{en:"black",ar:"أسود"},{en:"white",ar:"أبيض"},
+        {en:"gray",ar:"رمادي"},{en:"brown",ar:"بني"},{en:"gold",ar:"ذهبي"},
+        {en:"silver",ar:"فضي"},{en:"beige",ar:"بيج"},{en:"cream",ar:"كريمي"}
+      ]},
+      { title: "Shades & Descriptions", words: [
+        {en:"light",ar:"فاتح"},{en:"dark",ar:"غامق"},{en:"bright",ar:"ساطع"},
+        {en:"pale",ar:"شاحب"},{en:"deep",ar:"عميق"},{en:"vivid",ar:"زاهٍ"},
+        {en:"transparent",ar:"شفاف"},{en:"opaque",ar:"معتم"},{en:"neon",ar:"نيون"},
+        {en:"navy blue",ar:"أزرق داكن"},{en:"sky blue",ar:"أزرق سماوي"},
+        {en:"olive",ar:"زيتوني"},{en:"maroon",ar:"كستنائي"},{en:"turquoise",ar:"فيروزي"},
+        {en:"lavender",ar:"خزامى"},{en:"teal",ar:"أزرق مخضر"},{en:"coral",ar:"مرجاني"}
+      ]}
+    ]
+  },
+  {
+    id: 33, cat: "concepts", emoji: "💬", nameAr: "اتجاهات الكلام", nameEn: "Speech Verbs",
+    groups: [
+      { title: "Saying & Telling", words: [
+        {en:"say",ar:"يقول"},{en:"tell",ar:"يخبر"},{en:"speak",ar:"يتكلم"},
+        {en:"talk",ar:"يتحدث"},{en:"state",ar:"يصرح"},{en:"mention",ar:"يذكر"},
+        {en:"claim",ar:"يزعم"},{en:"declare",ar:"يعلن"},{en:"express",ar:"يعبر عن"},
+        {en:"announce",ar:"يعلن"},{en:"report",ar:"يُبلّغ"},{en:"admit",ar:"يعترف"},
+        {en:"confess",ar:"يعترف (بذنب)"},{en:"argue",ar:"يجادل"},{en:"discuss",ar:"يناقش"}
+      ]},
+      { title: "Asking & Answering", words: [
+        {en:"ask",ar:"يسأل"},{en:"answer",ar:"يجيب"},{en:"question",ar:"يستجوب"},
+        {en:"request",ar:"يطلب"},{en:"demand",ar:"يطالب"},{en:"inquire",ar:"يستفسر"},
+        {en:"respond",ar:"يستجيب"},{en:"reply",ar:"يرد"},{en:"confirm",ar:"يؤكد"},
+        {en:"deny",ar:"ينكر"},{en:"refuse",ar:"يرفض"},{en:"accept",ar:"يقبل"},
+        {en:"agree",ar:"يوافق"},{en:"disagree",ar:"يخالف"},{en:"negotiate",ar:"يتفاوض"}
+      ]},
+      { title: "Persuasion & Influence", words: [
+        {en:"convince",ar:"يقنع"},{en:"persuade",ar:"يُقنع"},{en:"encourage",ar:"يشجع"},
+        {en:"warn",ar:"يحذّر"},{en:"suggest",ar:"يقترح"},{en:"recommend",ar:"يوصي"},
+        {en:"advise",ar:"ينصح"},{en:"remind",ar:"يذكّر"},{en:"promise",ar:"يعد"},
+        {en:"threaten",ar:"يهدد"},{en:"criticize",ar:"ينتقد"},{en:"praise",ar:"يمدح"},
+        {en:"compliment",ar:"يثني على"},{en:"complain",ar:"يشكو"},{en:"apologize",ar:"يعتذر"}
+      ]}
+    ]
+  },
+  {
+    id: 34, cat: "concepts", emoji: "😶‍🌫️", nameAr: "المشاعر المتقدمة", nameEn: "Advanced Emotions",
+    groups: [
+      { title: "Stress & Fatigue", words: [
+        {en:"bored",ar:"يشعر بالملل"},{en:"tired",ar:"متعب"},{en:"stressed",ar:"مضغوط"},
+        {en:"nervous",ar:"متوتر"},{en:"exhausted",ar:"منهَك"},{en:"drained",ar:"مستنفَد"},
+        {en:"burned out",ar:"محترق من الإجهاد"},{en:"restless",ar:"مضطرب"},{en:"tense",ar:"متشنج"},
+        {en:"overwhelmed",ar:"مثقل"},{en:"numb",ar:"خدر / لا يشعر"}
+      ]},
+      { title: "Social Emotions", words: [
+        {en:"embarrassed",ar:"محرَج"},{en:"humiliated",ar:"مهان"},{en:"rejected",ar:"مرفوض"},
+        {en:"ignored",ar:"متجاهَل"},{en:"accepted",ar:"مقبول"},{en:"included",ar:"مُدمَج"},
+        {en:"excluded",ar:"مستبعَد"},{en:"respected",ar:"محترَم"},{en:"valued",ar:"مُقدَّر"},
+        {en:"betrayed",ar:"مخذول"},{en:"supported",ar:"مدعوم"},{en:"misunderstood",ar:"مسيء الفهم"}
+      ]},
+      { title: "Deep Feelings", words: [
+        {en:"melancholy",ar:"كآبة"},{en:"grief",ar:"حزن عميق"},{en:"despair",ar:"يأس"},
+        {en:"regret",ar:"ندم"},{en:"remorse",ar:"تأنيب الضمير"},{en:"longing",ar:"اشتياق"},
+        {en:"passion",ar:"شغف"},{en:"compassion",ar:"تعاطف"},{en:"empathy",ar:"تفهم مشاعر الآخرين"},
+        {en:"sympathy",ar:"تعازٍ"},{en:"awe",ar:"إعجاب وخشية"},{en:"gratitude",ar:"امتنان"}
+      ]}
+    ]
+  },
+  // ──────────────────── TOOLS ────────────────────
+  {
+    id: 35, cat: "tools", emoji: "📍", nameAr: "أدوات المكان", nameEn: "Prepositions of Place",
+    groups: [
+      { title: "Position Prepositions", words: [
+        {en:"in",ar:"في (داخل)"},{en:"on",ar:"على"},{en:"at",ar:"في (نقطة)"},
+        {en:"under",ar:"تحت"},{en:"over",ar:"فوق"},{en:"above",ar:"أعلى من"},
+        {en:"below",ar:"أسفل من"},{en:"between",ar:"بين"},{en:"among",ar:"وسط"},
+        {en:"beside",ar:"بجانب"},{en:"next to",ar:"بجوار"},{en:"near",ar:"قريب من"},
+        {en:"far from",ar:"بعيد عن"},{en:"behind",ar:"خلف"},{en:"in front of",ar:"أمام"},
+        {en:"inside",ar:"بداخل"},{en:"outside",ar:"خارج"},{en:"across",ar:"عبر"},
+        {en:"through",ar:"خلال"},{en:"around",ar:"حول"},{en:"along",ar:"على امتداد"},
+        {en:"against",ar:"ضد / مقابل"},{en:"onto",ar:"إلى فوق"},{en:"into",ar:"إلى داخل"},
+        {en:"out of",ar:"خارج من"},{en:"off",ar:"من على"}
+      ]}
+    ]
+  },
+  {
+    id: 36, cat: "tools", emoji: "🕐", nameAr: "أدوات الزمن", nameEn: "Prepositions of Time",
+    groups: [
+      { title: "Time Prepositions", words: [
+        {en:"before",ar:"قبل"},{en:"after",ar:"بعد"},{en:"during",ar:"أثناء"},
+        {en:"until",ar:"حتى"},{en:"since",ar:"منذ"},{en:"for",ar:"لمدة"},
+        {en:"at",ar:"في (وقت محدد)"},{en:"on",ar:"في (يوم)"},{en:"in",ar:"في (شهر/سنة)"},
+        {en:"by",ar:"بحلول"},{en:"within",ar:"في غضون"},{en:"throughout",ar:"طوال"},
+        {en:"between",ar:"بين (وقتين)"},{en:"from...to",ar:"من...إلى"},{en:"around",ar:"حوالي"},
+        {en:"ago",ar:"منذ"},{en:"later",ar:"لاحقاً"},{en:"earlier",ar:"مبكراً"},
+        {en:"already",ar:"بالفعل"},{en:"still",ar:"لا يزال"},{en:"yet",ar:"حتى الآن"}
+      ]}
+    ]
+  },
+  {
+    id: 37, cat: "tools", emoji: "📊", nameAr: "المقارنة والتفضيل", nameEn: "Comparison",
+    groups: [
+      { title: "Comparison Words", words: [
+        {en:"more",ar:"أكثر"},{en:"less",ar:"أقل"},{en:"better",ar:"أفضل"},
+        {en:"worse",ar:"أسوأ"},{en:"bigger",ar:"أكبر"},{en:"smaller",ar:"أصغر"},
+        {en:"faster",ar:"أسرع"},{en:"slower",ar:"أبطأ"},{en:"higher",ar:"أعلى"},
+        {en:"lower",ar:"أدنى"},{en:"longer",ar:"أطول"},{en:"shorter",ar:"أقصر"},
+        {en:"stronger",ar:"أقوى"},{en:"weaker",ar:"أضعف"},{en:"smarter",ar:"أذكى"},
+        {en:"the most",ar:"الأكثر"},{en:"the least",ar:"الأقل"},{en:"the best",ar:"الأفضل"},
+        {en:"the worst",ar:"الأسوأ"},{en:"as...as",ar:"بنفس القدر"},{en:"than",ar:"من (مقارنة)"},
+        {en:"equal",ar:"مساوٍ"},{en:"same",ar:"نفسه"},{en:"different",ar:"مختلف"},
+        {en:"similar",ar:"مشابه"},{en:"opposite",ar:"عكس"},{en:"prefer",ar:"يفضل"},
+        {en:"rather",ar:"بالأحرى"},{en:"especially",ar:"خاصةً"}
+      ]}
+    ]
+  },
+  {
+    id: 38, cat: "tools", emoji: "📦", nameAr: "الكمية والمقدار", nameEn: "Quantity & Amount",
+    groups: [
+      { title: "Quantity Words", words: [
+        {en:"many",ar:"كثير (معدود)"},{en:"much",ar:"كثير (غير معدود)"},{en:"few",ar:"قليل (معدود)"},
+        {en:"little",ar:"قليل (غير معدود)"},{en:"some",ar:"بعض"},{en:"any",ar:"أي"},
+        {en:"all",ar:"كل"},{en:"every",ar:"كل (فرد)"},{en:"each",ar:"كل واحد"},
+        {en:"both",ar:"كلاهما"},{en:"either",ar:"أي منهما"},{en:"neither",ar:"لا أحدهما"},
+        {en:"enough",ar:"كافٍ"},{en:"plenty",ar:"وفير"},{en:"a lot",ar:"كثير جداً"},
+        {en:"a little",ar:"قليلاً"},{en:"a few",ar:"قليلاً (معدود)"},{en:"none",ar:"لا شيء"},
+        {en:"whole",ar:"كامل"},{en:"part",ar:"جزء"},{en:"half",ar:"نصف"},
+        {en:"double",ar:"ضعف"},{en:"single",ar:"مفرد"},{en:"several",ar:"عدة"},
+        {en:"numerous",ar:"عديد"},{en:"majority",ar:"الغالبية"},{en:"minority",ar:"الأقلية"}
+      ]}
+    ]
+  },
+  {
+    id: 39, cat: "tools", emoji: "🔥", nameAr: "السببية والنتيجة", nameEn: "Cause & Effect",
+    groups: [
+      { title: "Cause Words", words: [
+        {en:"because",ar:"لأن"},{en:"since",ar:"بما أن"},{en:"due to",ar:"بسبب"},
+        {en:"owing to",ar:"نظراً لـ"},{en:"thanks to",ar:"بفضل"},{en:"as a result of",ar:"نتيجة لـ"},
+        {en:"caused by",ar:"سببه"},{en:"because of",ar:"بسبب"},{en:"for this reason",ar:"لهذا السبب"}
+      ]},
+      { title: "Effect Words", words: [
+        {en:"so",ar:"إذن"},{en:"therefore",ar:"لذلك"},{en:"thus",ar:"وبالتالي"},
+        {en:"hence",ar:"ومن ثَمَّ"},{en:"as a result",ar:"كنتيجة"},{en:"consequently",ar:"وبالتالي"},
+        {en:"that's why",ar:"لهذا"},{en:"lead to",ar:"يؤدي إلى"},{en:"result in",ar:"ينتج عنه"},
+        {en:"affect",ar:"يؤثر على"},{en:"cause",ar:"يتسبب في"},{en:"influence",ar:"يؤثر"},
+        {en:"impact",ar:"تأثير"},{en:"effect",ar:"أثر"},{en:"outcome",ar:"نتيجة"},
+        {en:"consequence",ar:"عاقبة"},{en:"result",ar:"نتيجة"}
+      ]}
+    ]
+  },
+  {
+    id: 40, cat: "tools", emoji: "⚡", nameAr: "كلمات يومية جداً", nameEn: "Everyday Essentials",
+    groups: [
+      { title: "Polite & Social Words", words: [
+        {en:"yes",ar:"نعم"},{en:"no",ar:"لا"},{en:"maybe",ar:"ربما"},
+        {en:"okay",ar:"حسناً"},{en:"please",ar:"من فضلك"},{en:"thanks",ar:"شكراً"},
+        {en:"thank you",ar:"شكراً لك"},{en:"you're welcome",ar:"على الرحب"},
+        {en:"sorry",ar:"آسف"},{en:"excuse me",ar:"عفواً"},{en:"pardon",ar:"سامحني"},
+        {en:"hello",ar:"مرحباً"},{en:"hi",ar:"أهلاً"},{en:"goodbye",ar:"وداعاً"},
+        {en:"bye",ar:"باي"},{en:"good morning",ar:"صباح الخير"},{en:"good night",ar:"تصبح على خير"},
+        {en:"see you",ar:"إلى اللقاء"},{en:"take care",ar:"اعتنِ بنفسك"},
+        {en:"welcome",ar:"أهلاً وسهلاً"}
+      ]},
+      { title: "Common Fillers & Responses", words: [
+        {en:"sure",ar:"بالتأكيد"},{en:"of course",ar:"بالطبع"},{en:"absolutely",ar:"بالضبط"},
+        {en:"exactly",ar:"تماماً"},{en:"right",ar:"صحيح"},{en:"wrong",ar:"خطأ"},
+        {en:"really",ar:"حقاً"},{en:"actually",ar:"في الواقع"},{en:"basically",ar:"في الأساس"},
+        {en:"probably",ar:"على الأرجح"},{en:"almost",ar:"تقريباً"},{en:"quite",ar:"إلى حد ما"},
+        {en:"just",ar:"فقط"},{en:"only",ar:"فقط"},{en:"even",ar:"حتى"},
+        {en:"still",ar:"لا يزال"},{en:"already",ar:"بالفعل"},{en:"again",ar:"مجدداً"},
+        {en:"together",ar:"معاً"},{en:"alone",ar:"وحده"},{en:"both",ar:"كلاهما"},
+        {en:"anyway",ar:"على أي حال"},{en:"otherwise",ar:"وإلا"},{en:"instead",ar:"بدلاً"}
+      ]},
+      { title: "Very Common Verbs", words: [
+        {en:"be",ar:"يكون"},{en:"have",ar:"يملك"},{en:"do",ar:"يفعل"},
+        {en:"get",ar:"يحصل على"},{en:"make",ar:"يصنع"},{en:"go",ar:"يذهب"},
+        {en:"know",ar:"يعرف"},{en:"take",ar:"يأخذ"},{en:"see",ar:"يرى"},
+        {en:"come",ar:"يأتي"},{en:"think",ar:"يفكر"},{en:"look",ar:"ينظر"},
+        {en:"want",ar:"يريد"},{en:"give",ar:"يعطي"},{en:"use",ar:"يستخدم"},
+        {en:"find",ar:"يجد"},{en:"tell",ar:"يخبر"},{en:"ask",ar:"يسأل"},
+        {en:"seem",ar:"يبدو"},{en:"feel",ar:"يشعر"},{en:"try",ar:"يحاول"},
+        {en:"leave",ar:"يترك / يغادر"},{en:"call",ar:"يتصل / يسمي"},
+        {en:"keep",ar:"يحتفظ"},{en:"let",ar:"يسمح / يدع"},{en:"begin",ar:"يبدأ"},
+        {en:"show",ar:"يُظهر"},{en:"hear",ar:"يسمع"},{en:"play",ar:"يلعب"},
+        {en:"run",ar:"يركض"}
+      ]}
+    ]
+  }
+];
+
+// ═══════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════
+let savedWords = JSON.parse(localStorage.getItem('savedWords') || '[]');
+let allExpanded = false;
+let currentCat = 'all';
+
+// ═══════════════════════════════════════════════════════════
+// BUILD UI
+// ═══════════════════════════════════════════════════════════
+const CAT_LABELS = {
+  basics: "📌 الأساسيات", daily: "🧠 الحياة اليومية", real: "🏠 الحياة الواقعية",
+  world: "🌍 العالم", tech: "💻 التكنولوجيا", movement: "🔄 الحركة",
+  language: "🧠 اللغة", concepts: "🧩 المفاهيم", tools: "⚙️ أدوات اللغة"
+};
+
+function renderAll() {
+  const container = document.getElementById('topicsContainer');
+  container.innerHTML = '';
+
+  const filtered = currentCat === 'all' ? TOPICS : TOPICS.filter(t => t.cat === currentCat);
+  
+  let lastCat = null;
+  filtered.forEach(topic => {
+    if (topic.cat !== lastCat) {
+      if (currentCat === 'all') {
+        const div = document.createElement('div');
+        div.className = 'category-divider';
+        div.innerHTML = `<div class="category-divider-line"></div><span class="category-divider-label">${CAT_LABELS[topic.cat]||topic.cat}</span><div class="category-divider-line"></div>`;
+        container.appendChild(div);
+      }
+      lastCat = topic.cat;
+    }
+    container.appendChild(buildTopicBlock(topic));
+  });
+
+  updateTotalCount();
+}
+
+function buildTopicBlock(topic) {
+  const totalWords = topic.groups.reduce((a,g)=>a+g.words.length,0);
+  
+  const block = document.createElement('div');
+  block.className = 'topic-block';
+  block.dataset.id = topic.id;
+  block.dataset.cat = topic.cat;
+
+  const header = document.createElement('div');
+  header.className = 'topic-header';
+  header.innerHTML = `
+    <div class="topic-num">${topic.id}</div>
+    <div class="topic-icon">${topic.emoji}</div>
+    <div>
+      <div class="topic-name-ar">${topic.nameAr}</div>
+      <div class="topic-name-en">${topic.nameEn}</div>
+    </div>
+    <div class="topic-meta">
+      <span class="word-count-badge">${totalWords} كلمة</span>
+    </div>
+    <span class="chevron">▼</span>
+  `;
+
+  const wordsDiv = document.createElement('div');
+  wordsDiv.className = 'words-container';
+
+  topic.groups.forEach(group => {
+    const sg = document.createElement('div');
+    sg.className = 'sub-group';
+    sg.innerHTML = `<div class="sub-group-title">${group.title}</div>`;
+    const grid = document.createElement('div');
+    grid.className = 'words-grid';
+    group.words.forEach(word => {
+      const card = document.createElement('div');
+      card.className = 'word-card' + (savedWords.includes(word.en) ? ' saved' : '');
+      card.innerHTML = `
+        <div class="word-card-inner">
+          <div class="word-text">
+            <div class="word-en">${word.en}</div>
+            <div class="word-ar">${word.ar}</div>
+          </div>
+          <button class="speak-btn" title="استمع للكلمة">🔊</button>
+        </div>`;
+      // Click on speaker button → speak
+      card.querySelector('.speak-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        speakWord(word.en, card.querySelector('.speak-btn'));
+      });
+      // Click on card → speak + toggle save
+      card.addEventListener('click', () => {
+        speakWord(word.en, card.querySelector('.speak-btn'));
+        toggleSave(word.en, card);
+      });
+      grid.appendChild(card);
+    });
+    sg.appendChild(grid);
+    wordsDiv.appendChild(sg);
+  });
+
+  header.addEventListener('click', () => {
+    const open = header.classList.toggle('open');
+    wordsDiv.classList.toggle('open', open);
+  });
+
+  block.appendChild(header);
+  block.appendChild(wordsDiv);
+  return block;
+}
+
+function updateTotalCount() {
+  let total = 0;
+  const filtered = currentCat === 'all' ? TOPICS : TOPICS.filter(t=>t.cat===currentCat);
+  filtered.forEach(t => t.groups.forEach(g => total += g.words.length));
+  document.getElementById('totalCount').textContent = TOPICS.reduce((a,t)=>a+t.groups.reduce((b,g)=>b+g.words.length,0),0);
+  document.getElementById('savedCount').textContent = savedWords.length;
+}
+
+// ═══════════════════════════════════════════════════════════
+// SAVE WORDS
+// ═══════════════════════════════════════════════════════════
+function toggleSave(word, card) {
+  const idx = savedWords.indexOf(word);
+  if (idx === -1) { savedWords.push(word); card.classList.add('saved'); }
+  else { savedWords.splice(idx, 1); card.classList.remove('saved'); }
+  localStorage.setItem('savedWords', JSON.stringify(savedWords));
+  document.getElementById('savedCount').textContent = savedWords.length;
+  renderSavedPanel();
+}
+
+function renderSavedPanel() {
+  const list = document.getElementById('savedList');
+  if (savedWords.length === 0) { list.innerHTML = '<div style="color:var(--muted);font-size:0.8rem">لا توجد كلمات محفوظة</div>'; return; }
+  list.innerHTML = savedWords.map(w => `<div class="saved-item">${w}</div>`).join('');
+}
+
+// ═══════════════════════════════════════════════════════════
+// SEARCH
+// ═══════════════════════════════════════════════════════════
+const searchInput = document.getElementById('searchInput');
+const clearBtn = document.getElementById('clearBtn');
+const searchResults = document.getElementById('searchResults');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  clearBtn.style.display = q ? 'block' : 'none';
+  
+  if (!q) {
+    searchResults.classList.remove('active');
+    searchResults.innerHTML = '';
+    document.getElementById('topicsContainer').style.display = '';
+    return;
+  }
+
+  document.getElementById('topicsContainer').style.display = 'none';
+  searchResults.classList.add('active');
+
+  const matches = [];
+  TOPICS.forEach(topic => {
+    topic.groups.forEach(group => {
+      group.words.forEach(word => {
+        if (word.en.toLowerCase().includes(q) || word.ar.includes(q)) {
+          matches.push({...word, topic: topic.nameAr, topicEn: topic.nameEn, emoji: topic.emoji});
+        }
+      });
+    });
+  });
+
+  if (matches.length === 0) {
+    searchResults.innerHTML = `<div class="no-results">لا نتائج لـ "<strong>${searchInput.value}</strong>"</div>`;
+    return;
+  }
+
+  const highlight = (text, q) => text.replace(new RegExp(q,'gi'), m=>`<mark>${m}</mark>`);
+  
+  searchResults.innerHTML = `<div style="color:var(--muted);font-size:0.82rem;margin-bottom:12px">${matches.length} نتيجة</div>
+    <div class="search-results-grid">${matches.map(w=>`
+    <div class="search-word-card">
+      <div class="search-word-en">${highlight(w.en, q)}</div>
+      <div class="search-word-ar">${highlight(w.ar, q)}</div>
+      <div class="search-word-topic">${w.emoji} ${w.topic}</div>
+    </div>`).join('')}</div>`;
+});
+
+clearBtn.addEventListener('click', () => {
+  searchInput.value = ''; clearBtn.style.display = 'none';
+  searchResults.classList.remove('active'); searchResults.innerHTML = '';
+  document.getElementById('topicsContainer').style.display = '';
+});
+
+// ═══════════════════════════════════════════════════════════
+// FILTER TABS
+// ═══════════════════════════════════════════════════════════
+document.getElementById('filterTabs').addEventListener('click', e => {
+  if (!e.target.classList.contains('tab-btn')) return;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  currentCat = e.target.dataset.cat;
+  renderAll();
+  searchInput.value = ''; clearBtn.style.display = 'none';
+  searchResults.classList.remove('active');
+  document.getElementById('topicsContainer').style.display = '';
+});
+
+// ═══════════════════════════════════════════════════════════
+// EXPAND ALL / COLLAPSE
+// ═══════════════════════════════════════════════════════════
+document.getElementById('expandAll').addEventListener('click', () => {
+  allExpanded = !allExpanded;
+  document.querySelectorAll('.topic-header').forEach(h => h.classList.toggle('open', allExpanded));
+  document.querySelectorAll('.words-container').forEach(w => w.classList.toggle('open', allExpanded));
+  document.getElementById('expandAll').textContent = allExpanded ? 'إغلاق' : 'فتح';
+});
+
+// ═══════════════════════════════════════════════════════════
+// SAVED PANEL
+// ═══════════════════════════════════════════════════════════
+document.getElementById('savedToggle').addEventListener('click', () => {
+  const panel = document.getElementById('savedPanel');
+  panel.classList.toggle('show');
+  if (panel.classList.contains('show')) renderSavedPanel();
+});
+
+document.getElementById('clearSaved').addEventListener('click', () => {
+  savedWords = []; localStorage.setItem('savedWords','[]');
+  document.querySelectorAll('.word-card.saved').forEach(c=>c.classList.remove('saved'));
+  document.getElementById('savedCount').textContent = '0';
+  renderSavedPanel();
+});
+
+// ═══════════════════════════════════════════════════════════
+// SCROLL & PROGRESS
+// ═══════════════════════════════════════════════════════════
+document.getElementById('topBtn').addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+window.addEventListener('scroll', () => {
+  const total = document.body.scrollHeight - window.innerHeight;
+  document.getElementById('progressBar').style.width = (window.scrollY/total*100)+'%';
+  document.getElementById('topBtn').style.opacity = window.scrollY > 300 ? '1' : '0.3';
+});
+
+// ═══════════════════════════════════════════════════════════
+// SPEECH SYNTHESIS
+// ═══════════════════════════════════════════════════════════
+let currentSpeakBtn = null;
+let playAllActive = false;
+let playAllTimeout = null;
+
+function speakWord(word, btn) {
+  // Cancel any ongoing speech
+  window.speechSynthesis.cancel();
+  if (playAllTimeout) { clearTimeout(playAllTimeout); playAllTimeout = null; }
+
+  // Reset previous active button
+  if (currentSpeakBtn && currentSpeakBtn !== btn) {
+    currentSpeakBtn.classList.remove('active');
+    currentSpeakBtn.textContent = '🔊';
+  }
+
+  const utter = new SpeechSynthesisUtterance(word);
+  utter.lang = 'en-US';
+  utter.rate = 0.85;
+  utter.pitch = 1;
+
+  // Pick best English voice if available
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => v.lang.startsWith('en') && v.localService) ||
+                  voices.find(v => v.lang.startsWith('en'));
+  if (enVoice) utter.voice = enVoice;
+
+  if (btn) {
+    currentSpeakBtn = btn;
+    btn.classList.add('active');
+    btn.textContent = '🔉';
+    utter.onend = () => { btn.classList.remove('active'); btn.textContent = '🔊'; currentSpeakBtn = null; };
+    utter.onerror = () => { btn.classList.remove('active'); btn.textContent = '🔊'; currentSpeakBtn = null; };
+  }
+
+  window.speechSynthesis.speak(utter);
+}
+
+// ── PLAY ALL (visible words in opened sections) ──────────────
+function getAllVisibleWords() {
+  const words = [];
+  document.querySelectorAll('.words-container.open .word-card').forEach(card => {
+    const en = card.querySelector('.word-en');
+    const btn = card.querySelector('.speak-btn');
+    if (en) words.push({ text: en.textContent.trim(), btn });
+  });
+  return words;
+}
+
+let playAllIndex = 0;
+let playAllWords = [];
+
+function stopPlayAll() {
+  playAllActive = false;
+  window.speechSynthesis.cancel();
+  if (playAllTimeout) { clearTimeout(playAllTimeout); playAllTimeout = null; }
+  if (currentSpeakBtn) { currentSpeakBtn.classList.remove('active'); currentSpeakBtn.textContent = '🔊'; currentSpeakBtn = null; }
+  const btn = document.getElementById('playAllBtn');
+  btn.textContent = '▶';
+  btn.classList.remove('playing');
+}
+
+function playNext() {
+  if (!playAllActive || playAllIndex >= playAllWords.length) {
+    stopPlayAll();
+    return;
+  }
+  const { text, btn } = playAllWords[playAllIndex];
+  playAllIndex++;
+
+  // Reset prev
+  if (currentSpeakBtn && currentSpeakBtn !== btn) {
+    currentSpeakBtn.classList.remove('active');
+    currentSpeakBtn.textContent = '🔊';
+  }
+
+  // Scroll card into view
+  if (btn) btn.closest('.word-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'en-US';
+  utter.rate = 0.85;
+  utter.pitch = 1;
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => v.lang.startsWith('en') && v.localService) || voices.find(v => v.lang.startsWith('en'));
+  if (enVoice) utter.voice = enVoice;
+
+  if (btn) {
+    currentSpeakBtn = btn;
+    btn.classList.add('active');
+    btn.textContent = '🔉';
+    utter.onend = () => {
+      btn.classList.remove('active');
+      btn.textContent = '🔊';
+      currentSpeakBtn = null;
+      if (playAllActive) playAllTimeout = setTimeout(playNext, 700);
+    };
+    utter.onerror = () => {
+      btn.classList.remove('active');
+      btn.textContent = '🔊';
+      currentSpeakBtn = null;
+      if (playAllActive) playAllTimeout = setTimeout(playNext, 300);
+    };
+  } else {
+    utter.onend = () => { if (playAllActive) playAllTimeout = setTimeout(playNext, 700); };
+  }
+
+  window.speechSynthesis.speak(utter);
+}
+
+document.getElementById('playAllBtn').addEventListener('click', () => {
+  if (playAllActive) { stopPlayAll(); return; }
+
+  // If no sections are open, open all first
+  const openSections = document.querySelectorAll('.words-container.open');
+  if (openSections.length === 0) {
+    document.querySelectorAll('.topic-header').forEach(h => h.classList.add('open'));
+    document.querySelectorAll('.words-container').forEach(w => w.classList.add('open'));
+    allExpanded = true;
+    document.getElementById('expandAll').textContent = 'إغلاق';
+  }
+
+  playAllWords = getAllVisibleWords();
+  if (playAllWords.length === 0) { alert('لا توجد كلمات مرئية! افتح قسماً أولاً.'); return; }
+
+  playAllActive = true;
+  playAllIndex = 0;
+  const btn = document.getElementById('playAllBtn');
+  btn.textContent = '⏹';
+  btn.classList.add('playing');
+
+  // Voices may not be loaded yet — small delay
+  setTimeout(playNext, 300);
+});
+
+// Load voices (some browsers load them async)
+window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
+renderAll();
+updateTotalCount();
+</script>
+</body>
+</html>

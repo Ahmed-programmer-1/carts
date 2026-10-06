@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>دور مصر في دعم حركات التحرر الوطني | الدرس الثاني عشر - تاريخ البكالوريا المصرية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-void: #0d0c0a;
+    --bg-panel: #16140f;
+    --bg-panel-raised: #1e1b14;
+    --stone: #3a3327;
+    --sand: #c9a227;
+    --sand-bright: #e8c96b;
+    --nile: #2e6f77;
+    --nile-bright: #4fa3ac;
+    --papyrus: #ece2c8;
+    --papyrus-dim: #a89f88;
+    --red-seal: #8c3b2e;
+    --line: rgba(201,162,39,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    background:var(--bg-void);
+    color:var(--papyrus);
+    font-family:'Tajawal', sans-serif;
+    line-height:1.9;
+    overflow-x:hidden;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  ::selection{background:var(--sand); color:#0d0c0a;}
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(201,162,39,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 100% 10%, rgba(46,111,119,0.14), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  h1,h2,h3,h4{font-family:'Amiri', serif; font-weight:700; color:var(--sand-bright);}
+  a{color:inherit; text-decoration:none;}
+
+  .topbar{
+    position:sticky; top:0; z-index:100;
+    background:rgba(13,12,10,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:calc(14px + env(safe-area-inset-top,0px)) 26px 14px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Amiri',serif; font-size:1.05rem; color:var(--sand-bright); white-space:nowrap;}
+  .brand .glyph{
+    width:34px; height:34px; border:2px solid var(--sand);
+    display:flex; align-items:center; justify-content:center;
+    border-radius:3px; font-size:1rem; color:var(--sand); flex-shrink:0;
+    background:linear-gradient(135deg, rgba(201,162,39,0.15), transparent);
+  }
+  .navlinks{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none;}
+  .navlinks::-webkit-scrollbar{display:none;}
+  .navlinks a{
+    font-size:0.78rem; padding:8px 11px; white-space:nowrap; border-radius:6px;
+    color:var(--papyrus-dim); transition:.2s;
+    border:1px solid transparent;
+  }
+  .navlinks a:hover{color:var(--sand-bright); border-color:var(--line); background:rgba(201,162,39,0.06);}
+
+  .hero{
+    position:relative; min-height:78vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:80px 20px 60px;
+    z-index:1;
+  }
+  .hero .kicker{
+    font-family:'Cairo',sans-serif; letter-spacing:5px; font-size:0.7rem;
+    color:var(--nile-bright); text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .hero .kicker::before, .hero .kicker::after{content:""; width:40px; height:1px; background:var(--nile-bright); opacity:.5;}
+  .hero h1{
+    font-size:clamp(2rem, 6vw, 4rem); line-height:1.35; max-width:920px;
+    text-shadow: 0 0 40px rgba(232,201,107,0.15);
+  }
+  .hero .subtitle{
+    margin-top:22px; font-size:1.08rem; color:var(--papyrus-dim); max-width:720px;
+    font-family:'Cairo',sans-serif; font-weight:300;
+  }
+  .hero .pillars-mini{ display:flex; gap:0; margin-top:56px; align-items:flex-end; flex-wrap:wrap; justify-content:center; }
+  .pillars-mini .col{
+    width:74px; height:100px; margin:0 6px;
+    background:linear-gradient(180deg, var(--bg-panel-raised), var(--bg-panel));
+    border:1px solid var(--line); border-top:3px solid var(--sand);
+    border-radius:4px 4px 0 0;
+    display:flex; align-items:flex-start; justify-content:center; padding-top:14px;
+    font-family:'Amiri',serif; font-size:0.78rem; color:var(--sand-bright);
+    position:relative;
+  }
+  .pillars-mini .col span{writing-mode:vertical-rl; text-orientation:mixed;}
+  .pillars-mini .col:nth-child(2){height:120px; border-top-color:var(--red-seal);}
+  .pillars-mini .col:nth-child(3){height:90px; border-top-color:var(--nile);}
+  .pillars-mini .col:nth-child(4){height:108px; border-top-color:var(--sand-bright);}
+
+  .hero-anchor{margin-top:50px; font-size:.85rem; color:var(--papyrus-dim); display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .hero-anchor .arrow{animation:bob 2s infinite ease-in-out;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+  @media (prefers-reduced-motion: reduce){ .hero-anchor .arrow{animation:none;} }
+
+  section{
+    position:relative; z-index:1;
+    max-width:980px; margin:0 auto; padding:70px 24px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'Cairo',sans-serif; font-size:0.78rem; letter-spacing:3px;
+    color:var(--nile-bright); text-transform:uppercase; margin-bottom:10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .num{
+    background:var(--stone); color:var(--sand-bright); font-family:'Amiri',serif;
+    width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem;
+  }
+  section > h2{font-size:clamp(1.5rem,4vw,2.2rem); margin-bottom:26px;}
+  section h3{font-size:1.2rem; color:var(--nile-bright); margin:28px 0 12px; font-family:'Cairo',sans-serif; font-weight:700;}
+  p{font-size:1.02rem; color:#dcd3ba;}
+  .lead{font-size:1.1rem; color:var(--papyrus); font-family:'Cairo',sans-serif; font-weight:300;}
+
+  .box{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:10px;
+    padding:22px 24px; margin:18px 0;
+  }
+  .box.gold{border-right:4px solid var(--sand);}
+  .box.nile{border-right:4px solid var(--nile);}
+  .box.red{border-right:4px solid var(--red-seal);}
+  .box-title{font-family:'Cairo',sans-serif; font-weight:700; color:var(--sand-bright); margin-bottom:10px; font-size:0.95rem; display:flex; align-items:center; gap:8px;}
+
+  ul.clean{list-style:none; padding:0;}
+  ul.clean li{ position:relative; padding-right:22px; margin:10px 0; color:#dcd3ba; font-size:0.98rem; }
+  ul.clean li::before{content:"◆"; position:absolute; right:0; top:2px; color:var(--sand); font-size:0.6rem;}
+
+  .quote{
+    font-family:'Amiri',serif; font-style:italic; font-size:1.12rem; color:var(--sand-bright);
+    border-right:3px solid var(--sand); padding:6px 22px; margin:20px 0; line-height:2;
+  }
+  .quote cite{display:block; font-family:'Cairo',sans-serif; font-style:normal; font-size:0.8rem; color:var(--papyrus-dim); margin-top:10px;}
+
+  .pillars-wrap{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:36px 0;}
+  .pillar-card{
+    background:linear-gradient(180deg, var(--bg-panel-raised), var(--bg-panel));
+    border:1px solid var(--line); border-top:4px solid var(--sand);
+    border-radius:8px; padding:20px 14px; text-align:center;
+    transition:.25s;
+  }
+  .pillar-card:hover{transform:translateY(-6px); border-top-color:var(--sand-bright); box-shadow:0 12px 30px rgba(0,0,0,0.4);}
+  .pillar-card .ic{font-size:1.8rem; margin-bottom:10px;}
+  .pillar-card h4{font-size:1.0rem; color:var(--sand-bright); margin-bottom:8px;}
+  .pillar-card p{font-size:0.85rem; color:var(--papyrus-dim);}
+  @media(max-width:760px){.pillars-wrap{grid-template-columns:repeat(2,1fr);}}
+
+  .article-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:20px 0;}
+  .article-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:18px;
+    font-size:0.92rem;
+  }
+  .article-card .tag{color:var(--nile-bright); font-family:'Cairo',sans-serif; font-weight:700; font-size:0.8rem; margin-bottom:8px; display:block;}
+  @media(max-width:760px){.article-grid{grid-template-columns:1fr;}}
+
+  .measures{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;}
+  .measure{background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:16px 18px; display:flex; gap:12px; align-items:flex-start;}
+  .measure .ic{font-size:1.3rem; flex-shrink:0;}
+  .measure p{font-size:0.92rem; margin:0;}
+  @media(max-width:700px){.measures{grid-template-columns:1fr;}}
+
+  .qa{
+    background:var(--bg-panel-raised); border:1px dashed var(--line); border-radius:8px;
+    padding:16px 20px; margin:16px 0; font-size:0.95rem;
+  }
+  .qa b{color:var(--nile-bright);}
+
+  .cta-row{display:flex; justify-content:center; margin:40px 0 0; flex-wrap:wrap; gap:14px;}
+  .btn{
+    background:linear-gradient(135deg, var(--sand), #a5811e);
+    color:#181206; font-family:'Cairo',sans-serif; font-weight:700; font-size:1rem;
+    padding:14px 34px; border-radius:30px; border:none; cursor:pointer;
+    transition:.2s; box-shadow:0 6px 20px rgba(201,162,39,0.25);
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(201,162,39,0.35);}
+  .btn.ghost{background:transparent; border:1px solid var(--sand); color:var(--sand-bright); box-shadow:none;}
+
+  .summary-section{background:var(--bg-panel);}
+  .summary-block{margin-bottom:30px;}
+  .summary-block h3{color:var(--sand-bright); border-bottom:1px solid var(--line); padding-bottom:8px;}
+  .summary-block ul.clean li::before{color:var(--nile-bright);}
+  .mini-table{width:100%; border-collapse:collapse; margin:14px 0; font-size:0.9rem;}
+  .mini-table th, .mini-table td{border:1px solid var(--line); padding:10px 12px; text-align:right;}
+  .mini-table th{background:var(--bg-panel-raised); color:var(--sand-bright); font-family:'Cairo',sans-serif;}
+  .mini-table{display:block; overflow-x:auto; white-space:nowrap;}
+
+  .exam-section{background:linear-gradient(180deg, var(--bg-void), #0a0908);}
+  .exam-head{text-align:center; margin-bottom:36px;}
+  .exam-progress{
+    position:sticky; top:calc(66px + env(safe-area-inset-top,0px)); z-index:50; background:var(--bg-panel);
+    border:1px solid var(--line); border-radius:20px; padding:8px 18px;
+    display:flex; align-items:center; gap:14px; font-size:0.85rem; max-width:400px; margin:0 auto 30px;
+  }
+  .bar{flex:1; height:6px; background:var(--stone); border-radius:6px; overflow:hidden;}
+  .bar-fill{height:100%; background:linear-gradient(90deg, var(--nile), var(--sand)); width:0%; transition:.3s;}
+
+  .q-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:12px;
+    padding:26px; margin-bottom:22px;
+  }
+  .q-num{color:var(--nile-bright); font-family:'Cairo',sans-serif; font-weight:700; font-size:0.85rem; margin-bottom:8px;}
+  .q-text{font-size:1.03rem; color:var(--papyrus); margin-bottom:18px; font-family:'Cairo',sans-serif; font-weight:500;}
+  .opts{display:flex; flex-direction:column; gap:10px;}
+  .opt{
+    display:flex; align-items:center; gap:12px; padding:12px 16px;
+    background:var(--bg-panel-raised); border:1px solid var(--line); border-radius:8px;
+    cursor:pointer; transition:.15s; font-size:0.94rem;
+  }
+  .opt:hover{border-color:var(--sand);}
+  .opt.selected{border-color:var(--nile-bright); background:rgba(46,111,119,0.12);}
+  .opt.correct{border-color:#5aa66b; background:rgba(90,166,107,0.15);}
+  .opt.wrong{border-color:var(--red-seal); background:rgba(140,59,46,0.18);}
+  .opt .letter{
+    width:26px; height:26px; border-radius:50%; background:var(--stone); color:var(--sand-bright);
+    display:flex; align-items:center; justify-content:center; font-size:0.8rem; flex-shrink:0; font-family:'Cairo',sans-serif;
+  }
+  .fb{margin-top:14px; font-size:0.88rem; padding:10px 14px; border-radius:6px; display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:rgba(90,166,107,0.12); color:#8fd39f; border:1px solid rgba(90,166,107,0.3);}
+  .fb.no{background:rgba(140,59,46,0.12); color:#e6a297; border:1px solid rgba(140,59,46,0.3);}
+
+  .result-panel{
+    display:none; text-align:center; background:var(--bg-panel-raised); border:1px solid var(--sand);
+    border-radius:14px; padding:40px 26px; margin-top:20px;
+  }
+  .result-panel.show{display:block;}
+  .result-score{font-family:'Amiri',serif; font-size:3rem; color:var(--sand-bright);}
+  .result-msg{font-size:1.03rem; margin-top:10px; color:var(--papyrus);}
+
+  footer{text-align:center; padding:40px 20px calc(60px + env(safe-area-inset-bottom,0px)); color:var(--papyrus-dim); font-size:0.82rem; position:relative; z-index:1;}
+
+  :focus-visible{outline:2px solid var(--nile-bright); outline-offset:2px;}
+
+  @media(max-width:640px){
+    .navlinks{display:none;}
+    .article-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="glyph">🤝</span> دعم مصر لحركات التحرر</div>
+  <nav class="navlinks">
+    <a href="#intro">مدخل الدرس</a>
+    <a href="#jazair">الجزائر</a>
+    <a href="#yaman">اليمن</a>
+    <a href="#iraq">العراق</a>
+    <a href="#janoub-ifriqya">جنوب إفريقيا</a>
+    <a href="#tadribat">تدريبات الكتاب</a>
+    <a href="#molakhas">الملخص الشامل</a>
+    <a href="#exam">الامتحان</a>
+    <a href="#mindmaps">الصور الذهنية</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="kicker">تاريخ · البكالوريا المصرية · الدرس الثاني عشر</div>
+  <h1>دور مصر في دعم حركات التحرر الوطني</h1>
+  <p class="subtitle">بعد نجاح ثورة ٢٣ يوليو اتضحت معالم السياسة المصرية تجاه الدول العربية؛ إذ رأت القيادة المصرية أن استمرار احتلال الدول العربية تهديد لأمنها القومي، فأصبحت القاهرة قبلة للثوار والفدائيين من الدول المحتلة حول العالم.</p>
+  <div class="pillars-mini" aria-hidden="true">
+    <div class="col"><span>سياسي</span></div>
+    <div class="col"><span>عسكري</span></div>
+    <div class="col"><span>إعلامي</span></div>
+    <div class="col"><span>ثقافي</span></div>
+  </div>
+  <div class="hero-anchor"><span>ابدأ الرحلة</span><span class="arrow">↓</span></div>
+</div>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="eyebrow"><span class="num">۰</span> مدخل الدرس</div>
+  <h2>مصر رمز التحرر الوطني ومقاومة الاستعمار في القرن العشرين</h2>
+  <p class="lead">كيف تحولت مصر إلى رمز للتحرر الوطني ومقاومة الاستعمار في القرن العشرين؟ امتد الدعم المصري إلى عديد من الدول العربية، كما ساندت مصر حركات التحرر في جنوب إفريقيا، لتصبح القاهرة خلال الخمسينيات والستينيات مركزًا مهمًا لحركات التحرر الوطني في العالم.</p>
+
+  <div class="box gold">
+    <div class="box-title">🎯 أهداف الدرس</div>
+    <ul class="clean">
+      <li>تتعرَّف أوجه الدعم السياسي والإعلامي والعسكري المصري لحركات التحرر.</li>
+      <li>تستنتج أسباب دعم مصر لحركات التحرر.</li>
+      <li>تُفسِّر أدوار مصر في دعم حركات التحرر.</li>
+      <li>تُعبِّر عن تقديرك لدور مصر في تعزيز ودعم حركات التحرر.</li>
+    </ul>
+  </div>
+
+  <div class="quote">بعد نجاح ثورة ٢٣ يوليو اتضحت معالم السياسة المصرية تجاه الدول العربية؛ حيث كانت قناعة القيادة المصرية أن استمرار احتلال الدول العربية فيه تهديد للأمن القومي المصري، ومن هنا زادت قناعة تأييد مصر لحركات التحرر الوطني، ولم يقف الأمر عند تأييد حركات التحرر في الدول العربية، بل انطلقت مصر تؤيد الدول الإفريقية، خاصة جنوب إفريقيا.
+    <cite>— الفكرة الرئيسة للدرس</cite>
+  </div>
+
+  <div class="qa">💭 <b>سؤال يقود تعلمنا:</b> كيف تحولت مصر إلى رمز للتحرر الوطني ومقاومة الاستعمار في القرن العشرين؟</div>
+</section>
+
+<!-- الجزائر -->
+<section id="jazair">
+  <div class="eyebrow"><span class="num">١</span> أولًا</div>
+  <h2>التحرر الوطني للجزائر</h2>
+  <div class="qa">💭 كيف تحولت القضية الجزائرية من قضية محلية إلى قضية تحرُّر عربي وإفريقي؟</div>
+
+  <h3>١. الدعم السياسي</h3>
+  <p>من أهم صور المساندة المصرية للثورة الجزائرية، خاصة في عهد جمال عبد الناصر الذي تبنَّى سياسة دعم حركات التحرر الوطني في الوطن العربي وإفريقيا، فقد اعترفت مصر منذ البداية بحق الشعب الجزائري في مقاومة الاستعمار الفرنسي، وفتحت أبوابها لقادة الثورة الجزائرية، وسمحت لهم بالتحرك في القاهرة للتعريف بالقضية الجزائرية أمام العالم، كما ساعدت مصر في إنشاء مكاتب سياسية وإعلامية للثورة الجزائرية؛ حتى تتمكن من التواصل مع الدول العربية والإفريقية والآسيوية.</p>
+  <p>ودافعت مصر عن القضية الجزائرية في الأمم المتحدة والمحافل الدولية المختلفة؛ حيث طالبت بإنهاء الاحتلال الفرنسي ومنح الشعب الجزائري حقه في تقرير المصير.</p>
+
+  <h3>٢. الدعم العسكري</h3>
+  <ul class="clean">
+    <li>أرسلت مصر أول شحنة سلاح إلى الثورة الجزائرية، وكانت من أوائل الدول العربية التي دعمت الكفاح الجزائري عسكريًا.</li>
+    <li>استمرت في إمداد الثورة بالسلاح حتى أثناء العدوان الثلاثي عليها عام ١٩٥٦م.</li>
+    <li>أقامت معسكرات ومراكز تدريب للمقاتلين الجزائريين، وأُجريت تدريبات جيش التحرير الوطني على الأراضي المصرية.</li>
+    <li>قدَّمت دعمًا ماليًا كبيرًا، وأسهمت بالنصيب الأكبر من المساعدات العربية المُقدَّمة للثورة.</li>
+    <li>خصَّصت جزءًا من عائدات تأميم قناة السويس لدعم الكفاح المسلح الجزائري.</li>
+  </ul>
+
+  <h3>٣. الدعم الإعلامي</h3>
+  <p>سخَّرت مصر وسائل إعلامها المختلفة لخدمة الثورة الجزائرية، وكانت إذاعة «صوت العرب» من أبرز وسائل الدعم الإعلامي؛ حيث بثت أخبار الثورة وتغطية تطوراتها، وخصَّصت برامج للتعريف بتاريخ الجزائر وكفاح شعبها؛ ما زاد الوعي بالقضية بين الشعوب العربية. كما بثت الإذاعة كلمات وخطابات تحث الشعوب العربية على التضامن مع الجزائر، ونقلت رسائل قادة الثورة إلى الشعب الجزائري والعالم العربي.</p>
+  <div class="quote">ليست ثورة شعب الجزائر فقط، بل هي معركة الأمة العربية كلها.</div>
+
+  <h3>٤. الدعم الثقافي</h3>
+  <p>أرسلت مصر بعثات تعليمية وثقافية؛ كما فعلت في ليبيا؛ للإسهام في نشر التعليم، وشارك المثقفون المصريون في التعريف بالقضية الجزائرية عبر الكتب والمقالات والندوات، مما قوَّى الروابط الثقافية بين الشعبين. كما لعب الأزهر الشريف دورًا في دعم الهُوية الإسلامية للشعب الجزائري، عبر استقبال الطلاب الجزائريين وتعليمهم العلوم العربية والإسلامية.</p>
+
+  <div class="box red">
+    <div class="box-title">📌 معلومة تاريخية</div>
+    <p>درس الرئيس الجزائري محمد بن إبراهيم بوخروبة، المعروف بـ«هواري بومدين»، في الأزهر الشريف.</p>
+  </div>
+
+  <p>ولم يختلف موقف مصر الداعم لحركات التحرر في المغرب وتونس عن موقفها في الجزائر.</p>
+  <div class="qa">💭 حلِّل دور مصر في دعم الثورة الجزائرية داخل المحافل الدولية ووسائل الإعلام العربية.</div>
+</section>
+
+<!-- اليمن -->
+<section id="yaman">
+  <div class="eyebrow"><span class="num">٢</span> ثانيًا</div>
+  <h2>التحرر الوطني لليمن</h2>
+  <div class="qa">💭 لماذا رأت مصر أن نجاح الثورة اليمنية ذو أهمية إستراتيجية للعالم العربي؟</div>
+
+  <p>تُعَد الثورة اليمنية من أبرز حركات التحرر والتغيير في الوطن العربي خلال القرن العشرين؛ فقد قامت ثورة ٢٦ سبتمبر عام ١٩٦٢م ضد نظام الحكم الإمامي الذي كان يحكم شمال اليمن آنذاك؛ بهدف إقامة نظام جمهوري حديث يقوم على الحرية والمساواة والتنمية، ومساعدة اليمن للخروج من حالة الفقر والتأخر.</p>
+  <p>حظيت الثورة اليمنية بدعم عربي كبير، وكانت مصر في مقدمة الدول التي ساندت الشعب اليمني سياسيًا وعسكريًا، في إطار سياسة جمال عبد الناصر القائمة على دعم حركات التحرر وتعزيز التضامن العربي؛ إذ رأت مصر أن نجاح الثورة اليمنية خطوة مهمة نحو التحرر والتقدم، ونقطة إستراتيجية محورية لحماية مدخل البحر الأحمر الجنوبي عند مضيق باب المندب، وهو ما ردَّ اليمن الجميل به لمصر لاحقًا عندما أُغلق باب المندب إبان حرب أكتوبر ١٩٧٣م.</p>
+
+  <div class="box gold">
+    <div class="box-title">💡 قيمة أتعلمها</div>
+    <p>التحرر الحقيقي يقوم على العدالة والمساواة والتنمية.</p>
+  </div>
+
+  <h3>١. الدعم السياسي</h3>
+  <p>لعبت مصر دورًا سياسيًا بارزًا في الدفاع عن الثورة اليمنية داخل جامعة الدول العربية والأمم المتحدة؛ حيث أكَّدت حق الشعب اليمني في اختيار نظام الحكم الذي يريده بعيدًا عن التدخلات الأجنبية، وعملت الدبلوماسية المصرية على توضيح أهداف الثورة أمام العالم، وبيان أنها ثورة تهدف إلى بناء دولة حديثة وإنهاء الحكم الفردي والعزلة التي عاشها اليمن طويلًا.</p>
+
+  <h3>٢. الدعم العسكري</h3>
+  <p>بعد اندلاع الثورة واشتداد الصراع، أرسلت مصر قوات عسكرية لمساندة النظام الجمهوري وحماية الثورة، وقدَّمت الأسلحة والذخائر والمعدات العسكرية، وساعدت في تدريب القوات اليمنية وتنظيم الجيش الجمهوري، ولعبت القوات المصرية دورًا بارزًا في الدفاع عن العاصمة صنعاء وعدد من المدن، ومنع القوات الملكية من السيطرة عليها.</p>
+
+  <h3>٣. الدعم الإعلامي</h3>
+  <p>قدَّمت إذاعة «صوت العرب» برامج وتقارير تتحدث عن نضال الشعب اليمني ومعاناته في ظل حكم الإمام، وشجَّعت الشعوب العربية على التضامن مع اليمن ودعم ثورته.</p>
+
+  <div class="quote">رأت مصر أن استمرار الاحتلال في الدول العربية والإفريقية يُمثِّل تهديدًا مباشرًا لأمنها القومي.</div>
+  <div class="qa">
+    <p>١- إلى أي مدى نجحت مصر في تحويل مفهوم الأمن القومي من حدود جغرافية إلى مسئولية قومية؟</p>
+    <p>٢- هل كان دعم مصر لحركات التحرر ضرورة إستراتيجية؟ دلِّل على رأيك.</p>
+  </div>
+</section>
+
+<!-- العراق -->
+<section id="iraq">
+  <div class="eyebrow"><span class="num">٣</span> ثالثًا</div>
+  <h2>التحرر الوطني للعراق</h2>
+  <div class="qa">💭 كيف أثَّر الصراع بين الاتجاه القومي العربي والنفوذ الغربي في العراق؟</div>
+
+  <div class="box nile">
+    <div class="box-title">📖 مفهوم أتعلمه: الأحلاف العسكرية</div>
+    <p>اتفاقيات بين مجموعة من الدول للتعاون العسكري والدفاع ضد تهديدات مشتركة.</p>
+  </div>
+
+  <h3>١. الدعم السياسي</h3>
+  <p>دعمت مصر العراق في التخلص من النفوذ البريطاني، وساندت القومية العربية التي طالبت بالاستقلال الحقيقي ورفض التبعية الأجنبية، كما أيَّدت ثورة ١٤ يوليو ١٩٥٨م التي أنهت النظام الملكي وأعلنت الجمهورية العراقية، وعدَّتها خطوة مهمة نحو التحرر الوطني.</p>
+  <p>وكانت مصر قد عارضت حلف بغداد الذي أُسِّس عام ١٩٥٥م بمشاركة العراق وبريطانيا وعدد من الدول؛ إذ رأت فيه أداة لزيادة النفوذ الغربي في المنطقة وتهديدًا لاستقلال الدول العربية.</p>
+
+  <div class="box red">
+    <div class="box-title">📌 حلف بغداد</div>
+    <p>حلف عسكري ضم خمس دول: بريطانيا، وتركيا، وإيران، والعراق، وباكستان، وكان هدفه المعلن التعاون والدفاع، بينما رأت مصر أنه أداة لتطويق المنطقة وزيادة النفوذ الغربي.</p>
+  </div>
+
+  <div class="box gold">
+    <div class="box-title">💡 قيمة أتعلمها</div>
+    <p>الكرامة الوطنية فوق كل تبعية.</p>
+  </div>
+
+  <h3>٢. الدعم الدبلوماسي</h3>
+  <p>حرصت مصر على دعم استقلال القرار العراقي داخل المحافل العربية، وعملت على تعزيز التضامن العربي بين مصر والعراق في مواجهة التدخلات الأجنبية.</p>
+
+  <h3>٣. الدعم الإعلامي</h3>
+  <p>هاجم الإعلام المصري الأحلاف العسكرية، خاصة حلف بغداد، وأبرز دوره في دعم الفكر القومي العربي داخل العراق. كما لعبت إذاعة «صوت العرب» دورًا بارزًا في دعم القضايا القومية والتحرر الوطني، ونشرت أفكار الوحدة العربية، ودعت إلى التعاون العسكري العربي ومواجهة النفوذ الغربي، وأكَّدت مصر أن العراق جزء أساسي من مشروع الوحدة العربية والتحرر والاستقلال.</p>
+
+  <div class="qa">💭 <b>أفكِّر وأجيب:</b> هل كان الدعم المصري للعراق مجرد موقف سياسي، أم أنه ارتبط بفكرة الوحدة العربية والتحرر الوطني؟ وضِّح.</div>
+</section>
+
+<!-- جنوب إفريقيا -->
+<section id="janoub-ifriqya">
+  <div class="eyebrow"><span class="num">٤</span> رابعًا</div>
+  <h2>التحرر الوطني لجنوب إفريقيا</h2>
+  <div class="qa">💭 لماذا عُدَّت قضية الفصل العنصري في جنوب إفريقيا قضية عالمية؟</div>
+
+  <p>عندما تبنَّت جنوب إفريقيا نظام الفصل العنصري «الأبارتهايد»، الذي مثَّل واحدة من أخطر صور التمييز العنصري في العالم خلال النصف الثاني من القرن العشرين، شهد الدور المصري في مواجهة هذه السياسة تطورًا مستمرًا؛ حيث رفضت مصر سياسة الفصل العنصري منذ عام ١٩٤٨م، واعتبرت أن مناهضته جزء من الدفاع عن حقوق الشعوب في الحرية والمساواة.</p>
+
+  <h3>١. الدعم السياسي</h3>
+  <p>اعتبرت مصر قضية التحرر الإفريقي ورفض الفصل العنصري جزءًا من سياستها الخارجية، ودافعت عن حق الشعوب في الحرية والمساواة، ووصفت النضال الجنوب إفريقي بأنه جزء من حركة التحرر الإفريقية.</p>
+
+  <h3>٢. الدعم الدبلوماسي</h3>
+  <p>أعلنت مصر رفضها الكامل لسياسة الفصل العنصري، وساعدت في دعم النضال الوطني، وعدَّت نضال نيلسون مانديلا جزءًا من معركة الشعوب ضد الاستعمار، كما دعمت المواقف الدولية المناهضة للفصل العنصري، وأكَّدت أن مواجهة هذا النظام قضية ترتبط بالحرية وحقوق الإنسان والمساواة.</p>
+
+  <h3>٣. الدعم الإعلامي</h3>
+  <p>اهتمت وسائل الإعلام المصرية بالقضية، ولعبت إذاعة «صوت العرب» دورًا بارزًا في نقل أخبار نضال الشعب الجنوب إفريقي ضد الاستعمار والفصل العنصري؛ ما ساهم في نشر الوعي الدولي بخطورة هذه السياسة، وزاد الضغوط على نظامها.</p>
+
+  <p>أسهم الدعم المصري والإفريقي والدولي في تزايد الضغوط على نظام الفصل العنصري، حتى انتهى رسميًا عام <b>١٩٩٤م</b> بعد سنوات طويلة من النضال، وانتُخب نيلسون مانديلا رئيسًا لجنوب إفريقيا؛ ليصبح نموذجًا لانتصار حركات التحرر وحقوق الإنسان في العصر الحديث.</p>
+
+  <div class="qa"><b>سؤال التفسير المدعوم بالأدلة:</b> «كانت مصر ولا تزال الداعم الأول لقضايا الشعوب العربية والإفريقية». ناقش العبارة، موضحًا دور مصر والأمم المتحدة في دعم هذه القضايا التاريخية.</div>
+
+  <div class="box nile">
+    <div class="box-title">📌 مشروع بحثي</div>
+    <p>اكتب مقالًا عن دور مصر الداعم لحركة تحرر في دولة عربية أو إفريقية أخرى، مستكملًا ما تعلمته من مصادر التعلم المختلفة. واستعرض أن النظام السياسي المصري يقوم على التعددية السياسية، وحرية التعبير، وحقوق الإنسان على أساس المواطنة دون تمييز على أساس اللون أو العرق أو اللغة.</p>
+  </div>
+
+  <div class="box gold">
+    <div class="box-title">📖 مفهوم أتعلمه: المواطنة</div>
+    <p>التمتع بالحقوق والواجبات في إطار الدولة.</p>
+  </div>
+  <div class="box red">
+    <div class="box-title">💡 قيم أتعلمها</div>
+    <p>مناهضة استغلال الشعوب، والكرامة والحرية والاستقلال.</p>
+  </div>
+</section>
+
+<!-- تدريبات الكتاب -->
+<section id="tadribat">
+  <div class="eyebrow"><span class="num">✎</span> تدريبات الدرس</div>
+  <h2>تدريبات الكتاب (صفحة ١٢٣) وتقييم ختامي على الوحدة الثالثة</h2>
+  <ul class="clean">
+    <li>ما العلاقة بين مقاومة الاستعمار في مصر وموقفها بعد الاستقلال من دعم الشعوب الأخرى ضد الاحتلال؟</li>
+    <li>فسِّر: «أدركت مصر أن دعم حركات التحرر العربي والإفريقي جزء من حماية أمنها القومي» في ضوء دعمها للعراق وجنوب إفريقيا.</li>
+    <li>ناقش: «لم يكن الدعم المصري لحركات التحرر مجرد دعم عاطفي، بل كان جزءًا من مشروع سياسي وقومي متكامل» في ضوء الجزائر والعراق.</li>
+    <li>ناقش: «أسهمت الوحدة الإفريقية والتضامن العربي في إضعاف النفوذ الاستعماري خلال القرن العشرين» بأمثلة من جنوب إفريقيا والجزائر.</li>
+    <li>ماذا لو لم تدعم مصر الثورة الجزائرية سياسيًا وإعلاميًا؟ وماذا لو نجح حلف بغداد في ضم معظم الدول العربية؟</li>
+    <li>قارن بين الدعم المصري للثورة الجزائرية والدعم المصري لثورة اليمن من حيث: الدعم السياسي، والعسكري، والإعلامي.</li>
+    <li>حدِّد مع التبرير: أكثر وسائل الدعم المصري تأثيرًا في نجاح الثورة الجزائرية، وأكثر العوامل التي ساعدت على سقوط نظام الفصل العنصري بجنوب إفريقيا.</li>
+    <li>ما العلاقة بين إذاعة صوت العرب والفكر القومي العربي في العراق؟</li>
+  </ul>
+
+  <h3>من التقييم الختامي على الوحدة الثالثة</h3>
+  <ul class="clean">
+    <li>ناقش: «كان الموقع الجيوسياسي لمصر أحد العوامل الرئيسة في تشكيل دورها الإقليمي والدولي»، وحلِّل علاقته بتبنِّي قضايا التحرر.</li>
+    <li>ناقش كيف أثَّرت مبادئ السياسة الخارجية المصرية بعد ثورة ١٩٥٢م في دعم حركات التحرر العربية والإفريقية والآسيوية.</li>
+    <li>استدل على أن مصر لم تعتمد على القوة العسكرية فقط في دعم حركات التحرر، بل استخدمت أدوات سياسية وإعلامية وثقافية.</li>
+    <li>قارن بين الدعم السياسي والإعلامي الذي قدَّمته مصر لحركات التحرر في الجزائر وجنوب إفريقيا من حيث الوسائل والأثر.</li>
+    <li>إلى أي مدى يختلف الاحتلال البريطاني عن الاحتلال الفرنسي في المنطقة العربية؟</li>
+    <li>ناقش: «لم يكن الاحتلال الأوروبي في الدول العربية والإفريقية والآسيوية احتلالًا عسكريًا فقط، بل كان مشروعًا للسيطرة».</li>
+    <li>قارن بين أساليب الاحتلال الأوروبي وأساليب مقاومة الشعوب المحتلة، موضحًا أثر كلٍّ منهما في تطور حركات التحرر.</li>
+    <li>ما العلاقة بين التنسيق بين حركات التحرر المختلفة ونجاحها في مواجهة الاستعمار؟</li>
+    <li>ماذا لو لم تمتلك مصر أدوات إعلامية وثقافية مؤثرة بعد ثورة ١٩٥٢م؟</li>
+  </ul>
+</section>
+
+<!-- الملخص الشامل -->
+<section id="molakhas" class="summary-section">
+  <div class="eyebrow"><span class="num">Σ</span> مراجعة نهائية</div>
+  <h2>الملخص الشامل للدرس</h2>
+
+  <div class="summary-block">
+    <h3>١. مفهومان أساسيان</h3>
+    <table class="mini-table">
+      <tr><th>المفهوم</th><th>التعريف</th></tr>
+      <tr><td>الأحلاف العسكرية</td><td>اتفاقيات بين مجموعة من الدول للتعاون العسكري والدفاع ضد تهديدات مشتركة.</td></tr>
+      <tr><td>المواطنة</td><td>التمتع بالحقوق والواجبات في إطار الدولة، دون تمييز على أساس اللون أو العرق أو اللغة.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٢. أشكال دعم مصر لحركات التحرر عبر الدول الأربع</h3>
+    <table class="mini-table">
+      <tr><th>الدولة</th><th>الدعم السياسي/الدبلوماسي</th><th>الدعم العسكري</th><th>الدعم الإعلامي والثقافي</th></tr>
+      <tr><td>الجزائر</td><td>اعتراف مبكر بحق المقاومة، مكاتب سياسية بالقاهرة، دفاع في الأمم المتحدة.</td><td>أول شحنة سلاح، معسكرات تدريب، دعم مالي من عائدات تأميم القناة.</td><td>صوت العرب، بعثات تعليمية، دور الأزهر مع الطلاب الجزائريين.</td></tr>
+      <tr><td>اليمن</td><td>الدفاع عن الثورة في جامعة الدول العربية والأمم المتحدة.</td><td>إرسال قوات عسكرية، أسلحة ومعدات، الدفاع عن صنعاء.</td><td>صوت العرب تنقل نضال الشعب اليمني وتدعو للتضامن معه.</td></tr>
+      <tr><td>العراق</td><td>دعم التخلص من النفوذ البريطاني، تأييد ثورة ١٤ يوليو ١٩٥٨م، معارضة حلف بغداد.</td><td>—</td><td>مهاجمة الأحلاف العسكرية، صوت العرب تنشر الوحدة العربية.</td></tr>
+      <tr><td>جنوب إفريقيا</td><td>رفض الفصل العنصري منذ ١٩٤٨م، دعم دولي لنضال مانديلا.</td><td>—</td><td>صوت العرب تنشر الوعي الدولي بخطورة الفصل العنصري.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٣. تواريخ يجب حفظها</h3>
+    <ul class="clean">
+      <li>١٩٤٨م: رفض مصر سياسة الفصل العنصري في جنوب إفريقيا منذ نشأتها.</li>
+      <li>١٩٥٥م: تأسيس حلف بغداد ومعارضة مصر له.</li>
+      <li>١٩٥٦م: أول شحنة سلاح مصرية للثورة الجزائرية، تزامنًا مع العدوان الثلاثي.</li>
+      <li>١٩٥٨م: ثورة ١٤ يوليو في العراق وإسقاط النظام الملكي.</li>
+      <li>١٩٦٢م: ثورة ٢٦ سبتمبر اليمنية وإعلان الجمهورية.</li>
+      <li>١٩٩٤م: نهاية نظام الفصل العنصري رسميًا وانتخاب نيلسون مانديلا رئيسًا.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h3>٤. القيم والدروس المستفادة</h3>
+    <ul class="clean">
+      <li>التحرر الحقيقي يقوم على العدالة والمساواة والتنمية.</li>
+      <li>الكرامة الوطنية فوق كل تبعية.</li>
+      <li>مناهضة استغلال الشعوب، والكرامة والحرية والاستقلال قيم لا تتجزأ.</li>
+      <li>دعم حركات التحرر كان استكمالًا لحماية الأمن القومي المصري، لا مجرد موقف عاطفي.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h3>٥. الخلاصة الكبرى</h3>
+    <p>لم يكن دعم مصر لحركات التحرر الوطني في الجزائر واليمن والعراق وجنوب إفريقيا عملًا عاطفيًا عابرًا، بل مشروعًا سياسيًا وقوميًا متكاملًا جمع بين الدعم السياسي والدبلوماسي في المحافل الدولية، والدعم العسكري بالسلاح والتدريب والقوات، والدعم الإعلامي عبر «صوت العرب»، والدعم الثقافي عبر البعثات والأزهر الشريف؛ انطلاقًا من قناعة راسخة بأن أمن مصر القومي يمتد إلى ما وراء حدودها، وأن استمرار الاحتلال في أي بقعة عربية أو إفريقية تهديد مباشر لمصر ذاتها؛ ليصبح دعم حركات التحرر جزءًا أصيلًا من هُوية مصر ودورها التاريخي.</p>
+  </div>
+
+  <div class="cta-row">
+    <a href="#exam" class="btn">ابدأ الامتحان الشامل →</a>
+  </div>
+</section>
+
+<!-- EXAM -->
+<section id="exam" class="exam-section">
+  <div class="exam-head">
+    <div class="eyebrow" style="justify-content:center;"><span class="num">✎</span> التقييم الختامي</div>
+    <h2>الامتحان الشامل</h2>
+    <p class="lead">١٥ سؤالًا تغطي كل عناصر الدرس. اختر إجابتك وستظهر لك النتيجة فورًا في نهاية الاختبار.</p>
+  </div>
+
+  <div class="exam-progress">
+    <span id="prog-text">٠ / ١٥</span>
+    <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <div class="cta-row">
+    <button class="btn" id="submit-btn">تصحيح الامتحان</button>
+    <button class="btn ghost" id="reset-btn">إعادة المحاولة</button>
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <div class="result-score" id="result-score">0/15</div>
+    <div class="result-msg" id="result-msg"></div>
+  </div>
+</section>
+
+<!-- الصور الذهنية والترابط -->
+<section id="mindmaps" style="border-bottom:none; text-align:center;">
+  <div class="eyebrow" style="justify-content:center;"><span class="num">🕸️</span> الصورة الكبرى</div>
+  <h2>الصور الذهنية وترابط الأحداث</h2>
+  <p class="lead">خرائط ذهنية توضح إزاي دعم مصر للجزائر واليمن والعراق وجنوب إفريقيا مترابط ببعض.</p>
+  <div class="cta-row">
+    <button class="btn" id="toggle-mindmaps">🧠 اعرض الصور الذهنية</button>
+  </div>
+
+  <div id="mindmaps-panel" style="display:none; margin-top:34px; text-align:right;">
+
+    <div class="box gold">
+      <div class="box-title">🕸️ خريطة (١): شبكة الدول الأربع التي دعمتها مصر</div>
+      <svg viewBox="0 0 640 460" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <line x1="320" y1="230" x2="520" y2="80" stroke="#c9a227" stroke-width="2"/>
+        <line x1="320" y1="230" x2="120" y2="80" stroke="#c9a227" stroke-width="2"/>
+        <line x1="320" y1="230" x2="120" y2="380" stroke="#c9a227" stroke-width="2"/>
+        <line x1="320" y1="230" x2="520" y2="380" stroke="#c9a227" stroke-width="2"/>
+
+        <circle cx="320" cy="230" r="70" fill="#16140f" stroke="#e8c96b" stroke-width="3"/>
+        <text x="320" y="224" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="14" font-weight="700">مصر داعمة</text>
+        <text x="320" y="245" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="13">للتحرر</text>
+
+        <rect x="430" y="40" width="180" height="80" rx="10" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="520" y="72" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">الجزائر</text>
+        <text x="520" y="94" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">سلاح وتدريب ودعم مالي وإعلامي</text>
+
+        <rect x="30" y="40" width="180" height="80" rx="10" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="120" y="72" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">اليمن</text>
+        <text x="120" y="94" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">قوات مصرية للدفاع عن صنعاء</text>
+
+        <rect x="30" y="340" width="180" height="80" rx="10" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="120" y="368" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">العراق</text>
+        <text x="120" y="390" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">دعم سياسي ومعارضة حلف بغداد</text>
+
+        <rect x="430" y="340" width="180" height="80" rx="10" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="520" y="368" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">جنوب إفريقيا</text>
+        <text x="520" y="390" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">مناهضة الفصل العنصري منذ ١٩٤٨م</text>
+      </svg>
+    </div>
+
+    <div class="box nile">
+      <div class="box-title">🗺️ خريطة (٢): أشكال الدعم المصري الأربعة</div>
+      <svg viewBox="0 0 640 460" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <line x1="320" y1="230" x2="520" y2="80" stroke="#4fa3ac" stroke-width="2"/>
+        <line x1="320" y1="230" x2="120" y2="80" stroke="#4fa3ac" stroke-width="2"/>
+        <line x1="320" y1="230" x2="120" y2="380" stroke="#4fa3ac" stroke-width="2"/>
+        <line x1="320" y1="230" x2="520" y2="380" stroke="#4fa3ac" stroke-width="2"/>
+
+        <circle cx="320" cy="230" r="70" fill="#16140f" stroke="#e8c96b" stroke-width="3"/>
+        <text x="320" y="224" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="14" font-weight="700">أشكال</text>
+        <text x="320" y="245" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="13">الدعم المصري</text>
+
+        <rect x="430" y="40" width="180" height="80" rx="10" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="520" y="72" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">سياسي ودبلوماسي</text>
+        <text x="520" y="94" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">اعتراف، محافل دولية، مكاتب</text>
+
+        <rect x="30" y="40" width="180" height="80" rx="10" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="120" y="72" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">عسكري</text>
+        <text x="120" y="94" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">سلاح، تدريب، قوات، تمويل</text>
+
+        <rect x="30" y="340" width="180" height="80" rx="10" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="120" y="368" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">إعلامي</text>
+        <text x="120" y="390" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">إذاعة صوت العرب</text>
+
+        <rect x="430" y="340" width="180" height="80" rx="10" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="520" y="368" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">ثقافي</text>
+        <text x="520" y="390" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">بعثات تعليمية والأزهر الشريف</text>
+      </svg>
+    </div>
+
+    <div class="box red">
+      <div class="box-title">🗓️ خريطة (٣): خط زمني لدعم مصر لحركات التحرر (١٩٤٨-١٩٩٤م)</div>
+      <svg viewBox="0 0 620 720" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <defs>
+          <marker id="arrow3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#8c3b2e"/>
+          </marker>
+        </defs>
+        <line x1="310" y1="90" x2="310" y2="126" stroke="#8c3b2e" stroke-width="2" marker-end="url(#arrow3)"/>
+        <line x1="310" y1="190" x2="310" y2="226" stroke="#8c3b2e" stroke-width="2" marker-end="url(#arrow3)"/>
+        <line x1="310" y1="290" x2="310" y2="326" stroke="#8c3b2e" stroke-width="2" marker-end="url(#arrow3)"/>
+        <line x1="310" y1="390" x2="310" y2="426" stroke="#8c3b2e" stroke-width="2" marker-end="url(#arrow3)"/>
+        <line x1="310" y1="490" x2="310" y2="526" stroke="#8c3b2e" stroke-width="2" marker-end="url(#arrow3)"/>
+        <line x1="310" y1="590" x2="310" y2="626" stroke="#8c3b2e" stroke-width="2" marker-end="url(#arrow3)"/>
+
+        <rect x="70" y="30" width="480" height="60" rx="12" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="310" y="55" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">رفض الفصل العنصري (١٩٤٨م)</text>
+        <text x="310" y="76" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">موقف مصري مبكر تجاه جنوب إفريقيا</text>
+
+        <rect x="70" y="130" width="480" height="60" rx="12" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="310" y="155" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">معارضة حلف بغداد (١٩٥٥م)</text>
+        <text x="310" y="176" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">رفض تطويق النفوذ الغربي للعراق</text>
+
+        <rect x="70" y="230" width="480" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="310" y="255" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">أول شحنة سلاح للجزائر (١٩٥٦م)</text>
+        <text x="310" y="276" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">استمرار الدعم رغم العدوان الثلاثي</text>
+
+        <rect x="70" y="330" width="480" height="60" rx="12" fill="#1e1b14" stroke="#4fa3ac" stroke-width="2"/>
+        <text x="310" y="355" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">ثورة العراق (١٩٥٨م)</text>
+        <text x="310" y="376" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">إسقاط الملكية وإعلان الجمهورية</text>
+
+        <rect x="70" y="430" width="480" height="60" rx="12" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="310" y="455" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">ثورة اليمن (١٩٦٢م)</text>
+        <text x="310" y="476" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">قوات مصرية تحمي النظام الجمهوري</text>
+
+        <rect x="70" y="530" width="480" height="60" rx="12" fill="#1e1b14" stroke="#8c3b2e" stroke-width="3"/>
+        <text x="310" y="555" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">حرب أكتوبر (١٩٧٣م)</text>
+        <text x="310" y="576" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">اليمن يغلق باب المندب لدعم مصر</text>
+
+        <rect x="70" y="630" width="480" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="3"/>
+        <text x="310" y="655" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">نهاية الفصل العنصري (١٩٩٤م)</text>
+        <text x="310" y="676" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">انتخاب نيلسون مانديلا رئيسًا</text>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  موقع مراجعة تفاعلي — الدرس الثاني عشر: دور مصر في دعم حركات التحرر الوطني — تاريخ البكالوريا المصرية
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "بعد نجاح ثورة ٢٣ يوليو، رأت القيادة المصرية أن استمرار احتلال الدول العربية:",
+    opts: ["لا علاقة له بمصر إطلاقًا", "تهديد للأمن القومي المصري", "أمر يخص الدول المحتلة وحدها", "فرصة اقتصادية لمصر"],
+    correct: 1,
+    fb: "كانت قناعة القيادة المصرية أن استمرار احتلال الدول العربية فيه تهديد للأمن القومي المصري؛ لذلك زاد تأييد مصر لحركات التحرر الوطني."
+  },
+  {
+    q: "من أبرز صور الدعم السياسي المصري للثورة الجزائرية:",
+    opts: ["رفض استقبال قادة الثورة في القاهرة", "الاعتراف المبكر بحق الشعب الجزائري في المقاومة، وفتح أبواب مصر لقادة الثورة", "دعم الاحتلال الفرنسي في الأمم المتحدة", "قطع كل صلة سياسية مع الجزائر"],
+    correct: 1,
+    fb: "اعترفت مصر منذ البداية بحق الشعب الجزائري في مقاومة الاستعمار الفرنسي، وفتحت أبوابها لقادة الثورة الجزائرية للتحرك من القاهرة والتعريف بقضيتهم."
+  },
+  {
+    q: "استمرت مصر في إمداد الثورة الجزائرية بالسلاح حتى في أثناء:",
+    opts: ["حرب أكتوبر ١٩٧٣م", "العدوان الثلاثي عليها عام ١٩٥٦م", "حرب ١٩٦٧م", "ثورة ١٩١٩م"],
+    correct: 1,
+    fb: "استمرت مصر في إمداد الثورة الجزائرية بالسلاح حتى في أثناء العدوان الثلاثي عليها عام ١٩٥٦م، رغم الظروف الصعبة التي مرت بها."
+  },
+  {
+    q: "خصَّصت مصر جزءًا من عائدات ...... لدعم الكفاح المسلح الجزائري.",
+    opts: ["الزراعة المصرية", "تأميم قناة السويس", "السياحة الوافدة", "الصادرات الزراعية فقط"],
+    correct: 1,
+    fb: "خصَّصت مصر جزءًا من عائدات تأميم قناة السويس لدعم الكفاح المسلح الجزائري، إلى جانب أشكال الدعم العسكري الأخرى."
+  },
+  {
+    q: "كانت إذاعة «صوت العرب» من أبرز وسائل الدعم الإعلامي المصري للثورة الجزائرية، حيث:",
+    opts: ["تجاهلت أخبار الثورة تمامًا", "بثت أخبار الثورة وخصَّصت برامج للتعريف بتاريخ الجزائر وكفاح شعبها", "دعمت الموقف الفرنسي في الجزائر", "توقفت عن البث خلال فترة الثورة"],
+    correct: 1,
+    fb: "بثت إذاعة صوت العرب أخبار الثورة الجزائرية وتغطية تطوراتها، وخصَّصت برامج للتعريف بتاريخ الجزائر وكفاح شعبها؛ ما زاد الوعي بالقضية عربيًا."
+  },
+  {
+    q: "درس الرئيس الجزائري هواري بومدين في:",
+    opts: ["جامعة السوربون", "الأزهر الشريف", "جامعة أكسفورد", "جامعة موسكو"],
+    correct: 1,
+    fb: "درس الرئيس الجزائري محمد بن إبراهيم بوخروبة، المعروف بهواري بومدين، في الأزهر الشريف؛ مما يعكس عمق الدعم الثقافي المصري للجزائر."
+  },
+  {
+    q: "قامت الثورة اليمنية (ثورة ٢٦ سبتمبر) عام ١٩٦٢م ضد:",
+    opts: ["الاحتلال البريطاني المباشر", "نظام الحكم الإمامي في شمال اليمن", "الاحتلال الفرنسي", "نظام جمهوري قائم بالفعل"],
+    correct: 1,
+    fb: "قامت ثورة ٢٦ سبتمبر عام ١٩٦٢م ضد نظام الحكم الإمامي الذي كان يحكم شمال اليمن؛ بهدف إقامة نظام جمهوري حديث."
+  },
+  {
+    q: "رأت مصر أن نجاح الثورة اليمنية يمثِّل نقطة إستراتيجية محورية لحماية:",
+    opts: ["مضيق باب المندب ومدخل البحر الأحمر الجنوبي", "قناة السويس فقط", "مضيق جبل طارق", "الخليج العربي فقط"],
+    correct: 0,
+    fb: "رأت مصر أن نجاح الثورة اليمنية نقطة إستراتيجية محورية لحماية مدخل البحر الأحمر الجنوبي عند مضيق باب المندب."
+  },
+  {
+    q: "لعبت القوات المصرية في اليمن دورًا بارزًا في:",
+    opts: ["دعم القوات الملكية ضد الجمهوريين", "الدفاع عن العاصمة صنعاء ومنع القوات الملكية من السيطرة عليها", "الانسحاب الفوري بعد اندلاع الثورة", "رفض تقديم أي سلاح أو معدات"],
+    correct: 1,
+    fb: "لعبت القوات المصرية دورًا بارزًا في الدفاع عن العاصمة صنعاء وعدد من المدن، ومنع القوات الملكية من السيطرة عليها."
+  },
+  {
+    q: "عارضت مصر حلف بغداد الذي أُسِّس عام ١٩٥٥م؛ لأنها رأت فيه:",
+    opts: ["أداة للدفاع المشترك بين الدول العربية فقط", "أداة لزيادة النفوذ الغربي في المنطقة وتهديدًا لاستقلال الدول العربية", "وسيلة لدعم استقلال العراق الكامل", "تحالفًا اقتصاديًا لا علاقة له بالسياسة"],
+    correct: 1,
+    fb: "عارضت مصر حلف بغداد؛ إذ رأت فيه أداة لزيادة النفوذ الغربي في المنطقة، وتهديدًا لاستقلال الدول العربية، وليس مجرد تعاون دفاعي بريء."
+  },
+  {
+    q: "ضم حلف بغداد (١٩٥٥م) خمس دول، هي:",
+    opts: ["مصر وسوريا والسعودية والأردن ولبنان", "بريطانيا وتركيا وإيران والعراق وباكستان", "فرنسا وإيطاليا وإسبانيا والبرتغال واليونان", "الولايات المتحدة وكندا والمكسيك والبرازيل والأرجنتين"],
+    correct: 1,
+    fb: "ضم حلف بغداد خمس دول: بريطانيا وتركيا وإيران والعراق وباكستان، وكان هدفه المعلن التعاون والدفاع، بينما رأت مصر فيه أداة لتطويق المنطقة."
+  },
+  {
+    q: "أيَّدت مصر ثورة ١٤ يوليو ١٩٥٨م في العراق؛ لأنها:",
+    opts: ["أعادت النظام الملكي إلى الحكم", "أنهت النظام الملكي وأعلنت الجمهورية العراقية", "عزَّزت النفوذ البريطاني في العراق", "انضمت لحلف بغداد بقوة أكبر"],
+    correct: 1,
+    fb: "أيَّدت مصر ثورة ١٤ يوليو ١٩٥٨م التي أنهت النظام الملكي وأعلنت الجمهورية العراقية، وعدَّتها خطوة مهمة نحو التحرر الوطني."
+  },
+  {
+    q: "رفضت مصر سياسة الفصل العنصري «الأبارتهايد» في جنوب إفريقيا منذ عام:",
+    opts: ["١٩٤٨م", "١٩٥٥م", "١٩٦٢م", "١٩٩٤م"],
+    correct: 0,
+    fb: "رفضت مصر سياسة الفصل العنصري منذ عام ١٩٤٨م، واعتبرت مناهضته جزءًا من الدفاع عن حقوق الشعوب في الحرية والمساواة."
+  },
+  {
+    q: "انتهى نظام الفصل العنصري في جنوب إفريقيا رسميًا عام ١٩٩٤م، وانتُخب رئيسًا للبلاد:",
+    opts: ["جمال عبد الناصر", "نيلسون مانديلا", "هواري بومدين", "أحمد بن بلة"],
+    correct: 1,
+    fb: "انتهى نظام الفصل العنصري رسميًا عام ١٩٩٤م، وانتُخب نيلسون مانديلا رئيسًا لجنوب إفريقيا، ليصبح نموذجًا لانتصار حركات التحرر."
+  },
+  {
+    q: "بحسب الدرس، يقوم النظام السياسي المصري على التعددية السياسية وحرية التعبير وحقوق الإنسان على أساس:",
+    opts: ["التمييز العرقي بين المواطنين", "المواطنة دون تمييز على أساس اللون أو العرق أو اللغة", "الانتماء الحزبي الواحد فقط", "التبعية لدول أخرى"],
+    correct: 1,
+    fb: "يقوم النظام السياسي المصري على التعددية السياسية وحرية التعبير وحقوق الإنسان على أساس المواطنة دون تمييز على أساس اللون أو العرق أو اللغة."
+  }
+];
+
+const container = document.getElementById('quiz-container');
+let answers = new Array(QUESTIONS.length).fill(null);
+let submitted = false;
+
+function render(){
+  container.innerHTML = '';
+  QUESTIONS.forEach((item, qi) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.innerHTML = `
+      <div class="q-num">السؤال ${qi+1} من ${QUESTIONS.length}</div>
+      <div class="q-text">${item.q}</div>
+      <div class="opts" data-qi="${qi}"></div>
+      <div class="fb" id="fb-${qi}"></div>
+    `;
+    const optsWrap = card.querySelector('.opts');
+    const letters = ['أ','ب','ج','د'];
+    item.opts.forEach((opt, oi) => {
+      const el = document.createElement('div');
+      el.className = 'opt';
+      el.setAttribute('role','button');
+      el.setAttribute('tabindex','0');
+      el.innerHTML = `<span class="letter">${letters[oi]}</span><span>${opt}</span>`;
+      el.addEventListener('click', () => selectOpt(qi, oi));
+      el.addEventListener('keydown', (e) => { if(e.key==='Enter' || e.key===' '){ e.preventDefault(); selectOpt(qi, oi); } });
+      optsWrap.appendChild(el);
+    });
+    container.appendChild(card);
+  });
+  updateProgress();
+}
+
+function selectOpt(qi, oi){
+  if(submitted) return;
+  answers[qi] = oi;
+  const optsWrap = document.querySelector(`.opts[data-qi="${qi}"]`);
+  [...optsWrap.children].forEach((el, idx) => {
+    el.classList.toggle('selected', idx === oi);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const answered = answers.filter(a => a !== null).length;
+  document.getElementById('prog-text').textContent = `${toArabicDigits(answered)} / ${toArabicDigits(QUESTIONS.length)}`;
+  document.getElementById('bar-fill').style.width = (answered / QUESTIONS.length * 100) + '%';
+}
+
+function toArabicDigits(n){
+  const map = {'0':'٠','1':'١','2':'٢','3':'٣','4':'٤','5':'٥','6':'٦','7':'٧','8':'٨','9':'٩'};
+  return String(n).split('').map(c => map[c] !== undefined ? map[c] : c).join('');
+}
+
+document.getElementById('submit-btn').addEventListener('click', () => {
+  submitted = true;
+  let score = 0;
+  QUESTIONS.forEach((item, qi) => {
+    const optsWrap = document.querySelector(`.opts[data-qi="${qi}"]`);
+    const chosen = answers[qi];
+    [...optsWrap.children].forEach((el, idx) => {
+      el.style.pointerEvents = 'none';
+      if(idx === item.correct) el.classList.add('correct');
+      else if(idx === chosen && chosen !== item.correct) el.classList.add('wrong');
+    });
+    if(chosen === item.correct) score++;
+    const fb = document.getElementById(`fb-${qi}`);
+    fb.textContent = (chosen === item.correct ? '✓ إجابة صحيحة — ' : (chosen === null ? '— لم تتم الإجابة — ' : '✗ إجابة غير دقيقة — ')) + item.fb;
+    fb.classList.add('show', chosen === item.correct ? 'ok' : 'no');
+  });
+
+  const panel = document.getElementById('result-panel');
+  panel.classList.add('show');
+  document.getElementById('result-score').textContent = `${toArabicDigits(score)} / ${toArabicDigits(QUESTIONS.length)}`;
+  let msg = '';
+  const pct = score / QUESTIONS.length;
+  if(pct === 1) msg = 'ممتاز! إتقان كامل لدرس دور مصر في دعم حركات التحرر الوطني 🤝';
+  else if(pct >= 0.8) msg = 'مستوى رائع جدًا — راجع الأسئلة التي أخطأت فيها لتثبيت المعلومة.';
+  else if(pct >= 0.6) msg = 'مستوى جيد — يُنصح بمراجعة الملخص الشامل مرة أخرى.';
+  else msg = 'يحتاج الأمر مزيدًا من المراجعة — عد إلى قسم الملخص الشامل قبل إعادة المحاولة.';
+  document.getElementById('result-msg').textContent = msg;
+  panel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  submitted = false;
+  answers = new Array(QUESTIONS.length).fill(null);
+  document.getElementById('result-panel').classList.remove('show');
+  render();
+  document.getElementById('exam').scrollIntoView({behavior:'smooth'});
+});
+
+render();
+
+const mmBtn = document.getElementById('toggle-mindmaps');
+const mmPanel = document.getElementById('mindmaps-panel');
+mmBtn.addEventListener('click', () => {
+  const showing = mmPanel.style.display !== 'none';
+  mmPanel.style.display = showing ? 'none' : 'block';
+  mmBtn.textContent = showing ? '🧠 اعرض الصور الذهنية' : '🙈 إخفاء الصور الذهنية';
+  if(!showing){ mmPanel.scrollIntoView({behavior:'smooth', block:'start'}); }
+});
+</script>
+
+</body>
+</html>

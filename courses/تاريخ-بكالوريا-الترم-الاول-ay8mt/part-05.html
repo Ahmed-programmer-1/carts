@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>سياسات الاحتلال بمصر في العصر الحديث | الدرس الخامس - تاريخ البكالوريا المصرية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-void: #0d0c0a;
+    --bg-panel: #16140f;
+    --bg-panel-raised: #1e1b14;
+    --stone: #3a3327;
+    --sand: #c9a227;
+    --sand-bright: #e8c96b;
+    --nile: #2e6f77;
+    --nile-bright: #4fa3ac;
+    --papyrus: #ece2c8;
+    --papyrus-dim: #a89f88;
+    --red-seal: #8c3b2e;
+    --line: rgba(201,162,39,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    background:var(--bg-void);
+    color:var(--papyrus);
+    font-family:'Tajawal', sans-serif;
+    line-height:1.9;
+    overflow-x:hidden;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  ::selection{background:var(--sand); color:#0d0c0a;}
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(201,162,39,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 100% 10%, rgba(140,59,46,0.10), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  h1,h2,h3,h4{font-family:'Amiri', serif; font-weight:700; color:var(--sand-bright);}
+  a{color:inherit; text-decoration:none;}
+
+  .topbar{
+    position:sticky; top:0; z-index:100;
+    background:rgba(13,12,10,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:calc(14px + env(safe-area-inset-top,0px)) 26px 14px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Amiri',serif; font-size:1.05rem; color:var(--sand-bright); white-space:nowrap;}
+  .brand .glyph{
+    width:34px; height:34px; border:2px solid var(--sand);
+    display:flex; align-items:center; justify-content:center;
+    border-radius:3px; font-size:1rem; color:var(--sand); flex-shrink:0;
+    background:linear-gradient(135deg, rgba(201,162,39,0.15), transparent);
+  }
+  .navlinks{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none;}
+  .navlinks::-webkit-scrollbar{display:none;}
+  .navlinks a{
+    font-size:0.78rem; padding:8px 11px; white-space:nowrap; border-radius:6px;
+    color:var(--papyrus-dim); transition:.2s;
+    border:1px solid transparent;
+  }
+  .navlinks a:hover{color:var(--sand-bright); border-color:var(--line); background:rgba(201,162,39,0.06);}
+
+  .hero{
+    position:relative; min-height:78vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:80px 20px 60px;
+    z-index:1;
+  }
+  .hero .kicker{
+    font-family:'Cairo',sans-serif; letter-spacing:5px; font-size:0.68rem;
+    color:var(--nile-bright); text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .hero .kicker::before, .hero .kicker::after{content:""; width:40px; height:1px; background:var(--nile-bright); opacity:.5;}
+  .hero h1{
+    font-size:clamp(1.9rem, 5.6vw, 3.8rem); line-height:1.35; max-width:920px;
+    text-shadow: 0 0 40px rgba(232,201,107,0.15);
+  }
+  .hero .subtitle{
+    margin-top:22px; font-size:1.05rem; color:var(--papyrus-dim); max-width:700px;
+    font-family:'Cairo',sans-serif; font-weight:300;
+  }
+  .hero .pillars-mini{ display:flex; gap:0; margin-top:56px; align-items:flex-end; flex-wrap:wrap; justify-content:center; }
+  .pillars-mini .col{
+    width:62px; height:96px; margin:0 5px;
+    background:linear-gradient(180deg, var(--bg-panel-raised), var(--bg-panel));
+    border:1px solid var(--line); border-top:3px solid var(--nile);
+    border-radius:4px 4px 0 0;
+    display:flex; align-items:flex-start; justify-content:center; padding-top:12px;
+    font-family:'Amiri',serif; font-size:0.72rem; color:var(--sand-bright);
+    position:relative;
+  }
+  .pillars-mini .col span{writing-mode:vertical-rl; text-orientation:mixed;}
+  .pillars-mini .col:nth-child(2){height:118px; border-top-color:var(--red-seal);}
+  .pillars-mini .col:nth-child(3){height:80px;}
+  .pillars-mini .col:nth-child(4){height:104px; border-top-color:var(--sand);}
+  .pillars-mini .col:nth-child(5){height:90px; border-top-color:var(--red-seal);}
+
+  .hero-anchor{margin-top:50px; font-size:.85rem; color:var(--papyrus-dim); display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .hero-anchor .arrow{animation:bob 2s infinite ease-in-out;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+  @media (prefers-reduced-motion: reduce){ .hero-anchor .arrow{animation:none;} }
+
+  section{
+    position:relative; z-index:1;
+    max-width:980px; margin:0 auto; padding:70px 24px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'Cairo',sans-serif; font-size:0.78rem; letter-spacing:3px;
+    color:var(--nile-bright); text-transform:uppercase; margin-bottom:10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .num{
+    background:var(--stone); color:var(--sand-bright); font-family:'Amiri',serif;
+    width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem;
+  }
+  section > h2{font-size:clamp(1.5rem,4vw,2.2rem); margin-bottom:26px;}
+  section h3{font-size:1.2rem; color:var(--nile-bright); margin:28px 0 12px; font-family:'Cairo',sans-serif; font-weight:700;}
+  p{font-size:1.02rem; color:#dcd3ba;}
+  .lead{font-size:1.1rem; color:var(--papyrus); font-family:'Cairo',sans-serif; font-weight:300;}
+
+  .box{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:10px;
+    padding:22px 24px; margin:18px 0;
+  }
+  .box.gold{border-right:4px solid var(--sand);}
+  .box.nile{border-right:4px solid var(--nile);}
+  .box.red{border-right:4px solid var(--red-seal);}
+  .box-title{font-family:'Cairo',sans-serif; font-weight:700; color:var(--sand-bright); margin-bottom:10px; font-size:0.95rem; display:flex; align-items:center; gap:8px;}
+
+  ul.clean{list-style:none; padding:0;}
+  ul.clean li{ position:relative; padding-right:22px; margin:10px 0; color:#dcd3ba; font-size:0.98rem; }
+  ul.clean li::before{content:"◆"; position:absolute; right:0; top:2px; color:var(--sand); font-size:0.6rem;}
+
+  .quote{
+    font-family:'Amiri',serif; font-style:italic; font-size:1.1rem; color:var(--sand-bright);
+    border-right:3px solid var(--sand); padding:6px 22px; margin:20px 0; line-height:2;
+  }
+  .quote cite{display:block; font-family:'Cairo',sans-serif; font-style:normal; font-size:0.8rem; color:var(--papyrus-dim); margin-top:10px;}
+
+  .pillars-wrap{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:36px 0;}
+  .pillar-card{
+    background:linear-gradient(180deg, var(--bg-panel-raised), var(--bg-panel));
+    border:1px solid var(--line); border-top:4px solid var(--sand);
+    border-radius:8px; padding:20px 14px; text-align:center;
+    transition:.25s;
+  }
+  .pillar-card:hover{transform:translateY(-6px); border-top-color:var(--sand-bright); box-shadow:0 12px 30px rgba(0,0,0,0.4);}
+  .pillar-card .ic{font-size:1.8rem; margin-bottom:10px;}
+  .pillar-card h4{font-size:0.98rem; color:var(--sand-bright); margin-bottom:8px;}
+  .pillar-card p{font-size:0.83rem; color:var(--papyrus-dim);}
+  @media(max-width:760px){.pillars-wrap{grid-template-columns:repeat(2,1fr);}}
+
+  .article-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:20px 0;}
+  .article-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:18px;
+    font-size:0.92rem;
+  }
+  .article-card .tag{color:var(--nile-bright); font-family:'Cairo',sans-serif; font-weight:700; font-size:0.8rem; margin-bottom:8px; display:block;}
+  @media(max-width:760px){.article-grid{grid-template-columns:1fr;}}
+
+  .measures{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;}
+  .measure{background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:16px 18px; display:flex; gap:12px; align-items:flex-start;}
+  .measure .ic{font-size:1.3rem; flex-shrink:0;}
+  .measure p{font-size:0.92rem; margin:0;}
+  @media(max-width:700px){.measures{grid-template-columns:1fr;}}
+
+  .qa{
+    background:var(--bg-panel-raised); border:1px dashed var(--line); border-radius:8px;
+    padding:16px 20px; margin:16px 0; font-size:0.95rem;
+  }
+  .qa b{color:var(--nile-bright);}
+
+  .cta-row{display:flex; justify-content:center; margin:40px 0 0; flex-wrap:wrap; gap:14px;}
+  .btn{
+    background:linear-gradient(135deg, var(--sand), #a5811e);
+    color:#181206; font-family:'Cairo',sans-serif; font-weight:700; font-size:1rem;
+    padding:14px 34px; border-radius:30px; border:none; cursor:pointer;
+    transition:.2s; box-shadow:0 6px 20px rgba(201,162,39,0.25);
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(201,162,39,0.35);}
+  .btn.ghost{background:transparent; border:1px solid var(--sand); color:var(--sand-bright); box-shadow:none;}
+
+  .summary-section{background:var(--bg-panel);}
+  .summary-block{margin-bottom:30px;}
+  .summary-block h3{color:var(--sand-bright); border-bottom:1px solid var(--line); padding-bottom:8px;}
+  .summary-block ul.clean li::before{color:var(--nile-bright);}
+  .mini-table{width:100%; border-collapse:collapse; margin:14px 0; font-size:0.9rem;}
+  .mini-table th, .mini-table td{border:1px solid var(--line); padding:10px 12px; text-align:right;}
+  .mini-table th{background:var(--bg-panel-raised); color:var(--sand-bright); font-family:'Cairo',sans-serif;}
+  .mini-table{display:block; overflow-x:auto; white-space:nowrap;}
+
+  .exam-section{background:linear-gradient(180deg, var(--bg-void), #0a0908);}
+  .exam-head{text-align:center; margin-bottom:36px;}
+  .exam-progress{
+    position:sticky; top:calc(66px + env(safe-area-inset-top,0px)); z-index:50; background:var(--bg-panel);
+    border:1px solid var(--line); border-radius:20px; padding:8px 18px;
+    display:flex; align-items:center; gap:14px; font-size:0.85rem; max-width:400px; margin:0 auto 30px;
+  }
+  .bar{flex:1; height:6px; background:var(--stone); border-radius:6px; overflow:hidden;}
+  .bar-fill{height:100%; background:linear-gradient(90deg, var(--nile), var(--sand)); width:0%; transition:.3s;}
+
+  .q-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:12px;
+    padding:26px; margin-bottom:22px;
+  }
+  .q-num{color:var(--nile-bright); font-family:'Cairo',sans-serif; font-weight:700; font-size:0.85rem; margin-bottom:8px;}
+  .q-text{font-size:1.03rem; color:var(--papyrus); margin-bottom:18px; font-family:'Cairo',sans-serif; font-weight:500;}
+  .opts{display:flex; flex-direction:column; gap:10px;}
+  .opt{
+    display:flex; align-items:center; gap:12px; padding:12px 16px;
+    background:var(--bg-panel-raised); border:1px solid var(--line); border-radius:8px;
+    cursor:pointer; transition:.15s; font-size:0.94rem;
+  }
+  .opt:hover{border-color:var(--sand);}
+  .opt.selected{border-color:var(--nile-bright); background:rgba(46,111,119,0.12);}
+  .opt.correct{border-color:#5aa66b; background:rgba(90,166,107,0.15);}
+  .opt.wrong{border-color:var(--red-seal); background:rgba(140,59,46,0.18);}
+  .opt .letter{
+    width:26px; height:26px; border-radius:50%; background:var(--stone); color:var(--sand-bright);
+    display:flex; align-items:center; justify-content:center; font-size:0.8rem; flex-shrink:0; font-family:'Cairo',sans-serif;
+  }
+  .fb{margin-top:14px; font-size:0.88rem; padding:10px 14px; border-radius:6px; display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:rgba(90,166,107,0.12); color:#8fd39f; border:1px solid rgba(90,166,107,0.3);}
+  .fb.no{background:rgba(140,59,46,0.12); color:#e6a297; border:1px solid rgba(140,59,46,0.3);}
+
+  .result-panel{
+    display:none; text-align:center; background:var(--bg-panel-raised); border:1px solid var(--sand);
+    border-radius:14px; padding:40px 26px; margin-top:20px;
+  }
+  .result-panel.show{display:block;}
+  .result-score{font-family:'Amiri',serif; font-size:3rem; color:var(--sand-bright);}
+  .result-msg{font-size:1.03rem; margin-top:10px; color:var(--papyrus);}
+
+  footer{text-align:center; padding:40px 20px calc(60px + env(safe-area-inset-bottom,0px)); color:var(--papyrus-dim); font-size:0.82rem; position:relative; z-index:1;}
+
+  :focus-visible{outline:2px solid var(--nile-bright); outline-offset:2px;}
+
+  @media(max-width:640px){
+    .navlinks{display:none;}
+    .article-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="glyph">🗝️</span> سياسات الاحتلال بمصر</div>
+  <nav class="navlinks">
+    <a href="#intro">مدخل الدرس</a>
+    <a href="#faransa">سياسات فرنسا</a>
+    <a href="#tadakhul">التدخل الأجنبي</a>
+    <a href="#ihtilal">الاحتلال البريطاني</a>
+    <a href="#tadribat">تدريبات الكتاب</a>
+    <a href="#molakhas">الملخص الشامل</a>
+    <a href="#exam">الامتحان</a>
+    <a href="#mindmaps">الصور الذهنية</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="kicker">تاريخ · البكالوريا المصرية · الوحدة الأولى · الدرس الخامس</div>
+  <h1>سياسات الاحتلال بمصر في العصر الحديث</h1>
+  <p class="subtitle">كانت مصر ساحة للتنافس الاستعماري بعد الثورة الصناعية؛ حيث طمعت الدول الأوروبية في المواد الخام والأسواق، وسرعان ما انتقل هذا التنافس إلى مصر، وكانت الحملة الفرنسية بداية للهجمة الاستعمارية الأوروبية على مصر.</p>
+  <div class="pillars-mini" aria-hidden="true">
+    <div class="col"><span>تقرب</span></div>
+    <div class="col"><span>قمع</span></div>
+    <div class="col"><span>تثبيت أقدام</span></div>
+    <div class="col"><span>تدخل مالي</span></div>
+    <div class="col"><span>احتلال عسكري</span></div>
+  </div>
+  <div class="hero-anchor"><span>ابدأ الرحلة</span><span class="arrow">↓</span></div>
+</div>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="eyebrow"><span class="num">۰</span> مدخل الدرس</div>
+  <h2>هل كانت سياسة فرنسا وبريطانيا في مصر واحدة؟</h2>
+  <p class="lead">بعد الثورة الصناعية أصبحت مصر ساحة للتنافس الاستعماري الأوروبي على المواد الخام والأسواق، فهل اتبعت فرنسا وبريطانيا الأسلوب نفسه في السيطرة على مصر ومواردها؟</p>
+
+  <div class="box gold">
+    <div class="box-title">🎯 أهداف الدرس</div>
+    <ul class="clean">
+      <li>يُلخِّص سياسات الحملة الفرنسية للتدخل في شؤون مصر.</li>
+      <li>يستنتج أثر التدخل الأوروبي على المشروع التنموي لمحمد علي.</li>
+      <li>يُقدِّم تفسيرات مدعومة بالأدلة لبعض سياسات الاحتلال الإنجليزي بمصر.</li>
+      <li>يُعبِّر عن أهمية وجود جيش وطني في تحقيق الاستقلال.</li>
+    </ul>
+  </div>
+
+  <div class="quote">كانت مصر ساحة للتنافس الاستعماري بعد الثورة الصناعية؛ حيث طمعت الدول الأوروبية في المواد الخام والأسواق، وسرعان ما انتقل هذا التنافس إلى مصر، وكانت الحملة الفرنسية بداية للهجمة الاستعمارية الأوروبية على مصر.
+    <cite>— الفكرة الرئيسة للدرس</cite>
+  </div>
+
+  <div class="qa">💭 <b>سؤال يدفعنا للتعلم:</b> هل اتبعت دولتا فرنسا وبريطانيا سياسة موحَّدة للسيطرة على مصر ومواردها؟</div>
+</section>
+
+<!-- سياسات فرنسا -->
+<section id="faransa">
+  <div class="eyebrow"><span class="num">١</span> أولًا</div>
+  <h2>سياسات فرنسا في مصر</h2>
+  <p>تمثلت سياسة فرنسا في مصر عند نزول حملتها إلى الإسكندرية عام <b>١٧٩٨م</b> في أسس وقواعد رئيسة وضعها نابليون.</p>
+
+  <h3>١. سياسة التقرب</h3>
+  <p>حاول نابليون التقرب إلى المصريين لكسب تأييدهم عبر:</p>
+  <ul class="clean">
+    <li>إصدار منشورات تحترم الإسلام.</li>
+    <li>التقرب من العلماء والمشايخ.</li>
+    <li>إنشاء المجمع العلمي المصري.</li>
+    <li>إنشاء دواوين محلية لإشراك الأعيان في الإدارة.</li>
+  </ul>
+  <p>هدفت هذه الإجراءات إلى إقناع المصريين بأن الوجود الفرنسي ليس احتلالًا، بل محاولة لإصلاح أوضاع البلاد.</p>
+
+  <div class="quote">يا أهل مصر، قد أُعلمت أنكم قد قيل لكم إنني ما زلت بهذا الطرف إلا بقصد إزالة دينكم، فهذا كذب صريح، فلا تصدقوه، وقولوا للمفترين إنني ما قدمت إليكم إلا لأخلص حقكم من يد الظالمين، وإنني أكثر من المماليك أعبد الله سبحانه وتعالى، وأحترم نبيه والقرآن العظيم...
+    <cite>— من منشورات نابليون بونابرت للمصريين، ١٧٩٨م</cite>
+  </div>
+
+  <div class="qa">
+    <p>١- ما الهدف السياسي من هذا المنشور؟</p>
+    <p>٢- في رأيك، لماذا ركَّز نابليون على الدين؟</p>
+    <p>٣- إلى أي مدى نجحت سياسة التقرب في تحقيق أهداف الحملة؟</p>
+    <p>٤- هل صدَّق المصريون أن الوجود الفرنسي إصلاحي؟ ولماذا؟</p>
+  </div>
+
+  <h3>٢. سياسة القمع</h3>
+  <p>واجهت الحملة الفرنسية مقاومة شعبية، فاعتمد نابليون وقادة الحملة على سياسة أكثر شدة، تمثلت في:</p>
+  <ul class="clean">
+    <li>قمع ثورتَي القاهرة الأولى والثانية.</li>
+    <li>فرض الضرائب ومصادرة الأموال من المصريين.</li>
+  </ul>
+  <p>وقد كشف ذلك التناقض بين منشور نابليون وممارساته الفعلية.</p>
+
+  <h3>٣. إجراءات تثبيت الأقدام</h3>
+  <p><b>(أ) دراسة مصر دراسة علمية شاملة:</b> اصطحب نابليون عددًا كبيرًا من العلماء في مجالات مختلفة، فقاموا بمسح دقيق لموارد مصر الطبيعية ورسم الخرائط وتسجيل آثار الحضارة المصرية القديمة، وتُوِّجت هذه الجهود بإصدار موسوعة «وصف مصر»، التي قدمت وصفًا دقيقًا لطبيعة مصر وثرواتها وسكانها وآثارها، وأسهمت في تعريف أوروبا بمكانة مصر الحضارية.</p>
+  <p><b>(ب) الاهتمام بشؤون الطباعة:</b> استخدمها الفرنسيون في إصدار المنشورات والأوامر الحكومية وإصدار الصحف التي تبرر وجود الحملة.</p>
+
+  <div class="qa">💭 <b>أفكِّر وأناقش:</b> كيف يمكن استخدام الإعلام أثناء الصراعات السياسية؟</div>
+
+  <p><b>(ج) اكتشاف حجر رشيد وأثره العلمي:</b> اكتشف الجنود الفرنسيون حجر رشيد عام <b>١٧٩٩م</b>، ويتضمن نصًا واحدًا بثلاث كتابات: الهيروغليفية والديموطيقية واليونانية. وساعد هذا الاكتشاف العالم الفرنسي <b>شامبليون</b> على فك رموز الكتابة الهيروغليفية عام <b>١٨٢٢م</b>؛ مما أسهم في نشأة علم المصريات وإعادة اكتشاف الحضارة المصرية القديمة.</p>
+
+  <div class="box nile">
+    <div class="box-title">🧠 مهارة أتعلمها</div>
+    <p>تعلَّم التاريخ من خلال الأدلة والوثائق والآثار، ولا تكتفِ بالمعلومات المجردة.</p>
+  </div>
+
+  <div class="box red">
+    <div class="box-title">📌 حقائق تاريخية</div>
+    <p>رغم قِصر مدة الحملة الفرنسية، فإن آثارها كانت عميقة وطويلة المدى.</p>
+  </div>
+</section>
+
+<!-- التدخل الأجنبي -->
+<section id="tadakhul">
+  <div class="eyebrow"><span class="num">٢</span> ثانيًا</div>
+  <h2>التدخل الأجنبي في شؤون مصر</h2>
+  <p>مع تزايد قوة محمد علي العسكرية واستمرار سيطرته على بلاد الشام، بدأت القوى الأوروبية الكبرى تنظر بقلق إلى احتمال ظهور قوة إقليمية جديدة قد تغيِّر موازين القوى في الشرق؛ لذا بدأت تتدخل بشكل مباشر لوقف قوة مصر الإقليمية.</p>
+
+  <h3>١. اتفاقية بلطة ليمان ١٨٣٨م</h3>
+  <p>سعت بريطانيا إلى توسيع نفوذها الاقتصادي في الشرق، خاصة في ظل اتساع التجارة العالمية، فعقدت مع الدولة العثمانية اتفاقية التجارة الحرة عام <b>١٨٣٨م</b>، والمعروفة باتفاقية بلطة ليمان.</p>
+  <div class="qa">💭 <b>أقرأ وأناقش:</b> حدِّد العلاقة بين اتفاقية بلطة ليمان ومستقبل الدولة المصرية واستقلالها.</div>
+
+  <h3>٢. مؤتمر لندن ١٨٤٠م</h3>
+  <p>كان الهدف من المؤتمر إعادة التوازن السياسي في المنطقة والحد من نفوذ محمد علي السياسي الواسع، وانتهى بتوقيع معاهدة لندن عام ١٨٤٠م التي فُرضت على محمد علي، ومن أهم بنودها:</p>
+  <ul class="clean">
+    <li>انسحاب القوات المصرية من بلاد الشام.</li>
+    <li>تقليص حجم الجيش المصري إلى ثمانية عشر ألفًا.</li>
+  </ul>
+  <p>وهكذا كشف المؤتمر أن مستقبل المنطقة أصبح مرتبطًا بقرارات القوى الأوروبية الكبرى.</p>
+
+  <h3>٣. إغراق مصر في الديون</h3>
+  <p>تآمرت الدول الأوروبية على مصر وأغرقتها في الديون، ومع تزايد أزمة الديون في عهد الخديوي إسماعيل، طالبت الدول الدائنة بمعرفة الوضع المالي الحقيقي لمصر؛ فشُكِّلت لجان مالية أوروبية هدفها:</p>
+  <ul class="clean">
+    <li>دراسة الوضع المالي للدولة.</li>
+    <li>تحديد حجم الديون والموارد.</li>
+    <li>تقديم مقترحات للإصلاح.</li>
+  </ul>
+  <p>وقد أتاحت تلك اللجان للقوى الأوروبية فرصة التدخل المباشر في الإدارة المالية المصرية، ومثَّلت خطوة تمهيدية نحو فرض رقابة مالية أجنبية، تحولت لاحقًا إلى سيطرة فعلية على القرار الاقتصادي.</p>
+
+  <div class="qa">💭 <b>أفكِّر وأبحث:</b> كيف أسهمت مصادر الدخل المختلفة في عهد الخديوي إسماعيل في توسع سياسة الديون؟</div>
+
+  <div class="box nile">
+    <div class="box-title">📖 مفهوم أتعلمه: الرقابة المالية</div>
+    <p>إشراف أجنبي على موارد الدولة ونفقاتها؛ لضمان سداد الديون.</p>
+  </div>
+
+  <h3>٤. المراقبة المالية الثنائية ١٨٧٦م</h3>
+  <p>في ظل تفاقم أزمة الديون، انتقل التدخل الأوروبي من مجرد متابعة مالية إلى إدارة مباشرة للموارد، بإنشاء نظام الرقابة المالية الثنائية عام <b>١٨٧٦م</b>، حيث عُيِّن:</p>
+  <ul class="clean">
+    <li>مراقب بريطاني للإشراف على الإيرادات.</li>
+    <li>مراقب فرنسي للإشراف على المصروفات.</li>
+  </ul>
+  <p>ولم يعد هذا النظام يقتصر على تقديم المشورة، بل أصبح تدخلًا فعليًا في إدارة مالية الدولة، وترتب على ذلك سيطرة الأوروبيين على موارد الدولة، وتقييد حرية الحكومة المصرية في اتخاذ القرارات.</p>
+
+  <div class="qa">💭 إلى أي مدى تتفق أو تختلف مع أن المراقبة المالية الثنائية كانت تمهيدًا لفقدان مصر استقلالها؟ برِّر رأيك بالشواهد التاريخية.</div>
+
+  <p>ومع تزايد النفوذ الأوروبي في الشؤون المالية، سعت القوى الأوروبية إلى توسيع تأثيرها في القرارات السياسية والإدارية، من خلال: التدخل في تشكيل الحكومة عبر الوزارة المختلطة، وتعاظم دور المستشارين الأجانب، واتساع التدخل الأجنبي في شؤون الدولة؛ مما أدَّى إلى تصاعد الرفض داخل المجتمع المصري، وظهور الحركة الوطنية التي رأت في هذا التدخل تهديدًا مباشرًا لاستقلال البلاد.</p>
+
+  <h3>٥. التدخل العسكري البريطاني ١٨٨٢م</h3>
+  <p>تصاعدت الأزمة السياسية في عهد الخديوي توفيق، وخاصة مع اندلاع الثورة العرابية التي عبَّرت عن رفض داخلي متزايد للتدخل الأجنبي، ورفعت مطالب أساسية، منها: تحقيق الإصلاح السياسي، والحد من النفوذ الأجنبي، وتحقيق العدالة داخل الدولة. واعتبرت بريطانيا هذه التطورات تهديدًا لمصالحها، خاصة بعد حفر قناة السويس، وفي عام <b>١٨٨٢م</b> تدخلت عسكريًا وتمكنت من احتلال مصر عقب معركة <b>التل الكبير</b>، لتبدأ مرحلة جديدة من السيطرة الأجنبية المباشرة.</p>
+
+  <div class="box gold">
+    <div class="box-title">💡 قيمة أتعلمها</div>
+    <p>الحفاظ على الاستقلال الوطني واجب وطني على الجميع.</p>
+  </div>
+</section>
+
+<!-- سياسات الاحتلال البريطاني -->
+<section id="ihtilal">
+  <div class="eyebrow"><span class="num">٣</span> ثالثًا</div>
+  <h2>سياسات الاحتلال البريطاني في مصر (١٨٨٢-١٩١٤م)</h2>
+  <p>رغم استمرار الحكم للخديوي في مصر بشكل رسمي وبقاء التبعية الاسمية للدولة العثمانية، فقد كانت السلطة الحقيقية في يد المعتمد البريطاني، مما يعكس نموذجًا واضحًا للاحتلال غير المباشر.</p>
+
+  <h3>١. السيطرة السياسية</h3>
+  <p>أبقت بريطانيا على مؤسسات الدولة، غير أن اليد العليا في تصريف كافة شؤون الحكومة كانت بيدها، ومن مظاهر ذلك:</p>
+  <ul class="clean">
+    <li>التدخل في تعيين وعزل الحكومات.</li>
+    <li>فرض سياسات تخدم المصالح البريطانية.</li>
+    <li>تحويل دور الخديوي إلى سلطة شكلية.</li>
+  </ul>
+
+  <h3>٢. تفكيك القوة العسكرية</h3>
+  <p>أدركت بريطانيا أن بقاء جيش قوي يمثل تهديدًا مباشرًا لوجودها؛ فسعت إلى إضعاف القوة العسكرية المصرية من خلال تقليص حجم الجيش وإخضاعه لإشراف بريطاني، والحد من دوره الوطني؛ وكان الهدف منع ظهور قوة عسكرية قادرة على قيادة حركة مقاومة ضد الاحتلال.</p>
+  <div class="qa">💭 إلى أي مدى نجحت بريطانيا في منع المقاومة المصرية عبر سياساتها السياسية والعسكرية؟</div>
+
+  <h3>٣. السيطرة على القضاء</h3>
+  <p>طوَّعت بريطانيا القوانين لخدمة مصالحها، ويتضح ذلك في: استمرار المحاكم المختلطة، ومنح الأجانب امتيازات خاصة، وتقليص دور القضاء الوطني؛ مما أدى إلى ازدواجية قانونية داخل المجتمع المصري.</p>
+  <div class="qa">💭 دلِّل على صحة العبارة: «استغلت إنجلترا القانون لخدمة مصالحها المختلفة».</div>
+
+  <h3>٤. السيطرة الاقتصادية</h3>
+  <div class="pillars-wrap">
+    <div class="pillar-card"><div class="ic">🌱</div><h4>التوسع في زراعة القطن</h4><p>لخدمة مصانع النسيج البريطانية.</p></div>
+    <div class="pillar-card"><div class="ic">🏭</div><h4>إضعاف الصناعة المحلية</h4><p>لصالح المنتجات البريطانية المستوردة.</p></div>
+    <div class="pillar-card"><div class="ic">🚪</div><h4>فتح الأسواق</h4><p>أمام المنتجات البريطانية بلا حماية جمركية.</p></div>
+    <div class="pillar-card"><div class="ic">🔄</div><h4>تصدير خام واستيراد مصنَّع</h4><p>نمط اقتصادي تابع للمصالح البريطانية.</p></div>
+  </div>
+  <div class="qa">💭 في رأيك، أي السياسات كان أكثر تأثيرًا في ترسيخ الاحتلال: السيطرة الاقتصادية أم العسكرية؟ ناقش وجهة نظرك.</div>
+
+  <h3>٥. سياسة الاحتلال في التعليم</h3>
+  <p>وضعت بريطانيا سياسات تعليمية تخدم مصالحها السياسية والإدارية، من خلال: تقليص التوسع في التعليم، وخفض الإنفاق عليه، والتركيز على إعداد موظفين للعمل في الإدارات المختلفة؛ مما أدَّى إلى تأخر انتشار التعليم في المجتمع المصري خلال تلك الفترة.</p>
+  <div class="qa">
+    <p>💭 هل تهدف السياسة البريطانية في التعليم إلى إعداد موظفين يخدمون مصالحها أم إلى إعداد مواطنين؟</p>
+    <p>١- كيف استخدم الاحتلال التعليم أداة لخدمة مصالحه؟</p>
+    <p>٢- كيف يمكن أن يؤثر التحكم في التعليم على وعي الأجيال القادمة؟</p>
+  </div>
+
+  <div class="box nile">
+    <div class="box-title">📌 مشروع بحثي</div>
+    <p>تعاون مع زملائك في إعداد مشروع بحثي عن سياسات الاحتلال في مصر، موضحًا أوجه التشابه والاختلاف بين الحملة الفرنسية والاحتلال البريطاني، ومستعينًا بمصادر التعلم المختلفة.</p>
+  </div>
+
+  <div class="qa"><b>سؤال التفسير المدعوم بالأدلة:</b> كانت سياسات الاحتلال الإنجليزي والفرنسي في مصر مختلفة، اشرح ذلك مستشهدًا بأدلة تاريخية.</div>
+
+  <div class="box red">
+    <div class="box-title">💡 قيمة أتعلمها</div>
+    <p>الجيش هو حصن السيادة، والموارد هي التي تحميه، والوعي هو القوة التي تحمي المجتمع، والهوية هي الروح التي تدعم الجيش والموارد وتجعل المجتمع متماسكًا؛ ولذلك فإن انهيار أي من هذه العناصر يهدد بانهيار الدولة، فالحفاظ على الاستقلال الوطني جوهر السيادة.</p>
+  </div>
+
+  <div class="box gold">
+    <div class="box-title">💡 تطبيقات حياتية</div>
+    <p>الحفاظ على الاستقلال الوطني واجب على الجميع، والوعي بقيمة الجيش والموارد والهوية الوطنية يساعد على حماية الدولة من أي تهديد.</p>
+  </div>
+</section>
+
+<!-- تدريبات الكتاب -->
+<section id="tadribat">
+  <div class="eyebrow"><span class="num">✎</span> تدريبات الدرس</div>
+  <h2>تدريبات الكتاب (صفحة ٦٢-٦٣)</h2>
+  <ul class="clean">
+    <li>تحديد أبرز مظاهر «الحكم غير المباشر» البريطاني: إبقاء المؤسسات شكلًا مع التحكم الفعلي في القرارات.</li>
+    <li>تحديد إيجابيات وسلبيات زراعة القطن في مصر في ظل الاحتلال البريطاني.</li>
+    <li>تحليل العلاقة بين: النهضة - الديون - التبعية في عصر خلفاء محمد علي.</li>
+    <li>مناقشة: «هل كان التحديث في مصر بالعصر الحديث طريقًا للاستقلال أم مدخلًا للاحتلال؟».</li>
+    <li>المقارنة بين نتائج سياسات محمد علي ونتائج التدخل الأوروبي.</li>
+    <li>الاختيار والتبرير: أخطر عامل على السيادة (ضعف الإدارة - التدخل العسكري - الديون).</li>
+    <li>تفسير كيف تحولت السياسات الاقتصادية إلى أداة للهجوم السياسي بمصر.</li>
+    <li>مقارنة أسلوب بريطانيا في احتلال مصر بأسلوب الهكسوس قديمًا.</li>
+  </ul>
+  <div class="qa">💭 <b>ماذا لو...؟</b> لم تتراكم الديون على مصر في عهد خلفاء محمد علي؟ وماذا لو أصبحت مصر اقتصادًا قويًا في تلك الفترة؟</div>
+</section>
+
+<!-- الملخص الشامل -->
+<section id="molakhas" class="summary-section">
+  <div class="eyebrow"><span class="num">Σ</span> مراجعة نهائية</div>
+  <h2>الملخص الشامل للدرس</h2>
+
+  <div class="summary-block">
+    <h3>١. مفهوم أساسي: الرقابة المالية</h3>
+    <p>إشراف أجنبي على موارد الدولة ونفقاتها؛ لضمان سداد الديون. تطورت في مصر من لجان مالية استشارية إلى نظام المراقبة الثنائية ١٨٧٦م، ثم إلى تدخل سياسي وعسكري كامل.</p>
+  </div>
+
+  <div class="summary-block">
+    <h3>٢. سياسات فرنسا الثلاث (١٧٩٨-١٨٠١م)</h3>
+    <table class="mini-table">
+      <tr><th>السياسة</th><th>أبرز مظاهرها</th></tr>
+      <tr><td>التقرب</td><td>منشورات تحترم الإسلام، التقرب من العلماء، المجمع العلمي المصري، الدواوين المحلية.</td></tr>
+      <tr><td>القمع</td><td>قمع ثورتَي القاهرة الأولى والثانية، فرض الضرائب ومصادرة الأموال.</td></tr>
+      <tr><td>تثبيت الأقدام</td><td>دراسة علمية شاملة (موسوعة وصف مصر)، الاهتمام بالطباعة، اكتشاف حجر رشيد ١٧٩٩م.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٣. خط زمني للتدخل الأجنبي والاحتلال</h3>
+    <table class="mini-table">
+      <tr><th>التاريخ</th><th>الحدث</th></tr>
+      <tr><td>١٧٩٨م</td><td>نزول الحملة الفرنسية بالإسكندرية.</td></tr>
+      <tr><td>١٧٩٩م</td><td>اكتشاف حجر رشيد.</td></tr>
+      <tr><td>١٨٠١م</td><td>خروج الحملة الفرنسية من مصر.</td></tr>
+      <tr><td>١٨٢٢م</td><td>شامبليون يفك رموز الهيروغليفية.</td></tr>
+      <tr><td>١٨٣٨م</td><td>اتفاقية بلطة ليمان (تجارة حرة).</td></tr>
+      <tr><td>١٨٤٠م</td><td>مؤتمر ومعاهدة لندن (تقليص الجيش المصري وانسحابه من الشام).</td></tr>
+      <tr><td>١٨٧٦م</td><td>المراقبة المالية الثنائية (بريطاني للإيرادات، فرنسي للمصروفات).</td></tr>
+      <tr><td>١٨٨٢م</td><td>الثورة العرابية، ثم الاحتلال العسكري البريطاني بعد معركة التل الكبير.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٤. أعمدة الاحتلال البريطاني غير المباشر (١٨٨٢-١٩١٤م)</h3>
+    <table class="mini-table">
+      <tr><th>المحور</th><th>أبرز مظاهره</th></tr>
+      <tr><td>سياسي</td><td>التدخل في تعيين وعزل الحكومات، تحويل الخديوي إلى سلطة شكلية.</td></tr>
+      <tr><td>عسكري</td><td>تقليص الجيش المصري وإخضاعه لإشراف بريطاني؛ لمنع أي مقاومة مسلحة.</td></tr>
+      <tr><td>قضائي</td><td>استمرار المحاكم المختلطة، امتيازات للأجانب، تقليص القضاء الوطني.</td></tr>
+      <tr><td>اقتصادي</td><td>التوسع في زراعة القطن، إضعاف الصناعة المحلية، تصدير خام واستيراد مصنَّع.</td></tr>
+      <tr><td>تعليمي</td><td>تقليص التوسع في التعليم، خفض الإنفاق، إعداد موظفين لا مواطنين.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٥. مقارنة سريعة: فرنسا مقابل بريطانيا</h3>
+    <table class="mini-table">
+      <tr><th>وجه المقارنة</th><th>فرنسا (١٧٩٨-١٨٠١م)</th><th>بريطانيا (١٨٣٨-١٩١٤م)</th></tr>
+      <tr><td>الأسلوب</td><td>تقرب ديني وعلمي، ثم قمع مباشر عند المقاومة.</td><td>تدخل تدريجي عبر الديون والرقابة المالية.</td></tr>
+      <tr><td>المدة</td><td>احتلال عسكري مباشر وقصير (٣ سنوات تقريبًا).</td><td>احتلال غير مباشر وطويل الأمد (أكثر من ٣٠ عامًا).</td></tr>
+      <tr><td>الأثر الأبرز</td><td>إرث علمي (وصف مصر، حجر رشيد، علم المصريات).</td><td>سيطرة شاملة سياسية وعسكرية وقضائية واقتصادية وتعليمية.</td></tr>
+    </table>
+  </div>
+
+  <div class="summary-block">
+    <h3>٦. القيم والدروس المستفادة</h3>
+    <ul class="clean">
+      <li>تعلَّم التاريخ من خلال الأدلة والوثائق والآثار، لا من المعلومات المجردة فقط.</li>
+      <li>الحفاظ على الاستقلال الوطني واجب وطني على الجميع.</li>
+      <li>الجيش حصن السيادة، والموارد تحميه، والوعي يحمي المجتمع، والهوية هي الروح الجامعة لكل ذلك.</li>
+      <li>الوعي بقيمة الجيش والموارد والهوية الوطنية يحمي الدولة من أي تهديد خارجي.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h3>٧. الخلاصة الكبرى</h3>
+    <p>لم تتبع فرنسا وبريطانيا الأسلوب نفسه في السيطرة على مصر: فرنسا جمعت بين التقرب والقمع في احتلال عسكري مباشر وقصير، بينما تسللت بريطانيا تدريجيًا عبر الاتفاقيات التجارية والديون والرقابة المالية، حتى وصلت إلى احتلال عسكري مباشر عام ١٨٨٢م تلاه حكم غير مباشر طويل الأمد أحكم قبضته على السياسة والجيش والقضاء والاقتصاد والتعليم معًا؛ فكان الدرس الأكبر أن فقدان السيادة قد يبدأ من بوابة الديون والاقتصاد قبل أن يصل إلى ميدان المعركة.</p>
+  </div>
+
+  <div class="cta-row">
+    <a href="#exam" class="btn">ابدأ الامتحان الشامل →</a>
+  </div>
+</section>
+
+<!-- EXAM -->
+<section id="exam" class="exam-section">
+  <div class="exam-head">
+    <div class="eyebrow" style="justify-content:center;"><span class="num">✎</span> التقييم الختامي</div>
+    <h2>الامتحان الشامل</h2>
+    <p class="lead">١٥ سؤالًا تغطي كل عناصر الدرس. اختر إجابتك وستظهر لك النتيجة فورًا في نهاية الاختبار.</p>
+  </div>
+
+  <div class="exam-progress">
+    <span id="prog-text">٠ / ١٥</span>
+    <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <div class="cta-row">
+    <button class="btn" id="submit-btn">تصحيح الامتحان</button>
+    <button class="btn ghost" id="reset-btn">إعادة المحاولة</button>
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <div class="result-score" id="result-score">0/15</div>
+    <div class="result-msg" id="result-msg"></div>
+  </div>
+</section>
+
+<!-- الصور الذهنية والترابط -->
+<section id="mindmaps" style="border-bottom:none; text-align:center;">
+  <div class="eyebrow" style="justify-content:center;"><span class="num">🕸️</span> الصورة الكبرى</div>
+  <h2>الصور الذهنية وترابط الأحداث</h2>
+  <p class="lead">٥ خرائط ذهنية هذه المرة، توضح كل زاوية من زوايا الدرس مترابطة مع الأخرى.</p>
+  <div class="cta-row">
+    <button class="btn" id="toggle-mindmaps">🧠 اعرض الصور الذهنية</button>
+  </div>
+
+  <div id="mindmaps-panel" style="display:none; margin-top:34px; text-align:right;">
+
+    <div class="box gold">
+      <div class="box-title">🗺️ خريطة (١): الخط الزمني الكامل من ١٧٩٨م إلى ١٨٨٢م</div>
+      <svg viewBox="0 0 620 820" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <defs>
+          <marker id="arrow1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#c9a227"/>
+          </marker>
+        </defs>
+        <line x1="310" y1="90" x2="310" y2="126" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="190" x2="310" y2="226" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="290" x2="310" y2="326" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="390" x2="310" y2="426" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="490" x2="310" y2="526" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="590" x2="310" y2="626" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+        <line x1="310" y1="690" x2="310" y2="726" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow1)"/>
+
+        <rect x="70" y="30" width="480" height="60" rx="12" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="310" y="55" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">الحملة الفرنسية (١٧٩٨م)</text>
+        <text x="310" y="76" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">تنزل الإسكندرية، بداية الهجمة الاستعمارية</text>
+
+        <rect x="70" y="130" width="480" height="60" rx="12" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="310" y="155" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">التقرب ثم القمع</text>
+        <text x="310" y="176" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">منشورات ثم قمع ثورتَي القاهرة</text>
+
+        <rect x="70" y="230" width="480" height="60" rx="12" fill="#1e1b14" stroke="#4fa3ac" stroke-width="2"/>
+        <text x="310" y="255" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">حجر رشيد (١٧٩٩م)</text>
+        <text x="310" y="276" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">فكَّ شامبليون رموزه عام ١٨٢٢م</text>
+
+        <rect x="70" y="330" width="480" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="310" y="355" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">خروج الحملة الفرنسية (١٨٠١م)</text>
+        <text x="310" y="376" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">نهاية الاحتلال المباشر الأول</text>
+
+        <rect x="70" y="430" width="480" height="60" rx="12" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="310" y="455" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">بلطة ليمان (١٨٣٨م)</text>
+        <text x="310" y="476" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">بداية التدخل الاقتصادي البريطاني</text>
+
+        <rect x="70" y="530" width="480" height="60" rx="12" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="310" y="555" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">معاهدة لندن (١٨٤٠م)</text>
+        <text x="310" y="576" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">تقليص الجيش المصري وانسحابه من الشام</text>
+
+        <rect x="70" y="630" width="480" height="60" rx="12" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="310" y="655" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">المراقبة الثنائية (١٨٧٦م)</text>
+        <text x="310" y="676" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">مراقب بريطاني وآخر فرنسي على الموارد</text>
+
+        <rect x="70" y="730" width="480" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="3"/>
+        <text x="310" y="755" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="15" font-weight="700">الاحتلال العسكري (١٨٨٢م)</text>
+        <text x="310" y="776" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="12">الثورة العرابية، معركة التل الكبير</text>
+      </svg>
+    </div>
+
+    <div class="box nile">
+      <div class="box-title">🕸️ خريطة (٢): شبكة سياسات فرنسا الثلاث</div>
+      <svg viewBox="0 0 640 460" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <line x1="320" y1="230" x2="320" y2="70" stroke="#4fa3ac" stroke-width="2"/>
+        <line x1="320" y1="230" x2="140" y2="370" stroke="#4fa3ac" stroke-width="2"/>
+        <line x1="320" y1="230" x2="500" y2="370" stroke="#4fa3ac" stroke-width="2"/>
+
+        <circle cx="320" cy="230" r="65" fill="#16140f" stroke="#e8c96b" stroke-width="3"/>
+        <text x="320" y="224" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="14" font-weight="700">الحملة الفرنسية</text>
+        <text x="320" y="244" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="13">١٧٩٨-١٨٠١م</text>
+
+        <rect x="205" y="15" width="230" height="70" rx="10" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="320" y="46" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">سياسة التقرب</text>
+        <text x="320" y="66" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">منشورات، علماء، مجمع علمي، دواوين</text>
+
+        <rect x="20" y="335" width="240" height="70" rx="10" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="140" y="366" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">سياسة القمع</text>
+        <text x="140" y="386" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">قمع ثورتَي القاهرة، ضرائب ومصادرة</text>
+
+        <rect x="380" y="335" width="240" height="70" rx="10" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="500" y="360" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">تثبيت الأقدام</text>
+        <text x="500" y="378" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">وصف مصر، الطباعة، حجر رشيد</text>
+        <text x="500" y="394" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">(١٧٩٩م)</text>
+      </svg>
+    </div>
+
+    <div class="box red">
+      <div class="box-title">🕸️ خريطة (٣): شبكة أعمدة الاحتلال البريطاني الخمسة</div>
+      <svg viewBox="0 0 640 560" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <line x1="320" y1="300" x2="320" y2="60" stroke="#8c3b2e" stroke-width="2"/>
+        <line x1="320" y1="300" x2="548" y2="226" stroke="#8c3b2e" stroke-width="2"/>
+        <line x1="320" y1="300" x2="461" y2="494" stroke="#8c3b2e" stroke-width="2"/>
+        <line x1="320" y1="300" x2="179" y2="494" stroke="#8c3b2e" stroke-width="2"/>
+        <line x1="320" y1="300" x2="92" y2="226" stroke="#8c3b2e" stroke-width="2"/>
+
+        <circle cx="320" cy="300" r="68" fill="#16140f" stroke="#e8c96b" stroke-width="3"/>
+        <text x="320" y="294" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="14" font-weight="700">الاحتلال</text>
+        <text x="320" y="314" text-anchor="middle" fill="#e8c96b" font-family="Amiri,serif" font-size="13">١٨٨٢-١٩١٤م</text>
+
+        <rect x="235" y="20" width="170" height="75" rx="10" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="320" y="50" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="13" font-weight="700">سياسي</text>
+        <text x="320" y="70" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">تعيين وعزل الحكومات</text>
+
+        <rect x="463" y="188" width="170" height="75" rx="10" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="548" y="216" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="13" font-weight="700">عسكري</text>
+        <text x="548" y="236" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">تقليص الجيش وإشراف عليه</text>
+
+        <rect x="376" y="456" width="170" height="75" rx="10" fill="#1e1b14" stroke="#4fa3ac" stroke-width="2"/>
+        <text x="461" y="484" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="13" font-weight="700">قضائي</text>
+        <text x="461" y="504" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">محاكم مختلطة وامتيازات أجنبية</text>
+
+        <rect x="94" y="456" width="170" height="75" rx="10" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="179" y="484" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="13" font-weight="700">اقتصادي</text>
+        <text x="179" y="504" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">قطن، إضعاف الصناعة، أسواق مفتوحة</text>
+
+        <rect x="7" y="188" width="170" height="75" rx="10" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="92" y="216" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="13" font-weight="700">تعليمي</text>
+        <text x="92" y="236" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="10.5">تقليص التوسع وخفض الإنفاق</text>
+      </svg>
+    </div>
+
+    <div class="box gold">
+      <div class="box-title">🔗 خريطة (٤): من الديون إلى الاحتلال العسكري</div>
+      <svg viewBox="0 0 620 630" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <defs>
+          <marker id="arrow4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#c9a227"/>
+          </marker>
+        </defs>
+        <line x1="310" y1="90" x2="310" y2="126" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow4)"/>
+        <line x1="310" y1="190" x2="310" y2="226" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow4)"/>
+        <line x1="310" y1="290" x2="310" y2="326" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow4)"/>
+        <line x1="310" y1="390" x2="310" y2="426" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow4)"/>
+        <line x1="310" y1="490" x2="310" y2="526" stroke="#c9a227" stroke-width="2" marker-end="url(#arrow4)"/>
+
+        <rect x="70" y="30" width="480" height="60" rx="12" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="310" y="55" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">بلطة ليمان + تراكم الديون</text>
+        <text x="310" y="76" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11.5">لجان مالية أوروبية للتفتيش</text>
+
+        <rect x="70" y="130" width="480" height="60" rx="12" fill="#1e1b14" stroke="#2e6f77" stroke-width="2"/>
+        <text x="310" y="155" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">المراقبة المالية الثنائية ١٨٧٦م</text>
+        <text x="310" y="176" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11.5">إشراف مباشر على الإيرادات والمصروفات</text>
+
+        <rect x="70" y="230" width="480" height="60" rx="12" fill="#1e1b14" stroke="#4fa3ac" stroke-width="2"/>
+        <text x="310" y="255" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">تدخل في الحكومة</text>
+        <text x="310" y="276" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11.5">الوزارة المختلطة والمستشارون الأجانب</text>
+
+        <rect x="70" y="330" width="480" height="60" rx="12" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="310" y="355" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">الثورة العرابية</text>
+        <text x="310" y="376" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11.5">رفض شعبي للتدخل الأجنبي</text>
+
+        <rect x="70" y="430" width="480" height="60" rx="12" fill="#1e1b14" stroke="#8c3b2e" stroke-width="3"/>
+        <text x="310" y="455" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">الاحتلال العسكري ١٨٨٢م</text>
+        <text x="310" y="476" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11.5">معركة التل الكبير</text>
+
+        <rect x="70" y="530" width="480" height="60" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="3"/>
+        <text x="310" y="555" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">الحكم غير المباشر</text>
+        <text x="310" y="576" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11.5">السلطة الفعلية للمعتمد البريطاني</text>
+      </svg>
+    </div>
+
+    <div class="box nile">
+      <div class="box-title">⚖️ خريطة (٥): مقارنة الأسلوبين — فرنسا في مقابل بريطانيا</div>
+      <svg viewBox="0 0 620 340" style="width:100%; height:auto; max-width:560px; display:block; margin:10px auto;">
+        <line x1="230" y1="90" x2="150" y2="140" stroke="#4fa3ac" stroke-width="2"/>
+        <line x1="390" y1="90" x2="470" y2="140" stroke="#4fa3ac" stroke-width="2"/>
+
+        <rect x="110" y="20" width="400" height="70" rx="12" fill="#1e1b14" stroke="#e8c96b" stroke-width="2"/>
+        <text x="310" y="55" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">سياسات احتلال مصر بالعصر الحديث</text>
+        <text x="310" y="75" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">أسلوبان مختلفان لهدف واحد</text>
+
+        <rect x="30" y="140" width="260" height="180" rx="12" fill="#1e1b14" stroke="#c9a227" stroke-width="2"/>
+        <text x="160" y="168" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">فرنسا (١٧٩٨-١٨٠١م)</text>
+        <text x="160" y="192" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">تقرب ديني وعلمي بالمنشورات</text>
+        <text x="160" y="212" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">قمع مباشر عند المقاومة الشعبية</text>
+        <text x="160" y="232" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">احتلال عسكري مباشر وقصير المدة</text>
+        <text x="160" y="252" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">إرث علمي: وصف مصر وحجر رشيد</text>
+        <text x="160" y="272" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">وميلاد علم المصريات</text>
+
+        <rect x="330" y="140" width="260" height="180" rx="12" fill="#1e1b14" stroke="#8c3b2e" stroke-width="2"/>
+        <text x="460" y="168" text-anchor="middle" fill="#e8c96b" font-family="Cairo,sans-serif" font-size="14" font-weight="700">بريطانيا (١٨٣٨-١٩١٤م)</text>
+        <text x="460" y="192" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">تدخل تدريجي عبر التجارة والديون</text>
+        <text x="460" y="212" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">رقابة مالية ثم سيطرة سياسية كاملة</text>
+        <text x="460" y="232" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">احتلال غير مباشر وطويل الأمد</text>
+        <text x="460" y="252" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">سيطرة سياسية وعسكرية وقضائية</text>
+        <text x="460" y="272" text-anchor="middle" fill="#dcd3ba" font-family="Tajawal,sans-serif" font-size="11">واقتصادية وتعليمية شاملة</text>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  موقع مراجعة تفاعلي — الدرس الخامس: سياسات الاحتلال بمصر في العصر الحديث — تاريخ البكالوريا المصرية، الوحدة الأولى: مصر بين الماضي والحاضر
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "نزلت الحملة الفرنسية إلى الإسكندرية عام:",
+    opts: ["١٧٩٨م", "١٨٠١م", "١٨٣٨م", "١٨٤٠م"],
+    correct: 0,
+    fb: "نزلت الحملة الفرنسية إلى الإسكندرية عام ١٧٩٨م، لتبدأ سياساتها في مصر وفق أسس وضعها نابليون."
+  },
+  {
+    q: "هدفت سياسة التقرب التي اتبعها نابليون إلى:",
+    opts: ["إقناع المصريين بأن الوجود الفرنسي إصلاحي لا احتلال", "فرض الضرائب فورًا على المصريين", "قمع ثورتَي القاهرة", "إلغاء المجمع العلمي المصري"],
+    correct: 0,
+    fb: "حاول نابليون عبر المنشورات والتقرب من العلماء وإنشاء المجمع العلمي إقناع المصريين بأن وجوده إصلاحي وليس احتلالًا."
+  },
+  {
+    q: "لجأ نابليون إلى سياسة القمع بعد:",
+    opts: ["نجاح سياسة التقرب الكامل", "مواجهة الحملة الفرنسية مقاومة شعبية", "خروج الحملة من مصر", "اكتشاف حجر رشيد"],
+    correct: 1,
+    fb: "واجهت الحملة الفرنسية مقاومة شعبية، فاعتمد نابليون على سياسة أكثر شدة تمثلت في قمع ثورتَي القاهرة وفرض الضرائب."
+  },
+  {
+    q: "توِّجت الدراسة العلمية الشاملة لمصر في عهد الحملة الفرنسية بإصدار موسوعة:",
+    opts: ["المقدمة", "وصف مصر", "البداية والنهاية", "الخطط المقريزية"],
+    correct: 1,
+    fb: "قدَّمت موسوعة «وصف مصر» وصفًا دقيقًا لطبيعة مصر وثرواتها وسكانها وآثارها، وعرَّفت أوروبا بمكانتها الحضارية."
+  },
+  {
+    q: "اكتُشف حجر رشيد عام ١٧٩٩م، وساعد على فك رموزه العالم الفرنسي شامبليون عام:",
+    opts: ["١٨٠١م", "١٨٢٢م", "١٨٣٨م", "١٨٧٦م"],
+    correct: 1,
+    fb: "ساعد اكتشاف حجر رشيد شامبليون على فك رموز الكتابة الهيروغليفية عام ١٨٢٢م؛ مما أسهم في نشأة علم المصريات."
+  },
+  {
+    q: "عُقدت اتفاقية بلطة ليمان بين الدولة العثمانية وبريطانيا عام ١٨٣٨م بهدف:",
+    opts: ["دعم الصناعة المصرية", "توسيع النفوذ الاقتصادي البريطاني عبر التجارة الحرة", "تقوية جيش محمد علي", "إلغاء الديون المصرية"],
+    correct: 1,
+    fb: "سعت بريطانيا لتوسيع نفوذها الاقتصادي في الشرق، فعقدت مع الدولة العثمانية اتفاقية التجارة الحرة المعروفة باتفاقية بلطة ليمان."
+  },
+  {
+    q: "من أهم بنود معاهدة لندن ١٨٤٠م التي فُرضت على محمد علي:",
+    opts: ["توسيع الجيش المصري إلى ١٠٠ ألف جندي", "انسحاب القوات المصرية من الشام وتقليص الجيش إلى ١٨ ألفًا", "منح مصر استقلالًا كاملًا", "إلغاء لقب الخديوية"],
+    correct: 1,
+    fb: "نصت معاهدة لندن ١٨٤٠م على انسحاب القوات المصرية من بلاد الشام، وتقليص حجم الجيش المصري إلى ثمانية عشر ألفًا."
+  },
+  {
+    q: "الرقابة المالية تعني:",
+    opts: ["استقلال الدولة الكامل في إدارة مواردها", "إشراف أجنبي على موارد الدولة ونفقاتها لضمان سداد الديون", "إلغاء الضرائب عن المواطنين", "تحرير التجارة الداخلية فقط"],
+    correct: 1,
+    fb: "الرقابة المالية هي إشراف أجنبي على موارد الدولة ونفقاتها؛ بهدف ضمان سداد الديون المستحقة."
+  },
+  {
+    q: "في نظام المراقبة المالية الثنائية ١٨٧٦م، تولَّى المراقب البريطاني الإشراف على:",
+    opts: ["المصروفات", "الإيرادات", "الجيش", "القضاء"],
+    correct: 1,
+    fb: "عُيِّن في نظام المراقبة الثنائية مراقب بريطاني للإشراف على الإيرادات، ومراقب فرنسي للإشراف على المصروفات."
+  },
+  {
+    q: "اندلعت الثورة العرابية كرد فعل على:",
+    opts: ["ازدهار الاقتصاد المصري", "تصاعد التدخل الأجنبي وتراجع الإصلاح السياسي", "توسع الجيش المصري بشكل مبالغ فيه", "انتهاء ديون مصر"],
+    correct: 1,
+    fb: "عبَّرت الثورة العرابية عن رفض داخلي متزايد للتدخل الأجنبي، ورفعت مطالب الإصلاح السياسي والحد من النفوذ الأجنبي وتحقيق العدالة."
+  },
+  {
+    q: "تمكَّنت بريطانيا من احتلال مصر عام ١٨٨٢م عقب معركة:",
+    opts: ["نزيب", "التل الكبير", "عين جالوت", "أكتيوم"],
+    correct: 1,
+    fb: "تدخلت بريطانيا عسكريًا عام ١٨٨٢م وتمكنت من احتلال مصر عقب معركة التل الكبير."
+  },
+  {
+    q: "من أبرز مظاهر «الحكم غير المباشر» البريطاني في مصر بعد ١٨٨٢م:",
+    opts: ["إلغاء الخديوية وإعلان الحكم الملكي المباشر", "إبقاء المؤسسات شكلًا مع التحكم الفعلي في القرارات", "ضم مصر رسميًا للإمبراطورية البريطانية فورًا", "منح المصريين حق تقرير المصير الكامل"],
+    correct: 1,
+    fb: "كان الحكم غير المباشر يعني إبقاء مؤسسات الدولة (ومنها الخديوية) قائمة شكليًا، بينما السلطة الفعلية بيد المعتمد البريطاني."
+  },
+  {
+    q: "سعت بريطانيا لتفكيك القوة العسكرية المصرية بعد الاحتلال؛ لأنها أدركت أن الجيش القوي:",
+    opts: ["لا يشكل أي خطر عليها", "يمثل تهديدًا مباشرًا لوجودها وقد يقود مقاومة ضد الاحتلال", "يخدم مصالحها الاقتصادية", "ضروري لحماية قناة السويس فقط"],
+    correct: 1,
+    fb: "أدركت بريطانيا أن بقاء جيش مصري قوي يهدد وجودها، فسعت لتقليصه ووضعه تحت إشراف بريطاني؛ لمنع أي مقاومة مسلحة منظمة."
+  },
+  {
+    q: "من مظاهر السيطرة البريطانية على الاقتصاد المصري:",
+    opts: ["دعم الصناعة الوطنية وحمايتها جمركيًا", "التوسع في زراعة القطن وإضعاف الصناعة المحلية", "إغلاق الأسواق أمام المنتجات الأجنبية", "الاعتماد الكامل على الإنتاج المحلي"],
+    correct: 1,
+    fb: "عملت بريطانيا على توجيه الاقتصاد المصري لخدمة مصالحها، عبر التوسع في زراعة القطن وإضعاف الصناعة المحلية وفتح الأسواق أمام منتجاتها."
+  },
+  {
+    q: "استهدفت سياسة الاحتلال البريطاني في التعليم بصفة أساسية:",
+    opts: ["التوسع الكبير في بناء المدارس", "إعداد موظفين للعمل في الإدارات المختلفة مع خفض الإنفاق", "تعميم التعليم المجاني للجميع", "دعم البعثات العلمية إلى الخارج"],
+    correct: 1,
+    fb: "ركَّزت السياسة البريطانية في التعليم على تقليص التوسع فيه وخفض الإنفاق عليه، والاكتفاء بإعداد موظفين يخدمون الإدارة لا مواطنين واعين."
+  }
+];
+
+const container = document.getElementById('quiz-container');
+let answers = new Array(QUESTIONS.length).fill(null);
+let submitted = false;
+
+function render(){
+  container.innerHTML = '';
+  QUESTIONS.forEach((item, qi) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.innerHTML = `
+      <div class="q-num">السؤال ${qi+1} من ${QUESTIONS.length}</div>
+      <div class="q-text">${item.q}</div>
+      <div class="opts" data-qi="${qi}"></div>
+      <div class="fb" id="fb-${qi}"></div>
+    `;
+    const optsWrap = card.querySelector('.opts');
+    const letters = ['أ','ب','ج','د'];
+    item.opts.forEach((opt, oi) => {
+      const el = document.createElement('div');
+      el.className = 'opt';
+      el.setAttribute('role','button');
+      el.setAttribute('tabindex','0');
+      el.innerHTML = `<span class="letter">${letters[oi]}</span><span>${opt}</span>`;
+      el.addEventListener('click', () => selectOpt(qi, oi));
+      el.addEventListener('keydown', (e) => { if(e.key==='Enter' || e.key===' '){ e.preventDefault(); selectOpt(qi, oi); } });
+      optsWrap.appendChild(el);
+    });
+    container.appendChild(card);
+  });
+  updateProgress();
+}
+
+function selectOpt(qi, oi){
+  if(submitted) return;
+  answers[qi] = oi;
+  const optsWrap = document.querySelector(`.opts[data-qi="${qi}"]`);
+  [...optsWrap.children].forEach((el, idx) => {
+    el.classList.toggle('selected', idx === oi);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const answered = answers.filter(a => a !== null).length;
+  document.getElementById('prog-text').textContent = `${toArabicDigits(answered)} / ${toArabicDigits(QUESTIONS.length)}`;
+  document.getElementById('bar-fill').style.width = (answered / QUESTIONS.length * 100) + '%';
+}
+
+function toArabicDigits(n){
+  const map = {'0':'٠','1':'١','2':'٢','3':'٣','4':'٤','5':'٥','6':'٦','7':'٧','8':'٨','9':'٩'};
+  return String(n).split('').map(c => map[c] !== undefined ? map[c] : c).join('');
+}
+
+document.getElementById('submit-btn').addEventListener('click', () => {
+  submitted = true;
+  let score = 0;
+  QUESTIONS.forEach((item, qi) => {
+    const optsWrap = document.querySelector(`.opts[data-qi="${qi}"]`);
+    const chosen = answers[qi];
+    [...optsWrap.children].forEach((el, idx) => {
+      el.style.pointerEvents = 'none';
+      if(idx === item.correct) el.classList.add('correct');
+      else if(idx === chosen && chosen !== item.correct) el.classList.add('wrong');
+    });
+    if(chosen === item.correct) score++;
+    const fb = document.getElementById(`fb-${qi}`);
+    fb.textContent = (chosen === item.correct ? '✓ إجابة صحيحة — ' : (chosen === null ? '— لم تتم الإجابة — ' : '✗ إجابة غير دقيقة — ')) + item.fb;
+    fb.classList.add('show', chosen === item.correct ? 'ok' : 'no');
+  });
+
+  const panel = document.getElementById('result-panel');
+  panel.classList.add('show');
+  document.getElementById('result-score').textContent = `${toArabicDigits(score)} / ${toArabicDigits(QUESTIONS.length)}`;
+  let msg = '';
+  const pct = score / QUESTIONS.length;
+  if(pct === 1) msg = 'ممتاز! إتقان كامل لدرس سياسات الاحتلال بمصر 🏛️';
+  else if(pct >= 0.8) msg = 'مستوى رائع جدًا — راجع الأسئلة التي أخطأت فيها لتثبيت المعلومة.';
+  else if(pct >= 0.6) msg = 'مستوى جيد — يُنصح بمراجعة الملخص الشامل مرة أخرى.';
+  else msg = 'يحتاج الأمر مزيدًا من المراجعة — عد إلى قسم الملخص الشامل قبل إعادة المحاولة.';
+  document.getElementById('result-msg').textContent = msg;
+  panel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  submitted = false;
+  answers = new Array(QUESTIONS.length).fill(null);
+  document.getElementById('result-panel').classList.remove('show');
+  render();
+  document.getElementById('exam').scrollIntoView({behavior:'smooth'});
+});
+
+render();
+
+const mmBtn = document.getElementById('toggle-mindmaps');
+const mmPanel = document.getElementById('mindmaps-panel');
+mmBtn.addEventListener('click', () => {
+  const showing = mmPanel.style.display !== 'none';
+  mmPanel.style.display = showing ? 'none' : 'block';
+  mmBtn.textContent = showing ? '🧠 اعرض الصور الذهنية' : '🙈 إخفاء الصور الذهنية';
+  if(!showing){ mmPanel.scrollIntoView({behavior:'smooth', block:'start'}); }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>مُراجِع | Functions التعبيرات الوظيفية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@400;600;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12203A;
+    --ink-2:#1B2C4D;
+    --paper:#F6EFDD;
+    --paper-2:#EDE2C6;
+    --gold:#C9972C;
+    --gold-2:#E4B84B;
+    --forest:#3E6E55;
+    --rose:#BE4B3C;
+    --slate:#5C6A82;
+    --text-dark:#1C2333;
+    --text-soft:#5E6B85;
+    --bg:var(--paper);
+    --bg-2:var(--paper-2);
+    --surface:#FFFDF6;
+    --ink-text:var(--text-dark);
+    --sub-text:var(--text-soft);
+    --shadow:0 10px 30px rgba(20,25,45,.12);
+    --radius:18px;
+  }
+  [data-theme="night"]{
+    --bg:#0C1220;
+    --bg-2:#111A2E;
+    --surface:#182238;
+    --ink-text:#F1EAD8;
+    --sub-text:#9AA6C2;
+    --shadow:0 10px 30px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink-text);
+    font-family:'Tajawal',sans-serif;
+    min-height:100vh;
+    transition:background .35s ease,color .35s ease;
+    overscroll-behavior-y:none;
+  }
+  .en{font-family:'Space Grotesk',sans-serif;}
+  #app{max-width:520px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;position:relative;padding-bottom:78px;}
+
+  /* ===== Top bar ===== */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 18px 10px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{
+    width:36px;height:36px;border-radius:10px;
+    background:linear-gradient(145deg,var(--gold-2),var(--gold));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk';font-weight:700;color:#2a1d05;font-size:16px;
+    box-shadow:0 4px 12px rgba(201,151,44,.4);
+  }
+  .brand h1{font-family:'Cairo';font-weight:800;font-size:19px;margin:0;letter-spacing:.2px;}
+  .brand span{display:block;font-size:11px;color:var(--sub-text);font-weight:500;margin-top:1px;}
+  .icon-btn{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--surface);border:1px solid rgba(120,120,120,.15);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    box-shadow:var(--shadow);font-size:17px;color:var(--ink-text);
+  }
+
+  /* ===== screens ===== */
+  .screen{display:none;padding:6px 18px 20px;animation:fadeIn .35s ease;}
+  .screen.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  /* ===== stats strip ===== */
+  .stats-strip{display:flex;gap:10px;margin:6px 0 18px;}
+  .stat-card{
+    flex:1;background:var(--surface);border-radius:14px;padding:12px 10px;
+    box-shadow:var(--shadow);text-align:center;
+  }
+  .stat-card b{display:block;font-family:'Space Grotesk';font-size:20px;color:var(--gold);}
+  .stat-card small{font-size:11px;color:var(--sub-text);}
+
+  /* ===== category list (rolodex tabs) ===== */
+  .section-label{font-family:'Cairo';font-weight:800;font-size:14px;color:var(--sub-text);margin:18px 2px 10px;display:flex;align-items:center;gap:8px;}
+  .section-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(120,120,120,.3),transparent);}
+  .cat-list{display:flex;flex-direction:column;gap:10px;}
+  .cat-tab{
+    position:relative;background:var(--surface);border-radius:14px;
+    padding:14px 16px 14px 14px;display:flex;align-items:center;gap:12px;
+    box-shadow:var(--shadow);cursor:pointer;border-inline-start:5px solid var(--gold);
+    transition:transform .15s ease;
+  }
+  .cat-tab:active{transform:scale(.98);}
+  .cat-num{
+    font-family:'Space Grotesk';font-weight:700;font-size:13px;color:var(--gold);
+    background:rgba(201,151,44,.12);border-radius:8px;padding:4px 8px;min-width:30px;text-align:center;
+  }
+  .cat-info{flex:1;min-width:0;}
+  .cat-info h3{margin:0 0 2px;font-family:'Cairo';font-size:15px;font-weight:700;}
+  .cat-info p{margin:0;font-size:11.5px;color:var(--sub-text);font-family:'Space Grotesk';}
+  .cat-progress-wrap{width:44px;height:44px;position:relative;flex-shrink:0;}
+  .cat-progress-wrap svg{transform:rotate(-90deg);width:44px;height:44px;}
+  .cat-progress-wrap circle{fill:none;stroke-width:4;}
+  .cat-progress-wrap .bg{stroke:rgba(120,120,120,.18);}
+  .cat-progress-wrap .fg{stroke:var(--forest);stroke-linecap:round;transition:stroke-dashoffset .4s ease;}
+  .cat-progress-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Space Grotesk';}
+
+  /* ===== deck / flashcard screen ===== */
+  .deck-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+  .deck-header h2{font-family:'Cairo';font-size:16px;margin:0;font-weight:800;}
+  .deck-count{font-size:12px;color:var(--sub-text);font-family:'Space Grotesk';}
+  .progress-bar{height:5px;border-radius:5px;background:rgba(120,120,120,.18);margin:10px 0 22px;overflow:hidden;}
+  .progress-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-2));border-radius:5px;transition:width .3s ease;}
+
+  .card-stage{perspective:1400px;height:340px;margin:0 auto 18px;position:relative;}
+  .flashcard{
+    width:100%;height:100%;position:relative;transform-style:preserve-3d;
+    transition:transform .55s cubic-bezier(.4,.2,.2,1);cursor:pointer;
+  }
+  .flashcard.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;
+    background:var(--surface);box-shadow:0 18px 40px rgba(20,25,45,.18);
+    padding:22px;display:flex;flex-direction:column;
+    border:1px solid rgba(120,120,120,.12);
+  }
+  .face::before{
+    content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);
+    width:52px;height:9px;border-radius:6px;background:repeating-linear-gradient(90deg,rgba(120,120,120,.35) 0 4px,transparent 4px 8px);
+  }
+  .face.back{transform:rotateY(180deg);}
+  .face-top{display:flex;justify-content:space-between;align-items:flex-start;margin-top:14px;}
+  .fav-btn{font-size:20px;background:none;border:none;cursor:pointer;color:var(--sub-text);padding:0;line-height:1;}
+  .fav-btn.active{color:var(--gold);}
+  .speak-btn{
+    width:38px;height:38px;border-radius:50%;background:var(--bg-2);border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ink-text);
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+  }
+  .card-word{font-family:'Space Grotesk';font-weight:700;font-size:34px;text-align:center;margin:auto 0 6px;}
+  .card-phon{text-align:center;color:var(--gold);font-size:13px;font-family:'Space Grotesk';margin-bottom:8px;}
+  .card-mean{text-align:center;font-family:'Cairo';font-weight:700;font-size:20px;color:var(--ink-text);}
+  .card-tag{position:absolute;bottom:16px;inset-inline-start:16px;font-size:10.5px;color:var(--sub-text);background:var(--bg-2);padding:4px 10px;border-radius:20px;font-family:'Space Grotesk';}
+  .card-hint{position:absolute;bottom:16px;inset-inline-end:16px;font-size:10.5px;color:var(--sub-text);}
+  .sentence-wrap{margin:auto 0;text-align:center;}
+  .sentence-en{font-family:'Space Grotesk';font-size:19px;line-height:1.5;margin-bottom:10px;}
+  .sentence-ar{font-family:'Cairo';font-size:14.5px;color:var(--sub-text);line-height:1.6;}
+  .back .card-word{font-size:20px;margin-bottom:4px;}
+  .back .card-mean{font-size:14px;color:var(--sub-text);font-weight:500;}
+
+  .deck-controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px;}
+  .ctrl-btn{
+    width:50px;height:50px;border-radius:50%;background:var(--surface);border:none;
+    box-shadow:var(--shadow);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink-text);
+  }
+  .ctrl-btn.primary{
+    width:auto;height:50px;padding:0 22px;border-radius:25px;background:var(--forest);color:#fff;
+    font-family:'Cairo';font-weight:700;font-size:14px;gap:8px;display:flex;align-items:center;
+  }
+  .ctrl-btn.primary.done{background:var(--sub-text);}
+  .ctrl-btn:active{transform:scale(.94);}
+
+  /* ===== bottom nav ===== */
+  .bottom-nav{
+    position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;
+    background:var(--surface);border-top:1px solid rgba(120,120,120,.15);
+    display:flex;padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+    box-shadow:0 -6px 20px rgba(0,0,0,.06);z-index:50;
+  }
+  .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:var(--sub-text);font-family:'Cairo';font-size:10.5px;font-weight:700;cursor:pointer;padding:4px 0;}
+  .nav-item .ic{font-size:19px;}
+  .nav-item.active{color:var(--gold);}
+
+  /* ===== exam screen ===== */
+  .exam-card{background:var(--surface);border-radius:18px;padding:18px;box-shadow:var(--shadow);margin-bottom:14px;}
+  .exam-card h3{font-family:'Cairo';font-size:15px;margin:0 0 4px;display:flex;align-items:center;gap:8px;}
+  .exam-card p{margin:0 0 12px;font-size:12.5px;color:var(--sub-text);line-height:1.6;}
+  .exam-btn{
+    width:100%;background:linear-gradient(135deg,var(--gold-2),var(--gold));border:none;color:#241804;
+    font-family:'Cairo';font-weight:800;font-size:14px;padding:13px;border-radius:12px;cursor:pointer;
+  }
+  .exam-btn:disabled{background:var(--bg-2);color:var(--sub-text);}
+  .exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .exam-tile{
+    background:var(--surface);border-radius:14px;padding:14px;box-shadow:var(--shadow);cursor:pointer;text-align:center;
+    border:2px solid transparent;
+  }
+  .exam-tile b{display:block;font-family:'Space Grotesk';font-size:22px;color:var(--gold);}
+  .exam-tile span{font-size:11px;color:var(--sub-text);font-family:'Cairo';font-weight:700;}
+  .exam-tile small{display:block;font-size:10px;color:var(--sub-text);margin-top:3px;}
+  .exam-tile:active{transform:scale(.97);}
+
+  /* quiz runner */
+  .quiz-progress{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .quiz-progress b{font-family:'Space Grotesk';color:var(--gold);}
+  .quiz-q{background:var(--surface);border-radius:18px;padding:24px 18px;text-align:center;box-shadow:var(--shadow);margin-bottom:18px;}
+  .quiz-q .qword{font-family:'Space Grotesk';font-size:30px;font-weight:700;margin:10px 0 4px;}
+  .quiz-q .qphon{color:var(--gold);font-size:12.5px;margin-bottom:6px;}
+  .opt-list{display:flex;flex-direction:column;gap:10px;}
+  .opt-btn{
+    background:var(--surface);border:2px solid rgba(120,120,120,.18);border-radius:12px;
+    padding:14px;font-family:'Cairo';font-weight:600;font-size:14.5px;cursor:pointer;text-align:right;color:var(--ink-text);
+  }
+  .opt-btn.correct{border-color:var(--forest);background:rgba(62,110,85,.12);color:var(--forest);}
+  .opt-btn.wrong{border-color:var(--rose);background:rgba(190,75,60,.12);color:var(--rose);}
+  .opt-btn:disabled{opacity:.7;}
+
+  .result-wrap{text-align:center;padding:20px 10px;}
+  .result-ring{width:150px;height:150px;margin:10px auto 18px;position:relative;}
+  .result-ring svg{transform:rotate(-90deg);width:150px;height:150px;}
+  .result-ring circle{fill:none;stroke-width:10;}
+  .result-ring .bg{stroke:rgba(120,120,120,.15);}
+  .result-ring .fg{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset 1s ease;}
+  .result-ring-txt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .result-ring-txt b{font-family:'Space Grotesk';font-size:28px;}
+  .result-ring-txt span{font-size:11px;color:var(--sub-text);}
+  .result-msg{font-family:'Cairo';font-weight:800;font-size:17px;margin-bottom:4px;}
+  .result-sub{font-size:12.5px;color:var(--sub-text);margin-bottom:20px;}
+  .review-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-radius:12px;padding:12px 14px;margin-bottom:8px;text-align:right;box-shadow:var(--shadow);}
+  .review-item .rw{font-family:'Space Grotesk';font-weight:700;}
+  .review-item .rm{font-size:12px;color:var(--sub-text);}
+
+  /* settings */
+  .settings-row{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-radius:14px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow);}
+  .settings-row div h4{margin:0 0 2px;font-family:'Cairo';font-size:14px;}
+  .settings-row div p{margin:0;font-size:11.5px;color:var(--sub-text);}
+  .toggle{width:50px;height:28px;border-radius:20px;background:var(--bg-2);position:relative;cursor:pointer;border:none;flex-shrink:0;}
+  .toggle i{position:absolute;top:3px;inset-inline-start:3px;width:22px;height:22px;border-radius:50%;background:var(--gold);transition:inset-inline-start .25s ease;}
+  .toggle.on i{inset-inline-start:25px;}
+  .voice-select{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(120,120,120,.25);background:var(--surface);color:var(--ink-text);font-family:'Cairo';font-size:13px;}
+
+  .empty-state{text-align:center;padding:50px 20px;color:var(--sub-text);}
+  .empty-state .em{font-size:40px;margin-bottom:10px;}
+  .empty-state p{font-size:13px;line-height:1.7;}
+
+  .back-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .back-row h2{font-family:'Cairo';font-weight:800;font-size:17px;margin:0;}
+
+  ::selection{background:rgba(201,151,44,.35);}
+  #toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#F6EFDD;padding:10px 20px;border-radius:30px;font-family:'Cairo';font-size:13px;font-weight:700;opacity:0;transition:all .3s ease;z-index:100;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.3);}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body data-theme="day">
+<div id="app">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark en">م</div>
+      <div>
+        <h1>مُراجِع</h1>
+        <span id="headerSub">التعبيرات الوظيفية Functions</span>
+      </div>
+    </div>
+    <button class="icon-btn" id="themeBtn" title="الوضع الليلي/النهاري">🌙</button>
+  </div>
+
+  <!-- HOME -->
+  <div class="screen active" id="screen-home">
+    <div class="stats-strip">
+      <div class="stat-card"><b id="statTotal">0</b><small>إجمالي الكلمات</small></div>
+      <div class="stat-card"><b id="statMemo">0</b><small>محفوظة</small></div>
+      <div class="stat-card"><b id="statFav">0</b><small>مفضّلة</small></div>
+    </div>
+    <div class="section-label">مجموعات الدروس</div>
+    <div class="cat-list" id="catList"></div>
+  </div>
+
+  <!-- DECK -->
+  <div class="screen" id="screen-deck">
+    <div class="back-row"><button class="icon-btn" onclick="goHome()">→</button><h2 id="deckTitle"></h2></div>
+    <div class="deck-header"><div class="deck-count" id="deckCount"></div><div class="deck-count" id="deckMemoCount"></div></div>
+    <div class="progress-bar"><i id="deckProgressBar" style="width:0%"></i></div>
+
+    <div class="card-stage">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="face front">
+          <div class="face-top">
+            <button class="fav-btn" id="favBtnFront" onclick="event.stopPropagation();toggleFav()">☆</button>
+            <button class="speak-btn" onclick="event.stopPropagation();speak('en')">🔊</button>
+          </div>
+          <div class="card-word en" id="cardWord"></div>
+          <div class="card-phon" id="cardPhon"></div>
+          <div class="card-mean" id="cardMean"></div>
+          <div class="card-tag" id="cardTagFront"></div>
+          <div class="card-hint">اضغط لقلب البطاقة ↺</div>
+        </div>
+        <div class="face back">
+          <div class="face-top">
+            <button class="fav-btn" id="favBtnBack" onclick="event.stopPropagation();toggleFav()">☆</button>
+            <button class="speak-btn" onclick="event.stopPropagation();speak('sen')">🔊</button>
+          </div>
+          <div class="sentence-wrap">
+            <div class="sentence-en en" id="sentEn"></div>
+            <div class="sentence-ar" id="sentAr"></div>
+          </div>
+          <div class="card-word en" id="cardWordBack" style="font-size:16px;margin-top:0;"></div>
+          <div class="card-mean" id="cardMeanBack" style="font-size:13px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck-controls">
+      <button class="ctrl-btn" onclick="prevCard()">›</button>
+      <button class="ctrl-btn primary" id="memoBtn" onclick="toggleMemo()">✓ حفظتها</button>
+      <button class="ctrl-btn" onclick="nextCard()">‹</button>
+    </div>
+  </div>
+
+  <!-- FAVORITES -->
+  <div class="screen" id="screen-fav">
+    <div class="back-row"><h2>⭐ الكلمات المفضّلة</h2></div>
+    <div id="favList"></div>
+  </div>
+
+  <!-- EXAMS -->
+  <div class="screen" id="screen-exam">
+    <div class="back-row"><h2>📝 الاختبارات</h2></div>
+
+    <div class="exam-card">
+      <h3>📅 الاختبار اليومي</h3>
+      <p id="dailyDesc">اختبار سريع وشامل على العبارات التي حفظتها في آخر فترة مذاكرة فقط.</p>
+      <button class="exam-btn" id="dailyBtn" onclick="startDailyExam()">ابدأ الاختبار اليومي</button>
+    </div>
+
+    <div class="section-label">اختبارات شاملة (على كل الكلمات المحفوظة)</div>
+    <div class="exam-grid" id="examGrid"></div>
+
+    <div class="section-label">آخر النتائج</div>
+    <div id="examHistory"></div>
+  </div>
+
+  <!-- QUIZ RUNNER -->
+  <div class="screen" id="screen-quiz">
+    <div class="quiz-progress">
+      <button class="icon-btn" onclick="quitQuiz()">✕</button>
+      <span>سؤال <b id="qIndex">1</b> / <span id="qTotal">10</span></span>
+    </div>
+    <div class="quiz-q">
+      <button class="speak-btn" style="margin:0 auto 8px;" onclick="speakQuizWord()">🔊</button>
+      <div class="qword en" id="qWord"></div>
+      <div class="qphon" id="qPhon"></div>
+    </div>
+    <div class="opt-list" id="optList"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div class="result-wrap">
+      <div class="result-ring">
+        <svg viewBox="0 0 150 150">
+          <circle class="bg" cx="75" cy="75" r="62"></circle>
+          <circle class="fg" id="resultRing" cx="75" cy="75" r="62"></circle>
+        </svg>
+        <div class="result-ring-txt"><b id="resultPct">0%</b><span id="resultFrac">0/0</span></div>
+      </div>
+      <div class="result-msg" id="resultMsg"></div>
+      <div class="result-sub" id="resultSub"></div>
+      <div id="reviewList"></div>
+      <button class="exam-btn" style="margin-top:10px;" onclick="goExam()">رجوع للاختبارات</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="screen" id="screen-settings">
+    <div class="back-row"><h2>⚙️ الإعدادات</h2></div>
+    <div class="settings-row">
+      <div><h4>الوضع الليلي</h4><p>مريح للعين أثناء المذاكرة ليلاً</p></div>
+      <button class="toggle" id="nightToggle" onclick="toggleTheme()"><i></i></button>
+    </div>
+    <div class="settings-row">
+      <div style="width:100%;"><h4>صوت النطق</h4><p style="margin-bottom:8px;">اختر الصوت الإنجليزي المتاح على جهازك</p>
+        <select class="voice-select" id="voiceSelect"></select>
+      </div>
+    </div>
+    <div class="settings-row" style="cursor:pointer;" onclick="resetProgress()">
+      <div><h4 style="color:var(--rose);">إعادة ضبط التقدم</h4><p>حذف كل الكلمات المحفوظة والمفضلة (لا يمكن التراجع)</p></div>
+      <span style="font-size:18px;">🗑️</span>
+    </div>
+    <div class="section-label">عن التطبيق</div>
+    <div class="exam-card">
+      <p style="margin:0;">مُراجِع — التعبيرات الوظيفية (Functions) الخاصة بامتحان الثانوية العامة: أكثر من 40 موقفًا شائعًا (الاعتذار، الاقتراح، الموافقة، طلب الإذن...) وكل موقف فيه أهم العبارات الجاهزة التي تقولها فيه، مع المعنى والنطق ومثال على الاستخدام.</p>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="nav-item active" data-tab="home" onclick="switchTab('home')"><span class="ic">🏠</span>الرئيسية</button>
+    <button class="nav-item" data-tab="fav" onclick="switchTab('fav')"><span class="ic">⭐</span>المفضلة</button>
+    <button class="nav-item" data-tab="exam" onclick="switchTab('exam')"><span class="ic">📝</span>الاختبارات</button>
+    <button class="nav-item" data-tab="settings" onclick="switchTab('settings')"><span class="ic">⚙️</span>الإعدادات</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const CATEGORIES = [{"id": "f1", "title": "التحية والرد عليها", "sub": "Greetings & Responses", "words": [{"id": "f1_w0", "en": "Hello! How are you?", "ar": "مرحبًا! كيف حالك؟", "phon": "هالو! هاو آر يو؟", "sen": "You meet a friend in the street.", "senm": "تقابل صديقًا في الشارع."}, {"id": "f1_w1", "en": "Hi there!", "ar": "أهلًا!", "phon": "هاي ذير", "sen": "A casual greeting to a friend.", "senm": "تحية بسيطة لصديق."}, {"id": "f1_w2", "en": "Good morning.", "ar": "صباح الخير.", "phon": "جود مورنينج", "sen": "You see your teacher in the morning.", "senm": "ترى معلمك في الصباح."}, {"id": "f1_w3", "en": "Good evening.", "ar": "مساء الخير.", "phon": "جود إيڤنينج", "sen": "You arrive at a party in the evening.", "senm": "تصل إلى حفلة في المساء."}, {"id": "f1_w4", "en": "I'm fine, thank you. And you?", "ar": "أنا بخير، شكرًا. وأنت؟", "phon": "آيم فاين، ثانك يو. آند يو؟", "sen": "Someone asks how you are.", "senm": "يسألك أحدهم عن حالك."}, {"id": "f1_w5", "en": "Nice to meet you.", "ar": "سعيد بلقائك.", "phon": "نايس تو ميت يو", "sen": "You meet someone for the first time.", "senm": "تقابل شخصًا لأول مرة."}, {"id": "f1_w6", "en": "It's been a long time!", "ar": "لم أرك منذ وقت طويل!", "phon": "إتس بين آ لونج تايم", "sen": "You meet an old friend after a long time.", "senm": "تقابل صديقًا قديمًا بعد غياب طويل."}]}, {"id": "f2", "title": "تقديم نفسك أو الآخرين", "sub": "Introducing Yourself & Others", "words": [{"id": "f2_w0", "en": "My name is Ahmed.", "ar": "اسمي أحمد.", "phon": "ماي نيم إز أحمد", "sen": "You meet someone new.", "senm": "تقابل شخصًا جديدًا."}, {"id": "f2_w1", "en": "I'd like to introduce you to my friend.", "ar": "أود أن أقدمك لصديقي.", "phon": "آيد لايك تو إنتروديوس يو تو ماي فرند", "sen": "You want to introduce a friend to someone.", "senm": "تريد تقديم صديق لشخص آخر."}, {"id": "f2_w2", "en": "This is my brother, Ali.", "ar": "هذا أخي، علي.", "phon": "ذيس إز ماي براذر، علي", "sen": "You introduce a family member.", "senm": "تقدّم أحد أفراد أسرتك."}, {"id": "f2_w3", "en": "Let me introduce myself.", "ar": "دعني أعرّفك بنفسي.", "phon": "ليت مي إنتروديوس ماي سلف", "sen": "You start a formal introduction.", "senm": "تبدأ تعريفًا رسميًا بنفسك."}, {"id": "f2_w4", "en": "Have you met my sister?", "ar": "هل قابلت أختي من قبل؟", "phon": "هاڤ يو ميت ماي سيستر؟", "sen": "You check if two people know each other.", "senm": "تتأكد إذا كان شخصان قد تقابلا من قبل."}, {"id": "f2_w5", "en": "Pleased to meet you.", "ar": "تشرفت بمعرفتك.", "phon": "بليزد تو ميت يو", "sen": "A polite response when meeting someone.", "senm": "رد مهذب عند لقاء شخص جديد."}]}, {"id": "f3", "title": "الاعتذار والرد عليه", "sub": "Apologizing & Responding", "words": [{"id": "f3_w0", "en": "I'm sorry.", "ar": "أنا آسف.", "phon": "آيم سوري", "sen": "You made a small mistake.", "senm": "ارتكبت خطأً بسيطًا."}, {"id": "f3_w1", "en": "I'm sorry for being late.", "ar": "أنا آسف على تأخري.", "phon": "آيم سوري فور بيينج ليت", "sen": "You arrive late to class.", "senm": "تصل متأخرًا إلى الفصل."}, {"id": "f3_w2", "en": "I apologize for my mistake.", "ar": "أعتذر عن خطئي.", "phon": "آي أپولوجايز فور ماي مستيك", "sen": "You want to apologize formally.", "senm": "تريد الاعتذار بشكل رسمي."}, {"id": "f3_w3", "en": "Excuse me for interrupting.", "ar": "عذرًا لمقاطعتك.", "phon": "إكسكيوز مي فور إنترَپتينج", "sen": "You interrupt someone speaking.", "senm": "تقاطع شخصًا أثناء حديثه."}, {"id": "f3_w4", "en": "It's my fault.", "ar": "هذا خطئي.", "phon": "إتس ماي فولت", "sen": "You admit responsibility for a problem.", "senm": "تعترف بمسؤوليتك عن مشكلة."}, {"id": "f3_w5", "en": "That's all right, don't worry.", "ar": "لا بأس، لا تقلق.", "phon": "ذاتس أول رايت، دونت ووري", "sen": "Responding to someone's apology.", "senm": "الرد على اعتذار شخص ما."}, {"id": "f3_w6", "en": "Never mind.", "ar": "لا يهم / انسَ الأمر.", "phon": "نيڤر مايند", "sen": "You want to reassure someone after an apology.", "senm": "تريد طمأنة شخص بعد اعتذاره."}]}, {"id": "f4", "title": "الشكر والرد عليه", "sub": "Thanking & Responding", "words": [{"id": "f4_w0", "en": "Thank you very much.", "ar": "شكرًا جزيلًا.", "phon": "ثانك يو ڤيري ماتش", "sen": "Someone helped you with something.", "senm": "ساعدك شخص في شيء ما."}, {"id": "f4_w1", "en": "Thanks a lot for your help.", "ar": "شكرًا جزيلًا على مساعدتك.", "phon": "ثانكس آ لوت فور يور هيلپ", "sen": "Someone assisted you with a task.", "senm": "ساعدك أحدهم في مهمة."}, {"id": "f4_w2", "en": "I really appreciate it.", "ar": "أقدّر ذلك حقًا.", "phon": "آي ريلي أپريشييت إت", "sen": "You want to show real gratitude.", "senm": "تريد التعبير عن امتنان حقيقي."}, {"id": "f4_w3", "en": "You're welcome.", "ar": "على الرحب والسعة.", "phon": "يور ويلكم", "sen": "Someone thanks you for help.", "senm": "يشكرك أحدهم على مساعدتك."}, {"id": "f4_w4", "en": "Not at all.", "ar": "لا داعي للشكر.", "phon": "نوت آت أول", "sen": "A polite response to thanks.", "senm": "رد مهذب على الشكر."}, {"id": "f4_w5", "en": "It's my pleasure.", "ar": "هذا من دواعي سروري.", "phon": "إتس ماي بليجر", "sen": "Responding warmly to thanks.", "senm": "الرد بدفء على الشكر."}]}, {"id": "f5", "title": "الاقتراح", "sub": "Suggesting", "words": [{"id": "f5_w0", "en": "Let's go to the cinema.", "ar": "هيا بنا نذهب إلى السينما.", "phon": "ليتس جو تو ذا سينما", "sen": "Suggesting an activity to a friend.", "senm": "تقترح نشاطًا على صديق."}, {"id": "f5_w1", "en": "Why don't we study together?", "ar": "لماذا لا نذاكر معًا؟", "phon": "واي دونت وي ستَدي توجيذر", "sen": "Suggesting a study plan.", "senm": "تقترح خطة مذاكرة."}, {"id": "f5_w2", "en": "How about going for a walk?", "ar": "ما رأيك أن نتمشى؟", "phon": "هاو أباوت جوينج فور آ ووك", "sen": "Suggesting a walk.", "senm": "تقترح نزهة على الأقدام."}, {"id": "f5_w3", "en": "Shall we start now?", "ar": "هل نبدأ الآن؟", "phon": "شال وي ستارت ناو", "sen": "Suggesting to begin an activity.", "senm": "تقترح بدء نشاط ما."}, {"id": "f5_w4", "en": "I suggest we leave early.", "ar": "أقترح أن نغادر مبكرًا.", "phon": "آي سَجست وي ليڤ إيرلي", "sen": "Suggesting an early departure.", "senm": "تقترح المغادرة مبكرًا."}, {"id": "f5_w5", "en": "What about trying this restaurant?", "ar": "ما رأيك أن نجرب هذا المطعم؟", "phon": "وات أباوت ترايينج ذيس رستورانت", "sen": "Suggesting a place to eat.", "senm": "تقترح مكانًا لتناول الطعام."}, {"id": "f5_w6", "en": "We could visit the museum.", "ar": "يمكننا زيارة المتحف.", "phon": "وي كود ڤيزيت ذا ميوزيام", "sen": "Suggesting a place to visit.", "senm": "تقترح مكانًا للزيارة."}]}, {"id": "f6", "title": "الموافقة", "sub": "Agreeing", "words": [{"id": "f6_w0", "en": "That's a good idea.", "ar": "هذه فكرة جيدة.", "phon": "ذاتس آ جود آيديا", "sen": "Agreeing with someone's suggestion.", "senm": "توافق على اقتراح شخص ما."}, {"id": "f6_w1", "en": "I agree with you.", "ar": "أوافقك الرأي.", "phon": "آي أجري ويذ يو", "sen": "Agreeing with an opinion.", "senm": "توافق على رأي."}, {"id": "f6_w2", "en": "Sure, why not.", "ar": "بالتأكيد، لماذا لا.", "phon": "شور، واي نوت", "sen": "Agreeing casually to a plan.", "senm": "توافق بشكل غير رسمي على خطة."}, {"id": "f6_w3", "en": "OK, let's do that.", "ar": "حسنًا، لنفعل ذلك.", "phon": "أوكيه، ليتس دو ذات", "sen": "Agreeing to take action.", "senm": "توافق على اتخاذ إجراء."}, {"id": "f6_w4", "en": "Yes, I think so too.", "ar": "نعم، أعتقد ذلك أيضًا.", "phon": "يس، آي ثينك سو تو", "sen": "Agreeing with a thought.", "senm": "توافق على فكرة ما."}, {"id": "f6_w5", "en": "That sounds great.", "ar": "هذا يبدو رائعًا.", "phon": "ذات ساوندز جريت", "sen": "Agreeing enthusiastically.", "senm": "توافق بحماس."}]}, {"id": "f7", "title": "عدم الموافقة", "sub": "Disagreeing", "words": [{"id": "f7_w0", "en": "I don't agree with you.", "ar": "لا أوافقك الرأي.", "phon": "آي دونت أجري ويذ يو", "sen": "Disagreeing directly with an opinion.", "senm": "تختلف مباشرة مع رأي."}, {"id": "f7_w1", "en": "I'm afraid I disagree.", "ar": "للأسف أنا لا أوافق.", "phon": "آيم أفريد آي ديسأجري", "sen": "Disagreeing politely.", "senm": "تختلف بأسلوب مهذب."}, {"id": "f7_w2", "en": "I don't think that's a good idea.", "ar": "لا أعتقد أن هذه فكرة جيدة.", "phon": "آي دونت ثينك ذاتس آ جود آيديا", "sen": "Disagreeing with a suggestion.", "senm": "تعترض على اقتراح."}, {"id": "f7_w3", "en": "Actually, I see it differently.", "ar": "في الحقيقة، أرى الأمر بشكل مختلف.", "phon": "أكتشوالي، آي سي إت ديفرنتلي", "sen": "Offering a different point of view.", "senm": "تقدّم وجهة نظر مختلفة."}, {"id": "f7_w4", "en": "I'm not sure about that.", "ar": "لست متأكدًا من ذلك.", "phon": "آيم نوت شور أباوت ذات", "sen": "Expressing doubt about an idea.", "senm": "تعبّر عن شك تجاه فكرة."}, {"id": "f7_w5", "en": "That's not quite right, in my opinion.", "ar": "هذا ليس صحيحًا تمامًا، في رأيي.", "phon": "ذاتس نوت كوايت رايت، إن ماي أوپينيون", "sen": "Politely correcting someone's opinion.", "senm": "تصحح رأي شخص بأسلوب مهذب."}]}, {"id": "f8", "title": "طلب الرأي وإبداؤه", "sub": "Asking & Giving Opinion", "words": [{"id": "f8_w0", "en": "What do you think about it?", "ar": "ما رأيك في الأمر؟", "phon": "وات دو يو ثينك أباوت إت", "sen": "Asking for someone's opinion.", "senm": "تسأل عن رأي شخص ما."}, {"id": "f8_w1", "en": "What's your opinion on this?", "ar": "ما رأيك في هذا؟", "phon": "واتس يور أوپينيون أون ذيس", "sen": "Asking directly for an opinion.", "senm": "تسأل بشكل مباشر عن رأي."}, {"id": "f8_w2", "en": "In my opinion, it's a good plan.", "ar": "في رأيي، هذه خطة جيدة.", "phon": "إن ماي أوپينيون، إتس آ جود پلان", "sen": "Giving your opinion about a plan.", "senm": "تعطي رأيك في خطة ما."}, {"id": "f8_w3", "en": "I believe this is correct.", "ar": "أعتقد أن هذا صحيح.", "phon": "آي بيليڤ ذيس إز كوركت", "sen": "Expressing your belief.", "senm": "تعبّر عن اعتقادك."}, {"id": "f8_w4", "en": "Personally, I think we should wait.", "ar": "شخصيًا، أعتقد أننا يجب أن ننتظر.", "phon": "پيرسونالي، آي ثينك وي شود ويت", "sen": "Giving a personal opinion.", "senm": "تعطي رأيك الشخصي."}, {"id": "f8_w5", "en": "As far as I know, it's true.", "ar": "على حد علمي، هذا صحيح.", "phon": "آز فار آز آي نو، إتس ترو", "sen": "Sharing what you know.", "senm": "تشارك ما تعرفه."}, {"id": "f8_w6", "en": "I feel that this is the best choice.", "ar": "أشعر أن هذا هو الخيار الأفضل.", "phon": "آي فيل ذات ذيس إز ذا بست تشويس", "sen": "Expressing a feeling-based opinion.", "senm": "تعبّر عن رأي مبني على شعورك."}]}, {"id": "f9", "title": "طلب الإذن", "sub": "Asking Permission", "words": [{"id": "f9_w0", "en": "May I come in?", "ar": "هل لي أن أدخل؟", "phon": "ماي آي كَم إن؟", "sen": "Asking permission to enter a room.", "senm": "تطلب الإذن بدخول غرفة."}, {"id": "f9_w1", "en": "Can I open the window?", "ar": "هل يمكنني فتح النافذة؟", "phon": "كان آي أوپن ذا ويندو؟", "sen": "Asking permission to open a window.", "senm": "تطلب الإذن بفتح النافذة."}, {"id": "f9_w2", "en": "Do you mind if I sit here?", "ar": "هل تمانع لو جلست هنا؟", "phon": "دو يو مايند إف آي سيت هير؟", "sen": "Asking politely to sit somewhere.", "senm": "تطلب بأدب الجلوس في مكان."}, {"id": "f9_w3", "en": "Is it OK if I leave early?", "ar": "هل يمكن أن أغادر مبكرًا؟", "phon": "إز إت أوكيه إف آي ليڤ إيرلي؟", "sen": "Asking permission to leave early.", "senm": "تطلب الإذن بالمغادرة مبكرًا."}, {"id": "f9_w4", "en": "Could I borrow your pen?", "ar": "هل يمكنني استعارة قلمك؟", "phon": "كود آي بورو يور پن؟", "sen": "Asking to borrow something.", "senm": "تطلب استعارة شيء ما."}, {"id": "f9_w5", "en": "Would you mind if I asked a question?", "ar": "هل تمانع لو سألت سؤالًا؟", "phon": "وود يو مايند إف آي آسكت آ كوستشن؟", "sen": "Asking permission to ask a question.", "senm": "تطلب الإذن لطرح سؤال."}]}, {"id": "f10", "title": "إعطاء الإذن أو رفضه", "sub": "Giving/Refusing Permission", "words": [{"id": "f10_w0", "en": "Yes, of course.", "ar": "نعم، بالطبع.", "phon": "يس، أوف كورس", "sen": "Giving permission enthusiastically.", "senm": "تمنح الإذن بحماس."}, {"id": "f10_w1", "en": "Sure, go ahead.", "ar": "بالتأكيد، تفضل.", "phon": "شور، جو أهيد", "sen": "Giving permission casually.", "senm": "تمنح الإذن بشكل غير رسمي."}, {"id": "f10_w2", "en": "I'm afraid not.", "ar": "للأسف لا.", "phon": "آيم أفريد نوت", "sen": "Refusing permission politely.", "senm": "ترفض الإذن بأدب."}, {"id": "f10_w3", "en": "Sorry, you can't do that here.", "ar": "آسف، لا يمكنك فعل ذلك هنا.", "phon": "سوري، يو كانت دو ذات هير", "sen": "Refusing permission for an action.", "senm": "ترفض الإذن بفعل شيء."}, {"id": "f10_w4", "en": "Yes, please do.", "ar": "نعم، تفضل بفعل ذلك.", "phon": "يس، بليز دو", "sen": "Giving clear permission.", "senm": "تمنح إذنًا واضحًا."}, {"id": "f10_w5", "en": "I'd rather you didn't.", "ar": "أفضل ألا تفعل ذلك.", "phon": "آيد راذر يو ديدنت", "sen": "Politely refusing permission.", "senm": "ترفض الإذن بأسلوب لطيف."}]}, {"id": "f11", "title": "عرض المساعدة", "sub": "Offering Help", "words": [{"id": "f11_w0", "en": "Can I help you?", "ar": "هل يمكنني مساعدتك؟", "phon": "كان آي هيلپ يو؟", "sen": "Offering help to someone in need.", "senm": "تعرض المساعدة على شخص محتاج."}, {"id": "f11_w1", "en": "Would you like some help?", "ar": "هل تريد بعض المساعدة؟", "phon": "وود يو لايك سَم هيلپ؟", "sen": "Offering assistance politely.", "senm": "تعرض المساعدة بأدب."}, {"id": "f11_w2", "en": "Let me help you with that.", "ar": "دعني أساعدك في ذلك.", "phon": "ليت مي هيلپ يو ويذ ذات", "sen": "Offering to help with a specific task.", "senm": "تعرض المساعدة في مهمة محددة."}, {"id": "f11_w3", "en": "Shall I carry your bag?", "ar": "هل أحمل حقيبتك؟", "phon": "شال آي كاري يور باج؟", "sen": "Offering to carry something heavy.", "senm": "تعرض حمل شيء ثقيل."}, {"id": "f11_w4", "en": "Do you need any assistance?", "ar": "هل تحتاج إلى أي مساعدة؟", "phon": "دو يو نيد أني أسيستنس؟", "sen": "Offering assistance formally.", "senm": "تعرض المساعدة بشكل رسمي."}, {"id": "f11_w5", "en": "I'll help you if you want.", "ar": "سأساعدك إذا أردت.", "phon": "آيل هيلپ يو إف يو وونت", "sen": "Offering conditional help.", "senm": "تعرض المساعدة إذا رغب الشخص."}]}, {"id": "f12", "title": "قبول أو رفض عرض", "sub": "Accepting/Refusing an Offer", "words": [{"id": "f12_w0", "en": "Yes, please.", "ar": "نعم، من فضلك.", "phon": "يس، بليز", "sen": "Accepting an offer simply.", "senm": "تقبل عرضًا ببساطة."}, {"id": "f12_w1", "en": "That would be great, thanks.", "ar": "سيكون هذا رائعًا، شكرًا.", "phon": "ذات وود بي جريت، ثانكس", "sen": "Accepting an offer happily.", "senm": "تقبل عرضًا بسعادة."}, {"id": "f12_w2", "en": "No, thank you, I'm fine.", "ar": "لا، شكرًا، أنا بخير.", "phon": "نو، ثانك يو، آيم فاين", "sen": "Politely refusing an offer.", "senm": "ترفض عرضًا بأدب."}, {"id": "f12_w3", "en": "I'd love to, but I can't.", "ar": "أود ذلك، لكن لا أستطيع.", "phon": "آيد لَڤ تو، بَت آي كانت", "sen": "Refusing an offer with regret.", "senm": "ترفض عرضًا مع الأسف."}, {"id": "f12_w4", "en": "Thanks, but I don't need any help.", "ar": "شكرًا، لكنني لا أحتاج إلى مساعدة.", "phon": "ثانكس، بَت آي دونت نيد أني هيلپ", "sen": "Politely declining help.", "senm": "ترفض المساعدة بأدب."}, {"id": "f12_w5", "en": "That's very kind of you.", "ar": "هذا لطف كبير منك.", "phon": "ذاتس ڤيري كايند أوف يو", "sen": "Acknowledging a kind offer.", "senm": "تعترف بلطف العرض المقدم."}]}, {"id": "f13", "title": "الطلب", "sub": "Making Requests", "words": [{"id": "f13_w0", "en": "Could you help me, please?", "ar": "هل يمكنك مساعدتي من فضلك؟", "phon": "كود يو هيلپ مي، بليز؟", "sen": "Making a polite request for help.", "senm": "تطلب المساعدة بأدب."}, {"id": "f13_w1", "en": "Would you mind closing the door?", "ar": "هل تمانع في إغلاق الباب؟", "phon": "وود يو مايند كلوزينج ذا دور؟", "sen": "Politely requesting an action.", "senm": "تطلب فعل شيء بأدب."}, {"id": "f13_w2", "en": "Can you pass me the salt, please?", "ar": "هل يمكنك تمرير الملح من فضلك؟", "phon": "كان يو پاس مي ذا سولت، بليز؟", "sen": "Requesting something at the table.", "senm": "تطلب شيئًا على المائدة."}, {"id": "f13_w3", "en": "I'd like a cup of tea, please.", "ar": "أريد كوب شاي من فضلك.", "phon": "آيد لايك آ كَپ أوف تي، بليز", "sen": "Ordering or requesting a drink.", "senm": "تطلب مشروبًا."}, {"id": "f13_w4", "en": "Please give me a hand.", "ar": "من فضلك ساعدني.", "phon": "بليز جيڤ مي آ هاند", "sen": "Asking for help with a task.", "senm": "تطلب المساعدة في مهمة."}, {"id": "f13_w5", "en": "Would you please explain this again?", "ar": "هل يمكنك شرح هذا مرة أخرى من فضلك؟", "phon": "وود يو بليز إكسپلين ذيس أجين؟", "sen": "Requesting an explanation again.", "senm": "تطلب إعادة الشرح."}]}, {"id": "f14", "title": "الدعوة", "sub": "Inviting", "words": [{"id": "f14_w0", "en": "Would you like to come to my party?", "ar": "هل تحب أن تأتي إلى حفلتي؟", "phon": "وود يو لايك تو كَم تو ماي پارتي؟", "sen": "Inviting someone to a party.", "senm": "تدعو شخصًا إلى حفلة."}, {"id": "f14_w1", "en": "I'd like to invite you for dinner.", "ar": "أود دعوتك لتناول العشاء.", "phon": "آيد لايك تو إنڤايت يو فور دينر", "sen": "Inviting someone for dinner.", "senm": "تدعو شخصًا لتناول العشاء."}, {"id": "f14_w2", "en": "Why don't you join us?", "ar": "لماذا لا تنضم إلينا؟", "phon": "واي دونت يو جوين أس؟", "sen": "Casually inviting someone to join.", "senm": "تدعو شخصًا للانضمام بشكل غير رسمي."}, {"id": "f14_w3", "en": "Can you come to the meeting?", "ar": "هل يمكنك الحضور إلى الاجتماع؟", "phon": "كان يو كَم تو ذا ميتينج؟", "sen": "Inviting someone to a meeting.", "senm": "تدعو شخصًا لحضور اجتماع."}, {"id": "f14_w4", "en": "Would you care to join me?", "ar": "هل ترغب في الانضمام إليّ؟", "phon": "وود يو كير تو جوين مي؟", "sen": "Formally inviting someone.", "senm": "تدعو شخصًا بشكل رسمي."}, {"id": "f14_w5", "en": "Let's meet this weekend.", "ar": "لنلتقِ نهاية هذا الأسبوع.", "phon": "ليتس ميت ذيس ويكإند", "sen": "Suggesting a meeting time.", "senm": "تقترح وقتًا للقاء."}]}, {"id": "f15", "title": "قبول أو رفض دعوة", "sub": "Accepting/Declining Invitations", "words": [{"id": "f15_w0", "en": "I'd love to come, thank you.", "ar": "أود الحضور، شكرًا لك.", "phon": "آيد لَڤ تو كَم، ثانك يو", "sen": "Accepting an invitation happily.", "senm": "تقبل الدعوة بسعادة."}, {"id": "f15_w1", "en": "That sounds great, count me in.", "ar": "يبدو هذا رائعًا، أنا موافق.", "phon": "ذات ساوندز جريت، كاونت مي إن", "sen": "Enthusiastically accepting an invitation.", "senm": "تقبل الدعوة بحماس."}, {"id": "f15_w2", "en": "I'm sorry, I can't make it.", "ar": "آسف، لا أستطيع الحضور.", "phon": "آيم سوري، آي كانت ميك إت", "sen": "Declining an invitation politely.", "senm": "ترفض الدعوة بأدب."}, {"id": "f15_w3", "en": "I'm afraid I'm busy that day.", "ar": "للأسف أنا مشغول في ذلك اليوم.", "phon": "آيم أفريد آيم بيزي ذات داي", "sen": "Declining due to being busy.", "senm": "ترفض الدعوة بسبب الانشغال."}, {"id": "f15_w4", "en": "Thanks for inviting me.", "ar": "شكرًا لدعوتي.", "phon": "ثانكس فور إنڤايتينج مي", "sen": "Thanking someone for an invitation.", "senm": "تشكر شخصًا على دعوته."}, {"id": "f15_w5", "en": "Maybe another time.", "ar": "ربما في وقت آخر.", "phon": "مايبي أناذر تايم", "sen": "Politely postponing an invitation.", "senm": "تؤجل الدعوة بأدب."}]}, {"id": "f16", "title": "النصيحة", "sub": "Giving Advice", "words": [{"id": "f16_w0", "en": "You should study harder.", "ar": "يجب أن تذاكر بجد أكثر.", "phon": "يو شود ستَدي هاردر", "sen": "Advising someone to study more.", "senm": "تنصح شخصًا بالمذاكرة أكثر."}, {"id": "f16_w1", "en": "I think you'd better rest.", "ar": "أعتقد أنه من الأفضل أن ترتاح.", "phon": "آي ثينك يود بيتر رست", "sen": "Advising someone to rest.", "senm": "تنصح شخصًا بالراحة."}, {"id": "f16_w2", "en": "Why don't you see a doctor?", "ar": "لماذا لا تذهب إلى الطبيب؟", "phon": "واي دونت يو سي آ دوكتور؟", "sen": "Advising someone to visit a doctor.", "senm": "تنصح شخصًا بزيارة الطبيب."}, {"id": "f16_w3", "en": "If I were you, I would apologize.", "ar": "لو كنت مكانك، لاعتذرت.", "phon": "إف آي وير يو، آي وود أپولوجايز", "sen": "Giving advice using a hypothetical situation.", "senm": "تقدم نصيحة بأسلوب افتراضي."}, {"id": "f16_w4", "en": "You ought to be more careful.", "ar": "ينبغي أن تكون أكثر حذرًا.", "phon": "يو أوت تو بي مور كيرفل", "sen": "Advising someone to be careful.", "senm": "تنصح شخصًا بالحذر."}, {"id": "f16_w5", "en": "It would be a good idea to practice daily.", "ar": "ستكون فكرة جيدة أن تتدرب يوميًا.", "phon": "إت وود بي آ جود آيديا تو براكتيس ديلي", "sen": "Advising regular practice.", "senm": "تنصح بالتدريب المستمر."}]}, {"id": "f17", "title": "التحذير", "sub": "Warning", "words": [{"id": "f17_w0", "en": "Be careful!", "ar": "كن حذرًا!", "phon": "بي كيرفل!", "sen": "Warning someone about danger.", "senm": "تحذّر شخصًا من خطر."}, {"id": "f17_w1", "en": "Watch out!", "ar": "انتبه!", "phon": "واتش آوت!", "sen": "Warning of immediate danger.", "senm": "تحذّر من خطر مباشر."}, {"id": "f17_w2", "en": "Look out for the car!", "ar": "احترس من السيارة!", "phon": "لوك آوت فور ذا كار!", "sen": "Warning someone about a car.", "senm": "تحذّر شخصًا من سيارة."}, {"id": "f17_w3", "en": "Don't touch that, it's hot.", "ar": "لا تلمس ذلك، إنه ساخن.", "phon": "دونت تَتش ذات، إتس هوت", "sen": "Warning about something hot.", "senm": "تحذّر من لمس شيء ساخن."}, {"id": "f17_w4", "en": "You'd better not do that.", "ar": "من الأفضل ألا تفعل ذلك.", "phon": "يود بيتر نوت دو ذات", "sen": "Warning against an action.", "senm": "تحذّر من فعل معين."}, {"id": "f17_w5", "en": "Mind the step.", "ar": "انتبه للدرجة.", "phon": "مايند ذا ستيپ", "sen": "Warning about a step or obstacle.", "senm": "تحذّر من درجة أو عائق."}]}, {"id": "f18", "title": "التعبير عن الإعجاب", "sub": "Expressing Likes", "words": [{"id": "f18_w0", "en": "I like this book very much.", "ar": "يعجبني هذا الكتاب كثيرًا.", "phon": "آي لايك ذيس بوك ڤيري ماتش", "sen": "Expressing liking for a book.", "senm": "تعبّر عن إعجابك بكتاب."}, {"id": "f18_w1", "en": "I love playing football.", "ar": "أحب لعب كرة القدم.", "phon": "آي لَڤ پلينج فوتبول", "sen": "Expressing love for an activity.", "senm": "تعبّر عن حبك لنشاط."}, {"id": "f18_w2", "en": "I'm fond of reading.", "ar": "أنا مولع بالقراءة.", "phon": "آيم فوند أوف ريدينج", "sen": "Expressing fondness for reading.", "senm": "تعبّر عن ولعك بالقراءة."}, {"id": "f18_w3", "en": "I really enjoy this music.", "ar": "أستمتع حقًا بهذه الموسيقى.", "phon": "آي ريلي إنجوي ذيس ميوزيك", "sen": "Expressing enjoyment of music.", "senm": "تعبّر عن استمتاعك بالموسيقى."}, {"id": "f18_w4", "en": "This is my favorite subject.", "ar": "هذه مادتي المفضلة.", "phon": "ذيس إز ماي فيڤريت سَبجكت", "sen": "Expressing preference for a subject.", "senm": "تعبّر عن تفضيلك لمادة دراسية."}, {"id": "f18_w5", "en": "I'm interested in science.", "ar": "أنا مهتم بالعلوم.", "phon": "آيم إنترستد إن سايينس", "sen": "Expressing interest in a topic.", "senm": "تعبّر عن اهتمامك بموضوع."}]}, {"id": "f19", "title": "التعبير عن عدم الإعجاب", "sub": "Expressing Dislikes", "words": [{"id": "f19_w0", "en": "I don't like this at all.", "ar": "لا يعجبني هذا إطلاقًا.", "phon": "آي دونت لايك ذيس آت أول", "sen": "Expressing strong dislike.", "senm": "تعبّر عن عدم إعجاب شديد."}, {"id": "f19_w1", "en": "I hate waking up early.", "ar": "أكره الاستيقاظ مبكرًا.", "phon": "آي هيت ويكينج أَپ إيرلي", "sen": "Expressing hatred of an activity.", "senm": "تعبّر عن كرهك لنشاط."}, {"id": "f19_w2", "en": "I can't stand loud noise.", "ar": "لا أطيق الضوضاء العالية.", "phon": "آي كانت ستاند لاود نويز", "sen": "Expressing inability to tolerate something.", "senm": "تعبّر عن عدم تحملك لشيء."}, {"id": "f19_w3", "en": "I'm not keen on spicy food.", "ar": "لست متحمسًا للطعام الحار.", "phon": "آيم نوت كين أون سپايسي فود", "sen": "Expressing mild dislike of food.", "senm": "تعبّر عن عدم رغبتك في طعام."}, {"id": "f19_w4", "en": "I'm not interested in football.", "ar": "لست مهتمًا بكرة القدم.", "phon": "آيم نوت إنترستد إن فوتبول", "sen": "Expressing lack of interest.", "senm": "تعبّر عن عدم اهتمامك."}, {"id": "f19_w5", "en": "I dislike waiting in queues.", "ar": "لا أحب الانتظار في الطوابير.", "phon": "آي ديسلايك ويتينج إن كيوز", "sen": "Expressing dislike of waiting.", "senm": "تعبّر عن عدم حبك للانتظار."}]}, {"id": "f20", "title": "التفضيل", "sub": "Expressing Preference", "words": [{"id": "f20_w0", "en": "I prefer tea to coffee.", "ar": "أفضل الشاي على القهوة.", "phon": "آي پريفر تي تو كوفي", "sen": "Comparing two preferences.", "senm": "تقارن بين تفضيلين."}, {"id": "f20_w1", "en": "I'd rather stay at home.", "ar": "أفضل البقاء في المنزل.", "phon": "آيد راذر ستاي آت هوم", "sen": "Expressing a preference to stay in.", "senm": "تعبّر عن تفضيلك البقاء بالمنزل."}, {"id": "f20_w2", "en": "I'd rather not go out today.", "ar": "أفضل ألا أخرج اليوم.", "phon": "آيد راذر نوت جو آوت تودي", "sen": "Expressing a negative preference.", "senm": "تعبّر عن تفضيل سلبي."}, {"id": "f20_w3", "en": "Tea is better than coffee for me.", "ar": "الشاي أفضل من القهوة بالنسبة لي.", "phon": "تي إز بيتر ذان كوفي فور مي", "sen": "Comparing preferences directly.", "senm": "تقارن بين التفضيلات مباشرة."}, {"id": "f20_w4", "en": "Between the two, I prefer this one.", "ar": "بين الاثنين، أفضل هذا.", "phon": "بيتوين ذا تو، آي پريفر ذيس وَن", "sen": "Choosing between two options.", "senm": "تختار بين خيارين."}]}, {"id": "f21", "title": "التعبير عن الدهشة", "sub": "Expressing Surprise", "words": [{"id": "f21_w0", "en": "Really?", "ar": "حقًا؟", "phon": "ريلي؟", "sen": "Reacting with surprise to news.", "senm": "ترد بدهشة على خبر."}, {"id": "f21_w1", "en": "What a surprise!", "ar": "يا لها من مفاجأة!", "phon": "وات آ سرپرايز!", "sen": "Reacting to an unexpected event.", "senm": "ترد على حدث غير متوقع."}, {"id": "f21_w2", "en": "I can't believe it!", "ar": "لا أستطيع تصديق ذلك!", "phon": "آي كانت بيليڤ إت!", "sen": "Expressing disbelief.", "senm": "تعبّر عن عدم تصديقك."}, {"id": "f21_w3", "en": "That's amazing!", "ar": "هذا مذهل!", "phon": "ذاتس أميزينج!", "sen": "Expressing amazement.", "senm": "تعبّر عن اندهاشك."}, {"id": "f21_w4", "en": "I didn't expect that.", "ar": "لم أتوقع ذلك.", "phon": "آي ديدنت إكسپكت ذات", "sen": "Expressing that something was unexpected.", "senm": "تعبّر عن أن الأمر غير متوقع."}, {"id": "f21_w5", "en": "How surprising!", "ar": "يا للدهشة!", "phon": "هاو سرپرايزينج!", "sen": "A short surprised reaction.", "senm": "رد فعل قصير بالدهشة."}]}, {"id": "f22", "title": "التعبير عن السعادة", "sub": "Expressing Happiness", "words": [{"id": "f22_w0", "en": "I'm so happy today!", "ar": "أنا سعيد جدًا اليوم!", "phon": "آيم سو هابي تودي!", "sen": "Expressing general happiness.", "senm": "تعبّر عن سعادتك العامة."}, {"id": "f22_w1", "en": "What great news!", "ar": "يا لها من أخبار رائعة!", "phon": "وات جريت نيوز!", "sen": "Reacting happily to good news.", "senm": "ترد بسعادة على خبر جيد."}, {"id": "f22_w2", "en": "I'm delighted to hear that.", "ar": "يسعدني سماع ذلك.", "phon": "آيم ديلايتد تو هير ذات", "sen": "Expressing delight formally.", "senm": "تعبّر عن سعادتك بشكل رسمي."}, {"id": "f22_w3", "en": "This makes me very happy.", "ar": "هذا يسعدني كثيرًا.", "phon": "ذيس ميكس مي ڤيري هابي", "sen": "Expressing happiness about something specific.", "senm": "تعبّر عن سعادتك تجاه أمر معين."}, {"id": "f22_w4", "en": "I'm thrilled about the trip.", "ar": "أنا متحمس جدًا للرحلة.", "phon": "آيم ثريلد أباوت ذا تريپ", "sen": "Expressing excitement about an event.", "senm": "تعبّر عن حماسك لحدث قادم."}]}, {"id": "f23", "title": "التعبير عن الحزن والتعاطف", "sub": "Expressing Sadness & Sympathy", "words": [{"id": "f23_w0", "en": "I'm sorry to hear that.", "ar": "يؤسفني سماع ذلك.", "phon": "آيم سوري تو هير ذات", "sen": "Showing sympathy for bad news.", "senm": "تعبّر عن تعاطفك مع خبر سيء."}, {"id": "f23_w1", "en": "That's so sad.", "ar": "هذا محزن جدًا.", "phon": "ذاتس سو ساد", "sen": "Reacting to sad news.", "senm": "ترد على خبر حزين."}, {"id": "f23_w2", "en": "I feel sorry for you.", "ar": "أشعر بالأسف من أجلك.", "phon": "آي فيل سوري فور يو", "sen": "Expressing sympathy directly.", "senm": "تعبّر عن التعاطف مباشرة."}, {"id": "f23_w3", "en": "I'm really upset about it.", "ar": "أنا مستاء حقًا من ذلك.", "phon": "آيم ريلي أَپسيت أباوت إت", "sen": "Expressing personal sadness.", "senm": "تعبّر عن حزنك الشخصي."}, {"id": "f23_w4", "en": "What a pity!", "ar": "يا للأسف!", "phon": "وات آ پيتي!", "sen": "A short expression of regret.", "senm": "تعبير قصير عن الأسف."}, {"id": "f23_w5", "en": "My condolences.", "ar": "تعازيّ الحارة.", "phon": "ماي كوندولنسز", "sen": "Offering condolences for a loss.", "senm": "تقدم العزاء عن فقدان."}]}, {"id": "f24", "title": "التعبير عن القلق", "sub": "Expressing Worry", "words": [{"id": "f24_w0", "en": "I'm worried about the exam.", "ar": "أنا قلق بشأن الامتحان.", "phon": "آيم ووريد أباوت ذي إجزام", "sen": "Expressing worry about an exam.", "senm": "تعبّر عن قلقك من امتحان."}, {"id": "f24_w1", "en": "I'm concerned about him.", "ar": "أنا قلق بشأنه.", "phon": "آيم كونسرند أباوت هيم", "sen": "Expressing concern for someone.", "senm": "تعبّر عن قلقك تجاه شخص."}, {"id": "f24_w2", "en": "What if we're late?", "ar": "ماذا لو تأخرنا؟", "phon": "وات إف ويرلِيت؟", "sen": "Expressing worry about being late.", "senm": "تعبّر عن قلقك من التأخر."}, {"id": "f24_w3", "en": "I'm afraid something went wrong.", "ar": "أخشى أن شيئًا ما حدث بشكل خاطئ.", "phon": "آيم أفريد سَمثينج ونت رونج", "sen": "Expressing worry that something is wrong.", "senm": "تعبّر عن خوفك من خطأ ما."}, {"id": "f24_w4", "en": "I can't stop worrying about it.", "ar": "لا أستطيع التوقف عن القلق حيال ذلك.", "phon": "آي كانت ستوپ ووريينج أباوت إت", "sen": "Expressing continuous worry.", "senm": "تعبّر عن قلق مستمر."}]}, {"id": "f25", "title": "التهنئة", "sub": "Congratulating", "words": [{"id": "f25_w0", "en": "Congratulations!", "ar": "تهانينا!", "phon": "كونجراتيوليشنز!", "sen": "Congratulating someone on success.", "senm": "تهنئ شخصًا على نجاحه."}, {"id": "f25_w1", "en": "Well done!", "ar": "أحسنت!", "phon": "ويل دَن!", "sen": "Praising someone's achievement.", "senm": "تمدح إنجاز شخص."}, {"id": "f25_w2", "en": "I'm proud of you.", "ar": "أنا فخور بك.", "phon": "آيم پراود أوف يو", "sen": "Expressing pride in someone.", "senm": "تعبّر عن فخرك بشخص."}, {"id": "f25_w3", "en": "You did a great job!", "ar": "لقد قمت بعمل رائع!", "phon": "يو ديد آ جريت جوب!", "sen": "Praising someone's work.", "senm": "تمدح عمل شخص."}, {"id": "f25_w4", "en": "Congratulations on your success!", "ar": "مبروك على نجاحك!", "phon": "كونجراتيوليشنز أون يور سَكسس!", "sen": "Congratulating on a specific success.", "senm": "تهنئ على نجاح محدد."}]}, {"id": "f26", "title": "الشكوى", "sub": "Complaining", "words": [{"id": "f26_w0", "en": "I'm not happy with this service.", "ar": "لست راضيًا عن هذه الخدمة.", "phon": "آيم نوت هابي ويذ ذيس سيرڤيس", "sen": "Complaining about poor service.", "senm": "تشتكي من خدمة سيئة."}, {"id": "f26_w1", "en": "This is not what I ordered.", "ar": "هذا ليس ما طلبته.", "phon": "ذيس إز نوت وات آي أوردرد", "sen": "Complaining about a wrong order.", "senm": "تشتكي من طلب خاطئ."}, {"id": "f26_w2", "en": "I'd like to make a complaint.", "ar": "أريد تقديم شكوى.", "phon": "آيد لايك تو ميك آ كومپلينت", "sen": "Formally starting a complaint.", "senm": "تبدأ شكوى بشكل رسمي."}, {"id": "f26_w3", "en": "This isn't good enough.", "ar": "هذا ليس جيدًا بما فيه الكفاية.", "phon": "ذيس إزنت جود إناف", "sen": "Expressing dissatisfaction with quality.", "senm": "تعبّر عن عدم رضاك عن الجودة."}, {"id": "f26_w4", "en": "I'm really disappointed with this.", "ar": "أنا مستاء حقًا من هذا.", "phon": "آيم ريلي ديسأپوينتد ويذ ذيس", "sen": "Expressing disappointment.", "senm": "تعبّر عن خيبة أملك."}, {"id": "f26_w5", "en": "Excuse me, there's a problem.", "ar": "عذرًا، هناك مشكلة.", "phon": "إكسكيوز مي، ذيرز آ پروبلم", "sen": "Pointing out a problem politely.", "senm": "تشير إلى مشكلة بأدب."}]}, {"id": "f27", "title": "السؤال عن الاتجاهات", "sub": "Asking for Directions", "words": [{"id": "f27_w0", "en": "Excuse me, where is the bank?", "ar": "عذرًا، أين البنك؟", "phon": "إكسكيوز مي، وير إز ذا بانك؟", "sen": "Asking a stranger for directions.", "senm": "تسأل شخصًا غريبًا عن اتجاه."}, {"id": "f27_w1", "en": "How can I get to the station?", "ar": "كيف يمكنني الوصول إلى المحطة؟", "phon": "هاو كان آي جيت تو ذا ستيشن؟", "sen": "Asking how to reach a place.", "senm": "تسأل كيف تصل إلى مكان."}, {"id": "f27_w2", "en": "Is it far from here?", "ar": "هل هو بعيد من هنا؟", "phon": "إز إت فار فروم هير؟", "sen": "Asking about distance.", "senm": "تسأل عن مسافة."}, {"id": "f27_w3", "en": "Could you tell me the way to the market?", "ar": "هل يمكنك إخباري بالطريق إلى السوق؟", "phon": "كود يو تيل مي ذا واي تو ذا ماركت؟", "sen": "Politely asking for directions.", "senm": "تسأل عن اتجاه بأدب."}, {"id": "f27_w4", "en": "Which way is the airport?", "ar": "في أي اتجاه المطار؟", "phon": "ويتش واي إز ذي إيربورت؟", "sen": "Asking about the direction of a place.", "senm": "تسأل عن اتجاه مكان."}]}, {"id": "f28", "title": "إعطاء الاتجاهات", "sub": "Giving Directions", "words": [{"id": "f28_w0", "en": "Go straight ahead.", "ar": "اذهب مستقيمًا للأمام.", "phon": "جو ستريت أهيد", "sen": "Giving a direction to go forward.", "senm": "تعطي اتجاهًا للسير للأمام."}, {"id": "f28_w1", "en": "Turn left at the corner.", "ar": "انعطف يسارًا عند الزاوية.", "phon": "تيرن ليفت آت ذا كورنر", "sen": "Giving a turning direction.", "senm": "تعطي اتجاه الانعطاف."}, {"id": "f28_w2", "en": "It's next to the bank.", "ar": "إنه بجوار البنك.", "phon": "إتس نكست تو ذا بانك", "sen": "Describing a location's position.", "senm": "تصف موقع مكان."}, {"id": "f28_w3", "en": "Take the second street on the right.", "ar": "خذ الشارع الثاني على اليمين.", "phon": "تيك ذا سيكند ستريت أون ذا رايت", "sen": "Giving specific street directions.", "senm": "تعطي اتجاهات دقيقة لشارع."}, {"id": "f28_w4", "en": "It's opposite the school.", "ar": "إنه مقابل المدرسة.", "phon": "إتس أوپوزيت ذا سكول", "sen": "Describing location opposite a landmark.", "senm": "تصف موقعًا مقابل معلم مشهور."}, {"id": "f28_w5", "en": "Walk for five minutes and you'll see it.", "ar": "امشِ لمدة خمس دقائق وسوف تراه.", "phon": "ووك فور فايڤ مينتس آند يول سي إت", "sen": "Giving a walking-time direction.", "senm": "تعطي اتجاهًا بمدة زمنية للمشي."}]}, {"id": "f29", "title": "طلب التكرار والتوضيح", "sub": "Asking for Repetition/Clarification", "words": [{"id": "f29_w0", "en": "Sorry, could you repeat that?", "ar": "آسف، هل يمكنك تكرار ذلك؟", "phon": "سوري، كود يو ريپيت ذات؟", "sen": "Asking someone to repeat what they said.", "senm": "تطلب من شخص تكرار ما قاله."}, {"id": "f29_w1", "en": "I beg your pardon?", "ar": "المعذرة؟", "phon": "آي بيج يور پاردن؟", "sen": "A formal way to ask for repetition.", "senm": "طريقة رسمية لطلب التكرار."}, {"id": "f29_w2", "en": "What do you mean?", "ar": "ماذا تقصد؟", "phon": "وات دو يو مين؟", "sen": "Asking for clarification of meaning.", "senm": "تسأل عن توضيح المعنى."}, {"id": "f29_w3", "en": "Could you say that again, please?", "ar": "هل يمكنك قول ذلك مرة أخرى من فضلك؟", "phon": "كود يو ساي ذات أجين، بليز؟", "sen": "Politely asking for repetition.", "senm": "تطلب التكرار بأدب."}, {"id": "f29_w4", "en": "I didn't catch that.", "ar": "لم أفهم ما قلته.", "phon": "آي ديدنت كاتش ذات", "sen": "Saying you didn't hear or understand.", "senm": "تقول إنك لم تسمع أو تفهم."}]}, {"id": "f30", "title": "التعبير عن اليقين", "sub": "Expressing Certainty", "words": [{"id": "f30_w0", "en": "I'm sure about that.", "ar": "أنا متأكد من ذلك.", "phon": "آيم شور أباوت ذات", "sen": "Expressing confidence in a fact.", "senm": "تعبّر عن ثقتك في حقيقة ما."}, {"id": "f30_w1", "en": "I'm certain he will come.", "ar": "أنا متأكد أنه سيأتي.", "phon": "آيم سيرتن هي ويل كَم", "sen": "Expressing certainty about the future.", "senm": "تعبّر عن يقين بشأن المستقبل."}, {"id": "f30_w2", "en": "Without doubt, this is correct.", "ar": "بلا شك، هذا صحيح.", "phon": "ويذاوت داوت، ذيس إز كوركت", "sen": "Expressing strong certainty.", "senm": "تعبّر عن يقين قوي."}, {"id": "f30_w3", "en": "I have no doubt about it.", "ar": "ليس لدي أي شك في ذلك.", "phon": "آي هاڤ نو داوت أباوت إت", "sen": "Expressing complete certainty.", "senm": "تعبّر عن يقين تام."}, {"id": "f30_w4", "en": "I'm positive this is right.", "ar": "أنا واثق أن هذا صحيح.", "phon": "آيم پوزيتيڤ ذيس إز رايت", "sen": "Expressing confident certainty.", "senm": "تعبّر عن يقين واثق."}]}, {"id": "f31", "title": "التعبير عن عدم اليقين", "sub": "Expressing Uncertainty", "words": [{"id": "f31_w0", "en": "I'm not sure about that.", "ar": "لست متأكدًا من ذلك.", "phon": "آيم نوت شور أباوت ذات", "sen": "Expressing lack of certainty.", "senm": "تعبّر عن عدم يقين."}, {"id": "f31_w1", "en": "I doubt it.", "ar": "أشك في ذلك.", "phon": "آي داوت إت", "sen": "Expressing doubt about something.", "senm": "تعبّر عن شكك في شيء."}, {"id": "f31_w2", "en": "Maybe, I'm not certain.", "ar": "ربما، لست متأكدًا.", "phon": "مايبي، آيم نوت سيرتن", "sen": "Expressing partial uncertainty.", "senm": "تعبّر عن عدم يقين جزئي."}, {"id": "f31_w3", "en": "It might be true.", "ar": "قد يكون هذا صحيحًا.", "phon": "إت مايت بي ترو", "sen": "Expressing possibility.", "senm": "تعبّر عن احتمالية."}, {"id": "f31_w4", "en": "I have no idea.", "ar": "ليس لدي أي فكرة.", "phon": "آي هاڤ نو آيديا", "sen": "Expressing complete lack of knowledge.", "senm": "تعبّر عن عدم معرفة تامة."}]}, {"id": "f32", "title": "الإلزام والحظر", "sub": "Obligation & Prohibition", "words": [{"id": "f32_w0", "en": "You must wear a seatbelt.", "ar": "يجب أن ترتدي حزام الأمان.", "phon": "يو مَست وير آ سيتبلت", "sen": "Stating a required safety rule.", "senm": "تذكر قاعدة أمان إلزامية."}, {"id": "f32_w1", "en": "You have to finish your homework.", "ar": "يجب أن تنهي واجبك.", "phon": "يو هاڤ تو فينيش يور هوموورك", "sen": "Stating an obligation.", "senm": "تذكر التزامًا مطلوبًا."}, {"id": "f32_w2", "en": "You mustn't smoke here.", "ar": "يجب ألا تدخن هنا.", "phon": "يو ماسنت سموك هير", "sen": "Stating a prohibition.", "senm": "تذكر منعًا لفعل ما."}, {"id": "f32_w3", "en": "Students are not allowed to use phones.", "ar": "لا يُسمح للطلاب باستخدام الهواتف.", "phon": "ستيودنتس آر نوت ألاود تو يوز فونز", "sen": "Stating a school rule.", "senm": "تذكر قاعدة مدرسية."}, {"id": "f32_w4", "en": "It's forbidden to park here.", "ar": "ممنوع الوقوف هنا.", "phon": "إتس فوربيدن تو پارك هير", "sen": "Stating a prohibition rule.", "senm": "تذكر قاعدة منع."}, {"id": "f32_w5", "en": "You need to be on time.", "ar": "يجب أن تكون في الموعد.", "phon": "يو نيد تو بي أون تايم", "sen": "Stating a necessary requirement.", "senm": "تذكر شرطًا ضروريًا."}]}, {"id": "f33", "title": "القدرة وعدم القدرة", "sub": "Ability & Inability", "words": [{"id": "f33_w0", "en": "I can swim very well.", "ar": "أستطيع السباحة جيدًا.", "phon": "آي كان سويم ڤيري ويل", "sen": "Expressing an ability.", "senm": "تعبّر عن قدرة تمتلكها."}, {"id": "f33_w1", "en": "I can't speak French.", "ar": "لا أستطيع التحدث بالفرنسية.", "phon": "آي كانت سپيك فرنش", "sen": "Expressing an inability.", "senm": "تعبّر عن عدم قدرتك."}, {"id": "f33_w2", "en": "She is able to solve the problem.", "ar": "هي قادرة على حل المشكلة.", "phon": "شي إز إيبل تو سولڤ ذا پروبلم", "sen": "Expressing someone's ability.", "senm": "تعبّر عن قدرة شخص آخر."}, {"id": "f33_w3", "en": "He isn't able to come today.", "ar": "لا يستطيع الحضور اليوم.", "phon": "هي إزنت إيبل تو كَم تودي", "sen": "Expressing someone's inability.", "senm": "تعبّر عن عدم قدرة شخص."}, {"id": "f33_w4", "en": "I could run fast when I was young.", "ar": "كنت أستطيع الجري بسرعة عندما كنت صغيرًا.", "phon": "آي كود رَن فاست ون آي واز يانج", "sen": "Expressing a past ability.", "senm": "تعبّر عن قدرة في الماضي."}]}, {"id": "f34", "title": "الوعد", "sub": "Making a Promise", "words": [{"id": "f34_w0", "en": "I promise I'll help you.", "ar": "أعدك أنني سأساعدك.", "phon": "آي پروميس آيل هيلپ يو", "sen": "Making a promise to help.", "senm": "تقطع وعدًا بالمساعدة."}, {"id": "f34_w1", "en": "I'll definitely come tomorrow.", "ar": "سأحضر غدًا بالتأكيد.", "phon": "آيل ديفينتلي كَم تومورو", "sen": "Making a confident promise.", "senm": "تقطع وعدًا واثقًا."}, {"id": "f34_w2", "en": "You have my word.", "ar": "لك كلمتي.", "phon": "يو هاڤ ماي وورد", "sen": "Assuring a strong promise.", "senm": "تؤكد وعدًا قويًا."}, {"id": "f34_w3", "en": "I promise not to be late again.", "ar": "أعدك ألا أتأخر مرة أخرى.", "phon": "آي پروميس نوت تو بي ليت أجين", "sen": "Promising to improve behavior.", "senm": "تعِد بتحسين سلوكك."}, {"id": "f34_w4", "en": "I'll make sure it's done.", "ar": "سأتأكد من إنجاز الأمر.", "phon": "آيل ميك شور إتس دَن", "sen": "Promising to complete a task.", "senm": "تعِد بإنجاز مهمة."}]}, {"id": "f35", "title": "الأمل والتمني", "sub": "Expressing Hope & Wishes", "words": [{"id": "f35_w0", "en": "I hope you get well soon.", "ar": "أتمنى لك الشفاء العاجل.", "phon": "آي هوپ يو جيت ويل سون", "sen": "Wishing someone recovery.", "senm": "تتمنى الشفاء لشخص مريض."}, {"id": "f35_w1", "en": "I wish you good luck.", "ar": "أتمنى لك حظًا سعيدًا.", "phon": "آي ويش يو جود لَك", "sen": "Wishing someone luck.", "senm": "تتمنى الحظ لشخص."}, {"id": "f35_w2", "en": "I hope to pass the exam.", "ar": "أتمنى أن أنجح في الامتحان.", "phon": "آي هوپ تو پاس ذي إجزام", "sen": "Expressing hope about an exam.", "senm": "تعبّر عن أملك في امتحان."}, {"id": "f35_w3", "en": "I wish I could travel more.", "ar": "أتمنى لو أستطيع السفر أكثر.", "phon": "آي ويش آي كود تراڤل مور", "sen": "Expressing a wish about the present.", "senm": "تعبّر عن أمنية بشأن الحاضر."}, {"id": "f35_w4", "en": "Let's hope for the best.", "ar": "لنأمل الأفضل.", "phon": "ليتس هوپ فور ذا بست", "sen": "Expressing shared hope.", "senm": "تعبّر عن أمل مشترك."}]}, {"id": "f36", "title": "الندم", "sub": "Expressing Regret", "words": [{"id": "f36_w0", "en": "I regret not studying harder.", "ar": "أندم على عدم المذاكرة بجد أكثر.", "phon": "آي ريجريت نوت ستَديينج هاردر", "sen": "Expressing regret about the past.", "senm": "تعبّر عن ندمك على أمر ماضٍ."}, {"id": "f36_w1", "en": "I wish I hadn't said that.", "ar": "أتمنى لو لم أقل ذلك.", "phon": "آي ويش آي هادنت سيد ذات", "sen": "Expressing regret over words said.", "senm": "تعبّر عن ندمك على كلام قلته."}, {"id": "f36_w2", "en": "If only I had more time.", "ar": "لو كان لدي وقت أكثر.", "phon": "إف أونلي آي هاد مور تايم", "sen": "Expressing regret about lack of time.", "senm": "تعبّر عن أسفك لضيق الوقت."}, {"id": "f36_w3", "en": "I shouldn't have done that.", "ar": "لم يكن يجب أن أفعل ذلك.", "phon": "آي شودنت هاڤ دَن ذات", "sen": "Expressing regret about an action.", "senm": "تعبّر عن ندمك على فعل قمت به."}, {"id": "f36_w4", "en": "I'm sorry I missed the class.", "ar": "آسف لأنني فوّت الحصة.", "phon": "آيم سوري آي مِست ذا كلاس", "sen": "Expressing regret about missing something.", "senm": "تعبّر عن أسفك لتفويت شيء."}]}, {"id": "f37", "title": "المجاملة والإطراء", "sub": "Complimenting", "words": [{"id": "f37_w0", "en": "You look great today!", "ar": "تبدو رائعًا اليوم!", "phon": "يو لوك جريت تودي!", "sen": "Complimenting someone's appearance.", "senm": "تجامل شخصًا على مظهره."}, {"id": "f37_w1", "en": "That's a lovely dress.", "ar": "هذا فستان جميل.", "phon": "ذاتس آ لَڤلي دريس", "sen": "Complimenting an item of clothing.", "senm": "تجامل شخصًا على ملابسه."}, {"id": "f37_w2", "en": "Well done, that was excellent!", "ar": "أحسنت، كان ذلك ممتازًا!", "phon": "ويل دَن، ذات واز إكسِلنت!", "sen": "Complimenting an achievement.", "senm": "تجامل شخصًا على إنجازه."}, {"id": "f37_w3", "en": "You did a fantastic job.", "ar": "لقد قمت بعمل رائع.", "phon": "يو ديد آ فانتاستيك جوب", "sen": "Praising someone's work.", "senm": "تمدح عمل شخص."}, {"id": "f37_w4", "en": "I really like your work.", "ar": "أنا معجب حقًا بعملك.", "phon": "آي ريلي لايك يور وورك", "sen": "Complimenting someone's efforts.", "senm": "تجامل شخصًا على جهده."}]}, {"id": "f38", "title": "التسوق والسؤال عن السعر", "sub": "Shopping & Asking Price", "words": [{"id": "f38_w0", "en": "How much is this, please?", "ar": "بكم هذا من فضلك؟", "phon": "هاو ماتش إز ذيس، بليز؟", "sen": "Asking the price of an item.", "senm": "تسأل عن سعر منتج."}, {"id": "f38_w1", "en": "Can I try this on?", "ar": "هل يمكنني تجربة هذا؟", "phon": "كان آي تراي ذيس أون؟", "sen": "Asking to try on clothes.", "senm": "تطلب تجربة ملابس."}, {"id": "f38_w2", "en": "Do you have a smaller size?", "ar": "هل لديك مقاس أصغر؟", "phon": "دو يو هاڤ آ سمولر سايز؟", "sen": "Asking about a different size.", "senm": "تسأل عن مقاس مختلف."}, {"id": "f38_w3", "en": "That's too expensive for me.", "ar": "هذا غالٍ جدًا بالنسبة لي.", "phon": "ذاتس تو إكسپنسيڤ فور مي", "sen": "Commenting that a price is high.", "senm": "تعلّق على ارتفاع السعر."}, {"id": "f38_w4", "en": "I'll take this one, please.", "ar": "سآخذ هذا من فضلك.", "phon": "آيل تيك ذيس وَن، بليز", "sen": "Deciding to buy an item.", "senm": "تقرر شراء منتج."}]}, {"id": "f39", "title": "طلب الطعام", "sub": "Ordering Food", "words": [{"id": "f39_w0", "en": "Can I see the menu, please?", "ar": "هل يمكنني رؤية قائمة الطعام من فضلك؟", "phon": "كان آي سي ذا منيو، بليز؟", "sen": "Asking for the menu at a restaurant.", "senm": "تطلب قائمة الطعام في مطعم."}, {"id": "f39_w1", "en": "I'd like to order a pizza.", "ar": "أود طلب بيتزا.", "phon": "آيد لايك تو أوردر آ پيتزا", "sen": "Ordering a specific dish.", "senm": "تطلب طبقًا محددًا."}, {"id": "f39_w2", "en": "Could I have the bill, please?", "ar": "هل يمكنني الحصول على الفاتورة من فضلك؟", "phon": "كود آي هاڤ ذا بِل، بليز؟", "sen": "Asking for the check.", "senm": "تطلب الفاتورة."}, {"id": "f39_w3", "en": "What do you recommend?", "ar": "بماذا تنصحني؟", "phon": "وات دو يو ريكوميند؟", "sen": "Asking the waiter for a recommendation.", "senm": "تسأل النادل عن توصية."}, {"id": "f39_w4", "en": "I'll have the chicken, please.", "ar": "سآخذ الدجاج من فضلك.", "phon": "آيل هاڤ ذا تشيكن، بليز", "sen": "Ordering a specific meal.", "senm": "تطلب وجبة محددة."}]}, {"id": "f40", "title": "المكالمات الهاتفية", "sub": "Phone Calls", "words": [{"id": "f40_w0", "en": "Hello, may I speak to Ali, please?", "ar": "مرحبًا، هل يمكنني التحدث مع علي من فضلك؟", "phon": "هالو، ماي آي سپيك تو علي، بليز؟", "sen": "Asking to speak to someone on the phone.", "senm": "تطلب التحدث مع شخص هاتفيًا."}, {"id": "f40_w1", "en": "This is Sara speaking.", "ar": "معك سارة.", "phon": "ذيس إز سارة سپيكينج", "sen": "Identifying yourself on the phone.", "senm": "تعرّف بنفسك في مكالمة."}, {"id": "f40_w2", "en": "Can I take a message?", "ar": "هل يمكنني تدوين رسالة؟", "phon": "كان آي تيك آ ميسج؟", "sen": "Offering to take a message.", "senm": "تعرض تدوين رسالة لشخص غائب."}, {"id": "f40_w3", "en": "Could you call back later?", "ar": "هل يمكنك الاتصال لاحقًا؟", "phon": "كود يو كول باك ليتر؟", "sen": "Asking someone to call again later.", "senm": "تطلب إعادة الاتصال لاحقًا."}, {"id": "f40_w4", "en": "Hold on, please.", "ar": "انتظر من فضلك.", "phon": "هولد أون، بليز", "sen": "Asking someone to wait on the phone.", "senm": "تطلب من شخص الانتظار في المكالمة."}, {"id": "f40_w5", "en": "Thanks for calling, goodbye.", "ar": "شكرًا على اتصالك، مع السلامة.", "phon": "ثانكس فور كولينج، جودباي", "sen": "Ending a phone call politely.", "senm": "تنهي مكالمة هاتفية بأدب."}]}, {"id": "f41", "title": "الوداع", "sub": "Saying Goodbye", "words": [{"id": "f41_w0", "en": "Goodbye, see you soon!", "ar": "مع السلامة، أراك قريبًا!", "phon": "جودباي، سي يو سون!", "sen": "Saying goodbye casually.", "senm": "تودّع شخصًا بشكل غير رسمي."}, {"id": "f41_w1", "en": "Take care of yourself.", "ar": "اعتنِ بنفسك.", "phon": "تيك كير أوف يورسلف", "sen": "A caring way to say goodbye.", "senm": "طريقة ودودة لتوديع شخص."}, {"id": "f41_w2", "en": "See you tomorrow.", "ar": "أراك غدًا.", "phon": "سي يو تومورو", "sen": "Saying goodbye until the next day.", "senm": "تودّع شخصًا حتى الغد."}, {"id": "f41_w3", "en": "It was nice talking to you.", "ar": "كان من الجميل التحدث معك.", "phon": "إت واز نايس توكينج تو يو", "sen": "Ending a pleasant conversation.", "senm": "تنهي محادثة لطيفة."}, {"id": "f41_w4", "en": "Have a safe trip.", "ar": "رحلة آمنة.", "phon": "هاڤ آ سيف تريپ", "sen": "Wishing someone a safe journey.", "senm": "تتمنى لشخص رحلة آمنة."}]}];
+const ALL_WORDS = CATEGORIES.flatMap(c => c.words.map(w => ({...w, catId:c.id, catTitle:c.title})));
+const WORD_MAP = Object.fromEntries(ALL_WORDS.map(w => [w.id, w]));
+
+let state = {
+  memorized: {},   // id -> timestamp
+  favorites: [],   // [id]
+  theme: 'day',
+  examLog: []       // {date, type, label, score, total}
+};
+
+let currentCat = null;
+let currentIdx = 0;
+let currentDeckIds = [];
+let quiz = { items: [], idx: 0, score: 0, wrong: [], type: '' };
+
+// ---------- storage ----------
+async function loadState(){
+  try{ const r = await window.storage.get('memorized_v1'); if(r) state.memorized = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('favorites_v1'); if(r) state.favorites = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('theme_v1'); if(r) state.theme = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('exam_log_v1'); if(r) state.examLog = JSON.parse(r.value); }catch(e){}
+  applyTheme();
+  renderHome();
+}
+async function saveMemorized(){ try{ await window.storage.set('memorized_v1', JSON.stringify(state.memorized)); }catch(e){} }
+async function saveFavorites(){ try{ await window.storage.set('favorites_v1', JSON.stringify(state.favorites)); }catch(e){} }
+async function saveTheme(){ try{ await window.storage.set('theme_v1', JSON.stringify(state.theme)); }catch(e){} }
+async function saveExamLog(){ try{ await window.storage.set('exam_log_v1', JSON.stringify(state.examLog)); }catch(e){} }
+
+// ---------- theme ----------
+function applyTheme(){
+  document.body.setAttribute('data-theme', state.theme);
+  document.getElementById('themeBtn').textContent = state.theme === 'night' ? '☀️' : '🌙';
+  document.getElementById('nightToggle').classList.toggle('on', state.theme === 'night');
+}
+function toggleTheme(){
+  state.theme = state.theme === 'night' ? 'day' : 'night';
+  applyTheme(); saveTheme();
+}
+document.getElementById('themeBtn').onclick = toggleTheme;
+
+// ---------- toast ----------
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 1800);
+}
+
+// ---------- tabs ----------
+function switchTab(tab){
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+  ['home','fav','exam','settings'].forEach(s=>{
+    document.getElementById('screen-'+s).classList.toggle('active', s===tab);
+  });
+  document.getElementById('screen-deck').classList.remove('active');
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-result').classList.remove('active');
+  if(tab==='home') renderHome();
+  if(tab==='fav') renderFav();
+  if(tab==='exam') renderExam();
+}
+function goHome(){ switchTab('home'); }
+function goExam(){ switchTab('exam'); }
+
+// ---------- home / categories ----------
+function renderHome(){
+  const memoCount = Object.keys(state.memorized).length;
+  document.getElementById('statTotal').textContent = ALL_WORDS.length;
+  document.getElementById('statMemo').textContent = memoCount;
+  document.getElementById('statFav').textContent = state.favorites.length;
+
+  const list = document.getElementById('catList');
+  list.innerHTML = '';
+  CATEGORIES.forEach((c, i) => {
+    const total = c.words.length;
+    const done = c.words.filter(w => state.memorized[w.id]).length;
+    const pct = total ? Math.round(done/total*100) : 0;
+    const circ = 2*Math.PI*18;
+    const offset = circ - (pct/100)*circ;
+    const div = document.createElement('div');
+    div.className = 'cat-tab';
+    div.onclick = () => openDeck(c.id);
+    div.innerHTML = `
+      <div class="cat-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="cat-info">
+        <h3>${c.title}</h3>
+        <p>${c.sub} · ${total} كلمة</p>
+      </div>
+      <div class="cat-progress-wrap">
+        <svg viewBox="0 0 44 44">
+          <circle class="bg" cx="22" cy="22" r="18"></circle>
+          <circle class="fg" cx="22" cy="22" r="18" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"></circle>
+        </svg>
+        <div class="cat-progress-txt">${pct}%</div>
+      </div>`;
+    list.appendChild(div);
+  });
+}
+
+// ---------- deck / flashcards ----------
+function openDeck(catId){
+  currentCat = CATEGORIES.find(c => c.id === catId);
+  currentDeckIds = currentCat.words.map(w => w.id);
+  currentIdx = 0;
+  document.getElementById('deckTitle').textContent = currentCat.title;
+  document.getElementById('screen-home').classList.remove('active');
+  document.getElementById('screen-deck').classList.add('active');
+  renderCard();
+}
+function renderCard(){
+  const id = currentDeckIds[currentIdx];
+  const w = WORD_MAP[id];
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('cardWord').textContent = w.en;
+  document.getElementById('cardPhon').textContent = w.phon;
+  document.getElementById('cardMean').textContent = w.ar;
+  document.getElementById('cardTagFront').textContent = w.catTitle;
+  document.getElementById('sentEn').textContent = w.sen;
+  document.getElementById('sentAr').textContent = w.senm;
+  document.getElementById('cardWordBack').textContent = w.en;
+  document.getElementById('cardMeanBack').textContent = w.ar;
+
+  const isFav = state.favorites.includes(id);
+  document.getElementById('favBtnFront').textContent = isFav ? '★' : '☆';
+  document.getElementById('favBtnFront').classList.toggle('active', isFav);
+  document.getElementById('favBtnBack').textContent = isFav ? '★' : '☆';
+  document.getElementById('favBtnBack').classList.toggle('active', isFav);
+
+  const isMemo = !!state.memorized[id];
+  const memoBtn = document.getElementById('memoBtn');
+  memoBtn.textContent = isMemo ? '✓ محفوظة' : '✓ حفظتها';
+  memoBtn.classList.toggle('done', isMemo);
+
+  document.getElementById('deckCount').textContent = `بطاقة ${currentIdx+1} من ${currentDeckIds.length}`;
+  const memoInCat = currentCat.words.filter(w2 => state.memorized[w2.id]).length;
+  document.getElementById('deckMemoCount').textContent = `محفوظ: ${memoInCat}/${currentCat.words.length}`;
+  document.getElementById('deckProgressBar').style.width = `${((currentIdx+1)/currentDeckIds.length)*100}%`;
+}
+function flipCard(){ document.getElementById('flashcard').classList.toggle('flipped'); }
+function nextCard(){ currentIdx = (currentIdx+1) % currentDeckIds.length; renderCard(); }
+function prevCard(){ currentIdx = (currentIdx-1+currentDeckIds.length) % currentDeckIds.length; renderCard(); }
+function toggleFav(){
+  const id = currentDeckIds[currentIdx];
+  const i = state.favorites.indexOf(id);
+  if(i>-1){ state.favorites.splice(i,1); } else { state.favorites.push(id); }
+  saveFavorites(); renderCard();
+}
+function toggleMemo(){
+  const id = currentDeckIds[currentIdx];
+  if(state.memorized[id]){ delete state.memorized[id]; toast('تم إلغاء الحفظ'); }
+  else { state.memorized[id] = Date.now(); toast('أُضيفت إلى كلماتك المحفوظة ✓'); }
+  saveMemorized(); renderCard();
+}
+
+// ---------- favorites screen ----------
+function renderFav(){
+  const wrap = document.getElementById('favList');
+  if(state.favorites.length === 0){
+    wrap.innerHTML = `<div class="empty-state"><div class="em">⭐</div><p>لسه معملتش تفضيل لأي كلمة.<br>اضغط على أيقونة النجمة داخل أي بطاقة لإضافتها هنا.</p></div>`;
+    return;
+  }
+  wrap.innerHTML = '';
+  state.favorites.forEach(id => {
+    const w = WORD_MAP[id];
+    if(!w) return;
+    const isMemo = !!state.memorized[id];
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    div.innerHTML = `<div><div class="rw en">${w.en}</div><div class="rm">${w.ar} — ${w.catTitle}</div></div>
+      <div style="font-size:16px;">${isMemo?'✅':'🔸'}</div>`;
+    wrap.appendChild(div);
+  });
+}
+
+// ---------- exams ----------
+function memorizedIds(){ return Object.keys(state.memorized); }
+function recentMemorizedIds(hours=48){
+  const cutoff = Date.now() - hours*3600*1000;
+  return Object.entries(state.memorized).filter(([id,ts]) => ts >= cutoff).map(([id]) => id);
+}
+function renderExam(){
+  const total = memorizedIds().length;
+  const recent = recentMemorizedIds();
+  document.getElementById('dailyDesc').textContent = recent.length
+    ? `لديك ${recent.length} كلمة حفظتها في آخر يومين. اختبر نفسك عليها فقط.`
+    : 'لم تحفظ كلمات جديدة في آخر يومين. راجع بطاقات جديدة أولًا لتفعيل الاختبار اليومي.';
+  document.getElementById('dailyBtn').disabled = recent.length === 0;
+
+  const percents = [
+    {p:7, label:'اختبار سريع', desc:'مراجعة خاطفة'},
+    {p:10, label:'اختبار خفيف', desc:'مراجعة أساسية'},
+    {p:15, label:'اختبار متوسط', desc:'مراجعة أعمق'},
+    {p:20, label:'اختبار شامل', desc:'أكبر تغطية'},
+  ];
+  const grid = document.getElementById('examGrid');
+  grid.innerHTML = '';
+  percents.forEach(pc => {
+    const count = Math.max(1, Math.ceil(total * pc.p/100));
+    const div = document.createElement('div');
+    div.className = 'exam-tile';
+    if(total===0){ div.style.opacity = .5; }
+    else { div.onclick = () => startComprehensiveExam(pc.p, count); }
+    div.innerHTML = `<b>${pc.p}%</b><span>${pc.label}</span><small>${total? count+' سؤال' : '—'}</small>`;
+    grid.appendChild(div);
+  });
+
+  const hist = document.getElementById('examHistory');
+  if(state.examLog.length === 0){
+    hist.innerHTML = `<div class="empty-state" style="padding:20px;"><p>لا توجد اختبارات سابقة بعد.</p></div>`;
+  } else {
+    hist.innerHTML = '';
+    [...state.examLog].reverse().slice(0,8).forEach(e => {
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      const pct = Math.round(e.score/e.total*100);
+      div.innerHTML = `<div><div class="rw" style="font-family:'Cairo';">${e.label}</div><div class="rm">${new Date(e.date).toLocaleDateString('ar-EG')}</div></div>
+        <div style="font-weight:800;color:${pct>=70?'var(--forest)':'var(--rose)'};">${e.score}/${e.total}</div>`;
+      hist.appendChild(div);
+    });
+  }
+}
+
+function buildQuizItems(ids, type, label){
+  const shuffled = [...ids].sort(()=>Math.random()-0.5);
+  const items = shuffled.map(id => {
+    const w = WORD_MAP[id];
+    let pool = ALL_WORDS.filter(x => x.id !== id);
+    pool = pool.sort(()=>Math.random()-0.5).slice(0,3);
+    const options = [...pool.map(p=>p.ar), w.ar].sort(()=>Math.random()-0.5);
+    return { id, word: w, options, correct: w.ar };
+  });
+  quiz = { items, idx:0, score:0, wrong:[], type, label };
+  document.getElementById('screen-exam').classList.remove('active');
+  document.getElementById('screen-quiz').classList.add('active');
+  document.getElementById('qTotal').textContent = items.length;
+  renderQuizQ();
+}
+function startDailyExam(){
+  const ids = recentMemorizedIds();
+  if(ids.length===0) return;
+  buildQuizItems(ids, 'daily', 'الاختبار اليومي (' + ids.length + ' كلمة)');
+}
+function startComprehensiveExam(pct, count){
+  const ids = memorizedIds();
+  const shuffled = [...ids].sort(()=>Math.random()-0.5).slice(0, count);
+  buildQuizItems(shuffled, 'comp'+pct, `اختبار شامل ${pct}% (${count} سؤال)`);
+}
+function renderQuizQ(){
+  const it = quiz.items[quiz.idx];
+  document.getElementById('qIndex').textContent = quiz.idx+1;
+  document.getElementById('qWord').textContent = it.word.en;
+  document.getElementById('qPhon').textContent = it.word.phon;
+  const optWrap = document.getElementById('optList');
+  optWrap.innerHTML = '';
+  it.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt;
+    btn.onclick = () => answerQuiz(opt, btn);
+    optWrap.appendChild(btn);
+  });
+}
+function speakQuizWord(){
+  const it = quiz.items[quiz.idx];
+  speakText(it.word.en);
+}
+function answerQuiz(opt, btn){
+  const it = quiz.items[quiz.idx];
+  const allBtns = document.querySelectorAll('.opt-btn');
+  allBtns.forEach(b => b.disabled = true);
+  const isCorrect = opt === it.correct;
+  if(isCorrect){ btn.classList.add('correct'); quiz.score++; }
+  else{
+    btn.classList.add('wrong');
+    allBtns.forEach(b => { if(b.textContent === it.correct) b.classList.add('correct'); });
+    quiz.wrong.push(it);
+  }
+  setTimeout(() => {
+    if(quiz.idx < quiz.items.length-1){ quiz.idx++; renderQuizQ(); }
+    else finishQuiz();
+  }, 900);
+}
+function quitQuiz(){
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-exam').classList.add('active');
+}
+async function finishQuiz(){
+  const total = quiz.items.length;
+  const score = quiz.score;
+  const pct = Math.round(score/total*100);
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-result').classList.add('active');
+  const circ = 2*Math.PI*62;
+  const ring = document.getElementById('resultRing');
+  ring.setAttribute('stroke-dasharray', circ);
+  ring.setAttribute('stroke-dashoffset', circ);
+  ring.style.stroke = pct>=70 ? 'var(--forest)' : (pct>=40? 'var(--gold)':'var(--rose)');
+  setTimeout(()=>{ ring.style.strokeDashoffset = circ - (pct/100)*circ; }, 100);
+  document.getElementById('resultPct').textContent = pct+'%';
+  document.getElementById('resultFrac').textContent = score+'/'+total;
+  document.getElementById('resultMsg').textContent = pct>=85?'ممتاز! 🎉' : pct>=70?'أداء جيد جدًا 👏' : pct>=50?'مستوى مقبول، استمر بالمراجعة':'محتاج مراجعة أكتر شوية 💪';
+  document.getElementById('resultSub').textContent = quiz.label;
+
+  const rev = document.getElementById('reviewList');
+  rev.innerHTML = '';
+  if(quiz.wrong.length){
+    const lbl = document.createElement('div');
+    lbl.className = 'section-label'; lbl.textContent = 'راجع الكلمات دي تاني';
+    rev.appendChild(lbl);
+    quiz.wrong.forEach(it => {
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `<div><div class="rw en">${it.word.en}</div><div class="rm">${it.word.sen}</div></div><div class="rm">${it.correct}</div>`;
+      rev.appendChild(div);
+    });
+  }
+
+  state.examLog.push({date:Date.now(), type:quiz.type, label:quiz.label, score, total});
+  await saveExamLog();
+}
+
+// ---------- TTS ----------
+let voices = [];
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
+  const sel = document.getElementById('voiceSelect');
+  if(!sel) return;
+  sel.innerHTML = '';
+  if(voices.length===0){
+    sel.innerHTML = '<option>الصوت الافتراضي للجهاز</option>';
+    return;
+  }
+  voices.forEach((v,i) => {
+    const o = document.createElement('option');
+    o.value = i; o.textContent = `${v.name} (${v.lang})`;
+    sel.appendChild(o);
+  });
+}
+speechSynthesis.onvoiceschanged = loadVoices;
+function speakText(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const sel = document.getElementById('voiceSelect');
+  if(voices.length && sel && sel.value !== '') u.voice = voices[sel.value];
+  u.lang = 'en-US'; u.rate = 0.92;
+  speechSynthesis.speak(u);
+}
+function speak(mode){
+  const w = WORD_MAP[currentDeckIds[currentIdx]];
+  speakText(mode==='en' ? w.en : w.sen);
+}
+
+// ---------- reset ----------
+async function resetProgress(){
+  if(!confirm('هل أنت متأكد؟ سيتم حذف كل الكلمات المحفوظة والمفضلة نهائيًا.')) return;
+  state.memorized = {}; state.favorites = []; state.examLog = [];
+  await saveMemorized(); await saveFavorites(); await saveExamLog();
+  toast('تم إعادة الضبط');
+  renderHome();
+}
+
+// ---------- init ----------
+loadVoices();
+loadState();
+</script>
+</body>
+</html>

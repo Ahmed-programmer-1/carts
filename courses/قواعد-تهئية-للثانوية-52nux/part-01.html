@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دفتر أحمد | English Notebook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF6EC;
+  --paper-line:#e8dfc8;
+  --ink:#20293A;
+  --ink-soft:#4b5568;
+  --red:#B9412E;
+  --red-soft:#e7c9c2;
+  --sage:#4C7A6E;
+  --sage-soft:#dbe9e4;
+  --amber:#C7891E;
+  --amber-soft:#f3e3c4;
+  --hole:#cfc7ab;
+  --card:#ffffff;
+  --shadow: 0 2px 10px rgba(32,41,58,0.08);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Cairo','Inter',sans-serif;
+  min-height:100vh;
+}
+::selection{background:var(--red-soft);}
+a{color:inherit;}
+
+/* Layout */
+.app{
+  display:grid;
+  grid-template-columns: 300px 1fr;
+  min-height:100vh;
+}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr;}
+  .sidebar{position:sticky;top:0;z-index:50;max-height:none;}
+}
+
+/* Sidebar - spiral notebook feel */
+.sidebar{
+  background:#231d17;
+  color:#f1e9d8;
+  padding:28px 0 28px 0;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
+  border-left:6px solid var(--red);
+}
+.sidebar-holes{
+  position:absolute;
+  right:14px;
+  top:0;
+  bottom:0;
+  width:10px;
+}
+.brand{
+  padding:0 28px 20px 28px;
+  border-bottom:1px dashed #55483a;
+  margin-bottom:14px;
+}
+.brand .eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:.12em;
+  color:#c9a36a;
+  text-transform:uppercase;
+}
+.brand h1{
+  font-family:'Zilla Slab',serif;
+  font-size:26px;
+  margin:6px 0 4px 0;
+  color:#fff;
+}
+.brand p{
+  margin:0;
+  font-size:13px;
+  color:#b9ac93;
+  line-height:1.6;
+}
+.nav-group-title{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:.1em;
+  color:#8f8267;
+  text-transform:uppercase;
+  padding:14px 28px 6px 28px;
+}
+.nav-btn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  text-align:right;
+  background:none;
+  border:none;
+  color:#e8ddc4;
+  font-family:'Cairo',sans-serif;
+  font-size:14.5px;
+  padding:10px 28px;
+  cursor:pointer;
+  border-right:3px solid transparent;
+  transition:.15s;
+}
+.nav-btn:hover{background:#33291f;}
+.nav-btn.active{
+  background:#3b2e21;
+  border-right-color:var(--amber);
+  color:#fff;
+  font-weight:600;
+}
+.nav-btn .num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  color:#8f8267;
+  min-width:20px;
+}
+.nav-btn.active .num{color:var(--amber);}
+
+/* Main content */
+.main{
+  padding:38px 48px 80px 48px;
+  max-width:980px;
+}
+@media (max-width:700px){.main{padding:24px 18px 60px 18px;}}
+
+.page-header{
+  border-bottom:3px solid var(--red);
+  padding-bottom:14px;
+  margin-bottom:28px;
+  position:relative;
+}
+.page-header .subject-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  color:var(--ink-soft);
+  letter-spacing:.05em;
+}
+.page-header h2{
+  font-family:'Zilla Slab',serif;
+  font-size:34px;
+  margin:4px 0 0 0;
+  color:var(--ink);
+}
+.page-header .desc{
+  color:var(--ink-soft);
+  font-size:15px;
+  margin-top:8px;
+  max-width:640px;
+  line-height:1.8;
+}
+
+.block{
+  background:var(--card);
+  border:1px solid var(--paper-line);
+  border-radius:10px;
+  padding:22px 24px;
+  margin-bottom:18px;
+  box-shadow:var(--shadow);
+}
+.block h3{
+  font-family:'Zilla Slab',serif;
+  font-size:20px;
+  margin:0 0 10px 0;
+  color:var(--ink);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.block h3::before{
+  content:"";
+  display:inline-block;
+  width:8px;height:8px;
+  background:var(--red);
+  border-radius:50%;
+}
+.block .ar-note{
+  color:var(--ink-soft);
+  font-size:14.5px;
+  line-height:1.9;
+  margin-bottom:12px;
+}
+.pattern{
+  font-family:'IBM Plex Mono',monospace;
+  direction:ltr;
+  text-align:left;
+  background:#1f2937;
+  color:#eae3d2;
+  padding:12px 16px;
+  border-radius:8px;
+  font-size:14px;
+  margin:10px 0;
+  overflow-x:auto;
+  line-height:1.7;
+}
+.pattern .op{color:#c9a36a;}
+.examples{margin-top:12px;}
+.ex-row{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:10px 12px;
+  background:var(--paper);
+  border:1px solid var(--paper-line);
+  border-radius:8px;
+  margin-bottom:8px;
+}
+.ex-row .en{
+  direction:ltr;
+  text-align:left;
+  flex:1;
+  font-family:'Inter',sans-serif;
+  font-size:15px;
+  color:var(--ink);
+}
+.ex-row .ar{
+  color:var(--ink-soft);
+  font-size:13.5px;
+  margin-top:3px;
+}
+.speak-btn{
+  border:none;
+  background:var(--sage-soft);
+  color:var(--sage);
+  width:34px;height:34px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:15px;
+  flex-shrink:0;
+  transition:.15s;
+}
+.speak-btn:hover{background:var(--sage);color:#fff;}
+
+/* Quiz */
+.quiz-wrap{
+  background:var(--card);
+  border:1px solid var(--paper-line);
+  border-radius:10px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+.quiz-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:16px;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.quiz-header h3{
+  font-family:'Zilla Slab',serif;
+  font-size:22px;
+  margin:0;
+}
+.quiz-progress{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  color:var(--ink-soft);
+  background:var(--paper);
+  padding:5px 12px;
+  border-radius:20px;
+  border:1px solid var(--paper-line);
+}
+.q-card{
+  border:1px solid var(--paper-line);
+  border-radius:8px;
+  padding:16px 18px;
+  margin-bottom:14px;
+  background:var(--paper);
+}
+.q-card .q-meta{
+  display:flex;
+  justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  color:var(--ink-soft);
+  margin-bottom:8px;
+}
+.q-card .diff{
+  padding:2px 8px;
+  border-radius:10px;
+  font-size:10.5px;
+}
+.diff.easy{background:var(--sage-soft);color:var(--sage);}
+.diff.med{background:var(--amber-soft);color:var(--amber);}
+.diff.hard{background:var(--red-soft);color:var(--red);}
+.q-text{
+  direction:ltr;
+  text-align:left;
+  font-size:16px;
+  font-family:'Inter',sans-serif;
+  margin-bottom:12px;
+  color:var(--ink);
+}
+.choices{display:flex;flex-direction:column;gap:8px;}
+.choice{
+  direction:ltr;
+  text-align:left;
+  border:1.5px solid var(--paper-line);
+  background:#fff;
+  border-radius:7px;
+  padding:9px 14px;
+  cursor:pointer;
+  font-family:'Inter',sans-serif;
+  font-size:14.5px;
+  transition:.12s;
+}
+.choice:hover{border-color:var(--sage);}
+.choice.selected{border-color:var(--ink);background:#f2f2f2;}
+.choice.correct{border-color:var(--sage);background:var(--sage-soft);}
+.choice.wrong{border-color:var(--red);background:var(--red-soft);}
+.q-explain{
+  margin-top:10px;
+  font-size:13.5px;
+  color:var(--ink-soft);
+  background:#fff;
+  border-right:3px solid var(--sage);
+  padding:8px 12px;
+  border-radius:4px;
+  display:none;
+}
+.q-explain.show{display:block;}
+.quiz-actions{
+  display:flex;
+  gap:10px;
+  margin-top:16px;
+  flex-wrap:wrap;
+}
+.btn{
+  border:none;
+  padding:11px 22px;
+  border-radius:8px;
+  font-family:'Cairo',sans-serif;
+  font-size:14.5px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.15s;
+}
+.btn-primary{background:var(--ink);color:#fff;}
+.btn-primary:hover{background:#3a4459;}
+.btn-secondary{background:#fff;border:1.5px solid var(--paper-line);color:var(--ink);}
+.btn-secondary:hover{border-color:var(--ink);}
+.score-banner{
+  display:none;
+  text-align:center;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:18px;
+  font-family:'Zilla Slab',serif;
+  font-size:20px;
+}
+.score-banner.show{display:block;}
+.score-great{background:var(--sage-soft);color:var(--sage);}
+.score-ok{background:var(--amber-soft);color:var(--amber);}
+.score-low{background:var(--red-soft);color:var(--red);}
+
+/* Vocabulary page */
+.vocab-toolbar{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+.vocab-search{
+  flex:1;
+  min-width:200px;
+  padding:11px 16px;
+  border-radius:8px;
+  border:1.5px solid var(--paper-line);
+  font-family:'Cairo',sans-serif;
+  font-size:14.5px;
+  background:#fff;
+}
+.vocab-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+  gap:14px;
+}
+.vocab-card{
+  background:var(--card);
+  border:1px solid var(--paper-line);
+  border-radius:10px;
+  padding:16px 18px;
+  box-shadow:var(--shadow);
+}
+.vocab-card .word-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.vocab-card .word{
+  direction:ltr;
+  font-family:'Zilla Slab',serif;
+  font-size:19px;
+  font-weight:600;
+  color:var(--ink);
+}
+.vocab-card .pos{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10.5px;
+  color:var(--ink-soft);
+  background:var(--paper);
+  padding:2px 7px;
+  border-radius:8px;
+  margin-right:6px;
+}
+.vocab-card .ar{
+  color:var(--red);
+  font-size:14.5px;
+  margin:6px 0 8px 0;
+  font-weight:600;
+}
+.vocab-card .sentence{
+  direction:ltr;
+  text-align:left;
+  font-size:13.5px;
+  color:var(--ink-soft);
+  background:var(--paper);
+  padding:8px 10px;
+  border-radius:6px;
+  line-height:1.6;
+}
+
+/* Home page */
+.home-hero{
+  background:linear-gradient(135deg,#231d17,#3b2e21);
+  color:#f1e9d8;
+  border-radius:14px;
+  padding:40px 36px;
+  margin-bottom:26px;
+  position:relative;
+  overflow:hidden;
+}
+.home-hero::after{
+  content:"";
+  position:absolute;
+  left:-40px;top:-40px;
+  width:180px;height:180px;
+  border:2px dashed rgba(255,255,255,0.08);
+  border-radius:50%;
+}
+.home-hero .eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  color:#c9a36a;
+  letter-spacing:.1em;
+}
+.home-hero h2{
+  font-family:'Zilla Slab',serif;
+  font-size:32px;
+  margin:8px 0;
+}
+.home-hero p{
+  color:#cfc4a9;
+  max-width:560px;
+  line-height:1.9;
+  font-size:15px;
+}
+.stat-row{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+.stat-pill{
+  background:rgba(255,255,255,0.08);
+  padding:8px 16px;
+  border-radius:20px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+}
+.lesson-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:14px;
+}
+.lesson-card{
+  background:var(--card);
+  border:1px solid var(--paper-line);
+  border-radius:10px;
+  padding:18px;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+  transition:.15s;
+}
+.lesson-card:hover{transform:translateY(-2px);border-color:var(--sage);}
+.lesson-card .lc-num{
+  font-family:'IBM Plex Mono',monospace;
+  color:var(--red);
+  font-size:12px;
+}
+.lesson-card h4{
+  font-family:'Zilla Slab',serif;
+  font-size:17px;
+  margin:6px 0;
+}
+.lesson-card p{
+  color:var(--ink-soft);
+  font-size:12.5px;
+  margin:0;
+  line-height:1.6;
+}
+
+.footer-note{
+  text-align:center;
+  color:var(--ink-soft);
+  font-size:12.5px;
+  margin-top:40px;
+  padding-top:20px;
+  border-top:1px dashed var(--paper-line);
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="sidebar" id="sidebar"></nav>
+  <main class="main" id="main"></main>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const lessons = [
+{
+  id:"describe",
+  title:"وصف الأشياء والأشخاص",
+  short:"Provide, Include, Contain, Consist of",
+  icon:"📋",
+  sections:[
+    {h:"Provide", ar:"يوفّر / يزوّد. له صيغتان حسب حرف الجر بعده.",
+     pattern:"provide + sb + <span class='op'>with</span> + sth\nprovide + sth + <span class='op'>for</span> + sb",
+     examples:[
+       {en:"My family provide me with money.", ar:"عائلتي تزودني بالمال."},
+       {en:"My parents provide food for many people.", ar:"والداي يوفران الطعام لأناس كثيرين."}
+     ]},
+    {h:"Include / Contain / Consist of", ar:"ثلاث كلمات متقاربة لكن بمعنى مختلف: <b>include</b> = يشمل (جزء من كل)، <b>contain</b> = يحتوي على (المحتوى الداخلي الفعلي)، <b>consist of</b> = يتكوّن من (أجزاء منفصلة يمكن فكّها وتركيبها).",
+     pattern:"sth + include(s) / contain(s) / consist(s) of + sth",
+     examples:[
+       {en:"The price includes breakfast.", ar:"السعر يشمل الإفطار."},
+       {en:"The bottle contains water.", ar:"الزجاجة تحتوي على ماء."},
+       {en:"The team consists of eleven players.", ar:"الفريق يتكوّن من أحد عشر لاعبًا."}
+     ]},
+    {h:"Social / Sociable / Introvert / Extrovert", ar:"<b>social</b> = اجتماعي (متعلق بالمجتمع بشكل عام). <b>sociable</b> = شخص يحب مخالطة الناس بطبعه. <b>introvert</b> = شخص انطوائي يفضّل الهدوء والوحدة. <b>extrovert</b> = شخص منفتح يحب التجمعات.",
+     pattern:"",
+     examples:[
+       {en:"He is a sociable person who loves parties.", ar:"هو شخص اجتماعي يحب الحفلات."},
+       {en:"She is an introvert; she prefers reading alone.", ar:"هي انطوائية، تفضل القراءة بمفردها."}
+     ]},
+    {h:"Indoor/Indoors & Outdoor/Outdoors", ar:"<b>indoor / outdoor</b> صفة تسبق اسمًا (داخلي/خارجي). <b>indoors / outdoors</b> ظرف يصف مكان الفعل (في الداخل/في الخارج) ولا يأتي بعده اسم.",
+     pattern:"adj: indoor/outdoor + noun\nadv: verb + indoors/outdoors",
+     examples:[
+       {en:"Football and basketball are outdoor games.", ar:"كرة القدم وكرة السلة رياضات خارجية."},
+       {en:"We stayed indoors because of the rain.", ar:"بقينا في الداخل بسبب المطر."}
+     ]},
+    {h:"Although / Even though / Despite / In spite of", ar:"<b>although = even though</b> = بالرغم من، يليها جملة كاملة (فاعل + فعل). <b>despite = in spite of</b> = بالرغم من، يليها اسم أو Ving فقط (بدون جملة كاملة).",
+     pattern:"although/even though + subject + verb\ndespite/in spite of + noun / Ving",
+     examples:[
+       {en:"Although it was raining, we went out.", ar:"بالرغم من أنها كانت تمطر، خرجنا."},
+       {en:"Despite the rain, we went out.", ar:"بالرغم من المطر، خرجنا."}
+     ]}
+  ],
+  quiz:[
+    {q:"My parents ___ me with everything I need.", c:["provide","include","contain","consist"],a:0,ex:"provide + sb + with sth."},
+    {q:"This box ___ old photos.", c:["includes","contains","provides","consists"],a:1,ex:"contain = يحتوي على المحتوى الداخلي الفعلي."},
+    {q:"The team ___ eleven players.", c:["contains","includes","consists of","provides"],a:2,ex:"consist of = يتكون من أجزاء."},
+    {q:"Football is an ___ game.", c:["indoors","outdoor","indoor","outdoors"],a:1,ex:"صفة قبل اسم = outdoor (بدون s)."},
+    {q:"We stayed ___ all weekend because of the storm.", c:["indoor","outdoor","indoors","outdoors"],a:2,ex:"ظرف بعد فعل = indoors (بدون اسم بعده)."},
+    {q:"She loves meeting new people; she's very ___.", c:["social","sociable","introvert","include"],a:1,ex:"sociable = يحب مخالطة الناس بطبعه."},
+    {q:"___ the heavy traffic, we arrived on time.", c:["Although","Even though","Despite","While"],a:2,ex:"يليها اسم (traffic) بدون جملة، إذن despite."},
+    {q:"___ he studied hard, he didn't pass.", c:["Despite","In spite of","Although","With"],a:2,ex:"يليها جملة كاملة (he studied)، إذن although."},
+    {q:"The price ___ breakfast and dinner.", c:["contains","consists","includes","provides"],a:2,ex:"include = يشمل كجزء من الكل."},
+    {q:"My uncle provides money ___ poor students.", c:["with","for","of","to"],a:1,ex:"provide sth for sb."},
+    {q:"He prefers being alone; he's an ___.", c:["extrovert","sociable","introvert","social"],a:2,ex:"introvert = انطوائي يفضل الهدوء."},
+    {q:"___ of the rain, the match continued.", c:["Although","Despite","In spite","In spite of"],a:3,ex:"in spite of + اسم = بالرغم من."}
+  ]
+},
+{
+  id:"causative-adj",
+  title:"النتيجة والصفات",
+  short:"Make + obj + adj/inf, -ed/-ing adjectives",
+  icon:"⚙️",
+  sections:[
+    {h:"Make + obj + adjective", ar:"يُستخدم لوصف نتيجة فورية يشعر بها شخص أو شيء بسبب فعل ما.",
+     pattern:"make + obj + adj",
+     examples:[{en:"Bad news made him feel upset.", ar:"الخبر السيء جعله يشعر بالانزعاج."}]},
+    {h:"Make + obj + infinitive (بدون to)", ar:"يُستخدم لإجبار شخص على فعل شيء.",
+     pattern:"make + obj + inf",
+     examples:[{en:"It's known that stress makes people react badly.", ar:"من المعروف أن التوتر يجعل الناس يتفاعلون بشكل سيء."}]},
+    {h:"المبني للمجهول لنفس التركيب", ar:"عند تحويل الجملة للمجهول تضاف to قبل الفعل.",
+     pattern:"obj + be + made + to + inf",
+     examples:[{en:"People are made to react badly under stress.", ar:"الناس يُجعلون يتفاعلون بشكل سيء تحت الضغط."}]},
+    {h:"صفات -ed و -ing", ar:"<b>-ed</b> تصف شعور الشخص نفسه. <b>-ing</b> تصف الشيء أو الموقف الذي يسبب هذا الشعور.",
+     pattern:"person + is + adj-ed\nthing/situation + is + adj-ing",
+     examples:[
+       {en:"I'm interested in this subject.", ar:"أنا مهتم بهذا الموضوع."},
+       {en:"This subject is interesting.", ar:"هذا الموضوع ممتع/مثير للاهتمام."}
+     ]},
+    {h:"Career, Profession, Work, Job", ar:"<b>career</b> = المسار المهني الكامل وتسلسل الوظائف عبر السنين. <b>profession</b> = مهنة تحتاج تدريبًا وتأهيلًا خاصًا (طبيب، محامٍ). <b>work</b> = العمل بشكل عام (فعل أو اسم غير معدود). <b>job</b> = وظيفة محددة يقوم بها شخص مقابل راتب.",
+     pattern:"",
+     examples:[
+       {en:"She built a successful career in medicine.", ar:"بنت مسيرة مهنية ناجحة في الطب."},
+       {en:"Teaching is a respected profession.", ar:"التدريس مهنة محترمة."},
+       {en:"He found a new job last week.", ar:"وجد وظيفة جديدة الأسبوع الماضي."}
+     ]}
+  ],
+  quiz:[
+    {q:"Loud noise makes me ___.", c:["annoy","annoying","annoyed","to annoy"],a:2,ex:"شعور الشخص = annoyed."},
+    {q:"This film is really ___.", c:["bored","boring","bore","to bore"],a:1,ex:"الشيء المسبب للشعور = boring."},
+    {q:"The manager made everyone ___ overtime.", c:["to work","work","working","worked"],a:1,ex:"make + obj + inf بدون to."},
+    {q:"Employees ___ to work overtime.", c:["make","made","are made","are making"],a:2,ex:"في المبني للمجهول تُضاف to: are made to work."},
+    {q:"Bad weather made the trip ___.", c:["cancel","canceled","to cancel","canceling"],a:1,ex:"make + obj + adjective (نتيجة)."},
+    {q:"Being a doctor is a respected ___.", c:["job","work","profession","career"],a:2,ex:"مهنة تحتاج تأهيل خاص = profession."},
+    {q:"I've had many jobs during my ___ in journalism.", c:["work","job","career","profession"],a:2,ex:"المسار الوظيفي الكامل = career."},
+    {q:"I feel ___ after the long exam.", c:["exhausting","exhaust","exhausted","to exhaust"],a:2,ex:"شعور الشخص = exhausted."},
+    {q:"She was ___ to clean her room by her mother.", c:["made","make","making","makes"],a:0,ex:"مبني للمجهول: was made to clean."},
+    {q:"He couldn't find ___ after graduation.", c:["a career","a work","a job","a profession"],a:2,ex:"وظيفة محددة = a job."}
+  ]
+},
+{
+  id:"quantifiers",
+  title:"العموميات: Every, Each, Both, All",
+  short:"Every / Each / Both / All + noun",
+  icon:"🔢",
+  sections:[
+    {h:"Every & Each", ar:"كلاهما + اسم مفرد. <b>every</b> = كل واحد كجزء من المجموعة ككل (تعميم). <b>each</b> = كل واحد بشكل فردي منفصل عن الباقي.",
+     pattern:"every / each + singular noun",
+     examples:[
+       {en:"Every student must bring a pen.", ar:"كل طالب يجب أن يحضر قلمًا (تعميم)."},
+       {en:"Each eye hurts much.", ar:"كل عين تؤلم كثيرًا (بشكل فردي)."}
+     ]},
+    {h:"Both & All", ar:"كلاهما + اسم جمع. <b>both</b> تُستخدم لشيئين اثنين فقط (كلاهما). <b>all</b> تُستخدم للجميع (ثلاثة فأكثر أو كمية).",
+     pattern:"both / all + plural noun",
+     examples:[{en:"Both hands hurt badly.", ar:"كلتا اليدين تؤلمان بشدة."}]},
+    {h:"Each of / Every of", ar:"يمكن قول <b>each of</b> + اسم جمع محدد، لكن لا يصح أبدًا قول <b>every of</b> (خطأ شائع).",
+     pattern:"each of + (the/my/...) + plural noun ✓\nevery of + plural noun ✗",
+     examples:[{en:"Each of my brothers has a mobile phone.", ar:"كل واحد من إخوتي لديه هاتف محمول."}]},
+    {h:"مفردات مرتبطة: Routine, Habit, Tradition, Red tape", ar:"<b>routine</b> = نظام حياة يومي متكرر. <b>habit</b> = عادة فردية شخصية. <b>tradition</b> = عادة جماعية أو موروثة عبر الأجيال. <b>red tape</b> = إجراءات حكومية روتينية بطيئة ومعقدة.",
+     pattern:"",
+     examples:[
+       {en:"Brushing your teeth is part of your daily routine.", ar:"تنظيف أسنانك جزء من روتينك اليومي."},
+       {en:"Wearing traditional clothes is a family tradition.", ar:"ارتداء الملابس التقليدية عادة عائلية موروثة."}
+     ]}
+  ],
+  quiz:[
+    {q:"___ student in this class is hardworking.", c:["Each","All","Both","Every"],a:3,ex:"every + مفرد (تعميم)."},
+    {q:"___ of my hands hurt after training.", c:["Every","Each","Both","All"],a:2,ex:"لشيئين اثنين = both + جمع."},
+    {q:"___ of my brothers has a mobile phone.", c:["Every","Each","All","Both"],a:1,ex:"each of + جمع محدد صحيح."},
+    {q:"___ students passed the exam this year.", c:["Every","Each","All","Both"],a:2,ex:"للجميع (أكثر من اثنين) = all + جمع."},
+    {q:"Choose the CORRECT sentence:", c:["Every of my friends came.","Each of my friends came.","All of my friend came.","Both of my friend came."],a:1,ex:"لا يصح استخدام every of أبدًا."},
+    {q:"Waking up at 6 am is part of his daily ___.", c:["tradition","habit","routine","red tape"],a:2,ex:"نظام حياة يومي = routine."},
+    {q:"Getting a government paper took ages because of the ___.", c:["red tape","tradition","habit","routine"],a:0,ex:"إجراءات حكومية بطيئة = red tape."}
+  ]
+},
+{
+  id:"time-clauses",
+  title:"جمل الزمن: While, When, During, On",
+  short:"While / When / During / On + Ving",
+  icon:"⏱️",
+  sections:[
+    {h:"While + الماضي المستمر", ar:"تُستخدم لوصف حدثين وقعا في نفس الوقت في الماضي (كلاهما مستمر)، أو حدث مستمر قوطعه حدث آخر مفاجئ.",
+     pattern:"While + sub + was/were + Ving, sub + past simple\nWhile + sub + was/were + Ving, sub + was/were + Ving",
+     examples:[
+       {en:"While I was studying, my father came.", ar:"بينما كنت أذاكر، جاء والدي."},
+       {en:"While my mother was cooking, I was studying English.", ar:"بينما كانت أمي تطبخ، كنت أذاكر الإنجليزية."}
+     ]},
+    {h:"While + Ving (بدون فاعل)", ar:"عندما يكون فاعل الجملتين نفسه، يمكن حذف الفاعل والفعل المساعد من جملة while واستخدام Ving مباشرة.",
+     pattern:"While + Ving, sub + verb",
+     examples:[{en:"While studying, Ahmed's brother came.", ar:"بينما كان يذاكر، جاء أخو أحمد."}]},
+    {h:"When + الماضي البسيط والمستمر", ar:"When تأتي مرة في أول الجملة ومرة في وسطها. تُستخدم مع (ماضي بسيط + ماضي مستمر) أو (ماضي مستمر + ماضي بسيط) لوصف حدث قصير قاطع حدثًا طويلًا.",
+     pattern:"When + past simple, past continuous\npast continuous + when + past simple",
+     examples:[{en:"My phone rang when I was studying English.", ar:"رن هاتفي بينما كنت أذاكر الإنجليزية."}]},
+    {h:"During + اسم", ar:"تُستخدم لحدث وقع مرة واحدة أثناء فترة زمنية (اسم)، وليس تكرارًا.",
+     pattern:"During + noun, past simple",
+     examples:[{en:"During the study, I felt tired.", ar:"أثناء المذاكرة، شعرت بالتعب."}]},
+    {h:"On + Ving (بدون فاعل)", ar:"تُستخدم لوصف حدث وقع فور حدوث حدث آخر (بمجرد أن...)، بدون فاعل بعدها.",
+     pattern:"On + Ving, sub + past simple",
+     examples:[{en:"On driving, I saw the accident.", ar:"بمجرد أن قدت السيارة، رأيت الحادث."}]},
+    {h:"When + Ving (حالة خاصة)", ar:"لا يجوز استخدام When مباشرة مع Ving إلا مع أفعال الحالة والشعور فقط (having, feeling, thinking) وليس الأفعال الحركية.",
+     pattern:"When + having/feeling/thinking + ..., sub + verb",
+     examples:[{en:"When eating many sweets, I felt ill.", ar:"عندما أكلت حلويات كثيرة، شعرت بالمرض."}]}
+  ],
+  quiz:[
+    {q:"While I ___ dinner, my phone rang.", c:["cook","was cooking","cooked","cooking"],a:1,ex:"while + كان يحدث = past continuous."},
+    {q:"___ studying, Ahmed's brother came.", c:["When","While","During","On"],a:1,ex:"حذف الفاعل بعد while يحتاج Ving مباشرة."},
+    {q:"My phone rang ___ I was studying.", c:["during","on","when","despite"],a:2,ex:"حدث قصير قاطع حدثًا طويلًا = when."},
+    {q:"___ the exam, I felt nervous.", c:["While","During","When","On"],a:1,ex:"During + اسم لحدث وقع مرة واحدة."},
+    {q:"___ arriving home, I called my mother.", c:["When","While","During","On"],a:3,ex:"On + Ving = بمجرد أن."},
+    {q:"___ eating many sweets, I felt ill.", c:["While","When","During","On"],a:1,ex:"when + Ving يجوز فقط مع أفعال الحالة/الشعور."},
+    {q:"While my mum was cooking, I ___ English.", c:["studied","was studying","study","studying"],a:1,ex:"حدثان مستمران معًا = past continuous في الجملتين."},
+    {q:"On ___ the accident, I stopped the car.", c:["see","seeing","saw","to see"],a:1,ex:"On + Ving."}
+  ]
+},
+{
+  id:"cond-basic",
+  title:"جمل الشرط (١): Zero & First Conditional",
+  short:"IF Conditionals overview",
+  icon:"🔀",
+  sections:[
+    {h:"Zero Conditional (الشرط الصفري)", ar:"يُستخدم للحقائق العامة والعلمية الثابتة التي تحدث دائمًا.",
+     pattern:"IF/When + present simple, present simple",
+     examples:[{en:"If you heat ice, it melts.", ar:"إذا سخّنت الثلج، يذوب."}]},
+    {h:"First Conditional (الشرط الأول)", ar:"يُستخدم لاحتمال حقيقي وقوي في المستقبل.",
+     pattern:"IF/When + present simple, will/can/may/shall + inf",
+     examples:[{en:"If you wake up early, you will go to school on time.", ar:"إذا استيقظت مبكرًا، ستذهب إلى المدرسة في الوقت المحدد."}]},
+    {h:"السؤال في الشرط الأول", ar:"جملة الشرط تبقى كما هي، وجواب الشرط يتحول لصيغة السؤال.",
+     pattern:"IF + present simple, will/can/may + sub + inf?\nIF + present simple, wh + do/does + sub + inf?",
+     examples:[{en:"If you wake up early, will you go to the gym?", ar:"إذا استيقظت مبكرًا، هل ستذهب إلى الجيم؟"}]},
+    {h:"Unless و In case", ar:"<b>unless</b> = if...not (إلا إذا/ما لم). <b>in case</b> = تحسبًا لحدوث شيء في المستقبل.",
+     pattern:"unless + present simple, will + inf",
+     examples:[{en:"Unless you study hard, you won't pass.", ar:"ما لم تذاكر بجد، لن تنجح."}]}
+  ],
+  quiz:[
+    {q:"If you heat water to 100°C, it ___.", c:["will boil","boils","boiled","would boil"],a:1,ex:"حقيقة علمية ثابتة = zero conditional."},
+    {q:"If it rains tomorrow, we ___ stay home.", c:["will","would","are","were"],a:0,ex:"احتمال مستقبلي حقيقي = first conditional (will)."},
+    {q:"If you study hard, you ___ get high marks.", c:["would","will","are","were"],a:1,ex:"first conditional."},
+    {q:"___ you study hard, you will get high marks?", c:["Unless","If","In case","When"],a:1,ex:"سؤال بسيط بـ IF."},
+    {q:"___ you don't hurry, you will miss the train.", c:["If","Unless","When","In case"],a:0,ex:"If + don't = If not - لكن unless لا تحتاج not."},
+    {q:"___ you study hard, you won't pass.", c:["If","Unless","When","Since"],a:1,ex:"unless = if...not."},
+    {q:"If ice gets warm, it ___.", c:["melted","will melt","melts","would melt"],a:2,ex:"zero conditional - حقيقة عامة."},
+    {q:"If you are in trouble, what ___ you do?", c:["will","would","do","did"],a:0,ex:"سؤال wh في الشرط الأول."}
+  ]
+},
+{
+  id:"cond-second",
+  title:"جمل الشرط (٢): Second Conditional",
+  short:"IF + past simple, would/could/might",
+  icon:"🌫️",
+  sections:[
+    {h:"الاستخدام", ar:"يُستخدم لافتراض غير حقيقي أو خيالي في الحاضر أو المستقبل (عكس الواقع الآن).",
+     pattern:"IF/unless + past simple, sub + would/could/might + inf",
+     examples:[
+       {en:"If I had a lot of money, I would buy the world.", ar:"لو كان معي الكثير من المال، لاشتريت العالم."},
+       {en:"If she had to work, she would look for a job.", ar:"لو اضطرت للعمل، لبحثت عن وظيفة."}
+     ]},
+    {h:"السؤال", ar:"تنعكس was would للسؤال.",
+     pattern:"IF + past simple, would/could/might + sub + inf?",
+     examples:[{en:"If you had enough money, would you buy this phone?", ar:"لو كان معك مال كافٍ، هل ستشتري هذا الهاتف؟"}]},
+    {h:"If I were you...", ar:"تُستخدم مع كل الضمائر (was تصبح were) لإعطاء نصيحة، وتُعادل should.",
+     pattern:"If I were you, I would + inf = You should + inf",
+     examples:[{en:"If I were you, I would study hard. = You should study hard.", ar:"لو كنت مكانك، لذاكرت بجد. = يجب أن تذاكر بجد."}]}
+  ],
+  quiz:[
+    {q:"If I ___ much money, I would travel the world.", c:["have","had","has","having"],a:1,ex:"second conditional: IF + past simple."},
+    {q:"If I were you, I ___ study harder.", c:["will","would","am","was"],a:1,ex:"would + inf بعد if+past simple."},
+    {q:"If she had to work, she ___ look for a job.", c:["will","would","does","did"],a:1,ex:"second conditional - افتراض غير حقيقي."},
+    {q:"If I ___ you, I would apologize.", c:["am","was","were","be"],a:2,ex:"If I were you (مع كل الضمائر)."},
+    {q:"If I were you, I would study hard. = You ___ study hard.", c:["must","should","can","will"],a:1,ex:"If I were you = should."},
+    {q:"___ you had enough money, would you buy a new car?", c:["When","Unless","If","Since"],a:2,ex:"سؤال بشرط ثانٍ."},
+    {q:"If I had wings, I ___ fly.", c:["will","would","can","do"],a:1,ex:"افتراض خيالي غير واقعي = second conditional."}
+  ]
+},
+{
+  id:"cond-third",
+  title:"جمل الشرط (٣): Third Conditional",
+  short:"IF + had + P.P, would have + P.P",
+  icon:"⏪",
+  sections:[
+    {h:"الاستخدام", ar:"يُستخدم لافتراض غير حقيقي في الماضي (شيء لم يحدث فعلًا) وغالبًا يحمل معنى الندم.",
+     pattern:"IF + sub + had + P.P, sub + would/could/might + have + P.P",
+     examples:[{en:"If I had gone to school early, I would have got a present.", ar:"لو كنت ذهبت إلى المدرسة مبكرًا، لكنت حصلت على هدية."}]},
+    {h:"السؤال", ar:"جواب الشرط يأتي أولًا في صيغة السؤال، ثم جملة الشرط.",
+     pattern:"would/could/might + sub + have + P.P, IF + sub + had + P.P?",
+     examples:[{en:"Would you have got a present if you had gone early?", ar:"هل كنت ستحصل على هدية لو ذهبت مبكرًا؟"}]},
+    {h:"Would have + to + inf (نتيجة إلزامية)", ar:"عندما تكون نتيجة جملة الشرط الثالثة إلزامًا حدث بالفعل، تُستخدم would have to.",
+     pattern:"IF + sub + had + P.P, sub + would have + to + inf",
+     examples:[{en:"If I had got high marks, I would have to buy a phone.", ar:"لو كنت حصلت على درجات عالية، كان سيتوجب عليّ شراء هاتف."}]}
+  ],
+  quiz:[
+    {q:"If I ___ hard, I would have passed the exam.", c:["study","studied","had studied","have studied"],a:2,ex:"third conditional: IF + had + P.P."},
+    {q:"If I had studied hard, I ___ passed the exam.", c:["would have","would","will have","had"],a:0,ex:"would have + P.P في جواب الشرط."},
+    {q:"If you had gone to school early, you ___ a present.", c:["would get","would have got","will get","get"],a:1,ex:"third conditional كاملة."},
+    {q:"___ you have passed if you had studied?", c:["Did","Would","Do","Were"],a:1,ex:"سؤال بالشرط الثالث: would + sub + have + P.P."},
+    {q:"If she had woken up early, she ___ late for school.", c:["wouldn't be","wouldn't have been","isn't","wasn't"],a:1,ex:"نفي الشرط الثالث: wouldn't have been."},
+    {q:"If I had got high marks, I ___ to buy a new phone.", c:["would have","would","would have had","will have"],a:0,ex:"would have to + inf = نتيجة إلزامية."}
+  ]
+},
+{
+  id:"unless-without",
+  title:"استثناءات الشرط: Unless, Without, But for",
+  short:"Unless / Without / If it weren't for",
+  icon:"🚫",
+  sections:[
+    {h:"Unless", ar:"تعني if...not (إلا إذا / ما لم)، لذلك لا تُستخدم أبدًا مع don't/didn't لأن معنى النفي موجود بالفعل داخلها.",
+     pattern:"unless + present/past simple, ...",
+     examples:[{en:"Unless you take medicine, you will feel tired.", ar:"ما لم تتناول الدواء، ستشعر بالتعب."}]},
+    {h:"Without / But for", ar:"تعني (بدون)، ويأتي بعدها اسم أو Ving أو مصدر.",
+     pattern:"without / but for + noun / Ving",
+     examples:[{en:"Without watching films, we will feel good.", ar:"بدون مشاهدة الأفلام، سنشعر بتحسن."}]},
+    {h:"If it weren't for", ar:"تعني (لولا)، وتُستخدم لوصف أن شيئًا ما هو السبب الوحيد وراء نتيجة معينة، ويليها اسم أو Ving.",
+     pattern:"If it weren't for + noun / Ving, sub + would/could/might + inf",
+     examples:[{en:"If it weren't for having enough money, you wouldn't buy a new car.", ar:"لولا وجود مال كافٍ، ما كنت لتشتري سيارة جديدة."}]},
+    {h:"حروف الجر الشرطية الأخرى", ar:"تُستخدم للتعبير عن شرط باسم فقط بدون جملة كاملة.",
+     pattern:"with / by / in case of + noun/inf/Ving",
+     examples:[{en:"With taking medicine, he will get better.", ar:"مع تناول الدواء، سيتحسن."}]}
+  ],
+  quiz:[
+    {q:"___ you take medicine, you will feel better.", c:["If","Unless","If not","When not"],a:1,ex:"unless = if...not."},
+    {q:"Choose the CORRECT sentence:", c:["Unless you don't hurry, you'll be late.","Unless you hurry, you'll be late.","Unless not hurry, you'll be late.","If unless you hurry..."],a:1,ex:"unless لا تُستخدم مع النفي أبدًا."},
+    {q:"___ watching too much TV, you will sleep well.", c:["Unless","Without","If","When"],a:1,ex:"without + Ving = بدون."},
+    {q:"___ my father's help, I couldn't have finished this project.", c:["Without","Unless","If","In case"],a:0,ex:"without/but for + اسم = لولا/بدون."},
+    {q:"If it weren't ___ your support, I would have failed.", c:["of","for","with","in"],a:1,ex:"If it weren't for = لولا."},
+    {q:"___ taking medicine, he will get better.", c:["With","Unless","Without","If not"],a:0,ex:"with + Ving = مع فعل شيء."}
+  ]
+},
+{
+  id:"wishes",
+  title:"التمني والتفضيل",
+  short:"Wish / Would rather / It's time",
+  icon:"✨",
+  sections:[
+    {h:"Wish / Would rather / It's time + الماضي البسيط", ar:"تُستخدم للتعبير عن تمني شيء غير حقيقي في الحاضر أو رغبة في حدوث فعل الآن (رغم أن الفعل ماضٍ شكلًا، معناه حاضر).",
+     pattern:"I wish / I'd rather / It's time + sub + past simple",
+     examples:[
+       {en:"I wish Ahmed was a programmer.", ar:"ليتني/أتمنى لو كان أحمد مبرمجًا."},
+       {en:"I'd rather Ahmed studied now.", ar:"أفضّل لو أن أحمد يذاكر الآن."},
+       {en:"It's time we all studied.", ar:"حان الوقت لنذاكر جميعًا."}
+     ]},
+    {h:"Would rather + مصدر (بدون فاعل)", ar:"عندما لا يوجد فاعل بعد would rather (نفس المتحدث)، تُستخدم المصدر مباشرة بدون to.",
+     pattern:"I would rather + inf",
+     examples:[{en:"I would rather revise for tomorrow's exam.", ar:"أفضّل أن أراجع لامتحان الغد."}]},
+    {h:"صيغ أخرى للنصيحة القوية", ar:"تعبيرات تحمل نفس معنى should تقريبًا.",
+     pattern:"had better + inf\ncan/could you + inf?",
+     examples:[
+       {en:"You had better ask your mother if she's tired.", ar:"من الأفضل أن تسأل أمك إذا كانت متعبة."},
+       {en:"Could you help me with this, please?", ar:"هل يمكنك مساعدتي في هذا من فضلك؟"}
+     ]}
+  ],
+  quiz:[
+    {q:"I wish I ___ a doctor.", c:["am","was","be","will be"],a:1,ex:"wish + past simple لتمني غير حقيقي."},
+    {q:"It's time we ___ home.", c:["go","went","going","will go"],a:1,ex:"it's time + past simple."},
+    {q:"I'd rather you ___ quietly.", c:["study","studied","to study","studying"],a:1,ex:"I'd rather + sub + past simple."},
+    {q:"I would rather ___ at home tonight.", c:["stay","stayed","to stay","staying"],a:0,ex:"would rather + مصدر بدون فاعل بعده = بدون to."},
+    {q:"You ___ apologize to her now.", c:["had better","had better to","have better","had rather"],a:0,ex:"had better + مصدر بدون to."},
+    {q:"___ you help me carry this bag?", c:["Would","Could","Should","Must"],a:1,ex:"could you = طلب مهذب."}
+  ]
+},
+{
+  id:"obligation",
+  title:"الإلزام والنصيحة",
+  short:"Must/Mustn't, Have to, Should",
+  icon:"⚠️",
+  sections:[
+    {h:"Must / Mustn't", ar:"<b>must</b> = إلزام أو رأي شخصي قوي من المتحدث. <b>mustn't</b> = ممنوع منعًا باتًا (نهي قوي).",
+     pattern:"sub + must/mustn't + inf",
+     examples:[{en:"You mustn't smoke in school.", ar:"ممنوع عليك التدخين في المدرسة."}]},
+    {h:"Have to / Has to / Need to", ar:"تُستخدم لإلزام خارجي (قانون أو قاعدة، وليس رأي المتحدث الشخصي).",
+     pattern:"sub + have to/has to/need to + inf",
+     examples:[{en:"We have to go to school on time.", ar:"يجب أن نذهب إلى المدرسة في الوقت المحدد."}]},
+    {h:"الفرق بين Mustn't و Don't have to", ar:"<b>mustn't</b> = ممنوع فعله. <b>don't have to / don't need to</b> = غير ملزم بفعله، لكن يمكن فعله إن أردت.",
+     pattern:"mustn't = ممنوع\ndon't have to / don't need to = غير لازم لكن ممكن",
+     examples:[
+       {en:"You mustn't smoke here. (ممنوع)", ar:"ممنوع التدخين هنا."},
+       {en:"You don't have to come if you're busy. (اختياري)", ar:"لست مضطرًا للحضور إذا كنت مشغولًا."}
+     ]},
+    {h:"Needn't have + P.P مقابل Didn't have to", ar:"<b>needn't have + P.P</b> = فعل الشخص شيئًا بالفعل لكن تبين أنه لم يكن ضروريًا. <b>didn't have to</b> = لم يكن الفعل ضروريًا أصلًا (ولم يفعله الشخص).",
+     pattern:"needn't have + P.P (فعله رغم أنه لم يكن ضروريًا)\ndidn't have to + inf (لم يكن ضروريًا ولم يفعله)",
+     examples:[
+       {en:"You needn't have gone to school. (ذهب لكن لم يكن ضروريًا)", ar:"لم يكن عليك الذهاب للمدرسة (لكنك ذهبت فعلًا)."},
+       {en:"You didn't have to go to school. (لم يذهب أصلًا)", ar:"لم يكن عليك الذهاب للمدرسة (ولم تذهب)."}
+     ]},
+    {h:"Should / Shouldn't / Ought to", ar:"تُستخدم للنصيحة (وليس الإلزام).",
+     pattern:"sub + should/shouldn't/ought to/oughtn't to + inf",
+     examples:[{en:"You should eat healthy food every day.", ar:"يجب أن تأكل طعامًا صحيًا كل يوم."}]},
+    {h:"المبني للمجهول", ar:"",
+     pattern:"obj + must/mustn't/should/shouldn't + be + P.P",
+     examples:[{en:"A gift must be bought by Ahmed.", ar:"يجب شراء هدية بواسطة أحمد."}]}
+  ],
+  quiz:[
+    {q:"You ___ smoke in the hospital. It's forbidden.", c:["don't have to","mustn't","needn't","shouldn't"],a:1,ex:"ممنوع تمامًا = mustn't."},
+    {q:"You ___ come to the party if you don't want to.", c:["mustn't","don't have to","shouldn't","oughtn't to"],a:1,ex:"غير ملزم لكن ممكن = don't have to."},
+    {q:"We ___ eat healthy food to stay fit.", c:["mustn't","should","don't have to","needn't"],a:1,ex:"نصيحة = should."},
+    {q:"I already had lunch, so you ___ have cooked for me.", c:["didn't have to","needn't","needn't have","mustn't"],a:2,ex:"فعله لكن تبين أنه غير ضروري = needn't have + P.P."},
+    {q:"The shop was closed, so I ___ buy anything.", c:["needn't have","didn't have to","mustn't","needn't"],a:1,ex:"لم يكن ضروريًا ولم يحدث = didn't have to."},
+    {q:"A gift ___ bought by Ahmed.", c:["must","must be","must to be","is must"],a:1,ex:"مبني للمجهول: obj + must + be + P.P."},
+    {q:"What ___ I do to improve my English?", c:["must","should","mustn't","need"],a:1,ex:"نصيحة بسؤال wh = should."},
+    {q:"Students ___ obey the school rules.", c:["should","have to","would","might"],a:1,ex:"إلزام خارجي (قاعدة) = have to."}
+  ]
+},
+{
+  id:"causative",
+  title:"أفعال التسبب: Make, Let, Have, Get, Allow",
+  short:"Make/Let/Have/Get/Allow + obj + inf",
+  icon:"🎛️",
+  sections:[
+    {h:"Make & Let (بدون to)", ar:"<b>make</b> = يجبر شخصًا على فعل شيء. <b>let</b> = يسمح لشخص بفعل شيء.",
+     pattern:"make/let + obj + inf (بدون to)",
+     examples:[
+       {en:"He didn't let them smoke.", ar:"لم يسمح لهم بالتدخين."},
+       {en:"His teacher made him rewrite the essay.", ar:"جعلته معلمته يعيد كتابة المقال."}
+     ]},
+    {h:"Allow / Permit (بـ to)", ar:"تعني نفس معنى let لكن بشكل أكثر رسمية، ويليها to.",
+     pattern:"allow/permit + obj + to + inf",
+     examples:[{en:"He didn't allow them to smoke.", ar:"لم يسمح لهم بالتدخين."}]},
+    {h:"Help (بالطريقتين)", ar:"يمكن أن تأتي بـ to أو بدونها، وكلاهما صحيح.",
+     pattern:"help + obj + (to) + inf",
+     examples:[{en:"Can you help me carry these bags?", ar:"هل يمكنك مساعدتي في حمل هذه الحقائب؟"}]},
+    {h:"Have / Get + obj + P.P (المبني للمجهول التسبيبي)", ar:"تُستخدم عندما يطلب الشخص من آخر (متخصص عادة) أن يفعل له شيئًا.",
+     pattern:"have/get + obj + P.P",
+     examples:[{en:"I got my room cleaned.", ar:"جعلت غرفتي تُنظَّف (بواسطة شخص آخر)."}]},
+    {h:"Get + obj + to + inf", ar:"تعني إقناع شخص أو تحفيزه ليفعل شيئًا.",
+     pattern:"get + obj + to + inf",
+     examples:[{en:"She got her brother to help her.", ar:"أقنعت أخاها بمساعدتها."}]}
+  ],
+  quiz:[
+    {q:"My brother doesn't allow his friends ___ in the park.", c:["smoke","to smoke","smoking","smoked"],a:1,ex:"allow + obj + to + inf."},
+    {q:"He didn't let them ___.", c:["to smoke","smoke","smoking","smoked"],a:1,ex:"let + obj + inf بدون to."},
+    {q:"I got my room ___.", c:["clean","cleaning","cleaned","to clean"],a:2,ex:"get + obj + P.P (تسبيبي)."},
+    {q:"The teacher made the students ___ the homework again.", c:["do","to do","doing","did"],a:0,ex:"make + obj + inf بدون to."},
+    {q:"Can you help me ___ this box?", c:["carry","carrying","carried","to carrying"],a:0,ex:"help + obj + inf (بدون to صحيحة أيضًا)."},
+    {q:"She got her brother ___ her with the homework.", c:["help","helping","to help","helped"],a:2,ex:"get + obj + to + inf = إقناع."},
+    {q:"Too much rain ___ the river to flood.", c:["made","caused","let","had"],a:1,ex:"cause + obj + to + inf = سبّب."}
+  ]
+},
+{
+  id:"usedto",
+  title:"العادات: Used to, Be used to, Get used to",
+  short:"Used to / Be used to / Get used to",
+  icon:"🔁",
+  sections:[
+    {h:"Used to + مصدر", ar:"يُستخدم لوصف عادة أو حالة تكررت في الماضي وتوقفت الآن تمامًا.",
+     pattern:"used to + inf\nnegative: didn't use to + inf\nquestion: Did + sub + use to + inf?",
+     examples:[
+       {en:"I used to play football.", ar:"كنت أعتاد لعب كرة القدم (وتوقفت)."},
+       {en:"Ahmed used to get up late but now he doesn't.", ar:"كان أحمد يعتاد الاستيقاظ متأخرًا لكنه الآن لا يفعل."}
+     ]},
+    {h:"Be used to + Ving / اسم", ar:"يعني أن الشخص معتاد على شيء في الحاضر (ليست عادة ماضية، بل حالة اعتياد حالية).",
+     pattern:"am/is/are + used to + Ving/noun",
+     examples:[{en:"I'm used to sleeping late.", ar:"أنا معتاد على النوم متأخرًا (حاليًا)."}]},
+    {h:"Get used to + Ving", ar:"يعني أن الشخص أصبح يعتاد على شيء تدريجيًا بمرور الوقت.",
+     pattern:"get/got/become + used to + Ving",
+     examples:[{en:"He is getting used to living alone.", ar:"بدأ يعتاد تدريجيًا على العيش وحيدًا."}]},
+    {h:"Was/Were + used to + Ving (في الماضي)", ar:"تُستخدم للتعبير عن اعتياد كان موجودًا في الماضي.",
+     pattern:"was/were + used to + Ving",
+     examples:[{en:"Ahmed was used to playing chess.", ar:"كان أحمد معتادًا على لعب الشطرنج."}]},
+    {h:"جملة المقارنة الشائعة (but now)", ar:"جملة نموذجية للمقارنة بين عادة ماضية توقفت وحال حاضر مختلف.",
+     pattern:"sub + used to + inf + but now + sub + doesn't/don't",
+     examples:[{en:"Ahmed used to get up late but now he doesn't.", ar:"كان أحمد يعتاد الاستيقاظ متأخرًا لكنه الآن لا يفعل."}]}
+  ],
+  quiz:[
+    {q:"When I was young, I ___ play in the street.", c:["use to","used to","am used to","was used to"],a:1,ex:"عادة ماضية توقفت = used to + inf."},
+    {q:"I'm used to ___ up early now.", c:["wake","waking","woke","wake to"],a:1,ex:"be used to + Ving = معتاد حاليًا."},
+    {q:"He is slowly getting used to ___ alone.", c:["live","living","lived","to live"],a:1,ex:"get used to + Ving = يعتاد تدريجيًا."},
+    {q:"___ you use to live in Cairo?", c:["Did","Do","Were","Was"],a:0,ex:"سؤال used to: Did + sub + use to."},
+    {q:"I ___ eat meat, but now I don't.", c:["use to","used to","am used to","get used to"],a:1,ex:"عادة توقفت + but now."},
+    {q:"Ahmed ___ playing chess when he was a child.", c:["used to","was used to","use to","gets used to"],a:1,ex:"اعتياد في الماضي = was used to + Ving."},
+    {q:"She didn't ___ drink coffee before.", c:["used to","use to","using to","uses to"],a:1,ex:"نفي used to: didn't use to."}
+  ]
+},
+{
+  id:"passive",
+  title:"المبني للمجهول",
+  short:"Passive Voice - all tenses & modals",
+  icon:"🔄",
+  sections:[
+    {h:"المضارع/الماضي البسيط", ar:"",
+     pattern:"obj + am/is/are + P.P (present)\nobj + was/were + P.P (past)",
+     examples:[{en:"The letter was sent yesterday.", ar:"أُرسلت الرسالة أمس."}]},
+    {h:"الماضي المستمر", ar:"",
+     pattern:"obj + was/were + being + P.P",
+     examples:[{en:"Football was being played by Ahmed.", ar:"كانت كرة القدم تُلعب بواسطة أحمد."}]},
+    {h:"مع الأفعال الناقصة (Modals)", ar:"",
+     pattern:"obj + modal (must/should/will/can) + be + P.P",
+     examples:[{en:"A gift must be bought by Ahmed.", ar:"يجب شراء هدية بواسطة أحمد."}]},
+    {h:"السؤال في المبني للمجهول", ar:"",
+     pattern:"was/were + obj + P.P?\nwh + was/were + obj + P.P?",
+     examples:[{en:"Was the homework done by the students?", ar:"هل تم عمل الواجب بواسطة الطلاب؟"}]}
+  ],
+  quiz:[
+    {q:"The cake ___ by my mother yesterday.", c:["made","was made","is made","makes"],a:1,ex:"الماضي البسيط المبني للمجهول: was/were + P.P."},
+    {q:"Football ___ being played when it started raining.", c:["was","is","were","are"],a:0,ex:"ماضي مستمر مبني للمجهول (فاعل مفرد = was)."},
+    {q:"A new bridge ___ built next year.", c:["will","will be","is","was"],a:1,ex:"مع الأفعال الناقصة: modal + be + P.P."},
+    {q:"___ the letter sent yesterday?", c:["Did","Was","Is","Does"],a:1,ex:"سؤال بالمبني للمجهول في الماضي."},
+    {q:"This house ___ built in 1990.", c:["was","is","were","has"],a:0,ex:"was/were + P.P (ماضٍ بسيط مبني للمجهول)."},
+    {q:"Homework must ___ by tomorrow.", c:["finish","be finished","finished","finishing"],a:1,ex:"must + be + P.P."}
+  ]
+},
+{
+  id:"verb-patterns",
+  title:"أنماط الأفعال: To+Inf أم Ving",
+  short:"Remember, Forget, Stop, Try, Regret...",
+  icon:"🧩",
+  sections:[
+    {h:"Remember / Forget (معنى مختلف حسب الصيغة)", ar:"<b>+ to + inf</b> = يتذكر أن يفعل فعلًا (لم يحدث بعد). <b>+ Ving</b> = يتذكر أنه فعل فعلًا بالفعل في الماضي.",
+     pattern:"remember/forget + to + inf (لم يحدث بعد)\nremember/forget + Ving (حدث بالفعل)",
+     examples:[
+       {en:"Remember to lock the door.", ar:"تذكّر أن تقفل الباب (لم يحدث بعد)."},
+       {en:"I remember locking the door.", ar:"أتذكر أني أقفلت الباب (حدث بالفعل)."}
+     ]},
+    {h:"Stop (معنى مختلف حسب الصيغة)", ar:"<b>+ Ving</b> = يتوقف عن فعل شيء كان يفعله باستمرار. <b>+ to + inf</b> = يتوقف عن فعل شيء ليقوم بفعل آخر.",
+     pattern:"stop + Ving (يتوقف عن الفعل نفسه)\nstop + to + inf (يتوقف ليفعل شيئًا آخر)",
+     examples:[{en:"He stopped smoking. / He stopped to smoke.", ar:"توقف عن التدخين. / توقف ليدخن (توقف عن شيء آخر ليدخن)."}]},
+    {h:"Regret / Try (معنى مختلف حسب الصيغة)", ar:"<b>regret + Ving</b> = يندم على فعل فعله بالفعل. <b>regret + to + inf</b> = يأسف لأنه سيقول/سيفعل شيئًا الآن. <b>try + Ving</b> = يجرّب كخبرة. <b>try + to + inf</b> = يحاول بصعوبة.",
+     pattern:"regret/try + Ving أو + to + inf (معنى مختلف)",
+     examples:[{en:"I tried studying at night. (جرّبت كتجربة)", ar:"جربت المذاكرة ليلًا."},
+               {en:"I tried to open the door. (حاولت بصعوبة)", ar:"حاولت فتح الباب (بصعوبة)."}]},
+    {h:"أفعال تأخذ Ving فقط", ar:"begin, start, love, like, prefer, hate, continue (تأخذ to+inf أو Ving بدون فرق كبير في المعنى).",
+     pattern:"begin/start/love/like/prefer/hate/continue + to+inf / Ving",
+     examples:[{en:"It began to rain. / It began raining.", ar:"بدأ المطر ينزل."}]},
+    {h:"Recommend, Suggest, Ask, Advise + that", ar:"تُستخدم بصيغة رسمية بعدها that + فاعل + مصدر أو should + مصدر.",
+     pattern:"recommend/suggest/ask/advise + that + sub + inf\n... + that + sub + should + inf",
+     examples:[{en:"The doctor recommended that he rest.", ar:"أوصى الطبيب بأن يرتاح."}]}
+  ],
+  quiz:[
+    {q:"Remember ___ the door before you leave.", c:["locking","to lock","lock","locked"],a:1,ex:"remember + to+inf = فعل لم يحدث بعد."},
+    {q:"I remember ___ this film before.", c:["to see","seeing","see","saw"],a:1,ex:"remember + Ving = حدث بالفعل."},
+    {q:"He stopped ___ because his eyes hurt.", c:["reading","to read","read","reads"],a:0,ex:"stop + Ving = توقف عن الفعل نفسه."},
+    {q:"On the way, he stopped ___ a coffee.", c:["having","to have","have","had"],a:1,ex:"stop + to+inf = توقف ليفعل شيئًا آخر."},
+    {q:"I regret ___ you that the shop is closed.", c:["telling","to tell","tell","told"],a:1,ex:"regret + to+inf = يأسف ليخبر الآن."},
+    {q:"I tried ___ the window but it wouldn't open.", c:["opening","to open","open","opens"],a:1,ex:"try + to+inf = حاول بصعوبة."},
+    {q:"It began ___ heavily.", c:["to rain","rains","rained",""],a:0,ex:"begin + to+inf (يجوز أيضًا Ving)."},
+    {q:"The doctor suggested that he ___ more water.", c:["drinks","drink","drank","to drink"],a:1,ex:"suggest + that + sub + مصدر بدون to."}
+  ]
+}
+];
+
+const vocab = [
+ {w:"provide (with)", pos:"v", ar:"يزوّد بـ", ex:"My family provide me with money."},
+ {w:"provide (for)", pos:"v", ar:"يوفّر لـ", ex:"My parents provide food for many people."},
+ {w:"include", pos:"v", ar:"يشمل", ex:"The price includes breakfast."},
+ {w:"contain", pos:"v", ar:"يحتوي على", ex:"The bottle contains fresh water."},
+ {w:"consist of", pos:"v", ar:"يتكوّن من", ex:"The team consists of eleven players."},
+ {w:"social", pos:"adj", ar:"اجتماعي", ex:"Humans are social creatures."},
+ {w:"sociable", pos:"adj", ar:"محب للمجتمع", ex:"She is a sociable, friendly girl."},
+ {w:"introvert", pos:"n", ar:"انطوائي", ex:"He is an introvert who prefers quiet evenings."},
+ {w:"extrovert", pos:"n", ar:"منفتح اجتماعيًا", ex:"My sister is an extrovert who loves parties."},
+ {w:"indoor / indoors", pos:"adj/adv", ar:"داخلي / في الداخل", ex:"We played an indoor game because it was raining outdoors."},
+ {w:"outdoor / outdoors", pos:"adj/adv", ar:"خارجي / في الخارج", ex:"Football is an outdoor game."},
+ {w:"despite / in spite of", pos:"prep", ar:"بالرغم من", ex:"Despite the rain, we went out."},
+ {w:"although / even though", pos:"conj", ar:"بالرغم من أن", ex:"Although it was raining, we went out."},
+ {w:"career", pos:"n", ar:"المسار المهني", ex:"She built a successful career in medicine."},
+ {w:"profession", pos:"n", ar:"مهنة (متخصصة)", ex:"Teaching is a respected profession."},
+ {w:"punctual", pos:"adj", ar:"مُلتزم بالمواعيد", ex:"He is always punctual for meetings."},
+ {w:"on time", pos:"phrase", ar:"في الموعد المحدد", ex:"The train arrived on time."},
+ {w:"in time", pos:"phrase", ar:"قبل الموعد بوقت كافٍ", ex:"We arrived in time to catch the train."},
+ {w:"careless", pos:"adj", ar:"مهمل / متأخر", ex:"Being careless with time made him miss the bus."},
+ {w:"around / nearly", pos:"adv", ar:"تقريبًا", ex:"There are around fifty students in the hall."},
+ {w:"round", pos:"adj", ar:"مستدير", ex:"The table is round."},
+ {w:"jam", pos:"n", ar:"مربى / ازدحام", ex:"We had toast with jam for breakfast."},
+ {w:"traffic jam", pos:"n", ar:"ازدحام مروري", ex:"We were late because of a traffic jam."},
+ {w:"crowded / jammed", pos:"adj", ar:"مزدحم", ex:"The street was crowded this morning."},
+ {w:"healthy", pos:"adj", ar:"مفيد للصحة", ex:"You must eat healthy food."},
+ {w:"healthful", pos:"adj", ar:"مرتبط بالصحة", ex:"A healthful lifestyle prevents many diseases."},
+ {w:"respectful (of/to)", pos:"adj", ar:"يظهر احترامًا", ex:"He is always respectful of other people's opinions."},
+ {w:"routine", pos:"n", ar:"نظام حياة يومي", ex:"Waking up at six is part of my daily routine."},
+ {w:"habit", pos:"n", ar:"عادة فردية", ex:"Biting your nails is a bad habit."},
+ {w:"tradition", pos:"n", ar:"عادة موروثة/جماعية", ex:"Celebrating Eid is an old family tradition."},
+ {w:"red tape", pos:"n", ar:"إجراءات حكومية روتينية", ex:"Getting the permit took ages because of red tape."},
+ {w:"own (v)", pos:"v", ar:"يملك", ex:"I'd love to own my own room one day."},
+ {w:"look / seem / feel / sound", pos:"v", ar:"يبدو", ex:"You look tired today; you should rest."},
+ {w:"depend on / count on / rely on", pos:"v", ar:"يعتمد على", ex:"You can always depend on your family for support."},
+ {w:"dependent on", pos:"adj", ar:"معتمد على", ex:"Young children are dependent on their parents."},
+ {w:"independent of", pos:"adj", ar:"مستقل عن", ex:"He became independent of his parents after university."},
+ {w:"bow", pos:"n/v", ar:"ينحني / قوس", ex:"The actor took a bow at the end of the play."},
+ {w:"respect", pos:"v/n", ar:"يحترم / احترام", ex:"You should respect your teachers."},
+ {w:"disrespect / look down on", pos:"v", ar:"يستهين بـ / يحتقر", ex:"It's rude to look down on people who are different from you."},
+ {w:"respected", pos:"adj", ar:"محترَم", ex:"She is a respected doctor in our city."},
+ {w:"respectable", pos:"adj", ar:"لائق / محترم (وضع/مكانة)", ex:"He comes from a respectable family."},
+ {w:"used to", pos:"phrase", ar:"كان يعتاد", ex:"I used to play football every Friday."},
+ {w:"be used to", pos:"phrase", ar:"معتاد على (حاليًا)", ex:"I'm used to waking up early now."},
+ {w:"get used to", pos:"phrase", ar:"يعتاد تدريجيًا", ex:"He is getting used to his new school."},
+ {w:"allow / permit", pos:"v", ar:"يسمح بـ (رسميًا)", ex:"My parents allow me to stay out until nine."},
+ {w:"needn't have + P.P", pos:"phrase", ar:"فعل شيء لم يكن ضروريًا", ex:"You needn't have brought a gift."},
+ {w:"had better", pos:"phrase", ar:"من الأفضل أن", ex:"You had better see a doctor."},
+ {w:"would rather", pos:"phrase", ar:"يفضّل أن", ex:"I would rather stay home tonight."},
+ {w:"obligatory / mandatory", pos:"adj", ar:"إلزامي", ex:"Wearing a seatbelt is obligatory."}
+];
+
+/* ============ RENDER ENGINE ============ */
+let currentId = "home";
+let quizState = {};
+
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = 0.92;
+  window.speechSynthesis.speak(u);
+}
+
+function renderSidebar(){
+  const sb = document.getElementById('sidebar');
+  let html = `
+    <div class="brand">
+      <div class="eyebrow">Ahmed's English Notebook</div>
+      <h1>دفتر أحمد</h1>
+      <p>مذاكرة القواعد + الكلمات بالصوت والاختبارات</p>
+    </div>
+    <div class="nav-group-title">البداية</div>
+    <button class="nav-btn ${currentId==='home'?'active':''}" onclick="goTo('home')"><span class="num">•</span> الرئيسية</button>
+    <div class="nav-group-title">الدروس</div>
+  `;
+  lessons.forEach((l,i)=>{
+    html += `<button class="nav-btn ${currentId===l.id?'active':''}" onclick="goTo('${l.id}')"><span class="num">${String(i+1).padStart(2,'0')}</span> ${l.icon} ${l.title}</button>`;
+  });
+  html += `<div class="nav-group-title">المفردات</div>
+    <button class="nav-btn ${currentId==='words'?'active':''}" onclick="goTo('words')"><span class="num">★</span> 📚 الكلمات (Words)</button>`;
+  sb.innerHTML = html;
+}
+
+function goTo(id){
+  currentId = id;
+  renderSidebar();
+  if(id==='home') renderHome();
+  else if(id==='words') renderWords();
+  else renderLesson(id);
+  window.scrollTo(0,0);
+}
+
+function renderHome(){
+  const totalQ = lessons.reduce((s,l)=>s+l.quiz.length,0);
+  let html = `
+  <div class="home-hero">
+    <div class="eyebrow">ENGLISH NOTEBOOK · A2 → B1+</div>
+    <h2>كل قواعدك في مكان واحد</h2>
+    <p>استخرجنا كل الدروس من دفترك الأصلي، صححنا الأخطاء، ونظمناها في ${lessons.length} درسًا مع أمثلة صوتية واختبارات متدرجة الصعوبة.</p>
+    <div class="stat-row">
+      <div class="stat-pill">${lessons.length} دروس</div>
+      <div class="stat-pill">${totalQ} سؤال اختبار</div>
+      <div class="stat-pill">${vocab.length} كلمة ومصطلح</div>
+    </div>
+  </div>
+  <div class="page-header">
+    <div class="subject-label">Subject: All Lessons</div>
+    <h2>اختر درسًا للبدء</h2>
+  </div>
+  <div class="lesson-grid">`;
+  lessons.forEach((l,i)=>{
+    html += `<div class="lesson-card" onclick="goTo('${l.id}')">
+      <div class="lc-num">${String(i+1).padStart(2,'0')} · ${l.icon}</div>
+      <h4>${l.title}</h4>
+      <p>${l.short}</p>
+    </div>`;
+  });
+  html += `</div>
+  <div class="footer-note">صُنع خصيصًا لأحمد من ملاحظاته المكتوبة بخط اليد ✍️</div>`;
+  document.getElementById('main').innerHTML = html;
+}
+
+function renderLesson(id){
+  const l = lessons.find(x=>x.id===id);
+  if(!l) return renderHome();
+  let html = `
+  <div class="page-header">
+    <div class="subject-label">Subject: ${l.short}</div>
+    <h2>${l.icon} ${l.title}</h2>
+  </div>`;
+  l.sections.forEach(s=>{
+    html += `<div class="block">
+      <h3>${s.h}</h3>
+      <div class="ar-note">${s.ar}</div>
+      ${s.pattern ? `<div class="pattern">${s.pattern.replace(/\n/g,'<br>')}</div>` : ''}
+      <div class="examples">`;
+    s.examples.forEach((e,idx)=>{
+      html += `<div class="ex-row">
+        <button class="speak-btn" onclick="speak(${JSON.stringify(e.en)})" title="استمع">🔊</button>
+        <div><div class="en">${e.en}</div><div class="ar">${e.ar}</div></div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+  html += renderQuizHtml(l);
+  document.getElementById('main').innerHTML = html;
+  quizState[l.id] = quizState[l.id] || {answers:{}, checked:false};
+}
+
+function renderQuizHtml(l){
+  const diffFor = (i,total)=> i < total*0.35 ? 'easy' : (i < total*0.7 ? 'med' : 'hard');
+  const diffLabel = {easy:'سهل', med:'متوسط', hard:'صعب'};
+  let html = `<div class="quiz-wrap" id="quiz-${l.id}">
+    <div class="quiz-header">
+      <h3>📝 اختبار الدرس</h3>
+      <div class="quiz-progress" id="progress-${l.id}">0 / ${l.quiz.length}</div>
+    </div>
+    <div class="score-banner" id="score-${l.id}"></div>`;
+  l.quiz.forEach((q,i)=>{
+    const d = diffFor(i, l.quiz.length);
+    html += `<div class="q-card" id="qc-${l.id}-${i}">
+      <div class="q-meta"><span>سؤال ${i+1}</span><span class="diff ${d}">${diffLabel[d]}</span></div>
+      <div class="q-text">${i+1}. ${q.q}</div>
+      <div class="choices">`;
+    q.c.forEach((c,ci)=>{
+      html += `<button class="choice" onclick="selectChoice('${l.id}',${i},${ci})" id="ch-${l.id}-${i}-${ci}">${c}</button>`;
+    });
+    html += `</div><div class="q-explain" id="exp-${l.id}-${i}">${q.ex}</div></div>`;
+  });
+  html += `<div class="quiz-actions">
+      <button class="btn btn-primary" onclick="checkQuiz('${l.id}')">تحقق من الإجابات</button>
+      <button class="btn btn-secondary" onclick="resetQuiz('${l.id}')">إعادة المحاولة</button>
+    </div>
+  </div>`;
+  return html;
+}
+
+function selectChoice(lid, qi, ci){
+  const st = quizState[lid];
+  if(st.checked) return;
+  st.answers[qi] = ci;
+  const l = lessons.find(x=>x.id===lid);
+  l.quiz[qi].c.forEach((c,idx)=>{
+    document.getElementById(`ch-${lid}-${qi}-${idx}`).classList.toggle('selected', idx===ci);
+  });
+  updateProgress(lid);
+}
+
+function updateProgress(lid){
+  const l = lessons.find(x=>x.id===lid);
+  const st = quizState[lid];
+  const answered = Object.keys(st.answers).length;
+  document.getElementById(`progress-${lid}`).textContent = `${answered} / ${l.quiz.length}`;
+}
+
+function checkQuiz(lid){
+  const l = lessons.find(x=>x.id===lid);
+  const st = quizState[lid];
+  st.checked = true;
+  let correct = 0;
+  l.quiz.forEach((q,i)=>{
+    const chosen = st.answers[i];
+    q.c.forEach((c,ci)=>{
+      const el = document.getElementById(`ch-${lid}-${i}-${ci}`);
+      el.style.pointerEvents = 'none';
+      if(ci===q.a) el.classList.add('correct');
+      else if(ci===chosen && chosen!==q.a) el.classList.add('wrong');
+    });
+    if(chosen===q.a) correct++;
+    document.getElementById(`exp-${lid}-${i}`).classList.add('show');
+  });
+  const pct = Math.round((correct/l.quiz.length)*100);
+  const banner = document.getElementById(`score-${lid}`);
+  banner.classList.add('show');
+  let cls = 'score-low', msg = `تحتاج مراجعة أكتر — ${correct}/${l.quiz.length} (${pct}%)`;
+  if(pct>=85){cls='score-great'; msg = `ممتاز جدًا! 🎉 ${correct}/${l.quiz.length} (${pct}%)`;}
+  else if(pct>=60){cls='score-ok'; msg = `جيد، قريب من الاحتراف — ${correct}/${l.quiz.length} (${pct}%)`;}
+  banner.className = `score-banner show ${cls}`;
+  banner.textContent = msg;
+  banner.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function resetQuiz(lid){
+  quizState[lid] = {answers:{}, checked:false};
+  renderLesson(lid);
+}
+
+function renderWords(){
+  let html = `
+  <div class="page-header">
+    <div class="subject-label">Subject: Vocabulary</div>
+    <h2>📚 الكلمات والمصطلحات</h2>
+    <div class="desc">كل كلمة ظهرت في الدروس أو الدفتر، مع جملة توضيحية وزر استماع للكلمة والجملة.</div>
+  </div>
+  <div class="vocab-toolbar">
+    <input class="vocab-search" id="vsearch" placeholder="ابحث عن كلمة... (search)" oninput="filterVocab()">
+  </div>
+  <div class="vocab-grid" id="vgrid"></div>`;
+  document.getElementById('main').innerHTML = html;
+  drawVocab(vocab);
+}
+
+function drawVocab(list){
+  const grid = document.getElementById('vgrid');
+  grid.innerHTML = list.map(v=>`
+    <div class="vocab-card">
+      <div class="word-row">
+        <span class="word">${v.w}</span>
+        <button class="speak-btn" onclick="speak(${JSON.stringify(v.w.split('(')[0].split('/')[0].trim())})" title="استمع للكلمة">🔊</button>
+      </div>
+      <span class="pos">${v.pos}</span>
+      <div class="ar">${v.ar}</div>
+      <div class="sentence">
+        ${v.ex}
+        <div style="margin-top:6px;"><button class="speak-btn" style="width:auto;padding:4px 10px;border-radius:14px;font-size:11px;" onclick="speak(${JSON.stringify(v.ex)})">🔊 استمع للجملة</button></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterVocab(){
+  const q = document.getElementById('vsearch').value.toLowerCase();
+  const filtered = vocab.filter(v=> v.w.toLowerCase().includes(q) || v.ar.includes(q) || v.ex.toLowerCase().includes(q));
+  drawVocab(filtered);
+}
+
+/* init */
+renderSidebar();
+renderHome();
+</script>
+</body>
+</html>
