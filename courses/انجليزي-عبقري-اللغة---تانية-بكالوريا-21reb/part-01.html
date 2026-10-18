@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>عبقري اللغة | كلمات وقواعد العبارات الموصولة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@400;600;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12203A;
+    --ink-2:#1B2C4D;
+    --paper:#F6EFDD;
+    --paper-2:#EDE2C6;
+    --gold:#C9972C;
+    --gold-2:#E4B84B;
+    --forest:#3E6E55;
+    --rose:#BE4B3C;
+    --slate:#5C6A82;
+    --text-dark:#1C2333;
+    --text-soft:#5E6B85;
+    --bg:var(--paper);
+    --bg-2:var(--paper-2);
+    --surface:#FFFDF6;
+    --ink-text:var(--text-dark);
+    --sub-text:var(--text-soft);
+    --shadow:0 10px 30px rgba(20,25,45,.12);
+    --radius:18px;
+  }
+  [data-theme="night"]{
+    --bg:#0C1220;
+    --bg-2:#111A2E;
+    --surface:#182238;
+    --ink-text:#F1EAD8;
+    --sub-text:#9AA6C2;
+    --shadow:0 10px 30px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink-text);
+    font-family:'Tajawal',sans-serif;
+    min-height:100vh;
+    transition:background .35s ease,color .35s ease;
+    overscroll-behavior-y:none;
+  }
+  .en{font-family:'Space Grotesk',sans-serif;}
+  #app{max-width:520px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;position:relative;padding-bottom:78px;}
+
+  /* ===== Top bar ===== */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 18px 10px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{
+    width:36px;height:36px;border-radius:10px;
+    background:linear-gradient(145deg,var(--gold-2),var(--gold));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk';font-weight:700;color:#2a1d05;font-size:16px;
+    box-shadow:0 4px 12px rgba(201,151,44,.4);
+  }
+  .brand h1{font-family:'Cairo';font-weight:800;font-size:19px;margin:0;letter-spacing:.2px;}
+  .brand span{display:block;font-size:11px;color:var(--sub-text);font-weight:500;margin-top:1px;}
+  .icon-btn{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--surface);border:1px solid rgba(120,120,120,.15);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    box-shadow:var(--shadow);font-size:17px;color:var(--ink-text);
+  }
+
+  /* ===== screens ===== */
+  .screen{display:none;padding:6px 18px 20px;animation:fadeIn .35s ease;}
+  .screen.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  /* ===== stats strip ===== */
+  .stats-strip{display:flex;gap:10px;margin:6px 0 18px;}
+  .stat-card{
+    flex:1;background:var(--surface);border-radius:14px;padding:12px 10px;
+    box-shadow:var(--shadow);text-align:center;
+  }
+  .stat-card b{display:block;font-family:'Space Grotesk';font-size:20px;color:var(--gold);}
+  .stat-card small{font-size:11px;color:var(--sub-text);}
+
+  /* ===== category list (rolodex tabs) ===== */
+  .section-label{font-family:'Cairo';font-weight:800;font-size:14px;color:var(--sub-text);margin:18px 2px 10px;display:flex;align-items:center;gap:8px;}
+  .section-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(120,120,120,.3),transparent);}
+  .cat-list{display:flex;flex-direction:column;gap:10px;}
+  .cat-tab{
+    position:relative;background:var(--surface);border-radius:14px;
+    padding:14px 16px 14px 14px;display:flex;align-items:center;gap:12px;
+    box-shadow:var(--shadow);cursor:pointer;border-inline-start:5px solid var(--gold);
+    transition:transform .15s ease;
+  }
+  .cat-tab:active{transform:scale(.98);}
+  .cat-num{
+    font-family:'Space Grotesk';font-weight:700;font-size:13px;color:var(--gold);
+    background:rgba(201,151,44,.12);border-radius:8px;padding:4px 8px;min-width:30px;text-align:center;
+  }
+  .cat-info{flex:1;min-width:0;}
+  .cat-info h3{margin:0 0 2px;font-family:'Cairo';font-size:15px;font-weight:700;}
+  .cat-info p{margin:0;font-size:11.5px;color:var(--sub-text);font-family:'Space Grotesk';}
+  .cat-progress-wrap{width:44px;height:44px;position:relative;flex-shrink:0;}
+  .cat-progress-wrap svg{transform:rotate(-90deg);width:44px;height:44px;}
+  .cat-progress-wrap circle{fill:none;stroke-width:4;}
+  .cat-progress-wrap .bg{stroke:rgba(120,120,120,.18);}
+  .cat-progress-wrap .fg{stroke:var(--forest);stroke-linecap:round;transition:stroke-dashoffset .4s ease;}
+  .cat-progress-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Space Grotesk';}
+
+  /* ===== deck / flashcard screen ===== */
+  .deck-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+  .deck-header h2{font-family:'Cairo';font-size:16px;margin:0;font-weight:800;}
+  .deck-count{font-size:12px;color:var(--sub-text);font-family:'Space Grotesk';}
+  .progress-bar{height:5px;border-radius:5px;background:rgba(120,120,120,.18);margin:10px 0 22px;overflow:hidden;}
+  .progress-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-2));border-radius:5px;transition:width .3s ease;}
+
+  .card-stage{perspective:1400px;height:340px;margin:0 auto 18px;position:relative;}
+  .flashcard{
+    width:100%;height:100%;position:relative;transform-style:preserve-3d;
+    transition:transform .55s cubic-bezier(.4,.2,.2,1);cursor:pointer;
+  }
+  .flashcard.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;
+    background:var(--surface);box-shadow:0 18px 40px rgba(20,25,45,.18);
+    padding:22px;display:flex;flex-direction:column;
+    border:1px solid rgba(120,120,120,.12);
+  }
+  .face::before{
+    content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);
+    width:52px;height:9px;border-radius:6px;background:repeating-linear-gradient(90deg,rgba(120,120,120,.35) 0 4px,transparent 4px 8px);
+  }
+  .face.back{transform:rotateY(180deg);}
+  .face-top{display:flex;justify-content:space-between;align-items:flex-start;margin-top:14px;}
+  .fav-btn{font-size:20px;background:none;border:none;cursor:pointer;color:var(--sub-text);padding:0;line-height:1;}
+  .fav-btn.active{color:var(--gold);}
+  .speak-btn{
+    width:38px;height:38px;border-radius:50%;background:var(--bg-2);border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ink-text);
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+  }
+  .card-word{font-family:'Space Grotesk';font-weight:700;font-size:34px;text-align:center;margin:0 0 6px;}
+  .card-phon{text-align:center;color:var(--gold);font-size:13px;font-family:'Space Grotesk';margin-bottom:8px;}
+  .card-mean{text-align:center;font-family:'Cairo';font-weight:700;font-size:20px;color:var(--ink-text);}
+  .card-tag{position:absolute;bottom:16px;inset-inline-start:16px;font-size:10.5px;color:var(--sub-text);background:var(--bg-2);padding:4px 10px;border-radius:20px;font-family:'Space Grotesk';}
+  .card-hint{position:absolute;bottom:16px;inset-inline-end:16px;font-size:10.5px;color:var(--sub-text);}
+  .sentence-wrap{margin:auto 0;text-align:center;}
+  .sentence-en{font-family:'Space Grotesk';font-size:19px;line-height:1.5;margin-bottom:10px;}
+  .sentence-ar{font-family:'Cairo';font-size:14.5px;color:var(--sub-text);line-height:1.6;}
+  .back .card-word{font-size:20px;margin-bottom:4px;}
+  .back .card-mean{font-size:14px;color:var(--sub-text);font-weight:500;}
+
+  .deck-controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px;}
+  .ctrl-btn{
+    width:50px;height:50px;border-radius:50%;background:var(--surface);border:none;
+    box-shadow:var(--shadow);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink-text);
+  }
+  .ctrl-btn.primary{
+    width:auto;height:50px;padding:0 22px;border-radius:25px;background:var(--forest);color:#fff;
+    font-family:'Cairo';font-weight:700;font-size:14px;gap:8px;display:flex;align-items:center;
+  }
+  .ctrl-btn.primary.done{background:var(--sub-text);}
+  .ctrl-btn:active{transform:scale(.94);}
+
+  /* ===== bottom nav ===== */
+  .bottom-nav{
+    position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;
+    background:var(--surface);border-top:1px solid rgba(120,120,120,.15);
+    display:flex;padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+    box-shadow:0 -6px 20px rgba(0,0,0,.06);z-index:50;
+  }
+  .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:var(--sub-text);font-family:'Cairo';font-size:10.5px;font-weight:700;cursor:pointer;padding:4px 0;}
+  .nav-item .ic{font-size:19px;}
+  .nav-item.active{color:var(--gold);}
+
+  /* ===== exam screen ===== */
+  .exam-card{background:var(--surface);border-radius:18px;padding:18px;box-shadow:var(--shadow);margin-bottom:14px;}
+  .exam-card h3{font-family:'Cairo';font-size:15px;margin:0 0 4px;display:flex;align-items:center;gap:8px;}
+  .exam-card p{margin:0 0 12px;font-size:12.5px;color:var(--sub-text);line-height:1.6;}
+  .exam-btn{
+    width:100%;background:linear-gradient(135deg,var(--gold-2),var(--gold));border:none;color:#241804;
+    font-family:'Cairo';font-weight:800;font-size:14px;padding:13px;border-radius:12px;cursor:pointer;
+  }
+  .exam-btn:disabled{background:var(--bg-2);color:var(--sub-text);}
+  .exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .exam-tile{
+    background:var(--surface);border-radius:14px;padding:14px;box-shadow:var(--shadow);cursor:pointer;text-align:center;
+    border:2px solid transparent;
+  }
+  .exam-tile b{display:block;font-family:'Space Grotesk';font-size:22px;color:var(--gold);}
+  .exam-tile span{font-size:11px;color:var(--sub-text);font-family:'Cairo';font-weight:700;}
+  .exam-tile small{display:block;font-size:10px;color:var(--sub-text);margin-top:3px;}
+  .exam-tile:active{transform:scale(.97);}
+
+  /* quiz runner */
+  .quiz-progress{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .quiz-progress b{font-family:'Space Grotesk';color:var(--gold);}
+  .quiz-q{background:var(--surface);border-radius:18px;padding:24px 18px;text-align:center;box-shadow:var(--shadow);margin-bottom:18px;}
+  .quiz-q .qword{font-family:'Space Grotesk';font-size:30px;font-weight:700;margin:10px 0 4px;}
+  .quiz-q .qphon{color:var(--gold);font-size:12.5px;margin-bottom:6px;}
+  .opt-list{display:flex;flex-direction:column;gap:10px;}
+  .opt-btn{
+    background:var(--surface);border:2px solid rgba(120,120,120,.18);border-radius:12px;
+    padding:14px;font-family:'Cairo';font-weight:600;font-size:14.5px;cursor:pointer;text-align:right;color:var(--ink-text);
+  }
+  .opt-btn.correct{border-color:var(--forest);background:rgba(62,110,85,.12);color:var(--forest);}
+  .opt-btn.wrong{border-color:var(--rose);background:rgba(190,75,60,.12);color:var(--rose);}
+  .opt-btn:disabled{opacity:.7;}
+
+  .result-wrap{text-align:center;padding:20px 10px;}
+  .result-ring{width:150px;height:150px;margin:10px auto 18px;position:relative;}
+  .result-ring svg{transform:rotate(-90deg);width:150px;height:150px;}
+  .result-ring circle{fill:none;stroke-width:10;}
+  .result-ring .bg{stroke:rgba(120,120,120,.15);}
+  .result-ring .fg{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset 1s ease;}
+  .result-ring-txt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .result-ring-txt b{font-family:'Space Grotesk';font-size:28px;}
+  .result-ring-txt span{font-size:11px;color:var(--sub-text);}
+  .result-msg{font-family:'Cairo';font-weight:800;font-size:17px;margin-bottom:4px;}
+  .result-sub{font-size:12.5px;color:var(--sub-text);margin-bottom:20px;}
+  .review-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-radius:12px;padding:12px 14px;margin-bottom:8px;text-align:right;box-shadow:var(--shadow);}
+  .review-item .rw{font-family:'Space Grotesk';font-weight:700;}
+  .review-item .rm{font-size:12px;color:var(--sub-text);}
+
+  /* settings */
+  .settings-row{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-radius:14px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow);}
+  .settings-row div h4{margin:0 0 2px;font-family:'Cairo';font-size:14px;}
+  .settings-row div p{margin:0;font-size:11.5px;color:var(--sub-text);}
+  .toggle{width:50px;height:28px;border-radius:20px;background:var(--bg-2);position:relative;cursor:pointer;border:none;flex-shrink:0;}
+  .toggle i{position:absolute;top:3px;inset-inline-start:3px;width:22px;height:22px;border-radius:50%;background:var(--gold);transition:inset-inline-start .25s ease;}
+  .toggle.on i{inset-inline-start:25px;}
+  .voice-select{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(120,120,120,.25);background:var(--surface);color:var(--ink-text);font-family:'Cairo';font-size:13px;}
+
+  /* ===== spaced repetition ===== */
+  .review-banner{
+    background:linear-gradient(135deg,var(--ink) 0%,var(--ink-2) 100%);
+    border-radius:18px;padding:18px;margin:6px 0 18px;color:#F6EFDD;
+    box-shadow:var(--shadow);display:flex;align-items:center;gap:14px;cursor:pointer;
+    position:relative;overflow:hidden;
+  }
+  .review-banner::after{content:"🔁";position:absolute;font-size:70px;opacity:.12;left:-6px;bottom:-16px;}
+  .review-banner .rb-num{font-family:'Space Grotesk';font-weight:700;font-size:32px;color:var(--gold-2);}
+  .review-banner .rb-text h4{margin:0 0 2px;font-family:'Cairo';font-size:14.5px;font-weight:800;}
+  .review-banner .rb-text p{margin:0;font-size:11.5px;color:#C7BFA8;}
+  .review-banner.zero{background:linear-gradient(135deg,var(--forest),#2e5540);}
+
+  .recall-row{display:flex;gap:10px;margin-top:10px;}
+  .recall-btn{
+    flex:1;border:none;border-radius:14px;padding:14px 8px;font-family:'Cairo';font-weight:800;font-size:13.5px;
+    cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;
+  }
+  .recall-btn .rc-ic{font-size:19px;}
+  .recall-btn.forgot{background:rgba(190,75,60,.14);color:var(--rose);border:2px solid rgba(190,75,60,.35);}
+  .recall-btn.remembered{background:rgba(62,110,85,.14);color:var(--forest);border:2px solid rgba(62,110,85,.4);}
+  .recall-btn:active{transform:scale(.96);}
+  .flip-nav-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px;}
+
+  .srs-badge{
+    position:absolute;top:14px;left:50%;transform:translateX(-50%);
+    font-size:10px;font-family:'Space Grotesk';font-weight:600;color:var(--sub-text);
+    background:var(--bg-2);padding:3px 10px;border-radius:20px;opacity:.9;top:auto;bottom:44px;left:50%;
+  }
+
+  .box-list{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+  .box-row{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:12px;padding:10px 14px;box-shadow:var(--shadow);}
+  .box-row .bx-label{width:76px;font-family:'Cairo';font-weight:700;font-size:12px;flex-shrink:0;}
+  .box-row .bx-bar-wrap{flex:1;height:8px;border-radius:6px;background:rgba(120,120,120,.15);overflow:hidden;}
+  .box-row .bx-bar{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold),var(--gold-2));}
+  .box-row .bx-count{width:34px;text-align:left;font-family:'Space Grotesk';font-weight:700;font-size:12.5px;color:var(--sub-text);}
+
+  .review-start-btn{
+    width:100%;background:linear-gradient(135deg,var(--gold-2),var(--gold));border:none;color:#241804;
+    font-family:'Cairo';font-weight:800;font-size:15px;padding:15px;border-radius:14px;cursor:pointer;margin-bottom:18px;
+  }
+  .review-start-btn:disabled{background:var(--bg-2);color:var(--sub-text);}
+
+  .empty-state{text-align:center;padding:50px 20px;color:var(--sub-text);}
+  .empty-state .em{font-size:40px;margin-bottom:10px;}
+  .empty-state p{font-size:13px;line-height:1.7;}
+
+  .back-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .back-row h2{font-family:'Cairo';font-weight:800;font-size:17px;margin:0;}
+
+  ::selection{background:rgba(201,151,44,.35);}
+  #toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#F6EFDD;padding:10px 20px;border-radius:30px;font-family:'Cairo';font-size:13px;font-weight:700;opacity:0;transition:all .3s ease;z-index:100;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.3);}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  /* ===== v2 additions: search / levels / rules / mastery / emoji / chips ===== */
+  .search-wrap{margin:6px 0 14px;}
+  .search-input{width:100%;padding:13px 16px;border-radius:14px;border:1px solid rgba(120,120,120,.2);background:var(--surface);color:var(--ink-text);font-family:'Cairo';font-size:14px;box-shadow:var(--shadow);outline:none;}
+  .search-result-item{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:12px;padding:10px 14px;margin-bottom:8px;box-shadow:var(--shadow);cursor:pointer;}
+  .search-result-item:active{transform:scale(.98);}
+  .sr-emoji{font-size:22px;flex-shrink:0;}
+  .sr-text{flex:1;min-width:0;}
+  .sr-cat{font-size:10px;color:var(--sub-text);font-family:'Cairo';max-width:90px;text-align:left;flex-shrink:0;}
+  .level-header{font-family:'Cairo';font-weight:800;font-size:13px;color:var(--gold);margin:22px 2px 8px;padding-bottom:6px;border-bottom:2px solid rgba(201,151,44,.25);}
+  .deck-tools{display:flex;gap:8px;margin-bottom:10px;}
+  .tool-btn{flex:1;background:var(--surface);border:1px solid rgba(120,120,120,.15);border-radius:10px;padding:9px 4px;font-family:'Cairo';font-weight:700;font-size:11.5px;cursor:pointer;color:var(--ink-text);box-shadow:var(--shadow);}
+  .tool-btn:active{transform:scale(.96);}
+  .rule-box{background:rgba(201,151,44,.1);border:1px solid rgba(201,151,44,.3);border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.8;margin-bottom:14px;}
+  .mastery-bar{margin-bottom:14px;}
+  .mastery-track{display:flex;height:8px;border-radius:6px;overflow:hidden;background:rgba(120,120,120,.15);}
+  .mastery-track span{display:block;height:100%;}
+  .mastery-legend{font-size:10.5px;color:var(--sub-text);margin-top:5px;text-align:center;font-family:'Cairo';}
+  .card-center{margin:auto 0;width:100%;}
+  .card-emoji{text-align:center;font-size:46px;line-height:1;margin-bottom:4px;}
+  .related-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:10px;}
+  .chip{background:var(--bg-2);border:none;border-radius:20px;padding:5px 12px;font-size:11px;font-family:'Cairo';font-weight:700;color:var(--ink-text);cursor:pointer;}
+  .chip:active{transform:scale(.95);}
+  .qemoji{font-size:34px;margin-bottom:4px;}
+
+  .maincard-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px;}
+  .maincard{background:var(--surface);border-radius:18px;padding:16px 14px;box-shadow:var(--shadow);cursor:pointer;
+    border-inline-start:5px solid var(--gold);text-align:center;transition:transform .15s ease;position:relative;}
+  .maincard:active{transform:scale(.97);}
+  .maincard .mc-emoji{font-size:34px;margin-bottom:6px;}
+  .maincard h3{margin:0 0 3px;font-family:'Cairo';font-weight:800;font-size:14px;line-height:1.35;}
+  .maincard p{margin:0;font-size:10.5px;color:var(--sub-text);font-family:'Cairo';}
+  .maincard .mc-count{margin-top:8px;font-family:'Space Grotesk';font-weight:700;font-size:11px;color:var(--gold);
+    background:rgba(201,151,44,.12);border-radius:20px;padding:3px 10px;display:inline-block;}
+  .maincard.grammar{border-inline-start-color:var(--forest);}
+  .maincard.grammar .mc-count{color:var(--forest);background:rgba(62,110,85,.12);}
+
+  .lesson-tab{position:relative;background:var(--surface);border-radius:14px;padding:14px 16px;display:flex;
+    align-items:center;gap:12px;box-shadow:var(--shadow);cursor:pointer;border-inline-start:5px solid var(--forest);
+    margin-bottom:10px;transition:transform .15s ease;}
+  .lesson-tab:active{transform:scale(.98);}
+  .lesson-num{font-family:'Space Grotesk';font-weight:700;font-size:13px;color:var(--forest);
+    background:rgba(62,110,85,.12);border-radius:8px;padding:4px 8px;min-width:30px;text-align:center;}
+  .lesson-emoji{font-size:22px;}
+  .lesson-info{flex:1;min-width:0;}
+  .lesson-info h3{margin:0 0 2px;font-family:'Cairo';font-size:14.5px;font-weight:700;}
+  .lesson-info p{margin:0;font-size:11px;color:var(--sub-text);font-family:'Cairo';}
+  .lesson-score{font-size:11px;font-family:'Space Grotesk';font-weight:700;color:var(--gold);flex-shrink:0;}
+
+  .lesson-explain{background:rgba(62,110,85,.08);border:1px solid rgba(62,110,85,.25);border-radius:14px;
+    padding:16px;font-size:13.5px;line-height:2;margin-bottom:16px;}
+  .lesson-explain b{color:var(--forest);}
+  .example-card{background:var(--surface);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);margin-bottom:10px;}
+  .example-top{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  .example-en{font-family:'Space Grotesk';font-size:15px;font-weight:600;flex:1;line-height:1.5;}
+  .example-ar{font-size:12.5px;color:var(--sub-text);margin-top:6px;line-height:1.7;}
+  .speak-btn-sm{width:32px;height:32px;border-radius:50%;background:var(--bg-2);border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;color:var(--ink-text);}
+  .lesson-start-btn{width:100%;background:linear-gradient(135deg,var(--forest),#2e5540);border:none;color:#fff;
+    font-family:'Cairo';font-weight:800;font-size:15px;padding:15px;border-radius:14px;cursor:pointer;margin:16px 0 4px;}
+  .qwrap-lesson{background:var(--surface);border-radius:18px;padding:22px 18px;text-align:right;box-shadow:var(--shadow);margin-bottom:18px;}
+  .qwrap-lesson .ql-en{font-family:'Space Grotesk';font-size:16px;line-height:1.7;font-weight:600;}
+  .exp-box{background:rgba(201,151,44,.1);border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.7;margin-top:10px;color:var(--sub-text);}
+
+</style>
+</head>
+<body data-theme="day">
+<div id="app">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark en">ع</div>
+      <div>
+        <h1>عبقري اللغة</h1>
+        <span id="headerSub">كلمات السبورة والمحاضرة + قواعد العبارات الموصولة</span>
+      </div>
+    </div>
+    <button class="icon-btn" id="themeBtn" title="الوضع الليلي/النهاري">🌙</button>
+  </div>
+
+  <!-- HOME -->
+  <div class="screen active" id="screen-home">
+    <div class="review-banner" id="homeReviewBanner" onclick="switchTab('review')">
+      <div class="rb-num" id="homeDueNum">0</div>
+      <div class="rb-text">
+        <h4 id="homeDueTitle">كلمة مستحقة للمراجعة اليوم</h4>
+        <p id="homeDueSub">نظام التكرار المتباعد بيفكّرك بالكلمة في وقتها المثالي</p>
+      </div>
+    </div>
+    <div class="stats-strip">
+      <div class="stat-card"><b id="statTotal">0</b><small>إجمالي الكلمات</small></div>
+      <div class="stat-card"><b id="statMemo">0</b><small>محفوظة</small></div>
+      <div class="stat-card"><b id="statFav">0</b><small>مفضّلة</small></div>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 دوّر على كلمة (عربي أو إنجليزي)..." oninput="onSearchInput(this.value)">
+    </div>
+    <div id="searchResults" style="display:none;"></div>
+    <div id="catListSection">
+      <div class="section-label">اختر أحد الكروت الأربعة</div>
+      <div class="maincard-grid" id="mainCardGrid"></div>
+    </div>
+  </div>
+
+  <!-- CARD HOME (categories/lessons inside a main card) -->
+  <div class="screen" id="screen-cardhome">
+    <div class="back-row"><button class="icon-btn" onclick="goHome()">→</button><h2 id="cardHomeTitle"></h2></div>
+    <p id="cardHomeDesc" style="font-size:12px;color:var(--sub-text);margin:-8px 0 16px;line-height:1.7;"></p>
+    <div class="cat-list" id="cardHomeList"></div>
+  </div>
+
+  <!-- GRAMMAR LESSON -->
+  <div class="screen" id="screen-lesson">
+    <div class="back-row"><button class="icon-btn" onclick="backFromLesson()">→</button><h2 id="lessonTitle"></h2></div>
+    <div class="lesson-explain" id="lessonExplain"></div>
+    <div class="section-label">أمثلة</div>
+    <div id="lessonExamples"></div>
+    <button class="lesson-start-btn" onclick="startLessonQuiz()">✏️ ابدأ التدريب على الدرس</button>
+  </div>
+
+  <!-- DECK -->
+  <div class="screen" id="screen-deck">
+    <div class="back-row"><button class="icon-btn" onclick="backFromDeck()">→</button><h2 id="deckTitle"></h2></div>
+    <div class="deck-tools">
+      <button class="tool-btn" onclick="toggleRuleBox()">📘 القاعدة</button>
+      <button class="tool-btn" onclick="exportLesson()">⬇️ تصدير</button>
+      <button class="tool-btn" onclick="copyLessonLink()">🔗 مشاركة</button>
+    </div>
+    <div class="rule-box" id="ruleBox" style="display:none;"></div>
+    <div class="mastery-bar" id="masteryBar"></div>
+    <div class="deck-header"><div class="deck-count" id="deckCount"></div><div class="deck-count" id="deckMemoCount"></div></div>
+    <div class="progress-bar"><i id="deckProgressBar" style="width:0%"></i></div>
+
+    <div class="card-stage">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="face front">
+          <div class="face-top">
+            <button class="fav-btn" id="favBtnFront" onclick="event.stopPropagation();toggleFav()">☆</button>
+            <button class="speak-btn" onclick="event.stopPropagation();speak('en')">🔊</button>
+          </div>
+          <div class="card-center">
+            <div class="card-emoji" id="cardEmoji"></div>
+            <div class="card-word en" id="cardWord"></div>
+            <div class="card-phon" id="cardPhon"></div>
+            <div class="card-mean" id="cardMean"></div>
+            <div class="related-chips" id="relatedChips" style="display:none;"></div>
+          </div>
+          <div class="card-tag" id="cardTagFront"></div>
+          <div class="srs-badge" id="srsBadgeFront"></div>
+          <div class="card-hint">اضغط لقلب البطاقة ↺</div>
+        </div>
+        <div class="face back">
+          <div class="face-top">
+            <button class="fav-btn" id="favBtnBack" onclick="event.stopPropagation();toggleFav()">☆</button>
+            <button class="speak-btn" onclick="event.stopPropagation();speak('sen')">🔊</button>
+          </div>
+          <div class="sentence-wrap">
+            <div class="sentence-en en" id="sentEn"></div>
+            <div class="sentence-ar" id="sentAr"></div>
+          </div>
+          <div class="card-word en" id="cardWordBack" style="font-size:16px;margin-top:0;"></div>
+          <div class="card-mean" id="cardMeanBack" style="font-size:13px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recall-row" id="recallRow" style="display:none;">
+      <button class="recall-btn forgot" onclick="assessCard(false)"><span class="rc-ic">🔁</span>لسه محتاج مراجعة</button>
+      <button class="recall-btn remembered" onclick="assessCard(true)"><span class="rc-ic">✅</span>اتذكرتها</button>
+    </div>
+    <div class="flip-nav-row">
+      <button class="ctrl-btn" onclick="prevCard()">›</button>
+      <span class="deck-count" id="srsStatus" style="min-width:120px;text-align:center;"></span>
+      <button class="ctrl-btn" onclick="nextCard()">‹</button>
+    </div>
+  </div>
+
+  <!-- REVIEW (Spaced Repetition) -->
+  <div class="screen" id="screen-review">
+    <div class="back-row"><h2>🔁 المراجعة المتباعدة</h2></div>
+    <p style="font-size:12.5px;color:var(--sub-text);margin:-6px 0 16px;line-height:1.7;">
+      كل كلمة بترجعلك في وقتها الصح: يوم، ٣ أيام، أسبوع، أسبوعين، شهر، ٣ شهور. كل ما تفتكر الكلمة صح، بتبعد المراجعة القادمة أكتر.
+    </p>
+    <button class="review-start-btn" id="reviewStartBtn" onclick="startReviewSession()">ابدأ مراجعة اليوم (<span id="reviewStartCount">0</span> كلمة)</button>
+    <div class="section-label">توزيع الكلمات على مراحل الحفظ</div>
+    <div class="box-list" id="boxList"></div>
+    <div class="section-label">جدول المراجعات القادمة</div>
+    <div id="upcomingList"></div>
+  </div>
+
+  <!-- FAVORITES -->
+  <div class="screen" id="screen-fav">
+    <div class="back-row"><h2>⭐ الكلمات المفضّلة</h2></div>
+    <div id="favList"></div>
+  </div>
+
+  <!-- EXAMS -->
+  <div class="screen" id="screen-exam">
+    <div class="back-row"><h2>📝 الاختبارات</h2></div>
+
+    <div class="exam-card">
+      <h3>📅 الاختبار اليومي</h3>
+      <p id="dailyDesc">اختبار سريع وشامل على الكلمات التي حفظتها في آخر فترة مذاكرة فقط.</p>
+      <button class="exam-btn" id="dailyBtn" onclick="startDailyExam()">ابدأ الاختبار اليومي</button>
+    </div>
+
+    <div class="section-label">اختبارات شاملة (على كل الكلمات المحفوظة)</div>
+    <div class="exam-grid" id="examGrid"></div>
+
+    <div class="section-label">آخر النتائج</div>
+    <div id="examHistory"></div>
+  </div>
+
+  <!-- QUIZ RUNNER -->
+  <div class="screen" id="screen-quiz">
+    <div class="quiz-progress">
+      <button class="icon-btn" onclick="quitQuiz()">✕</button>
+      <span>سؤال <b id="qIndex">1</b> / <span id="qTotal">10</span></span>
+    </div>
+    <div class="quiz-q">
+      <button class="speak-btn" style="margin:0 auto 8px;" onclick="speakQuizWord()">🔊</button>
+      <div class="qemoji" id="qEmoji"></div>
+      <div class="qword en" id="qWord"></div>
+      <div class="qphon" id="qPhon"></div>
+    </div>
+    <div class="opt-list" id="optList"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div class="result-wrap">
+      <div class="result-ring">
+        <svg viewBox="0 0 150 150">
+          <circle class="bg" cx="75" cy="75" r="62"></circle>
+          <circle class="fg" id="resultRing" cx="75" cy="75" r="62"></circle>
+        </svg>
+        <div class="result-ring-txt"><b id="resultPct">0%</b><span id="resultFrac">0/0</span></div>
+      </div>
+      <div class="result-msg" id="resultMsg"></div>
+      <div class="result-sub" id="resultSub"></div>
+      <div id="reviewList"></div>
+      <button class="exam-btn" style="margin-top:10px;" onclick="goExam()">رجوع للاختبارات</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="screen" id="screen-settings">
+    <div class="back-row"><h2>⚙️ الإعدادات</h2></div>
+    <div class="settings-row">
+      <div><h4>الوضع الليلي</h4><p>مريح للعين أثناء المذاكرة ليلاً</p></div>
+      <button class="toggle" id="nightToggle" onclick="toggleTheme()"><i></i></button>
+    </div>
+    <div class="settings-row">
+      <div style="width:100%;"><h4>صوت النطق</h4><p style="margin-bottom:8px;">اختر الصوت الإنجليزي المتاح على جهازك</p>
+        <select class="voice-select" id="voiceSelect"></select>
+      </div>
+    </div>
+    <div class="settings-row" style="cursor:pointer;" onclick="resetProgress()">
+      <div><h4 style="color:var(--rose);">إعادة ضبط التقدم</h4><p>حذف كل الكلمات المحفوظة والمفضلة (لا يمكن التراجع)</p></div>
+      <span style="font-size:18px;">🗑️</span>
+    </div>
+    <div class="section-label">عن التطبيق</div>
+    <div class="exam-card">
+      <p style="margin:0;">عبقري اللغة — تطبيق مستخرج من محاضرتين حقيقيتين: سبورة المستر أحمد طارق (وحدة العبارات الموصولة) ومحاضرة "عبقري اللغة" الأولى. يحتوي على 188 كلمة مقسّمة في 17 مجموعة (كرت 1 وكرت 2)، بالإضافة إلى 16 درس قواعد كامل عن Relative Clauses (كرت 3 وكرت 4) بشرح مبسّط بالعربي، أمثلة مترجمة بزر استماع، وتدريبات بعد كل درس. مع نظام تكرار متباعد (Spaced Repetition)، اختبارات، مفضّلة، وبحث فوري.</p>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="nav-item active" data-tab="home" onclick="switchTab('home')"><span class="ic">🏠</span>الرئيسية</button>
+    <button class="nav-item" data-tab="review" onclick="switchTab('review')"><span class="ic">🔁</span>المراجعة</button>
+    <button class="nav-item" data-tab="fav" onclick="switchTab('fav')"><span class="ic">⭐</span>المفضلة</button>
+    <button class="nav-item" data-tab="exam" onclick="switchTab('exam')"><span class="ic">📝</span>الاختبارات</button>
+    <button class="nav-item" data-tab="settings" onclick="switchTab('settings')"><span class="ic">⚙️</span>الإعدادات</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const CATEGORIES = [{"id": "c1g1", "title": "أدوات الربط الموصولة", "sub": "Relative Pronouns", "words": [{"en": "who", "ar": "الذي / التي (للأشخاص - فاعل)", "phon": "هو", "sen": "The teacher who explains clearly is amazing.", "senm": "المعلم الذي يشرح بوضوح رائع.", "related": [], "emoji": "🧑", "id": "c1g1_w0"}, {"en": "whom", "ar": "الذي / التي (للأشخاص - مفعول به)", "phon": "هوم", "sen": "The doctor to whom I spoke was kind.", "senm": "الطبيب الذي تحدثت إليه كان لطيفًا.", "related": [], "emoji": "🤝", "id": "c1g1_w1"}, {"en": "which", "ar": "الذي / التي (للأشياء)", "phon": "ويتش", "sen": "This is the tool which I use daily.", "senm": "هذه هي الأداة التي أستخدمها يوميًا.", "related": [], "emoji": "🔧", "id": "c1g1_w2"}, {"en": "that", "ar": "الذي / التي (أشخاص أو أشياء)", "phon": "ذات", "sen": "All that I want is peace of mind.", "senm": "كل ما أريده هو راحة البال.", "related": [], "emoji": "🔗", "id": "c1g1_w3"}, {"en": "whose", "ar": "الذي/التي ملكه (ملكية)", "phon": "هووز", "sen": "Ahmed, whose father is a doctor, is smart.", "senm": "أحمد، الذي والده طبيب، ذكي.", "related": [], "emoji": "🏷️", "id": "c1g1_w4"}, {"en": "where", "ar": "حيث / الذي فيه (مكان)", "phon": "وير", "sen": "Cairo, where I was born, is busy.", "senm": "القاهرة، حيث وُلدت، مزدحمة.", "related": [], "emoji": "📍", "id": "c1g1_w5"}, {"en": "when", "ar": "حين / الذي فيه (زمان)", "phon": "وين", "sen": "June is the month when I go on holiday.", "senm": "يونيو هو الشهر الذي أذهب فيه في عطلة.", "related": [], "emoji": "⏰", "id": "c1g1_w6"}, {"en": "what", "ar": "الشيء الذي (the thing that)", "phon": "وات", "sen": "I got what you meant.", "senm": "فهمت ما قصدته.", "related": [], "emoji": "💭", "id": "c1g1_w7"}, {"en": "whatever", "ar": "أي شيء (ضمير موصول كامل)", "phon": "واتإڤر", "sen": "You can order whatever you want.", "senm": "يمكنك طلب أي شيء تريده.", "related": [], "emoji": "✨", "id": "c1g1_w8"}, {"en": "whichever", "ar": "أيّهما (ضمير موصول كامل)", "phon": "ويتشإڤر", "sen": "Take whichever book you like.", "senm": "خذ أيّ كتاب تحبه.", "related": [], "emoji": "📚", "id": "c1g1_w9"}, {"en": "whoever", "ar": "أيّ شخص (ضمير موصول كامل)", "phon": "هووإڤر", "sen": "Whoever arrives first should open the window.", "senm": "أيّ شخص يصل أولًا يفتح الشباك.", "related": [], "emoji": "🙋", "id": "c1g1_w10"}], "rule": "هذه هي كل أدوات الربط الموصولة (Relative Pronouns) التي بنيت عليها كل قواعد هذا الدرس — كل واحدة منها بتوصل جملتين وتحل محل تكرار الاسم.", "cardId": 1, "level": 1}, {"id": "c1g2", "title": "كلمات مزدوجة: اسم أم فعل؟", "sub": "Stay / Visit / Import / Export", "words": [{"en": "stay", "ar": "إقامة / يُقيم", "phon": "ستاي", "sen": "Our stay at the hotel was short.", "senm": "كانت إقامتنا في الفندق قصيرة.", "related": [], "emoji": "🏨", "id": "c1g2_w0"}, {"en": "visit", "ar": "زيارة / يزور", "phon": "ڤيزت", "sen": "We will visit our grandfather.", "senm": "سنزور جدنا.", "related": [], "emoji": "🧳", "id": "c1g2_w1"}, {"en": "import", "ar": "واردات / يستورد", "phon": "إمبورت", "sen": "Egypt imports a lot of wheat.", "senm": "مصر تستورد قمحًا كثيرًا.", "related": [], "emoji": "📥", "id": "c1g2_w2"}, {"en": "export", "ar": "صادرات / يصدّر", "phon": "إكسبورت", "sen": "The company exports its products to Europe.", "senm": "الشركة تصدّر منتجاتها إلى أوروبا.", "related": [], "emoji": "📤", "id": "c1g2_w3"}], "rule": "كل كلمة من هذول ممكن تيجي اسم أو فعل حسب مكانها في الجملة، ومعناها بيتغير شوية حسب الاستخدام.", "cardId": 1, "level": 1}, {"id": "c1g3", "title": "الأجر والمشاعر", "sub": "Pay, Likes & Dislikes", "words": [{"en": "pay", "ar": "أجر / يدفع", "phon": "باي", "sen": "He works hard for good pay.", "senm": "يعمل بجهد من أجل أجر جيد.", "related": [], "emoji": "💵", "id": "c1g3_w0"}, {"en": "like (n.)", "ar": "شيء محبوب", "phon": "لايك", "sen": "Tell me your likes and dislikes.", "senm": "أخبرني بما تحبه وما تكرهه.", "related": [], "emoji": "👍", "id": "c1g3_w1"}, {"en": "dislike (n.)", "ar": "شيء مكروه", "phon": "ديسلايك", "sen": "Loud noise is one of my dislikes.", "senm": "الضجيج أحد الأشياء التي أكرهها.", "related": [], "emoji": "👎", "id": "c1g3_w2"}], "rule": "كلمات بسيطة لكنها كتير الاستخدام: الأجر مقابل العمل، والأشياء التي تحبها أو تكرهها.", "cardId": 1, "level": 1}, {"id": "c1g4", "title": "كلمات من جمل القواعد", "sub": "Vocabulary from the Grammar Examples", "words": [{"en": "renovation", "ar": "تجديد", "phon": "رينوڤيشن", "sen": "The old house underwent a complete renovation.", "senm": "خضع المنزل القديم لتجديد كامل.", "related": [], "emoji": "🛠️", "id": "c1g4_w0"}, {"en": "logistics", "ar": "الخدمات اللوجستية", "phon": "لوجيستكس", "sen": "The assistant I hired helps with all the logistics.", "senm": "المساعد الذي وظفته يساعد في كل الأمور اللوجستية.", "related": [], "emoji": "📦", "id": "c1g4_w1"}, {"en": "catalog", "ar": "فهرس", "phon": "كاتالوج", "sen": "The catalog lists all available books.", "senm": "الفهرس يسرد كل الكتب المتاحة.", "related": [], "emoji": "📖", "id": "c1g4_w2"}, {"en": "accessible", "ar": "متاح / يمكن الوصول إليه", "phon": "أكسيسبل", "sen": "The rare books are accessible online now.", "senm": "الكتب النادرة متاحة عبر الإنترنت الآن.", "related": [], "emoji": "🌐", "id": "c1g4_w3"}, {"en": "preserved", "ar": "محفوظ", "phon": "بريزيرڤد", "sen": "The rare books are preserved in a display case.", "senm": "الكتب النادرة محفوظة في واجهة عرض.", "related": [], "emoji": "🗄️", "id": "c1g4_w4"}, {"en": "donate", "ar": "يتبرع بـ", "phon": "دونيت", "sen": "The teacher donated rare books last week.", "senm": "تبرع المعلم بكتب نادرة الأسبوع الماضي.", "related": [], "emoji": "🎁", "id": "c1g4_w5"}, {"en": "historic", "ar": "تاريخي", "phon": "هيستوريك", "sen": "This is a historic library.", "senm": "هذه مكتبة تاريخية.", "related": [], "emoji": "🏛️", "id": "c1g4_w6"}, {"en": "scholars", "ar": "علماء / باحثون", "phon": "سكولرز", "sen": "Many great scholars spent their time here.", "senm": "قضى علماء عظماء وقتهم هنا.", "related": [], "emoji": "🎓", "id": "c1g4_w7"}, {"en": "resort", "ar": "منتجع", "phon": "ريزورت", "sen": "The company built a new resort by the sea.", "senm": "بنت الشركة منتجعًا جديدًا على البحر.", "related": [], "emoji": "🏖️", "id": "c1g4_w8"}, {"en": "priceless", "ar": "لا يُقدَّر بثمن", "phon": "برايسلس", "sen": "The museum houses a priceless collection.", "senm": "يضم المتحف مجموعة لا تُقدَّر بثمن.", "related": [], "emoji": "💎", "id": "c1g4_w9"}, {"en": "candidate", "ar": "مرشح", "phon": "كانديدت", "sen": "She was the only candidate who passed the interview.", "senm": "كانت هي المرشحة الوحيدة التي نجحت في المقابلة.", "related": [], "emoji": "🗳️", "id": "c1g4_w10"}, {"en": "apologize", "ar": "يعتذر", "phon": "أبولوجايز", "sen": "I made a mistake, so I apologized for it.", "senm": "ارتكبت خطأً، فاعتذرت عنه.", "related": [], "emoji": "🙏", "id": "c1g4_w11"}], "rule": "كل هذه الكلمات ظهرت في جمل شرح القواعد على السبورة — نتعلمها لوحدها كمان عشان تتقن الجملة كلها.", "cardId": 1, "level": 1}, {"id": "c2g1", "title": "الكلمات الرئيسية 1", "sub": "Key Vocabulary", "words": [{"en": "bias", "ar": "تحيز", "phon": "بايس", "sen": "The article showed a clear bias toward one side.", "senm": "أظهر المقال تحيزًا واضحًا لجانب واحد.", "related": [], "emoji": "⚖️", "id": "c2g1_w0"}, {"en": "satisfy", "ar": "يرضي / يشبع", "phon": "ساتيسفاي", "sen": "Nothing seems to satisfy him.", "senm": "لا شيء يبدو أنه يرضيه.", "related": [], "emoji": "😊", "id": "c2g1_w1"}, {"en": "highlight-reel effect", "ar": "تأثير شريط اللقطات المميزة", "phon": "هايلايت ريل إفكت", "sen": "Social media creates a highlight-reel effect.", "senm": "السوشيال ميديا تخلق تأثير شريط اللقطات المميزة.", "related": [], "emoji": "🎬", "id": "c2g1_w2"}, {"en": "dissatisfaction", "ar": "عدم رضا", "phon": "ديس ساتيسفاكشن", "sen": "He expressed his dissatisfaction with the results.", "senm": "عبّر عن عدم رضاه عن النتائج.", "related": [], "emoji": "😞", "id": "c2g1_w3"}, {"en": "mindfulness", "ar": "اليقظة الذهنية", "phon": "مايندفلنس", "sen": "Practicing mindfulness can reduce anxiety.", "senm": "ممارسة اليقظة الذهنية تقلل القلق.", "related": [], "emoji": "🧘", "id": "c2g1_w4"}, {"en": "self-esteem", "ar": "تقدير الذات", "phon": "سلف إستيم", "sen": "Encouragement helped rebuild her self-esteem.", "senm": "التشجيع ساعدها في استعادة تقدير الذات.", "related": [], "emoji": "💪", "id": "c2g1_w5"}, {"en": "sedentary", "ar": "خامل / قليل الحركة", "phon": "سيدنتري", "sen": "A sedentary lifestyle can increase health risks.", "senm": "نمط الحياة الخامل قد يزيد المخاطر الصحية.", "related": [], "emoji": "🛋️", "id": "c2g1_w6"}, {"en": "social reflection", "ar": "تأمل اجتماعي", "phon": "سوشال ريفلكشن", "sen": "The event led to a period of social reflection.", "senm": "أدى الحدث إلى فترة من التأمل الاجتماعي.", "related": [], "emoji": "🪞", "id": "c2g1_w7"}, {"en": "acquaintance", "ar": "شخص معرفة", "phon": "أكوينتنس", "sen": "He is not a friend, just an acquaintance.", "senm": "هو ليس صديقًا، فقط شخص معرفة.", "related": [], "emoji": "🤝", "id": "c2g1_w8"}, {"en": "measurable", "ar": "قابل للقياس", "phon": "ميجرابل", "sen": "There was a measurable improvement in her grades.", "senm": "كان هناك تحسن قابل للقياس في درجاتها.", "related": [], "emoji": "📏", "id": "c2g1_w9"}], "rule": "أهم كلمات المحاضرة عن الرفاهية والمقارنة الاجتماعية — ابدأ بيها.", "cardId": 2, "level": 2}, {"id": "c2g2", "title": "الكلمات الرئيسية 2", "sub": "Key Vocabulary", "words": [{"en": "underestimated", "ar": "مُستهان به", "phon": "أندرإستيميتد", "sen": "The importance of sleep is often underestimated.", "senm": "أهمية النوم غالبًا ما تكون مُستهانًا بها.", "related": [], "emoji": "📉", "id": "c2g2_w0"}, {"en": "nutritionist", "ar": "أخصائي تغذية", "phon": "نيوتريشنست", "sen": "David asked a nutritionist to improve his diet.", "senm": "سأل ديفيد أخصائي تغذية لتحسين نظامه الغذائي.", "related": [], "emoji": "🥗", "id": "c2g2_w1"}, {"en": "toxic", "ar": "سام", "phon": "توكسيك", "sen": "A toxic work environment affects everyone.", "senm": "بيئة العمل السامة تؤثر على الجميع.", "related": [], "emoji": "☠️", "id": "c2g2_w2"}, {"en": "social comparison", "ar": "مقارنة اجتماعية", "phon": "سوشال كومباريزن", "sen": "Social comparison can lower self-esteem.", "senm": "المقارنة الاجتماعية قد تقلل تقدير الذات.", "related": [], "emoji": "👥", "id": "c2g2_w3"}, {"en": "evaluative adjective", "ar": "صفة تقييمية", "phon": "إيڤاليوتيڤ أدجكتيڤ", "sen": "'Amazing' is an evaluative adjective.", "senm": "كلمة amazing هي صفة تقييمية.", "related": [], "emoji": "📝", "id": "c2g2_w4"}, {"en": "selective", "ar": "انتقائي", "phon": "سيليكتيڤ", "sen": "His memory of the meeting was very selective.", "senm": "كانت ذاكرته عن الاجتماع انتقائية جدًا.", "related": [], "emoji": "🎯", "id": "c2g2_w5"}, {"en": "unrealistic", "ar": "غير واقعي", "phon": "أنريلستيك", "sen": "Expecting fluency in a week is unrealistic.", "senm": "توقع الطلاقة خلال أسبوع غير واقعي.", "related": [], "emoji": "🚫", "id": "c2g2_w6"}, {"en": "transform", "ar": "يحوّل / يغيّر", "phon": "ترانسفورم", "sen": "Exercise can transform your mood completely.", "senm": "الرياضة يمكن أن تغير مزاجك تمامًا.", "related": [], "emoji": "🔄", "id": "c2g2_w7"}, {"en": "well-being", "ar": "الرفاهية", "phon": "ويل بيينج", "sen": "A balanced diet supports overall well-being.", "senm": "النظام الغذائي المتوازن يدعم الرفاهية العامة.", "related": [], "emoji": "🌿", "id": "c2g2_w8"}], "rule": "تابع باقي الكلمات الرئيسية لنفس الموضوع.", "cardId": 2, "level": 2}, {"id": "c2g3", "title": "كلمات هامة 1", "sub": "Important Vocabulary", "words": [{"en": "absorb", "ar": "يستوعب / يمتص", "phon": "أبسورب", "sen": "The body can only absorb a certain amount of vitamin C.", "senm": "الجسم يمتص كمية محددة فقط من فيتامين سي.", "related": [], "emoji": "🧽", "id": "c2g3_w0"}, {"en": "community", "ar": "مجتمع", "phon": "كوميونيتي", "sen": "The local community organized a charity event.", "senm": "نظّم المجتمع المحلي فعالية خيرية.", "related": [], "emoji": "🏘️", "id": "c2g3_w1"}, {"en": "anxiety", "ar": "القلق", "phon": "أنزايتي", "sen": "Public speaking causes anxiety in many people.", "senm": "التحدث أمام الجمهور يسبب القلق لكثيرين.", "related": [], "emoji": "😰", "id": "c2g3_w2"}, {"en": "activity", "ar": "نشاط", "phon": "أكتيڤيتي", "sen": "Regular physical activity improves health.", "senm": "النشاط البدني المنتظم يحسّن الصحة.", "related": [], "emoji": "🏃", "id": "c2g3_w3"}, {"en": "concentration", "ar": "تركيز", "phon": "كونسنتريشن", "sen": "Deep concentration is needed for exams.", "senm": "التركيز العميق مطلوب للامتحانات.", "related": [], "emoji": "🎯", "id": "c2g3_w4"}, {"en": "accurate", "ar": "دقيق", "phon": "أكيوريت", "sen": "The report gave accurate information.", "senm": "قدم التقرير معلومات دقيقة.", "related": [], "emoji": "✅", "id": "c2g3_w5"}, {"en": "competitive", "ar": "تنافسي", "phon": "كومبيتيتيڤ", "sen": "The job market is highly competitive.", "senm": "سوق العمل تنافسي للغاية.", "related": [], "emoji": "🏆", "id": "c2g3_w6"}, {"en": "aggressive", "ar": "عدواني", "phon": "أجريسيڤ", "sen": "His aggressive behavior got him a red card.", "senm": "سلوكه العدواني كلفه بطاقة حمراء.", "related": [], "emoji": "😠", "id": "c2g3_w7"}, {"en": "conscious", "ar": "واعٍ / مدرك", "phon": "كونشس", "sen": "She was conscious of the need to save money.", "senm": "كانت واعية لضرورة توفير المال.", "related": [], "emoji": "🧠", "id": "c2g3_w8"}, {"en": "influencers", "ar": "المؤثرون", "phon": "إنفلوإنسرز", "sen": "Brands collaborate with social media influencers.", "senm": "تتعاون العلامات التجارية مع مؤثري السوشيال ميديا.", "related": [], "emoji": "📱", "id": "c2g3_w9"}, {"en": "non-judgmental", "ar": "غير انتقادي", "phon": "نون جادجمنتال", "sen": "A good therapist offers a non-judgmental space.", "senm": "المعالج الجيد يوفر مساحة غير انتقادية.", "related": [], "emoji": "🕊️", "id": "c2g3_w10"}, {"en": "loneliness", "ar": "الوحدة", "phon": "لونلينس", "sen": "Moving to a new city can bring feelings of loneliness.", "senm": "الانتقال لمدينة جديدة قد يجلب شعور الوحدة.", "related": [], "emoji": "😔", "id": "c2g3_w11"}], "rule": "كلمات هامة تتكرر كتير في الامتحانات والمحادثة.", "cardId": 2, "level": 2}, {"id": "c2g4", "title": "كلمات هامة 2", "sub": "Important Vocabulary", "words": [{"en": "intense", "ar": "شديد / مكثف", "phon": "إنتنس", "sen": "The workout was so intense she could barely walk.", "senm": "كان التمرين شديدًا لدرجة أنها بالكاد استطاعت المشي.", "related": [], "emoji": "🔥", "id": "c2g4_w0"}, {"en": "perform", "ar": "يؤدي / ينفذ", "phon": "بيرفورم", "sen": "Athletes perform better with a routine.", "senm": "الرياضيون يؤدون بشكل أفضل مع روتين ثابت.", "related": [], "emoji": "🎽", "id": "c2g4_w1"}, {"en": "instinctively", "ar": "بشكل غريزي", "phon": "إنستنكتيفلي", "sen": "She instinctively covered her ears.", "senm": "غطت أذنيها بشكل غريزي.", "related": [], "emoji": "⚡", "id": "c2g4_w2"}, {"en": "obvious", "ar": "واضح", "phon": "أوبڤيس", "sen": "It was obvious that she was tired.", "senm": "كان واضحًا أنها متعبة.", "related": [], "emoji": "👁️", "id": "c2g4_w3"}, {"en": "lean", "ar": "قليل الدهن", "phon": "لين", "sen": "Chicken is a lean protein source.", "senm": "الدجاج مصدر بروتين قليل الدهن.", "related": [], "emoji": "🍗", "id": "c2g4_w4"}, {"en": "performance", "ar": "الأداء", "phon": "بيرفورمانس", "sen": "Lack of sleep affects academic performance.", "senm": "قلة النوم تؤثر على الأداء الدراسي.", "related": [], "emoji": "📊", "id": "c2g4_w5"}, {"en": "association", "ar": "ارتباط / جمعية", "phon": "أسوسييشن", "sen": "There is a strong association between exercise and mood.", "senm": "هناك ارتباط قوي بين الرياضة والمزاج.", "related": [], "emoji": "🔗", "id": "c2g4_w6"}, {"en": "consume", "ar": "يستهلك", "phon": "كونسيوم", "sen": "People who consume caffeine may sleep poorly.", "senm": "من يستهلكون الكافيين قد ينامون بشكل سيئ.", "related": [], "emoji": "☕", "id": "c2g4_w7"}, {"en": "classmate", "ar": "زميل دراسة", "phon": "كلاسميت", "sen": "He is not a close friend, just a classmate.", "senm": "هو ليس صديقًا مقربًا، فقط زميل دراسة.", "related": [], "emoji": "🎒", "id": "c2g4_w8"}, {"en": "moderate", "ar": "معتدل", "phon": "موديريت", "sen": "Moderate exercise is suitable for most people.", "senm": "الرياضة المعتدلة مناسبة لمعظم الناس.", "related": [], "emoji": "⚖️", "id": "c2g4_w9"}, {"en": "boost", "ar": "يعزز / يزيد", "phon": "بوست", "sen": "A good breakfast can boost your energy.", "senm": "الفطور الجيد يعزز طاقتك.", "related": [], "emoji": "🚀", "id": "c2g4_w10"}, {"en": "cycling", "ar": "ركوب الدراجات", "phon": "سايكلينج", "sen": "Cycling is a low-impact exercise.", "senm": "ركوب الدراجات رياضة خفيفة على المفاصل.", "related": [], "emoji": "🚴", "id": "c2g4_w11"}], "rule": "استمر في حفظ الكلمات الهامة — مجموعة تانية.", "cardId": 2, "level": 2}, {"id": "c2g5", "title": "كلمات هامة 3", "sub": "Important Vocabulary", "words": [{"en": "biased", "ar": "متحيز", "phon": "بايسد", "sen": "The article was clearly biased in favor of one party.", "senm": "كان المقال متحيزًا بوضوح لصالح طرف واحد.", "related": [], "emoji": "⚖️", "id": "c2g5_w0"}, {"en": "consumption", "ar": "استهلاك", "phon": "كونسمشن", "sen": "Reduce your daily sugar consumption.", "senm": "قلل من استهلاكك اليومي للسكر.", "related": [], "emoji": "🍬", "id": "c2g5_w1"}, {"en": "celebrity", "ar": "شخص مشهور", "phon": "سيليبريتي", "sen": "A celebrity opened the new supermarket.", "senm": "افتتح شخص مشهور السوبر ماركت الجديد.", "related": [], "emoji": "🌟", "id": "c2g5_w2"}, {"en": "decade", "ar": "عقد (عشر سنوات)", "phon": "ديكيد", "sen": "Technology has changed over the past decade.", "senm": "تغيرت التكنولوجيا خلال العقد الماضي.", "related": [], "emoji": "🗓️", "id": "c2g5_w3"}, {"en": "limit", "ar": "يحد من", "phon": "ليمت", "sen": "Doctors advise patients to limit sugary drinks.", "senm": "ينصح الأطباء المرضى بالحد من المشروبات السكرية.", "related": [], "emoji": "🚫", "id": "c2g5_w4"}, {"en": "phenomenon", "ar": "ظاهرة", "phon": "فينومينون", "sen": "The rise of influencers is a new phenomenon.", "senm": "صعود المؤثرين ظاهرة جديدة.", "related": [], "emoji": "🌪️", "id": "c2g5_w5"}, {"en": "meditation", "ar": "التأمل", "phon": "ميديتيشن", "sen": "She does meditation every morning.", "senm": "تمارس التأمل كل صباح.", "related": [], "emoji": "🧘", "id": "c2g5_w6"}, {"en": "poor nutrition", "ar": "سوء التغذية", "phon": "بور نيوتريشن", "sen": "Poor nutrition is linked to fatigue.", "senm": "سوء التغذية مرتبط بالإرهاق.", "related": [], "emoji": "🍟", "id": "c2g5_w7"}, {"en": "processed food", "ar": "الأطعمة المصنّعة", "phon": "بروسيسد فود", "sen": "A diet high in processed food harms health.", "senm": "النظام الغذائي الغني بالأطعمة المصنعة يضر بالصحة.", "related": [], "emoji": "🥫", "id": "c2g5_w8"}, {"en": "physical recovery", "ar": "التعافي البدني", "phon": "فيزيكال ريكفري", "sen": "Athletes need rest for physical recovery.", "senm": "الرياضيون يحتاجون الراحة للتعافي البدني.", "related": [], "emoji": "💆", "id": "c2g5_w9"}, {"en": "mental", "ar": "عقلي / نفسي", "phon": "منتال", "sen": "Reading is good for mental health.", "senm": "القراءة مفيدة للصحة العقلية.", "related": [], "emoji": "🧠", "id": "c2g5_w10"}, {"en": "powerful", "ar": "قوي / مؤثر", "phon": "باورفل", "sen": "Exercise has a powerful effect on the brain.", "senm": "الرياضة لها تأثير قوي على الدماغ.", "related": [], "emoji": "💥", "id": "c2g5_w11"}], "rule": "آخر مجموعة من الكلمات الهامة الأساسية.", "cardId": 2, "level": 2}, {"id": "c2g6", "title": "كلمات إضافية 1", "sub": "Extra Vocabulary", "words": [{"en": "deliberate", "ar": "مدروس / متعمد", "phon": "ديليبريت", "sen": "Her decision was deliberate and carefully planned.", "senm": "كان قرارها مدروسًا ومخططًا له بعناية.", "related": [], "emoji": "🎯", "id": "c2g6_w0"}, {"en": "foundation", "ar": "أساس", "phon": "فاونديشن", "sen": "Trust is the foundation of a good friendship.", "senm": "الثقة هي أساس الصداقة الجيدة.", "related": [], "emoji": "🏗️", "id": "c2g6_w1"}, {"en": "filtered", "ar": "مُعدّل / مُفلتر", "phon": "فيلترد", "sen": "Her photos were heavily filtered.", "senm": "صورها كانت مفلترة بشكل كبير.", "related": [], "emoji": "🖼️", "id": "c2g6_w2"}, {"en": "endorphins", "ar": "هرمونات السعادة", "phon": "إندورفينز", "sen": "Exercise releases endorphins that boost mood.", "senm": "الرياضة تفرز هرمونات السعادة التي تحسن المزاج.", "related": [], "emoji": "😄", "id": "c2g6_w3"}, {"en": "imply", "ar": "يوحي بـ", "phon": "إمبلاي", "sen": "His silence seemed to imply he was angry.", "senm": "صمته بدا أنه يوحي بأنه غاضب.", "related": [], "emoji": "💬", "id": "c2g6_w4"}, {"en": "specialist", "ar": "متخصص", "phon": "سبيشلست", "sen": "A specialist reviewed her case.", "senm": "راجع متخصص حالتها.", "related": [], "emoji": "👨‍⚕️", "id": "c2g6_w5"}, {"en": "device", "ar": "جهاز", "phon": "ديفايس", "sen": "Using a device before bed disturbs sleep.", "senm": "استخدام جهاز قبل النوم يزعج النوم.", "related": [], "emoji": "📱", "id": "c2g6_w6"}, {"en": "expert", "ar": "خبير", "phon": "إكسبرت", "sen": "Health experts recommend daily exercise.", "senm": "يوصي خبراء الصحة بالرياضة اليومية.", "related": [], "emoji": "🎓", "id": "c2g6_w7"}, {"en": "independence", "ar": "استقلال", "phon": "إندبندنس", "sen": "Moving abroad gave her a sense of independence.", "senm": "السفر للخارج أعطاها شعورًا بالاستقلال.", "related": [], "emoji": "🕊️", "id": "c2g6_w8"}, {"en": "depression", "ar": "اكتئاب", "phon": "ديبريشن", "sen": "Lack of sleep can lead to depression.", "senm": "قلة النوم قد تؤدي للاكتئاب.", "related": [], "emoji": "🌧️", "id": "c2g6_w9"}, {"en": "gap", "ar": "فجوة", "phon": "جاب", "sen": "There is a gap between what people eat and think they eat.", "senm": "هناك فجوة بين ما يأكله الناس وما يظنون أنهم يأكلونه.", "related": [], "emoji": "🕳️", "id": "c2g6_w10"}, {"en": "evaluation", "ar": "تقييم", "phon": "إيڤاليويشن", "sen": "The teacher used a fair evaluation rubric.", "senm": "استخدم المعلم معيار تقييم عادل.", "related": [], "emoji": "📋", "id": "c2g6_w11"}, {"en": "include", "ar": "يشمل / يتضمن", "phon": "إنكلود", "sen": "A balanced diet should include lean proteins.", "senm": "النظام الغذائي المتوازن يجب أن يشمل بروتينات قليلة الدهن.", "related": [], "emoji": "➕", "id": "c2g6_w12"}], "rule": "كلمات إضافية أعمق، مفيدة في القراءة والكتابة.", "cardId": 2, "level": 2}, {"id": "c2g7", "title": "كلمات إضافية 2", "sub": "Extra Vocabulary", "words": [{"en": "distant", "ar": "بعيد", "phon": "ديستنت", "sen": "Teenagers now compare themselves to distant celebrities.", "senm": "المراهقون يقارنون أنفسهم بمشاهير بعيدين.", "related": [], "emoji": "🌌", "id": "c2g7_w0"}, {"en": "intake", "ar": "تناول / استهلاك", "phon": "إنتيك", "sen": "Reduce your daily sugar intake.", "senm": "قلل من تناولك اليومي للسكر.", "related": [], "emoji": "🍽️", "id": "c2g7_w1"}, {"en": "fatigue", "ar": "الإرهاق", "phon": "فاتيج", "sen": "After the long walk, I felt fatigue in my legs.", "senm": "بعد المشي الطويل، شعرت بالإرهاق في ساقيّ.", "related": [], "emoji": "🥱", "id": "c2g7_w2"}, {"en": "pressure", "ar": "ضغط", "phon": "بريشر", "sen": "Many students feel pressure to get high grades.", "senm": "يشعر كثير من الطلاب بضغط للحصول على درجات عالية.", "related": [], "emoji": "⏳", "id": "c2g7_w3"}, {"en": "symptoms", "ar": "أعراض", "phon": "سيمبتمز", "sen": "Common symptoms of anxiety include a rapid heartbeat.", "senm": "من أعراض القلق الشائعة تسارع ضربات القلب.", "related": [], "emoji": "🌡️", "id": "c2g7_w4"}, {"en": "stage", "ar": "مرحلة", "phon": "ستيج", "sen": "During the final stage of the project, they reviewed the work.", "senm": "في المرحلة الأخيرة من المشروع، راجعوا العمل.", "related": [], "emoji": "🪜", "id": "c2g7_w5"}, {"en": "stress", "ar": "التوتر", "phon": "ستريس", "sen": "Chronic stress can weaken the immune system.", "senm": "التوتر المزمن قد يضعف جهاز المناعة.", "related": [], "emoji": "😖", "id": "c2g7_w6"}, {"en": "require", "ar": "يتطلب", "phon": "ريكواير", "sen": "Improving fitness will require effort and dedication.", "senm": "تحسين اللياقة يتطلب جهدًا والتزامًا.", "related": [], "emoji": "📌", "id": "c2g7_w7"}, {"en": "mood", "ar": "الحالة المزاجية", "phon": "مود", "sen": "A short walk can lift your mood.", "senm": "المشي القصير يحسّن حالتك المزاجية.", "related": [], "emoji": "🙂", "id": "c2g7_w8"}, {"en": "recommend", "ar": "يوصي بـ", "phon": "ريكوميند", "sen": "Doctors recommend 30 minutes of exercise daily.", "senm": "يوصي الأطباء بـ30 دقيقة رياضة يوميًا.", "related": [], "emoji": "👍", "id": "c2g7_w9"}, {"en": "tendency", "ar": "ميل / نزعة", "phon": "تندنسي", "sen": "He has a tendency to eat unhealthy snacks when stressed.", "senm": "لديه ميل لتناول وجبات غير صحية عند التوتر.", "related": [], "emoji": "🔄", "id": "c2g7_w10"}, {"en": "wellness", "ar": "العافية", "phon": "ولنس", "sen": "The club offers wellness programs.", "senm": "النادي يقدم برامج للعافية.", "related": [], "emoji": "🌸", "id": "c2g7_w11"}, {"en": "psychological", "ar": "نفسي", "phon": "سايكولوجيكال", "sen": "The study examined the psychological effects of isolation.", "senm": "درست الدراسة الآثار النفسية للعزلة.", "related": [], "emoji": "🧠", "id": "c2g7_w12"}], "rule": "تابع كلمات إضافية عن الصحة والمزاج.", "cardId": 2, "level": 2}, {"id": "c2g8", "title": "كلمات إضافية 3", "sub": "Extra Vocabulary", "words": [{"en": "teenager", "ar": "مراهق", "phon": "تينإيجر", "sen": "As a teenager, she faced pressure to fit in.", "senm": "كمراهقة، واجهت ضغطًا للاندماج.", "related": [], "emoji": "🧑‍🎤", "id": "c2g8_w0"}, {"en": "target", "ar": "هدف / يستهدف", "phon": "تارجت", "sen": "The campaign targets young adults.", "senm": "تستهدف الحملة الشباب.", "related": [], "emoji": "🎯", "id": "c2g8_w1"}, {"en": "version", "ar": "نسخة / إصدار", "phon": "ڤيرجن", "sen": "This new version of the app tracks water intake.", "senm": "هذه النسخة الجديدة من التطبيق تتابع شرب الماء.", "related": [], "emoji": "🔄", "id": "c2g8_w2"}, {"en": "reduction", "ar": "تقليل / خفض", "phon": "ريدكشن", "sen": "A reduction in screen time improves sleep.", "senm": "تقليل وقت الشاشة يحسّن النوم.", "related": [], "emoji": "⬇️", "id": "c2g8_w3"}, {"en": "track", "ar": "يرصد / يتابع", "phon": "تراك", "sen": "Use a journal to track your mood.", "senm": "استخدم مفكرة لتتابع مزاجك.", "related": [], "emoji": "📔", "id": "c2g8_w4"}, {"en": "self-confidence", "ar": "الثقة بالنفس", "phon": "سلف كونفيدنس", "sen": "Positive feedback boosted her self-confidence.", "senm": "التقييم الإيجابي عزز ثقتها بنفسها.", "related": [], "emoji": "🌟", "id": "c2g8_w5"}, {"en": "skincare", "ar": "العناية بالبشرة", "phon": "سكينكير", "sen": "Her daily skincare routine includes sunscreen.", "senm": "روتينها اليومي للعناية بالبشرة يتضمن واقي الشمس.", "related": [], "emoji": "🧴", "id": "c2g8_w6"}, {"en": "whole grains", "ar": "حبوب كاملة", "phon": "هول جرينز", "sen": "Nutritionists recommend whole grains over white bread.", "senm": "يوصي أخصائيو التغذية بالحبوب الكاملة بدلًا من الخبز الأبيض.", "related": [], "emoji": "🌾", "id": "c2g8_w7"}, {"en": "individual", "ar": "فرد", "phon": "إنديڤيجوال", "sen": "Mental wellness matters for every individual.", "senm": "الصحة النفسية مهمة لكل فرد.", "related": [], "emoji": "🧍", "id": "c2g8_w8"}, {"en": "formation", "ar": "تكوين / تشكيل", "phon": "فورميشن", "sen": "A balanced diet lays the foundation for good formation of habits.", "senm": "النظام الغذائي المتوازن يضع أساس تكوين عادات جيدة.", "related": [], "emoji": "🧩", "id": "c2g8_w9"}, {"en": "sensitive", "ar": "حساس", "phon": "سنسيتيڤ", "sen": "His skin is very sensitive to chemicals.", "senm": "بشرته حساسة جدًا للمواد الكيميائية.", "related": [], "emoji": "🌡️", "id": "c2g8_w10"}, {"en": "healthy fats", "ar": "الدهون الصحية", "phon": "هيلثي فاتس", "sen": "Nuts are an excellent source of healthy fats.", "senm": "المكسرات مصدر ممتاز للدهون الصحية.", "related": [], "emoji": "🥑", "id": "c2g8_w11"}], "rule": "آخر مجموعة كلمات إضافية عن الثقة بالنفس والعناية بالذات.", "cardId": 2, "level": 2}, {"id": "c2g9", "title": "تعبيرات ومصطلحات 1", "sub": "Expressions & Collocations", "words": [{"en": "have in common", "ar": "لديه شيء مشترك", "phon": "هاف إن كومون", "sen": "Twins usually have a lot in common.", "senm": "التوأم عادة لديهم أشياء كثيرة مشتركة.", "related": [], "emoji": "🧬", "id": "c2g9_w0"}, {"en": "face to face", "ar": "وجهًا لوجه", "phon": "فيس تو فيس", "sen": "They finally sat down face to face.", "senm": "جلسا أخيرًا وجهًا لوجه.", "related": [], "emoji": "👥", "id": "c2g9_w1"}, {"en": "balanced diet", "ar": "نظام غذائي متوازن", "phon": "بالانسد دايت", "sen": "A balanced diet supports good health.", "senm": "النظام الغذائي المتوازن يدعم الصحة الجيدة.", "related": [], "emoji": "🥗", "id": "c2g9_w2"}, {"en": "well-documented", "ar": "موثّق جيدًا", "phon": "ويل دوكيومنتد", "sen": "These are well-documented health benefits.", "senm": "هذه فوائد صحية موثّقة جيدًا.", "related": [], "emoji": "📑", "id": "c2g9_w3"}, {"en": "emotional control", "ar": "تحكّم عاطفي", "phon": "إيموشنال كونترول", "sen": "Sleep supports emotional control.", "senm": "النوم يدعم التحكم العاطفي.", "related": [], "emoji": "❤️", "id": "c2g9_w4"}, {"en": "be likely to", "ar": "من المحتمل أن", "phon": "بي لايكلي تو", "sen": "Students who eat breakfast are likely to perform better.", "senm": "الطلاب الذين يتناولون الفطور من المحتمل أن يؤدوا بشكل أفضل.", "related": [], "emoji": "🔮", "id": "c2g9_w5"}, {"en": "emotional resilience", "ar": "مرونة نفسية", "phon": "إيموشنال ريزيلينس", "sen": "Emotional resilience helps you recover from failure.", "senm": "المرونة النفسية تساعدك على التعافي من الفشل.", "related": [], "emoji": "🌱", "id": "c2g9_w6"}, {"en": "academic performance", "ar": "الأداء الدراسي", "phon": "أكاديميك بيرفورمانس", "sen": "Lack of sleep affects academic performance.", "senm": "قلة النوم تؤثر على الأداء الدراسي.", "related": [], "emoji": "🎓", "id": "c2g9_w7"}, {"en": "a varied range of", "ar": "مجموعة متنوعة من", "phon": "أ ڤيريد رينج أوف", "sen": "Eat a varied range of fruits and vegetables.", "senm": "تناول مجموعة متنوعة من الفواكه والخضروات.", "related": [], "emoji": "🍇", "id": "c2g9_w8"}, {"en": "do exercise", "ar": "يمارس الرياضة", "phon": "دو إكسرسايز", "sen": "Teenagers should do exercise every day.", "senm": "يجب أن يمارس المراهقون الرياضة كل يوم.", "related": [], "emoji": "🏋️", "id": "c2g9_w9"}, {"en": "social connection", "ar": "التواصل الاجتماعي", "phon": "سوشال كونكشن", "sen": "Quality time builds social connection.", "senm": "الوقت الممتع يبني التواصل الاجتماعي.", "related": [], "emoji": "🤝", "id": "c2g9_w10"}, {"en": "at the same time", "ar": "في نفس الوقت", "phon": "آت ذا سيم تايم", "sen": "It reduces stress at the same time as boosting mood.", "senm": "يقلل التوتر في نفس الوقت الذي يحسّن فيه المزاج.", "related": [], "emoji": "⏱️", "id": "c2g9_w11"}, {"en": "good at", "ar": "جيد في", "phon": "جود آت", "sen": "She is good at managing her time.", "senm": "هي جيدة في إدارة وقتها.", "related": [], "emoji": "👍", "id": "c2g9_w12"}, {"en": "set up", "ar": "يُعدّ / يُنشئ", "phon": "سيت أب", "sen": "Setting up a bedtime routine improves sleep.", "senm": "إعداد روتين نوم منتظم يحسّن النوم.", "related": [], "emoji": "🛏️", "id": "c2g9_w13"}], "rule": "تعبيرات جاهزة تستخدمها زي ما هي — احفظها كوحدة واحدة مش كلمة كلمة.", "cardId": 2, "level": 2}, {"id": "c2g10", "title": "تعبيرات ومصطلحات 2", "sub": "Expressions & Collocations", "words": [{"en": "have an effect on", "ar": "له أثر على", "phon": "هاف آن إفكت أون", "sen": "Music has an effect on our emotions.", "senm": "الموسيقى لها أثر على مشاعرنا.", "related": [], "emoji": "🎵", "id": "c2g10_w0"}, {"en": "sleep quality", "ar": "جودة النوم", "phon": "سليب كواليتي", "sen": "A regular routine improves sleep quality.", "senm": "الروتين المنتظم يحسّن جودة النوم.", "related": [], "emoji": "😴", "id": "c2g10_w1"}, {"en": "be widely seen as", "ar": "يُرى على نطاق واسع بأنه", "phon": "بي وايدلي سين آز", "sen": "A balanced diet is widely seen as the foundation of health.", "senm": "النظام الغذائي المتوازن يُرى على نطاق واسع كأساس للصحة.", "related": [], "emoji": "👀", "id": "c2g10_w2"}, {"en": "fail to", "ar": "يفشل في", "phon": "فيل تو", "sen": "Many teens fail to meet daily activity levels.", "senm": "كثير من المراهقين يفشلون في تحقيق مستويات النشاط اليومي.", "related": [], "emoji": "❌", "id": "c2g10_w3"}, {"en": "sense of self", "ar": "الشعور بالذات", "phon": "سنس أوف سلف", "sen": "Our habits shape our sense of self.", "senm": "عاداتنا تشكّل شعورنا بذاتنا.", "related": [], "emoji": "🪞", "id": "c2g10_w4"}, {"en": "cope with", "ar": "يتأقلم مع / يساير", "phon": "كوب ويذ", "sen": "Relaxation techniques help students cope with pressure.", "senm": "تقنيات الاسترخاء تساعد الطلاب على التأقلم مع الضغط.", "related": [], "emoji": "🧩", "id": "c2g10_w5"}, {"en": "linked to", "ar": "مرتبط بـ", "phon": "لينكد تو", "sen": "Poor nutrition is linked to fatigue.", "senm": "سوء التغذية مرتبط بالإرهاق.", "related": [], "emoji": "🔗", "id": "c2g10_w6"}, {"en": "count towards", "ar": "يُحتسب ضمن", "phon": "كاونت تواردز", "sen": "A brisk walk counts towards your daily target.", "senm": "المشي السريع يُحتسب ضمن هدفك اليومي.", "related": [], "emoji": "➕", "id": "c2g10_w7"}, {"en": "daily habit", "ar": "عادة يومية", "phon": "ديلي هابت", "sen": "Reading is a healthy daily habit.", "senm": "القراءة عادة يومية صحية.", "related": [], "emoji": "📅", "id": "c2g10_w8"}, {"en": "high-caffeine drinks", "ar": "مشروبات عالية الكافيين", "phon": "هاي كافين درينكس", "sen": "Limit your intake of high-caffeine drinks.", "senm": "قلل من تناول المشروبات عالية الكافيين.", "related": [], "emoji": "☕", "id": "c2g10_w9"}, {"en": "daily target", "ar": "هدف يومي", "phon": "ديلي تارجت", "sen": "Cycling to school counts towards the daily target.", "senm": "ركوب الدراجة للمدرسة يُحتسب ضمن الهدف اليومي.", "related": [], "emoji": "🎯", "id": "c2g10_w10"}, {"en": "contribute to", "ar": "يساهم في", "phon": "كونتريبيوت تو", "sen": "Poor sleep contributes to mood changes.", "senm": "قلة النوم تساهم في تقلبات المزاج.", "related": [], "emoji": "🧩", "id": "c2g10_w11"}, {"en": "play a role in", "ar": "يلعب دورًا في", "phon": "بلاي أ رول إن", "sen": "Self-esteem plays a role in mental health.", "senm": "تقدير الذات يلعب دورًا في الصحة النفسية.", "related": [], "emoji": "🎭", "id": "c2g10_w12"}, {"en": "pay attention to", "ar": "ينتبه إلى", "phon": "باي أتنشن تو", "sen": "We should pay attention to what we consume online.", "senm": "يجب أن ننتبه لما نستهلكه عبر الإنترنت.", "related": [], "emoji": "👁️", "id": "c2g10_w13"}], "rule": "تابع التعبيرات الجاهزة والمصطلحات المهمة.", "cardId": 2, "level": 2}, {"id": "c2g11", "title": "المشتقات", "sub": "Derivatives (Verb / Adj / Noun)", "words": [{"en": "meditate → meditative → meditation", "ar": "يتأمل ← تأملي ← التأمل", "phon": "ميديتيت", "sen": "Meditation helps me stay calm and focused.", "senm": "التأمل يساعدني على البقاء هادئًا ومركزًا.", "related": [], "emoji": "🧘", "id": "c2g11_w0"}, {"en": "measure → measurable → measurement", "ar": "يقيس ← قابل للقياس ← القياس", "phon": "مِجر", "sen": "There was a measurable improvement in her speed.", "senm": "كان هناك تحسن قابل للقياس في سرعتها.", "related": [], "emoji": "📏", "id": "c2g11_w1"}, {"en": "evaluate → evaluative → evaluation", "ar": "يقيّم ← تقييمي ← التقييم", "phon": "إيڤاليويت", "sen": "Try to avoid being too evaluative when learning.", "senm": "حاول ألا تكون تقييميًا جدًا عند التعلم.", "related": [], "emoji": "📊", "id": "c2g11_w2"}, {"en": "bias → biased → bias", "ar": "يتحيّز ← متحيّز ← التحيّز", "phon": "بايَس", "sen": "His judgment was clearly biased by his preferences.", "senm": "كان حكمه متحيزًا بوضوح لتفضيلاته.", "related": [], "emoji": "⚖️", "id": "c2g11_w3"}, {"en": "depress → depressed → depression", "ar": "يُكئب ← مكتئب ← الاكتئاب", "phon": "ديبرس", "sen": "Prolonged stress left him feeling depressed.", "senm": "التوتر المطول جعله يشعر بالاكتئاب.", "related": [], "emoji": "🌧️", "id": "c2g11_w4"}, {"en": "transform → transformative → transformation", "ar": "يحوّل ← تحويلي ← التحول", "phon": "ترانسفورم", "sen": "Moving abroad was a truly transformative experience.", "senm": "الانتقال للخارج كانت تجربة تحويلية حقًا.", "related": [], "emoji": "🦋", "id": "c2g11_w5"}, {"en": "aggress → aggressive → aggression", "ar": "يعتدي ← عدواني ← العدوان", "phon": "أجرس", "sen": "His aggressive behavior surprised everyone.", "senm": "سلوكه العدواني فاجأ الجميع.", "related": [], "emoji": "😤", "id": "c2g11_w6"}, {"en": "nourish → nutritious → nutrition", "ar": "يغذّي ← مغذٍّ ← التغذية", "phon": "نَريش", "sen": "Proper nutrition is essential for energy.", "senm": "التغذية السليمة ضرورية للطاقة.", "related": [], "emoji": "🥦", "id": "c2g11_w7"}, {"en": "acquaint → acquainted → acquaintance", "ar": "يتعرّف ← معتاد على ← معرفة", "phon": "أكوينت", "sen": "Are you acquainted with the new system?", "senm": "هل أنت معتاد على النظام الجديد؟", "related": [], "emoji": "🤝", "id": "c2g11_w8"}, {"en": "resile → resilient → resilience", "ar": "يعود لأصله ← مرن ← المرونة", "phon": "ريزيلينت", "sen": "Children are often more resilient than we think.", "senm": "الأطفال غالبًا أكثر مرونة مما نظن.", "related": [], "emoji": "🌿", "id": "c2g11_w9"}, {"en": "perform → --- → performance", "ar": "يؤدي / يقوم بـ ← الأداء", "phon": "بيرفورم", "sen": "His performance in the exam was excellent.", "senm": "كان أداؤه في الامتحان ممتازًا.", "related": [], "emoji": "🎽", "id": "c2g11_w10"}], "rule": "كل كلمة هنا بتوريك 3 أشكال منها: فعل، وصفة، واسم — احفظهم مع بعض.", "cardId": 2, "level": 2}, {"id": "c2g12", "title": "كلمات متشابهة لفظًا", "sub": "Commonly Confused Words", "words": [{"en": "advice / advise", "ar": "نصيحة (اسم) / ينصح (فعل)", "phon": "أدڤايس", "sen": "My advice is to sleep early; I advise you to try it.", "senm": "نصيحتي أن تنام مبكرًا؛ أنصحك بتجربة ذلك.", "related": [], "emoji": "💡", "id": "c2g12_w0"}, {"en": "high / highly", "ar": "عالٍ (مادي) / بدرجة عالية (معنوي)", "phon": "های", "sen": "He is a highly intelligent student who flew high.", "senm": "هو طالب ذكي جدًا وقد حلّق عاليًا.", "related": [], "emoji": "⬆️", "id": "c2g12_w1"}, {"en": "daily / dairy", "ar": "يومي / منتجات الألبان", "phon": "ديلي", "sen": "Taking a daily walk is good; avoid dairy if allergic.", "senm": "المشي اليومي مفيد؛ تجنب منتجات الألبان إن كنت تعاني حساسية.", "related": [], "emoji": "🥛", "id": "c2g12_w2"}, {"en": "mood / mode", "ar": "الحالة المزاجية / وضع (طريقة)", "phon": "مود", "sen": "Music affects your mood and puts you in a new mode.", "senm": "الموسيقى تؤثر على مزاجك وتضعك في وضع جديد.", "related": [], "emoji": "🎚️", "id": "c2g12_w3"}, {"en": "affect / effect", "ar": "يؤثر (فعل) / تأثير (اسم)", "phon": "أفكت", "sen": "Sleep affects mood; the effect is very clear.", "senm": "النوم يؤثر على المزاج؛ والتأثير واضح جدًا.", "related": [], "emoji": "➡️", "id": "c2g12_w4"}, {"en": "loneliness / solitude", "ar": "الوحدة (شعور سلبي) / عزلة اختيارية", "phon": "لونلينس", "sen": "She felt loneliness, unlike the peaceful solitude she chose before.", "senm": "شعرت بالوحدة، على عكس العزلة الهادئة التي اختارتها من قبل.", "related": [], "emoji": "🏝️", "id": "c2g12_w5"}, {"en": "device / devise", "ar": "جهاز (اسم) / يبتكر (فعل)", "phon": "ديڤايس", "sen": "He used a device to devise a new solution.", "senm": "استخدم جهازًا لابتكار حل جديد.", "related": [], "emoji": "💡", "id": "c2g12_w6"}, {"en": "publish / spread", "ar": "ينشر (كتاب) / ينتشر (مرض أو خبر)", "phon": "پبلِش", "sen": "They publish books before the news can spread.", "senm": "ينشرون الكتب قبل أن ينتشر الخبر.", "related": [], "emoji": "📰", "id": "c2g12_w7"}, {"en": "deeply / deep", "ar": "بعمق (معنوي) / عميق (مادي)", "phon": "ديپلي", "sen": "I am deeply sorry; they dug deep into the ground.", "senm": "أنا آسف بشدة؛ حفروا عميقًا في الأرض.", "related": [], "emoji": "🕳️", "id": "c2g12_w8"}, {"en": "process / operation", "ar": "عملية (كيميائية أو صناعية) / عملية (جراحية)", "phon": "پروسس", "sen": "The manufacturing process differs from a surgical operation.", "senm": "عملية التصنيع تختلف عن العملية الجراحية.", "related": [], "emoji": "⚙️", "id": "c2g12_w9"}, {"en": "boast / boost", "ar": "يتفاخر / يعزز", "phon": "بوست", "sen": "Don't boast about grades; try to boost your effort instead.", "senm": "لا تتفاخر بالدرجات؛ حاول أن تعزز مجهودك بدلًا من ذلك.", "related": [], "emoji": "📣", "id": "c2g12_w10"}, {"en": "moderate / modest", "ar": "معتدل / متواضع", "phon": "موديريت", "sen": "He does moderate exercise and stays modest about it.", "senm": "يمارس رياضة معتدلة ويبقى متواضعًا بشأنها.", "related": [], "emoji": "🙇", "id": "c2g12_w11"}, {"en": "every day / everyday", "ar": "كل يوم (ظرف) / يومي (صفة)", "phon": "إيڤري داي", "sen": "Reading every day became her everyday habit.", "senm": "القراءة كل يوم أصبحت عادتها اليومية.", "related": [], "emoji": "📅", "id": "c2g12_w12"}, {"en": "consist of / comprise", "ar": "يتكوّن من (جزء) / يشمل (الكل)", "phon": "كونسست أوف", "sen": "The team consists of ten players; USA is comprised of 50 states.", "senm": "الفريق يتكون من عشرة لاعبين؛ الولايات المتحدة تتكون من 50 ولاية.", "related": [], "emoji": "🧩", "id": "c2g12_w13"}], "rule": "كلمات بتتلخبط مع بعض في النطق أو الشكل لكن معناها مختلف تمامًا — انتبه للفرق.", "cardId": 2, "level": 2}, {"id": "c2g13", "title": "كلمات من نص القراءة", "sub": "Words from the Reading Passages", "words": [{"en": "release", "ar": "يفرز / يطلق", "phon": "ريليس", "sen": "Exercise causes the release of endorphins.", "senm": "الرياضة تسبب إفراز الإندورفين.", "related": [], "emoji": "💥", "id": "c2g13_w0"}, {"en": "brisk (walk)", "ar": "سريع (مشي)", "phon": "بريسك", "sen": "A brisk walk counts towards the daily target.", "senm": "المشي السريع يُحتسب ضمن الهدف اليومي.", "related": [], "emoji": "🚶", "id": "c2g13_w1"}, {"en": "furthermore", "ar": "علاوة على ذلك", "phon": "فيرذرمور", "sen": "Furthermore, teenagers who exercise sleep more deeply.", "senm": "علاوة على ذلك، المراهقون الذين يمارسون الرياضة ينامون بعمق أكبر.", "related": [], "emoji": "➕", "id": "c2g13_w2"}, {"en": "worldwide", "ar": "حول العالم", "phon": "وورلدوايد", "sen": "80% of teenagers worldwide fail to meet activity levels.", "senm": "80% من المراهقين حول العالم لا يحققون مستويات النشاط.", "related": [], "emoji": "🌍", "id": "c2g13_w3"}, {"en": "equally", "ar": "بنفس القدر", "phon": "إيكوالي", "sen": "Sleep is equally important, but underestimated.", "senm": "النوم مهم بنفس القدر، لكنه مستهان به.", "related": [], "emoji": "⚖️", "id": "c2g13_w4"}, {"en": "journal", "ar": "مجلة علمية / مفكرة", "phon": "جورنال", "sen": "Research published in a journal found new links.", "senm": "بحث نُشر في مجلة علمية وجد روابط جديدة.", "related": [], "emoji": "📔", "id": "c2g13_w5"}, {"en": "bedtime routine", "ar": "روتين ما قبل النوم", "phon": "بيدتايم روتين", "sen": "Setting up a bedtime routine improves sleep quality.", "senm": "إعداد روتين ما قبل النوم يحسّن جودة النوم.", "related": [], "emoji": "🛌", "id": "c2g13_w6"}, {"en": "curated", "ar": "منتقى بعناية", "phon": "كيوريتد", "sen": "Social media shows a highly curated image of life.", "senm": "السوشيال ميديا تعرض صورة منتقاة بعناية للحياة.", "related": [], "emoji": "🖼️", "id": "c2g13_w7"}, {"en": "filter (v.)", "ar": "يُصفّي / يُعدّل الصورة", "phon": "فلتر", "sen": "People filter their photos before posting.", "senm": "الناس يصفّون صورهم قبل النشر.", "related": [], "emoji": "🎨", "id": "c2g13_w8"}, {"en": "perceive", "ar": "يُدرك / يرى", "phon": "بيرسيڤ", "sen": "Viewers instinctively perceive it as a complete picture.", "senm": "المشاهدون يدركونها بشكل غريزي كصورة كاملة.", "related": [], "emoji": "👁️", "id": "c2g13_w9"}, {"en": "standard", "ar": "معيار", "phon": "ستاندرد", "sen": "Media literacy questions the impossible standard online.", "senm": "الوعي الإعلامي يشكك في المعيار المستحيل على الإنترنت.", "related": [], "emoji": "📐", "id": "c2g13_w10"}, {"en": "shape (v.)", "ar": "يُشكّل", "phon": "شيپ", "sen": "Our daily habits shape our sense of self.", "senm": "عاداتنا اليومية تُشكّل شعورنا بذاتنا.", "related": [], "emoji": "🧱", "id": "c2g13_w11"}], "rule": "كلمات استخرجناها من نصوص القراءة الكاملة في المحاضرة.", "cardId": 2, "level": 2}];
+const GRAMMAR_LESSONS = [{"id": "l1", "cardId": 3, "num": 1, "title": "مقدمة: إيه هي العبارات الموصولة؟", "emoji": "🔗", "explain": "العبارات الموصولة (Relative Clauses) هي جمل فرعية ناقصة ومستقلة، بتُعطي معلومات عن اسم قبلها، وبتبدأ دايمًا بـ<b>ضمير موصول</b> (Relative Pronoun) زي who / which / that / whose / where / when، أو <b>ظرف وصل</b>.\n<br><br>\nالفايدة الأساسية منها: تجنّب تكرار الاسم مرتين في نفس الفقرة. بدل ما تقول جملتين منفصلتين، بتربطهم في جملة واحدة أوضح وأجمل.", "examples": [{"en": "I have a friend. My friend lives in Aswan.", "ar": "لدي صديق. صديقي يعيش في أسوان. (تكرار)"}, {"en": "I have a friend who lives in Aswan.", "ar": "لدي صديق يعيش في أسوان. (بدون تكرار)"}, {"en": "This is the book. I bought the book yesterday.", "ar": "هذا هو الكتاب. اشتريت الكتاب أمس. (تكرار)"}, {"en": "This is the book which I bought yesterday.", "ar": "هذا هو الكتاب الذي اشتريته أمس. (بدون تكرار)"}], "exercises": [{"q": "العبارة الموصولة تُستخدم أساسًا عشان:", "options": ["تكرار الاسم مرتين", "تجنّب تكرار الاسم", "إنهاء الجملة بسرعة", "تغيير الفاعل"], "answer": 1, "explain": "الهدف الأساسي من العبارة الموصولة هو دمج جملتين لتجنّب تكرار نفس الاسم."}, {"q": "العبارة الموصولة تبدأ دائمًا بـ:", "options": ["فعل مساعد", "ضمير موصول", "حرف جر فقط", "اسم علم"], "answer": 1, "explain": "دائمًا تبدأ بضمير موصول مثل who / which / that / whose / where / when."}, {"q": "'I know the man ___ helped you.' اختر الأنسب:", "options": ["who", "what", "whom object", "none"], "answer": 0, "explain": "who تستخدم للأشخاص في محل فاعل."}, {"q": "العبارة الموصولة تُعتبر:", "options": ["جملة رئيسية كاملة", "جملة فرعية ناقصة تابعة لاسم", "سؤال", "أمر"], "answer": 1, "explain": "هي جملة فرعية (ناقصة بذاتها) وظيفتها وصف اسم سبقها."}, {"q": "'This is the house ___ I lived in.' اختر الأنسب:", "options": ["which", "who", "whom", "when"], "answer": 0, "explain": "which تُستخدم للأشياء غير العاقلة مثل 'the house'."}]}, {"id": "l2", "cardId": 3, "num": 2, "title": "أنواع الجملة الموصولة: Defining & Non-Defining", "emoji": "🧩", "explain": "في نوعين من الجُمل الموصولة:\n<br><br>\n<b>1) Defining Clause (Restrictive)</b> — جملة موصولة \"أساسية\"، بتدينا معلومات أساسية عن الاسم ما ينفصلش عنها المعنى، ولو شلناها الجملة مش هتكتمل بالمعنى المطلوب. <u>ما تتكتبش بينها وبين الجملة فاصلة (comma)</u>.\n<br><br>\n<b>2) Non-Defining Clause (Non-Restrictive)</b> — جملة موصولة \"إضافية\"، بتدينا معلومات زيادة عن اسم أو جملة واضحة ومعروفة، ولو شلناها الجملة الأساسية تفضل مكتملة المعنى. <u>لازم تُكتب بين فاصلتين (commas)</u>، ومينفعش تِبدأ بـ that أبدًا.", "examples": [{"en": "Students who study hard pass the exam.", "ar": "الطلاب الذين يذاكرون بجد ينجحون. (Defining - بدون فاصلة)"}, {"en": "My brother, who lives in Canada, is a doctor.", "ar": "أخي، الذي يعيش في كندا، طبيب. (Non-Defining - بفاصلتين)"}, {"en": "Amira is the girl who got the full mark.", "ar": "أميرة هي الفتاة التي حصلت على الدرجة الكاملة. (Defining)"}, {"en": "Cairo, where I was born, is a busy city.", "ar": "القاهرة، حيث وُلدت، مدينة مزدحمة. (Non-Defining)"}], "exercises": [{"q": "الجملة الموصولة الـ Non-Defining بين:", "options": ["قوسين", "فاصلتين", "علامتي تعجب", "بدون أي علامة"], "answer": 1, "explain": "دائمًا بين فاصلتين لأنها معلومة إضافية غير أساسية."}, {"q": "في Defining Clause إذا حذفنا الجملة الموصولة:", "options": ["يختل المعنى الأساسي", "يبقى المعنى كامل تمامًا", "الجملة تصبح سؤالًا", "لا يتغير شيء أبدًا"], "answer": 0, "explain": "في Defining، المعلومة أساسية فحذفها يُخلّ بالمعنى."}, {"q": "'My brother who lives in Canada is a doctor' (بدون فاصلة) تعني:", "options": ["عندي أخ واحد بس وبيعيش في كندا وهو طبيب", "من بين إخوتي المتعددين، الأخ اللي بيعيش في كندا هو الطبيب", "جملة خاطئة تمامًا", "لا فرق عن استخدام الفاصلة"], "answer": 1, "explain": "بدون فاصلة (Defining) تعني تحديد أخ معين من بين عدة إخوة."}, {"q": "أي جملة موصولة ما ينفعش تبدأ بـ that؟", "options": ["Defining", "Non-Defining", "الاثنين", "لا واحدة منهم"], "answer": 1, "explain": "That ممنوعة تمامًا في الجمل غير المحددة (Non-Defining)."}, {"q": "'Taha Hussein, ___ was a famous writer, was blind.'", "options": ["who", "that", "which object", "whom object"], "answer": 0, "explain": "who لأنها جملة Non-Defining عن شخص، وthat ممنوعة هنا."}]}, {"id": "l3", "cardId": 3, "num": 3, "title": "Who", "emoji": "🧑", "explain": "<b>Who</b> ضمير موصول خاص بـ<b>العاقل (الأشخاص)</b> فقط، وبيحل محل <b>فاعل</b> الجملة الموصولة (subject) — يعني بييجي بعده فعل على طول من غير فاعل تاني.", "examples": [{"en": "The boy who I wanted to talk to wasn't at home.", "ar": "الولد الذي أردت التحدث إليه لم يكن في المنزل."}, {"en": "Amira is the girl who got the full mark.", "ar": "أميرة هي الفتاة التي حصلت على الدرجة الكاملة."}, {"en": "The teacher who explains lessons clearly is an experienced teacher.", "ar": "المعلم الذي يشرح الدروس بوضوح معلم متمرس."}, {"en": "My brother who lives in Canada is a doctor.", "ar": "أخي الذي يعيش في كندا طبيب."}], "exercises": [{"q": "Who بيحل محل:", "options": ["فاعل عاقل", "مفعول به عاقل", "اسم مكان", "اسم زمان"], "answer": 0, "explain": "who دائمًا فاعل، ويأتي بعده الفعل مباشرة."}, {"q": "'The Scientist ___ discovered the new medicine will receive an award.'", "options": ["which", "who", "whose", "where"], "answer": 1, "explain": "who لأن الفاعل هنا (discovered) عاقل."}, {"q": "'The engineer ___ designed the bridge won an award.'", "options": ["which", "that/who", "whom", "when"], "answer": 1, "explain": "who أو that تصلح، لأن الفاعل (designed) عاقل."}, {"q": "أيهما صحيحة؟", "options": ["The girl who has black hair is beautiful.", "The girl who black hair has is beautiful.", "The girl who's has black hair.", "The girl whom has black hair."], "answer": 0, "explain": "who + فعل مباشرة بدون فاعل إضافي."}, {"q": "'The student ___ worked hard on her project...' اختر الأنسب:", "options": ["who", "whom", "whose (بدون اسم)", "where"], "answer": 0, "explain": "who لأنها فاعل الفعل worked."}]}, {"id": "l4", "cardId": 3, "num": 4, "title": "Whom", "emoji": "🤝", "explain": "<b>Whom</b> ضمير موصول خاص بـ<b>العاقل</b> فقط زي who، لكنه بيحل محل <b>مفعول به</b> (object) — يعني بعده هيكون فيه فاعل تاني وفعل.\n<br><br>\nملحوظة: في الاستخدام اليومي (غير الرسمي) كتير من الناس بيستخدموا who بدل whom حتى مع المفعول به، لكن في الامتحانات وwhom الرسمية هي الأصح مع المفعول به.", "examples": [{"en": "The boy whom I wanted to talk to wasn't at home.", "ar": "الولد الذي أردت التحدث إليه لم يكن في المنزل."}, {"en": "Mr. Ali, whom I met yesterday, was kind.", "ar": "السيد علي، الذي قابلته أمس، كان لطيفًا."}, {"en": "The doctor to whom I spoke recommended more medications.", "ar": "الطبيب الذي تحدثت إليه أوصى بمزيد من الأدوية."}, {"en": "The author whose latest novel won a prize... whom we all admire.", "ar": "الكاتب الذي فاز آخر رواياته بجائزة... الذي نُعجب به جميعًا."}], "exercises": [{"q": "Whom بيحل محل:", "options": ["فاعل عاقل", "مفعول به عاقل", "اسم غير عاقل", "اسم مكان"], "answer": 1, "explain": "whom مفعول به عاقل، ودائمًا بيتبعها فاعل + فعل."}, {"q": "'The Woman ___ I met at the restaurant is a famous writer.'", "options": ["who (فاعل)", "whom (مفعول)", "whose", "where"], "answer": 1, "explain": "whom لأنها مفعول به لفعل met، وبعدها فاعل I."}, {"q": "أي جملة تستخدم whom بشكل صحيح؟", "options": ["The doctor whom spoke to me.", "The doctor to whom I spoke.", "The doctor whom is kind.", "The doctor whom lives here."], "answer": 1, "explain": "whom تأتي كمفعول به، وممكن تُسبق بحرف جر (to whom)."}, {"q": "لو الضمير الموصول جاله فاعل وفعل بعده مباشرة، غالبًا يكون:", "options": ["who (فاعل)", "whom (مفعول)", "إما who أو whom حسب الصيغة", "لا شيء مما سبق"], "answer": 2, "explain": "لو بعده فاعل + فعل يبقى مفعول به، ويصح فيه whom (رسمي) أو who (غير رسمي)."}, {"q": "'The author ___ latest novel won an international prize will sign books.'", "options": ["whom", "whose", "which", "who"], "answer": 1, "explain": "هنا نحتاج ضمير ملكية (الرواية بتاعت الكاتب) فتكون whose وليس whom."}]}, {"id": "l5", "cardId": 3, "num": 5, "title": "Which", "emoji": "🔧", "explain": "<b>Which</b> ضمير موصول خاص بـ<b>غير العاقل</b> (الأشياء والحيوانات)، وممكن يحل محل <b>فاعل</b> أو <b>مفعول به</b> على حد سواء.\n<br><br>\nملحوظة مهمة: which ممكن كمان تشير لـ<b>جملة كاملة</b> قالها المتحدث قبلها (مش بس اسم واحد)، وفي الحالة دي بتيجي بعد فاصلة دايمًا.", "examples": [{"en": "Bees are small insects which make honey.", "ar": "النحل حشرات صغيرة تصنع العسل."}, {"en": "Amira adapted a recipe which she got from her mother.", "ar": "أميرة عدّلت وصفة حصلت عليها من والدتها."}, {"en": "He offered to help me, which was very kind of him.", "ar": "عرض مساعدتي، وهذا كان لطيفًا جدًا منه. (تشير للجملة كلها)"}, {"en": "My car, which I bought last year, is very fast.", "ar": "سيارتي، التي اشتريتها العام الماضي، سريعة جدًا."}], "exercises": [{"q": "Which تُستخدم مع:", "options": ["العاقل فقط", "غير العاقل فقط", "الاثنين معًا", "الزمان فقط"], "answer": 1, "explain": "which دائمًا لغير العاقل (أشياء، حيوانات، حالات)."}, {"q": "'Ali got the full mark, ___ amazed his classmates.'", "options": ["who", "which", "whom", "whose"], "answer": 1, "explain": "which هنا بتشير للجملة كلها (حصوله على الدرجة الكاملة) مش لاسم واحد."}, {"q": "'The laptop ___ stopped working yesterday was brand new.'", "options": ["who", "whose", "which", "whom"], "answer": 2, "explain": "which لأن laptop غير عاقل، وهي فاعل الفعل stopped."}, {"q": "'Egypt is a country ___ imports are more than its exports.'", "options": ["which", "whose", "whom", "that (مع فاصلة)"], "answer": 1, "explain": "whose هنا لأنها ملكية (واردات مصر)، مش which."}, {"q": "متى تُستخدم which بعد فاصلة للإشارة لجملة كاملة؟", "options": ["عندما تصف اسمًا واحدًا محددًا", "عندما تعلّق على الجملة أو الفكرة كلها قبلها", "عندما تبدأ الجملة", "أبدًا لا تُستخدم كذلك"], "answer": 1, "explain": "which بعد فاصلة ممكن تُعلّق على كل الجملة السابقة، مش بس اسم."}]}, {"id": "l6", "cardId": 3, "num": 6, "title": "That", "emoji": "🔗", "explain": "<b>That</b> ضمير موصول \"شامل\" — بيُستخدم مع <b>العاقل وغير العاقل</b> معًا (بدل who/which)، وممكن يحل محل فاعل أو مفعول به، بس في <b>Defining Clause فقط</b>.\n<br><br>\n⚠️ قاعدتين مهمتين جدًا عن that:\n<br>1) <b>مينفعش تيجي في Non-Defining Clause</b> (يعني ما تيجيش بعد فاصلة) أبدًا.\n<br>2) <b>مينفعش يسبقها حرف جر مباشرة</b> (زي in that ✗) — لازم تتحرك حرف الجر لآخر الجملة.", "examples": [{"en": "This is my friend that I work with.", "ar": "هذا صديقي الذي أعمل معه."}, {"en": "The doctor that I met yesterday was very professional.", "ar": "الطبيب الذي قابلته أمس كان محترفًا جدًا."}, {"en": "The teacher that explains lessons clearly is an experienced teacher.", "ar": "المعلم الذي يشرح الدروس بوضوح معلم متمرس."}, {"en": "This is the tool that I do a lot of jobs with.", "ar": "هذه هي الأداة التي أنجز بها الكثير من المهام."}], "exercises": [{"q": "That تصلح مع:", "options": ["العاقل فقط", "غير العاقل فقط", "العاقل وغير العاقل معًا", "الزمان فقط"], "answer": 2, "explain": "that شاملة للعاقل وغير العاقل، بعكس who وwhich."}, {"q": "That ممكن تُستخدم في:", "options": ["Defining Clause فقط", "Non-Defining Clause فقط", "الاثنين", "ولا واحدة"], "answer": 0, "explain": "that تُستخدم فقط في الجمل المحددة (Defining) وليس بعد فاصلة."}, {"q": "أي جملة خاطئة؟", "options": ["This is the tool that I use.", "This is the tool in that I do jobs. ✗", "This is the tool which I do jobs with.", "This is the tool that I do jobs with."], "answer": 1, "explain": "ممنوع أن يسبق حرف الجر (in) كلمة that مباشرة."}, {"q": "'Taha Hussein, ___ was a famous writer, was blind.'", "options": ["that", "who", "which", "ok either"], "answer": 1, "explain": "who فقط، لأن that ممنوعة تمامًا بعد الفاصلة (Non-Defining)."}, {"q": "'The car that stopped working belongs to my cousin.' who/which/that هنا that بتحل محل:", "options": ["فاعل غير عاقل (car)", "مفعول به عاقل", "اسم زمان", "اسم مكان"], "answer": 0, "explain": "that هنا فاعل الجملة الموصولة، وتشير لشيء غير عاقل (car)."}]}, {"id": "l7", "cardId": 3, "num": 7, "title": "Whose", "emoji": "🏷️", "explain": "<b>Whose</b> ضمير موصول خاص بـ<b>الملكية</b> — بيُستخدم مع العاقل وغير العاقل، ولازم يتبعه <b>اسم مباشرة</b> (بدون \"the\" أو ضمير ملكية قبله).\n<br><br>\nقاعدة تحويل: لو الجملة فيها <b>have/has</b> (ملكية)، ممكن تحوّلها لـ whose + اسم، أو تحوّلها لـ with + اسم.", "examples": [{"en": "Ahmed, whose father is a doctor, is top of his class.", "ar": "أحمد، الذي والده طبيب، الأول على فصله."}, {"en": "Sarah is clever. Her marks are perfect. → Sarah whose marks are perfect is clever.", "ar": "سارة ذكية، والتي درجاتها ممتازة."}, {"en": "My Uncle, whose car we travelled in, is kind.", "ar": "عمي، الذي سافرنا في سيارته، لطيف."}, {"en": "Egypt is a country whose imports are more than its exports.", "ar": "مصر دولة وارداتها أكثر من صادراتها."}], "exercises": [{"q": "بعد whose لازم يأتي:", "options": ["فعل مباشرة", "اسم مباشرة", "حرف جر", "ضمير"], "answer": 1, "explain": "whose + اسم مباشرة (ملكية) بدون أدوات تعريف زيادة."}, {"q": "'The girl ___ hair is black is beautiful.'", "options": ["who", "whose", "which", "whom"], "answer": 1, "explain": "whose لأنها ملكية (شعرها)."}, {"q": "'Andy is still young. His skills are limited.' → 'Andy ___ skills are limited is still young.'", "options": ["who", "whose", "which", "that"], "answer": 1, "explain": "whose تربط بين الجملتين بمعنى الملكية (مهاراته)."}, {"q": "'The house ___ we bought last summer needs some renovation.' (الملكية غير مقصودة هنا، والمقصود المفعول به):", "options": ["whose", "which", "who", "when"], "answer": 1, "explain": "which صح هنا لأنها مفعول به بسيط لفعل bought، مش ملكية."}, {"q": "'My Uncle in whose car we travelled is kind.' → الصيغة المكافئة الصحيحة:", "options": ["My Uncle whose car we travelled in is kind.", "My Uncle whose in car we travelled is kind.", "My Uncle who car we travelled in is kind.", "My Uncle which car we travelled in is kind."], "answer": 0, "explain": "حرف الجر (in) ينتقل لآخر الجملة عند فك التركيب الرسمي."}]}, {"id": "l8", "cardId": 3, "num": 8, "title": "Where", "emoji": "📍", "explain": "<b>Where</b> ظرف وصل خاص بـ<b>المكان</b> — بيحل محل مكان معيّن (in it / at it / to it...).\n<br><br>\n⚠️ قاعدة مهمة: <b>where ما يجيش بعده أو قبله حرف جر مباشرة</b> (زي where...in ✗). لو محتاج تحط حرف جر، لازم تستبدل where بـ <b>which</b> وتحط حرف الجر قبلها أو في آخر الجملة.", "examples": [{"en": "Cairo, where I was born, is a busy city.", "ar": "القاهرة، حيث وُلدت، مدينة مزدحمة."}, {"en": "My brother went to Alexandria University where he studied architecture.", "ar": "أخي ذهب لجامعة الإسكندرية حيث درس العمارة."}, {"en": "This is the house where I raised my children.", "ar": "هذا هو المنزل الذي ربّيت فيه أطفالي."}, {"en": "This is the house which I raised my children in. (بدل: where...in ✗)", "ar": "هذا هو المنزل الذي ربّيت فيه أطفالي."}], "exercises": [{"q": "Where بتحل محل:", "options": ["زمان", "مكان", "شخص", "ملكية"], "answer": 1, "explain": "where ظرف وصل للمكان دائمًا."}, {"q": "أي جملة خاطئة؟", "options": ["This is the house where I live.", "This is the house where I live in. ✗", "This is the house which I live in.", "This is the house in which I live."], "answer": 1, "explain": "ممنوع حرف الجر (in) بعد where مباشرة."}, {"q": "'This is the City ___ I grew up.' (بدون حرف جر بعدها):", "options": ["where", "which", "who", "whom"], "answer": 0, "explain": "where صح هنا لأنه مفيش حرف جر بعدها."}, {"q": "'This is the City in which I grew up.' الصيغة الأخرى الصحيحة المكافئة باستخدام where:", "options": ["This is the City where I grew up in.", "This is the City where I grew up.", "This is the City where in I grew up.", "لا توجد صيغة صحيحة"], "answer": 1, "explain": "where بدون أي حرف جر يعادل in which."}, {"q": "'My brother went to Alexandria University ___ he studied architecture there.' (لاحظ وجود there بالفعل):", "options": ["where", "which", "a+b معًا", "whom"], "answer": 1, "explain": "لازم نلغي التكرار: naستخدم which لأن there موجودة بالفعل فتُغني عن where."}]}, {"id": "l9", "cardId": 3, "num": 9, "title": "When", "emoji": "⏰", "explain": "<b>When</b> ظرف وصل خاص بـ<b>الزمان</b> — بيحل محل وقت معيّن (on it / at it / in it...).\n<br><br>\n⚠️ زي where بالظبط: <b>when ما يجيش معاه حرف جر مباشرة</b>. لو محتاج حرف جر، استبدل when بـ <b>which</b> مع حرف الجر.", "examples": [{"en": "June is the month when I go on holiday.", "ar": "يونيو هو الشهر الذي أذهب فيه في عطلة."}, {"en": "2025 is the year when I graduated.", "ar": "2025 هو العام الذي تخرجت فيه."}, {"en": "I remember the day when we met.", "ar": "أتذكر اليوم الذي التقينا فيه."}, {"en": "I remember the day on which we met. (بدل: when...on ✗)", "ar": "أتذكر اليوم الذي التقينا فيه."}], "exercises": [{"q": "When بتحل محل:", "options": ["مكان", "زمان", "شخص", "سبب"], "answer": 1, "explain": "when ظرف وصل للزمان."}, {"q": "أي جملة صحيحة؟", "options": ["I remember the day when we met on. ✗", "I remember the day on which we met.", "I remember the day which on we met. ✗", "I remember the day on when we met. ✗"], "answer": 1, "explain": "حرف الجر (on) يُستخدم قبل which فقط، مش قبل when أو بعدها."}, {"q": "'Ramadan, ___ is my favourite month, comes and goes so fast.'", "options": ["when", "which", "a+b معًا", "where"], "answer": 1, "explain": "which هنا لأن رمضان بيوصف كموضوع الجملة مش مجرد وقت لحدث آخر."}, {"q": "'2025 is the year ___ I graduated.' (بدون حرف جر):", "options": ["which", "when", "where", "whom"], "answer": 1, "explain": "when مباشرة لأنها بتشير لوقت التخرج بدون حرف جر إضافي."}, {"q": "'This is the house ___ I raised my children.' استخدام صحيح لـ when هنا؟", "options": ["نعم صحيح", "لا، لازم where لأنها عن مكان مش زمان", "نعم لكن يحتاج حرف جر", "لا فرق"], "answer": 1, "explain": "when خاص بالزمان فقط، والمنزل ده مكان فتستخدم where."}]}, {"id": "l10", "cardId": 4, "num": 10, "title": "What = the thing that", "emoji": "💭", "explain": "<b>What</b> ضمير موصول \"مستقل بذاته\" (Independent) — معناه <b>\"الشيء الذي / ما\"</b> (the thing that). لاحظ إنه ما بيوصفش اسم قبله زي باقي الضمائر، لأنه بيشمل الاسم جوّاه خلاص. يعني ماينفعش نقول \"the thing what\"!", "examples": [{"en": "I got what you meant.", "ar": "فهمت ما قصدته. (= the thing that you meant)"}, {"en": "What helped me to succeed was his encouragement.", "ar": "الذي ساعدني على النجاح كان تشجيعه."}, {"en": "However, what truly mattered in the end was the experience her team gained.", "ar": "لكن، ما كان مهمًا فعلًا في النهاية كانت الخبرة التي اكتسبها فريقها."}, {"en": "Tell me what you want.", "ar": "أخبرني بما تريده."}], "exercises": [{"q": "What تعني:", "options": ["الذي (لشخص)", "الشيء الذي / ما", "التي (لمكان)", "الذي (لزمان)"], "answer": 1, "explain": "what = the thing that، ضمير مستقل يشمل الاسم والضمير معًا."}, {"q": "أي جملة صحيحة؟", "options": ["I got the thing what you meant. ✗", "I got what you meant.", "I got the thing that what you meant. ✗", "I got what that you meant. ✗"], "answer": 1, "explain": "what لا تُسبق باسم مثل 'the thing' لأنها تحمل معناها بذاتها."}, {"q": "'___ helped me to succeed was his encouragement.'", "options": ["Which", "What", "That", "Who"], "answer": 1, "explain": "what هنا في بداية الجملة بمعنى 'الذي' (الشيء الذي ساعدني)."}, {"q": "'I couldn't understand ___ he said during the meeting.'", "options": ["who", "what", "whose", "when"], "answer": 1, "explain": "what هنا تعني 'ما الذي قاله' (مفعول به لـ said)."}, {"q": "الفرق الأساسي بين what وbaqi الضمائر الموصولة إنها:", "options": ["دائمًا للأشخاص فقط", "تحمل معنى الاسم بداخلها فلا تحتاج اسمًا قبلها", "لازم تُسبق بفاصلة", "لا تُستخدم أبدًا في بداية الجملة"], "answer": 1, "explain": "what هي الوحيدة ضمن هذه المجموعة المستقلة بذاتها (تشمل الاسم + الضمير معًا)."}]}, {"id": "l11", "cardId": 4, "num": 11, "title": "Whatever / Whichever / Whoever", "emoji": "✨", "explain": "دي \"الكلمة الموصولة المستقلة\" (زي what بالظبط) بس بمعاني مختلفة شوية:\n<br><br>\n• <b>Whatever</b> = أي شيء (anything that) — للأشياء بشكل عام.\n<br>• <b>Whichever</b> = أيّهما / أيًّا كان (من بين اختيارات محددة).\n<br>• <b>Whoever</b> = أيّ شخص (anyone who) — للأشخاص.\n<br><br>\nوالثلاثة بتعمل نفس دور الاسم + الضمير الموصول مع بعض، فما تحتاجش اسم قبلها.", "examples": [{"en": "You can order whatever you want.", "ar": "يمكنك طلب أي شيء تريده."}, {"en": "Take whichever book you like.", "ar": "خذ أي كتاب تحبه."}, {"en": "Whoever arrives first should open the window.", "ar": "أي شخص يصل أولًا يفتح الشباك."}, {"en": "Choose whichever seat you like.", "ar": "اختر أي مقعد تحبه."}], "exercises": [{"q": "Whatever تعني:", "options": ["أي شخص", "أي شيء", "أيّهما من اختيارين", "متى ما"], "answer": 1, "explain": "whatever = anything that، بمعنى 'أي شيء'."}, {"q": "'___ arrives first should open the window.'", "options": ["Whatever", "Whichever", "Whoever", "What"], "answer": 2, "explain": "whoever لأنها عن شخص (anyone who)."}, {"q": "'You can order ___ you want.'", "options": ["whoever", "whatever", "whichever object محدد", "when"], "answer": 1, "explain": "whatever لأنها عامة عن أي شيء من القائمة."}, {"q": "'I entered the class, and the teacher said Take ___ seat you like.'", "options": ["whatever", "whichever", "whoever", "what"], "answer": 1, "explain": "whichever هنا تفيد الاختيار من بين مقاعد محددة متاحة."}, {"q": "النوع دا من الضمائر الموصولة يشبه في استقلاليته:", "options": ["who", "which", "what", "whose"], "answer": 2, "explain": "زي what بالظبط، الكلمات دي مستقلة بذاتها ومابتحتاجش اسم قبلها."}]}, {"id": "l12", "cardId": 4, "num": 12, "title": "Which للتعليق على جملة كاملة", "emoji": "💬", "explain": "أحيانًا بنستخدم <b>, which</b> (بفاصلة) عشان نُعلّق على <b>الجملة أو الفكرة كلها</b> اللي قبلها، مش بس اسم واحد بعينه. دي حاجة مميزة لـ which بس، ومحدش غيرها ينفع يعملها (لا that ولا what).", "examples": [{"en": "Ali got the full mark, which amazed his classmates.", "ar": "علي حصل على الدرجة الكاملة، وهذا أذهل زملاءه."}, {"en": "He offered to help me, which was very kind of him.", "ar": "عرض مساعدتي، وهذا كان لطيفًا جدًا منه."}, {"en": "She passed her final exams with top grades, which made her parents proud.", "ar": "اجتازت امتحاناتها النهائية بأعلى الدرجات، وهذا جعل والديها فخورين."}, {"en": "The engineer designed the bridge, which won an award.", "ar": "المهندس صمم الجسر، الذي (أو: وهذا) فاز بجائزة."}], "exercises": [{"q": "عشان تُعلّق على جملة كاملة سابقة (مش اسم واحد)، تستخدم:", "options": ["that", "which", "who", "whom"], "answer": 1, "explain": "which فقط هي اللي تقدر تشير لجملة كاملة سابقة."}, {"q": "'Ali got the full mark. ___ amazed his classmates.' بدمج الجملتين:", "options": ["Ali got the full mark, which amazed his classmates.", "Ali got the full mark, that amazed his classmates.", "Ali got the full mark who amazed his classmates.", "Ali got the full mark whom amazed his classmates."], "answer": 0, "explain": "which بعد فاصلة تشير لكل جملة 'حصوله على الدرجة الكاملة'."}, {"q": "'She passed her final exams with top grades, ___ made her parents proud.'", "options": ["that", "who", "which", "whom"], "answer": 2, "explain": "which تشير للحدث كله (نجاحها بامتياز)."}, {"q": "هل يجوز نستخدم what بدل which في هذه الحالة؟", "options": ["نعم دائمًا", "لا، what لا تُستخدم للتعليق على جملة سابقة بهذا الشكل", "نعم بس مع فاصلة", "لا فرق"], "answer": 1, "explain": "what تعني 'الشيء الذي' وتُستخدم بشكل مختلف، مش للتعليق على جملة كاملة سبقتها بفاصلة."}, {"q": "'He offered to help me, ___ was very kind of him.'", "options": ["that", "which", "who", "whom"], "answer": 1, "explain": "which تشير لكل الفعل (عرضه المساعدة) وتصفه بأنه لطف."}]}, {"id": "l13", "cardId": 4, "num": 13, "title": "Of Which / Of Whom (بعد أدوات الكمية)", "emoji": "🔢", "explain": "لما تيجي بعد أدوات الكمية زي (most / many / both / all / none / some / a few) و بعدها <b>of</b>، لازم نستخدم:\n<br>• <b>of whom</b> — للعاقل (أشخاص).\n<br>• <b>of which</b> — لغير العاقل (أشياء).\n<br><br>\nوممنوع خالص نستخدم <b>that</b> بعد حرف جر زي of مباشرة.", "examples": [{"en": "The students, many of whom were from abroad, enjoyed the meeting.", "ar": "الطلاب، الذين كان كثير منهم من الخارج، استمتعوا باللقاء."}, {"en": "He gave me three books, all of which were interesting.", "ar": "أعطاني ثلاثة كتب، كلها كانت ممتعة."}, {"en": "I read an article whose main argument was interesting. He invited twenty guests, most of whom were his close friends.", "ar": "قرأت مقالًا كانت حجته الرئيسية مثيرة. دعا عشرين ضيفًا، معظمهم كانوا أصدقاءه المقربين."}, {"en": "Most people who live in this area use public transportation.", "ar": "معظم الناس الذين يعيشون في هذه المنطقة يستخدمون المواصلات العامة."}], "exercises": [{"q": "بعد 'most of' مع أشخاص، نستخدم:", "options": ["whom", "which", "that", "where"], "answer": 0, "explain": "of whom للعاقل بعد أدوات الكمية."}, {"q": "'He gave me three books, all ___ were interesting.'", "options": ["of whom", "of which", "that", "who"], "answer": 1, "explain": "of which لأن 'books' غير عاقل."}, {"q": "'The students, many ___ were from abroad, enjoyed the meeting.'", "options": ["of that", "of which", "of whom", "whose"], "answer": 2, "explain": "of whom لأن الطلاب أشخاص (عاقل)."}, {"q": "هل يصح نقول 'most of that'؟", "options": ["نعم دائمًا", "لا، ممنوع that بعد حرف جر مباشرة", "نعم بس للأشياء", "نعم بس للأشخاص"], "answer": 1, "explain": "that ممنوعة تمامًا بعد أي حرف جر مثل of."}, {"q": "'He invited twenty guests, most of ___ were his close friends.'", "options": ["whom", "which", "that", "where"], "answer": 0, "explain": "whom لأن guests أشخاص."}]}, {"id": "l14", "cardId": 4, "num": 14, "title": "متى يجب استخدام That إجباريًا", "emoji": "⚡", "explain": "في حالات معيّنة لازم تستخدم <b>that</b> بس (مش which ولا who)، وهي بعد:\n<br>• All, Every, Everything, Something, Nothing, None, Few, Little, Any, Much, Only.\n<br>• صيغة <b>التفضيل العليا</b> (Superlative) زي: the best / the most / the greatest ... + ever.", "examples": [{"en": "All that I want in life is peace of mind.", "ar": "كل ما أريده في الحياة هو راحة البال."}, {"en": "Adam is the only student that failed the exam.", "ar": "آدم هو الطالب الوحيد الذي رسب في الامتحان."}, {"en": "He is the best man that I have ever read about.", "ar": "هو أفضل رجل قرأت عنه على الإطلاق."}, {"en": "This is the most interesting novel that I have ever read.", "ar": "هذه أروع رواية قرأتها على الإطلاق."}], "exercises": [{"q": "بعد 'the only' لازم نستخدم:", "options": ["which", "who", "that", "whose"], "answer": 2, "explain": "that إجبارية بعد only."}, {"q": "'This is the most interesting novel ___ I have ever read.'", "options": ["which", "who", "that", "whom"], "answer": 2, "explain": "that إجبارية بعد صيغة التفضيل العليا (the most)."}, {"q": "'All ___ I want in life is peace of mind.'", "options": ["which", "who", "that", "whom"], "answer": 2, "explain": "that إجبارية بعد all."}, {"q": "'She was the only candidate ___ passed the final interview.'", "options": ["who", "which", "that", "whose"], "answer": 2, "explain": "that إجبارية بعد only، حتى لو كان الفاعل شخصًا."}, {"q": "أي كلمة من دول بتفرض استخدام that إجباريًا؟", "options": ["a friend", "everything", "the doctor", "a book"], "answer": 1, "explain": "everything من أدوات العموم اللي بتفرض that."}]}, {"id": "l15", "cardId": 4, "num": 15, "title": "مكان حرف الجر مع الضمير الموصول", "emoji": "📐", "explain": "حرف الجر (زي in, with, to, for...) في الجملة الموصولة له مكانان:\n<br>• <b>قبل which أو whom مباشرة</b> (أسلوب رسمي): in which, with which, to whom...\n<br>• <b>في آخر الجملة</b> (أسلوب غير رسمي): ...which... in, ...whom... to.\n<br><br>\n⚠️ القاعدة الذهبية: حرف الجر <b>ما يجيش أبدًا مباشرة قبل</b> who / that / where / when. يجي بس قبل <b>which أو whom</b>، أو يروح آخر الجملة.", "examples": [{"en": "This is the tool with which I do a lot of jobs. / This is the tool which I do a lot of jobs with.", "ar": "هذه هي الأداة التي أنجز بها الكثير من المهام."}, {"en": "The doctor to whom I spoke recommended more medications. / The doctor whom I spoke to recommended more medications.", "ar": "الطبيب الذي تحدثت إليه أوصى بمزيد من الأدوية."}, {"en": "I made a mistake, for which I apologized.", "ar": "ارتكبت خطأ، اعتذرت عنه."}, {"en": "The teacher on whom we all rely is retiring this year.", "ar": "المعلم الذي نعتمد عليه جميعًا سيتقاعد هذا العام."}], "exercises": [{"q": "حرف الجر ينفع يجي مباشرة قبل:", "options": ["who فقط", "that فقط", "which أو whom", "where فقط"], "answer": 2, "explain": "which وwhom بس هما اللي ينفع يسبقهم حرف جر مباشرة."}, {"q": "أي جملة خاطئة؟", "options": ["The house in which I lived.", "The house which I lived in.", "The house in that I lived. ✗", "The tool with which I work."], "answer": 2, "explain": "ممنوع حرف الجر (in) يسبق that مباشرة."}, {"q": "'The teacher ___ we all rely is retiring this year.' (أسلوب رسمي، بحرف جر قبل الضمير):", "options": ["who", "on whom", "whom on", "that"], "answer": 1, "explain": "on whom: حرف الجر (on) قبل whom مباشرة في الأسلوب الرسمي."}, {"q": "'I made a mistake, ___ I apologized.'", "options": ["for which", "which for", "that for", "for that"], "answer": 0, "explain": "for which: حرف الجر يسبق which مباشرة."}, {"q": "الجملة 'The tool which I do a lot of jobs with' — حرف الجر with موجود:", "options": ["قبل which مباشرة", "في آخر الجملة", "غير موجود أصلًا", "قبل الفعل"], "answer": 1, "explain": "with في آخر الجملة (الأسلوب غير الرسمي)."}]}, {"id": "l16", "cardId": 4, "num": 16, "title": "حذف الضمير الموصول (Reduced Clauses)", "emoji": "✂️", "explain": "في 3 حالات ممكن نختصر فيها الجملة الموصولة ونحذف الضمير:\n<br><br>\n<b>1) لو الضمير مفعول به</b> (which/who/whom/that + فاعل + فعل) → نحذف الضمير خالص.\n<br>مثال: This is the woman <s>who</s> I helped. → This is the woman I helped.\n<br><br>\n<b>2) لو الضمير + be + فعل مستمر (-ing)</b> → نحذف الضمير و be، ونسيب الفعل ب -ing.\n<br>مثال: The boy <s>who is</s> wearing a red shirt is my son. → The boy wearing a red shirt is my son.\n<br><br>\n<b>3) لو الضمير + be + تعبير آخر (اسم مفعول أو جار ومجرور)</b> → نحذف الضمير و be بالكامل.\n<br>مثال: The woman <s>who is</s> in this shop lent me this pen. → The woman in this shop lent me this pen.", "examples": [{"en": "This is the woman who I helped. → This is the woman I helped.", "ar": "هذه هي المرأة التي ساعدتها."}, {"en": "The boy who is wearing a red shirt is my son. → The boy wearing a red shirt is my son.", "ar": "الولد الذي يرتدي قميصًا أحمر هو ابني."}, {"en": "The girl who was arrested yesterday stole clothes. → The girl arrested yesterday stole clothes.", "ar": "الفتاة التي قُبض عليها أمس سرقت ملابس."}, {"en": "The woman who is in this shop lent me this pen. → The woman in this shop lent me this pen.", "ar": "المرأة التي في هذا المتجر أعارتني هذا القلم."}], "exercises": [{"q": "لو الضمير الموصول مفعول به (بعده فاعل وفعل)، نقدر:", "options": ["نحذفه خالص", "نسيبه إجباريًا", "نضيف be قبله", "نستبدله بـ what"], "answer": 0, "explain": "في حالة المفعول به يجوز حذف الضمير الموصول بالكامل."}, {"q": "'The book ___ on the table belongs to me.' (بدون ضمير موصول):", "options": ["which is", "No word (بدون كلمة)", "who is", "that am"], "answer": 1, "explain": "لا نحتاج أي كلمة هنا، لأنها جار ومجرور فيُحذف الضمير و be معًا."}, {"q": "'The girl who was arrested yesterday stole clothes.' → الصيغة المختصرة:", "options": ["The girl arrested yesterday stole clothes.", "The girl who arrested yesterday stole clothes.", "The girl arresting yesterday stole clothes.", "The girl was arrested yesterday stole clothes."], "answer": 0, "explain": "who + was + مفعول (arrested) → نحذف who + was ونسيب اسم المفعول arrested."}, {"q": "'The boy who is wearing a red shirt is my son.' → الصيغة المختصرة:", "options": ["The boy wearing a red shirt is my son.", "The boy wears a red shirt is my son.", "The boy is wearing a red shirt is my son.", "The boy who wearing a red shirt."], "answer": 0, "explain": "who + is + فعل مستمر → نحذف who+is ونسيب الفعل بصيغة -ing."}, {"q": "'This is the woman I helped.' الجملة دي أصلها:", "options": ["This is the woman whom I helped.", "This is the woman who helped.", "This is the woman whose I helped.", "This is the woman which helped."], "answer": 0, "explain": "الأصل: whom (مفعول به) تم حذفها لأنها مفعول به."}]}];
+const CARDS_META = [{"id": 1, "title": "كلمات السبورة الملونة", "sub": "من سبورة المستر أحمد طارق", "emoji": "🖍️", "type": "vocab", "desc": "كلمات ظهرت في شرح درس العبارات الموصولة على السبورة، مقسّمة في مجموعات جاهزة."}, {"id": 2, "title": "كلمات محاضرة الجرامر", "sub": "عبقري اللغة - المحاضرة 1", "emoji": "📖", "type": "vocab", "desc": "كل كلمات المحاضرة: أساسية، هامة، تعبيرات، مترادفات، مشتقات، ومتشابهات لفظية."}, {"id": 3, "title": "قواعد الموصول - الأساسيات", "sub": "Relative Clauses · الجزء الأول", "emoji": "🧩", "type": "grammar", "desc": "من المقدمة، لأنواع الجملة الموصولة، ثم who / whom / which / that / whose / where / when."}, {"id": 4, "title": "قواعد الموصول - المتقدم", "sub": "Relative Clauses · الجزء الثاني", "emoji": "🚀", "type": "grammar", "desc": "what، whatever/whichever/whoever، أدوات الكمية، إلزامية that، حرف الجر، وحذف الضمير."}];
+const ALL_WORDS = CATEGORIES.flatMap(c => c.words.map(w => ({...w, catId:c.id, catTitle:c.title})));
+const WORD_MAP = Object.fromEntries(ALL_WORDS.map(w => [w.id, w]));
+
+const DAY = 24*60*60*1000;
+// interval (days) to wait AFTER reaching this box, indexed 1..6. box 0 = new/never studied.
+const BOX_DAYS = [0, 1, 3, 7, 14, 30, 90];
+const BOX_LABELS = ['جديدة','يوم واحد','٣ أيام','أسبوع','أسبوعين','شهر','متقنة (٣ شهور)'];
+
+let state = {
+  srs: {},          // id -> {box, next, last, reviews, lapses}
+  favorites: [],    // [id]
+  theme: 'day',
+  examLog: [],      // {date, type, label, score, total}
+  lessonScores: {}  // lessonId -> {score, total, date}
+};
+
+let currentCat = null;
+let currentCardId = null;
+let currentIdx = 0;
+let currentDeckIds = [];
+let deckMode = 'category'; // 'category' | 'review'
+let reviewStats = { seen:0, remembered:0, forgot:0 };
+let quiz = { items: [], idx: 0, score: 0, wrong: [], type: '' };
+let quizContext = 'vocab';
+
+// ---------- SRS helpers ----------
+function srsOf(id){ return state.srs[id] || null; }
+function isDue(id, now){
+  const s = state.srs[id];
+  if(!s) return true; // never studied = due now
+  return s.next <= now;
+}
+function dueIds(){
+  const now = Date.now();
+  return ALL_WORDS.map(w=>w.id).filter(id => isDue(id, now));
+}
+function isLearned(id){ const s = state.srs[id]; return !!s && s.box >= 1; }
+function learnedIds(){ return Object.keys(state.srs).filter(id => state.srs[id].box >= 1); }
+function boxCounts(){
+  const counts = [0,0,0,0,0,0,0];
+  ALL_WORDS.forEach(w=>{
+    const s = state.srs[w.id];
+    const b = s ? s.box : 0;
+    counts[b]++;
+  });
+  return counts;
+}
+function assess(id, remembered){
+  const now = Date.now();
+  let s = state.srs[id] || { box:0, next:now, last:0, reviews:0, lapses:0 };
+  s.reviews++;
+  if(remembered){
+    s.box = Math.min(s.box+1, 6);
+    s.next = now + BOX_DAYS[s.box]*DAY;
+  } else {
+    s.lapses++;
+    s.box = 0;
+    s.next = now + 1*DAY;
+  }
+  s.last = now;
+  state.srs[id] = s;
+  saveSrs();
+  return s;
+}
+function fmtInterval(s){
+  if(!s) return 'جديدة';
+  return BOX_LABELS[s.box] || '';
+}
+function fmtRelative(ts){
+  const now = Date.now();
+  const diff = ts - now;
+  if(diff <= 0) return 'مستحقة الآن';
+  const days = Math.round(diff / DAY);
+  if(days <= 0) return 'اليوم';
+  if(days === 1) return 'غدًا';
+  return `بعد ${days} يوم`;
+}
+
+// ---------- storage ----------
+async function loadState(){
+  try{ const r = await window.storage.get('srs_v1'); if(r) state.srs = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('favorites_v1'); if(r) state.favorites = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('theme_v1'); if(r) state.theme = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('exam_log_v1'); if(r) state.examLog = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('lesson_scores_v1'); if(r) state.lessonScores = JSON.parse(r.value); }catch(e){}
+  applyTheme();
+  renderHome();
+  routeFromHash();
+}
+async function saveSrs(){ try{ await window.storage.set('srs_v1', JSON.stringify(state.srs)); }catch(e){} }
+async function saveFavorites(){ try{ await window.storage.set('favorites_v1', JSON.stringify(state.favorites)); }catch(e){} }
+async function saveTheme(){ try{ await window.storage.set('theme_v1', JSON.stringify(state.theme)); }catch(e){} }
+async function saveExamLog(){ try{ await window.storage.set('exam_log_v1', JSON.stringify(state.examLog)); }catch(e){} }
+async function saveLessonScores(){ try{ await window.storage.set('lesson_scores_v1', JSON.stringify(state.lessonScores)); }catch(e){} }
+
+// ---------- theme ----------
+function applyTheme(){
+  document.body.setAttribute('data-theme', state.theme);
+  document.getElementById('themeBtn').textContent = state.theme === 'night' ? '☀️' : '🌙';
+  document.getElementById('nightToggle').classList.toggle('on', state.theme === 'night');
+}
+function toggleTheme(){
+  state.theme = state.theme === 'night' ? 'day' : 'night';
+  applyTheme(); saveTheme();
+}
+document.getElementById('themeBtn').onclick = toggleTheme;
+
+// ---------- toast ----------
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 1800);
+}
+
+// ---------- tabs ----------
+function switchTab(tab){
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+  ['home','review','fav','exam','settings'].forEach(s=>{
+    document.getElementById('screen-'+s).classList.toggle('active', s===tab);
+  });
+  document.getElementById('screen-deck').classList.remove('active');
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-result').classList.remove('active');
+  document.getElementById('screen-cardhome').classList.remove('active');
+  document.getElementById('screen-lesson').classList.remove('active');
+  if(tab==='home') renderHome();
+  if(tab==='review') renderReviewScreen();
+  if(tab==='fav') renderFav();
+  if(tab==='exam') renderExam();
+}
+function goHome(){ switchTab('home'); }
+function goExam(){ switchTab('exam'); }
+
+// ---------- home / categories ----------
+function renderHome(){
+  const learned = learnedIds().length;
+  document.getElementById('statTotal').textContent = ALL_WORDS.length;
+  document.getElementById('statMemo').textContent = learned;
+  document.getElementById('statFav').textContent = state.favorites.length;
+
+  const due = dueIds().length;
+  const banner = document.getElementById('homeReviewBanner');
+  document.getElementById('homeDueNum').textContent = due;
+  if(due === 0){
+    banner.classList.add('zero');
+    document.getElementById('homeDueTitle').textContent = 'مفيش كلمات مستحقة دلوقتي 🎉';
+    document.getElementById('homeDueSub').textContent = 'كل كلماتك في وقتها الصح، تعال تاني بعد شوية';
+  } else {
+    banner.classList.remove('zero');
+    document.getElementById('homeDueTitle').textContent = 'كلمة مستحقة للمراجعة الآن';
+    document.getElementById('homeDueSub').textContent = 'اضغط هنا عشان تراجعهم بنظام التكرار المتباعد';
+  }
+
+  const grid = document.getElementById('mainCardGrid');
+  grid.innerHTML = '';
+  CARDS_META.forEach(card => {
+    const div = document.createElement('div');
+    div.className = 'maincard' + (card.type==='grammar' ? ' grammar' : '');
+    div.onclick = () => openCard(card.id);
+    let countTxt = '';
+    if(card.type==='vocab'){
+      const cats = CATEGORIES.filter(c=>c.cardId===card.id);
+      const n = cats.reduce((s,c)=>s+c.words.length,0);
+      countTxt = n + ' كلمة';
+    } else {
+      const n = GRAMMAR_LESSONS.filter(l=>l.cardId===card.id).length;
+      countTxt = n + ' درس';
+    }
+    div.innerHTML = `
+      <div class="mc-emoji">${card.emoji}</div>
+      <h3>${card.title}</h3>
+      <p>${card.sub}</p>
+      <div class="mc-count">${countTxt}</div>`;
+    grid.appendChild(div);
+  });
+}
+
+// ---------- review screen ----------
+function renderReviewScreen(){
+  const due = dueIds();
+  document.getElementById('reviewStartCount').textContent = due.length;
+  document.getElementById('reviewStartBtn').disabled = due.length === 0;
+
+  const counts = boxCounts();
+  const maxC = Math.max(...counts, 1);
+  const boxList = document.getElementById('boxList');
+  boxList.innerHTML = '';
+  BOX_LABELS.forEach((label, i) => {
+    const div = document.createElement('div');
+    div.className = 'box-row';
+    div.innerHTML = `<div class="bx-label">${label}</div>
+      <div class="bx-bar-wrap"><div class="bx-bar" style="width:${(counts[i]/maxC*100)}%;"></div></div>
+      <div class="bx-count">${counts[i]}</div>`;
+    boxList.appendChild(div);
+  });
+
+  const upcoming = document.getElementById('upcomingList');
+  const scheduled = Object.entries(state.srs)
+    .filter(([id,s]) => s.next > Date.now())
+    .sort((a,b) => a[1].next - b[1].next)
+    .slice(0, 8);
+  if(scheduled.length === 0){
+    upcoming.innerHTML = `<div class="empty-state" style="padding:20px;"><p>لا توجد مراجعات مجدولة بعد. ابدأ بمراجعة بعض الكلمات أولًا.</p></div>`;
+  } else {
+    upcoming.innerHTML = '';
+    scheduled.forEach(([id, s]) => {
+      const w = WORD_MAP[id];
+      if(!w) return;
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `<div><div class="rw en">${w.emoji?w.emoji+' ':''}${w.en}</div><div class="rm">${w.ar}</div></div>
+        <div class="rm">${fmtRelative(s.next)}</div>`;
+      upcoming.appendChild(div);
+    });
+  }
+}
+function startReviewSession(){
+  const ids = dueIds();
+  if(ids.length === 0) return;
+  currentDeckIds = ids.sort(()=>Math.random()-0.5);
+  currentIdx = 0;
+  currentCat = null;
+  deckMode = 'review';
+  reviewStats = { seen:0, remembered:0, forgot:0 };
+  document.getElementById('deckTitle').textContent = 'مراجعة اليوم';
+  document.getElementById('ruleBox').innerHTML = ''; document.getElementById('ruleBox').style.display = 'none';
+  document.getElementById('masteryBar').innerHTML = '';
+  location.hash = 'review';
+  ['home','review','fav','exam','settings'].forEach(s=>document.getElementById('screen-'+s).classList.remove('active'));
+  document.getElementById('screen-deck').classList.add('active');
+  renderCard();
+}
+
+// ---------- deck / flashcards ----------
+function openDeck(catId){
+  currentCat = CATEGORIES.find(c => c.id === catId);
+  currentDeckIds = currentCat.words.map(w => w.id);
+  currentIdx = 0;
+  deckMode = 'category';
+  document.getElementById('deckTitle').textContent = currentCat.title;
+  const rb = document.getElementById('ruleBox');
+  rb.innerHTML = currentCat.rule ? ('📘 <b>قاعدة الدرس:</b> ' + currentCat.rule) : 'مفيش قاعدة إضافية لهذا الدرس.';
+  rb.style.display = 'none';
+  renderMasteryBar();
+  location.hash = catId;
+  ['home','review','fav','exam','settings'].forEach(s=>document.getElementById('screen-'+s).classList.remove('active'));
+  document.getElementById('screen-cardhome').classList.remove('active');
+  document.getElementById('screen-lesson').classList.remove('active');
+  document.getElementById('screen-deck').classList.add('active');
+  renderCard();
+}
+
+// ---------- CARD (main 4-card) navigation ----------
+function openCard(cardId){
+  currentCardId = cardId;
+  const card = CARDS_META.find(c => c.id === cardId);
+  document.getElementById('cardHomeTitle').textContent = card.emoji + ' ' + card.title;
+  document.getElementById('cardHomeDesc').textContent = card.desc;
+  const list = document.getElementById('cardHomeList');
+  list.innerHTML = '';
+  if(card.type === 'vocab'){
+    const cats = CATEGORIES.filter(c => c.cardId === cardId);
+    cats.forEach((c,i) => {
+      const total = c.words.length;
+      const done = c.words.filter(w => isLearned(w.id)).length;
+      const pct = total ? Math.round(done/total*100) : 0;
+      const circ = 2*Math.PI*18;
+      const offset = circ - (pct/100)*circ;
+      const div = document.createElement('div');
+      div.className = 'cat-tab';
+      div.onclick = () => openDeck(c.id);
+      div.innerHTML = `
+        <div class="cat-num">${String(i+1).padStart(2,'0')}</div>
+        <div class="cat-info">
+          <h3>${c.title}</h3>
+          <p>${c.sub} · ${total} كلمة</p>
+        </div>
+        <div class="cat-progress-wrap">
+          <svg viewBox="0 0 44 44">
+            <circle class="bg" cx="22" cy="22" r="18"></circle>
+            <circle class="fg" cx="22" cy="22" r="18" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"></circle>
+          </svg>
+          <div class="cat-progress-txt">${pct}%</div>
+        </div>`;
+      list.appendChild(div);
+    });
+  } else {
+    const lessons = GRAMMAR_LESSONS.filter(l => l.cardId === cardId).sort((a,b)=>a.num-b.num);
+    lessons.forEach(l => {
+      const sc = state.lessonScores[l.id];
+      const div = document.createElement('div');
+      div.className = 'lesson-tab';
+      div.onclick = () => openLesson(l.id);
+      div.innerHTML = `
+        <div class="lesson-num">${String(l.num).padStart(2,'0')}</div>
+        <div class="lesson-emoji">${l.emoji}</div>
+        <div class="lesson-info">
+          <h3>${l.title}</h3>
+          <p>${l.examples.length} أمثلة · ${l.exercises.length} تدريبات</p>
+        </div>
+        <div class="lesson-score">${sc ? '✅ '+sc.score+'/'+sc.total : ''}</div>`;
+      list.appendChild(div);
+    });
+  }
+  ['home','review','fav','exam','settings'].forEach(s=>document.getElementById('screen-'+s).classList.remove('active'));
+  document.getElementById('screen-deck').classList.remove('active');
+  document.getElementById('screen-lesson').classList.remove('active');
+  document.getElementById('screen-cardhome').classList.add('active');
+}
+function backFromDeck(){
+  if(deckMode === 'review'){ goHome(); return; }
+  if(currentCat && currentCat.cardId){ openCard(currentCat.cardId); } else { goHome(); }
+}
+function backFromLesson(){
+  if(currentCardId){ openCard(currentCardId); } else { goHome(); }
+}
+
+// ---------- Grammar lessons ----------
+let currentLesson = null;
+function openLesson(lessonId){
+  currentLesson = GRAMMAR_LESSONS.find(l => l.id === lessonId);
+  currentCardId = currentLesson.cardId;
+  document.getElementById('lessonTitle').textContent = currentLesson.emoji + ' ' + currentLesson.title;
+  document.getElementById('lessonExplain').innerHTML = currentLesson.explain;
+  const wrap = document.getElementById('lessonExamples');
+  wrap.innerHTML = '';
+  currentLesson.examples.forEach((ex, i) => {
+    const div = document.createElement('div');
+    div.className = 'example-card';
+    div.innerHTML = `
+      <div class="example-top">
+        <div class="example-en en">${ex.en}</div>
+        <button class="speak-btn-sm">🔊</button>
+      </div>
+      <div class="example-ar">${ex.ar}</div>`;
+    div.querySelector('.speak-btn-sm').onclick = () => speakText(ex.en);
+    wrap.appendChild(div);
+  });
+  ['home','review','fav','exam','settings'].forEach(s=>document.getElementById('screen-'+s).classList.remove('active'));
+  document.getElementById('screen-cardhome').classList.remove('active');
+  document.getElementById('screen-lesson').classList.add('active');
+}
+
+let lquiz = { items: [], idx: 0, score: 0, wrong: [] };
+function startLessonQuiz(){
+  quizContext = 'lesson';
+  lquiz = { items: currentLesson.exercises.map(e=>({...e})), idx: 0, score: 0, wrong: [] };
+  document.getElementById('screen-lesson').classList.remove('active');
+  document.getElementById('screen-quiz').classList.add('active');
+  document.getElementById('qTotal').textContent = lquiz.items.length;
+  renderLessonQuizQ();
+}
+function renderLessonQuizQ(){
+  const it = lquiz.items[lquiz.idx];
+  document.getElementById('qIndex').textContent = lquiz.idx+1;
+  const qq = document.querySelector('.quiz-q');
+  qq.innerHTML = `
+    <button class="speak-btn" style="margin:0 auto 8px;">🔊</button>
+    <div class="qwrap-lesson"><div class="ql-en en">${it.q}</div></div>`;
+  qq.querySelector('.speak-btn').onclick = () => speakText(it.q);
+  const optWrap = document.getElementById('optList');
+  optWrap.innerHTML = '';
+  it.options.forEach((opt, oi) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn en';
+    btn.textContent = opt;
+    btn.onclick = () => answerLessonQuiz(oi, btn);
+    optWrap.appendChild(btn);
+  });
+}
+function answerLessonQuiz(oi, btn){
+  const it = lquiz.items[lquiz.idx];
+  const allBtns = document.querySelectorAll('.opt-btn');
+  allBtns.forEach(b => b.disabled = true);
+  const isCorrect = oi === it.answer;
+  if(isCorrect){ btn.classList.add('correct'); lquiz.score++; }
+  else{
+    btn.classList.add('wrong');
+    allBtns[it.answer].classList.add('correct');
+    lquiz.wrong.push(it);
+  }
+  const explainDiv = document.createElement('div');
+  explainDiv.className = 'exp-box';
+  explainDiv.textContent = '💡 ' + it.explain;
+  document.getElementById('optList').appendChild(explainDiv);
+  setTimeout(() => {
+    if(lquiz.idx < lquiz.items.length-1){ lquiz.idx++; renderLessonQuizQ(); }
+    else finishLessonQuiz();
+  }, 2200);
+}
+async function finishLessonQuiz(){
+  const total = lquiz.items.length;
+  const score = lquiz.score;
+  const pct = Math.round(score/total*100);
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-result').classList.add('active');
+  const circ = 2*Math.PI*62;
+  const ring = document.getElementById('resultRing');
+  ring.setAttribute('stroke-dasharray', circ);
+  ring.setAttribute('stroke-dashoffset', circ);
+  ring.style.stroke = pct>=70 ? 'var(--forest)' : (pct>=40? 'var(--gold)':'var(--rose)');
+  setTimeout(()=>{ ring.style.strokeDashoffset = circ - (pct/100)*circ; }, 100);
+  document.getElementById('resultPct').textContent = pct+'%';
+  document.getElementById('resultFrac').textContent = score+'/'+total;
+  document.getElementById('resultMsg').textContent = pct>=85?'ممتاز! 🎉' : pct>=70?'أداء جيد جدًا 👏' : pct>=50?'مستوى مقبول، راجع الدرس تاني':'محتاج تراجع الدرس تاني 💪';
+  document.getElementById('resultSub').textContent = currentLesson.title;
+  const rev = document.getElementById('reviewList');
+  rev.innerHTML = '';
+  if(lquiz.wrong.length){
+    const lbl = document.createElement('div');
+    lbl.className = 'section-label'; lbl.textContent = 'راجع القواعد دي تاني';
+    rev.appendChild(lbl);
+    lquiz.wrong.forEach(it => {
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `<div><div class="rw en" style="font-size:12.5px;">${it.q}</div><div class="rm">${it.explain}</div></div><div class="rm en">${it.options[it.answer]}</div>`;
+      rev.appendChild(div);
+    });
+  }
+  state.lessonScores[currentLesson.id] = {score, total, date:Date.now()};
+  await saveLessonScores();
+  const backBtn = document.querySelector('.result-wrap .exam-btn');
+  backBtn.textContent = 'رجوع للدرس';
+  backBtn.onclick = () => { document.getElementById('screen-result').classList.remove('active'); openLesson(currentLesson.id); backBtn.onclick = goExam; backBtn.textContent = 'رجوع للاختبارات'; };
+}
+function toggleRuleBox(){
+  const box = document.getElementById('ruleBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+}
+function renderMasteryBar(){
+  const wrap = document.getElementById('masteryBar');
+  if(deckMode !== 'category' || !currentCat){ wrap.innerHTML=''; return; }
+  const counts = [0,0,0,0,0,0,0];
+  currentCat.words.forEach(w=>{
+    const s = state.srs[w.id];
+    counts[s?s.box:0]++;
+  });
+  const total = currentCat.words.length || 1;
+  const colors = ['#9AA6C2','#C9972C','#C9972C','#C9972C','#3E6E55','#3E6E55','#3E6E55'];
+  const segs = counts.map((c,i)=>{
+    if(c<=0) return '';
+    const pct = (c/total*100);
+    return '<span style="width:'+pct+'%;background:'+colors[i]+'" title="'+BOX_LABELS[i]+': '+c+'"></span>';
+  }).join('');
+  wrap.innerHTML = '<div class="mastery-track">'+segs+'</div><div class="mastery-legend">توزيع الإتقان لكلمات هذه الحلقة ('+counts[0]+' لسه جديدة)</div>';
+}
+function exportLesson(){
+  if(!currentCat) return;
+  let txt = currentCat.title + '\n' + currentCat.sub + '\n' + '='.repeat(30) + '\n\n';
+  currentCat.words.forEach((w,i)=>{
+    txt += (i+1) + '. ' + w.en + '  —  ' + w.ar + ' (' + w.phon + ')\n';
+    txt += '   ' + w.sen + '\n';
+    txt += '   ' + w.senm + '\n\n';
+  });
+  const blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const safeName = currentCat.title.replace(/[\\\/:*?"<>|]/g,'').trim();
+  a.href = url; a.download = safeName + '.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 2000);
+  toast('📄 اتحمّل ملف كلمات الحلقة');
+}
+function copyLessonLink(){
+  if(!currentCat) return;
+  const url = location.origin + location.pathname + '#' + currentCat.id;
+  const done = () => toast('🔗 اتنسخ رابط الحلقة');
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(done).catch(()=> toast('تعذّر النسخ التلقائي'));
+  } else {
+    toast('تعذّر النسخ التلقائي');
+  }
+}
+function onSearchInput(q){
+  const wrap = document.getElementById('searchResults');
+  const listSection = document.getElementById('catListSection');
+  q = q.trim();
+  if(!q){ wrap.style.display='none'; wrap.innerHTML=''; listSection.style.display=''; return; }
+  listSection.style.display='none';
+  const ql = q.toLowerCase();
+  const wordResults = ALL_WORDS.filter(w => w.en.toLowerCase().includes(ql) || w.ar.includes(q)).slice(0, 20);
+  const lessonResults = GRAMMAR_LESSONS.filter(l => l.title.includes(q) || l.title.toLowerCase().includes(ql)).slice(0, 10);
+  wrap.style.display='block';
+  if(wordResults.length === 0 && lessonResults.length === 0){
+    wrap.innerHTML = '<div class="empty-state" style="padding:30px 10px;"><p>مفيش نتائج لـ «'+q+'»</p></div>';
+    return;
+  }
+  wrap.innerHTML = '';
+  wordResults.forEach(w=>{
+    const div = document.createElement('div');
+    div.className = 'search-result-item';
+    div.onclick = () => openWordDirect(w.id);
+    div.innerHTML = '<span class="sr-emoji">'+(w.emoji||'🔤')+'</span>'
+      + '<div class="sr-text"><div class="rw en">'+w.en+'</div><div class="rm">'+w.ar+'</div></div>'
+      + '<div class="sr-cat">'+w.catTitle+'</div>';
+    wrap.appendChild(div);
+  });
+  lessonResults.forEach(l=>{
+    const div = document.createElement('div');
+    div.className = 'search-result-item';
+    div.onclick = () => openLesson(l.id);
+    div.innerHTML = '<span class="sr-emoji">'+l.emoji+'</span>'
+      + '<div class="sr-text"><div class="rw">'+l.title+'</div><div class="rm">درس قواعد</div></div>'
+      + '<div class="sr-cat">قواعد</div>';
+    wrap.appendChild(div);
+  });
+}
+function openWordDirect(id){
+  const w = WORD_MAP[id];
+  if(!w) return;
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchResults').style.display = 'none';
+  document.getElementById('catListSection').style.display = '';
+  openDeck(w.catId);
+  const idx = currentDeckIds.indexOf(id);
+  if(idx > -1){ currentIdx = idx; renderCard(); }
+}
+function jumpRelated(id){
+  const idx = currentDeckIds.indexOf(id);
+  if(idx > -1){ currentIdx = idx; renderCard(); }
+  else { openWordDirect(id); }
+}
+function routeFromHash(){
+  const h = location.hash.replace('#','');
+  if(!h) return;
+  if(h === 'review'){ switchTab('review'); return; }
+  const cat = CATEGORIES.find(c => c.id === h);
+  if(cat) openDeck(h);
+}
+function renderCard(){
+  const id = currentDeckIds[currentIdx];
+  const w = WORD_MAP[id];
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('recallRow').style.display = 'none';
+  document.getElementById('cardEmoji').textContent = w.emoji || '';
+  document.getElementById('cardEmoji').style.display = w.emoji ? 'block' : 'none';
+  document.getElementById('cardWord').textContent = w.en;
+  document.getElementById('cardPhon').textContent = w.phon;
+  document.getElementById('cardMean').textContent = w.ar;
+  document.getElementById('cardTagFront').textContent = w.catTitle;
+  const chips = document.getElementById('relatedChips');
+  if(w.related && w.related.length){
+    chips.style.display = 'flex';
+    chips.innerHTML = w.related.map(rid=>{
+      const rw = WORD_MAP[rid];
+      return rw ? ('<button class="chip" onclick="event.stopPropagation();jumpRelated(\''+rid+'\')">🔗 '+rw.en+'</button>') : '';
+    }).join('');
+  } else {
+    chips.style.display = 'none';
+    chips.innerHTML = '';
+  }
+  document.getElementById('sentEn').textContent = w.sen;
+  document.getElementById('sentAr').textContent = w.senm;
+  document.getElementById('cardWordBack').textContent = w.en;
+  document.getElementById('cardMeanBack').textContent = w.ar;
+
+  const isFav = state.favorites.includes(id);
+  document.getElementById('favBtnFront').textContent = isFav ? '★' : '☆';
+  document.getElementById('favBtnFront').classList.toggle('active', isFav);
+  document.getElementById('favBtnBack').textContent = isFav ? '★' : '☆';
+  document.getElementById('favBtnBack').classList.toggle('active', isFav);
+
+  const s = srsOf(id);
+  document.getElementById('srsBadgeFront').textContent = '🔁 ' + fmtInterval(s);
+
+  if(deckMode === 'review'){
+    document.getElementById('deckCount').textContent = `مراجعة ${currentIdx+1} من ${currentDeckIds.length}`;
+    document.getElementById('deckMemoCount').textContent = `اتذكرت: ${reviewStats.remembered} · محتاج مراجعة: ${reviewStats.forgot}`;
+  } else {
+    document.getElementById('deckCount').textContent = `بطاقة ${currentIdx+1} من ${currentDeckIds.length}`;
+    const learnedInCat = currentCat.words.filter(w2 => isLearned(w2.id)).length;
+    document.getElementById('deckMemoCount').textContent = `محفوظ: ${learnedInCat}/${currentCat.words.length}`;
+  }
+  document.getElementById('deckProgressBar').style.width = `${((currentIdx+1)/currentDeckIds.length)*100}%`;
+  document.getElementById('srsStatus').textContent = s ? fmtRelative(s.next) : 'كلمة جديدة';
+}
+function flipCard(){
+  const card = document.getElementById('flashcard');
+  card.classList.toggle('flipped');
+  document.getElementById('recallRow').style.display = card.classList.contains('flipped') ? 'flex' : 'none';
+}
+function nextCard(){ currentIdx = (currentIdx+1) % currentDeckIds.length; renderCard(); }
+function prevCard(){ currentIdx = (currentIdx-1+currentDeckIds.length) % currentDeckIds.length; renderCard(); }
+function toggleFav(){
+  const id = currentDeckIds[currentIdx];
+  const i = state.favorites.indexOf(id);
+  if(i>-1){ state.favorites.splice(i,1); } else { state.favorites.push(id); }
+  saveFavorites(); renderCard();
+}
+function assessCard(remembered){
+  const id = currentDeckIds[currentIdx];
+  const s = assess(id, remembered);
+  renderMasteryBar();
+  reviewStats.seen++;
+  if(remembered){ reviewStats.remembered++; toast('👍 هترجعلك بعد ' + BOX_LABELS[s.box]); }
+  else { reviewStats.forgot++; toast('🔁 هترجعلك بكرة تاني'); }
+
+  if(deckMode === 'review'){
+    if(currentIdx >= currentDeckIds.length - 1){ finishReviewSession(); return; }
+    currentIdx++; renderCard();
+  } else {
+    if(currentIdx >= currentDeckIds.length - 1){ currentIdx = 0; } else { currentIdx++; }
+    renderCard();
+  }
+}
+function finishReviewSession(){
+  const total = reviewStats.seen;
+  const pct = total ? Math.round(reviewStats.remembered/total*100) : 0;
+  document.getElementById('screen-deck').classList.remove('active');
+  document.getElementById('screen-result').classList.add('active');
+  const circ = 2*Math.PI*62;
+  const ring = document.getElementById('resultRing');
+  ring.setAttribute('stroke-dasharray', circ);
+  ring.setAttribute('stroke-dashoffset', circ);
+  ring.style.stroke = pct>=70 ? 'var(--forest)' : (pct>=40? 'var(--gold)':'var(--rose)');
+  setTimeout(()=>{ ring.style.strokeDashoffset = circ - (pct/100)*circ; }, 100);
+  document.getElementById('resultPct').textContent = pct+'%';
+  document.getElementById('resultFrac').textContent = reviewStats.remembered+'/'+total;
+  document.getElementById('resultMsg').textContent = pct>=85?'مذاكرة ممتازة! 🎉' : pct>=60?'مراجعة كويسة 👏' : 'محتاج تركّز على اللي محتاج مراجعة تاني 💪';
+  document.getElementById('resultSub').textContent = 'خلصت مراجعة اليوم';
+  document.getElementById('reviewList').innerHTML = '';
+  renderHome();
+}
+
+// ---------- favorites screen ----------
+function renderFav(){
+  const wrap = document.getElementById('favList');
+  if(state.favorites.length === 0){
+    wrap.innerHTML = `<div class="empty-state"><div class="em">⭐</div><p>لسه معملتش تفضيل لأي كلمة.<br>اضغط على أيقونة النجمة داخل أي بطاقة لإضافتها هنا.</p></div>`;
+    return;
+  }
+  wrap.innerHTML = '';
+  state.favorites.forEach(id => {
+    const w = WORD_MAP[id];
+    if(!w) return;
+    const learned = isLearned(id);
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    div.innerHTML = `<div><div class="rw en">${w.emoji?w.emoji+' ':''}${w.en}</div><div class="rm">${w.ar} — ${w.catTitle}</div></div>
+      <div style="font-size:16px;">${learned?'✅':'🔸'}</div>`;
+    wrap.appendChild(div);
+  });
+}
+
+// ---------- exams ----------
+function memorizedIds(){ return learnedIds(); }
+function recentMemorizedIds(hours=48){
+  const cutoff = Date.now() - hours*3600*1000;
+  return Object.entries(state.srs).filter(([id,s]) => s.last >= cutoff).map(([id]) => id);
+}
+function renderExam(){
+  const total = memorizedIds().length;
+  const recent = recentMemorizedIds();
+  document.getElementById('dailyDesc').textContent = recent.length
+    ? `لديك ${recent.length} كلمة راجعتها في آخر يومين. اختبر نفسك عليها فقط.`
+    : 'لم تراجع كلمات في آخر يومين. راجع بطاقات أولًا لتفعيل الاختبار اليومي.';
+  document.getElementById('dailyBtn').disabled = recent.length === 0;
+
+  const percents = [
+    {p:7, label:'اختبار سريع', desc:'مراجعة خاطفة'},
+    {p:10, label:'اختبار خفيف', desc:'مراجعة أساسية'},
+    {p:15, label:'اختبار متوسط', desc:'مراجعة أعمق'},
+    {p:20, label:'اختبار شامل', desc:'أكبر تغطية'},
+  ];
+  const grid = document.getElementById('examGrid');
+  grid.innerHTML = '';
+  percents.forEach(pc => {
+    const count = Math.max(1, Math.ceil(total * pc.p/100));
+    const div = document.createElement('div');
+    div.className = 'exam-tile';
+    if(total===0){ div.style.opacity = .5; }
+    else { div.onclick = () => startComprehensiveExam(pc.p, count); }
+    div.innerHTML = `<b>${pc.p}%</b><span>${pc.label}</span><small>${total? count+' سؤال' : '—'}</small>`;
+    grid.appendChild(div);
+  });
+
+  const hist = document.getElementById('examHistory');
+  if(state.examLog.length === 0){
+    hist.innerHTML = `<div class="empty-state" style="padding:20px;"><p>لا توجد اختبارات سابقة بعد.</p></div>`;
+  } else {
+    hist.innerHTML = '';
+    [...state.examLog].reverse().slice(0,8).forEach(e => {
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      const pct = Math.round(e.score/e.total*100);
+      div.innerHTML = `<div><div class="rw" style="font-family:'Cairo';">${e.label}</div><div class="rm">${new Date(e.date).toLocaleDateString('ar-EG')}</div></div>
+        <div style="font-weight:800;color:${pct>=70?'var(--forest)':'var(--rose)'};">${e.score}/${e.total}</div>`;
+      hist.appendChild(div);
+    });
+  }
+}
+
+function buildQuizItems(ids, type, label){
+  quizContext = 'vocab';
+  const shuffled = [...ids].sort(()=>Math.random()-0.5);
+  const items = shuffled.map(id => {
+    const w = WORD_MAP[id];
+    let pool = ALL_WORDS.filter(x => x.id !== id);
+    pool = pool.sort(()=>Math.random()-0.5).slice(0,3);
+    const options = [...pool.map(p=>p.ar), w.ar].sort(()=>Math.random()-0.5);
+    return { id, word: w, options, correct: w.ar };
+  });
+  quiz = { items, idx:0, score:0, wrong:[], type, label };
+  document.getElementById('screen-exam').classList.remove('active');
+  document.getElementById('screen-quiz').classList.add('active');
+  document.getElementById('qTotal').textContent = items.length;
+  renderQuizQ();
+}
+function startDailyExam(){
+  const ids = recentMemorizedIds();
+  if(ids.length===0) return;
+  buildQuizItems(ids, 'daily', 'الاختبار اليومي (' + ids.length + ' كلمة)');
+}
+function startComprehensiveExam(pct, count){
+  const ids = memorizedIds();
+  const shuffled = [...ids].sort(()=>Math.random()-0.5).slice(0, count);
+  buildQuizItems(shuffled, 'comp'+pct, `اختبار شامل ${pct}% (${count} سؤال)`);
+}
+function renderQuizQ(){
+  const it = quiz.items[quiz.idx];
+  document.getElementById('qIndex').textContent = quiz.idx+1;
+  document.querySelector('.quiz-q').innerHTML = `
+    <button class="speak-btn" style="margin:0 auto 8px;" onclick="speakQuizWord()">🔊</button>
+    <div class="qemoji" id="qEmoji">${it.word.emoji||''}</div>
+    <div class="qword en" id="qWord">${it.word.en}</div>
+    <div class="qphon" id="qPhon">${it.word.phon}</div>`;
+  const optWrap = document.getElementById('optList');
+  optWrap.innerHTML = '';
+  it.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt;
+    btn.onclick = () => answerQuiz(opt, btn);
+    optWrap.appendChild(btn);
+  });
+}
+function speakQuizWord(){
+  const it = quiz.items[quiz.idx];
+  speakText(it.word.en);
+}
+function answerQuiz(opt, btn){
+  const it = quiz.items[quiz.idx];
+  const allBtns = document.querySelectorAll('.opt-btn');
+  allBtns.forEach(b => b.disabled = true);
+  const isCorrect = opt === it.correct;
+  if(isCorrect){ btn.classList.add('correct'); quiz.score++; }
+  else{
+    btn.classList.add('wrong');
+    allBtns.forEach(b => { if(b.textContent === it.correct) b.classList.add('correct'); });
+    quiz.wrong.push(it);
+  }
+  setTimeout(() => {
+    if(quiz.idx < quiz.items.length-1){ quiz.idx++; renderQuizQ(); }
+    else finishQuiz();
+  }, 900);
+}
+function quitQuiz(){
+  document.getElementById('screen-quiz').classList.remove('active');
+  if(quizContext === 'lesson' && currentLesson){
+    openLesson(currentLesson.id);
+  } else {
+    document.getElementById('screen-exam').classList.add('active');
+  }
+}
+async function finishQuiz(){
+  const total = quiz.items.length;
+  const score = quiz.score;
+  const pct = Math.round(score/total*100);
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-result').classList.add('active');
+  const circ = 2*Math.PI*62;
+  const ring = document.getElementById('resultRing');
+  ring.setAttribute('stroke-dasharray', circ);
+  ring.setAttribute('stroke-dashoffset', circ);
+  ring.style.stroke = pct>=70 ? 'var(--forest)' : (pct>=40? 'var(--gold)':'var(--rose)');
+  setTimeout(()=>{ ring.style.strokeDashoffset = circ - (pct/100)*circ; }, 100);
+  document.getElementById('resultPct').textContent = pct+'%';
+  document.getElementById('resultFrac').textContent = score+'/'+total;
+  document.getElementById('resultMsg').textContent = pct>=85?'ممتاز! 🎉' : pct>=70?'أداء جيد جدًا 👏' : pct>=50?'مستوى مقبول، استمر بالمراجعة':'محتاج مراجعة أكتر شوية 💪';
+  document.getElementById('resultSub').textContent = quiz.label;
+
+  const rev = document.getElementById('reviewList');
+  rev.innerHTML = '';
+  if(quiz.wrong.length){
+    const lbl = document.createElement('div');
+    lbl.className = 'section-label'; lbl.textContent = 'راجع الكلمات دي تاني';
+    rev.appendChild(lbl);
+    quiz.wrong.forEach(it => {
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `<div><div class="rw en">${it.word.emoji?it.word.emoji+' ':''}${it.word.en}</div><div class="rm">${it.word.sen}</div></div><div class="rm">${it.correct}</div>`;
+      rev.appendChild(div);
+    });
+  }
+
+  state.examLog.push({date:Date.now(), type:quiz.type, label:quiz.label, score, total});
+  await saveExamLog();
+}
+
+// ---------- TTS ----------
+let voices = [];
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
+  const sel = document.getElementById('voiceSelect');
+  if(!sel) return;
+  sel.innerHTML = '';
+  if(voices.length===0){
+    sel.innerHTML = '<option>الصوت الافتراضي للجهاز</option>';
+    return;
+  }
+  voices.forEach((v,i) => {
+    const o = document.createElement('option');
+    o.value = i; o.textContent = `${v.name} (${v.lang})`;
+    sel.appendChild(o);
+  });
+}
+speechSynthesis.onvoiceschanged = loadVoices;
+function speakText(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const sel = document.getElementById('voiceSelect');
+  if(voices.length && sel && sel.value !== '') u.voice = voices[sel.value];
+  u.lang = 'en-US'; u.rate = 0.92;
+  speechSynthesis.speak(u);
+}
+function speak(mode){
+  const w = WORD_MAP[currentDeckIds[currentIdx]];
+  speakText(mode==='en' ? w.en : w.sen);
+}
+
+// ---------- reset ----------
+async function resetProgress(){
+  if(!confirm('هل أنت متأكد؟ سيتم حذف كل جدول المراجعة والكلمات المفضلة نهائيًا.')) return;
+  state.srs = {}; state.favorites = []; state.examLog = [];
+  await saveSrs(); await saveFavorites(); await saveExamLog();
+  toast('تم إعادة الضبط');
+  renderHome();
+}
+
+// ---------- hash routing ----------
+window.addEventListener('hashchange', routeFromHash);
+
+// ---------- init ----------
+loadVoices();
+loadState();
+</script>
+</body>
+</html>
