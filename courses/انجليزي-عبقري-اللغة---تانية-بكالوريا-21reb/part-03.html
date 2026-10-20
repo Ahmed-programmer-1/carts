@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>عبقري اللغة | المحاضرة 3: الجمل الشرطية If</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@400;600;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12203A;
+    --ink-2:#1B2C4D;
+    --paper:#F6EFDD;
+    --paper-2:#EDE2C6;
+    --gold:#C9972C;
+    --gold-2:#E4B84B;
+    --forest:#3E6E55;
+    --rose:#BE4B3C;
+    --slate:#5C6A82;
+    --text-dark:#1C2333;
+    --text-soft:#5E6B85;
+    --bg:var(--paper);
+    --bg-2:var(--paper-2);
+    --surface:#FFFDF6;
+    --ink-text:var(--text-dark);
+    --sub-text:var(--text-soft);
+    --shadow:0 10px 30px rgba(20,25,45,.12);
+    --radius:18px;
+  }
+  [data-theme="night"]{
+    --bg:#0C1220;
+    --bg-2:#111A2E;
+    --surface:#182238;
+    --ink-text:#F1EAD8;
+    --sub-text:#9AA6C2;
+    --shadow:0 10px 30px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink-text);
+    font-family:'Tajawal',sans-serif;
+    min-height:100vh;
+    transition:background .35s ease,color .35s ease;
+    overscroll-behavior-y:none;
+  }
+  .en{font-family:'Space Grotesk',sans-serif;}
+  #app{max-width:520px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;position:relative;padding-bottom:78px;}
+
+  /* ===== Top bar ===== */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 18px 10px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{
+    width:36px;height:36px;border-radius:10px;
+    background:linear-gradient(145deg,var(--gold-2),var(--gold));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk';font-weight:700;color:#2a1d05;font-size:16px;
+    box-shadow:0 4px 12px rgba(201,151,44,.4);
+  }
+  .brand h1{font-family:'Cairo';font-weight:800;font-size:19px;margin:0;letter-spacing:.2px;}
+  .brand span{display:block;font-size:11px;color:var(--sub-text);font-weight:500;margin-top:1px;}
+  .icon-btn{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--surface);border:1px solid rgba(120,120,120,.15);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    box-shadow:var(--shadow);font-size:17px;color:var(--ink-text);
+  }
+
+  /* ===== screens ===== */
+  .screen{display:none;padding:6px 18px 20px;animation:fadeIn .35s ease;}
+  .screen.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  /* ===== stats strip ===== */
+  .stats-strip{display:flex;gap:10px;margin:6px 0 18px;}
+  .stat-card{
+    flex:1;background:var(--surface);border-radius:14px;padding:12px 10px;
+    box-shadow:var(--shadow);text-align:center;
+  }
+  .stat-card b{display:block;font-family:'Space Grotesk';font-size:20px;color:var(--gold);}
+  .stat-card small{font-size:11px;color:var(--sub-text);}
+
+  /* ===== category list (rolodex tabs) ===== */
+  .section-label{font-family:'Cairo';font-weight:800;font-size:14px;color:var(--sub-text);margin:18px 2px 10px;display:flex;align-items:center;gap:8px;}
+  .section-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(120,120,120,.3),transparent);}
+  .cat-list{display:flex;flex-direction:column;gap:10px;}
+  .cat-tab{
+    position:relative;background:var(--surface);border-radius:14px;
+    padding:14px 16px 14px 14px;display:flex;align-items:center;gap:12px;
+    box-shadow:var(--shadow);cursor:pointer;border-inline-start:5px solid var(--gold);
+    transition:transform .15s ease;
+  }
+  .cat-tab:active{transform:scale(.98);}
+  .cat-num{
+    font-family:'Space Grotesk';font-weight:700;font-size:13px;color:var(--gold);
+    background:rgba(201,151,44,.12);border-radius:8px;padding:4px 8px;min-width:30px;text-align:center;
+  }
+  .cat-info{flex:1;min-width:0;}
+  .cat-info h3{margin:0 0 2px;font-family:'Cairo';font-size:15px;font-weight:700;}
+  .cat-info p{margin:0;font-size:11.5px;color:var(--sub-text);font-family:'Space Grotesk';}
+  .cat-progress-wrap{width:44px;height:44px;position:relative;flex-shrink:0;}
+  .cat-progress-wrap svg{transform:rotate(-90deg);width:44px;height:44px;}
+  .cat-progress-wrap circle{fill:none;stroke-width:4;}
+  .cat-progress-wrap .bg{stroke:rgba(120,120,120,.18);}
+  .cat-progress-wrap .fg{stroke:var(--forest);stroke-linecap:round;transition:stroke-dashoffset .4s ease;}
+  .cat-progress-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Space Grotesk';}
+
+  /* ===== deck / flashcard screen ===== */
+  .deck-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+  .deck-header h2{font-family:'Cairo';font-size:16px;margin:0;font-weight:800;}
+  .deck-count{font-size:12px;color:var(--sub-text);font-family:'Space Grotesk';}
+  .progress-bar{height:5px;border-radius:5px;background:rgba(120,120,120,.18);margin:10px 0 22px;overflow:hidden;}
+  .progress-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-2));border-radius:5px;transition:width .3s ease;}
+
+  .card-stage{perspective:1400px;height:340px;margin:0 auto 18px;position:relative;}
+  .flashcard{
+    width:100%;height:100%;position:relative;transform-style:preserve-3d;
+    transition:transform .55s cubic-bezier(.4,.2,.2,1);cursor:pointer;
+  }
+  .flashcard.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;
+    background:var(--surface);box-shadow:0 18px 40px rgba(20,25,45,.18);
+    padding:22px;display:flex;flex-direction:column;
+    border:1px solid rgba(120,120,120,.12);
+  }
+  .face::before{
+    content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);
+    width:52px;height:9px;border-radius:6px;background:repeating-linear-gradient(90deg,rgba(120,120,120,.35) 0 4px,transparent 4px 8px);
+  }
+  .face.back{transform:rotateY(180deg);}
+  .face-top{display:flex;justify-content:space-between;align-items:flex-start;margin-top:14px;}
+  .fav-btn{font-size:20px;background:none;border:none;cursor:pointer;color:var(--sub-text);padding:0;line-height:1;}
+  .fav-btn.active{color:var(--gold);}
+  .speak-btn{
+    width:38px;height:38px;border-radius:50%;background:var(--bg-2);border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ink-text);
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+  }
+  .card-word{font-family:'Space Grotesk';font-weight:700;font-size:34px;text-align:center;margin:0 0 6px;}
+  .card-phon{text-align:center;color:var(--gold);font-size:13px;font-family:'Space Grotesk';margin-bottom:8px;}
+  .card-mean{text-align:center;font-family:'Cairo';font-weight:700;font-size:20px;color:var(--ink-text);}
+  .card-tag{position:absolute;bottom:16px;inset-inline-start:16px;font-size:10.5px;color:var(--sub-text);background:var(--bg-2);padding:4px 10px;border-radius:20px;font-family:'Space Grotesk';}
+  .card-hint{position:absolute;bottom:16px;inset-inline-end:16px;font-size:10.5px;color:var(--sub-text);}
+  .sentence-wrap{margin:auto 0;text-align:center;}
+  .sentence-en{font-family:'Space Grotesk';font-size:19px;line-height:1.5;margin-bottom:10px;}
+  .sentence-ar{font-family:'Cairo';font-size:14.5px;color:var(--sub-text);line-height:1.6;}
+  .back .card-word{font-size:20px;margin-bottom:4px;}
+  .back .card-mean{font-size:14px;color:var(--sub-text);font-weight:500;}
+
+  .deck-controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px;}
+  .ctrl-btn{
+    width:50px;height:50px;border-radius:50%;background:var(--surface);border:none;
+    box-shadow:var(--shadow);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink-text);
+  }
+  .ctrl-btn.primary{
+    width:auto;height:50px;padding:0 22px;border-radius:25px;background:var(--forest);color:#fff;
+    font-family:'Cairo';font-weight:700;font-size:14px;gap:8px;display:flex;align-items:center;
+  }
+  .ctrl-btn.primary.done{background:var(--sub-text);}
+  .ctrl-btn:active{transform:scale(.94);}
+
+  /* ===== bottom nav ===== */
+  .bottom-nav{
+    position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;
+    background:var(--surface);border-top:1px solid rgba(120,120,120,.15);
+    display:flex;padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+    box-shadow:0 -6px 20px rgba(0,0,0,.06);z-index:50;
+  }
+  .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:var(--sub-text);font-family:'Cairo';font-size:10.5px;font-weight:700;cursor:pointer;padding:4px 0;}
+  .nav-item .ic{font-size:19px;}
+  .nav-item.active{color:var(--gold);}
+
+  /* ===== exam screen ===== */
+  .exam-card{background:var(--surface);border-radius:18px;padding:18px;box-shadow:var(--shadow);margin-bottom:14px;}
+  .exam-card h3{font-family:'Cairo';font-size:15px;margin:0 0 4px;display:flex;align-items:center;gap:8px;}
+  .exam-card p{margin:0 0 12px;font-size:12.5px;color:var(--sub-text);line-height:1.6;}
+  .exam-btn{
+    width:100%;background:linear-gradient(135deg,var(--gold-2),var(--gold));border:none;color:#241804;
+    font-family:'Cairo';font-weight:800;font-size:14px;padding:13px;border-radius:12px;cursor:pointer;
+  }
+  .exam-btn:disabled{background:var(--bg-2);color:var(--sub-text);}
+  .exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .exam-tile{
+    background:var(--surface);border-radius:14px;padding:14px;box-shadow:var(--shadow);cursor:pointer;text-align:center;
+    border:2px solid transparent;
+  }
+  .exam-tile b{display:block;font-family:'Space Grotesk';font-size:22px;color:var(--gold);}
+  .exam-tile span{font-size:11px;color:var(--sub-text);font-family:'Cairo';font-weight:700;}
+  .exam-tile small{display:block;font-size:10px;color:var(--sub-text);margin-top:3px;}
+  .exam-tile:active{transform:scale(.97);}
+
+  /* quiz runner */
+  .quiz-progress{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .quiz-progress b{font-family:'Space Grotesk';color:var(--gold);}
+  .quiz-q{background:var(--surface);border-radius:18px;padding:24px 18px;text-align:center;box-shadow:var(--shadow);margin-bottom:18px;}
+  .quiz-q .qword{font-family:'Space Grotesk';font-size:30px;font-weight:700;margin:10px 0 4px;}
+  .quiz-q .qphon{color:var(--gold);font-size:12.5px;margin-bottom:6px;}
+  .opt-list{display:flex;flex-direction:column;gap:10px;}
+  .opt-btn{
+    background:var(--surface);border:2px solid rgba(120,120,120,.18);border-radius:12px;
+    padding:14px;font-family:'Cairo';font-weight:600;font-size:14.5px;cursor:pointer;text-align:right;color:var(--ink-text);
+  }
+  .opt-btn.correct{border-color:var(--forest);background:rgba(62,110,85,.12);color:var(--forest);}
+  .opt-btn.wrong{border-color:var(--rose);background:rgba(190,75,60,.12);color:var(--rose);}
+  .opt-btn:disabled{opacity:.7;}
+
+  .result-wrap{text-align:center;padding:20px 10px;}
+  .result-ring{width:150px;height:150px;margin:10px auto 18px;position:relative;}
+  .result-ring svg{transform:rotate(-90deg);width:150px;height:150px;}
+  .result-ring circle{fill:none;stroke-width:10;}
+  .result-ring .bg{stroke:rgba(120,120,120,.15);}
+  .result-ring .fg{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset 1s ease;}
+  .result-ring-txt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .result-ring-txt b{font-family:'Space Grotesk';font-size:28px;}
+  .result-ring-txt span{font-size:11px;color:var(--sub-text);}
+  .result-msg{font-family:'Cairo';font-weight:800;font-size:17px;margin-bottom:4px;}
+  .result-sub{font-size:12.5px;color:var(--sub-text);margin-bottom:20px;}
+  .review-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-radius:12px;padding:12px 14px;margin-bottom:8px;text-align:right;box-shadow:var(--shadow);}
+  .review-item .rw{font-family:'Space Grotesk';font-weight:700;}
+  .review-item .rm{font-size:12px;color:var(--sub-text);}
+
+  /* settings */
+  .settings-row{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-radius:14px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow);}
+  .settings-row div h4{margin:0 0 2px;font-family:'Cairo';font-size:14px;}
+  .settings-row div p{margin:0;font-size:11.5px;color:var(--sub-text);}
+  .toggle{width:50px;height:28px;border-radius:20px;background:var(--bg-2);position:relative;cursor:pointer;border:none;flex-shrink:0;}
+  .toggle i{position:absolute;top:3px;inset-inline-start:3px;width:22px;height:22px;border-radius:50%;background:var(--gold);transition:inset-inline-start .25s ease;}
+  .toggle.on i{inset-inline-start:25px;}
+  .voice-select{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(120,120,120,.25);background:var(--surface);color:var(--ink-text);font-family:'Cairo';font-size:13px;}
+
+  /* ===== spaced repetition ===== */
+  .review-banner{
+    background:linear-gradient(135deg,var(--ink) 0%,var(--ink-2) 100%);
+    border-radius:18px;padding:18px;margin:6px 0 18px;color:#F6EFDD;
+    box-shadow:var(--shadow);display:flex;align-items:center;gap:14px;cursor:pointer;
+    position:relative;overflow:hidden;
+  }
+  .review-banner::after{content:"🔁";position:absolute;font-size:70px;opacity:.12;left:-6px;bottom:-16px;}
+  .review-banner .rb-num{font-family:'Space Grotesk';font-weight:700;font-size:32px;color:var(--gold-2);}
+  .review-banner .rb-text h4{margin:0 0 2px;font-family:'Cairo';font-size:14.5px;font-weight:800;}
+  .review-banner .rb-text p{margin:0;font-size:11.5px;color:#C7BFA8;}
+  .review-banner.zero{background:linear-gradient(135deg,var(--forest),#2e5540);}
+
+  .recall-row{display:flex;gap:10px;margin-top:10px;}
+  .recall-btn{
+    flex:1;border:none;border-radius:14px;padding:14px 8px;font-family:'Cairo';font-weight:800;font-size:13.5px;
+    cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;
+  }
+  .recall-btn .rc-ic{font-size:19px;}
+  .recall-btn.forgot{background:rgba(190,75,60,.14);color:var(--rose);border:2px solid rgba(190,75,60,.35);}
+  .recall-btn.remembered{background:rgba(62,110,85,.14);color:var(--forest);border:2px solid rgba(62,110,85,.4);}
+  .recall-btn:active{transform:scale(.96);}
+  .flip-nav-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px;}
+
+  .srs-badge{
+    position:absolute;top:14px;left:50%;transform:translateX(-50%);
+    font-size:10px;font-family:'Space Grotesk';font-weight:600;color:var(--sub-text);
+    background:var(--bg-2);padding:3px 10px;border-radius:20px;opacity:.9;top:auto;bottom:44px;left:50%;
+  }
+
+  .box-list{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+  .box-row{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:12px;padding:10px 14px;box-shadow:var(--shadow);}
+  .box-row .bx-label{width:76px;font-family:'Cairo';font-weight:700;font-size:12px;flex-shrink:0;}
+  .box-row .bx-bar-wrap{flex:1;height:8px;border-radius:6px;background:rgba(120,120,120,.15);overflow:hidden;}
+  .box-row .bx-bar{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold),var(--gold-2));}
+  .box-row .bx-count{width:34px;text-align:left;font-family:'Space Grotesk';font-weight:700;font-size:12.5px;color:var(--sub-text);}
+
+  .review-start-btn{
+    width:100%;background:linear-gradient(135deg,var(--gold-2),var(--gold));border:none;color:#241804;
+    font-family:'Cairo';font-weight:800;font-size:15px;padding:15px;border-radius:14px;cursor:pointer;margin-bottom:18px;
+  }
+  .review-start-btn:disabled{background:var(--bg-2);color:var(--sub-text);}
+
+  .empty-state{text-align:center;padding:50px 20px;color:var(--sub-text);}
+  .empty-state .em{font-size:40px;margin-bottom:10px;}
+  .empty-state p{font-size:13px;line-height:1.7;}
+
+  .back-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .back-row h2{font-family:'Cairo';font-weight:800;font-size:17px;margin:0;}
+
+  ::selection{background:rgba(201,151,44,.35);}
+  #toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#F6EFDD;padding:10px 20px;border-radius:30px;font-family:'Cairo';font-size:13px;font-weight:700;opacity:0;transition:all .3s ease;z-index:100;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.3);}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  /* ===== v2 additions: search / levels / rules / mastery / emoji / chips ===== */
+  .search-wrap{margin:6px 0 14px;}
+  .search-input{width:100%;padding:13px 16px;border-radius:14px;border:1px solid rgba(120,120,120,.2);background:var(--surface);color:var(--ink-text);font-family:'Cairo';font-size:14px;box-shadow:var(--shadow);outline:none;}
+  .search-result-item{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:12px;padding:10px 14px;margin-bottom:8px;box-shadow:var(--shadow);cursor:pointer;}
+  .search-result-item:active{transform:scale(.98);}
+  .sr-emoji{font-size:22px;flex-shrink:0;}
+  .sr-text{flex:1;min-width:0;}
+  .sr-cat{font-size:10px;color:var(--sub-text);font-family:'Cairo';max-width:90px;text-align:left;flex-shrink:0;}
+  .level-header{font-family:'Cairo';font-weight:800;font-size:13px;color:var(--gold);margin:22px 2px 8px;padding-bottom:6px;border-bottom:2px solid rgba(201,151,44,.25);}
+  .deck-tools{display:flex;gap:8px;margin-bottom:10px;}
+  .tool-btn{flex:1;background:var(--surface);border:1px solid rgba(120,120,120,.15);border-radius:10px;padding:9px 4px;font-family:'Cairo';font-weight:700;font-size:11.5px;cursor:pointer;color:var(--ink-text);box-shadow:var(--shadow);}
+  .tool-btn:active{transform:scale(.96);}
+  .rule-box{background:rgba(201,151,44,.1);border:1px solid rgba(201,151,44,.3);border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.8;margin-bottom:14px;}
+  .mastery-bar{margin-bottom:14px;}
+  .mastery-track{display:flex;height:8px;border-radius:6px;overflow:hidden;background:rgba(120,120,120,.15);}
+  .mastery-track span{display:block;height:100%;}
+  .mastery-legend{font-size:10.5px;color:var(--sub-text);margin-top:5px;text-align:center;font-family:'Cairo';}
+  .card-center{margin:auto 0;width:100%;}
+  .card-emoji{text-align:center;font-size:46px;line-height:1;margin-bottom:4px;}
+  .related-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:10px;}
+  .chip{background:var(--bg-2);border:none;border-radius:20px;padding:5px 12px;font-size:11px;font-family:'Cairo';font-weight:700;color:var(--ink-text);cursor:pointer;}
+  .chip:active{transform:scale(.95);}
+  .qemoji{font-size:34px;margin-bottom:4px;}
+
+  .maincard-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px;}
+  .maincard{background:var(--surface);border-radius:18px;padding:16px 14px;box-shadow:var(--shadow);cursor:pointer;
+    border-inline-start:5px solid var(--gold);text-align:center;transition:transform .15s ease;position:relative;}
+  .maincard:active{transform:scale(.97);}
+  .maincard .mc-emoji{font-size:34px;margin-bottom:6px;}
+  .maincard h3{margin:0 0 3px;font-family:'Cairo';font-weight:800;font-size:14px;line-height:1.35;}
+  .maincard p{margin:0;font-size:10.5px;color:var(--sub-text);font-family:'Cairo';}
+  .maincard .mc-count{margin-top:8px;font-family:'Space Grotesk';font-weight:700;font-size:11px;color:var(--gold);
+    background:rgba(201,151,44,.12);border-radius:20px;padding:3px 10px;display:inline-block;}
+  .maincard.grammar{border-inline-start-color:var(--forest);}
+  .maincard.grammar .mc-count{color:var(--forest);background:rgba(62,110,85,.12);}
+
+  .lesson-tab{position:relative;background:var(--surface);border-radius:14px;padding:14px 16px;display:flex;
+    align-items:center;gap:12px;box-shadow:var(--shadow);cursor:pointer;border-inline-start:5px solid var(--forest);
+    margin-bottom:10px;transition:transform .15s ease;}
+  .lesson-tab:active{transform:scale(.98);}
+  .lesson-num{font-family:'Space Grotesk';font-weight:700;font-size:13px;color:var(--forest);
+    background:rgba(62,110,85,.12);border-radius:8px;padding:4px 8px;min-width:30px;text-align:center;}
+  .lesson-emoji{font-size:22px;}
+  .lesson-info{flex:1;min-width:0;}
+  .lesson-info h3{margin:0 0 2px;font-family:'Cairo';font-size:14.5px;font-weight:700;}
+  .lesson-info p{margin:0;font-size:11px;color:var(--sub-text);font-family:'Cairo';}
+  .lesson-score{font-size:11px;font-family:'Space Grotesk';font-weight:700;color:var(--gold);flex-shrink:0;}
+
+  .lesson-explain{background:rgba(62,110,85,.08);border:1px solid rgba(62,110,85,.25);border-radius:14px;
+    padding:16px;font-size:13.5px;line-height:2;margin-bottom:16px;}
+  .lesson-explain b{color:var(--forest);}
+  .example-card{background:var(--surface);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);margin-bottom:10px;}
+  .example-top{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  .example-en{font-family:'Space Grotesk';font-size:15px;font-weight:600;flex:1;line-height:1.5;}
+  .example-ar{font-size:12.5px;color:var(--sub-text);margin-top:6px;line-height:1.7;}
+  .speak-btn-sm{width:32px;height:32px;border-radius:50%;background:var(--bg-2);border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;color:var(--ink-text);}
+  .lesson-start-btn{width:100%;background:linear-gradient(135deg,var(--forest),#2e5540);border:none;color:#fff;
+    font-family:'Cairo';font-weight:800;font-size:15px;padding:15px;border-radius:14px;cursor:pointer;margin:16px 0 4px;}
+  .qwrap-lesson{background:var(--surface);border-radius:18px;padding:22px 18px;text-align:right;box-shadow:var(--shadow);margin-bottom:18px;}
+  .qwrap-lesson .ql-en{font-family:'Space Grotesk';font-size:16px;line-height:1.7;font-weight:600;}
+  .exp-box{background:rgba(201,151,44,.1);border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.7;margin-top:10px;color:var(--sub-text);}
+
+</style>
+</head>
+<body data-theme="day">
+<div id="app">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark en">ع</div>
+      <div>
+        <h1>عبقري اللغة</h1>
+        <span id="headerSub">المحاضرة 3: كلمات + قواعد الجمل الشرطية (If)</span>
+      </div>
+    </div>
+    <button class="icon-btn" id="themeBtn" title="الوضع الليلي/النهاري">🌙</button>
+  </div>
+
+  <!-- HOME -->
+  <div class="screen active" id="screen-home">
+    <div class="review-banner" id="homeReviewBanner" onclick="switchTab('review')">
+      <div class="rb-num" id="homeDueNum">0</div>
+      <div class="rb-text">
+        <h4 id="homeDueTitle">كلمة مستحقة للمراجعة اليوم</h4>
+        <p id="homeDueSub">نظام التكرار المتباعد بيفكّرك بالكلمة في وقتها المثالي</p>
+      </div>
+    </div>
+    <div class="stats-strip">
+      <div class="stat-card"><b id="statTotal">0</b><small>إجمالي الكلمات</small></div>
+      <div class="stat-card"><b id="statMemo">0</b><small>محفوظة</small></div>
+      <div class="stat-card"><b id="statFav">0</b><small>مفضّلة</small></div>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 دوّر على كلمة (عربي أو إنجليزي)..." oninput="onSearchInput(this.value)">
+    </div>
+    <div id="searchResults" style="display:none;"></div>
+    <div id="catListSection">
+      <div class="section-label">اختر أحد الكروت الأربعة</div>
+      <div class="maincard-grid" id="mainCardGrid"></div>
+    </div>
+  </div>
+
+  <!-- CARD HOME (categories/lessons inside a main card) -->
+  <div class="screen" id="screen-cardhome">
+    <div class="back-row"><button class="icon-btn" onclick="goHome()">→</button><h2 id="cardHomeTitle"></h2></div>
+    <p id="cardHomeDesc" style="font-size:12px;color:var(--sub-text);margin:-8px 0 16px;line-height:1.7;"></p>
+    <div class="cat-list" id="cardHomeList"></div>
+  </div>
+
+  <!-- GRAMMAR LESSON -->
+  <div class="screen" id="screen-lesson">
+    <div class="back-row"><button class="icon-btn" onclick="backFromLesson()">→</button><h2 id="lessonTitle"></h2></div>
+    <div class="lesson-explain" id="lessonExplain"></div>
+    <div class="section-label">أمثلة</div>
+    <div id="lessonExamples"></div>
+    <button class="lesson-start-btn" onclick="startLessonQuiz()">✏️ ابدأ التدريب على الدرس</button>
+  </div>
+
+  <!-- DECK -->
+  <div class="screen" id="screen-deck">
+    <div class="back-row"><button class="icon-btn" onclick="backFromDeck()">→</button><h2 id="deckTitle"></h2></div>
+    <div class="deck-tools">
+      <button class="tool-btn" onclick="toggleRuleBox()">📘 القاعدة</button>
+      <button class="tool-btn" onclick="exportLesson()">⬇️ تصدير</button>
+      <button class="tool-btn" onclick="copyLessonLink()">🔗 مشاركة</button>
+    </div>
+    <div class="rule-box" id="ruleBox" style="display:none;"></div>
+    <div class="mastery-bar" id="masteryBar"></div>
+    <div class="deck-header"><div class="deck-count" id="deckCount"></div><div class="deck-count" id="deckMemoCount"></div></div>
+    <div class="progress-bar"><i id="deckProgressBar" style="width:0%"></i></div>
+
+    <div class="card-stage">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="face front">
+          <div class="face-top">
+            <button class="fav-btn" id="favBtnFront" onclick="event.stopPropagation();toggleFav()">☆</button>
+            <button class="speak-btn" onclick="event.stopPropagation();speak('en')">🔊</button>
+          </div>
+          <div class="card-center">
+            <div class="card-emoji" id="cardEmoji"></div>
+            <div class="card-word en" id="cardWord"></div>
+            <div class="card-phon" id="cardPhon"></div>
+            <div class="card-mean" id="cardMean"></div>
+            <div class="related-chips" id="relatedChips" style="display:none;"></div>
+          </div>
+          <div class="card-tag" id="cardTagFront"></div>
+          <div class="srs-badge" id="srsBadgeFront"></div>
+          <div class="card-hint">اضغط لقلب البطاقة ↺</div>
+        </div>
+        <div class="face back">
+          <div class="face-top">
+            <button class="fav-btn" id="favBtnBack" onclick="event.stopPropagation();toggleFav()">☆</button>
+            <button class="speak-btn" onclick="event.stopPropagation();speak('sen')">🔊</button>
+          </div>
+          <div class="sentence-wrap">
+            <div class="sentence-en en" id="sentEn"></div>
+            <div class="sentence-ar" id="sentAr"></div>
+          </div>
+          <div class="card-word en" id="cardWordBack" style="font-size:16px;margin-top:0;"></div>
+          <div class="card-mean" id="cardMeanBack" style="font-size:13px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recall-row" id="recallRow" style="display:none;">
+      <button class="recall-btn forgot" onclick="assessCard(false)"><span class="rc-ic">🔁</span>لسه محتاج مراجعة</button>
+      <button class="recall-btn remembered" onclick="assessCard(true)"><span class="rc-ic">✅</span>اتذكرتها</button>
+    </div>
+    <div class="flip-nav-row">
+      <button class="ctrl-btn" onclick="prevCard()">›</button>
+      <span class="deck-count" id="srsStatus" style="min-width:120px;text-align:center;"></span>
+      <button class="ctrl-btn" onclick="nextCard()">‹</button>
+    </div>
+  </div>
+
+  <!-- REVIEW (Spaced Repetition) -->
+  <div class="screen" id="screen-review">
+    <div class="back-row"><h2>🔁 المراجعة المتباعدة</h2></div>
+    <p style="font-size:12.5px;color:var(--sub-text);margin:-6px 0 16px;line-height:1.7;">
+      كل كلمة بترجعلك في وقتها الصح: يوم، ٣ أيام، أسبوع، أسبوعين، شهر، ٣ شهور. كل ما تفتكر الكلمة صح، بتبعد المراجعة القادمة أكتر.
+    </p>
+    <button class="review-start-btn" id="reviewStartBtn" onclick="startReviewSession()">ابدأ مراجعة اليوم (<span id="reviewStartCount">0</span> كلمة)</button>
+    <div class="section-label">توزيع الكلمات على مراحل الحفظ</div>
+    <div class="box-list" id="boxList"></div>
+    <div class="section-label">جدول المراجعات القادمة</div>
+    <div id="upcomingList"></div>
+  </div>
+
+  <!-- FAVORITES -->
+  <div class="screen" id="screen-fav">
+    <div class="back-row"><h2>⭐ الكلمات المفضّلة</h2></div>
+    <div id="favList"></div>
+  </div>
+
+  <!-- EXAMS -->
+  <div class="screen" id="screen-exam">
+    <div class="back-row"><h2>📝 الاختبارات</h2></div>
+
+    <div class="exam-card">
+      <h3>📅 الاختبار اليومي</h3>
+      <p id="dailyDesc">اختبار سريع وشامل على الكلمات التي حفظتها في آخر فترة مذاكرة فقط.</p>
+      <button class="exam-btn" id="dailyBtn" onclick="startDailyExam()">ابدأ الاختبار اليومي</button>
+    </div>
+
+    <div class="section-label">اختبارات شاملة (على كل الكلمات المحفوظة)</div>
+    <div class="exam-grid" id="examGrid"></div>
+
+    <div class="section-label">آخر النتائج</div>
+    <div id="examHistory"></div>
+  </div>
+
+  <!-- QUIZ RUNNER -->
+  <div class="screen" id="screen-quiz">
+    <div class="quiz-progress">
+      <button class="icon-btn" onclick="quitQuiz()">✕</button>
+      <span>سؤال <b id="qIndex">1</b> / <span id="qTotal">10</span></span>
+    </div>
+    <div class="quiz-q">
+      <button class="speak-btn" style="margin:0 auto 8px;" onclick="speakQuizWord()">🔊</button>
+      <div class="qemoji" id="qEmoji"></div>
+      <div class="qword en" id="qWord"></div>
+      <div class="qphon" id="qPhon"></div>
+    </div>
+    <div class="opt-list" id="optList"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div class="result-wrap">
+      <div class="result-ring">
+        <svg viewBox="0 0 150 150">
+          <circle class="bg" cx="75" cy="75" r="62"></circle>
+          <circle class="fg" id="resultRing" cx="75" cy="75" r="62"></circle>
+        </svg>
+        <div class="result-ring-txt"><b id="resultPct">0%</b><span id="resultFrac">0/0</span></div>
+      </div>
+      <div class="result-msg" id="resultMsg"></div>
+      <div class="result-sub" id="resultSub"></div>
+      <div id="reviewList"></div>
+      <button class="exam-btn" style="margin-top:10px;" onclick="goExam()">رجوع للاختبارات</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="screen" id="screen-settings">
+    <div class="back-row"><h2>⚙️ الإعدادات</h2></div>
+    <div class="settings-row">
+      <div><h4>الوضع الليلي</h4><p>مريح للعين أثناء المذاكرة ليلاً</p></div>
+      <button class="toggle" id="nightToggle" onclick="toggleTheme()"><i></i></button>
+    </div>
+    <div class="settings-row">
+      <div style="width:100%;"><h4>صوت النطق</h4><p style="margin-bottom:8px;">اختر الصوت الإنجليزي المتاح على جهازك</p>
+        <select class="voice-select" id="voiceSelect"></select>
+      </div>
+    </div>
+    <div class="settings-row" style="cursor:pointer;" onclick="resetProgress()">
+      <div><h4 style="color:var(--rose);">إعادة ضبط التقدم</h4><p>حذف كل الكلمات المحفوظة والمفضلة (لا يمكن التراجع)</p></div>
+      <span style="font-size:18px;">🗑️</span>
+    </div>
+    <div class="section-label">عن التطبيق</div>
+    <div class="exam-card">
+      <p style="margin:0;">عبقري اللغة (المحاضرة 3) — تطبيق مستخرج من سبورة المستر أحمد طارق (وحدة الجمل الشرطية If Conditionals). يحتوي على 128 كلمة مقسّمة في 11 مجموعة (كرت 1 وكرت 2) وكل كلمة معاها إيموجي يساعد على الحفظ، بالإضافة إلى 20 درس قواعد (كرت 3 وكرت 4) بشرح مبسّط بالعربي، أمثلة مترجمة بزر استماع، وتدريبات بعد كل درس. مع نظام تكرار متباعد (Spaced Repetition)، اختبارات، مفضّلة، وبحث فوري.</p>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="nav-item active" data-tab="home" onclick="switchTab('home')"><span class="ic">🏠</span>الرئيسية</button>
+    <button class="nav-item" data-tab="review" onclick="switchTab('review')"><span class="ic">🔁</span>المراجعة</button>
+    <button class="nav-item" data-tab="fav" onclick="switchTab('fav')"><span class="ic">⭐</span>المفضلة</button>
+    <button class="nav-item" data-tab="exam" onclick="switchTab('exam')"><span class="ic">📝</span>الاختبارات</button>
+    <button class="nav-item" data-tab="settings" onclick="switchTab('settings')"><span class="ic">⚙️</span>الإعدادات</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+if(!window.storage||!window.storage.get){ window.storage={
+  get:async k=>{ try{ const v=localStorage.getItem('ag_lec3_'+k); return v===null?null:{key:k,value:v}; }catch(e){ return null; } },
+  set:async (k,v)=>{ try{ localStorage.setItem('ag_lec3_'+k,v); return {key:k,value:v}; }catch(e){ return null; } },
+  delete:async k=>{ try{ localStorage.removeItem('ag_lec3_'+k); return {key:k,deleted:true}; }catch(e){ return null; } },
+  list:async p=>{ try{ return {keys:Object.keys(localStorage).filter(x=>x.startsWith('ag_lec3_'+(p||''))).map(x=>x.slice(8))}; }catch(e){ return {keys:[]}; } }
+}; }
+</script>
+<script>
+const CATEGORIES = [{"id": "c1g1", "title": "أفعال (1): دراسة وشراء وتشغيل", "sub": "Verbs: Study, Buy & Operate", "words": [{"en": "study", "ar": "يذاكر / يدرس", "phon": "ستادي", "sen": "If you study hard, you will get good marks.", "senm": "إذا ذاكرت بجد، ستحصل على درجات جيدة.", "related": [], "emoji": "📚", "id": "c1g1_w0"}, {"en": "buy", "ar": "يشتري", "phon": "باي", "sen": "If I had enough money, I would buy a new laptop.", "senm": "لو كان معي مال كافٍ، لاشتريت لابتوب جديدًا.", "related": [], "emoji": "🛒", "id": "c1g1_w1"}, {"en": "press", "ar": "يضغط", "phon": "بريس", "sen": "If you press this button, the machine starts.", "senm": "إذا ضغطت هذا الزر، تبدأ الآلة.", "related": [], "emoji": "👇", "id": "c1g1_w2"}, {"en": "start", "ar": "يبدأ / يشتغل", "phon": "ستارت", "sen": "If you press this button, the machine starts.", "senm": "إذا ضغطت هذا الزر، تبدأ الآلة.", "related": [], "emoji": "▶️", "id": "c1g1_w3"}, {"en": "fix", "ar": "يُصلح", "phon": "فيكس", "sen": "If you have enough money, the car will be fixed.", "senm": "إذا كان معك مال كافٍ، فستُصلَّح السيارة.", "related": [], "emoji": "🔧", "id": "c1g1_w4"}, {"en": "pass", "ar": "ينجح في / يجتاز", "phon": "باس", "sen": "You won't pass the exam unless you study hard.", "senm": "لن تنجح في الامتحان ما لم تذاكر بجد.", "related": [], "emoji": "✅", "id": "c1g1_w5"}, {"en": "call", "ar": "يتصل بـ", "phon": "كول", "sen": "If you call Ali, he may answer.", "senm": "إذا اتصلت بعلي، فقد يرد.", "related": [], "emoji": "📞", "id": "c1g1_w6"}, {"en": "answer", "ar": "يرد / يجيب", "phon": "آنسر", "sen": "If you call Ali, he may answer.", "senm": "إذا اتصلت بعلي، فقد يرد.", "related": [], "emoji": "💬", "id": "c1g1_w7"}, {"en": "meet", "ar": "يقابل", "phon": "ميت", "sen": "If you come early, I will meet you.", "senm": "إذا جئت مبكرًا، فسأقابلك.", "related": [], "emoji": "🤝", "id": "c1g1_w8"}, {"en": "stay", "ar": "يبقى", "phon": "ستاي", "sen": "If it rains tomorrow, we will stay at home.", "senm": "إذا أمطرت غدًا، فسنبقى في البيت.", "related": [], "emoji": "🛋️", "id": "c1g1_w9"}], "rule": "أفعال ظهرت في جمل الشرط على السبورة.", "cardId": 1, "level": 1}, {"id": "c1g2", "title": "أفعال (2): طبيعة وصحة وحياة", "sub": "Verbs: Nature & Daily Life", "words": [{"en": "heat", "ar": "يسخّن", "phon": "هيت", "sen": "If water is heated, it boils.", "senm": "إذا سُخِّن الماء، فإنه يغلي.", "related": [], "emoji": "🔥", "id": "c1g2_w0"}, {"en": "boil", "ar": "يغلي", "phon": "بويل", "sen": "If water is heated, it boils.", "senm": "إذا سُخِّن الماء، فإنه يغلي.", "related": [], "emoji": "♨️", "id": "c1g2_w1"}, {"en": "water (v.)", "ar": "يسقي / يروي", "phon": "ووتر", "sen": "If you don't water plants, they die.", "senm": "إذا لم تسقِ النباتات، فإنها تموت.", "related": [], "emoji": "🪴", "id": "c1g2_w2"}, {"en": "die", "ar": "يموت", "phon": "داي", "sen": "If you don't water plants, they die.", "senm": "إذا لم تسقِ النباتات، فإنها تموت.", "related": [], "emoji": "🥀", "id": "c1g2_w3"}, {"en": "rain", "ar": "يُمطر", "phon": "رين", "sen": "I will stay at home in case it rains.", "senm": "سأبقى في البيت تحسبًا لأن تمطر.", "related": [], "emoji": "🌧️", "id": "c1g2_w4"}, {"en": "happen", "ar": "يحدث", "phon": "هابن", "sen": "What will happen if he works hard?", "senm": "ماذا سيحدث إذا عمل بجد؟", "related": [], "emoji": "💫", "id": "c1g2_w5"}, {"en": "save", "ar": "يوفّر / يدّخر", "phon": "سيف", "sen": "Would you buy a new car if you saved enough money?", "senm": "هل ستشتري سيارة جديدة لو ادخرت مالًا كافيًا؟", "related": [], "emoji": "💰", "id": "c1g2_w6"}, {"en": "lose weight", "ar": "يُنقص وزنه", "phon": "لوز ويت", "sen": "Don't eat too much if you want to lose weight.", "senm": "لا تأكل كثيرًا إذا كنت تريد إنقاص وزنك.", "related": [], "emoji": "⚖️", "id": "c1g2_w7"}, {"en": "eat", "ar": "يأكل", "phon": "إيت", "sen": "Don't eat too much if you want to lose weight.", "senm": "لا تأكل كثيرًا إذا كنت تريد إنقاص وزنك.", "related": [], "emoji": "🍽️", "id": "c1g2_w8"}, {"en": "rest", "ar": "يستريح", "phon": "ريست", "sen": "Let's take a rest if you are tired.", "senm": "هيا نستريح إذا كنت متعبًا.", "related": [], "emoji": "😌", "id": "c1g2_w9"}, {"en": "drink", "ar": "يشرب / مشروب", "phon": "درينك", "sen": "Let's have a drink if you are tired.", "senm": "هيا نتناول مشروبًا إذا كنت متعبًا.", "related": [], "emoji": "🥤", "id": "c1g2_w10"}, {"en": "revise", "ar": "يراجع", "phon": "ريڤايز", "sen": "She won't go out if she is revising for her exams.", "senm": "لن تخرج إذا كانت تراجع لامتحاناتها.", "related": [], "emoji": "📖", "id": "c1g2_w11"}, {"en": "attend", "ar": "يحضر", "phon": "أتند", "sen": "If you would like to attend the party, I will go with you.", "senm": "إذا أردت حضور الحفلة، فسأذهب معك.", "related": [], "emoji": "🎟️", "id": "c1g2_w12"}], "rule": "أفعال عن الطبيعة والصحة والحياة اليومية.", "cardId": 1, "level": 1}, {"id": "c1g3", "title": "أفعال (3): ماضٍ ومستقبل", "sub": "Verbs: Past Results & Plans", "words": [{"en": "succeed", "ar": "ينجح", "phon": "ساكسيد", "sen": "If he had studied hard, he would have succeeded.", "senm": "لو كان قد ذاكر بجد، لنجح.", "related": [], "emoji": "🏆", "id": "c1g3_w0"}, {"en": "borrow", "ar": "يستلف / يقترض", "phon": "بورو", "sen": "If Ali spent all his money, he would have to borrow.", "senm": "لو أنفق علي كل ماله، لاضطر إلى الاستلاف.", "related": [], "emoji": "🤲", "id": "c1g3_w1"}, {"en": "wake up", "ar": "يستيقظ", "phon": "ويك أب", "sen": "Would Salma have woken up early if she had slept early?", "senm": "هل كانت سلمى ستستيقظ مبكرًا لو نامت مبكرًا؟", "related": [], "emoji": "⏰", "id": "c1g3_w2"}, {"en": "sleep", "ar": "ينام", "phon": "سليب", "sen": "If she had slept early, she would have woken up early.", "senm": "لو نامت مبكرًا، لاستيقظت مبكرًا.", "related": [], "emoji": "😴", "id": "c1g3_w3"}, {"en": "wait", "ar": "ينتظر", "phon": "ويت", "sen": "If I had to wait, I would wait.", "senm": "لو اضطررت إلى الانتظار، لانتظرت.", "related": [], "emoji": "⏳", "id": "c1g3_w4"}, {"en": "give", "ar": "يعطي", "phon": "جيڤ", "sen": "If I had a camera, I would give it to you.", "senm": "لو كان معي كاميرا، لأعطيتك إياها.", "related": [], "emoji": "🎁", "id": "c1g3_w5"}, {"en": "leave", "ar": "يغادر", "phon": "ليڤ", "sen": "Unless he had left home earlier, he wouldn't have caught the bus.", "senm": "لولا أنه غادر البيت مبكرًا، لما لحق بالأتوبيس.", "related": [], "emoji": "🚪", "id": "c1g3_w6"}, {"en": "spend", "ar": "ينفق / يقضي", "phon": "سبند", "sen": "If Ali spent all his money, he would have to borrow.", "senm": "لو أنفق علي كل ماله، لاضطر إلى الاستلاف.", "related": [], "emoji": "💸", "id": "c1g3_w7"}, {"en": "lose", "ar": "يفقد / يضيّع", "phon": "لوز", "sen": "If I lost my keys, I would have to call a locksmith.", "senm": "لو ضيّعت مفاتيحي، لاضطررت إلى استدعاء حدّاد أقفال.", "related": [], "emoji": "🔑", "id": "c1g3_w8"}, {"en": "see", "ar": "يرى / يزور", "phon": "سي", "sen": "If I were you, I would see a doctor.", "senm": "لو كنت مكانك، لذهبت إلى الطبيب.", "related": [], "emoji": "👁️", "id": "c1g3_w9"}], "rule": "أفعال بتظهر كتير في الحالتين الثانية والثالثة.", "cardId": 1, "level": 1}, {"id": "c1g4", "title": "أسماء (1): أشياء", "sub": "Nouns: Things", "words": [{"en": "laptop", "ar": "لابتوب", "phon": "لابتوب", "sen": "If I had enough money, I would buy a new laptop.", "senm": "لو كان معي مال كافٍ، لاشتريت لابتوب جديدًا.", "related": [], "emoji": "💻", "id": "c1g4_w0"}, {"en": "camera", "ar": "كاميرا", "phon": "كاميرا", "sen": "If I had a camera, I would give it to you.", "senm": "لو كان معي كاميرا، لأعطيتك إياها.", "related": [], "emoji": "📷", "id": "c1g4_w1"}, {"en": "car", "ar": "سيارة", "phon": "كار", "sen": "An expensive car would be bought if he had enough money.", "senm": "لو كان معه مال كافٍ، لاشتُريت سيارة غالية.", "related": [], "emoji": "🚗", "id": "c1g4_w2"}, {"en": "button", "ar": "زر", "phon": "باتن", "sen": "If you press this button, the machine starts.", "senm": "إذا ضغطت هذا الزر، تبدأ الآلة.", "related": [], "emoji": "🔘", "id": "c1g4_w3"}, {"en": "machine", "ar": "آلة", "phon": "ماشين", "sen": "If you press this button, the machine starts.", "senm": "إذا ضغطت هذا الزر، تبدأ الآلة.", "related": [], "emoji": "⚙️", "id": "c1g4_w4"}, {"en": "keys", "ar": "مفاتيح", "phon": "كيز", "sen": "If I lost my keys, I would have to call a locksmith.", "senm": "لو ضيّعت مفاتيحي، لاضطررت إلى استدعاء حدّاد أقفال.", "related": [], "emoji": "🗝️", "id": "c1g4_w5"}, {"en": "locksmith", "ar": "حدّاد أقفال", "phon": "لوكسميث", "sen": "I would call a locksmith.", "senm": "كنت سأتصل بحدّاد أقفال.", "related": [], "emoji": "🔐", "id": "c1g4_w6"}, {"en": "present (n.)", "ar": "هدية", "phon": "بريزنت", "sen": "If I had enough money, I would buy you a present.", "senm": "لو كان معي مال كافٍ، لاشتريت لك هدية.", "related": [], "emoji": "🎀", "id": "c1g4_w7"}, {"en": "report", "ar": "تقرير", "phon": "ريبورت", "sen": "The doctor's report would be read if I had more time.", "senm": "لو كان لدي وقت أكثر، لقُرئ تقرير الطبيب.", "related": [], "emoji": "📄", "id": "c1g4_w8"}, {"en": "plants", "ar": "نباتات", "phon": "بلانتس", "sen": "If you don't water plants, they die.", "senm": "إذا لم تسقِ النباتات، فإنها تموت.", "related": [], "emoji": "🌱", "id": "c1g4_w9"}, {"en": "bus", "ar": "أتوبيس", "phon": "باس", "sen": "He wouldn't have caught the bus.", "senm": "لما لحق بالأتوبيس.", "related": [], "emoji": "🚌", "id": "c1g4_w10"}, {"en": "party", "ar": "حفلة", "phon": "بارتي", "sen": "If I didn't have a cold, I would go to the party.", "senm": "لو لم أكن مصابًا بنزلة برد، لذهبت إلى الحفلة.", "related": [], "emoji": "🎉", "id": "c1g4_w11"}], "rule": "أسماء أشياء ظهرت في جمل الشرط.", "cardId": 1, "level": 1}, {"id": "c1g5", "title": "أسماء (2): ناس ومعاني", "sub": "Nouns: People & Ideas", "words": [{"en": "marks", "ar": "درجات", "phon": "ماركس", "sen": "If you study hard, you will get good marks.", "senm": "إذا ذاكرت بجد، ستحصل على درجات جيدة.", "related": [], "emoji": "💯", "id": "c1g5_w0"}, {"en": "money", "ar": "مال / فلوس", "phon": "ماني", "sen": "If I had enough money, I would buy a new laptop.", "senm": "لو كان معي مال كافٍ، لاشتريت لابتوب جديدًا.", "related": [], "emoji": "💵", "id": "c1g5_w1"}, {"en": "exam", "ar": "امتحان", "phon": "إجزام", "sen": "You won't pass the exam unless you study hard.", "senm": "لن تنجح في الامتحان ما لم تذاكر بجد.", "related": [], "emoji": "📝", "id": "c1g5_w2"}, {"en": "test", "ar": "اختبار", "phon": "تست", "sen": "You will pass the final test provided that you study hard.", "senm": "ستنجح في الاختبار النهائي بشرط أن تذاكر بجد.", "related": [], "emoji": "🧪", "id": "c1g5_w3"}, {"en": "doctor", "ar": "طبيب", "phon": "دكتر", "sen": "If I were you, I would see a doctor.", "senm": "لو كنت مكانك، لذهبت إلى الطبيب.", "related": [], "emoji": "🩺", "id": "c1g5_w4"}, {"en": "mother", "ar": "أم", "phon": "مذر", "sen": "If she were a mother, she would be very kind.", "senm": "لو كانت أمًّا، لكانت لطيفة جدًا.", "related": [], "emoji": "👩‍👧", "id": "c1g5_w5"}, {"en": "friends", "ar": "أصدقاء", "phon": "فرندز", "sen": "If one of your friends has a problem, help him.", "senm": "إذا كان لدى أحد أصدقائك مشكلة، فساعده.", "related": [], "emoji": "👫", "id": "c1g5_w6"}, {"en": "problem", "ar": "مشكلة", "phon": "بروبلم", "sen": "If one of your friends has a problem, help him.", "senm": "إذا كان لدى أحد أصدقائك مشكلة، فساعده.", "related": [], "emoji": "⚠️", "id": "c1g5_w7"}, {"en": "cold (n.)", "ar": "نزلة برد", "phon": "كولد", "sen": "If I didn't have a cold, I would go to the party.", "senm": "لو لم أكن مصابًا بنزلة برد، لذهبت إلى الحفلة.", "related": [], "emoji": "🤧", "id": "c1g5_w8"}, {"en": "position", "ar": "موقف / مكان", "phon": "بوزيشن", "sen": "If I were in your position, I would see a doctor.", "senm": "لو كنت في موقفك، لذهبت إلى الطبيب.", "related": [], "emoji": "📍", "id": "c1g5_w9"}, {"en": "shoes", "ar": "حذاء", "phon": "شوز", "sen": "If I were in your shoes, I wouldn't do that.", "senm": "لو كنت مكانك، ما فعلت ذلك.", "related": [], "emoji": "👟", "id": "c1g5_w10"}, {"en": "support", "ar": "دعم", "phon": "سابورت", "sen": "But for your support, I wouldn't succeed.", "senm": "لولا دعمك، لما نجحت.", "related": [], "emoji": "🙌", "id": "c1g5_w11"}, {"en": "time", "ar": "وقت", "phon": "تايم", "sen": "The report would be read if I had more time.", "senm": "لو كان لدي وقت أكثر، لقُرئ التقرير.", "related": [], "emoji": "⏱️", "id": "c1g5_w12"}], "rule": "أسماء الناس والمعاني في جمل الشرط.", "cardId": 1, "level": 1}, {"id": "c1g6", "title": "صفات وظروف", "sub": "Adjectives & Adverbs", "words": [{"en": "enough", "ar": "كافٍ", "phon": "إيناف", "sen": "If I had enough money, I would buy a laptop.", "senm": "لو كان معي مال كافٍ، لاشتريت لابتوب.", "related": [], "emoji": "👌", "id": "c1g6_w0"}, {"en": "hard", "ar": "بجد / بشدة", "phon": "هارد", "sen": "If you study hard, you will get good marks.", "senm": "إذا ذاكرت بجد، ستحصل على درجات جيدة.", "related": [], "emoji": "💪", "id": "c1g6_w1"}, {"en": "expensive", "ar": "غالٍ", "phon": "إكسبنسيف", "sen": "He would buy an expensive car.", "senm": "كان سيشتري سيارة غالية.", "related": [], "emoji": "💎", "id": "c1g6_w2"}, {"en": "early", "ar": "مبكرًا", "phon": "إيرلي", "sen": "If you come early, I will meet you.", "senm": "إذا جئت مبكرًا، فسأقابلك.", "related": [], "emoji": "🌅", "id": "c1g6_w3"}, {"en": "tired", "ar": "متعب", "phon": "تايرد", "sen": "Let's have a drink if you are tired.", "senm": "هيا نتناول مشروبًا إذا كنت متعبًا.", "related": [], "emoji": "🥱", "id": "c1g6_w4"}, {"en": "kind", "ar": "لطيف / عطوف", "phon": "كايند", "sen": "If she were a mother, she would be very kind.", "senm": "لو كانت أمًّا، لكانت لطيفة جدًا.", "related": [], "emoji": "🤗", "id": "c1g6_w5"}, {"en": "able", "ar": "قادر", "phon": "إيبل", "sen": "If he has left home, you won't be able to meet him.", "senm": "إذا كان قد غادر البيت، فلن تستطيع مقابلته.", "related": [], "emoji": "🦸", "id": "c1g6_w6"}, {"en": "final", "ar": "نهائي", "phon": "فاينال", "sen": "You will pass the final test.", "senm": "ستنجح في الاختبار النهائي.", "related": [], "emoji": "🏁", "id": "c1g6_w7"}, {"en": "tomorrow", "ar": "غدًا", "phon": "تومورو", "sen": "If it rains tomorrow, we will stay at home.", "senm": "إذا أمطرت غدًا، فسنبقى في البيت.", "related": [], "emoji": "📅", "id": "c1g6_w8"}, {"en": "every day", "ar": "كل يوم", "phon": "إيڤري داي", "sen": "You will pass if you study hard every day.", "senm": "ستنجح إذا ذاكرت بجد كل يوم.", "related": [], "emoji": "🔁", "id": "c1g6_w9"}], "rule": "صفات وظروف وردت في جمل الشرط.", "cardId": 1, "level": 1}, {"id": "c1g7", "title": "أدوات الشرط والربط", "sub": "Conditional Connectors", "words": [{"en": "if", "ar": "لو / إذا", "phon": "إف", "sen": "If you study hard, you will get good marks.", "senm": "إذا ذاكرت بجد، ستحصل على درجات جيدة.", "related": [], "emoji": "🤔", "id": "c1g7_w0"}, {"en": "unless", "ar": "ما لم / إلا إذا", "phon": "أنلس", "sen": "You won't pass the exam unless you study hard.", "senm": "لن تنجح في الامتحان ما لم تذاكر بجد.", "related": [], "emoji": "🙅", "id": "c1g7_w1"}, {"en": "in case", "ar": "تحسبًا لـ", "phon": "إن كيس", "sen": "I will stay at home in case it rains.", "senm": "سأبقى في البيت تحسبًا لأن تمطر.", "related": [], "emoji": "☂️", "id": "c1g7_w2"}, {"en": "in case of", "ar": "في حالة (+ اسم أو V-ing)", "phon": "إن كيس أوف", "sen": "In case of fire, use the stairs.", "senm": "في حالة الحريق، استخدم السلالم.", "related": [], "emoji": "🚨", "id": "c1g7_w3"}, {"en": "as long as", "ar": "طالما / بشرط أن", "phon": "آز لونج آز", "sen": "You will pass as long as you study hard.", "senm": "ستنجح طالما ذاكرت بجد.", "related": [], "emoji": "🔗", "id": "c1g7_w4"}, {"en": "providing that", "ar": "بشرط أن", "phon": "بروڤايدينج ذات", "sen": "You will pass providing that you study hard.", "senm": "ستنجح بشرط أن تذاكر بجد.", "related": [], "emoji": "📜", "id": "c1g7_w5"}, {"en": "provided that", "ar": "بشرط أن", "phon": "بروڤايدد ذات", "sen": "You will pass the final test provided that you study hard every day.", "senm": "ستنجح في الاختبار النهائي بشرط أن تذاكر بجد كل يوم.", "related": [], "emoji": "✍️", "id": "c1g7_w6"}, {"en": "without", "ar": "بدون / لولا", "phon": "ويذاوت", "sen": "Without your support, I wouldn't succeed.", "senm": "بدون دعمك، لما نجحت.", "related": [], "emoji": "🚫", "id": "c1g7_w7"}, {"en": "but for", "ar": "لولا", "phon": "بات فور", "sen": "But for your support, I wouldn't succeed.", "senm": "لولا دعمك، لما نجحت.", "related": [], "emoji": "🙏", "id": "c1g7_w8"}], "rule": "الأدوات اللي بتيجي مكان if أو معاها في الحالات المختلفة.", "cardId": 1, "level": 1}, {"id": "c1g8", "title": "تراكيب الحالات والتعبيرات", "sub": "Conditional Structures", "words": [{"en": "zero conditional", "ar": "الحالة الصفرية", "phon": "زيرو كونديشنال", "sen": "If water is heated, it boils.", "senm": "إذا سُخِّن الماء، فإنه يغلي.", "related": [], "emoji": "0️⃣", "id": "c1g8_w0"}, {"en": "first conditional", "ar": "الحالة الأولى", "phon": "فيرست كونديشنال", "sen": "If it rains tomorrow, we will stay at home.", "senm": "إذا أمطرت غدًا، فسنبقى في البيت.", "related": [], "emoji": "1️⃣", "id": "c1g8_w1"}, {"en": "second conditional", "ar": "الحالة الثانية", "phon": "سيكند كونديشنال", "sen": "If I had enough money, I would buy a new laptop.", "senm": "لو كان معي مال كافٍ، لاشتريت لابتوب.", "related": [], "emoji": "2️⃣", "id": "c1g8_w2"}, {"en": "third conditional", "ar": "الحالة الثالثة", "phon": "ثيرد كونديشنال", "sen": "If he had studied hard, he would have succeeded.", "senm": "لو كان قد ذاكر بجد، لنجح.", "related": [], "emoji": "3️⃣", "id": "c1g8_w3"}, {"en": "would like", "ar": "يرغب في", "phon": "وود لايك", "sen": "If you would like to attend the party, I will go with you.", "senm": "إذا رغبت في حضور الحفلة، فسأذهب معك.", "related": [], "emoji": "😍", "id": "c1g8_w4"}, {"en": "would love", "ar": "يحب جدًا", "phon": "وود لاڤ", "sen": "If you would love to come, I will wait.", "senm": "إذا كنت تحب أن تأتي، فسأنتظر.", "related": [], "emoji": "❤️", "id": "c1g8_w5"}, {"en": "would prefer", "ar": "يفضّل", "phon": "وود بريفر", "sen": "If you would prefer tea, I will make it.", "senm": "إذا كنت تفضّل الشاي، فسأعدّه.", "related": [], "emoji": "👍", "id": "c1g8_w6"}, {"en": "had better", "ar": "من الأفضل أن", "phon": "هاد بيتر", "sen": "If you are tired, you had better rest.", "senm": "إذا كنت متعبًا، فمن الأفضل أن ترتاح.", "related": [], "emoji": "☝️", "id": "c1g8_w7"}, {"en": "would rather", "ar": "يفضّل أن", "phon": "وود راذر", "sen": "If it rains, I would rather stay at home.", "senm": "إذا أمطرت، فأفضّل البقاء في البيت.", "related": [], "emoji": "🤷", "id": "c1g8_w8"}, {"en": "let's", "ar": "هيا بنا", "phon": "ليتس", "sen": "Let's take a rest if you are tired.", "senm": "هيا نستريح إذا كنت متعبًا.", "related": [], "emoji": "👉", "id": "c1g8_w9"}, {"en": "were (with all pronouns)", "ar": "were مع كل الضمائر", "phon": "وير", "sen": "If she were a mother, she would be very kind.", "senm": "لو كانت أمًّا، لكانت لطيفة جدًا.", "related": [], "emoji": "🧑‍🤝‍🧑", "id": "c1g8_w10"}], "rule": "التراكيب اللي ظهرت في السبورة بجانب الحالات الأربع.", "cardId": 1, "level": 1}, {"id": "c2g1", "title": "أفعال شاذة (1)", "sub": "Irregular Verbs: V1 – V2 – V3", "words": [{"en": "buy – bought – bought", "ar": "يشتري", "phon": "باي", "sen": "If I had enough money, I would buy a new laptop.", "senm": "لو كان معي مال كافٍ، لاشتريت لابتوب جديدًا.", "related": [], "emoji": "🛒", "id": "c2g1_w0"}, {"en": "have – had – had", "ar": "يمتلك", "phon": "هاڤ", "sen": "If he had enough money, he would buy a car.", "senm": "لو كان لديه مال كافٍ، لاشترى سيارة.", "related": [], "emoji": "✋", "id": "c2g1_w1"}, {"en": "go – went – gone", "ar": "يذهب", "phon": "جو", "sen": "If I had a cold, I wouldn't go to the party.", "senm": "لو كنت مصابًا بنزلة برد، لما ذهبت إلى الحفلة.", "related": [], "emoji": "🚶", "id": "c2g1_w2"}, {"en": "wake up – woke up – woken up", "ar": "يستيقظ", "phon": "ويك أب", "sen": "If she had slept early, she would have woken up early.", "senm": "لو نامت مبكرًا، لاستيقظت مبكرًا.", "related": [], "emoji": "⏰", "id": "c2g1_w3"}, {"en": "sleep – slept – slept", "ar": "ينام", "phon": "سليب", "sen": "If she had slept early, she would have woken up early.", "senm": "لو نامت مبكرًا، لاستيقظت مبكرًا.", "related": [], "emoji": "😴", "id": "c2g1_w4"}, {"en": "leave – left – left", "ar": "يغادر", "phon": "ليڤ", "sen": "If he had left earlier, he would have caught the bus.", "senm": "لو غادر مبكرًا، لالتحق بالأتوبيس.", "related": [], "emoji": "🚪", "id": "c2g1_w5"}, {"en": "spend – spent – spent", "ar": "ينفق", "phon": "سبند", "sen": "If Ali spent all his money, he would have to borrow.", "senm": "لو أنفق علي كل ماله، لاضطر إلى الاستلاف.", "related": [], "emoji": "💸", "id": "c2g1_w6"}, {"en": "lose – lost – lost", "ar": "يفقد", "phon": "لوز", "sen": "If I lost my keys, I would call a locksmith.", "senm": "لو ضيّعت مفاتيحي، لاتصلت بحدّاد أقفال.", "related": [], "emoji": "🔑", "id": "c2g1_w7"}, {"en": "give – gave – given", "ar": "يعطي", "phon": "جيڤ", "sen": "If I had a camera, I would give it to you.", "senm": "لو كان معي كاميرا، لأعطيتك إياها.", "related": [], "emoji": "🎁", "id": "c2g1_w8"}, {"en": "see – saw – seen", "ar": "يرى", "phon": "سي", "sen": "If I were you, I would see a doctor.", "senm": "لو كنت مكانك، لذهبت إلى الطبيب.", "related": [], "emoji": "👁️", "id": "c2g1_w9"}, {"en": "meet – met – met", "ar": "يقابل", "phon": "ميت", "sen": "If you had come early, I would have met you.", "senm": "لو جئت مبكرًا، لقابلتك.", "related": [], "emoji": "🤝", "id": "c2g1_w10"}, {"en": "read – read – read", "ar": "يقرأ", "phon": "ريد", "sen": "If I had more time, I would read the report.", "senm": "لو كان لدي وقت أكثر، لقرأت التقرير.", "related": [], "emoji": "📖", "id": "c2g1_w11"}], "rule": "V1 – V2 – V3 — أهم حاجة V2 في الثانية وV3 في الثالثة.", "cardId": 2, "level": 2}, {"id": "c2g2", "title": "أفعال شاذة (2)", "sub": "More Irregular Verbs", "words": [{"en": "take – took – taken", "ar": "يأخذ", "phon": "تيك", "sen": "If you had taken a taxi, you would have arrived on time.", "senm": "لو ركبت تاكسي، لوصلت في الموعد.", "related": [], "emoji": "🚕", "id": "c2g2_w0"}, {"en": "get – got – got/gotten", "ar": "يحصل على", "phon": "جيت", "sen": "If you study hard, you will get good marks.", "senm": "إذا ذاكرت بجد، ستحصل على درجات جيدة.", "related": [], "emoji": "🎯", "id": "c2g2_w1"}, {"en": "come – came – come", "ar": "يأتي", "phon": "كام", "sen": "If you come early, I will meet you.", "senm": "إذا جئت مبكرًا، فسأقابلك.", "related": [], "emoji": "🏃", "id": "c2g2_w2"}, {"en": "know – knew – known", "ar": "يعرف", "phon": "نو", "sen": "If I knew the answer, I would tell you.", "senm": "لو كنت أعرف الإجابة، لأخبرتك.", "related": [], "emoji": "🧠", "id": "c2g2_w3"}, {"en": "do – did – done", "ar": "يفعل", "phon": "دو", "sen": "If you had done your homework, you would have passed.", "senm": "لو أنجزت واجبك، لنجحت.", "related": [], "emoji": "☑️", "id": "c2g2_w4"}, {"en": "make – made – made", "ar": "يصنع", "phon": "ميك", "sen": "If I had time, I would make a cake.", "senm": "لو كان لدي وقت، لصنعت كعكة.", "related": [], "emoji": "🛠️", "id": "c2g2_w5"}, {"en": "say – said – said", "ar": "يقول", "phon": "سي", "sen": "If she had said sorry, he would have forgiven her.", "senm": "لو قالت آسفة، لسامحها.", "related": [], "emoji": "🗣️", "id": "c2g2_w6"}, {"en": "tell – told – told", "ar": "يخبر", "phon": "تل", "sen": "If I knew, I would tell you.", "senm": "لو كنت أعلم، لأخبرتك.", "related": [], "emoji": "📢", "id": "c2g2_w7"}, {"en": "think – thought – thought", "ar": "يفكر", "phon": "ثينك", "sen": "If I thought it was wrong, I wouldn't do it.", "senm": "لو ظننت أنه خطأ، ما فعلته.", "related": [], "emoji": "💭", "id": "c2g2_w8"}, {"en": "bring – brought – brought", "ar": "يُحضر", "phon": "برينج", "sen": "If you brought your book, we could study.", "senm": "لو أحضرت كتابك، لاستطعنا المذاكرة.", "related": [], "emoji": "🎒", "id": "c2g2_w9"}, {"en": "win – won – won", "ar": "يفوز", "phon": "وين", "sen": "If we had practised, we would have won.", "senm": "لو تدربنا، لفزنا.", "related": [], "emoji": "🥇", "id": "c2g2_w10"}, {"en": "catch – caught – caught", "ar": "يلحق / يمسك", "phon": "كاتش", "sen": "If he had left earlier, he would have caught the bus.", "senm": "لو غادر مبكرًا، لالتحق بالأتوبيس.", "related": [], "emoji": "🪝", "id": "c2g2_w11"}, {"en": "eat – ate – eaten", "ar": "يأكل", "phon": "إيت", "sen": "If you ate less, you would lose weight.", "senm": "لو أكلت أقل، لنقص وزنك.", "related": [], "emoji": "🍽️", "id": "c2g2_w12"}, {"en": "keep – kept – kept", "ar": "يحتفظ", "phon": "كيب", "sen": "If you kept calm, you would solve it.", "senm": "لو حافظت على هدوئك، لحللتها.", "related": [], "emoji": "🧘", "id": "c2g2_w13"}], "rule": "أفعال شاذة إضافية بتيجي كتير في الشرط.", "cardId": 2, "level": 2}, {"id": "c2g3", "title": "أفعال منتظمة", "sub": "Regular Verbs", "words": [{"en": "study – studied – studied", "ar": "يذاكر", "phon": "ستادي", "sen": "If he had studied hard, he would have succeeded.", "senm": "لو كان قد ذاكر بجد، لنجح.", "related": [], "emoji": "📚", "id": "c2g3_w0"}, {"en": "succeed – succeeded – succeeded", "ar": "ينجح", "phon": "ساكسيد", "sen": "If he had studied, he would have succeeded.", "senm": "لو ذاكر، لنجح.", "related": [], "emoji": "🏆", "id": "c2g3_w1"}, {"en": "fix – fixed – fixed", "ar": "يُصلح", "phon": "فيكس", "sen": "If I had tools, I would fix the car.", "senm": "لو كان معي أدوات، لأصلحت السيارة.", "related": [], "emoji": "🔧", "id": "c2g3_w2"}, {"en": "borrow – borrowed – borrowed", "ar": "يستلف", "phon": "بورو", "sen": "If I needed money, I would borrow some.", "senm": "لو احتجت مالًا، لاستلفت بعضه.", "related": [], "emoji": "🤲", "id": "c2g3_w3"}, {"en": "wait – waited – waited", "ar": "ينتظر", "phon": "ويت", "sen": "If I had to wait, I would wait.", "senm": "لو اضطررت إلى الانتظار، لانتظرت.", "related": [], "emoji": "⏳", "id": "c2g3_w4"}, {"en": "stay – stayed – stayed", "ar": "يبقى", "phon": "ستاي", "sen": "If it rained, we would stay at home.", "senm": "لو أمطرت، لبقينا في البيت.", "related": [], "emoji": "🛋️", "id": "c2g3_w5"}, {"en": "pass – passed – passed", "ar": "ينجح في", "phon": "باس", "sen": "If you had studied, you would have passed the exam.", "senm": "لو ذاكرت، لنجحت في الامتحان.", "related": [], "emoji": "✅", "id": "c2g3_w6"}, {"en": "press – pressed – pressed", "ar": "يضغط", "phon": "بريس", "sen": "If you press this button, the machine starts.", "senm": "إذا ضغطت هذا الزر، تبدأ الآلة.", "related": [], "emoji": "👇", "id": "c2g3_w7"}, {"en": "start – started – started", "ar": "يبدأ", "phon": "ستارت", "sen": "If it started to rain, we would leave.", "senm": "لو بدأت تمطر، لغادرنا.", "related": [], "emoji": "▶️", "id": "c2g3_w8"}, {"en": "answer – answered – answered", "ar": "يجيب", "phon": "آنسر", "sen": "If he had answered, I would have known.", "senm": "لو أجاب، لعرفت.", "related": [], "emoji": "💬", "id": "c2g3_w9"}, {"en": "call – called – called", "ar": "يتصل", "phon": "كول", "sen": "If you called him, he would answer.", "senm": "لو اتصلت به، لرد.", "related": [], "emoji": "📞", "id": "c2g3_w10"}, {"en": "attend – attended – attended", "ar": "يحضر", "phon": "أتند", "sen": "If I had attended the party, I would have met her.", "senm": "لو حضرت الحفلة، لقابلتها.", "related": [], "emoji": "🎟️", "id": "c2g3_w11"}, {"en": "save – saved – saved", "ar": "يوفّر", "phon": "سيف", "sen": "If I saved money, I would buy a laptop.", "senm": "لو ادخرت مالًا، لاشتريت لابتوب.", "related": [], "emoji": "💰", "id": "c2g3_w12"}, {"en": "happen – happened – happened", "ar": "يحدث", "phon": "هابن", "sen": "What would happen if he worked hard?", "senm": "ماذا سيحدث لو عمل بجد؟", "related": [], "emoji": "💫", "id": "c2g3_w13"}], "rule": "الأفعال المنتظمة: V2 وV3 بيبقوا ed.", "cardId": 2, "level": 2}];
+const GRAMMAR_LESSONS = [{"id": "l1", "cardId": 3, "num": 1, "title": "مقدمة: الحالات الأربع للـ If", "emoji": "🧩", "explain": "جمل الشرط (<b>If Conditionals</b>) فيها <b>جملة الشرط</b> (If clause) و<b>جملة جواب الشرط</b> (Main clause). فيه 4 حالات حسب الزمن:\n<br><br>\n0️⃣ <b>الصفرية:</b> If + مضارع بسيط ← مضارع بسيط\n<br>1️⃣ <b>الأولى:</b> If + مضارع بسيط ← Sub + will + inf\n<br>2️⃣ <b>الثانية:</b> If + ماضي بسيط ← Sub + would + inf\n<br>3️⃣ <b>الثالثة:</b> If + ماضي تام ← Sub + would have + P.P", "examples": [{"en": "If water is heated, it boils.", "ar": "إذا سُخِّن الماء، فإنه يغلي. (صفرية)"}, {"en": "If you study hard, you will get good marks.", "ar": "إذا ذاكرت بجد، ستحصل على درجات جيدة. (أولى)"}, {"en": "If I had enough money, I would buy a new laptop.", "ar": "لو كان معي مال كافٍ، لاشتريت لابتوب جديدًا. (ثانية)"}, {"en": "If he had studied hard, he would have succeeded.", "ar": "لو كان قد ذاكر بجد، لنجح. (ثالثة)"}], "exercises": [{"q": "الحالة الأولى بتتكون من:", "options": ["If + مضارع بسيط ← Sub + will + inf", "If + ماضي بسيط ← Sub + would + inf", "If + ماضي تام ← Sub + would have + P.P", "If + مضارع ← مضارع"], "answer": 0, "explain": "الأولى: If + present simple ← will + inf."}, {"q": "الحالة الثانية بتتكون من:", "options": ["If + مضارع بسيط ← will + inf", "If + ماضي بسيط ← would + inf", "If + ماضي تام ← would have + P.P", "If + will ← would"], "answer": 1, "explain": "الثانية: If + past simple ← would + inf."}, {"q": "الحالة الثالثة بتتكون من:", "options": ["If + مضارع بسيط", "If + ماضي بسيط ← would + inf", "If + ماضي تام ← would have + P.P", "If + مضارع تام"], "answer": 2, "explain": "الثالثة: If + past perfect ← would have + P.P."}, {"q": "الحالة الصفرية بتتكون من:", "options": ["مضارع بسيط ← مضارع بسيط", "ماضي بسيط ← would", "ماضي تام ← would have", "will ← will"], "answer": 0, "explain": "الصفرية: مضارع بسيط في الجملتين."}, {"q": "If I had enough money, I ___ a new laptop.", "options": ["will buy", "would buy", "have bought", "buy"], "answer": 1, "explain": "If + ماضي بسيط ← would + inf (ثانية)."}]}, {"id": "l2", "cardId": 3, "num": 2, "title": "الحالة الصفرية (Zero Conditional)", "emoji": "0️⃣", "explain": "<b>الصفرية:</b> If ← مضارع بسيط ← مضارع بسيط\n<br>وممكن نستخدم <b>when</b> مكان If.\n<br><br>\n<b>الإثبات:</b>\n<br>• I, we, you, they ← الفعل في المصدر\n<br>• He, she, it ← الفعل + (s)\n<br><br>\n<b>النفي:</b>\n<br>• I, we, you, they ← don't + مصدر\n<br>• He, she, it ← doesn't + inf\n<br><br>\n📌 بنستخدمها في <b>الحقائق والأشياء العامة</b>.", "examples": [{"en": "If water is heated, it boils.", "ar": "إذا سُخِّن الماء، فإنه يغلي. (حقيقة)"}, {"en": "If you don't water plants, they die.", "ar": "إذا لم تسقِ النباتات، فإنها تموت. (حقيقة)"}, {"en": "When you press this button, the machine starts.", "ar": "عندما تضغط هذا الزر، تبدأ الآلة."}, {"en": "If it rains, the streets get wet.", "ar": "إذا أمطرت، تتبلل الشوارع."}], "exercises": [{"q": "If water ___, it boils.", "options": ["heat", "heats", "is heated", "is heating"], "answer": 2, "explain": "الماء بيتسخن (مجهول) ← is heated."}, {"q": "If you ___ this button, the machine starts.", "options": ["press", "pressed", "have pressed", "pressing"], "answer": 0, "explain": "صفرية: مضارع بسيط ← press."}, {"q": "If you don't water plants, they ___.", "options": ["die", "died", "will died", "dying"], "answer": 0, "explain": "مضارع بسيط ← die."}, {"q": "الحالة الصفرية بنستخدمها في:", "options": ["الحقائق والأشياء العامة", "أحداث مستحيلة في الماضي", "أحداث مستقبلية محتملة فقط", "الأحلام"], "answer": 0, "explain": "الصفرية للحقائق والأشياء العامة."}, {"q": "If he ___ late, his mother gets angry. (come)", "options": ["come", "comes", "came", "will come"], "answer": 1, "explain": "he ← فعل + s: comes."}]}, {"id": "l3", "cardId": 3, "num": 3, "title": "الصفرية: التعليمات والمجهول", "emoji": "📋", "explain": "<b>خلي بالك:</b> ممكن نستخدم الصفرية في <b>إعطاء التعليمات والنواهي</b>:\n<br><i>If you press this button, the machine starts.</i>\n<br><br>\nوفي <b>المجهول</b> (Passive):\n<br><b>Object + am / is / are + P.P</b>\n<br><i>Football isn't played by me.</i>\n<br><br>\nيعني لو الفاعل مش هو اللي بيعمل الفعل، بنحط الـ be المناسب (is/are) + P.P.", "examples": [{"en": "If you press this button, the machine starts.", "ar": "إذا ضغطت هذا الزر، تبدأ الآلة. (تعليمات)"}, {"en": "If water is heated, it boils.", "ar": "إذا سُخِّن الماء، فإنه يغلي. (مجهول)"}, {"en": "Football isn't played by me.", "ar": "كرة القدم لا ألعبها أنا. (مجهول منفي)"}, {"en": "If plants aren't watered, they die.", "ar": "إذا لم تُسقَ النباتات، فإنها تموت. (مجهول)"}], "exercises": [{"q": "Object + ___ + P.P ← المجهول في المضارع", "options": ["am / is / are", "was / were", "will", "had"], "answer": 0, "explain": "المجهول في المضارع: am/is/are + P.P."}, {"q": "Football ___ played by me.", "options": ["isn't", "don't", "doesn't", "hasn't"], "answer": 0, "explain": "مجهول منفي: isn't + P.P."}, {"q": "If plants ___ watered, they die.", "options": ["aren't", "don't", "didn't", "haven't"], "answer": 0, "explain": "plants جمع ← aren't + watered."}, {"q": "If the lights ___ on, the room is bright. (turn)", "options": ["are turned", "turn", "turned", "is turned"], "answer": 0, "explain": "lights جمع ومجهول ← are turned."}, {"q": "ممكن نستخدم الصفرية في:", "options": ["التعليمات", "الأحلام المستحيلة", "الماضي المنتهي", "الندم على الماضي"], "answer": 0, "explain": "الصفرية تُستخدم للتعليمات والنواهي."}]}, {"id": "l4", "cardId": 3, "num": 4, "title": "الحالة الأولى (First Conditional)", "emoji": "1️⃣", "explain": "<b>الأولى:</b> If + مضارع بسيط ← Sub + <b>will / can / may / must</b> + inf\n<br><br>\n📌 بنستخدمها عشان نتكلم عن <b>أشياء محتملة الحدوث في المستقبل</b>.\n<br><br>\n<i>If it rains tomorrow, we will stay at home.</i>\n<br><br>\nولو الشرط مش مؤكد النتيجة، بنستخدم <b>may</b> أو <b>can</b> بدل will.", "examples": [{"en": "If it rains tomorrow, we will stay at home.", "ar": "إذا أمطرت غدًا، فسنبقى في البيت."}, {"en": "If you come early, I will meet you.", "ar": "إذا جئت مبكرًا، فسأقابلك."}, {"en": "If you study hard, you will get good marks.", "ar": "إذا ذاكرت بجد، ستحصل على درجات جيدة."}, {"en": "If you call Ali, he may answer.", "ar": "إذا اتصلت بعلي، فقد يرد."}], "exercises": [{"q": "If you ___ hard, you will get good marks.", "options": ["Study", "Studies", "studied", "had studied"], "answer": 0, "explain": "you ← study (مضارع بسيط)."}, {"q": "If you come early, I ___ you.", "options": ["meet", "will meet", "would meet", "met"], "answer": 1, "explain": "أولى ← will + inf."}, {"q": "If you call Ali, he ___ (I don't know).", "options": ["will answer", "may answer", "can answer", "answer"], "answer": 1, "explain": "المتكلم مش متأكد ← may."}, {"q": "الحالة الأولى بنستخدمها عشان نتكلم عن:", "options": ["أشياء محتملة في المستقبل", "أشياء مستحيلة في الحاضر", "أشياء ماضية وانتهت", "حقائق علمية"], "answer": 0, "explain": "الأولى للأشياء المحتملة في المستقبل."}, {"q": "If it ___ tomorrow, we will stay at home.", "options": ["rains", "rained", "would rain", "will rain"], "answer": 0, "explain": "بعد if في الأولى لازم مضارع بسيط (مش will)."}]}, {"id": "l5", "cardId": 3, "num": 5, "title": "الأولى: المجهول", "emoji": "🔧", "explain": "المجهول في الحالة الأولى:\n<br><b>If + مضارع بسيط + Obj + will be / can be / may be / must be + P.P</b>\n<br><br>\n<i>If you have enough money, the car will be fixed.</i>\n<br><br>\nلاحظ: بعد الـ be بنحط <b>التصريف الثالث (P.P)</b>.", "examples": [{"en": "If you have enough money, the car will be fixed.", "ar": "إذا كان معك مال كافٍ، فستُصلَّح السيارة."}, {"en": "If you study hard, the exam can be passed.", "ar": "إذا ذاكرت بجد، يمكن اجتياز الامتحان."}, {"en": "If it rains, the match may be cancelled.", "ar": "إذا أمطرت، فقد تُلغى المباراة."}, {"en": "If you are late, the door must be closed.", "ar": "إذا تأخرت، يجب أن يُغلق الباب."}], "exercises": [{"q": "If you have enough money, the car ___ fixed.", "options": ["will be", "will", "would be", "is"], "answer": 0, "explain": "مجهول أولى ← will be + P.P."}, {"q": "If it rains, the match ___ be cancelled.", "options": ["may", "would", "had", "has"], "answer": 0, "explain": "may be + P.P."}, {"q": "المجهول في الأولى: Obj + ___ + P.P", "options": ["will be / can be / may be / must be", "would have", "had been", "am/is/are + ing"], "answer": 0, "explain": "will/can/may/must + be + P.P."}, {"q": "If he works hard, the work ___ finished.", "options": ["will be finished", "will finish", "would be finished", "is finish"], "answer": 0, "explain": "بعد be نستخدم P.P: finished."}, {"q": "If you press the button, the door ___ opened. (can)", "options": ["can be", "can", "could have", "can been"], "answer": 0, "explain": "can be + P.P."}]}, {"id": "l6", "cardId": 3, "num": 6, "title": "unless / in case مكان If", "emoji": "🙅", "explain": "خد بالك!! ممكن نستخدم <b>unless</b> و<b>in case</b> بدل If في الحالة الأولى:\n<br><br>\n• <b>unless</b> = <b>if not</b>: <i>You won't pass the exam unless you study hard.</i>\n<br>• <b>in case</b> = <b>تحسبًا لحدوث شيء آخر</b>: <i>I will stay at home in case it rains.</i>\n<br><br>\n⚠️ بعد unless و in case بنستخدم <b>مضارع بسيط</b> (من غير will).", "examples": [{"en": "You won't pass the exam unless you study hard.", "ar": "لن تنجح في الامتحان ما لم تذاكر بجد."}, {"en": "I will stay at home in case it rains.", "ar": "سأبقى في البيت تحسبًا لأن تمطر."}, {"en": "Take an umbrella in case it rains.", "ar": "خذ مظلة تحسبًا لأن تمطر."}, {"en": "Unless you hurry, you will miss the bus.", "ar": "ما لم تسرع، ستفوتك الحافلة."}], "exercises": [{"q": "You won't pass the exam ___ you study hard.", "options": ["If", "Unless", "When", "What"], "answer": 1, "explain": "unless = if not."}, {"q": "I will stay at home in case it ___.", "options": ["rains", "rained", "had rained", "rain"], "answer": 0, "explain": "in case + مضارع بسيط."}, {"q": "Unless you ___ hard, you won't succeed. (study)", "options": ["study", "will study", "studied", "don't study"], "answer": 0, "explain": "unless فيها معنى النفي، والفعل مضارع مثبت."}, {"q": "in case معناها:", "options": ["تحسبًا لحدوث شيء", "بشرط أن", "بدون", "لولا"], "answer": 0, "explain": "in case = تحسبًا."}, {"q": "'If you don't hurry, you will miss the bus' = ___ you hurry, you will miss the bus.", "options": ["Unless", "In case", "Until", "Whether"], "answer": 0, "explain": "if not = unless."}]}, {"id": "l7", "cardId": 3, "num": 7, "title": "أسئلة الحالة الأولى", "emoji": "❓", "explain": "<b>إزاي نعمل سؤال من الحالة الأولى؟</b>\n<br><br>\n<b>1) السؤال بـ (هل) Yes/No:</b>\n<br>Will / Can / May + Sub + inf + (if + مضارع بسيط) ؟\n<br><i>Will he pass the next exam if he works hard?</i>\n<br>أو: If + مضارع بسيط + Will/Can/May + Sub + inf ؟\n<br><br>\n<b>2) السؤال بأداة استفهام (WH):</b>\n<br>WH + will/can/may + Sub + inf + if + مضارع بسيط ؟\n<br><i>What will happen if he works hard?</i>\n<br>أو: If + مضارع بسيط + WH + will/can/may + Sub + inf ؟", "examples": [{"en": "Will he pass the next exam if he works hard?", "ar": "هل سينجح في الامتحان القادم إذا عمل بجد؟"}, {"en": "If he works hard, will he pass the next exam?", "ar": "إذا عمل بجد، هل سينجح في الامتحان القادم؟"}, {"en": "What will happen if he works hard?", "ar": "ماذا سيحدث إذا عمل بجد؟"}, {"en": "If he works hard, what will happen?", "ar": "إذا عمل بجد، ماذا سيحدث؟"}], "exercises": [{"q": "What ___ you do if it rains tomorrow?", "options": ["will", "would", "must", "can't"], "answer": 0, "explain": "WH + will + sub + inf."}, {"q": "___ you buy a new car if you save enough money?", "options": ["Will", "Did", "Are", "Do"], "answer": 0, "explain": "سؤال Yes/No في الأولى يبدأ بـ Will."}, {"q": "If she finishes early, where ___ go?", "options": ["she", "will", "will she", "she does"], "answer": 2, "explain": "WH + will + sub: where will she go?"}, {"q": "بعد If في سؤال الأولى بنستخدم:", "options": ["مضارع بسيط", "will", "would", "ماضي بسيط"], "answer": 0, "explain": "If he works (مضارع بسيط)."}, {"q": "Will he pass the next exam ___ he works hard?", "options": ["if", "unless", "in case of", "without"], "answer": 0, "explain": "If + مضارع بسيط."}]}, {"id": "l8", "cardId": 3, "num": 8, "title": "جواب الشرط أمر (Imperative)", "emoji": "☝️", "explain": "خد بالك!! لو <b>جملة جواب الشرط</b> بدأت بـ:\n<br>• <b>المصدر</b> (inf)\n<br>• <b>Don't + inf</b>\n<br>• <b>Never + inf</b>\n<br>• <b>let's + inf</b>\n<br>• <b>had better + inf</b>\n<br>• <b>would rather + inf</b>\n<br><br>\n⚠️ لازم بعد If نستخدم <b>مضارع بسيط</b>.", "examples": [{"en": "Don't eat too much if you want to lose weight.", "ar": "لا تأكل كثيرًا إذا كنت تريد إنقاص وزنك."}, {"en": "If one of your friends has a problem, help him.", "ar": "إذا كان لدى أحد أصدقائك مشكلة، فساعده."}, {"en": "Let's take a rest and have a drink if you are tired.", "ar": "هيا نستريح ونتناول مشروبًا إذا كنت متعبًا."}, {"en": "If you feel cold, you had better wear a coat.", "ar": "إذا شعرت بالبرد، فمن الأفضل أن ترتدي معطفًا."}], "exercises": [{"q": "Don't eat too much if you ___ to lose weight.", "options": ["want", "wanted", "had wanted", "would want"], "answer": 0, "explain": "جواب الشرط أمر ← If + مضارع بسيط."}, {"q": "If one of your friends ___ a problem, help him/her.", "options": ["has", "had", "had had", "would have"], "answer": 0, "explain": "مضارع بسيط: has."}, {"q": "Let's take a rest and have a drink if you ___ tired.", "options": ["were", "are", "had been", "would be"], "answer": 1, "explain": "let's + مضارع بسيط بعد if."}, {"q": "لو جواب الشرط بدأ بـ Don't + inf، بعد If نستخدم:", "options": ["مضارع بسيط", "ماضي بسيط", "ماضي تام", "would"], "answer": 0, "explain": "أمر ← مضارع بسيط."}, {"q": "If you are ill, you ___ better see a doctor.", "options": ["had", "would", "will", "have"], "answer": 0, "explain": "had better + inf."}]}, {"id": "l9", "cardId": 3, "num": 9, "title": "تراكيب خاصة بعد If", "emoji": "😍", "explain": "لو بعد <b>If</b> جه واحد من التراكيب دي:\n<br>• Sub + <b>would like / would love / would prefer</b>\n<br>• Sub + <b>am / is / are + ing</b>\n<br>• Sub + <b>have / has + P.P</b>\n<br><br>\nيبقى <b>جملة جواب الشرط تكون: Will + inf</b>.\n<br><br>\n<i>If you would like to attend the party, I will go with you.</i>", "examples": [{"en": "If you would like to attend the party, I will go with you.", "ar": "إذا أردت حضور الحفلة، فسأذهب معك."}, {"en": "She won't go out if she is revising for her exams.", "ar": "لن تخرج إذا كانت تراجع لامتحاناتها."}, {"en": "If he has left home, you won't be able to meet him.", "ar": "إذا كان قد غادر البيت، فلن تستطيع مقابلته."}, {"en": "If you would prefer tea, I will make it.", "ar": "إذا كنت تفضّل الشاي، فسأعدّه."}], "exercises": [{"q": "If you would like to attend the party, I ___ with you.", "options": ["will go", "would go", "would have gone", "went"], "answer": 0, "explain": "would like بعد if ← will + inf."}, {"q": "She ___ out if she is revising for her exams.", "options": ["will go", "would go", "won't go", "didn't go"], "answer": 2, "explain": "المراجعة بتمنعها من الخروج ← won't go."}, {"q": "If he has left home, you ___ able to meet him.", "options": ["won't be", "wouldn't be", "wouldn't have been", "weren't"], "answer": 0, "explain": "has left ← will + inf: won't be."}, {"q": "لو بعد If جه have/has + P.P، جواب الشرط:", "options": ["will + inf", "would + inf", "would have + P.P", "ماضي بسيط"], "answer": 0, "explain": "will + inf."}, {"q": "If you ___ prefer tea, I will make it.", "options": ["would", "will", "had", "are"], "answer": 0, "explain": "would prefer تركيب بعد if."}]}, {"id": "l10", "cardId": 3, "num": 10, "title": "تدريب شامل: الصفرية والأولى", "emoji": "🏋️", "explain": "تدريب على <b>الصفرية والأولى</b>: الأزمنة، المجهول، unless و in case، الأسئلة، والأوامر.\n<br><br>\nتذكر: بعد <b>If</b> دايمًا <b>مضارع بسيط</b> في الصفرية والأولى (إلا لو جه would like أو ing أو have + P.P).", "examples": [{"en": "If you press this button, the machine starts.", "ar": "إذا ضغطت هذا الزر، تبدأ الآلة."}, {"en": "If you come early, I will meet you.", "ar": "إذا جئت مبكرًا، فسأقابلك."}, {"en": "What will happen if he works hard?", "ar": "ماذا سيحدث إذا عمل بجد؟"}, {"en": "I will stay at home in case it rains.", "ar": "سأبقى في البيت تحسبًا لأن تمطر."}], "exercises": [{"q": "If water ___, it boils.", "options": ["heat", "heats", "is heated", "is heating"], "answer": 2, "explain": "is heated."}, {"q": "If you come early, I ___ you.", "options": ["meet", "will meet", "would meet", "met"], "answer": 1, "explain": "will meet."}, {"q": "You won't pass the exam ___ you study hard.", "options": ["If", "Unless", "When", "What"], "answer": 1, "explain": "Unless."}, {"q": "What ___ you do if it rains tomorrow?", "options": ["will", "would", "must", "can't"], "answer": 0, "explain": "will."}, {"q": "I will stay at home in case it ___.", "options": ["rains", "rained", "had rained", "rain"], "answer": 0, "explain": "in case + مضارع بسيط."}]}, {"id": "l11", "cardId": 4, "num": 11, "title": "الحالة الثانية (Second Conditional)", "emoji": "2️⃣", "explain": "<b>الثانية:</b> If + <b>ماضي بسيط</b> ← Sub + <b>could / might / would</b> + inf (معلوم)\n<br><br>\nفي جملة الشرط:\n<br>• Sub + V2\n<br>• Sub + didn't + inf (نفي)\n<br>• <b>were</b> مع كل الضمائر\n<br><br>\n📌 بنستخدمها عشان نتكلم عن أشياء <b>مستحيلة الحدوث في الحاضر والمستقبل</b>.", "examples": [{"en": "If I had enough money, I would buy a new laptop.", "ar": "لو كان معي مال كافٍ، لاشتريت لابتوب جديدًا."}, {"en": "If I didn't have a cold, I would go to the party.", "ar": "لو لم أكن مصابًا بنزلة برد، لذهبت إلى الحفلة."}, {"en": "If he had enough money, he would buy an expensive car, but he doesn't.", "ar": "لو كان معه مال كافٍ، لاشترى سيارة غالية، لكنه لا يملك."}, {"en": "If I could fly, I might visit the moon.", "ar": "لو استطعت الطيران، فربما زرت القمر."}], "exercises": [{"q": "If I had enough money, I ___ a new laptop.", "options": ["will buy", "would buy", "have bought", "buy"], "answer": 1, "explain": "ثانية ← would + inf."}, {"q": "If I ___ a cold, I would go to the party.", "options": ["hadn't", "didn't have", "haven't", "had"], "answer": 1, "explain": "المعنى: أنا عندي برد، فننفي بالماضي: didn't have."}, {"q": "If he had enough money, he would buy an expensive car but he ___.", "options": ["isn't", "doesn't", "didn't", "hadn't"], "answer": 1, "explain": "الواقع في الحاضر: doesn't have."}, {"q": "الحالة الثانية بنستخدمها عشان نتكلم عن:", "options": ["أشياء مستحيلة في الحاضر والمستقبل", "أشياء محتملة في المستقبل", "أشياء ماضية فقط", "الحقائق العلمية"], "answer": 0, "explain": "الثانية للأشياء غير الواقعية في الحاضر والمستقبل."}, {"q": "If she ___ a mother, she would be very kind.", "options": ["is", "was", "were", "be"], "answer": 2, "explain": "were مع كل الضمائر."}]}, {"id": "l12", "cardId": 4, "num": 12, "title": "الثانية: المجهول و were", "emoji": "🔄", "explain": "<b>المجهول في الثانية:</b>\n<br>If + ماضي بسيط + <b>Obj + would be / could be / might be + P.P</b>\n<br><i>An expensive car would be bought if he had enough money.</i>\n<br>(الفاعل المجهول: <b>Obj + was / were + P.P</b> في جملة الشرط)\n<br><br>\n<b>خد بالك:</b> يتم استخدام <b>Were</b> مع كل الضمائر في الحالة الثانية:\n<br><i>If she <b>were</b> a mother, she would be very kind.</i>", "examples": [{"en": "An expensive car would be bought if he had enough money.", "ar": "لو كان معه مال كافٍ، لاشتُريت سيارة غالية."}, {"en": "The doctor's report would be read if I had more time.", "ar": "لو كان لدي وقت أكثر، لقُرئ تقرير الطبيب."}, {"en": "If she were a mother, she would be very kind.", "ar": "لو كانت أمًّا، لكانت لطيفة جدًا."}, {"en": "If the lights were turned off, the room would be dark.", "ar": "لو أُطفئت الأنوار، لأظلمت الغرفة."}], "exercises": [{"q": "An expensive car ___ bought, if he had enough money.", "options": ["would", "would be", "would have", "would had"], "answer": 1, "explain": "مجهول ثانية ← would be + P.P."}, {"q": "The doctor's report ___ read, if I had more time.", "options": ["would be", "will be", "will have been", "will"], "answer": 0, "explain": "would be + P.P."}, {"q": "If she ___ a mother, she would be very kind.", "options": ["is", "was", "were", "been"], "answer": 2, "explain": "were مع كل الضمائر."}, {"q": "المجهول في الثانية: Obj + ___ + P.P", "options": ["would be / could be / might be", "will be", "had been", "would have"], "answer": 0, "explain": "would/could/might + be + P.P."}, {"q": "If he ___ here, he would help us.", "options": ["is", "were", "has been", "will be"], "answer": 1, "explain": "If he were."}]}, {"id": "l13", "cardId": 4, "num": 13, "title": "الثانية: النصيحة", "emoji": "💡", "explain": "بنستخدم الحالة الثانية في <b>النصيحة</b>:\n<br><br>• If I were in your position\n<br>• If I were in your shoes\n<br>• If I were you\n<br><br>+ <b>Sub + would / wouldn't + inf</b>\n<br><br>\n<i>If I were you, I would see a doctor.</i>", "examples": [{"en": "If I were you, I would see a doctor.", "ar": "لو كنت مكانك، لذهبت إلى الطبيب."}, {"en": "If I were in your position, I would apologise.", "ar": "لو كنت في موقفك، لاعتذرت."}, {"en": "If I were in your shoes, I wouldn't say that.", "ar": "لو كنت مكانك، لما قلت ذلك."}, {"en": "If I were you, I wouldn't eat that.", "ar": "لو كنت مكانك، لما أكلت ذلك."}], "exercises": [{"q": "If I were you, I ___ a doctor.", "options": ["will see", "would see", "a or b", "see"], "answer": 1, "explain": "نصيحة ← would + inf."}, {"q": "If I were in your shoes, I ___ that.", "options": ["wouldn't do", "won't do", "didn't do", "don't do"], "answer": 0, "explain": "would/wouldn't + inf."}, {"q": "If I ___ in your position, I would apologise.", "options": ["am", "was", "were", "have been"], "answer": 2, "explain": "were."}, {"q": "لإعطاء نصيحة بنستخدم:", "options": ["If I were you + would + inf", "If I am you + will", "If I had been you + would", "If you were me + will"], "answer": 0, "explain": "If I were you + would."}, {"q": "If I were you, I ___ study harder.", "options": ["would", "will", "had", "am"], "answer": 0, "explain": "would + inf."}]}, {"id": "l14", "cardId": 4, "num": 14, "title": "الثانية: had + اسم / had to", "emoji": "🧰", "explain": "تراكيب مهمة في الثانية:\n<br><br>\n• <b>If + فاعل + had + اسم</b> ← فاعل + <b>would</b> + مصدر\n<br><i>If I had a camera, I would give it to you.</i>\n<br><br>\n• <b>If + فاعل + had to + مصدر</b> ← فاعل + <b>would</b> + مصدر\n<br><i>If I had to wait, I would wait.</i>\n<br><br>\n• <b>If + ماضي بسيط</b> ← فاعل + <b>would have + اسم</b> / <b>would have to + مصدر</b>\n<br><i>If Ali spent all his money, he would have to borrow.</i>", "examples": [{"en": "If I had a camera, I would give it to you.", "ar": "لو كان معي كاميرا، لأعطيتك إياها."}, {"en": "If I had to wait, I would wait.", "ar": "لو اضطررت إلى الانتظار، لانتظرت."}, {"en": "If Ali spent all his money, he would have to borrow.", "ar": "لو أنفق علي كل ماله، لاضطر إلى الاستلاف."}, {"en": "If I lost my keys, I would have to call a locksmith.", "ar": "لو ضيّعت مفاتيحي، لاضطررت إلى استدعاء حدّاد أقفال."}], "exercises": [{"q": "If ___ enough money, I would buy you a present.", "options": ["hadn't", "had", "have", "has"], "answer": 1, "explain": "If + had + اسم."}, {"q": "If I lost my keys, I ___ have to call a locksmith.", "options": ["would", "would have to", "had to", "will have to"], "answer": 0, "explain": "would + have to."}, {"q": "If Ali spent all his money, he ___ borrow.", "options": ["would have to", "will", "had", "would had"], "answer": 0, "explain": "would have to + inf."}, {"q": "If I had a camera, I ___ give it to you.", "options": ["would", "will", "had", "have"], "answer": 0, "explain": "would + inf."}, {"q": "If + ماضي بسيط ← would have + ___", "options": ["اسم أو to + مصدر", "P.P فقط", "V-ing", "V2"], "answer": 0, "explain": "would have + اسم / would have to + مصدر."}]}, {"id": "l15", "cardId": 4, "num": 15, "title": "الحالة الثالثة (Third Conditional)", "emoji": "3️⃣", "explain": "<b>الثالثة:</b> If + <b>ماضي تام</b> ← Sub + <b>would / could / might have + P.P</b>\n<br><br>\nفي جملة الشرط:\n<br>• Sub + <b>had + P.P</b>\n<br>• Obj + <b>had been + P.P</b> (مجهول)\n<br><br>\n📌 بنستخدمها للكلام عن <b>أشياء حصلت (أو ماحصلتش) في الماضي</b>، وللندم.\n<br><br>\n<i>If he had studied hard, he would have succeeded.</i> ← يعني: <b>he didn't study</b>.", "examples": [{"en": "If he had studied hard, he would have succeeded.", "ar": "لو كان قد ذاكر بجد، لنجح. (هو لم يذاكر)"}, {"en": "If Salma had slept early, she would have woken up early.", "ar": "لو نامت سلمى مبكرًا، لاستيقظت مبكرًا."}, {"en": "If I had known, I would have told you.", "ar": "لو كنت أعرف، لأخبرتك."}, {"en": "If the car had been fixed, we would have travelled.", "ar": "لو أُصلحت السيارة، لسافرنا."}], "exercises": [{"q": "If he had studied hard, he would have succeeded. This means he ___", "options": ["study", "studied", "didn't study", "a/b"], "answer": 2, "explain": "الثالثة بتعني عكس الواقع: didn't study."}, {"q": "If she had slept early, she ___ early.", "options": ["would wake up", "would have woken up", "will wake up", "woke up"], "answer": 1, "explain": "would have + P.P."}, {"q": "If I ___ the answer, I would have told you.", "options": ["knew", "had known", "know", "have known"], "answer": 1, "explain": "ماضي تام: had known."}, {"q": "المجهول في الثالثة: Obj + ___ + P.P", "options": ["had been", "would be", "will be", "was"], "answer": 0, "explain": "had been + P.P."}, {"q": "الحالة الثالثة بنستخدمها عشان نتكلم عن:", "options": ["أحداث الماضي", "الحاضر", "المستقبل", "الحقائق"], "answer": 0, "explain": "الثالثة تخص الماضي."}]}, {"id": "l16", "cardId": 4, "num": 16, "title": "الثالثة: السؤال", "emoji": "🙋", "explain": "<b>السؤال في الثالثة:</b>\n<br>Would + Sub + have + P.P + if + ماضي تام ؟\n<br><br>\n<i>Would he have succeeded if he had studied hard?</i>\n<br><br>\nومع أداة استفهام:\n<br><i>What would you have done if you had missed the bus?</i>", "examples": [{"en": "Would he have succeeded if he had studied hard?", "ar": "هل كان سينجح لو ذاكر بجد؟"}, {"en": "Would Salma have woken up early if she had slept early?", "ar": "هل كانت سلمى ستستيقظ مبكرًا لو نامت مبكرًا؟"}, {"en": "What would you have done if you had missed the bus?", "ar": "ماذا كنت ستفعل لو فاتتك الحافلة؟"}, {"en": "If he had studied, would he have passed?", "ar": "لو كان قد ذاكر، هل كان سينجح؟"}], "exercises": [{"q": "Would Salma have woken up early, if she ___ early?", "options": ["sleep", "slept", "had slept", "would sleep"], "answer": 2, "explain": "بعد if في الثالثة: had + P.P."}, {"q": "___ he have succeeded if he had studied hard?", "options": ["Would", "Will", "Did", "Has"], "answer": 0, "explain": "سؤال الثالثة يبدأ بـ Would."}, {"q": "What ___ you have done if you had missed the bus?", "options": ["would", "will", "do", "did"], "answer": 0, "explain": "WH + would + sub + have + P.P."}, {"q": "Would he have passed if he ___ harder?", "options": ["studied", "had studied", "studies", "would study"], "answer": 1, "explain": "If + had + P.P."}, {"q": "سؤال الثالثة: Would + sub + ___ + P.P", "options": ["have", "has", "had", "be"], "answer": 0, "explain": "Would + sub + have + P.P."}]}, {"id": "l17", "cardId": 4, "num": 17, "title": "If not = unless", "emoji": "🙅‍♂️", "explain": "<b>If not = unless</b>\n<br><br>\n<i>If you don't study hard, you won't succeed.</i>\n<br><i>Unless you study hard, you won't succeed.</i>\n<br><br>\nوبتيجي كمان مع الثالثة:\n<br><i>Unless he had left home earlier, he wouldn't have caught the bus.</i>\n<br><br>\n⚠️ بعد unless مفيش نفي تاني (unless نفسها فيها معنى النفي).", "examples": [{"en": "If you don't study hard, you won't succeed.", "ar": "إذا لم تذاكر بجد، فلن تنجح."}, {"en": "Unless you study hard, you won't succeed.", "ar": "ما لم تذاكر بجد، فلن تنجح."}, {"en": "Unless he had left home earlier, he wouldn't have caught the bus.", "ar": "لولا أنه غادر البيت مبكرًا، لما لحق بالأتوبيس."}, {"en": "Unless it rains, we will go out.", "ar": "ما لم تمطر، سنخرج."}], "exercises": [{"q": "Unless he had left home earlier, he ___ caught the bus.", "options": ["wouldn't have", "wouldn't", "won't", "hasn't"], "answer": 0, "explain": "unless + ماضي تام ← would have + P.P."}, {"q": "If not = ___", "options": ["unless", "in case", "provided that", "without"], "answer": 0, "explain": "if not = unless."}, {"q": "___ you study hard, you won't succeed.", "options": ["Unless", "If not", "Provided", "As long as"], "answer": 0, "explain": "Unless = if not."}, {"q": "Unless you ___ hard, you won't succeed. (study)", "options": ["study", "don't study", "didn't study", "won't study"], "answer": 0, "explain": "unless بدون نفي إضافي."}, {"q": "'If you don't hurry, you'll be late' = ___ you hurry, you'll be late.", "options": ["Unless", "In case", "Without", "But for"], "answer": 0, "explain": "unless."}]}, {"id": "l18", "cardId": 4, "num": 18, "title": "as long as / providing that / provided that", "emoji": "🔗", "explain": "الأدوات دي بتيجي مكان <b>If</b> بمعنى <b>(بشرط أن / طالما)</b>:\n<br><br>\n<b>If = as long as = providing that = provided that</b>\n<br><br>\n<i>You will pass the final test provided that you study hard every day.</i>\n<br><br>\n⚠️ <b>in case</b> معناها مختلفة: <b>تحسبًا</b> (مش بشرط).", "examples": [{"en": "You will pass the final test provided that you study hard every day.", "ar": "ستنجح في الاختبار النهائي بشرط أن تذاكر بجد كل يوم."}, {"en": "You will pass as long as you study hard.", "ar": "ستنجح طالما ذاكرت بجد."}, {"en": "I'll lend you the car providing that you drive carefully.", "ar": "سأعيرك السيارة بشرط أن تقود بحرص."}, {"en": "Take an umbrella in case it rains.", "ar": "خذ مظلة تحسبًا لأن تمطر. (مختلفة عن provided that)"}], "exercises": [{"q": "You will pass the final test ___ you study hard every day.", "options": ["Provided that", "in case of", "Provided", "Unless"], "answer": 0, "explain": "provided that = بشرط أن."}, {"q": "If = as long as = ___", "options": ["providing that", "in case", "without", "unless"], "answer": 0, "explain": "providing that بمعنى if."}, {"q": "You will pass ___ you study hard.", "options": ["as long as", "in case", "without", "but for"], "answer": 0, "explain": "as long as = بشرط."}, {"q": "'تحسبًا لحدوث شيء' بتتقال:", "options": ["in case", "as long as", "provided that", "unless"], "answer": 0, "explain": "in case = تحسبًا."}, {"q": "I'll lend you the car ___ you drive carefully.", "options": ["providing that", "in case of", "without", "but for"], "answer": 0, "explain": "providing that + جملة."}]}, {"id": "l19", "cardId": 4, "num": 19, "title": "without / but for / in case of", "emoji": "🙏", "explain": "<b>In case of + V-ing</b> (أو اسم)\n<br><b>Without / But for + V-ing / اسم</b> بمعنى (لولا / بدون)\n<br><br>\n<i>But for your support, I wouldn't succeed.</i>\n<br><i>Without your support, I wouldn't succeed.</i>\n<br><br>\nبعدهم <b>اسم أو V-ing</b> مش جملة كاملة.", "examples": [{"en": "But for your support, I wouldn't succeed.", "ar": "لولا دعمك، لما نجحت."}, {"en": "Without your support, I wouldn't succeed.", "ar": "بدون دعمك، لما نجحت."}, {"en": "In case of fire, use the stairs.", "ar": "في حالة الحريق، استخدم السلالم."}, {"en": "Without leaving early, you will miss the bus.", "ar": "بدون المغادرة مبكرًا، ستفوتك الحافلة."}], "exercises": [{"q": "___ your support, I wouldn't succeed.", "options": ["But for", "If", "unless", "Providing that"], "answer": 0, "explain": "But for + اسم = لولا."}, {"q": "Without / But for + ___", "options": ["V-ing أو اسم", "جملة كاملة", "فعل مصدر", "P.P فقط"], "answer": 0, "explain": "بعدهم اسم أو V-ing."}, {"q": "___ fire, use the stairs.", "options": ["In case of", "In case", "Unless", "Provided"], "answer": 0, "explain": "in case of + اسم."}, {"q": "But for his help, I ___ the exam.", "options": ["would fail", "will fail", "failed", "fail"], "answer": 0, "explain": "would + inf."}, {"q": "In case of + ___", "options": ["V-ing أو اسم", "فاعل + فعل", "فعل مصدر فقط", "will + inf"], "answer": 0, "explain": "in case of + V-ing / اسم."}]}, {"id": "l20", "cardId": 4, "num": 20, "title": "تدريب شامل: الثانية والثالثة والأدوات", "emoji": "🏆", "explain": "تدريب شامل على <b>الثانية والثالثة</b> وأدوات الشرط: <b>unless / as long as / provided that / but for / without</b>.\n<br><br>\nتذكر: <b>ثانية</b> ← ماضي بسيط + would + inf | <b>ثالثة</b> ← ماضي تام + would have + P.P.", "examples": [{"en": "If I were you, I would see a doctor.", "ar": "لو كنت مكانك، لذهبت إلى الطبيب."}, {"en": "If he had studied hard, he would have succeeded.", "ar": "لو كان قد ذاكر بجد، لنجح."}, {"en": "But for your support, I wouldn't succeed.", "ar": "لولا دعمك، لما نجحت."}, {"en": "You will pass provided that you study hard.", "ar": "ستنجح بشرط أن تذاكر بجد."}], "exercises": [{"q": "If I were you, I ___ a doctor.", "options": ["will see", "would see", "a or b", "see"], "answer": 1, "explain": "would see."}, {"q": "If he had enough money, he would buy an expensive car but he ___.", "options": ["isn't", "doesn't", "didn't", "hadn't"], "answer": 1, "explain": "doesn't."}, {"q": "Would Salma have woken up early, if she ___ early?", "options": ["sleep", "slept", "had slept", "would sleep"], "answer": 2, "explain": "had slept."}, {"q": "___ your support, I wouldn't succeed.", "options": ["But for", "If", "unless", "Providing that"], "answer": 0, "explain": "But for."}, {"q": "You will pass the final test ___ you study hard every day.", "options": ["Provided that", "in case of", "Provided", "Unless"], "answer": 0, "explain": "Provided that."}]}];
+const CARDS_META = [{"id": 1, "title": "كلمات السبورة الملونة", "sub": "من سبورة المستر أحمد طارق", "emoji": "🖍️", "type": "vocab", "desc": "كلمات ظهرت في شرح الجمل الشرطية على السبورة، مقسّمة في مجموعات جاهزة، وكل كلمة معاها إيموجي يساعدك تحفظها."}, {"id": 2, "title": "تصريفات الأفعال", "sub": "عبقري اللغة - المحاضرة 3", "emoji": "🔤", "type": "vocab", "desc": "V1 – V2 – V3 لأفعال الشرط (مهمة جدًا في الثانية والثالثة)، كل فعل بجملة شرطية وإيموجي للحفظ."}, {"id": 3, "title": "قواعد الصفرية والأولى", "sub": "If Conditionals · الجزء الأول", "emoji": "0️⃣", "type": "grammar", "desc": "المقدمة، الحالة الصفرية، الحالة الأولى، المجهول، unless و in case، الأسئلة، والأوامر."}, {"id": 4, "title": "قواعد الثانية والثالثة والأدوات", "sub": "If Conditionals · الجزء الثاني", "emoji": "3️⃣", "type": "grammar", "desc": "الثانية والنصيحة، الثالثة، unless، as long as، provided that، but for و without."}];
+const ALL_WORDS = CATEGORIES.flatMap(c => c.words.map(w => ({...w, catId:c.id, catTitle:c.title})));
+const WORD_MAP = Object.fromEntries(ALL_WORDS.map(w => [w.id, w]));
+
+const DAY = 24*60*60*1000;
+// interval (days) to wait AFTER reaching this box, indexed 1..6. box 0 = new/never studied.
+const BOX_DAYS = [0, 1, 3, 7, 14, 30, 90];
+const BOX_LABELS = ['جديدة','يوم واحد','٣ أيام','أسبوع','أسبوعين','شهر','متقنة (٣ شهور)'];
+
+let state = {
+  srs: {},          // id -> {box, next, last, reviews, lapses}
+  favorites: [],    // [id]
+  theme: 'day',
+  examLog: [],      // {date, type, label, score, total}
+  lessonScores: {}  // lessonId -> {score, total, date}
+};
+
+let currentCat = null;
+let currentCardId = null;
+let currentIdx = 0;
+let currentDeckIds = [];
+let deckMode = 'category'; // 'category' | 'review'
+let reviewStats = { seen:0, remembered:0, forgot:0 };
+let quiz = { items: [], idx: 0, score: 0, wrong: [], type: '' };
+let quizContext = 'vocab';
+
+// ---------- SRS helpers ----------
+function srsOf(id){ return state.srs[id] || null; }
+function isDue(id, now){
+  const s = state.srs[id];
+  if(!s) return true; // never studied = due now
+  return s.next <= now;
+}
+function dueIds(){
+  const now = Date.now();
+  return ALL_WORDS.map(w=>w.id).filter(id => isDue(id, now));
+}
+function isLearned(id){ const s = state.srs[id]; return !!s && s.box >= 1; }
+function learnedIds(){ return Object.keys(state.srs).filter(id => state.srs[id].box >= 1); }
+function boxCounts(){
+  const counts = [0,0,0,0,0,0,0];
+  ALL_WORDS.forEach(w=>{
+    const s = state.srs[w.id];
+    const b = s ? s.box : 0;
+    counts[b]++;
+  });
+  return counts;
+}
+function assess(id, remembered){
+  const now = Date.now();
+  let s = state.srs[id] || { box:0, next:now, last:0, reviews:0, lapses:0 };
+  s.reviews++;
+  if(remembered){
+    s.box = Math.min(s.box+1, 6);
+    s.next = now + BOX_DAYS[s.box]*DAY;
+  } else {
+    s.lapses++;
+    s.box = 0;
+    s.next = now + 1*DAY;
+  }
+  s.last = now;
+  state.srs[id] = s;
+  saveSrs();
+  return s;
+}
+function fmtInterval(s){
+  if(!s) return 'جديدة';
+  return BOX_LABELS[s.box] || '';
+}
+function fmtRelative(ts){
+  const now = Date.now();
+  const diff = ts - now;
+  if(diff <= 0) return 'مستحقة الآن';
+  const days = Math.round(diff / DAY);
+  if(days <= 0) return 'اليوم';
+  if(days === 1) return 'غدًا';
+  return `بعد ${days} يوم`;
+}
+
+// ---------- storage ----------
+async function loadState(){
+  try{ const r = await window.storage.get('srs_v1'); if(r) state.srs = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('favorites_v1'); if(r) state.favorites = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('theme_v1'); if(r) state.theme = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('exam_log_v1'); if(r) state.examLog = JSON.parse(r.value); }catch(e){}
+  try{ const r = await window.storage.get('lesson_scores_v1'); if(r) state.lessonScores = JSON.parse(r.value); }catch(e){}
+  applyTheme();
+  renderHome();
+  routeFromHash();
+}
+async function saveSrs(){ try{ await window.storage.set('srs_v1', JSON.stringify(state.srs)); }catch(e){} }
+async function saveFavorites(){ try{ await window.storage.set('favorites_v1', JSON.stringify(state.favorites)); }catch(e){} }
+async function saveTheme(){ try{ await window.storage.set('theme_v1', JSON.stringify(state.theme)); }catch(e){} }
+async function saveExamLog(){ try{ await window.storage.set('exam_log_v1', JSON.stringify(state.examLog)); }catch(e){} }
+async function saveLessonScores(){ try{ await window.storage.set('lesson_scores_v1', JSON.stringify(state.lessonScores)); }catch(e){} }
+
+// ---------- theme ----------
+function applyTheme(){
+  document.body.setAttribute('data-theme', state.theme);
+  document.getElementById('themeBtn').textContent = state.theme === 'night' ? '☀️' : '🌙';
+  document.getElementById('nightToggle').classList.toggle('on', state.theme === 'night');
+}
+function toggleTheme(){
+  state.theme = state.theme === 'night' ? 'day' : 'night';
+  applyTheme(); saveTheme();
+}
+document.getElementById('themeBtn').onclick = toggleTheme;
+
+// ---------- toast ----------
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 1800);
+}
+
+// ---------- tabs ----------
+function switchTab(tab){
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+  ['home','review','fav','exam','settings'].forEach(s=>{
+    document.getElementById('screen-'+s).classList.toggle('active', s===tab);
+  });
+  document.getElementById('screen-deck').classList.remove('active');
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-result').classList.remove('active');
+  document.getElementById('screen-cardhome').classList.remove('active');
+  document.getElementById('screen-lesson').classList.remove('active');
+  if(tab==='home') renderHome();
+  if(tab==='review') renderReviewScreen();
+  if(tab==='fav') renderFav();
+  if(tab==='exam') renderExam();
+}
+function goHome(){ switchTab('home'); }
+function goExam(){ switchTab('exam'); }
+
+// ---------- home / categories ----------
+function renderHome(){
+  const learned = learnedIds().length;
+  document.getElementById('statTotal').textContent = ALL_WORDS.length;
+  document.getElementById('statMemo').textContent = learned;
+  document.getElementById('statFav').textContent = state.favorites.length;
+
+  const due = dueIds().length;
+  const banner = document.getElementById('homeReviewBanner');
+  document.getElementById('homeDueNum').textContent = due;
+  if(due === 0){
+    banner.classList.add('zero');
+    document.getElementById('homeDueTitle').textContent = 'مفيش كلمات مستحقة دلوقتي 🎉';
+    document.getElementById('homeDueSub').textContent = 'كل كلماتك في وقتها الصح، تعال تاني بعد شوية';
+  } else {
+    banner.classList.remove('zero');
+    document.getElementById('homeDueTitle').textContent = 'كلمة مستحقة للمراجعة الآن';
+    document.getElementById('homeDueSub').textContent = 'اضغط هنا عشان تراجعهم بنظام التكرار المتباعد';
+  }
+
+  const grid = document.getElementById('mainCardGrid');
+  grid.innerHTML = '';
+  CARDS_META.forEach(card => {
+    const div = document.createElement('div');
+    div.className = 'maincard' + (card.type==='grammar' ? ' grammar' : '');
+    div.onclick = () => openCard(card.id);
+    let countTxt = '';
+    if(card.type==='vocab'){
+      const cats = CATEGORIES.filter(c=>c.cardId===card.id);
+      const n = cats.reduce((s,c)=>s+c.words.length,0);
+      countTxt = n + ' كلمة';
+    } else {
+      const n = GRAMMAR_LESSONS.filter(l=>l.cardId===card.id).length;
+      countTxt = n + ' درس';
+    }
+    div.innerHTML = `
+      <div class="mc-emoji">${card.emoji}</div>
+      <h3>${card.title}</h3>
+      <p>${card.sub}</p>
+      <div class="mc-count">${countTxt}</div>`;
+    grid.appendChild(div);
+  });
+}
+
+// ---------- review screen ----------
+function renderReviewScreen(){
+  const due = dueIds();
+  document.getElementById('reviewStartCount').textContent = due.length;
+  document.getElementById('reviewStartBtn').disabled = due.length === 0;
+
+  const counts = boxCounts();
+  const maxC = Math.max(...counts, 1);
+  const boxList = document.getElementById('boxList');
+  boxList.innerHTML = '';
+  BOX_LABELS.forEach((label, i) => {
+    const div = document.createElement('div');
+    div.className = 'box-row';
+    div.innerHTML = `<div class="bx-label">${label}</div>
+      <div class="bx-bar-wrap"><div class="bx-bar" style="width:${(counts[i]/maxC*100)}%;"></div></div>
+      <div class="bx-count">${counts[i]}</div>`;
+    boxList.appendChild(div);
+  });
+
+  const upcoming = document.getElementById('upcomingList');
+  const scheduled = Object.entries(state.srs)
+    .filter(([id,s]) => s.next > Date.now())
+    .sort((a,b) => a[1].next - b[1].next)
+    .slice(0, 8);
+  if(scheduled.length === 0){
+    upcoming.innerHTML = `<div class="empty-state" style="padding:20px;"><p>لا توجد مراجعات مجدولة بعد. ابدأ بمراجعة بعض الكلمات أولًا.</p></div>`;
+  } else {
+    upcoming.innerHTML = '';
+    scheduled.forEach(([id, s]) => {
+      const w = WORD_MAP[id];
+      if(!w) return;
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `<div><div class="rw en">${w.emoji?w.emoji+' ':''}${w.en}</div><div class="rm">${w.ar}</div></div>
+        <div class="rm">${fmtRelative(s.next)}</div>`;
+      upcoming.appendChild(div);
+    });
+  }
+}
+function startReviewSession(){
+  const ids = dueIds();
+  if(ids.length === 0) return;
+  currentDeckIds = ids.sort(()=>Math.random()-0.5);
+  currentIdx = 0;
+  currentCat = null;
+  deckMode = 'review';
+  reviewStats = { seen:0, remembered:0, forgot:0 };
+  document.getElementById('deckTitle').textContent = 'مراجعة اليوم';
+  document.getElementById('ruleBox').innerHTML = ''; document.getElementById('ruleBox').style.display = 'none';
+  document.getElementById('masteryBar').innerHTML = '';
+  location.hash = 'review';
+  ['home','review','fav','exam','settings'].forEach(s=>document.getElementById('screen-'+s).classList.remove('active'));
+  document.getElementById('screen-deck').classList.add('active');
+  renderCard();
+}
+
+// ---------- deck / flashcards ----------
+function openDeck(catId){
+  currentCat = CATEGORIES.find(c => c.id === catId);
+  currentDeckIds = currentCat.words.map(w => w.id);
+  currentIdx = 0;
+  deckMode = 'category';
+  document.getElementById('deckTitle').textContent = currentCat.title;
+  const rb = document.getElementById('ruleBox');
+  rb.innerHTML = currentCat.rule ? ('📘 <b>قاعدة الدرس:</b> ' + currentCat.rule) : 'مفيش قاعدة إضافية لهذا الدرس.';
+  rb.style.display = 'none';
+  renderMasteryBar();
+  location.hash = catId;
+  ['home','review','fav','exam','settings'].forEach(s=>document.getElementById('screen-'+s).classList.remove('active'));
+  document.getElementById('screen-cardhome').classList.remove('active');
+  document.getElementById('screen-lesson').classList.remove('active');
+  document.getElementById('screen-deck').classList.add('active');
+  renderCard();
+}
+
+// ---------- CARD (main 4-card) navigation ----------
+function openCard(cardId){
+  currentCardId = cardId;
+  const card = CARDS_META.find(c => c.id === cardId);
+  document.getElementById('cardHomeTitle').textContent = card.emoji + ' ' + card.title;
+  document.getElementById('cardHomeDesc').textContent = card.desc;
+  const list = document.getElementById('cardHomeList');
+  list.innerHTML = '';
+  if(card.type === 'vocab'){
+    const cats = CATEGORIES.filter(c => c.cardId === cardId);
+    cats.forEach((c,i) => {
+      const total = c.words.length;
+      const done = c.words.filter(w => isLearned(w.id)).length;
+      const pct = total ? Math.round(done/total*100) : 0;
+      const circ = 2*Math.PI*18;
+      const offset = circ - (pct/100)*circ;
+      const div = document.createElement('div');
+      div.className = 'cat-tab';
+      div.onclick = () => openDeck(c.id);
+      div.innerHTML = `
+        <div class="cat-num">${String(i+1).padStart(2,'0')}</div>
+        <div class="cat-info">
+          <h3>${c.title}</h3>
+          <p>${c.sub} · ${total} كلمة</p>
+        </div>
+        <div class="cat-progress-wrap">
+          <svg viewBox="0 0 44 44">
+            <circle class="bg" cx="22" cy="22" r="18"></circle>
+            <circle class="fg" cx="22" cy="22" r="18" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"></circle>
+          </svg>
+          <div class="cat-progress-txt">${pct}%</div>
+        </div>`;
+      list.appendChild(div);
+    });
+  } else {
+    const lessons = GRAMMAR_LESSONS.filter(l => l.cardId === cardId).sort((a,b)=>a.num-b.num);
+    lessons.forEach(l => {
+      const sc = state.lessonScores[l.id];
+      const div = document.createElement('div');
+      div.className = 'lesson-tab';
+      div.onclick = () => openLesson(l.id);
+      div.innerHTML = `
+        <div class="lesson-num">${String(l.num).padStart(2,'0')}</div>
+        <div class="lesson-emoji">${l.emoji}</div>
+        <div class="lesson-info">
+          <h3>${l.title}</h3>
+          <p>${l.examples.length} أمثلة · ${l.exercises.length} تدريبات</p>
+        </div>
+        <div class="lesson-score">${sc ? '✅ '+sc.score+'/'+sc.total : ''}</div>`;
+      list.appendChild(div);
+    });
+  }
+  ['home','review','fav','exam','settings'].forEach(s=>document.getElementById('screen-'+s).classList.remove('active'));
+  document.getElementById('screen-deck').classList.remove('active');
+  document.getElementById('screen-lesson').classList.remove('active');
+  document.getElementById('screen-cardhome').classList.add('active');
+}
+function backFromDeck(){
+  if(deckMode === 'review'){ goHome(); return; }
+  if(currentCat && currentCat.cardId){ openCard(currentCat.cardId); } else { goHome(); }
+}
+function backFromLesson(){
+  if(currentCardId){ openCard(currentCardId); } else { goHome(); }
+}
+
+// ---------- Grammar lessons ----------
+let currentLesson = null;
+function openLesson(lessonId){
+  currentLesson = GRAMMAR_LESSONS.find(l => l.id === lessonId);
+  currentCardId = currentLesson.cardId;
+  document.getElementById('lessonTitle').textContent = currentLesson.emoji + ' ' + currentLesson.title;
+  document.getElementById('lessonExplain').innerHTML = currentLesson.explain;
+  const wrap = document.getElementById('lessonExamples');
+  wrap.innerHTML = '';
+  currentLesson.examples.forEach((ex, i) => {
+    const div = document.createElement('div');
+    div.className = 'example-card';
+    div.innerHTML = `
+      <div class="example-top">
+        <div class="example-en en">${ex.en}</div>
+        <button class="speak-btn-sm">🔊</button>
+      </div>
+      <div class="example-ar">${ex.ar}</div>`;
+    div.querySelector('.speak-btn-sm').onclick = () => speakText(ex.en);
+    wrap.appendChild(div);
+  });
+  ['home','review','fav','exam','settings'].forEach(s=>document.getElementById('screen-'+s).classList.remove('active'));
+  document.getElementById('screen-cardhome').classList.remove('active');
+  document.getElementById('screen-lesson').classList.add('active');
+}
+
+let lquiz = { items: [], idx: 0, score: 0, wrong: [] };
+function startLessonQuiz(){
+  quizContext = 'lesson';
+  lquiz = { items: currentLesson.exercises.map(e=>({...e})), idx: 0, score: 0, wrong: [] };
+  document.getElementById('screen-lesson').classList.remove('active');
+  document.getElementById('screen-quiz').classList.add('active');
+  document.getElementById('qTotal').textContent = lquiz.items.length;
+  renderLessonQuizQ();
+}
+function renderLessonQuizQ(){
+  const it = lquiz.items[lquiz.idx];
+  document.getElementById('qIndex').textContent = lquiz.idx+1;
+  const qq = document.querySelector('.quiz-q');
+  qq.innerHTML = `
+    <button class="speak-btn" style="margin:0 auto 8px;">🔊</button>
+    <div class="qwrap-lesson"><div class="ql-en en">${it.q}</div></div>`;
+  qq.querySelector('.speak-btn').onclick = () => speakText(it.q);
+  const optWrap = document.getElementById('optList');
+  optWrap.innerHTML = '';
+  it.options.forEach((opt, oi) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn en';
+    btn.textContent = opt;
+    btn.onclick = () => answerLessonQuiz(oi, btn);
+    optWrap.appendChild(btn);
+  });
+}
+function answerLessonQuiz(oi, btn){
+  const it = lquiz.items[lquiz.idx];
+  const allBtns = document.querySelectorAll('.opt-btn');
+  allBtns.forEach(b => b.disabled = true);
+  const isCorrect = oi === it.answer;
+  if(isCorrect){ btn.classList.add('correct'); lquiz.score++; }
+  else{
+    btn.classList.add('wrong');
+    allBtns[it.answer].classList.add('correct');
+    lquiz.wrong.push(it);
+  }
+  const explainDiv = document.createElement('div');
+  explainDiv.className = 'exp-box';
+  explainDiv.textContent = '💡 ' + it.explain;
+  document.getElementById('optList').appendChild(explainDiv);
+  setTimeout(() => {
+    if(lquiz.idx < lquiz.items.length-1){ lquiz.idx++; renderLessonQuizQ(); }
+    else finishLessonQuiz();
+  }, 2200);
+}
+async function finishLessonQuiz(){
+  const total = lquiz.items.length;
+  const score = lquiz.score;
+  const pct = Math.round(score/total*100);
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-result').classList.add('active');
+  const circ = 2*Math.PI*62;
+  const ring = document.getElementById('resultRing');
+  ring.setAttribute('stroke-dasharray', circ);
+  ring.setAttribute('stroke-dashoffset', circ);
+  ring.style.stroke = pct>=70 ? 'var(--forest)' : (pct>=40? 'var(--gold)':'var(--rose)');
+  setTimeout(()=>{ ring.style.strokeDashoffset = circ - (pct/100)*circ; }, 100);
+  document.getElementById('resultPct').textContent = pct+'%';
+  document.getElementById('resultFrac').textContent = score+'/'+total;
+  document.getElementById('resultMsg').textContent = pct>=85?'ممتاز! 🎉' : pct>=70?'أداء جيد جدًا 👏' : pct>=50?'مستوى مقبول، راجع الدرس تاني':'محتاج تراجع الدرس تاني 💪';
+  document.getElementById('resultSub').textContent = currentLesson.title;
+  const rev = document.getElementById('reviewList');
+  rev.innerHTML = '';
+  if(lquiz.wrong.length){
+    const lbl = document.createElement('div');
+    lbl.className = 'section-label'; lbl.textContent = 'راجع القواعد دي تاني';
+    rev.appendChild(lbl);
+    lquiz.wrong.forEach(it => {
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `<div><div class="rw en" style="font-size:12.5px;">${it.q}</div><div class="rm">${it.explain}</div></div><div class="rm en">${it.options[it.answer]}</div>`;
+      rev.appendChild(div);
+    });
+  }
+  state.lessonScores[currentLesson.id] = {score, total, date:Date.now()};
+  await saveLessonScores();
+  const backBtn = document.querySelector('.result-wrap .exam-btn');
+  backBtn.textContent = 'رجوع للدرس';
+  backBtn.onclick = () => { document.getElementById('screen-result').classList.remove('active'); openLesson(currentLesson.id); backBtn.onclick = goExam; backBtn.textContent = 'رجوع للاختبارات'; };
+}
+function toggleRuleBox(){
+  const box = document.getElementById('ruleBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+}
+function renderMasteryBar(){
+  const wrap = document.getElementById('masteryBar');
+  if(deckMode !== 'category' || !currentCat){ wrap.innerHTML=''; return; }
+  const counts = [0,0,0,0,0,0,0];
+  currentCat.words.forEach(w=>{
+    const s = state.srs[w.id];
+    counts[s?s.box:0]++;
+  });
+  const total = currentCat.words.length || 1;
+  const colors = ['#9AA6C2','#C9972C','#C9972C','#C9972C','#3E6E55','#3E6E55','#3E6E55'];
+  const segs = counts.map((c,i)=>{
+    if(c<=0) return '';
+    const pct = (c/total*100);
+    return '<span style="width:'+pct+'%;background:'+colors[i]+'" title="'+BOX_LABELS[i]+': '+c+'"></span>';
+  }).join('');
+  wrap.innerHTML = '<div class="mastery-track">'+segs+'</div><div class="mastery-legend">توزيع الإتقان لكلمات هذه الحلقة ('+counts[0]+' لسه جديدة)</div>';
+}
+function exportLesson(){
+  if(!currentCat) return;
+  let txt = currentCat.title + '\n' + currentCat.sub + '\n' + '='.repeat(30) + '\n\n';
+  currentCat.words.forEach((w,i)=>{
+    txt += (i+1) + '. ' + w.en + '  —  ' + w.ar + ' (' + w.phon + ')\n';
+    txt += '   ' + w.sen + '\n';
+    txt += '   ' + w.senm + '\n\n';
+  });
+  const blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const safeName = currentCat.title.replace(/[\\\/:*?"<>|]/g,'').trim();
+  a.href = url; a.download = safeName + '.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 2000);
+  toast('📄 اتحمّل ملف كلمات الحلقة');
+}
+function copyLessonLink(){
+  if(!currentCat) return;
+  const url = location.origin + location.pathname + '#' + currentCat.id;
+  const done = () => toast('🔗 اتنسخ رابط الحلقة');
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(done).catch(()=> toast('تعذّر النسخ التلقائي'));
+  } else {
+    toast('تعذّر النسخ التلقائي');
+  }
+}
+function onSearchInput(q){
+  const wrap = document.getElementById('searchResults');
+  const listSection = document.getElementById('catListSection');
+  q = q.trim();
+  if(!q){ wrap.style.display='none'; wrap.innerHTML=''; listSection.style.display=''; return; }
+  listSection.style.display='none';
+  const ql = q.toLowerCase();
+  const wordResults = ALL_WORDS.filter(w => w.en.toLowerCase().includes(ql) || w.ar.includes(q)).slice(0, 20);
+  const lessonResults = GRAMMAR_LESSONS.filter(l => l.title.includes(q) || l.title.toLowerCase().includes(ql)).slice(0, 10);
+  wrap.style.display='block';
+  if(wordResults.length === 0 && lessonResults.length === 0){
+    wrap.innerHTML = '<div class="empty-state" style="padding:30px 10px;"><p>مفيش نتائج لـ «'+q+'»</p></div>';
+    return;
+  }
+  wrap.innerHTML = '';
+  wordResults.forEach(w=>{
+    const div = document.createElement('div');
+    div.className = 'search-result-item';
+    div.onclick = () => openWordDirect(w.id);
+    div.innerHTML = '<span class="sr-emoji">'+(w.emoji||'🔤')+'</span>'
+      + '<div class="sr-text"><div class="rw en">'+w.en+'</div><div class="rm">'+w.ar+'</div></div>'
+      + '<div class="sr-cat">'+w.catTitle+'</div>';
+    wrap.appendChild(div);
+  });
+  lessonResults.forEach(l=>{
+    const div = document.createElement('div');
+    div.className = 'search-result-item';
+    div.onclick = () => openLesson(l.id);
+    div.innerHTML = '<span class="sr-emoji">'+l.emoji+'</span>'
+      + '<div class="sr-text"><div class="rw">'+l.title+'</div><div class="rm">درس قواعد</div></div>'
+      + '<div class="sr-cat">قواعد</div>';
+    wrap.appendChild(div);
+  });
+}
+function openWordDirect(id){
+  const w = WORD_MAP[id];
+  if(!w) return;
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchResults').style.display = 'none';
+  document.getElementById('catListSection').style.display = '';
+  openDeck(w.catId);
+  const idx = currentDeckIds.indexOf(id);
+  if(idx > -1){ currentIdx = idx; renderCard(); }
+}
+function jumpRelated(id){
+  const idx = currentDeckIds.indexOf(id);
+  if(idx > -1){ currentIdx = idx; renderCard(); }
+  else { openWordDirect(id); }
+}
+function routeFromHash(){
+  const h = location.hash.replace('#','');
+  if(!h) return;
+  if(h === 'review'){ switchTab('review'); return; }
+  const cat = CATEGORIES.find(c => c.id === h);
+  if(cat) openDeck(h);
+}
+function renderCard(){
+  const id = currentDeckIds[currentIdx];
+  const w = WORD_MAP[id];
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('recallRow').style.display = 'none';
+  document.getElementById('cardEmoji').textContent = w.emoji || '';
+  document.getElementById('cardEmoji').style.display = w.emoji ? 'block' : 'none';
+  document.getElementById('cardWord').textContent = w.en;
+  document.getElementById('cardPhon').textContent = w.phon;
+  document.getElementById('cardMean').textContent = w.ar;
+  document.getElementById('cardTagFront').textContent = w.catTitle;
+  const chips = document.getElementById('relatedChips');
+  if(w.related && w.related.length){
+    chips.style.display = 'flex';
+    chips.innerHTML = w.related.map(rid=>{
+      const rw = WORD_MAP[rid];
+      return rw ? ('<button class="chip" onclick="event.stopPropagation();jumpRelated(\''+rid+'\')">🔗 '+rw.en+'</button>') : '';
+    }).join('');
+  } else {
+    chips.style.display = 'none';
+    chips.innerHTML = '';
+  }
+  document.getElementById('sentEn').textContent = w.sen;
+  document.getElementById('sentAr').textContent = w.senm;
+  document.getElementById('cardWordBack').textContent = w.en;
+  document.getElementById('cardMeanBack').textContent = w.ar;
+
+  const isFav = state.favorites.includes(id);
+  document.getElementById('favBtnFront').textContent = isFav ? '★' : '☆';
+  document.getElementById('favBtnFront').classList.toggle('active', isFav);
+  document.getElementById('favBtnBack').textContent = isFav ? '★' : '☆';
+  document.getElementById('favBtnBack').classList.toggle('active', isFav);
+
+  const s = srsOf(id);
+  document.getElementById('srsBadgeFront').textContent = '🔁 ' + fmtInterval(s);
+
+  if(deckMode === 'review'){
+    document.getElementById('deckCount').textContent = `مراجعة ${currentIdx+1} من ${currentDeckIds.length}`;
+    document.getElementById('deckMemoCount').textContent = `اتذكرت: ${reviewStats.remembered} · محتاج مراجعة: ${reviewStats.forgot}`;
+  } else {
+    document.getElementById('deckCount').textContent = `بطاقة ${currentIdx+1} من ${currentDeckIds.length}`;
+    const learnedInCat = currentCat.words.filter(w2 => isLearned(w2.id)).length;
+    document.getElementById('deckMemoCount').textContent = `محفوظ: ${learnedInCat}/${currentCat.words.length}`;
+  }
+  document.getElementById('deckProgressBar').style.width = `${((currentIdx+1)/currentDeckIds.length)*100}%`;
+  document.getElementById('srsStatus').textContent = s ? fmtRelative(s.next) : 'كلمة جديدة';
+}
+function flipCard(){
+  const card = document.getElementById('flashcard');
+  card.classList.toggle('flipped');
+  document.getElementById('recallRow').style.display = card.classList.contains('flipped') ? 'flex' : 'none';
+}
+function nextCard(){ currentIdx = (currentIdx+1) % currentDeckIds.length; renderCard(); }
+function prevCard(){ currentIdx = (currentIdx-1+currentDeckIds.length) % currentDeckIds.length; renderCard(); }
+function toggleFav(){
+  const id = currentDeckIds[currentIdx];
+  const i = state.favorites.indexOf(id);
+  if(i>-1){ state.favorites.splice(i,1); } else { state.favorites.push(id); }
+  saveFavorites(); renderCard();
+}
+function assessCard(remembered){
+  const id = currentDeckIds[currentIdx];
+  const s = assess(id, remembered);
+  renderMasteryBar();
+  reviewStats.seen++;
+  if(remembered){ reviewStats.remembered++; toast('👍 هترجعلك بعد ' + BOX_LABELS[s.box]); }
+  else { reviewStats.forgot++; toast('🔁 هترجعلك بكرة تاني'); }
+
+  if(deckMode === 'review'){
+    if(currentIdx >= currentDeckIds.length - 1){ finishReviewSession(); return; }
+    currentIdx++; renderCard();
+  } else {
+    if(currentIdx >= currentDeckIds.length - 1){ currentIdx = 0; } else { currentIdx++; }
+    renderCard();
+  }
+}
+function finishReviewSession(){
+  const total = reviewStats.seen;
+  const pct = total ? Math.round(reviewStats.remembered/total*100) : 0;
+  document.getElementById('screen-deck').classList.remove('active');
+  document.getElementById('screen-result').classList.add('active');
+  const circ = 2*Math.PI*62;
+  const ring = document.getElementById('resultRing');
+  ring.setAttribute('stroke-dasharray', circ);
+  ring.setAttribute('stroke-dashoffset', circ);
+  ring.style.stroke = pct>=70 ? 'var(--forest)' : (pct>=40? 'var(--gold)':'var(--rose)');
+  setTimeout(()=>{ ring.style.strokeDashoffset = circ - (pct/100)*circ; }, 100);
+  document.getElementById('resultPct').textContent = pct+'%';
+  document.getElementById('resultFrac').textContent = reviewStats.remembered+'/'+total;
+  document.getElementById('resultMsg').textContent = pct>=85?'مذاكرة ممتازة! 🎉' : pct>=60?'مراجعة كويسة 👏' : 'محتاج تركّز على اللي محتاج مراجعة تاني 💪';
+  document.getElementById('resultSub').textContent = 'خلصت مراجعة اليوم';
+  document.getElementById('reviewList').innerHTML = '';
+  renderHome();
+}
+
+// ---------- favorites screen ----------
+function renderFav(){
+  const wrap = document.getElementById('favList');
+  if(state.favorites.length === 0){
+    wrap.innerHTML = `<div class="empty-state"><div class="em">⭐</div><p>لسه معملتش تفضيل لأي كلمة.<br>اضغط على أيقونة النجمة داخل أي بطاقة لإضافتها هنا.</p></div>`;
+    return;
+  }
+  wrap.innerHTML = '';
+  state.favorites.forEach(id => {
+    const w = WORD_MAP[id];
+    if(!w) return;
+    const learned = isLearned(id);
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    div.innerHTML = `<div><div class="rw en">${w.emoji?w.emoji+' ':''}${w.en}</div><div class="rm">${w.ar} — ${w.catTitle}</div></div>
+      <div style="font-size:16px;">${learned?'✅':'🔸'}</div>`;
+    wrap.appendChild(div);
+  });
+}
+
+// ---------- exams ----------
+function memorizedIds(){ return learnedIds(); }
+function recentMemorizedIds(hours=48){
+  const cutoff = Date.now() - hours*3600*1000;
+  return Object.entries(state.srs).filter(([id,s]) => s.last >= cutoff).map(([id]) => id);
+}
+function renderExam(){
+  const total = memorizedIds().length;
+  const recent = recentMemorizedIds();
+  document.getElementById('dailyDesc').textContent = recent.length
+    ? `لديك ${recent.length} كلمة راجعتها في آخر يومين. اختبر نفسك عليها فقط.`
+    : 'لم تراجع كلمات في آخر يومين. راجع بطاقات أولًا لتفعيل الاختبار اليومي.';
+  document.getElementById('dailyBtn').disabled = recent.length === 0;
+
+  const percents = [
+    {p:7, label:'اختبار سريع', desc:'مراجعة خاطفة'},
+    {p:10, label:'اختبار خفيف', desc:'مراجعة أساسية'},
+    {p:15, label:'اختبار متوسط', desc:'مراجعة أعمق'},
+    {p:20, label:'اختبار شامل', desc:'أكبر تغطية'},
+  ];
+  const grid = document.getElementById('examGrid');
+  grid.innerHTML = '';
+  percents.forEach(pc => {
+    const count = Math.max(1, Math.ceil(total * pc.p/100));
+    const div = document.createElement('div');
+    div.className = 'exam-tile';
+    if(total===0){ div.style.opacity = .5; }
+    else { div.onclick = () => startComprehensiveExam(pc.p, count); }
+    div.innerHTML = `<b>${pc.p}%</b><span>${pc.label}</span><small>${total? count+' سؤال' : '—'}</small>`;
+    grid.appendChild(div);
+  });
+
+  const hist = document.getElementById('examHistory');
+  if(state.examLog.length === 0){
+    hist.innerHTML = `<div class="empty-state" style="padding:20px;"><p>لا توجد اختبارات سابقة بعد.</p></div>`;
+  } else {
+    hist.innerHTML = '';
+    [...state.examLog].reverse().slice(0,8).forEach(e => {
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      const pct = Math.round(e.score/e.total*100);
+      div.innerHTML = `<div><div class="rw" style="font-family:'Cairo';">${e.label}</div><div class="rm">${new Date(e.date).toLocaleDateString('ar-EG')}</div></div>
+        <div style="font-weight:800;color:${pct>=70?'var(--forest)':'var(--rose)'};">${e.score}/${e.total}</div>`;
+      hist.appendChild(div);
+    });
+  }
+}
+
+function buildQuizItems(ids, type, label){
+  quizContext = 'vocab';
+  const shuffled = [...ids].sort(()=>Math.random()-0.5);
+  const items = shuffled.map(id => {
+    const w = WORD_MAP[id];
+    let pool = ALL_WORDS.filter(x => x.id !== id);
+    pool = pool.sort(()=>Math.random()-0.5).slice(0,3);
+    const options = [...pool.map(p=>p.ar), w.ar].sort(()=>Math.random()-0.5);
+    return { id, word: w, options, correct: w.ar };
+  });
+  quiz = { items, idx:0, score:0, wrong:[], type, label };
+  document.getElementById('screen-exam').classList.remove('active');
+  document.getElementById('screen-quiz').classList.add('active');
+  document.getElementById('qTotal').textContent = items.length;
+  renderQuizQ();
+}
+function startDailyExam(){
+  const ids = recentMemorizedIds();
+  if(ids.length===0) return;
+  buildQuizItems(ids, 'daily', 'الاختبار اليومي (' + ids.length + ' كلمة)');
+}
+function startComprehensiveExam(pct, count){
+  const ids = memorizedIds();
+  const shuffled = [...ids].sort(()=>Math.random()-0.5).slice(0, count);
+  buildQuizItems(shuffled, 'comp'+pct, `اختبار شامل ${pct}% (${count} سؤال)`);
+}
+function renderQuizQ(){
+  const it = quiz.items[quiz.idx];
+  document.getElementById('qIndex').textContent = quiz.idx+1;
+  document.querySelector('.quiz-q').innerHTML = `
+    <button class="speak-btn" style="margin:0 auto 8px;" onclick="speakQuizWord()">🔊</button>
+    <div class="qemoji" id="qEmoji">${it.word.emoji||''}</div>
+    <div class="qword en" id="qWord">${it.word.en}</div>
+    <div class="qphon" id="qPhon">${it.word.phon}</div>`;
+  const optWrap = document.getElementById('optList');
+  optWrap.innerHTML = '';
+  it.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt;
+    btn.onclick = () => answerQuiz(opt, btn);
+    optWrap.appendChild(btn);
+  });
+}
+function speakQuizWord(){
+  const it = quiz.items[quiz.idx];
+  speakText(it.word.en);
+}
+function answerQuiz(opt, btn){
+  const it = quiz.items[quiz.idx];
+  const allBtns = document.querySelectorAll('.opt-btn');
+  allBtns.forEach(b => b.disabled = true);
+  const isCorrect = opt === it.correct;
+  if(isCorrect){ btn.classList.add('correct'); quiz.score++; }
+  else{
+    btn.classList.add('wrong');
+    allBtns.forEach(b => { if(b.textContent === it.correct) b.classList.add('correct'); });
+    quiz.wrong.push(it);
+  }
+  setTimeout(() => {
+    if(quiz.idx < quiz.items.length-1){ quiz.idx++; renderQuizQ(); }
+    else finishQuiz();
+  }, 900);
+}
+function quitQuiz(){
+  document.getElementById('screen-quiz').classList.remove('active');
+  if(quizContext === 'lesson' && currentLesson){
+    openLesson(currentLesson.id);
+  } else {
+    document.getElementById('screen-exam').classList.add('active');
+  }
+}
+async function finishQuiz(){
+  const total = quiz.items.length;
+  const score = quiz.score;
+  const pct = Math.round(score/total*100);
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-result').classList.add('active');
+  const circ = 2*Math.PI*62;
+  const ring = document.getElementById('resultRing');
+  ring.setAttribute('stroke-dasharray', circ);
+  ring.setAttribute('stroke-dashoffset', circ);
+  ring.style.stroke = pct>=70 ? 'var(--forest)' : (pct>=40? 'var(--gold)':'var(--rose)');
+  setTimeout(()=>{ ring.style.strokeDashoffset = circ - (pct/100)*circ; }, 100);
+  document.getElementById('resultPct').textContent = pct+'%';
+  document.getElementById('resultFrac').textContent = score+'/'+total;
+  document.getElementById('resultMsg').textContent = pct>=85?'ممتاز! 🎉' : pct>=70?'أداء جيد جدًا 👏' : pct>=50?'مستوى مقبول، استمر بالمراجعة':'محتاج مراجعة أكتر شوية 💪';
+  document.getElementById('resultSub').textContent = quiz.label;
+
+  const rev = document.getElementById('reviewList');
+  rev.innerHTML = '';
+  if(quiz.wrong.length){
+    const lbl = document.createElement('div');
+    lbl.className = 'section-label'; lbl.textContent = 'راجع الكلمات دي تاني';
+    rev.appendChild(lbl);
+    quiz.wrong.forEach(it => {
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `<div><div class="rw en">${it.word.emoji?it.word.emoji+' ':''}${it.word.en}</div><div class="rm">${it.word.sen}</div></div><div class="rm">${it.correct}</div>`;
+      rev.appendChild(div);
+    });
+  }
+
+  state.examLog.push({date:Date.now(), type:quiz.type, label:quiz.label, score, total});
+  await saveExamLog();
+}
+
+// ---------- TTS ----------
+let voices = [];
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
+  const sel = document.getElementById('voiceSelect');
+  if(!sel) return;
+  sel.innerHTML = '';
+  if(voices.length===0){
+    sel.innerHTML = '<option>الصوت الافتراضي للجهاز</option>';
+    return;
+  }
+  voices.forEach((v,i) => {
+    const o = document.createElement('option');
+    o.value = i; o.textContent = `${v.name} (${v.lang})`;
+    sel.appendChild(o);
+  });
+}
+speechSynthesis.onvoiceschanged = loadVoices;
+function speakText(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const sel = document.getElementById('voiceSelect');
+  if(voices.length && sel && sel.value !== '') u.voice = voices[sel.value];
+  u.lang = 'en-US'; u.rate = 0.92;
+  speechSynthesis.speak(u);
+}
+function speak(mode){
+  const w = WORD_MAP[currentDeckIds[currentIdx]];
+  speakText(mode==='en' ? w.en : w.sen);
+}
+
+// ---------- reset ----------
+async function resetProgress(){
+  if(!confirm('هل أنت متأكد؟ سيتم حذف كل جدول المراجعة والكلمات المفضلة نهائيًا.')) return;
+  state.srs = {}; state.favorites = []; state.examLog = [];
+  await saveSrs(); await saveFavorites(); await saveExamLog();
+  toast('تم إعادة الضبط');
+  renderHome();
+}
+
+// ---------- hash routing ----------
+window.addEventListener('hashchange', routeFromHash);
+
+// ---------- init ----------
+loadVoices();
+loadState();
+</script>
+</body>
+</html>
